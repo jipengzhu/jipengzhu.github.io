@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="java容器篇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="container">
+<meta property="og:url" content="http://example.com/2017/07/01/lang/lang-1-java/junior/java-3-container/index.html">
+<meta property="og:site_name" content="朱继鹏的博客">
+<meta property="og:description" content="java容器篇">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-06-30T17:03:00.000Z">
+<meta property="article:modified_time" content="2023-05-21T09:17:12.271Z">
+<meta property="article:author" content="朱继鹏">
+<meta property="article:tag" content="+ java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2017/07/01/lang/lang-1-java/junior/java-3-container/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>container | 朱继鹏的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">朱继鹏的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">天道酬勤，全栈不停</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2017/07/01/lang/lang-1-java/junior/java-3-container/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar/zhujipeng.jpg">
+      <meta itemprop="name" content="朱继鹏">
+      <meta itemprop="description" content="在全栈的路上狂奔不止">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朱继鹏的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          container
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-07-01 01:03:00" itemprop="dateCreated datePublished" datetime="2017-07-01T01:03:00+08:00">2017-07-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-21 17:17:12" itemprop="dateModified" datetime="2023-05-21T17:17:12+08:00">2023-05-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-junior/" itemprop="url" rel="index"><span itemprop="name">+ java + junior</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">java容器篇</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Container"><a href="#Container" class="headerlink" title="Container"></a>Container</h1><h2 id="Type"><a href="#Type" class="headerlink" title="Type"></a>Type</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_67322837/article/details/124322953">java普通容器详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/c1776167012/article/details/109351903">java同步容器详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43472474/article/details/110885281">java安全容器详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xing123456jl/article/details/108044431">Collection接口和实现类方法详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kubiderenya/article/details/105276261">Collection接口方法详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kubiderenya/article/details/105277593">List接口方法详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kubiderenya/article/details/105280785">Set接口方法详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kubiderenya/article/details/105289741">Queue接口方法详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kubiderenya/article/details/105291408">Deque接口方法详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46853673/article/details/123066973">BlockingQueue接口方法详解</a></li>
+</ul>
+</blockquote>
+<blockquote>
+<p>不推荐的类：Vector、Stack、Hashtable</p>
+</blockquote>
+<h3 id="普通容器类（线程不安全）"><a href="#普通容器类（线程不安全）" class="headerlink" title="普通容器类（线程不安全）"></a>普通容器类（线程不安全）</h3><ul>
+<li>Array：T[]</li>
+<li>List<ul>
+<li>ArrayList：基于数组实现</li>
+<li>LinkedList：基于链表实现</li>
+</ul>
+</li>
+<li>Set<ul>
+<li>HashSet：最常用的Set</li>
+<li>LinkedHashSet：支持按照插入顺序（默认）或者访问顺序迭代</li>
+<li>SortedSet<ul>
+<li>NavigableSet<ul>
+<li>TreeSet：支持排序</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Map<ul>
+<li>HashMap：最常用的Map</li>
+<li>LinkedHashMap：支持按照插入顺序（默认）或者访问顺序迭代</li>
+<li>SortedMap<ul>
+<li>NavigableMap<ul>
+<li>TreeMap：支持排序，基于堆实现</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Queue<ul>
+<li>Deque<ul>
+<li>ArrayDeque：基于数组实现</li>
+<li>LinkedList：基于链表实现</li>
+</ul>
+</li>
+<li>PriorityQueue：支持优先级</li>
+</ul>
+</li>
+<li>Stack：LinkedList</li>
+</ul>
+<blockquote>
+<p>Set是基于Map实现的</p>
+</blockquote>
+<h3 id="同步容器类（线程安全）"><a href="#同步容器类（线程安全）" class="headerlink" title="同步容器类（线程安全）"></a>同步容器类（线程安全）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Jacabe/article/details/82929159">Collections.synchronizedXXX详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/javawubo/article/details/103807386">Collections.synchronizedXXX的坑入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yuanlaijike/article/details/104591250">Collections.synchronizedXXX的坑详解</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>List：Vector</li>
+<li>Map：Hashtable</li>
+<li>Stack：Stack</li>
+</ul>
+<blockquote>
+<p>还可以使用Collections.synchronizedXXX包装返回的同步容器<br>Collections.synchronizedXXX包装类返回的迭代器没有保证安全，需要使用者自己保证</p>
+</blockquote>
+<h3 id="并发容器类（线程安全）"><a href="#并发容器类（线程安全）" class="headerlink" title="并发容器类（线程安全）"></a>并发容器类（线程安全）</h3><ul>
+<li>List<ul>
+<li>CopyOnWriteArrayList：写时复制</li>
+</ul>
+</li>
+<li>Set<ul>
+<li>CopyOnWriteArraySet：写时复制</li>
+<li>SortedSet<ul>
+<li>NavigableSet<ul>
+<li>ConcurrentSkipListSet：安全版TreeSet</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Map<ul>
+<li>ConcurrentHashMap：Segment + Lock （java7）、CAS + synchronized（java8）</li>
+<li>SortedMap<ul>
+<li>NavigableMap<ul>
+<li>ConcurrentSkipListMap：安全版TreeMap，基于跳表实现</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Queue：<ul>
+<li>BlockingQueue：<ul>
+<li>ArrayBlockingQueue：有界</li>
+<li>LinkedBlockingQueue：默认无界，但边界可配</li>
+<li>SynchronousQueue：有界，容量为0，不存储元素直接交付（handoff）的阻塞队列</li>
+<li>TransferQueue<ul>
+<li>LinkedTransferQueue：无界，支持Transfer操作</li>
+</ul>
+</li>
+<li>PriorityBlockingQueue：无界，支持优先级</li>
+<li>DelayQueue：无界，支持延时，基于PriorityQueue实现的</li>
+<li>DelayedWorkQueue：无界，支持延时，ScheduledThreadPoolExecutor的内部类</li>
+</ul>
+</li>
+<li>BlockingDeque：<ul>
+<li>LinkedBlockingDeque：默认无界，但边界可配</li>
+</ul>
+</li>
+<li>ConcurrentLinkedQueue：无界</li>
+<li>ConcurrentLinkedDeque：无界</li>
+</ul>
+</li>
+</ul>
+<h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><h3 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_56079407/article/details/119062757">java数组详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kqZhu/article/details/104216549">java动态数组详解</a></li>
+</ul>
+</blockquote>
+<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><h3 id="Basic-1"><a href="#Basic-1" class="headerlink" title="Basic"></a>Basic</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43200566/article/details/128118293">java列表详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lpq374606827/article/details/93203927">java列表之List和Array转换详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33312725/article/details/128783014">CopyOnWriteArrayList的适用场景详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h3><h4 id="ArrayList和LinkedList的区别"><a href="#ArrayList和LinkedList的区别" class="headerlink" title="ArrayList和LinkedList的区别"></a>ArrayList和LinkedList的区别</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46728644/article/details/122553804">ArrayList和LinkedList的区别</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>结构：<ul>
+<li>ArrayList是基于数组实现的</li>
+<li>LinkedList是基于链表实现的</li>
+</ul>
+</li>
+<li>性能：<ul>
+<li>ArrayList读取时使用索引直接定位，所以读取（随机访问）较快，写入时需要移动元素，所以写入（插入和删除）较慢</li>
+<li>LinkedList读取时需从头开始遍历，所以读取（随机访问）较慢，写入时不需要移动元素，所以写入（插入和删除）较快</li>
+</ul>
+</li>
+<li>空间：<ul>
+<li>LinkedList使用Node结构还需要存储前指针和后指针，比ArrayList更占内存</li>
+</ul>
+</li>
+</ul>
+<h4 id="ArrayList和Vector的区别"><a href="#ArrayList和Vector的区别" class="headerlink" title="ArrayList和Vector的区别"></a>ArrayList和Vector的区别</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Think_and_work/article/details/124349102">ArrayList和Vector的区别</a></li>
+</ul>
+</blockquote>
+<h4 id="Collections-synchronizedList和Vector的区别"><a href="#Collections-synchronizedList和Vector的区别" class="headerlink" title="Collections.synchronizedList和Vector的区别"></a>Collections.synchronizedList和Vector的区别</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/DViewer/article/details/52970896">Collections.synchronizedList和Vector的区别</a></li>
+</ul>
+</blockquote>
+<h4 id="CopyOnWriteArrayList和Vector的区别"><a href="#CopyOnWriteArrayList和Vector的区别" class="headerlink" title="CopyOnWriteArrayList和Vector的区别"></a>CopyOnWriteArrayList和Vector的区别</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41317495/article/details/110368573">CopyOnWriteArrayList和Vector的区别</a></li>
+</ul>
+</blockquote>
+<h4 id="CopyOnWriteArrayList和Collections-synchronizedList的区别"><a href="#CopyOnWriteArrayList和Collections-synchronizedList的区别" class="headerlink" title="CopyOnWriteArrayList和Collections.synchronizedList的区别"></a>CopyOnWriteArrayList和Collections.synchronizedList的区别</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zljjava/article/details/48139465">CopyOnWriteArrayList和Collections.synchronizedList的区别</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>结构：<ul>
+<li>CopyOnWriteArrayList是基于写时拷贝技术保证安全的</li>
+<li>Collections.synchronizedList返回的包装类是基于synchronized锁机制保证安全的</li>
+</ul>
+</li>
+<li>性能：<ul>
+<li>CopyOnWriteArrayList适合读多写少的安全场景</li>
+<li>Collections.synchronizedList适合写多读少的安全场景</li>
+</ul>
+</li>
+<li>空间：<ul>
+<li>CopyOnWriteArrayList修改时需要拷贝一份数据，比Collections.synchronizedList更占内存</li>
+</ul>
+</li>
+</ul>
+<h4 id="ArrayList和LinkedList增删查时间复杂度分析"><a href="#ArrayList和LinkedList增删查时间复杂度分析" class="headerlink" title="ArrayList和LinkedList增删查时间复杂度分析"></a>ArrayList和LinkedList增删查时间复杂度分析</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43864727/article/details/88384142">ArrayList和LinkedList增删查时间复杂度分析</a></li>
+</ul>
+</blockquote>
+<h4 id="为什么ArrayList实现了RandomAccess接口而LinkedList却没有"><a href="#为什么ArrayList实现了RandomAccess接口而LinkedList却没有" class="headerlink" title="为什么ArrayList实现了RandomAccess接口而LinkedList却没有"></a>为什么ArrayList实现了RandomAccess接口而LinkedList却没有</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37967783/article/details/105234540">为什么ArrayList实现了RandomAccess接口而LinkedList却没有</a></li>
+</ul>
+</blockquote>
+<h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><h3 id="Basic-2"><a href="#Basic-2" class="headerlink" title="Basic"></a>Basic</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43200566/article/details/128152710">java集合详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/beautiful_huang/article/details/105010030">java集合类型之TreeSet详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhaojie181711/article/details/80510129">java集合类型之LinkedHashSet详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><h3 id="Basic-3"><a href="#Basic-3" class="headerlink" title="Basic"></a>Basic</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/p312011150/article/details/89251565">java映射详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/whc888666/article/details/108990090">java映射类型之TreeMap详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41969790/article/details/106154225">java映射类型之LinkedHashMap详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/haoweng4800/article/details/118592875">java映射类型之IdentityHashMap详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_19922839/article/details/114654573">java映射类型之BidiMap和MultiMap详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wbb9019/article/details/90642922">java8之映射新特性入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/AnoiaDream/article/details/109213714">java8之映射新特性详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37811638/article/details/103223880">java映射操作之put详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wo415415/article/details/87469226">java映射操作之put与compute详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cnds123321/article/details/113793574">java映射操作之put和putIfAbsent详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_24082175/article/details/119157022">java映射操作之putIfAbsent和computeIfAbsent详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39723544/article/details/91359302">java映射操作之compute入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31635851/article/details/120330979">java映射操作之compute详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42815754/article/details/104798709">java映射操作之computeIfAbsent和computeIfPresent详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Question-1"><a href="#Question-1" class="headerlink" title="Question"></a>Question</h3><h4 id="HashMap和ConcurrentHashMap的区别"><a href="#HashMap和ConcurrentHashMap的区别" class="headerlink" title="HashMap和ConcurrentHashMap的区别"></a>HashMap和ConcurrentHashMap的区别</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42949615/article/details/124109063">HashMap和ConcurrentHashMap的区别</a></li>
+</ul>
+</blockquote>
+<h4 id="HashMap和Hashtable的区别"><a href="#HashMap和Hashtable的区别" class="headerlink" title="HashMap和Hashtable的区别"></a>HashMap和Hashtable的区别</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xuhuaabc/article/details/91475761">HashMap和Hashtable的区别</a></li>
+</ul>
+</blockquote>
+<h4 id="Collections-synchronizedMap和Hashtable的区别"><a href="#Collections-synchronizedMap和Hashtable的区别" class="headerlink" title="Collections.synchronizedMap和Hashtable的区别"></a>Collections.synchronizedMap和Hashtable的区别</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43561914/article/details/115268360">Collections.synchronizedMap和Hashtable的区别</a></li>
+</ul>
+</blockquote>
+<h4 id="ConcurrentHashMap和Hashtable的区别"><a href="#ConcurrentHashMap和Hashtable的区别" class="headerlink" title="ConcurrentHashMap和Hashtable的区别"></a>ConcurrentHashMap和Hashtable的区别</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/asad21654864/article/details/130070461">ConcurrentHashMap和Hashtable的区别</a></li>
+</ul>
+</blockquote>
+<h4 id="ConcurrentHashMap和Collections-synchronizedMap的区别"><a href="#ConcurrentHashMap和Collections-synchronizedMap的区别" class="headerlink" title="ConcurrentHashMap和Collections.synchronizedMap的区别"></a>ConcurrentHashMap和Collections.synchronizedMap的区别</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhu_fangyuan/article/details/110455386">ConcurrentHashMap和Collections.synchronizedMap的区别</a></li>
+</ul>
+</blockquote>
+<h2 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h2><h3 id="Basic-4"><a href="#Basic-4" class="headerlink" title="Basic"></a>Basic</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Archiea/article/details/122512483">java队列详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/org_hjh/article/details/110195517">BlockingQueue详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/inthat/article/details/108360964">TransferQueue详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/leaderFLY/article/details/115344174">DelayQueue详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/daliucheng/article/details/120472938">DelayQueue之Delayed延时接口</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LeoHan163/article/details/122667781">DelayQueue和PriorityQueue对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40739917/article/details/123014665">DelayQueue之实现延时任务调度</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w13485673086/article/details/88538826">DelayedWorkQueue详解</a></li>
+</ul>
+</blockquote>
+<p>DelayedWorkQueue是ScheduledThreadPoolExecutor的内部类</p>
+<h3 id="Question-2"><a href="#Question-2" class="headerlink" title="Question"></a>Question</h3><h4 id="Queue方法的区别"><a href="#Queue方法的区别" class="headerlink" title="Queue方法的区别"></a>Queue方法的区别</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012745499/article/details/108331888">Queue方法的区别</a></li>
+</ul>
+</blockquote>
+<p>按照操作分</p>
+<ul>
+<li>add&#x2F;offer&#x2F;put：添加尾部元素</li>
+<li>remove&#x2F;poll&#x2F;take：移除头部元素</li>
+<li>element&#x2F;peek：查询头部元素</li>
+</ul>
+<p>按照结果分</p>
+<ul>
+<li>add&#x2F;remove&#x2F;element：操作元素失败的时候抛出异常</li>
+<li>offer&#x2F;poll&#x2F;peek：操作元素失败的时候会返回值</li>
+<li>put&#x2F;take：操作元素失败的时候会阻塞</li>
+</ul>
+<blockquote>
+<p>put&#x2F;take是BlockingQueue接口特有的阻塞方法，Queue接口里没有</p>
+</blockquote>
+<h4 id="ArrayDeque和LinkedList的区别"><a href="#ArrayDeque和LinkedList的区别" class="headerlink" title="ArrayDeque和LinkedList的区别"></a>ArrayDeque和LinkedList的区别</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45465895/article/details/106834528">ArrayDeque和LinkedList的区别</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>结构：<ul>
+<li>ArrayDeque是基于数组实现的</li>
+<li>LinkedList是基于链表实现的</li>
+</ul>
+</li>
+<li>性能：<ul>
+<li>ArrayDeque读取时使用索引直接定位，所以读取（随机访问）较快，写入时需要移动元素，所以写入（插入和删除）较慢</li>
+<li>LinkedList读取时需从头开始遍历，所以读取（随机访问）较慢，写入时不需要移动元素，所以写入（插入和删除）较快</li>
+</ul>
+</li>
+<li>空间：<ul>
+<li>LinkedList使用Node结构还需要存储前指针和后指针，比ArrayDeque更占内存</li>
+</ul>
+</li>
+</ul>
+<h4 id="ArrayBlockingQueue和LinkedBlockingQueue的区别"><a href="#ArrayBlockingQueue和LinkedBlockingQueue的区别" class="headerlink" title="ArrayBlockingQueue和LinkedBlockingQueue的区别"></a>ArrayBlockingQueue和LinkedBlockingQueue的区别</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/silyvin/article/details/79482941">ArrayBlockingQueue和LinkedBlockingQueue的区别</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>结构：<ul>
+<li>ArrayBlockingQueue是基于循环数组实现的，LinkedBlockingQueue基于链表实现的</li>
+<li>ArrayBlockingQueue必须设置边界，LinkedBlockingQueue默认无界，但边界可配</li>
+</ul>
+</li>
+<li>性能：<ul>
+<li>ArrayBlockingQueue出队和入队使用同一把锁，LinkedBlockingQueue出队和入队使用不同的锁，因此LinkedBlockingQueue的并发支持更高</li>
+</ul>
+</li>
+<li>空间：<ul>
+<li>ArrayBlockingQueue因为使用循环数组会分配固定的内存，LinkedBlockingQueue按需使用内存，因此ArrayBlockingQueue在滞留元素较少时容易浪费空间</li>
+<li>LinkedBlockingQueue使用Node结构还需要存储指针，比ArrayBlockingQueue更占内存</li>
+<li>LinkedBlockingQueue会频繁的创建和销毁额外的Node对象，对GC存在较大影响</li>
+</ul>
+</li>
+</ul>
+<h4 id="LinkedBlockingQueue和ConcurrentLinkedQueue的区别"><a href="#LinkedBlockingQueue和ConcurrentLinkedQueue的区别" class="headerlink" title="LinkedBlockingQueue和ConcurrentLinkedQueue的区别"></a>LinkedBlockingQueue和ConcurrentLinkedQueue的区别</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Andrew_Chenwq/article/details/124139334">LinkedBlockingQueue和ConcurrentLinkedQueue的区别入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a303549861/article/details/90641143">LinkedBlockingQueue和ConcurrentLinkedQueue的区别进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Developlee/article/details/108099933">LinkedBlockingQueue和ConcurrentLinkedQueue的区别详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013011866/article/details/100590705">消息队列和任务队列的区别入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39397165/article/details/109481226">消息队列和任务队列的区别详解</a></li>
+</ul>
+</blockquote>
+<h4 id="SynchronousQueue和TransferQueue的区别"><a href="#SynchronousQueue和TransferQueue的区别" class="headerlink" title="SynchronousQueue和TransferQueue的区别"></a>SynchronousQueue和TransferQueue的区别</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_29860591/article/details/113726069">SynchronousQueue和TransferQueue的区别</a></li>
+</ul>
+</blockquote>
+<h4 id="DelayQueue和DelayedWorkQueue的区别"><a href="#DelayQueue和DelayedWorkQueue的区别" class="headerlink" title="DelayQueue和DelayedWorkQueue的区别"></a>DelayQueue和DelayedWorkQueue的区别</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30570101/article/details/95353221">DelayQueue和DelayedWorkQueue的区别</a></li>
+</ul>
+</blockquote>
+<h2 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h2><h3 id="Basic-5"><a href="#Basic-5" class="headerlink" title="Basic"></a>Basic</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mingyuli/article/details/119064618">java栈列详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Traverse"><a href="#Traverse" class="headerlink" title="Traverse"></a>Traverse</h1><p>Traverse：遍历</p>
+<h2 id="Basic-6"><a href="#Basic-6" class="headerlink" title="Basic"></a>Basic</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lishuoboy/article/details/124932806">java容器遍历方式详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Iterator"><a href="#Iterator" class="headerlink" title="Iterator"></a>Iterator</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/syc0616/article/details/116122418">java容器遍历之迭代器（Iterator）入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sheng0113/article/details/122712947">java容器遍历之迭代器（Iterator）详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Fail"><a href="#Fail" class="headerlink" title="Fail"></a>Fail</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/striner/article/details/86375684">java容器遍历之快速失败（fail-fast）和安全失败（fail-safe）入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MCQ1999/article/details/108907295">java容器遍历之快速失败（fail-fast）和安全失败（fail-safe）详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Question-3"><a href="#Question-3" class="headerlink" title="Question"></a>Question</h2><h3 id="Iterator和Itreable的区别"><a href="#Iterator和Itreable的区别" class="headerlink" title="Iterator和Itreable的区别"></a>Iterator和Itreable的区别</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011523796/article/details/79018718">Iterator和Itreable的区别</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>Iterator：迭代器，负责进行遍历</li>
+<li>Itreable：可迭代，负责返回Iterator</li>
+</ul>
+<h3 id="Iterator和ListIterator的区别"><a href="#Iterator和ListIterator的区别" class="headerlink" title="Iterator和ListIterator的区别"></a>Iterator和ListIterator的区别</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39017359/article/details/89293748">Iterator和ListIterator的区别</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>Iterator只能向后遍历</li>
+<li>ListIterator还可以向前遍历</li>
+</ul>
+<h3 id="List遍历时怎么安全的删除元素"><a href="#List遍历时怎么安全的删除元素" class="headerlink" title="List遍历时怎么安全的删除元素"></a>List遍历时怎么安全的删除元素</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36412715/article/details/84071160">List遍历时怎么删除元素</a></li>
+</ul>
+</blockquote>
+<h1 id="Sorting"><a href="#Sorting" class="headerlink" title="Sorting"></a>Sorting</h1><p>Sorting：排序</p>
+<h2 id="Basic-7"><a href="#Basic-7" class="headerlink" title="Basic"></a>Basic</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Vici__/article/details/85293896">java容器排序详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Comparator"><a href="#Comparator" class="headerlink" title="Comparator"></a>Comparator</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Madoka_Homura/article/details/107382799">java容器排序之比较器（Comparator）详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Comparable"><a href="#Comparable" class="headerlink" title="Comparable"></a>Comparable</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41474648/article/details/105182845">java容器排序之可排序（Comparable）详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Question-4"><a href="#Question-4" class="headerlink" title="Question"></a>Question</h2><h3 id="Comparator和Comparable的区别"><a href="#Comparator和Comparable的区别" class="headerlink" title="Comparator和Comparable的区别"></a>Comparator和Comparable的区别</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45559536/article/details/106091870">Comparator和Comparable的区别</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>Comparator：比较器，负责对任意两个对象进行比较</li>
+<li>Comparable：可比较，负责比较当前对象和其他对象</li>
+</ul>
+<h3 id="Collections-sort和Arrays-sort的区别"><a href="#Collections-sort和Arrays-sort的区别" class="headerlink" title="Collections.sort和Arrays.sort的区别"></a>Collections.sort和Arrays.sort的区别</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42110638/article/details/85636367">Collections.sort和Arrays.sort的区别</a></li>
+</ul>
+</blockquote>
+<h3 id="Collections-sort和Stream-sorted的区别"><a href="#Collections-sort和Stream-sorted的区别" class="headerlink" title="Collections.sort和Stream.sorted的区别"></a>Collections.sort和Stream.sorted的区别</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/pan_junbiao/article/details/123738861">Collections.sort和stream().sorted的区别</a></li>
+</ul>
+</blockquote>
+<h1 id="Nullable"><a href="#Nullable" class="headerlink" title="Nullable"></a>Nullable</h1><p>Nullable：可空</p>
+<h2 id="Basic-8"><a href="#Basic-8" class="headerlink" title="Basic"></a>Basic</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CodingNO1/article/details/105642365">java容器空值入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/TsuiXh/article/details/123505243">java容器空值详解</a></li>
+</ul>
+</blockquote>
+<p>空值支持情况总结如下：</p>
+<ol>
+<li>list都允许空值</li>
+<li>基于CopyOnWrite的安全容器都允许空值</li>
+<li>其他安全容器和支持排序的容器不允许空值</li>
+</ol>
+<h2 id="Question-5"><a href="#Question-5" class="headerlink" title="Question"></a>Question</h2><h3 id="ConcurrentHashMap为什么key和value不能为null"><a href="#ConcurrentHashMap为什么key和value不能为null" class="headerlink" title="ConcurrentHashMap为什么key和value不能为null"></a>ConcurrentHashMap为什么key和value不能为null</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010979642/article/details/117333313">ConcurrentHashMap为什么key和value不能为null</a></li>
+</ul>
+</blockquote>
+<h1 id="Stream"><a href="#Stream" class="headerlink" title="Stream"></a>Stream</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yy339452689/article/details/110956119">Stream详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43842093/article/details/122136492">Collectors详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhuweifeng/article/details/117411385">Collectors.toCollection详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31635851/article/details/111553400">Collectors.toList详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/L_fly_J/article/details/120100016">Collectors.toSet详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yuxiangdeming/article/details/128901450">Collectors.toMap详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kingmax54212008/article/details/98489696">Collectors.toMap之重复的key</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wysnxzm/article/details/81260073">Collectors.toMap之NullPointerException</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangmuming/article/details/72747183">Collectors之去掉null</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/winterking3/article/details/116268407">Collectors之去重</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39940674/article/details/122075526">Stream之函数式编程详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/li0978/article/details/113853900">Stream之流式编程详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/li0978/article/details/113921324">Stream之流式编程原理</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w1014074794/article/details/119947671">Stream之修改并行度</a></li>
+</ul>
+</blockquote>
+<h2 id="FP（Functional-Programming-函数式编程）"><a href="#FP（Functional-Programming-函数式编程）" class="headerlink" title="FP（Functional Programming 函数式编程）"></a>FP（Functional Programming 函数式编程）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/li0978/article/details/113836970">lambda表达式入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51545690/article/details/129298954">lambda表达式详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38718258/article/details/105053475">java函数式编程入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/icarusliu/article/details/79495534">java函数式编程详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hbdhaj/article/details/119564310">java函数式接口入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/atu1111/article/details/104799866">java函数式接口详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31635851/article/details/116930647">java函数式接口之UnaryOperator和BinaryOperator</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31635851/article/details/116985000">java函数式接口之Function.apply详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41378597/article/details/103942253">java函数式接口之Function.identity详解</a></li>
+</ul>
+</blockquote>
+<h2 id="SP（Stream-Programming-流式编程）"><a href="#SP（Stream-Programming-流式编程）" class="headerlink" title="SP（Stream Programming 流式编程）"></a>SP（Stream Programming 流式编程）</h2><p>计算核心：Map（映射和转换）、Reduce（归并和聚合）、Filter（过滤和筛选）<br>并行核心：Parallelism（并行度）、Partition（分区）、Merge（合并）</p>
+<h3 id="java"><a href="#java" class="headerlink" title="java"></a>java</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yy339452689/article/details/110956119">Stream操作符详解</a></li>
+</ul>
+</blockquote>
+<h4 id="Framework"><a href="#Framework" class="headerlink" title="Framework"></a>Framework</h4><p>Storm、Spark Stream、Flink</p>
+<h5 id="spark"><a href="#spark" class="headerlink" title="spark"></a>spark</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/BigData_Hobert/article/details/108762358">Spark算子详解</a></li>
+</ul>
+</blockquote>
+<h5 id="flink"><a href="#flink" class="headerlink" title="flink"></a>flink</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liuwei0376/article/details/123496301">Flink算子详解</a></li>
+</ul>
+</blockquote>
+<h2 id="RP（Reactive-Programming-响应式编程）"><a href="#RP（Reactive-Programming-响应式编程）" class="headerlink" title="RP（Reactive Programming 响应式编程）"></a>RP（Reactive Programming 响应式编程）</h2><h3 id="RxJava"><a href="#RxJava" class="headerlink" title="RxJava"></a>RxJava</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jiduochou963/article/details/115044605">Rxjava入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jdsjlzx/article/details/51485778">Rxjava详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jdsjlzx/article/details/51534504">Rxjava核心</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Gdeer/article/details/97802092">RxJava操作符详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/AndroidAlvin/article/details/103159576">Rxjava链式调用原理入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/y1962475006/article/details/79098820">Rxjava链式调用原理详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Wengwuhua/article/details/105893242">Rxjava链式调用和线程切换原理</a></li>
+</ul>
+</blockquote>
+<h4 id="Rxjava链式调用原理"><a href="#Rxjava链式调用原理" class="headerlink" title="Rxjava链式调用原理"></a>Rxjava链式调用原理</h4><p>基于观察者模式实现的，并运用了责任链模式和装饰器模式</p>
+<h5 id="数据流转的实现"><a href="#数据流转的实现" class="headerlink" title="数据流转的实现"></a>数据流转的实现</h5><blockquote>
+<ol>
+<li>Rxjava的Observable. OnSubscribe的作用类似于Producer（生产者）</li>
+<li>Rxjava的Subscriber的作用类似于Consumer（消费者）</li>
+<li>Rxjava的Observable. OnSubscribe（Producer）会通过lift操作或者subcribe操作生成Subscriber（Consumer）并在调用Observable. OnSubscribe的call方法时将Subscriber传递给Observable. OnSubscribe</li>
+<li>当Observable. OnSubscribe的call方法执行时，Subscriber就会被调用</li>
+<li>这样生产者和消费者模型就形成了，数据的流转就实现了</li>
+</ol>
+</blockquote>
+<h5 id="生产链的建立"><a href="#生产链的建立" class="headerlink" title="生产链的建立"></a>生产链的建立</h5><blockquote>
+<ol>
+<li>Observable会通过create操作创建第一个Observable. OnSubscribe</li>
+<li>之后调用操作符函数时会通过lift操作创建一个新的Observable和Observable. OnSubscribe</li>
+<li>新的Observable. OnSubscribe（通过内部类的方式）引用了上一个Observable. OnSubscribe</li>
+<li>这样Observable. OnSubscribe通过Observable的创建从前到后的建立了依赖关系</li>
+<li>生产链依赖就形成了</li>
+</ol>
+</blockquote>
+<h5 id="生产链的触发"><a href="#生产链的触发" class="headerlink" title="生产链的触发"></a>生产链的触发</h5><blockquote>
+<ol>
+<li>当Observable.subcribe方法调用时，最后那个Observable. OnSubscribe的call方法就会被调用</li>
+<li>当每个Observable. OnSubscribe的call方法调用时，都会触发上一个Observable. OnSubscribe的call方法被调用</li>
+<li>这样Observable. OnSubscribe通过从后到前的递归调用，生产链调用就触发了</li>
+</ol>
+</blockquote>
+<h5 id="消费链的建立"><a href="#消费链的建立" class="headerlink" title="消费链的建立"></a>消费链的建立</h5><blockquote>
+<ol>
+<li>Observable会通过subcribe操作创建最后一个Subscriber</li>
+<li>之后subcribe操作触发Observable. OnSubscribe的call方法执行时会创建一个新的Subscriber</li>
+<li>新的Subscriber引用了当前Observable使用的Subscriber，并被传递给了上一个Observable使用</li>
+<li>这样Subscriber通过Observable的执行从后到前建立了依赖关系</li>
+<li>消费链依赖就形成了</li>
+</ol>
+</blockquote>
+<h5 id="消费链的触发"><a href="#消费链的触发" class="headerlink" title="消费链的触发"></a>消费链的触发</h5><blockquote>
+<ol>
+<li>当Observable. OnSubscribe的call方法执行时，Subscriber的onNext方法就会执行</li>
+<li>映射操作时Subscriber的onNext方法执行时会直接触发下一个Subscriber的onNext方法，聚合操作时Subscriber的onNext方法执行时会将数据缓存起来等到onCompleted方法执行时再依次触发下一个Subscriber的onNext方法</li>
+<li>这样Subscriber通过从前到后的顺序执行，消费链执行就触发了</li>
+</ol>
+</blockquote>
+<h1 id="Safe"><a href="#Safe" class="headerlink" title="Safe"></a>Safe</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43494882/article/details/119615153">容器的线程安全性详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>线程安全容器的实现方式通常有3种</p>
+<blockquote>
+<ol>
+<li>加锁（LOCK）：适合强一致性的场景，性能比较差，比如Blocking系列中的BlockingQueue、BlockingDeque</li>
+<li>无锁（CAS）：适合高并发的场景，存在弱一致性的问题，比如Concurrent系列中的ConcurrentHashMap，ConcurrentLinkedQueue、ConcurrentLinkedDeque</li>
+<li>写时复制（COW）：适合读多写少的场景，存在内存占用高和弱一致性的问题，比如CopyOnWrite系列中的CopyOnWriteArrayList、CopyOnWriteArraySet</li>
+</ol>
+</blockquote>
+<h2 id="Consistency"><a href="#Consistency" class="headerlink" title="Consistency"></a>Consistency</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a3125504x/article/details/109407748">一致性详解</a></li>
+</ul>
+</blockquote>
+<p>一致性有以下几个概念</p>
+<ul>
+<li>强一致性（strict consistency）<ul>
+<li>顺序一致性（sequential consistency）</li>
+</ul>
+</li>
+<li>弱一致性（weak consistency）<ul>
+<li>最终一致性（eventual consistency）</li>
+</ul>
+</li>
+</ul>
+<h3 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28605513/article/details/84992262">ConcurrentHashMap的弱一致性入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yu757371316/article/details/81389867">ConcurrentHashMap的弱一致性详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41634872/article/details/110246465">ConcurrentHashMap之get的弱一致性</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Qgwperfect/article/details/88706891">ConcurrentHashMap之size的弱一致性</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43327091/article/details/104208440">ConcurrentHashMap之iterator的弱一致性</a></li>
+</ul>
+</blockquote>
+<h3 id="CopyOnWriteArrayList"><a href="#CopyOnWriteArrayList" class="headerlink" title="CopyOnWriteArrayList"></a>CopyOnWriteArrayList</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35159279/article/details/119998687">CopyOnWriteArrayList的弱一致性</a></li>
+</ul>
+</blockquote>
+<h1 id="☆-Theory"><a href="#☆-Theory" class="headerlink" title="☆ Theory"></a>☆ Theory</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hty1053240123/article/details/52858123">国内在线查看Java源码方法</a></li>
+<li><a target="_blank" rel="noopener" href="https://gitee.com/huangtianyu/jdk-source">国内在线查看Java源码地址</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq877728715/article/details/103063830">容器初始容量、加载因子、扩容增量</a></li>
+</ul>
+</blockquote>
+<p>容器用到的数据结构和算法可以参考这里（原创） <a href="/2017/03/01/dsa/dsa/" title="dsa">dsa</a></p>
+<blockquote>
+<p>优先级队列实现：堆<br>可排序字典实现：红黑树或者跳表</p>
+</blockquote>
+<h2 id="List-1"><a href="#List-1" class="headerlink" title="List"></a>List</h2><h3 id="Basic-9"><a href="#Basic-9" class="headerlink" title="Basic"></a>Basic</h3><h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46726346/article/details/107562529">ArrayList实现原理入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fighterandknight/article/details/61240861">ArrayList实现原理详解</a></li>
+</ul>
+</blockquote>
+<h4 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jianyuerensheng/article/details/51204598">LinkedList实现原理入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fighterandknight/article/details/61476335">LinkedList实现原理详解</a></li>
+</ul>
+</blockquote>
+<h4 id="CopyOnWriteArrayList-1"><a href="#CopyOnWriteArrayList-1" class="headerlink" title="CopyOnWriteArrayList"></a>CopyOnWriteArrayList</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010002184/article/details/90452918">CopyOnWriteArrayList实现原理入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43799161/article/details/123029380">CopyOnWriteArrayList实现原理详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Question-6"><a href="#Question-6" class="headerlink" title="Question"></a>Question</h3><h4 id="ArrayList-1"><a href="#ArrayList-1" class="headerlink" title="ArrayList"></a>ArrayList</h4><h5 id="ArrayList是如何扩容的"><a href="#ArrayList是如何扩容的" class="headerlink" title="ArrayList是如何扩容的"></a>ArrayList是如何扩容的</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/penriver/article/details/117447113">ArrayList扩容详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Set-1"><a href="#Set-1" class="headerlink" title="Set"></a>Set</h2><h3 id="Basic-10"><a href="#Basic-10" class="headerlink" title="Basic"></a>Basic</h3><h4 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/guoweimelon/article/details/50804799">HashSet实现原理详解</a></li>
+</ul>
+</blockquote>
+<blockquote>
+<p>HashSet基于HashMap实现</p>
+</blockquote>
+<h4 id="LinkedHashSet"><a href="#LinkedHashSet" class="headerlink" title="LinkedHashSet"></a>LinkedHashSet</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_37366055/article/details/78367170">LinkedHashSet实现原理详解</a></li>
+</ul>
+</blockquote>
+<blockquote>
+<p>LinkedHashSet基于LinkedHashMap实现</p>
+</blockquote>
+<h4 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/csdnlijingran/article/details/89886433">TreeSet实现原理详解</a></li>
+</ul>
+</blockquote>
+<blockquote>
+<p>TreeSet基于TreeMap实现</p>
+</blockquote>
+<h4 id="CopyOnWriteArraySet"><a href="#CopyOnWriteArraySet" class="headerlink" title="CopyOnWriteArraySet"></a>CopyOnWriteArraySet</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Dax1n/article/details/69950901">CopyOnWriteArraySet实现原理详解</a></li>
+</ul>
+</blockquote>
+<blockquote>
+<p>CopyOnWriteArraySet基于CopyOnWriteArrayList实现</p>
+</blockquote>
+<h4 id="ConcurrentSkipListSet"><a href="#ConcurrentSkipListSet" class="headerlink" title="ConcurrentSkipListSet"></a>ConcurrentSkipListSet</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hbtj_1216/article/details/114908080">ConcurrentSkipListSet实现原理详解</a></li>
+</ul>
+</blockquote>
+<blockquote>
+<p>ConcurrentSkipListSet基于ConcurrentSkipListMap实现</p>
+</blockquote>
+<h2 id="Map-1"><a href="#Map-1" class="headerlink" title="Map"></a>Map</h2><h3 id="Basic-11"><a href="#Basic-11" class="headerlink" title="Basic"></a>Basic</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ysz171360154/article/details/108983642">Map之equals和hashCode详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41864321/article/details/93920730">Map之hash冲突详解</a></li>
+</ul>
+</blockquote>
+<h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qghurt/article/details/107323702">HashMap知识点</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fst438060684/article/details/86499840">java7和java8的HashMap区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_49263647/article/details/115740392">java7和java8的HashMap实现原理详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/centrl/article/details/115910463">java7的HashMap实现原理入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Youth_lql/article/details/110005072">java7的HashMap实现原理详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lj402159806/article/details/103925779">java8的HashMap实现原理入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fighterandknight/article/details/61624150">java8的HashMap实现原理详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jx520/article/details/127948707">HashMap之hash方法为何要进行异或和位移</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cy973071263/article/details/122869277">HashMap之tableSizeFor方法原理详解</a></li>
+</ul>
+</blockquote>
+<h4 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40634846/article/details/106085066">LinkedHashMap实现原理详解</a></li>
+</ul>
+</blockquote>
+<h4 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_26222859/article/details/80661053">TreeMap实现原理详解</a></li>
+</ul>
+</blockquote>
+<h4 id="ConcurrentHashMap-1"><a href="#ConcurrentHashMap-1" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40826814/article/details/115328565">ConcurrentHashMap知识点</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013374645/article/details/88700927">java7和java8的ConcurrentHashMap区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32224047/article/details/108990363">java7和java8的ConcurrentHashMap实现原理详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LightOfMiracle/article/details/73235252">java7的ConcurrentHashMap实现原理入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36942720/article/details/114030517">java7的ConcurrentHashMap实现原理详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lj402159806/article/details/104009846">java8的ConcurrentHashMap实现原理入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fighterandknight/article/details/68936902">java8的ConcurrentHashMap实现原理详解</a></li>
+</ul>
+</blockquote>
+<h4 id="ConcurrentSkipListMap"><a href="#ConcurrentSkipListMap" class="headerlink" title="ConcurrentSkipListMap"></a>ConcurrentSkipListMap</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/coslay/article/details/44819823">ConcurrentSkipListMap实现原理详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Question-7"><a href="#Question-7" class="headerlink" title="Question"></a>Question</h3><h4 id="Map-2"><a href="#Map-2" class="headerlink" title="Map"></a>Map</h4><h5 id="为什么重写equals要重写hashCode"><a href="#为什么重写equals要重写hashCode" class="headerlink" title="为什么重写equals要重写hashCode"></a>为什么重写equals要重写hashCode</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45427600/article/details/113484445">为什么重写equals要重写hashCode</a></li>
+</ul>
+</blockquote>
+<h5 id="hash冲突如何解决"><a href="#hash冲突如何解决" class="headerlink" title="hash冲突如何解决"></a>hash冲突如何解决</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_48241564/article/details/118613312">hash冲突如何解决</a></li>
+</ul>
+</blockquote>
+<h5 id="Map是如何扩容的"><a href="#Map是如何扩容的" class="headerlink" title="Map是如何扩容的"></a>Map是如何扩容的</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39736597/article/details/113726067">Map是如何扩容的</a></li>
+</ul>
+</blockquote>
+<h4 id="HashMap-1"><a href="#HashMap-1" class="headerlink" title="HashMap"></a>HashMap</h4><h5 id="HashMap的核心逻辑"><a href="#HashMap的核心逻辑" class="headerlink" title="HashMap的核心逻辑"></a>HashMap的核心逻辑</h5><p>关键点</p>
+<ul>
+<li>constructor：构造过程<ul>
+<li>initialCapacity：初始容量</li>
+<li>loadFactor：加载因子</li>
+<li>threshold：扩容阈值</li>
+</ul>
+</li>
+<li>put：写入元素过程<ul>
+<li>hash：求哈希（高低位进行与操作减少hash碰撞）</li>
+<li>indexFor：求下标（容量为2的n次方时使用与操作代替求余操作更快）</li>
+<li>resize：扩容<ul>
+<li>rehash：重新求哈希（容量为2的n次方时通过原hash的第n+1位判断是否需要移动）</li>
+<li>transfer：移动元素（新位置要么是原位置，要么是原位置加原容量的长度）</li>
+</ul>
+</li>
+<li>update：用equals判断是否存在相同的元素，存在则覆盖，不存在则创建并插入</li>
+<li>create：创建并插入（头插法和尾插法）</li>
+</ul>
+</li>
+<li>get：获取元素过程</li>
+<li>size：获取大小过程</li>
+<li>safe<ul>
+<li>put：java7使用Reentrantlock锁住segment，java8使用CAS + synchronized锁住头结点</li>
+<li>get：不加锁，使用volatile</li>
+<li>iterate：弱一致性和modCount</li>
+</ul>
+</li>
+</ul>
+<h5 id="java7和java8的HashMap区别"><a href="#java7和java8的HashMap区别" class="headerlink" title="java7和java8的HashMap区别"></a>java7和java8的HashMap区别</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fst438060684/article/details/86499840">java7和java8的HashMap区别</a></li>
+</ul>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>区别点</th>
+<th>jdk7</th>
+<th>jdk8</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>存储结构</td>
+<td>数组 + 链表</td>
+<td>数组 + 链表 + 红黑树</td>
+</tr>
+<tr>
+<td>逻辑结构</td>
+<td>Entry</td>
+<td>Node</td>
+</tr>
+<tr>
+<td>结点插法</td>
+<td>头插法</td>
+<td>尾插法</td>
+</tr>
+<tr>
+<td>哈希（hash）算法</td>
+<td>较复杂</td>
+<td>较简单（冲突了可以树化）</td>
+</tr>
+<tr>
+<td>索引（index）算法</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>扩容判断</td>
+<td>除了size&gt;threshold，还需要有hash冲突才扩容</td>
+<td>size&gt;threshold时直接扩容</td>
+</tr>
+<tr>
+<td>扩容迁移</td>
+<td>所有元素重新hash后迁移</td>
+<td>判断容量的新增高位来决定是否需要迁移，并且迁移时 新索引&#x3D;原索引+原容量</td>
+</tr>
+</tbody></table>
+<h5 id="java8的HashMap为什么要用红黑树"><a href="#java8的HashMap为什么要用红黑树" class="headerlink" title="java8的HashMap为什么要用红黑树"></a>java8的HashMap为什么要用红黑树</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/it_qingfengzhuimeng/article/details/103308308">java8的HashMap为什么要用红黑树</a></li>
+</ul>
+</blockquote>
+<h5 id="java8的HashMap中的红黑树是如何排序的"><a href="#java8的HashMap中的红黑树是如何排序的" class="headerlink" title="java8的HashMap中的红黑树是如何排序的"></a>java8的HashMap中的红黑树是如何排序的</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43842467/article/details/105909380">java8的HashMap中的红黑树是如何排序的</a></li>
+</ul>
+</blockquote>
+<h5 id="java8的HashMap中链表和红黑树的转换条件"><a href="#java8的HashMap中链表和红黑树的转换条件" class="headerlink" title="java8的HashMap中链表和红黑树的转换条件"></a>java8的HashMap中链表和红黑树的转换条件</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40728490/article/details/105702394">java8的HashMap中链表和红黑树的转换条件</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42949615/article/details/124519812">java8的HashMap中链表和红黑树的转换依据</a></li>
+</ul>
+</blockquote>
+<h5 id="java8的HashMap容量大小为什么必须是2的幂次方"><a href="#java8的HashMap容量大小为什么必须是2的幂次方" class="headerlink" title="java8的HashMap容量大小为什么必须是2的幂次方"></a>java8的HashMap容量大小为什么必须是2的幂次方</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39380192/article/details/104588207">java8的HashMap容量大小为什么必须是2的幂次方入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yuanchangliang/article/details/108044976">java8的HashMap容量大小为什么必须是2的幂次方详解</a></li>
+</ul>
+</blockquote>
+<ol>
+<li>加快索引计算：计算索引时可以使用按位与运算代替求余运算，加快运算速度</li>
+<li>减少哈希冲突：按位与运算时其中一个数都是1，增大了hash分布范围，减少了hash冲突</li>
+</ol>
+<h5 id="HashMap是如何扩容的"><a href="#HashMap是如何扩容的" class="headerlink" title="HashMap是如何扩容的"></a>HashMap是如何扩容的</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012191627/article/details/106927867">HashMap扩容详解</a></li>
+</ul>
+</blockquote>
+<h5 id="HashMap有哪些并发问题"><a href="#HashMap有哪些并发问题" class="headerlink" title="HashMap有哪些并发问题"></a>HashMap有哪些并发问题</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lx853771701/article/details/124251534">HashMap并发问题</a></li>
+</ul>
+</blockquote>
+<h4 id="ConcurrentHashMap-2"><a href="#ConcurrentHashMap-2" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h4><h5 id="ConcurrentHashMap的核心逻辑"><a href="#ConcurrentHashMap的核心逻辑" class="headerlink" title="ConcurrentHashMap的核心逻辑"></a>ConcurrentHashMap的核心逻辑</h5><h5 id="java7和java8的ConcurrentHashMap区别"><a href="#java7和java8的ConcurrentHashMap区别" class="headerlink" title="java7和java8的ConcurrentHashMap区别"></a>java7和java8的ConcurrentHashMap区别</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013374645/article/details/88700927">java7和java8的ConcurrentHashMap区别</a></li>
+</ul>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>区别点</th>
+<th>jdk7</th>
+<th>jdk8</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>存储结构</td>
+<td>数组 + 链表</td>
+<td>数组 + 链表 + 红黑树</td>
+</tr>
+<tr>
+<td>逻辑结构</td>
+<td>Segment + HashEntry + lock（segment）</td>
+<td>Node + cas + synchronized（head）</td>
+</tr>
+<tr>
+<td>结点插法</td>
+<td>头插法</td>
+<td>尾插法</td>
+</tr>
+<tr>
+<td>哈希（hash）算法</td>
+<td>需要hash两次</td>
+<td>只需要hash一次</td>
+</tr>
+<tr>
+<td>索引（index）算法</td>
+<td>需要index两次</td>
+<td>只需要index一次</td>
+</tr>
+<tr>
+<td>扩容判断</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>扩容迁移</td>
+<td>单线程扩容</td>
+<td>并发扩容</td>
+</tr>
+<tr>
+<td>大小计算</td>
+<td>先无锁计算三次，如果结果一样则返回计算结果，否则就会锁住所有的Segment求和</td>
+<td>直接存储size</td>
+</tr>
+</tbody></table>
+<h5 id="java7的ConcurrentHashMap的并发度是什么"><a href="#java7的ConcurrentHashMap的并发度是什么" class="headerlink" title="java7的ConcurrentHashMap的并发度是什么"></a>java7的ConcurrentHashMap的并发度是什么</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jaryle/article/details/78284291">java7的ConcurrentHashMap的并发度是什么</a></li>
+</ul>
+</blockquote>
+<h5 id="java8的ConcurrentHashMap为什么放弃了分段锁"><a href="#java8的ConcurrentHashMap为什么放弃了分段锁" class="headerlink" title="java8的ConcurrentHashMap为什么放弃了分段锁"></a>java8的ConcurrentHashMap为什么放弃了分段锁</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sufu1065/article/details/120465782">ConcurrentHashMap为什么放弃了分段锁详解</a></li>
+</ul>
+</blockquote>
+<h5 id="ConcurrentHashMap是如何计算size的"><a href="#ConcurrentHashMap是如何计算size的" class="headerlink" title="ConcurrentHashMap是如何计算size的"></a>ConcurrentHashMap是如何计算size的</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_27037443/article/details/94441885">java7和java8的ConcurrentHashMap的size计算详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/windy46/article/details/107545767">java7的ConcurrentHashMap的size计算详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Saintmm/article/details/121311201">java8的ConcurrentHashMap的size计算详解</a></li>
+</ul>
+</blockquote>
+<h5 id="ConcurrentHashMap是如何扩容的"><a href="#ConcurrentHashMap是如何扩容的" class="headerlink" title="ConcurrentHashMap是如何扩容的"></a>ConcurrentHashMap是如何扩容的</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/rod0320/article/details/123034307">java7和java8的ConcurrentHashMap扩容详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41384351/article/details/89578165">java7的ConcurrentHashMap扩容详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zzu_seu/article/details/106698150">java8的ConcurrentHashMap扩容详解</a></li>
+</ul>
+</blockquote>
+<h5 id="ConcurrentHashMap还有并发问题吗"><a href="#ConcurrentHashMap还有并发问题吗" class="headerlink" title="ConcurrentHashMap还有并发问题吗"></a>ConcurrentHashMap还有并发问题吗</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/beijiuyizui/article/details/109383328">ConcurrentHashMap还有并发问题吗</a></li>
+</ul>
+</blockquote>
+<h2 id="Queue-1"><a href="#Queue-1" class="headerlink" title="Queue"></a>Queue</h2><h3 id="Basic-12"><a href="#Basic-12" class="headerlink" title="Basic"></a>Basic</h3><h4 id="ArrayDeque"><a href="#ArrayDeque" class="headerlink" title="ArrayDeque"></a>ArrayDeque</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_37627646/article/details/121859848">ArrayDeque实现原理详解</a></li>
+</ul>
+</blockquote>
+<h4 id="LinkedList-1"><a href="#LinkedList-1" class="headerlink" title="LinkedList"></a>LinkedList</h4><p><a href="#LinkedList">参考List部分的LinkedList</a></p>
+<h4 id="PriorityQueue"><a href="#PriorityQueue" class="headerlink" title="PriorityQueue"></a>PriorityQueue</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_37627646/article/details/121382025">PriorityQueue实现原理详解</a></li>
+</ul>
+</blockquote>
+<h4 id="ArrayBlockingQueue"><a href="#ArrayBlockingQueue" class="headerlink" title="ArrayBlockingQueue"></a>ArrayBlockingQueue</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/org_hjh/article/details/109791013">ArrayBlockingQueue实现原理详解</a></li>
+</ul>
+</blockquote>
+<h4 id="LinkedBlockingQueue"><a href="#LinkedBlockingQueue" class="headerlink" title="LinkedBlockingQueue"></a>LinkedBlockingQueue</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/org_hjh/article/details/109820895">LinkedBlockingQueue实现原理详解</a></li>
+</ul>
+</blockquote>
+<h4 id="SynchronousQueue"><a href="#SynchronousQueue" class="headerlink" title="SynchronousQueue"></a>SynchronousQueue</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/org_hjh/article/details/109955522">SynchronousQueue实现原理详解</a></li>
+</ul>
+</blockquote>
+<h4 id="LinkedTransferQueue"><a href="#LinkedTransferQueue" class="headerlink" title="LinkedTransferQueue"></a>LinkedTransferQueue</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/org_hjh/article/details/109983915">LinkedTransferQueue实现原理详解</a></li>
+</ul>
+</blockquote>
+<h4 id="PriorityBlockingQueue"><a href="#PriorityBlockingQueue" class="headerlink" title="PriorityBlockingQueue"></a>PriorityBlockingQueue</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/org_hjh/article/details/109855381">PriorityBlockingQueue实现原理详解</a></li>
+</ul>
+</blockquote>
+<h4 id="DelayQueue"><a href="#DelayQueue" class="headerlink" title="DelayQueue"></a>DelayQueue</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/org_hjh/article/details/109900500">DelayQueue实现原理详解</a></li>
+</ul>
+</blockquote>
+<h4 id="DelayedWorkQueue"><a href="#DelayedWorkQueue" class="headerlink" title="DelayedWorkQueue"></a>DelayedWorkQueue</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/org_hjh/article/details/110101184">DelayedWorkQueue实现原理详解</a></li>
+</ul>
+</blockquote>
+<h4 id="LinkedBlockingDeque"><a href="#LinkedBlockingDeque" class="headerlink" title="LinkedBlockingDeque"></a>LinkedBlockingDeque</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/org_hjh/article/details/110056223">LinkedBlockingDeque实现原理详解</a></li>
+</ul>
+</blockquote>
+<h4 id="ConcurrentLinkedQueue"><a href="#ConcurrentLinkedQueue" class="headerlink" title="ConcurrentLinkedQueue"></a>ConcurrentLinkedQueue</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_37627646/article/details/121427364">ConcurrentLinkedQueue实现原理详解</a></li>
+</ul>
+</blockquote>
+<h4 id="ConcurrentLinkedDeque"><a href="#ConcurrentLinkedDeque" class="headerlink" title="ConcurrentLinkedDeque"></a>ConcurrentLinkedDeque</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_37627646/article/details/121684096">ConcurrentLinkedDeque实现原理详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Stack-1"><a href="#Stack-1" class="headerlink" title="Stack"></a>Stack</h2><h3 id="Basic-13"><a href="#Basic-13" class="headerlink" title="Basic"></a>Basic</h3><h4 id="LinkedList-2"><a href="#LinkedList-2" class="headerlink" title="LinkedList"></a>LinkedList</h4><p><a href="#LinkedList">参考List部分的LinkedList</a></p>
+<h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><h2 id="为什么没有ConcurrentArrayList"><a href="#为什么没有ConcurrentArrayList" class="headerlink" title="为什么没有ConcurrentArrayList"></a>为什么没有ConcurrentArrayList</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39673037/article/details/111760888">为什么没有ConcurrentArrayList</a></li>
+</ul>
+</blockquote>
+<h2 id="为什么没有ConcurrentHashSet"><a href="#为什么没有ConcurrentHashSet" class="headerlink" title="为什么没有ConcurrentHashSet"></a>为什么没有ConcurrentHashSet</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/p15097962069/article/details/105877038">为什么没有ConcurrentHashSet</a></li>
+</ul>
+</blockquote>
+<h1 id="Utils"><a href="#Utils" class="headerlink" title="Utils"></a>Utils</h1><h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><p>Arrays、Collections、Comparator</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_52519008/article/details/124654579">Arrays详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiangqian0721/article/details/120170736">Collections详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31635851/article/details/120269813">Comparator详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Apache-Commons"><a href="#Apache-Commons" class="headerlink" title="Apache Commons"></a>Apache Commons</h2><p>ArrayUtils、CollectionUtils、ListUtils、SetUtils、MapUtils、ComparatorUtils</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40722604/article/details/114698079">Apache Commons Container详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010979642/article/details/106339345">Apache Commons Collections详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wysnxzm/article/details/82425047">Apache Commons ComparatorUtils详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Google-Guava"><a href="#Google-Guava" class="headerlink" title="Google Guava"></a>Google Guava</h2><p>Lists、Sets、Maps、Ordering、Range、RangeSet、RangeMap、Table、Tables</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wuyuxing24/article/details/100594173">Google Guava Container详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhiwenganyong/article/details/122770670">Google Guava Collections详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/han12398766/article/details/117391657">Google Guava Ordering详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_18671415/article/details/113128590">Google Guava Range详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/neweastsun/article/details/84996250">Google Guava Table详解</a></li>
+</ul>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>只想买包辣条</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/pay/wechatpay.jpeg" alt="朱继鹏 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># + java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/07/01/lang/lang-1-java/junior/java-2-lang/" rel="prev" title="lang">
+      <i class="fa fa-chevron-left"></i> lang
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/07/01/lang/lang-1-java/junior/java-4-exception/" rel="next" title="exception">
+      exception <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Container"><span class="nav-number">1.</span> <span class="nav-text">Container</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Type"><span class="nav-number">1.1.</span> <span class="nav-text">Type</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E5%AE%B9%E5%99%A8%E7%B1%BB%EF%BC%88%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">普通容器类（线程不安全）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E5%AE%B9%E5%99%A8%E7%B1%BB%EF%BC%88%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">1.1.2.</span> <span class="nav-text">同步容器类（线程安全）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E7%B1%BB%EF%BC%88%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">1.1.3.</span> <span class="nav-text">并发容器类（线程安全）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array"><span class="nav-number">1.2.</span> <span class="nav-text">Array</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic"><span class="nav-number">1.2.1.</span> <span class="nav-text">Basic</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#List"><span class="nav-number">1.3.</span> <span class="nav-text">List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question"><span class="nav-number">1.3.2.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList%E5%92%8CLinkedList%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">ArrayList和LinkedList的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList%E5%92%8CVector%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">ArrayList和Vector的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Collections-synchronizedList%E5%92%8CVector%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">Collections.synchronizedList和Vector的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CopyOnWriteArrayList%E5%92%8CVector%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.2.4.</span> <span class="nav-text">CopyOnWriteArrayList和Vector的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CopyOnWriteArrayList%E5%92%8CCollections-synchronizedList%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.2.5.</span> <span class="nav-text">CopyOnWriteArrayList和Collections.synchronizedList的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList%E5%92%8CLinkedList%E5%A2%9E%E5%88%A0%E6%9F%A5%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-number">1.3.2.6.</span> <span class="nav-text">ArrayList和LinkedList增删查时间复杂度分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88ArrayList%E5%AE%9E%E7%8E%B0%E4%BA%86RandomAccess%E6%8E%A5%E5%8F%A3%E8%80%8CLinkedList%E5%8D%B4%E6%B2%A1%E6%9C%89"><span class="nav-number">1.3.2.7.</span> <span class="nav-text">为什么ArrayList实现了RandomAccess接口而LinkedList却没有</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set"><span class="nav-number">1.4.</span> <span class="nav-text">Set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-2"><span class="nav-number">1.4.1.</span> <span class="nav-text">Basic</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map"><span class="nav-number">1.5.</span> <span class="nav-text">Map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-3"><span class="nav-number">1.5.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-1"><span class="nav-number">1.5.2.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap%E5%92%8CConcurrentHashMap%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">HashMap和ConcurrentHashMap的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap%E5%92%8CHashtable%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">HashMap和Hashtable的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Collections-synchronizedMap%E5%92%8CHashtable%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.5.2.3.</span> <span class="nav-text">Collections.synchronizedMap和Hashtable的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ConcurrentHashMap%E5%92%8CHashtable%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.5.2.4.</span> <span class="nav-text">ConcurrentHashMap和Hashtable的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ConcurrentHashMap%E5%92%8CCollections-synchronizedMap%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.5.2.5.</span> <span class="nav-text">ConcurrentHashMap和Collections.synchronizedMap的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Queue"><span class="nav-number">1.6.</span> <span class="nav-text">Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-4"><span class="nav-number">1.6.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-2"><span class="nav-number">1.6.2.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Queue%E6%96%B9%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">Queue方法的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayDeque%E5%92%8CLinkedList%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.6.2.2.</span> <span class="nav-text">ArrayDeque和LinkedList的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayBlockingQueue%E5%92%8CLinkedBlockingQueue%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.6.2.3.</span> <span class="nav-text">ArrayBlockingQueue和LinkedBlockingQueue的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedBlockingQueue%E5%92%8CConcurrentLinkedQueue%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.6.2.4.</span> <span class="nav-text">LinkedBlockingQueue和ConcurrentLinkedQueue的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SynchronousQueue%E5%92%8CTransferQueue%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.6.2.5.</span> <span class="nav-text">SynchronousQueue和TransferQueue的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DelayQueue%E5%92%8CDelayedWorkQueue%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.6.2.6.</span> <span class="nav-text">DelayQueue和DelayedWorkQueue的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stack"><span class="nav-number">1.7.</span> <span class="nav-text">Stack</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-5"><span class="nav-number">1.7.1.</span> <span class="nav-text">Basic</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Traverse"><span class="nav-number">2.</span> <span class="nav-text">Traverse</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-6"><span class="nav-number">2.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Iterator"><span class="nav-number">2.1.1.</span> <span class="nav-text">Iterator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fail"><span class="nav-number">2.1.2.</span> <span class="nav-text">Fail</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question-3"><span class="nav-number">2.2.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Iterator%E5%92%8CItreable%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.2.1.</span> <span class="nav-text">Iterator和Itreable的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iterator%E5%92%8CListIterator%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.2.2.</span> <span class="nav-text">Iterator和ListIterator的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#List%E9%81%8D%E5%8E%86%E6%97%B6%E6%80%8E%E4%B9%88%E5%AE%89%E5%85%A8%E7%9A%84%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0"><span class="nav-number">2.2.3.</span> <span class="nav-text">List遍历时怎么安全的删除元素</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sorting"><span class="nav-number">3.</span> <span class="nav-text">Sorting</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-7"><span class="nav-number">3.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparator"><span class="nav-number">3.1.1.</span> <span class="nav-text">Comparator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparable"><span class="nav-number">3.1.2.</span> <span class="nav-text">Comparable</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question-4"><span class="nav-number">3.2.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparator%E5%92%8CComparable%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.2.1.</span> <span class="nav-text">Comparator和Comparable的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Collections-sort%E5%92%8CArrays-sort%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.2.2.</span> <span class="nav-text">Collections.sort和Arrays.sort的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Collections-sort%E5%92%8CStream-sorted%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.2.3.</span> <span class="nav-text">Collections.sort和Stream.sorted的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nullable"><span class="nav-number">4.</span> <span class="nav-text">Nullable</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-8"><span class="nav-number">4.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question-5"><span class="nav-number">4.2.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ConcurrentHashMap%E4%B8%BA%E4%BB%80%E4%B9%88key%E5%92%8Cvalue%E4%B8%8D%E8%83%BD%E4%B8%BAnull"><span class="nav-number">4.2.1.</span> <span class="nav-text">ConcurrentHashMap为什么key和value不能为null</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Stream"><span class="nav-number">5.</span> <span class="nav-text">Stream</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FP%EF%BC%88Functional-Programming-%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%EF%BC%89"><span class="nav-number">5.1.</span> <span class="nav-text">FP（Functional Programming 函数式编程）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SP%EF%BC%88Stream-Programming-%E6%B5%81%E5%BC%8F%E7%BC%96%E7%A8%8B%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">SP（Stream Programming 流式编程）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#java"><span class="nav-number">5.2.1.</span> <span class="nav-text">java</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Framework"><span class="nav-number">5.2.1.1.</span> <span class="nav-text">Framework</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#spark"><span class="nav-number">5.2.1.1.1.</span> <span class="nav-text">spark</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#flink"><span class="nav-number">5.2.1.1.2.</span> <span class="nav-text">flink</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RP%EF%BC%88Reactive-Programming-%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B%EF%BC%89"><span class="nav-number">5.3.</span> <span class="nav-text">RP（Reactive Programming 响应式编程）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RxJava"><span class="nav-number">5.3.1.</span> <span class="nav-text">RxJava</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Rxjava%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86"><span class="nav-number">5.3.1.1.</span> <span class="nav-text">Rxjava链式调用原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%B5%81%E8%BD%AC%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">5.3.1.1.1.</span> <span class="nav-text">数据流转的实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E9%93%BE%E7%9A%84%E5%BB%BA%E7%AB%8B"><span class="nav-number">5.3.1.1.2.</span> <span class="nav-text">生产链的建立</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E9%93%BE%E7%9A%84%E8%A7%A6%E5%8F%91"><span class="nav-number">5.3.1.1.3.</span> <span class="nav-text">生产链的触发</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E9%93%BE%E7%9A%84%E5%BB%BA%E7%AB%8B"><span class="nav-number">5.3.1.1.4.</span> <span class="nav-text">消费链的建立</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E9%93%BE%E7%9A%84%E8%A7%A6%E5%8F%91"><span class="nav-number">5.3.1.1.5.</span> <span class="nav-text">消费链的触发</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Safe"><span class="nav-number">6.</span> <span class="nav-text">Safe</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution"><span class="nav-number">6.1.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Consistency"><span class="nav-number">6.2.</span> <span class="nav-text">Consistency</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ConcurrentHashMap"><span class="nav-number">6.2.1.</span> <span class="nav-text">ConcurrentHashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CopyOnWriteArrayList"><span class="nav-number">6.2.2.</span> <span class="nav-text">CopyOnWriteArrayList</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E2%98%86-Theory"><span class="nav-number">7.</span> <span class="nav-text">☆ Theory</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#List-1"><span class="nav-number">7.1.</span> <span class="nav-text">List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-9"><span class="nav-number">7.1.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList"><span class="nav-number">7.1.1.1.</span> <span class="nav-text">ArrayList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedList"><span class="nav-number">7.1.1.2.</span> <span class="nav-text">LinkedList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CopyOnWriteArrayList-1"><span class="nav-number">7.1.1.3.</span> <span class="nav-text">CopyOnWriteArrayList</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-6"><span class="nav-number">7.1.2.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList-1"><span class="nav-number">7.1.2.1.</span> <span class="nav-text">ArrayList</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ArrayList%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A9%E5%AE%B9%E7%9A%84"><span class="nav-number">7.1.2.1.1.</span> <span class="nav-text">ArrayList是如何扩容的</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-1"><span class="nav-number">7.2.</span> <span class="nav-text">Set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-10"><span class="nav-number">7.2.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HashSet"><span class="nav-number">7.2.1.1.</span> <span class="nav-text">HashSet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedHashSet"><span class="nav-number">7.2.1.2.</span> <span class="nav-text">LinkedHashSet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TreeSet"><span class="nav-number">7.2.1.3.</span> <span class="nav-text">TreeSet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CopyOnWriteArraySet"><span class="nav-number">7.2.1.4.</span> <span class="nav-text">CopyOnWriteArraySet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ConcurrentSkipListSet"><span class="nav-number">7.2.1.5.</span> <span class="nav-text">ConcurrentSkipListSet</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map-1"><span class="nav-number">7.3.</span> <span class="nav-text">Map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-11"><span class="nav-number">7.3.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap"><span class="nav-number">7.3.1.1.</span> <span class="nav-text">HashMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedHashMap"><span class="nav-number">7.3.1.2.</span> <span class="nav-text">LinkedHashMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TreeMap"><span class="nav-number">7.3.1.3.</span> <span class="nav-text">TreeMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ConcurrentHashMap-1"><span class="nav-number">7.3.1.4.</span> <span class="nav-text">ConcurrentHashMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ConcurrentSkipListMap"><span class="nav-number">7.3.1.5.</span> <span class="nav-text">ConcurrentSkipListMap</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-7"><span class="nav-number">7.3.2.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Map-2"><span class="nav-number">7.3.2.1.</span> <span class="nav-text">Map</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%87%8D%E5%86%99equals%E8%A6%81%E9%87%8D%E5%86%99hashCode"><span class="nav-number">7.3.2.1.1.</span> <span class="nav-text">为什么重写equals要重写hashCode</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#hash%E5%86%B2%E7%AA%81%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3"><span class="nav-number">7.3.2.1.2.</span> <span class="nav-text">hash冲突如何解决</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Map%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A9%E5%AE%B9%E7%9A%84"><span class="nav-number">7.3.2.1.3.</span> <span class="nav-text">Map是如何扩容的</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap-1"><span class="nav-number">7.3.2.2.</span> <span class="nav-text">HashMap</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#HashMap%E7%9A%84%E6%A0%B8%E5%BF%83%E9%80%BB%E8%BE%91"><span class="nav-number">7.3.2.2.1.</span> <span class="nav-text">HashMap的核心逻辑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#java7%E5%92%8Cjava8%E7%9A%84HashMap%E5%8C%BA%E5%88%AB"><span class="nav-number">7.3.2.2.2.</span> <span class="nav-text">java7和java8的HashMap区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#java8%E7%9A%84HashMap%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="nav-number">7.3.2.2.3.</span> <span class="nav-text">java8的HashMap为什么要用红黑树</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#java8%E7%9A%84HashMap%E4%B8%AD%E7%9A%84%E7%BA%A2%E9%BB%91%E6%A0%91%E6%98%AF%E5%A6%82%E4%BD%95%E6%8E%92%E5%BA%8F%E7%9A%84"><span class="nav-number">7.3.2.2.4.</span> <span class="nav-text">java8的HashMap中的红黑树是如何排序的</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#java8%E7%9A%84HashMap%E4%B8%AD%E9%93%BE%E8%A1%A8%E5%92%8C%E7%BA%A2%E9%BB%91%E6%A0%91%E7%9A%84%E8%BD%AC%E6%8D%A2%E6%9D%A1%E4%BB%B6"><span class="nav-number">7.3.2.2.5.</span> <span class="nav-text">java8的HashMap中链表和红黑树的转换条件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#java8%E7%9A%84HashMap%E5%AE%B9%E9%87%8F%E5%A4%A7%E5%B0%8F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BF%85%E9%A1%BB%E6%98%AF2%E7%9A%84%E5%B9%82%E6%AC%A1%E6%96%B9"><span class="nav-number">7.3.2.2.6.</span> <span class="nav-text">java8的HashMap容量大小为什么必须是2的幂次方</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HashMap%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A9%E5%AE%B9%E7%9A%84"><span class="nav-number">7.3.2.2.7.</span> <span class="nav-text">HashMap是如何扩容的</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HashMap%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98"><span class="nav-number">7.3.2.2.8.</span> <span class="nav-text">HashMap有哪些并发问题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ConcurrentHashMap-2"><span class="nav-number">7.3.2.3.</span> <span class="nav-text">ConcurrentHashMap</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ConcurrentHashMap%E7%9A%84%E6%A0%B8%E5%BF%83%E9%80%BB%E8%BE%91"><span class="nav-number">7.3.2.3.1.</span> <span class="nav-text">ConcurrentHashMap的核心逻辑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#java7%E5%92%8Cjava8%E7%9A%84ConcurrentHashMap%E5%8C%BA%E5%88%AB"><span class="nav-number">7.3.2.3.2.</span> <span class="nav-text">java7和java8的ConcurrentHashMap区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#java7%E7%9A%84ConcurrentHashMap%E7%9A%84%E5%B9%B6%E5%8F%91%E5%BA%A6%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">7.3.2.3.3.</span> <span class="nav-text">java7的ConcurrentHashMap的并发度是什么</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#java8%E7%9A%84ConcurrentHashMap%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%BE%E5%BC%83%E4%BA%86%E5%88%86%E6%AE%B5%E9%94%81"><span class="nav-number">7.3.2.3.4.</span> <span class="nav-text">java8的ConcurrentHashMap为什么放弃了分段锁</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ConcurrentHashMap%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97size%E7%9A%84"><span class="nav-number">7.3.2.3.5.</span> <span class="nav-text">ConcurrentHashMap是如何计算size的</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ConcurrentHashMap%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A9%E5%AE%B9%E7%9A%84"><span class="nav-number">7.3.2.3.6.</span> <span class="nav-text">ConcurrentHashMap是如何扩容的</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ConcurrentHashMap%E8%BF%98%E6%9C%89%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98%E5%90%97"><span class="nav-number">7.3.2.3.7.</span> <span class="nav-text">ConcurrentHashMap还有并发问题吗</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Queue-1"><span class="nav-number">7.4.</span> <span class="nav-text">Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-12"><span class="nav-number">7.4.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayDeque"><span class="nav-number">7.4.1.1.</span> <span class="nav-text">ArrayDeque</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedList-1"><span class="nav-number">7.4.1.2.</span> <span class="nav-text">LinkedList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PriorityQueue"><span class="nav-number">7.4.1.3.</span> <span class="nav-text">PriorityQueue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayBlockingQueue"><span class="nav-number">7.4.1.4.</span> <span class="nav-text">ArrayBlockingQueue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedBlockingQueue"><span class="nav-number">7.4.1.5.</span> <span class="nav-text">LinkedBlockingQueue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SynchronousQueue"><span class="nav-number">7.4.1.6.</span> <span class="nav-text">SynchronousQueue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedTransferQueue"><span class="nav-number">7.4.1.7.</span> <span class="nav-text">LinkedTransferQueue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PriorityBlockingQueue"><span class="nav-number">7.4.1.8.</span> <span class="nav-text">PriorityBlockingQueue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DelayQueue"><span class="nav-number">7.4.1.9.</span> <span class="nav-text">DelayQueue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DelayedWorkQueue"><span class="nav-number">7.4.1.10.</span> <span class="nav-text">DelayedWorkQueue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedBlockingDeque"><span class="nav-number">7.4.1.11.</span> <span class="nav-text">LinkedBlockingDeque</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ConcurrentLinkedQueue"><span class="nav-number">7.4.1.12.</span> <span class="nav-text">ConcurrentLinkedQueue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ConcurrentLinkedDeque"><span class="nav-number">7.4.1.13.</span> <span class="nav-text">ConcurrentLinkedDeque</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stack-1"><span class="nav-number">7.5.</span> <span class="nav-text">Stack</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-13"><span class="nav-number">7.5.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedList-2"><span class="nav-number">7.5.1.1.</span> <span class="nav-text">LinkedList</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">8.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%9C%89ConcurrentArrayList"><span class="nav-number">8.1.</span> <span class="nav-text">为什么没有ConcurrentArrayList</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%9C%89ConcurrentHashSet"><span class="nav-number">8.2.</span> <span class="nav-text">为什么没有ConcurrentHashSet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Utils"><span class="nav-number">9.</span> <span class="nav-text">Utils</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java"><span class="nav-number">9.1.</span> <span class="nav-text">Java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Apache-Commons"><span class="nav-number">9.2.</span> <span class="nav-text">Apache Commons</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Google-Guava"><span class="nav-number">9.3.</span> <span class="nav-text">Google Guava</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="朱继鹏"
+      src="/images/avatar/zhujipeng.jpg">
+  <p class="site-author-name" itemprop="name">朱继鹏</p>
+  <div class="site-description" itemprop="description">在全栈的路上狂奔不止</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jipengzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jipengzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jipengzhu@qq.com" title="E-Mail → mailto:jipengzhu@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱继鹏</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

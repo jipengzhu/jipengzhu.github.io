@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="java综合篇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="other">
+<meta property="og:url" content="http://example.com/2017/07/01/lang/lang-1-java/junior/java-13-other/index.html">
+<meta property="og:site_name" content="朱继鹏的博客">
+<meta property="og:description" content="java综合篇">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-06-30T17:13:00.000Z">
+<meta property="article:modified_time" content="2023-05-21T09:17:12.268Z">
+<meta property="article:author" content="朱继鹏">
+<meta property="article:tag" content="+ java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2017/07/01/lang/lang-1-java/junior/java-13-other/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>other | 朱继鹏的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">朱继鹏的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">天道酬勤，全栈不停</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2017/07/01/lang/lang-1-java/junior/java-13-other/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar/zhujipeng.jpg">
+      <meta itemprop="name" content="朱继鹏">
+      <meta itemprop="description" content="在全栈的路上狂奔不止">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朱继鹏的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          other
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-07-01 01:13:00" itemprop="dateCreated datePublished" datetime="2017-07-01T01:13:00+08:00">2017-07-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-21 17:17:12" itemprop="dateModified" datetime="2023-05-21T17:17:12+08:00">2023-05-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-junior/" itemprop="url" rel="index"><span itemprop="name">+ java + junior</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">java综合篇</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Sdk"><a href="#Sdk" class="headerlink" title="Sdk"></a>Sdk</h1><h2 id="java"><a href="#java" class="headerlink" title="java"></a>java</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35067322/article/details/103193762">java多版本管理工具详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/nklinsirui/article/details/117263817">java多版本管理工具之sdkman</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013015301/article/details/128953048">java多版本管理工具之jenv</a></li>
+</ul>
+</blockquote>
+<h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_32265069/article/details/114612043">windows支持多版本java入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44072270/article/details/117897967">windows支持多版本java进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_21808961/article/details/102217844">windows支持多版本java详解</a></li>
+</ul>
+</blockquote>
+<h3 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jxpxlinkui/article/details/79649204">linux支持多版本java入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/huanglu0314/article/details/109099746">linux支持多版本java进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36670734/article/details/123836164">linux支持多版本java详解</a></li>
+</ul>
+</blockquote>
+<h3 id="script"><a href="#script" class="headerlink" title="script"></a>script</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013617144/article/details/79770667">windows中使用脚本支持多版本java入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40460909/article/details/80681047">linux中使用脚本支持多版本java入门</a></li>
+</ul>
+</blockquote>
+<h2 id="python"><a href="#python" class="headerlink" title="python"></a>python</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010104435/article/details/79633p67">python多版本管理工具pyenv</a></li>
+</ul>
+</blockquote>
+<h1 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h1><h2 id="java-1"><a href="#java-1" class="headerlink" title="java"></a>java</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_52170926/article/details/114647858">JAVA_HOME和CLASSPATH的作用</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44652781/article/details/99666495">java5后不需要配置CLASSPATH环境变量了</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yklovejava/article/details/84321509">java在ide和terminal中运行的差异</a></li>
+</ul>
+</blockquote>
+<h2 id="python-1"><a href="#python-1" class="headerlink" title="python"></a>python</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/HD243608836/article/detaips/120746985">python多环境管理工具virtualenv</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011159821/article/details/11519p060">python多环境管理工具venv</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51971452/article/details/113618588">python多环境管理工具pipenv</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qianghaohao/article/details/79681p87">python之pyenv和virtualenv</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_37926734/article/details/123478506">python之virtualenv、venv、pipenv</a></li>
+</ul>
+</blockquote>
+<h1 id="Package"><a href="#Package" class="headerlink" title="Package"></a>Package</h1><h2 id="java-2"><a href="#java-2" class="headerlink" title="java"></a>java</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/allenwells/article/details/46649145">jar详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ddnj15797768089/article/details/109144728">java包管理工具maven</a></li>
+</ul>
+</blockquote>
+<h2 id="python-2"><a href="#python-2" class="headerlink" title="python"></a>python</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Dome_/article/details/89763579">python包管理工具pip</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42096901/articpe/details/89299017">python包管理工具之requirements.txt</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33431368/article/details/12358p593">python包管理工具之setup.py</a></li>
+</ul>
+</blockquote>
+<h2 id="os"><a href="#os" class="headerlink" title="os"></a>os</h2><h3 id="windows-1"><a href="#windows-1" class="headerlink" title="windows"></a>windows</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Datapad/article/details/122962324">windows之winget详解</a></li>
+</ul>
+</blockquote>
+<h3 id="linux-1"><a href="#linux-1" class="headerlink" title="linux"></a>linux</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/small_queen/article/details/115535046">linux包安装工具详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42982742/article/details/103195291">linux之yum与rpm的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_29864185/article/details/52943692">linux之apt和dpkg的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Netfilter007/article/details/103873293">linux之yum详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fdcp123/article/details/115180957">linux之yum源</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34556414/article/details/105425688">linux之yum-config-manager</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/guozuofeng/article/details/99691196">linux之yum whatprovides</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chenngua/article/details/84627913">linux之yum fastermirror</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Netfilter007/article/details/103879962">linux之apt详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/angle_chen123/article/details/120675472">linux之curl详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_27870421/article/details/91951402">linux之wget详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/f80407515/article/details/107654729">linux之alternatives详解</a></li>
+</ul>
+</blockquote>
+<h3 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/SmileLife123/article/details/129110329">mac之Homebrew详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MacwinWin/article/details/112384643">mac软连接之brew link</a></li>
+</ul>
+</blockquote>
+<h1 id="Serialize"><a href="#Serialize" class="headerlink" title="Serialize"></a>Serialize</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/czh500/article/details/88030537">Serialize入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Z0157/article/details/81611261">Serialize详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Jiangtagong/article/details/119656782">Serialize方式入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46201444/article/details/115081351">Serialize方式进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fenglongmiao/article/details/79425218">Serialize方式详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dingxie1963/article/details/101259337">Serialize之Thrift和Protobuf对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zpf_940810653842/article/details/102824384">Serialize之Kyro和Avro对比</a></li>
+</ul>
+</blockquote>
+<h1 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/leaderway/article/details/52387925">Apache Commons详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chuyouyinghe/article/details/123393220">Google Guava详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MrRight000/article/details/121822291">Hutool详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zzhongcy/article/details/122948536">Lombok详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45851575/article/details/125051480">SpotBugs详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Lombok"><a href="#Lombok" class="headerlink" title="Lombok"></a>Lombok</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39863155/article/details/110299466">Lombok入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MHGeek/article/details/100155398">Lombok进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/monokai/article/details/109029102">Lombok详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37192800/article/details/79785906">Lombok之构造器（Constructor）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/feinifi/article/details/85275280">Lombok之Data继承（Inherit）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31635851/article/details/122123278">Lombok之Field默认值（Default）详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Builder"><a href="#Builder" class="headerlink" title="Builder"></a>Builder</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44461217/article/details/122473178">Lombok之Builder默认值（Default）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shichen2010/article/details/110082130">Lombok之Builder继承（Inherit）详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Setter-Getter"><a href="#Setter-Getter" class="headerlink" title="Setter-Getter"></a>Setter-Getter</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cauchy6317/article/details/102499709">Lombok之Setter-Getter使用详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35794202/article/details/81166469">Lombok之Setter-Getter自定义详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaokunzong/article/details/110713067">Lombok之Setter-Getter的坑之第二个字母大写</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_20689109/article/details/80474808">Lombok之Setter-Getter的坑之下划线</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangzeyuaaa/article/details/46649061">java之Setter-Getter规则详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhanggonglalala/article/details/108869608">Lombok之日志（Log）详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Null"><a href="#Null" class="headerlink" title="Null"></a>Null</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cauchy6317/article/details/102567195">Lombok之空值（Null）详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Exception"><a href="#Exception" class="headerlink" title="Exception"></a>Exception</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/csdnjiamin/article/details/109668426">Lombok之异常（Exception）详解</a></li>
+</ul>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>只想买包辣条</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/pay/wechatpay.jpeg" alt="朱继鹏 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># + java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/07/01/lang/lang-1-java/junior/java-12-jvm/" rel="prev" title="jvm">
+      <i class="fa fa-chevron-left"></i> jvm
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/07/01/lang/lang-1-java/middle/java-1-spring/" rel="next" title="spring">
+      spring <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sdk"><span class="nav-number">1.</span> <span class="nav-text">Sdk</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java"><span class="nav-number">1.1.</span> <span class="nav-text">java</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#windows"><span class="nav-number">1.1.1.</span> <span class="nav-text">windows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux"><span class="nav-number">1.1.2.</span> <span class="nav-text">linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#script"><span class="nav-number">1.1.3.</span> <span class="nav-text">script</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python"><span class="nav-number">1.2.</span> <span class="nav-text">python</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Environment"><span class="nav-number">2.</span> <span class="nav-text">Environment</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java-1"><span class="nav-number">2.1.</span> <span class="nav-text">java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python-1"><span class="nav-number">2.2.</span> <span class="nav-text">python</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Package"><span class="nav-number">3.</span> <span class="nav-text">Package</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java-2"><span class="nav-number">3.1.</span> <span class="nav-text">java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python-2"><span class="nav-number">3.2.</span> <span class="nav-text">python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#os"><span class="nav-number">3.3.</span> <span class="nav-text">os</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#windows-1"><span class="nav-number">3.3.1.</span> <span class="nav-text">windows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-1"><span class="nav-number">3.3.2.</span> <span class="nav-text">linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mac"><span class="nav-number">3.3.3.</span> <span class="nav-text">mac</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Serialize"><span class="nav-number">4.</span> <span class="nav-text">Serialize</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tools"><span class="nav-number">5.</span> <span class="nav-text">Tools</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lombok"><span class="nav-number">5.1.</span> <span class="nav-text">Lombok</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic"><span class="nav-number">5.1.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Builder"><span class="nav-number">5.1.2.</span> <span class="nav-text">Builder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Setter-Getter"><span class="nav-number">5.1.3.</span> <span class="nav-text">Setter-Getter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Log"><span class="nav-number">5.1.4.</span> <span class="nav-text">Log</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Null"><span class="nav-number">5.1.5.</span> <span class="nav-text">Null</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exception"><span class="nav-number">5.1.6.</span> <span class="nav-text">Exception</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="朱继鹏"
+      src="/images/avatar/zhujipeng.jpg">
+  <p class="site-author-name" itemprop="name">朱继鹏</p>
+  <div class="site-description" itemprop="description">在全栈的路上狂奔不止</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jipengzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jipengzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jipengzhu@qq.com" title="E-Mail → mailto:jipengzhu@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱继鹏</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

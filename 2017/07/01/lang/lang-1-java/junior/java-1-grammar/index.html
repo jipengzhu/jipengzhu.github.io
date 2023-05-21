@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="java语法篇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="grammar">
+<meta property="og:url" content="http://example.com/2017/07/01/lang/lang-1-java/junior/java-1-grammar/index.html">
+<meta property="og:site_name" content="朱继鹏的博客">
+<meta property="og:description" content="java语法篇">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-06-30T17:01:00.000Z">
+<meta property="article:modified_time" content="2023-05-21T09:17:12.261Z">
+<meta property="article:author" content="朱继鹏">
+<meta property="article:tag" content="+ java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2017/07/01/lang/lang-1-java/junior/java-1-grammar/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>grammar | 朱继鹏的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">朱继鹏的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">天道酬勤，全栈不停</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2017/07/01/lang/lang-1-java/junior/java-1-grammar/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar/zhujipeng.jpg">
+      <meta itemprop="name" content="朱继鹏">
+      <meta itemprop="description" content="在全栈的路上狂奔不止">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朱继鹏的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          grammar
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-07-01 01:01:00" itemprop="dateCreated datePublished" datetime="2017-07-01T01:01:00+08:00">2017-07-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-21 17:17:12" itemprop="dateModified" datetime="2023-05-21T17:17:12+08:00">2023-05-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-junior/" itemprop="url" rel="index"><span itemprop="name">+ java + junior</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">java语法篇</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Language"><a href="#Language" class="headerlink" title="Language"></a>Language</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012963866/article/details/89395987">JVM支持的语言</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42347634/article/details/114138433">JVM语言的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28884137/article/details/129298982">Java和JavaScript对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43207777/article/details/121889179">Java和Python对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_70730532/article/details/126405302">Java和Go对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cherrydreamsover/article/details/81835976">C和C++的区别入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012234115/article/details/39548729">C和C++的区别进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/DLQFHL/article/details/100737083">C和C++的区别详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Standard"><a href="#Standard" class="headerlink" title="Standard"></a>Standard</h1><h2 id="Naming"><a href="#Naming" class="headerlink" title="Naming"></a>Naming</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u800820/article/details/119700293">变量命名常用方式入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39996739/article/details/111581751">变量命名常用方式详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36193970/article/details/103066590">java详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46075832/article/details/123630861">java8新特性</a></li>
+</ul>
+</blockquote>
+<h2 id="Pointer"><a href="#Pointer" class="headerlink" title="Pointer"></a>Pointer</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_52858062/article/details/116534830">C++什么时候使用指针和引用简介</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37167788/article/details/106683376">C++什么时候使用指针和引用入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42579072/article/details/106516727">C++什么时候使用指针和引用进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/simon_2011/article/details/78119088">C++什么时候使用指针和引用详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46657980/article/details/108855571">C++什么时候使用指针和引用精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a3192048/article/details/84621775">C++为什么有指针了还要有引用</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33757398/article/details/81259636">空指针与野指针详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Handler"><a href="#Handler" class="headerlink" title="Handler"></a>Handler</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014041012/article/details/44878375">句柄和指针的区别入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/bigzql/article/details/111244244">句柄和指针的区别进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/perfectguyipeng/article/details/71189822">句柄和指针的区别详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/YL970302/article/details/86296428">引用和指针的区别入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41256281/article/details/90545595">引用和指针的区别进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weikangc/article/details/49762929">引用和指针的区别详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Keyword"><a href="#Keyword" class="headerlink" title="Keyword"></a>Keyword</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45198663/article/details/126084123">java关键字详解</a></li>
+</ul>
+</blockquote>
+<h2 id="final"><a href="#final" class="headerlink" title="final"></a>final</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jiang_wang01/article/details/118993058">java的final关键字详解</a></li>
+</ul>
+</blockquote>
+<h3 id="final关键字的作用"><a href="#final关键字的作用" class="headerlink" title="final关键字的作用"></a>final关键字的作用</h3><ul>
+<li>修饰类：代表类不可以继承</li>
+<li>修饰字段：代表字段初始化后不能修改引用</li>
+<li>修饰方法：代表方法不可以被重写</li>
+</ul>
+<h3 id="final和finalize的区别"><a href="#final和finalize的区别" class="headerlink" title="final和finalize的区别"></a>final和finalize的区别</h3><ul>
+<li>final是一个关键字</li>
+<li>finalize是Object类的一个方法</li>
+</ul>
+<h2 id="this和super"><a href="#this和super" class="headerlink" title="this和super"></a>this和super</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jiang_wang01/article/details/119223302">java的this和super关键字详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shalimu/article/details/105198961">java的this详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/pipizhen_/article/details/107165618">java的super详解</a></li>
+</ul>
+</blockquote>
+<h2 id="implements和extends"><a href="#implements和extends" class="headerlink" title="implements和extends"></a>implements和extends</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39938767/article/details/80056922">java的implements和extends详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_64089863/article/details/128008076">内部类和匿名类基本使用和区别</a></li>
+</ul>
+</blockquote>
+<h2 id="Interface（接口）"><a href="#Interface（接口）" class="headerlink" title="Interface（接口）"></a>Interface（接口）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_19782019/article/details/80259836">java接口详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixx3/article/details/81194499">java8之接口新特性</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sl1992/article/details/81750599">java8之函数式接口</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_38120325/article/details/89637317">java8之接口和抽象类的区别入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fishbone_/article/details/85158497">java8之接口和抽象类的区别详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/waylon_ma/article/details/119152022">java8之接口的默认方法冲突入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ld3205/article/details/83273663">java8之接口的默认方法冲突详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Abstract-Class（抽象类）"><a href="#Abstract-Class（抽象类）" class="headerlink" title="Abstract Class（抽象类）"></a>Abstract Class（抽象类）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43514707/article/details/110824159">抽象类入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wei_zhi/article/details/52736350">抽象类详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Inner-Class（内部类）"><a href="#Inner-Class（内部类）" class="headerlink" title="Inner Class（内部类）"></a>Inner Class（内部类）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liuxiao723846/article/details/108006609">内部类入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhao_miao/article/details/83245816">内部类详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Anonymous-Class（匿名类）"><a href="#Anonymous-Class（匿名类）" class="headerlink" title="Anonymous Class（匿名类）"></a>Anonymous Class（匿名类）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cao124383050/article/details/102862120">匿名类入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jiaotuwoaini/article/details/51542059">匿名类详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tyrroo/article/details/82896662">匿名类原理</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35988274/article/details/99620221">匿名类的类名.this和this</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/feiying0canglang/article/details/124946774">匿名类之内存泄漏详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.codenong.com/21009712/">匿名类之性能问题入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31749835/article/details/90745384">匿名类之性能问题详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/AlbenXie/article/details/109318659">匿名类之HashMap初始化赋值的问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/banzhuanhu/article/details/112277154">匿名类之Lambda表达式为什么运行效率低</a></li>
+</ul>
+</blockquote>
+<h2 id="Enum-Class（枚举类）"><a href="#Enum-Class（枚举类）" class="headerlink" title="Enum Class（枚举类）"></a>Enum Class（枚举类）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_27093465/article/details/52180865">枚举类入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mhmyqn/article/details/48087247">枚举类详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/bigfc/article/details/126389288">枚举类之name</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lili625/article/details/44651113">枚举类之ordinal</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_43401436/article/details/104130410">枚举类之valueOf</a></li>
+</ul>
+</blockquote>
+<h1 id="Field"><a href="#Field" class="headerlink" title="Field"></a>Field</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/29643012">java字段之能直接获取到字段的名字吗</a></li>
+<li><a target="_blank" rel="noopener" href="https://9to5answer.com/nameof-equivalent-in-java">java字段之获取字段名字的方法</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.javawenti.com/?post=14028">java字段之实现nameof操作符的相关讨论入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://mobiuscode.dev/posts/NameOf-Expression-For-Java/">java字段之实现nameof操作符的相关讨论进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/14944333/get-name-of-a-field">java字段之实现nameof操作符的相关讨论详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/strangeway-org/nameof">java字段之实现nameof操作符的解决方案入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/mobiuscode-de/nameof">java字段之实现nameof操作符的解决方案详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Variable"><a href="#Variable" class="headerlink" title="Variable"></a>Variable</h2><p>变量分类如下</p>
+<ul>
+<li>全局变量（global variable）：全局范围，java中没有</li>
+<li>模块变量（module variable）：模块范围，java中又叫类&#x2F;静态变量（class&#x2F;static field）</li>
+<li>实例变量（instance variable）：实例范围，java中又叫成员变量（member field）</li>
+<li>方法变量（method variable）：方法范围</li>
+<li>局部变量（local variable）：代码块范围</li>
+</ul>
+<h2 id="Setter-Getter"><a href="#Setter-Getter" class="headerlink" title="Setter-Getter"></a>Setter-Getter</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39388918/article/details/102483168">java字段之Setter-Getter详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangzeyuaaa/article/details/46649061">java字段之Setter-Getter规则</a></li>
+</ul>
+</blockquote>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><h2 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h2><p>闭包</p>
+<h1 id="Creator"><a href="#Creator" class="headerlink" title="Creator"></a>Creator</h1><h2 id="Constructor"><a href="#Constructor" class="headerlink" title="Constructor"></a>Constructor</h2><p>new Constructor</p>
+<h2 id="Builder"><a href="#Builder" class="headerlink" title="Builder"></a>Builder</h2><p>Builder.build</p>
+<h2 id="Of"><a href="#Of" class="headerlink" title="Of"></a>Of</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013185349/article/details/100836333">String.valueOf详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42575499/article/details/105067845">Integer.valueOf详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MAIHCBOY/article/details/107281487">Boolean.valueOf详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cumtb2009/article/details/107765612">LocalDate.of详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_43401436/article/details/104130410">Enum.valueOf详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40223688/article/details/104264461">Optional.of</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43529573/article/details/105938572">List.of详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31635851/article/details/111151900">Stream.of详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_50120894/article/details/124337278">Path.of</a></li>
+</ul>
+</blockquote>
+<h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1>
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>只想买包辣条</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/pay/wechatpay.jpeg" alt="朱继鹏 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># + java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/05/05/essay/geography/" rel="prev" title="geography">
+      <i class="fa fa-chevron-left"></i> geography
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/07/01/lang/lang-1-java/junior/java-2-lang/" rel="next" title="lang">
+      lang <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Language"><span class="nav-number">1.</span> <span class="nav-text">Language</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Standard"><span class="nav-number">2.</span> <span class="nav-text">Standard</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Naming"><span class="nav-number">2.1.</span> <span class="nav-text">Naming</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Syntax"><span class="nav-number">3.</span> <span class="nav-text">Syntax</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pointer"><span class="nav-number">3.1.</span> <span class="nav-text">Pointer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handler"><span class="nav-number">3.2.</span> <span class="nav-text">Handler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.3.</span> <span class="nav-text">Reference</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keyword"><span class="nav-number">4.</span> <span class="nav-text">Keyword</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#final"><span class="nav-number">4.1.</span> <span class="nav-text">final</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#final%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">4.1.1.</span> <span class="nav-text">final关键字的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#final%E5%92%8Cfinalize%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.1.2.</span> <span class="nav-text">final和finalize的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this%E5%92%8Csuper"><span class="nav-number">4.2.</span> <span class="nav-text">this和super</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#implements%E5%92%8Cextends"><span class="nav-number">4.3.</span> <span class="nav-text">implements和extends</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Class"><span class="nav-number">5.</span> <span class="nav-text">Class</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Interface%EF%BC%88%E6%8E%A5%E5%8F%A3%EF%BC%89"><span class="nav-number">5.1.</span> <span class="nav-text">Interface（接口）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract-Class%EF%BC%88%E6%8A%BD%E8%B1%A1%E7%B1%BB%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">Abstract Class（抽象类）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inner-Class%EF%BC%88%E5%86%85%E9%83%A8%E7%B1%BB%EF%BC%89"><span class="nav-number">5.3.</span> <span class="nav-text">Inner Class（内部类）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Anonymous-Class%EF%BC%88%E5%8C%BF%E5%90%8D%E7%B1%BB%EF%BC%89"><span class="nav-number">5.4.</span> <span class="nav-text">Anonymous Class（匿名类）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Enum-Class%EF%BC%88%E6%9E%9A%E4%B8%BE%E7%B1%BB%EF%BC%89"><span class="nav-number">5.5.</span> <span class="nav-text">Enum Class（枚举类）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Field"><span class="nav-number">6.</span> <span class="nav-text">Field</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Variable"><span class="nav-number">6.1.</span> <span class="nav-text">Variable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Setter-Getter"><span class="nav-number">6.2.</span> <span class="nav-text">Setter-Getter</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-number">7.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Function"><span class="nav-number">7.1.</span> <span class="nav-text">Function</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Creator"><span class="nav-number">8.</span> <span class="nav-text">Creator</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Constructor"><span class="nav-number">8.1.</span> <span class="nav-text">Constructor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Builder"><span class="nav-number">8.2.</span> <span class="nav-text">Builder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Of"><span class="nav-number">8.3.</span> <span class="nav-text">Of</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="朱继鹏"
+      src="/images/avatar/zhujipeng.jpg">
+  <p class="site-author-name" itemprop="name">朱继鹏</p>
+  <div class="site-description" itemprop="description">在全栈的路上狂奔不止</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jipengzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jipengzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jipengzhu@qq.com" title="E-Mail → mailto:jipengzhu@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱继鹏</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx">
+<meta property="og:url" content="http://example.com/2017/07/01/lang/lang-1-java/middle/java-13-nginx/index.html">
+<meta property="og:site_name" content="朱继鹏的博客">
+<meta property="og:description" content="nginx">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-06-30T19:13:00.000Z">
+<meta property="article:modified_time" content="2023-05-21T09:17:12.289Z">
+<meta property="article:author" content="朱继鹏">
+<meta property="article:tag" content="+ java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2017/07/01/lang/lang-1-java/middle/java-13-nginx/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>nginx | 朱继鹏的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">朱继鹏的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">天道酬勤，全栈不停</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2017/07/01/lang/lang-1-java/middle/java-13-nginx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar/zhujipeng.jpg">
+      <meta itemprop="name" content="朱继鹏">
+      <meta itemprop="description" content="在全栈的路上狂奔不止">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朱继鹏的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          nginx
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-07-01 03:13:00" itemprop="dateCreated datePublished" datetime="2017-07-01T03:13:00+08:00">2017-07-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-21 17:17:12" itemprop="dateModified" datetime="2023-05-21T17:17:12+08:00">2023-05-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-middle/" itemprop="url" rel="index"><span itemprop="name">+ java + middle</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">nginx</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41974199/article/details/108832665">Nginx入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_51432770/article/details/112350471">Nginx进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44983653/article/details/101115410">Nginx详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/bandaoyu/article/details/108182086">OpenResty和Nginx的关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011424614/article/details/107814619">OpenResty入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_35688430/article/details/112263697">OpenResty详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_24509229/article/details/116171770">Kong和OpenResty的关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ApacheAPISIX/article/details/119150155">APISIX和Kong对比入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ApacheAPISIX/article/details/126891097">APISIX和Kong对比详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/manmanyao/article/details/105845489">APISIX详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h1><h2 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ArtAndLife/article/details/110103095">Nginx配置入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangbin_0729/article/details/82109693">Nginx配置进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42177284/article/details/114855422">Nginx配置详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shen198623/article/details/122414710">Nginx最大连接数入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhuyu19911016520/article/details/90714429">Nginx最大连接数详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38599724/article/details/103138960">Nginx查看最大连接数</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/newxwj/article/details/107018245">Nginx查看最大并发数</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/test_test111/article/details/120100012">Nginx配置之常用配置</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/duola8789/article/details/107608658">Nginx配置之root和alias的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LANNY8588/article/details/115251631">Nginx配置之index和try_files的区别</a></li>
+</ul>
+</blockquote>
+<h3 id="Upstream"><a href="#Upstream" class="headerlink" title="Upstream"></a>Upstream</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42306443/article/details/103510560">Nginx配置之upstream入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_67390969/article/details/126113721">Nginx配置之upstream进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LL845876425/article/details/97621365">Nginx配置之upstream详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qianghong000/article/details/118153027">Nginx配置之动态upstream入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Aria_Miazzy/article/details/103192475">Nginx配置之动态upstream详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Azj12345/article/details/120535948">Nginx配置之server详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lch551218/article/details/104812913">Nginx配置之server匹配规则入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40737025/article/details/85053164">Nginx配置之server匹配规则详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Location"><a href="#Location" class="headerlink" title="Location"></a>Location</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41993206/article/details/117432516">Nginx配置之location详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_48803304/article/details/107876414">Nginx配置之proxy_pass入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42818496/article/details/109462050">Nginx配置之proxy_pass详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010391029/article/details/50395680">Nginx配置之proxy_redirect入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/keenx/article/details/128610612">Nginx配置之proxy_redirect详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38826019/article/details/109176896">Nginx配置之proxy_set_header入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41536539/article/details/99486071">Nginx配置之proxy_set_header详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34381842/article/details/118898760">Nginx配置之location末尾的”&#x2F;“的处理</a></li>
+</ul>
+</blockquote>
+<h3 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lhjalt/article/details/108266243">Nginx配置之dns详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Host"><a href="#Host" class="headerlink" title="Host"></a>Host</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yihanzhi/article/details/107002881">Nginx配置之host详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zqj1172102457/article/details/106458505">Nginx配置之$host和$http_host的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LG_15011399296/article/details/125409060">Nginx配置之$http_host和$proxy_host的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianyekpp/article/details/71209720">Nginx配置之$server_port和$proxy_port的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ichen820/article/details/117958438">登录重定向之Nginx如何传递Host</a></li>
+</ul>
+</blockquote>
+<h3 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/am_Linux/article/details/130070403">Nginx配置之header详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34556414/article/details/106634895">获取客户端真实IP之Nginx如何传递X-Real-IP和X-Forwarded-For</a></li>
+</ul>
+</blockquote>
+<h3 id="Dispatch"><a href="#Dispatch" class="headerlink" title="Dispatch"></a>Dispatch</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wosind/article/details/102898948">nginx根据不同请求头、URL定向到不同服务器</a></li>
+</ul>
+</blockquote>
+<h3 id="Rewrite"><a href="#Rewrite" class="headerlink" title="Rewrite"></a>Rewrite</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_51622156/article/details/112608013">Nginx配置之rewrite入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/boyuser/article/details/109563055">Nginx配置之rewrite详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Websocket"><a href="#Websocket" class="headerlink" title="Websocket"></a>Websocket</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/small_love/article/details/106254621">Nginx配置之websocket详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32421489/article/details/110039555">Vue之Router的History模式404问题详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42752574/article/details/108457614">Vue之Router路由模式详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45412401/article/details/112617848">Nginx常用模块详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_54947566/article/details/116327207">Nginx添加新模块入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/gshzh00/article/details/90268365">Nginx添加新模块进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LIN2060/article/details/84098828">Nginx添加新模块详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_24054301/article/details/112131057">Nginx添加新模块精进</a></li>
+</ul>
+</blockquote>
+<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><h1 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h1><h2 id="Nginx为什么这么快"><a href="#Nginx为什么这么快" class="headerlink" title="Nginx为什么这么快"></a>Nginx为什么这么快</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/z591102/article/details/113972164">Nginx为什么这么快入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44648216/article/details/105823429">Nginx为什么这么快进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42977042/article/details/104744087">Nginx为什么这么快详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h1><h1 id="Availability"><a href="#Availability" class="headerlink" title="Availability"></a>Availability</h1><h2 id="Durability"><a href="#Durability" class="headerlink" title="Durability"></a>Durability</h2><h2 id="Replication"><a href="#Replication" class="headerlink" title="Replication"></a>Replication</h2><h2 id="Cluster"><a href="#Cluster" class="headerlink" title="Cluster"></a>Cluster</h2><h1 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h1><h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><h2 id="Management"><a href="#Management" class="headerlink" title="Management"></a>Management</h2><h3 id="Visual"><a href="#Visual" class="headerlink" title="Visual"></a>Visual</h3><h3 id="Monitor"><a href="#Monitor" class="headerlink" title="Monitor"></a>Monitor</h3><h1 id="Other-1"><a href="#Other-1" class="headerlink" title="Other"></a>Other</h1>
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>只想买包辣条</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/pay/wechatpay.jpeg" alt="朱继鹏 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># + java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/07/01/lang/lang-1-java/middle/java-12-es/" rel="prev" title="es">
+      <i class="fa fa-chevron-left"></i> es
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/07/01/lang/lang-1-java/senior/java-1-system/" rel="next" title="system">
+      system <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Usage"><span class="nav-number">2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Config"><span class="nav-number">2.1.</span> <span class="nav-text">Config</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Upstream"><span class="nav-number">2.1.1.</span> <span class="nav-text">Upstream</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Server"><span class="nav-number">2.1.2.</span> <span class="nav-text">Server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Location"><span class="nav-number">2.1.3.</span> <span class="nav-text">Location</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS"><span class="nav-number">2.1.4.</span> <span class="nav-text">DNS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Host"><span class="nav-number">2.1.5.</span> <span class="nav-text">Host</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Header"><span class="nav-number">2.1.6.</span> <span class="nav-text">Header</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dispatch"><span class="nav-number">2.1.7.</span> <span class="nav-text">Dispatch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rewrite"><span class="nav-number">2.1.8.</span> <span class="nav-text">Rewrite</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Websocket"><span class="nav-number">2.1.9.</span> <span class="nav-text">Websocket</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue"><span class="nav-number">2.2.</span> <span class="nav-text">Vue</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Module"><span class="nav-number">3.</span> <span class="nav-text">Module</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem"><span class="nav-number">4.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Performance"><span class="nav-number">5.</span> <span class="nav-text">Performance</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E5%BF%AB"><span class="nav-number">5.1.</span> <span class="nav-text">Nginx为什么这么快</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theory"><span class="nav-number">6.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Availability"><span class="nav-number">7.</span> <span class="nav-text">Availability</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Durability"><span class="nav-number">7.1.</span> <span class="nav-text">Durability</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Replication"><span class="nav-number">7.2.</span> <span class="nav-text">Replication</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster"><span class="nav-number">7.3.</span> <span class="nav-text">Cluster</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Application"><span class="nav-number">8.</span> <span class="nav-text">Application</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Management"><span class="nav-number">9.1.</span> <span class="nav-text">Management</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual"><span class="nav-number">9.1.1.</span> <span class="nav-text">Visual</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monitor"><span class="nav-number">9.1.2.</span> <span class="nav-text">Monitor</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other-1"><span class="nav-number">10.</span> <span class="nav-text">Other</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="朱继鹏"
+      src="/images/avatar/zhujipeng.jpg">
+  <p class="site-author-name" itemprop="name">朱继鹏</p>
+  <div class="site-description" itemprop="description">在全栈的路上狂奔不止</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jipengzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jipengzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jipengzhu@qq.com" title="E-Mail → mailto:jipengzhu@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱继鹏</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

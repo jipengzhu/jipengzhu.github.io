@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="java读写篇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="io">
+<meta property="og:url" content="http://example.com/2017/07/01/lang/lang-1-java/junior/java-6-io/index.html">
+<meta property="og:site_name" content="朱继鹏的博客">
+<meta property="og:description" content="java读写篇">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-06-30T17:06:00.000Z">
+<meta property="article:modified_time" content="2023-05-21T09:17:12.275Z">
+<meta property="article:author" content="朱继鹏">
+<meta property="article:tag" content="+ java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2017/07/01/lang/lang-1-java/junior/java-6-io/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>io | 朱继鹏的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">朱继鹏的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">天道酬勤，全栈不停</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2017/07/01/lang/lang-1-java/junior/java-6-io/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar/zhujipeng.jpg">
+      <meta itemprop="name" content="朱继鹏">
+      <meta itemprop="description" content="在全栈的路上狂奔不止">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朱继鹏的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          io
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-07-01 01:06:00" itemprop="dateCreated datePublished" datetime="2017-07-01T01:06:00+08:00">2017-07-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-21 17:17:12" itemprop="dateModified" datetime="2023-05-21T17:17:12+08:00">2023-05-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-junior/" itemprop="url" rel="index"><span itemprop="name">+ java + junior</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">java读写篇</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37955444/article/details/79607883">IO详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liuxiao723846/article/details/117693340">IO重读</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ffj_olivia/article/details/121114303">IO异常</a></li>
+</ul>
+</blockquote>
+<h2 id="IO流的分类"><a href="#IO流的分类" class="headerlink" title="IO流的分类"></a>IO流的分类</h2><ul>
+<li>按数据方向来分：输入流（input）、输出流（output）</li>
+<li>按数据单位来分：字节流（byte）、字符流（char）</li>
+<li>按数据通道来分：节点流、处理流</li>
+</ul>
+<h2 id="IO类的分类"><a href="#IO类的分类" class="headerlink" title="IO类的分类"></a>IO类的分类</h2><ul>
+<li>接口：InputStream、OutputStream、Reader、Writer</li>
+<li>内存：ByteArrayInputStream、ByteArrayOutputStream、<br>CharArrayReader、CharArrayWriter、<br>StringReader、StringWriter</li>
+<li>文件：FileInputStream、FileOutputStream、FileReader、FileWriter</li>
+<li>管道：PipedInputStream、PipedOutputStream、PipedReader、PipedWriter</li>
+<li>终端：Scanner、PrintStream、PrintWriter</li>
+<li>缓冲：BufferedInputStream、BufferedOutputStream、BufferedReader、BufferedWriter</li>
+<li>转换：InputStreamReader、OutputStreamWriter</li>
+<li>组合：SequenceInputStream</li>
+</ul>
+<h2 id="IO类的体系"><a href="#IO类的体系" class="headerlink" title="IO类的体系"></a>IO类的体系</h2><ul>
+<li>InputStream<ul>
+<li>ByteArrayInputStream：节点流，操作内存</li>
+<li>FileInputStream：节点流，操作文件</li>
+<li>PipedInputStream：节点流，操作管道</li>
+<li>FilterInputStream<ul>
+<li>BufferedInputStream：处理流，支持缓冲</li>
+<li>DataInputStream：处理流，操作数据</li>
+<li>PushbackInputStream：处理流，支持回退</li>
+<li><del>LineNumberInputStream（已废弃）</del>：处理流，包含行数</li>
+</ul>
+</li>
+<li>ObjectInputStream：处理流，操作对象</li>
+<li>SequenceInputStream：处理流，组合输入</li>
+<li><del>StringBufferInputStream（已废弃）</del>：推荐用StringReader</li>
+</ul>
+</li>
+<li>OutputStream<ul>
+<li>ByteArrayOutputStream：节点流，操作内存</li>
+<li>FileOutputStream：节点流，操作文件</li>
+<li>PipedOutputStream：节点流，操作管道</li>
+<li>FilterOutputStream<ul>
+<li>BufferedOutputStream：处理流，支持缓冲</li>
+<li>DataOutputStream：处理流，操作数据</li>
+<li>PrintStream：处理流，功能丰富</li>
+</ul>
+</li>
+<li>ObjectOutputStream：处理流，操作对象</li>
+</ul>
+</li>
+<li>Reader<ul>
+<li>CharArrayReader：节点流，操作内存</li>
+<li>StringReader：节点流，操作内存</li>
+<li>InputStreamReader：处理流，支持转换<ul>
+<li>FileReader：处理流，操作文件</li>
+</ul>
+</li>
+<li>PipedReader：节点流，操作管道</li>
+<li>FilterReader<ul>
+<li>PushbackReader：处理流，支持回退</li>
+</ul>
+</li>
+<li>BufferedReader：处理流，支持缓冲<ul>
+<li>LineNumberReader：处理流，包含行数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Writer<ul>
+<li>CharArrayWriter：节点流，操作内存</li>
+<li>StringWriter：节点流，操作内存</li>
+<li>OutputStreamWriter：处理流，支持转换<ul>
+<li>FileWriter处理流，操作文件</li>
+</ul>
+</li>
+<li>PipedWriter：节点流，操作管道</li>
+<li>FilterWriter</li>
+<li>BufferedWriter：处理流，支持缓冲</li>
+<li>PrintWriter：处理流，功能丰富</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>注意：BufferedReader没有继承FilterReader，BufferedWriter没有继承FilterWriter</p>
+</blockquote>
+<h2 id="IO模型分类"><a href="#IO模型分类" class="headerlink" title="IO模型分类"></a>IO模型分类</h2><h3 id="IO模型分类-1"><a href="#IO模型分类-1" class="headerlink" title="IO模型分类"></a>IO模型分类</h3><p>IO模型可以按照同步和异步、阻塞和非阻塞进行分类</p>
+<ul>
+<li>同步阻塞</li>
+<li>同步非阻塞</li>
+<li>异步非阻塞</li>
+</ul>
+<blockquote>
+<p>注意：没有异步阻塞这种组合，因为异步不需要阻塞</p>
+</blockquote>
+<h4 id="同步和异步"><a href="#同步和异步" class="headerlink" title="同步和异步"></a>同步和异步</h4><p>同步和异步描述的是调用者执行操作后获取结果的方式</p>
+<ul>
+<li>同步：主动获取结果，有阻塞和非阻塞等实现方式</li>
+<li>异步：被动接收结果，有回调等实现方式</li>
+</ul>
+<blockquote>
+<p>非阻塞实现方式：轮询（polling）、事件驱动（event-driven）、信号驱动（signal-driven）</p>
+</blockquote>
+<h4 id="阻塞和非阻塞"><a href="#阻塞和非阻塞" class="headerlink" title="阻塞和非阻塞"></a>阻塞和非阻塞</h4><p>阻塞和非阻塞描述的是调用者执行操作后的后续行为</p>
+<ul>
+<li>阻塞：只能挂起等待结果，不能做其他事情</li>
+<li>非阻塞：无需挂起等待结果，可以做其他事情，稍后再获取或者接收结果</li>
+</ul>
+<h3 id="Java的IO模型分类"><a href="#Java的IO模型分类" class="headerlink" title="Java的IO模型分类"></a>Java的IO模型分类</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_38109046/article/details/89449305">java的IO模型详解</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>BIO（Bloking IO）：同步阻塞IO，又名老IO（Old IO）</li>
+<li>NIO（Non-Bloking IO）：同步非阻塞IO，又名新IO（New IO）</li>
+<li>AIO（Asynchronous IO）：异步非阻塞IO</li>
+</ul>
+<h3 id="Unix的IO模型分类"><a href="#Unix的IO模型分类" class="headerlink" title="Unix的IO模型分类"></a>Unix的IO模型分类</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35361244/article/details/109251983">Unix的IO模型详解</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>阻塞IO（bloking IO）：同步阻塞IO</li>
+<li>非阻塞IO（non-blocking IO）：同步非阻塞IO</li>
+<li>多路复用IO（multiplexing IO）：同步非阻塞IO，又名事件驱动IO（event-driven IO）</li>
+<li>信号驱动式IO（signal-driven IO）：同步非阻塞IO</li>
+<li>异步IO（asynchronous IO）：异步非阻塞IO</li>
+</ul>
+<blockquote>
+<p>注意：除了异步IO，其他都是同步IO，同步IO里面除了阻塞IO以外都是非阻塞IO</p>
+</blockquote>
+<h2 id="IO多路复用"><a href="#IO多路复用" class="headerlink" title="IO多路复用"></a>IO多路复用</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34827674/article/details/115619261">IO多路复用详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/daocaokafei/article/details/118282087">IO多路复用原理</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lihao21/article/details/67631516">IO多路复用之epoll的水平触发与边缘触发</a></li>
+</ul>
+</blockquote>
+<p>水平触发：不断的触发epoll_wait回调，直到内核缓冲区数据被read函数读完才结束<br>边缘触发：只触发一次epoll_wait回调，需要程序自己保证将内核缓冲区的数据读取完</p>
+<p>select和poll调用只支持水平触发，epoll默认是水平触发</p>
+<blockquote>
+<p>边缘（edge）触发类似于电平的跳变（边沿上升和边沿下降），一般和非阻塞 I&#x2F;O 搭配使用</p>
+</blockquote>
+<h2 id="IO并发模式"><a href="#IO并发模式" class="headerlink" title="IO并发模式"></a>IO并发模式</h2><h3 id="Reactor和Proactor"><a href="#Reactor和Proactor" class="headerlink" title="Reactor和Proactor"></a>Reactor和Proactor</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34827674/article/details/116175772">Reactor和Proactor详解</a></li>
+</ul>
+</blockquote>
+<p>Reactor的核心如下</p>
+<ul>
+<li>Dispatcher：事件分发器</li>
+<li>Acceptor：连接事件处理器</li>
+<li>Handler：读写事件处理器</li>
+</ul>
+<h1 id="BIO"><a href="#BIO" class="headerlink" title="BIO"></a>BIO</h1><p>BIO：Block IO，同步阻塞式IO，基于普通读写机制</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/anlian523/article/details/104256787">BIO详解</a></li>
+</ul>
+</blockquote>
+<h1 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h1><p>NIO：New IO， 同步非阻塞IO，基于多路复用机制</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/crazymakercircle/article/details/120946903">NIO详解</a></li>
+</ul>
+</blockquote>
+<h1 id="AIO"><a href="#AIO" class="headerlink" title="AIO"></a>AIO</h1><p>AIO：Asynchronous IO，异步非堵塞IO，基于事件和回调机制</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiongbatianxia30146/article/details/100745414">AIO详解</a></li>
+</ul>
+</blockquote>
+<h1 id="File"><a href="#File" class="headerlink" title="File"></a>File</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35268841/article/details/103342620">File入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_52533007/article/details/123274351">File进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/allway2/article/details/118873434">File详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cold___play/article/details/105135556">Files详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cold___play/article/details/105130927">Path详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38569499/article/details/84988087">Paths详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/b15735105314/article/details/115677912">RandomAccessFile详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wanghao112956/article/details/93978152">TempFile详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yanjun_1982/article/details/79421528">文件描述符与文件句柄的区别入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/nazeniwaresakini/article/details/104220111">文件描述符与文件句柄的区别进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_25518029/article/details/119997315">文件描述符与文件句柄的区别详解</a></li>
+</ul>
+</blockquote>
+<h2 id="相对路径（Relative-Path）"><a href="#相对路径（Relative-Path）" class="headerlink" title="相对路径（Relative Path）"></a>相对路径（Relative Path）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangjun5159/article/details/49820615">File相对路径和user.dir</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/haoyifen/article/details/52733371">Path相对路径和user.dir</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mm_bit/article/details/50372229">Jar相对路径和user.dir</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ColdFireMan/article/details/105968160">java的user.dir入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43842093/article/details/130175513">java的user.dir详解</a></li>
+</ul>
+</blockquote>
+<h2 id="资源路径（Resource-Path）"><a href="#资源路径（Resource-Path）" class="headerlink" title="资源路径（Resource Path）"></a>资源路径（Resource Path）</h2><h3 id="java"><a href="#java" class="headerlink" title="java"></a>java</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35789269/article/details/116766487">java读取资源文件</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43907800/article/details/106227945">Class.getResource和ClassLoader.getResource的区别入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangshk_/article/details/82704010">Class.getResource和ClassLoader.getResource的区别详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangmx1993328/article/details/89334236">ClassLoader和Properties、ResourceBundle</a> </li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wk1134314305/article/details/77940147">java的classpath详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30871701/article/details/99960038">java的classpath通配符详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Thinkingcao/article/details/111897862">java配置类之Properties</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_29364429/article/details/102847037">java国际化之ResourceBundle</a></li>
+</ul>
+</blockquote>
+<h3 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/new_ord/article/details/108916783">Spring读取资源文件</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/listeningsea/article/details/122944290">Spring的ResourceUtils详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/baQiWangZhengLiang/article/details/84568846">Spring的ResourceUtils和jar</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010086122/article/details/81607167">Spring的ResourceLoader详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/YangLiehui/article/details/98599253">Spring的ClassPathResource详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w372426096/article/details/78345180">Spring的classpath和classpath*的区别入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/java_lifeng/article/details/101352188">Spring的classpath和classpath*的区别详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq1309664161/article/details/119710994">Spring配置类之Environment</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43203949/article/details/125471825">Spring国际化之MessageSource</a></li>
+</ul>
+</blockquote>
+<h3 id="jar"><a href="#jar" class="headerlink" title="jar"></a>jar</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40304825/article/details/112917818">jar读取资源文件入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_37672801/article/details/123538366">jar读取资源文件详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ywg_1994/article/details/104440114">读取jar包中的资源文件</a></li>
+</ul>
+</blockquote>
+<h2 id="类的路径（Class-Path）"><a href="#类的路径（Class-Path）" class="headerlink" title="类的路径（Class Path）"></a>类的路径（Class Path）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yklovejava/article/details/84321509">java执行路径之user.dir和classpath</a></li>
+</ul>
+</blockquote>
+<h1 id="Console"><a href="#Console" class="headerlink" title="Console"></a>Console</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/i_r_o_n_m_a_n/article/details/122178183">Console IO详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_52459924/article/details/123538356">Scanner的方法区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ll_dream/article/details/80253189">scanf读取规则理解和回车无法结束</a></li>
+</ul>
+</blockquote>
+<h2 id="如何从控制台读取数据"><a href="#如何从控制台读取数据" class="headerlink" title="如何从控制台读取数据"></a>如何从控制台读取数据</h2><p>使用Scanner</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">try (Scanner s = new Scanner(System.in)) &#123;</span><br><span class="line">    if (s.hasNextInt()) &#123;</span><br><span class="line">        int v = s.nextInt();</span><br><span class="line">        System.out.println(&quot;value: &quot; + v);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="如何输出数据到控制台"><a href="#如何输出数据到控制台" class="headerlink" title="如何输出数据到控制台"></a>如何输出数据到控制台</h2><p>使用PrintStream</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// System.out.println(&quot;123&quot;);</span><br><span class="line">PrintStream o = System.out;</span><br><span class="line">o.println(&quot;123&quot;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014209205/article/details/80461122">Socket IO详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h1><h2 id="configuration"><a href="#configuration" class="headerlink" title="configuration"></a>configuration</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/winter_wu_1998/article/details/103469213">常见的配置文件格式详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_19934363/article/details/88775352">ini和properties配置格式对比</a></li>
+</ul>
+</blockquote>
+<h3 id="properties"><a href="#properties" class="headerlink" title="properties"></a>properties</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Thinkingcao/article/details/111897862">java读取properties配置文件</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lsllll44/article/details/117539198">properties配置格式详解</a></li>
+</ul>
+</blockquote>
+<h3 id="ini"><a href="#ini" class="headerlink" title="ini"></a>ini</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lb245557472/article/details/92792666">java读取ini配置文件</a></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a123441/article/details/90668032">ini配置格式详解</a></li>
+</ul>
+</blockquote>
+<h3 id="json"><a href="#json" class="headerlink" title="json"></a>json</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_34059951/article/details/88742749">json配置格式详解</a></li>
+</ul>
+</blockquote>
+<h3 id="yaml"><a href="#yaml" class="headerlink" title="yaml"></a>yaml</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43791724/article/details/110738333">yaml配置格式入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42176188/article/details/121586165">yaml配置格式进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fly910905/article/details/99882542">yaml配置格式详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44211323/article/details/116988447">yaml和SpringBoot</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/BigData_Mining/article/details/88535356">yaml和K8s</a></li>
+</ul>
+</blockquote>
+<h3 id="toml"><a href="#toml" class="headerlink" title="toml"></a>toml</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/demon7552003/article/details/117161585">toml配置格式详解</a></li>
+</ul>
+</blockquote>
+<h2 id="environment"><a href="#environment" class="headerlink" title="environment"></a>environment</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w8y56f/article/details/108495772">java读取环境变量和虚拟机参数</a></li>
+</ul>
+</blockquote>
+<h2 id="option"><a href="#option" class="headerlink" title="option"></a>option</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/moyefeng198436/article/details/113535904">java命令行参数解析器</a></li>
+</ul>
+</blockquote>
+<h1 id="Utils"><a href="#Utils" class="headerlink" title="Utils"></a>Utils</h1><h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><p>Files、Paths</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mingyonghu/article/details/118944724">Files工具类详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36761831/article/details/90547522">Paths工具类详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Apache-Commons"><a href="#Apache-Commons" class="headerlink" title="Apache Commons"></a>Apache Commons</h2><p>IOUtils、FileUtils、FilenameUtils、FileSystemUtils、FileCopyUtils</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42671519/article/details/121157079">Apache Commons IO入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Regino/article/details/105055963">Apache Commons IO进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36462452/article/details/128593936">Apache Commons IO详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangmx1993328/article/details/80136921">Apache Commons IO工具类入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/backbug/article/details/99572931">Apache Commons IO工具类详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/han12398766/article/details/104605614">Apache Commons FileSystemUtils详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/han12398766/article/details/104605463">Apache Commons FileCopyUtils详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/han12398766/article/details/104605288">Apache Commons SocketUtils详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Google-Guava"><a href="#Google-Guava" class="headerlink" title="Google Guava"></a>Google Guava</h2><p>Files</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/agileforce/article/details/88300623">Google Guava IO入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://solang.blog.csdn.net/article/details/105486129">Google Guava IO进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wuyuxing24/article/details/95891648">Google Guava IO详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/o83290102o5/article/details/79105879">Google Guava IO工具类入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liuxiao723846/article/details/90545962">Google Guava IO工具类详解</a></li>
+</ul>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>只想买包辣条</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/pay/wechatpay.jpeg" alt="朱继鹏 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># + java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/07/01/lang/lang-1-java/junior/java-5-generic/" rel="prev" title="generic">
+      <i class="fa fa-chevron-left"></i> generic
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/07/01/lang/lang-1-java/junior/java-7-net/" rel="next" title="net">
+      net <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IO"><span class="nav-number">1.</span> <span class="nav-text">IO</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IO%E6%B5%81%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.</span> <span class="nav-text">IO流的分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO%E7%B1%BB%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">1.2.</span> <span class="nav-text">IO类的分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO%E7%B1%BB%E7%9A%84%E4%BD%93%E7%B3%BB"><span class="nav-number">1.3.</span> <span class="nav-text">IO类的体系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO%E6%A8%A1%E5%9E%8B%E5%88%86%E7%B1%BB"><span class="nav-number">1.4.</span> <span class="nav-text">IO模型分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IO%E6%A8%A1%E5%9E%8B%E5%88%86%E7%B1%BB-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">IO模型分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">同步和异步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%BB%E5%A1%9E%E5%92%8C%E9%9D%9E%E9%98%BB%E5%A1%9E"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">阻塞和非阻塞</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E7%9A%84IO%E6%A8%A1%E5%9E%8B%E5%88%86%E7%B1%BB"><span class="nav-number">1.4.2.</span> <span class="nav-text">Java的IO模型分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unix%E7%9A%84IO%E6%A8%A1%E5%9E%8B%E5%88%86%E7%B1%BB"><span class="nav-number">1.4.3.</span> <span class="nav-text">Unix的IO模型分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8"><span class="nav-number">1.5.</span> <span class="nav-text">IO多路复用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.6.</span> <span class="nav-text">IO并发模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Reactor%E5%92%8CProactor"><span class="nav-number">1.6.1.</span> <span class="nav-text">Reactor和Proactor</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BIO"><span class="nav-number">2.</span> <span class="nav-text">BIO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NIO"><span class="nav-number">3.</span> <span class="nav-text">NIO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AIO"><span class="nav-number">4.</span> <span class="nav-text">AIO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#File"><span class="nav-number">5.</span> <span class="nav-text">File</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84%EF%BC%88Relative-Path%EF%BC%89"><span class="nav-number">5.1.</span> <span class="nav-text">相对路径（Relative Path）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E8%B7%AF%E5%BE%84%EF%BC%88Resource-Path%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">资源路径（Resource Path）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#java"><span class="nav-number">5.2.1.</span> <span class="nav-text">java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring"><span class="nav-number">5.2.2.</span> <span class="nav-text">Spring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jar"><span class="nav-number">5.2.3.</span> <span class="nav-text">jar</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E8%B7%AF%E5%BE%84%EF%BC%88Class-Path%EF%BC%89"><span class="nav-number">5.3.</span> <span class="nav-text">类的路径（Class Path）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Console"><span class="nav-number">6.</span> <span class="nav-text">Console</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BB%8E%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="nav-number">6.1.</span> <span class="nav-text">如何从控制台读取数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%BE%93%E5%87%BA%E6%95%B0%E6%8D%AE%E5%88%B0%E6%8E%A7%E5%88%B6%E5%8F%B0"><span class="nav-number">6.2.</span> <span class="nav-text">如何输出数据到控制台</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Socket"><span class="nav-number">7.</span> <span class="nav-text">Socket</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Config"><span class="nav-number">8.</span> <span class="nav-text">Config</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#configuration"><span class="nav-number">8.1.</span> <span class="nav-text">configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#properties"><span class="nav-number">8.1.1.</span> <span class="nav-text">properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ini"><span class="nav-number">8.1.2.</span> <span class="nav-text">ini</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#json"><span class="nav-number">8.1.3.</span> <span class="nav-text">json</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yaml"><span class="nav-number">8.1.4.</span> <span class="nav-text">yaml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#toml"><span class="nav-number">8.1.5.</span> <span class="nav-text">toml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#environment"><span class="nav-number">8.2.</span> <span class="nav-text">environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#option"><span class="nav-number">8.3.</span> <span class="nav-text">option</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Utils"><span class="nav-number">9.</span> <span class="nav-text">Utils</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java"><span class="nav-number">9.1.</span> <span class="nav-text">Java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Apache-Commons"><span class="nav-number">9.2.</span> <span class="nav-text">Apache Commons</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Google-Guava"><span class="nav-number">9.3.</span> <span class="nav-text">Google Guava</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="朱继鹏"
+      src="/images/avatar/zhujipeng.jpg">
+  <p class="site-author-name" itemprop="name">朱继鹏</p>
+  <div class="site-description" itemprop="description">在全栈的路上狂奔不止</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jipengzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jipengzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jipengzhu@qq.com" title="E-Mail → mailto:jipengzhu@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱继鹏</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

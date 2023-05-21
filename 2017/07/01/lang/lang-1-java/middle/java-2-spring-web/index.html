@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="spring-web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring-web">
+<meta property="og:url" content="http://example.com/2017/07/01/lang/lang-1-java/middle/java-2-spring-web/index.html">
+<meta property="og:site_name" content="朱继鹏的博客">
+<meta property="og:description" content="spring-web">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-06-30T19:02:00.000Z">
+<meta property="article:modified_time" content="2023-05-21T09:17:12.290Z">
+<meta property="article:author" content="朱继鹏">
+<meta property="article:tag" content="+ java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2017/07/01/lang/lang-1-java/middle/java-2-spring-web/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>spring-web | 朱继鹏的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">朱继鹏的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">天道酬勤，全栈不停</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2017/07/01/lang/lang-1-java/middle/java-2-spring-web/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar/zhujipeng.jpg">
+      <meta itemprop="name" content="朱继鹏">
+      <meta itemprop="description" content="在全栈的路上狂奔不止">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朱继鹏的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          spring-web
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-07-01 03:02:00" itemprop="dateCreated datePublished" datetime="2017-07-01T03:02:00+08:00">2017-07-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-21 17:17:12" itemprop="dateModified" datetime="2023-05-21T17:17:12+08:00">2023-05-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-middle/" itemprop="url" rel="index"><span itemprop="name">+ java + middle</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">spring-web</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46680603/article/details/121641895">SpringMvc详解</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>controller</li>
+<li>model<ul>
+<li>entity</li>
+<li>dao（mapper or orm）</li>
+<li>dal（use multiple dao）</li>
+</ul>
+</li>
+<li>view</li>
+<li>helper</li>
+<li>utils</li>
+</ul>
+<h2 id="请求流程描述"><a href="#请求流程描述" class="headerlink" title="请求流程描述"></a>请求流程描述</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/afoskosnv/article/details/120179447">SpringMvc流程入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_53601359/article/details/114460179">SpringMvc流程详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/glpghz/article/details/114116080">ContextLoaderListener入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_45406092/article/details/120217613">ContextLoaderListener详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_45899013/article/details/106675837">DispatcherServlet入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_45406092/article/details/115423861">DispatcherServlet详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zxd1435513775/article/details/103000992">HandlerMapping入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_45406092/article/details/115429186">HandlerMapping详解</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>DispatcherServlet捕获请求并分析</li>
+<li>DispatcherServlet通过HandlerMapping获取Handler</li>
+<li>使用Request中的模型数据填充Handler并执行</li>
+<li>Handler执行完后返回一个ModelAndView对象</li>
+<li>根据返回的ModelAndView选择一个适合的ViewResolver</li>
+<li>ViewResolver结合Model和View渲染视图</li>
+<li>返回Response</li>
+</ul>
+<h2 id="请求转发和重定向"><a href="#请求转发和重定向" class="headerlink" title="请求转发和重定向"></a>请求转发和重定向</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011066470/article/details/115379182">Spring请求转发（forward）和重定向（redirect）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39813000/article/details/104555657">Spring请求转发（forward）和重定向（redirect）区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45555680/article/details/111658001">Http状态码之301和302的区别</a></li>
+</ul>
+</blockquote>
+<h2 id="过滤器和拦截器"><a href="#过滤器和拦截器" class="headerlink" title="过滤器和拦截器"></a>过滤器和拦截器</h2><h3 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LawssssCat/article/details/105249730">Filter（过滤器）和Interceptor（拦截器）对比入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41788977/article/details/103610068">Filter（过滤器）和Interceptor（拦截器）对比详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Filter（过滤器）"><a href="#Filter（过滤器）" class="headerlink" title="Filter（过滤器）"></a>Filter（过滤器）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zzuhkp/article/details/121288762">Filter入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ToBeABetterOne/article/details/79310250">Filter详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34136709/article/details/106849386">Filter注册</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/andy_zhang2007/article/details/86029954">FormContentFilter详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/accept666/article/details/122611242">CorsFilter详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35207086/article/details/120091221">FilterRegistrationBean详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39368007/article/details/114065579">FilterChain之职责链模式</a></li>
+</ul>
+</blockquote>
+<h3 id="Interceptor（拦截器）"><a href="#Interceptor（拦截器）" class="headerlink" title="Interceptor（拦截器）"></a>Interceptor（拦截器）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Herishwater/article/details/103544342">Interceptor入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zzuhkp/article/details/121242297">Interceptor详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/magic55574/article/details/110475311">Interceptor注册</a></li>
+</ul>
+</blockquote>
+<h1 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43013511/article/details/123248435">Controller和RestController的区别</a></li>
+</ul>
+</blockquote>
+<h2 id="Request"><a href="#Request" class="headerlink" title="Request"></a>Request</h2><h3 id="Route"><a href="#Route" class="headerlink" title="Route"></a>Route</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/pengkai411429850/article/details/51798499">SpringMVC之路径匹配规则</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/rocling/article/details/82903574">@RequestMapping详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qingquanyingyue/article/details/105125648">@RequestMapping和@GetMapping的区别</a></li>
+</ul>
+</blockquote>
+<h3 id="Param"><a href="#Param" class="headerlink" title="Param"></a>Param</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46193073/article/details/104257123">SpringMVC之前后端传递参数的方式入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40734247/article/details/110151421">SpringMVC之前后端传递参数的方式详解</a></li>
+</ul>
+</blockquote>
+<h4 id="get"><a href="#get" class="headerlink" title="get"></a>get</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/athga/article/details/106200416">SpringMVC之获取各种请求参数入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43842093/article/details/121175080">SpringMVC之获取各种请求参数进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/youanyyou/article/details/106774241">SpringMVC之获取各种请求参数详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ybsgsg/article/details/119533049">SpringMVC之获取各种请求参数精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/likunpeng6656201/article/details/97259884">SpringMVC之Parameter和Attribute的区别入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44557778/article/details/109051419">SpringMVC之Parameter和Attribute的区别详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43329749/article/details/105717815">SpringMVC之request.getAttribute和session.getAttribute的区别</a></li>
+</ul>
+</blockquote>
+<h4 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43883917/article/details/113097624">SpringMVC之绑定请求参数入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012841209/article/details/72847633">SpringMVC之绑定请求参数进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_34390105/article/details/92386683">SpringMVC之绑定请求参数详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38749555/article/details/102642569">SpringMVC之绑定请求参数之基本类型和复杂类型混用</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lutinghuan/article/details/46820023">SpringMVC之请求参数之绑定多个对象</a></li>
+</ul>
+</blockquote>
+<h4 id="mime"><a href="#mime" class="headerlink" title="mime"></a>mime</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Keith003/article/details/82181964">SpringMVC之MIME</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013258447/article/details/101107743">SpringMVC之MIME和Post请求</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Her_smile/article/details/92794691">SpringMVC之MIME的x-www-form-urlencoded</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dreamerrrrrr/article/details/111146763">SpringMVC之MIME的multipart&#x2F;form-data</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/genius_999999/article/details/104621252">SpringMVC之MIME的multipart&#x2F;form-data与x-www-form-urlencoded区别</a></li>
+</ul>
+</blockquote>
+<h4 id="default"><a href="#default" class="headerlink" title="default"></a>default</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39514033/article/details/112181999">SpringMVC之参数默认值</a></li>
+</ul>
+</blockquote>
+<h4 id="annotation"><a href="#annotation" class="headerlink" title="annotation"></a>annotation</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/david2000999/article/details/121233360">@RequestParam加与不加的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44543508/article/details/101026720">@RequestParam详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CPOHUI/article/details/106876158">@RequestBody详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qfikh/article/details/88553603">@RequestBody和@RequestParam比较</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/linysuccess/article/details/109221288">@RequestBody和@RequestParam混合使用</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hunt_er/article/details/109678025">@RequestBody只能使用一次</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/securitit/article/details/110704836">@RequestPart详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wd2014610/article/details/79727061">@RequestPart和@RequestParam比较</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/aar49191/article/details/101961466">@RequestAttribute详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45614626/article/details/108510486">@RequestAttribute和@RequestParam的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37370132/article/details/107972265">@PathVariable详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31960623/article/details/116902786">@Value详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/feyehong/article/details/123676293">@RequestHeader详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sswqzx/article/details/85450711">@CookieValue</a></li>
+</ul>
+</blockquote>
+<h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zzu_wlan/article/details/104508541">@SessionAttributes详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/csyy140225/article/details/82454611">@SessionAttribute详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/superfjj/article/details/103890655">@SessionAttributes和@SessionAttribute的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38615170/article/details/90290852">SpringSession入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/east123321/article/details/79157464">SpringSession详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Sool179/article/details/85042162">SpringSession复制</a></li>
+</ul>
+</blockquote>
+<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/JinKin_OldWang/article/details/83052454">ModelAndView和Model、ModelMap的关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yue_xx/article/details/105740360">@ModelAttribute详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/feiying0canglang/article/details/120495744">@ModelAttribute和@SessionAttributes的区别</a></li>
+</ul>
+</blockquote>
+<h2 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h2><h3 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44176169/article/details/104980344">SpringMVC之返回值类型</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tongshoushou/article/details/108588028">SpringMVC之返回视图名</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39901558/article/details/111178078">SpringMVC之返回状态码</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_26878363/article/details/102487207">SpringMVC之返回响应头</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44866828/article/details/118876652">SpringMVC之使用ResponseEntity自定义返回</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44563573/article/details/114302954">@ResponseBody详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/thinkingcao/article/details/110875494">@ResponseStatus详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/deanwq/article/details/102907212">ResponseEntity和@ResponseBody的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36582604/article/details/80520937">ResponseEntity和@ResponseBody的优先级</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/asxyxxx/article/details/121806762">统一返回结果入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xueyijin/article/details/122524335">统一返回结果详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h2><h3 id="Basic-1"><a href="#Basic-1" class="headerlink" title="Basic"></a>Basic</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/penriver/article/details/117028346">获取ApplicationContext的方式</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_35756522/article/details/77127169">RequestContextHolder详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45901207/article/details/110992418">RequestContextHolder原理</a></li>
+</ul>
+</blockquote>
+<h3 id="Invalid"><a href="#Invalid" class="headerlink" title="Invalid"></a>Invalid</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sageyin/article/details/114916266">RequestContextHolder在子线程中失效的解决办法</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yu0_zhang0/article/details/106272919">RequestContextHolder在@Async中失效的解决办法</a></li>
+</ul>
+</blockquote>
+<h2 id="Validation"><a href="#Validation" class="headerlink" title="Validation"></a>Validation</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43692950/article/details/119247774">SpringValidation入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_48795607/article/details/112823402">SpringValidation进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/BASK2312/article/details/129317072">SpringValidation详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ProLayman/article/details/114136791">SpringValidation规则</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/HD243608836/article/details/116239908">SpringValidation异常入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43409401/article/details/116017177">SpringValidation异常详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hc1285653662/article/details/126839237">SpringValidation异常区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42974140/article/details/113183565">SpringValidation之@Valid和@Validated的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40603010/article/details/124056549">SpringValidation之@NotNull和@NonNull的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010900754/article/details/91323427">SpringValidation之@NotNull和@Nullable</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39751320/article/details/105090653">SpringValidation之BindingResult入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33375499/article/details/105639446">SpringValidation之BindingResult详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yangshangwei/article/details/123105926">SpringAssert详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Converter"><a href="#Converter" class="headerlink" title="Converter"></a>Converter</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhuqiuhui/article/details/82316686">SpringConverter入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiewenfeng520/article/details/106992065">SpringConverter进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/huangjhai/article/details/104214894">SpringConverter详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33912453/article/details/89019947">HttpMessageConverter入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44741023/article/details/119932980">HttpMessageConverter进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43808717/article/details/117512315">HttpMessageConverter详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Heron22/article/details/109512976">MappingJackson2HttpMessageConverter使用和原理</a></li>
+</ul>
+</blockquote>
+<h3 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012410733/article/details/72773095">SpringMVC的Date处理类型详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhuzicc/article/details/127956849">@DateTimeFormat详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhou520yue520/article/details/81348926">@DateTimeFormat和@JsonFormat入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhuzicc/article/details/106529485">@DateTimeFormat和@JsonFormat详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_21567385/article/details/107303684">SpringBoot的Date类型配置详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Enum"><a href="#Enum" class="headerlink" title="Enum"></a>Enum</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33306246/article/details/106933613">SpringMVC的Enum处理类型详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Json"><a href="#Json" class="headerlink" title="Json"></a>Json</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31960623/article/details/117778291">Jackson详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31960623/article/details/117820462">Jackson注解入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/blwinner/article/details/98532847">Jackson注解详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_16759541/article/details/89083510">Jackson之@JsonProperty和@JsonAlias详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_20919883/article/details/116480850">Jackson之@JsonFormat处理date和enum</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Mr__Chao/article/details/121537320">Jackson之TypeReference详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34347620/article/details/103444083">Jackson之自定义序列化和反序列化</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zzuhkp/article/details/107749148">Spring之ResolvableType详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/z28126308/article/details/90276705">Spring之Jackson配置</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fallenjency/article/details/123276600">JsonPath详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w727655308/article/details/121207345">jq详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_17231297/article/details/129787384">接口优化方案总结</a></li>
+</ul>
+</blockquote>
+<h1 id="View"><a href="#View" class="headerlink" title="View"></a>View</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42382121/article/details/82557048">Java的EL表达式</a></li>
+</ul>
+</blockquote>
+<h2 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45994580/article/details/123965547">Servlet入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_19782019/article/details/80292110">Servlet详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Jsp"><a href="#Jsp" class="headerlink" title="Jsp"></a>Jsp</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Madeira/article/details/93377880">Jsp入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45018290/article/details/108108207">Jsp详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Mr_YanMingXin/article/details/118603852">Jsp内置对象</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_48033003/article/details/117508888">Jsp的EL表达式</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41121133/article/details/112211411">Jsp和Servlet的区别</a></li>
+</ul>
+</blockquote>
+<h2 id="Thymeleaf"><a href="#Thymeleaf" class="headerlink" title="Thymeleaf"></a>Thymeleaf</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/nimaaicijdh/article/details/108510775">Thymeleaf入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46188681/article/details/114188838">Thymeleaf详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43605444/article/details/122028798">SpEL入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/neweastsun/article/details/104533662">SpEL进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/likun557/article/details/107853045">SpEL详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liuyueyi25/article/details/106249073">SpEL语法</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zxx2096/article/details/102986973">SpEL之#和$的区别</a></li>
+</ul>
+</blockquote>
+<p>spel：Spring Expression Language</p>
+<h1 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cchchunhe/article/details/89452279">Service、Manager和Helper</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44929168/article/details/128377849">POJO入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40610003/article/details/109007539">POJO详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Transform"><a href="#Transform" class="headerlink" title="Transform"></a>Transform</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lemon_TT/article/details/122779141">Bean转换的几种方法</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yqw1401/article/details/120385937">MapStruct详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Exception"><a href="#Exception" class="headerlink" title="Exception"></a>Exception</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41107231/article/details/115874974">Spring全局异常入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_27575627/article/details/129128997">Spring全局异常进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/include_IT_dog/article/details/107111598">Spring全局异常详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42370303/article/details/81147071">异常分类之BizException详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37731470/article/details/116754395">异常捕获之Filter异常</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38366063/article/details/89494264">异常捕获之Interceptor异常</a></li>
+</ul>
+</blockquote>
+<h2 id="Retry"><a href="#Retry" class="headerlink" title="Retry"></a>Retry</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq826654664jx/article/details/116108221">服务容错之请求失败该不该重试</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lonelymanontheway/article/details/105829096">服务容错之超时重试</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012060033/article/details/128410398">GuavaRetry和SpringRetry对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/noaman_wgs/article/details/85940207">GuavaRetry详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hongyuan19/article/details/118995696">SpringRetry详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013467442/article/details/105746620">@Retryable入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wtopps/article/details/103698635">@Retryable详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Idempotent"><a href="#Idempotent" class="headerlink" title="Idempotent"></a>Idempotent</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yuhaiyang_1/article/details/81040967">幂等入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/afsvsv/article/details/90767910">幂等进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sufu1065/article/details/122335349">幂等详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45701550/article/details/118276588">幂等和重试的关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43684538/article/details/120014838">幂等和去重的区别</a></li>
+</ul>
+</blockquote>
+<p>Idempotent：幂等</p>
+<h2 id="Repeat"><a href="#Repeat" class="headerlink" title="Repeat"></a>Repeat</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CPOHUI/article/details/106439476">重复提交问题入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weter_drop/article/details/103127340">重复提交问题详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sonicwater/article/details/114872095">防抖（debounce）和截流（throttle）详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h1><h2 id="Protocol"><a href="#Protocol" class="headerlink" title="Protocol"></a>Protocol</h2><h3 id="Http"><a href="#Http" class="headerlink" title="Http"></a>Http</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yeyinfan123/article/details/106968850">HTTP入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq15035899256/article/details/126103840">HTTP进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45890970/article/details/122890674">HTTP详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44739349/article/details/106097201">Http请求库选型</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/petterp/article/details/129003792">Http请求库演进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w372426096/article/details/82713315">HttpClient详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_32237719/article/details/100125359">OkHttp入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_32237719/article/details/109743388">OkHttp进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43842093/article/details/121877245">OkHttp详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sukisabishi/article/details/121878743">Retrofit详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Ares___/article/details/121620150">RestTemplate详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/f641385712/article/details/100713622">RestTemplate集成HttpClient和OkHttp</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chendasheng/article/details/107075468">OkHttp和HttpClient的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fitaotao/article/details/103903429">Retrofit和OkHttp的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/b644ROfP20z37485O35M/article/details/109505044">RestTemplate和Retrofit的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/q1353122328/article/details/128812919">Feign和Retrofit的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38233258/article/details/125706722">Forest和Retrofit的区别</a></li>
+</ul>
+</blockquote>
+<h3 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/asd051377305/article/details/108066378">WebSocket协议入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LL845876425/article/details/106393358">WebSocket协议进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sermonlizhi/article/details/118609757">WebSocket协议详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq991658923/article/details/127022522">WebSocket使用入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w1014074794/article/details/113845879">WebSocket使用进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_56995925/article/details/120543965">WebSocket使用详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43821679/article/details/110236715">WebSocket之数据实时更新</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42125556/article/details/120931552">分布式WebSocket入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhuwei_clark/article/details/83547193">分布式WebSocket进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/delicious_life/article/details/105305640">分布式WebSocket详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/aiwokache/article/details/117294920">WebSocket和Http的关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cai4561/article/details/106809244">WebSocket掉线重连</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/houbin0912/article/details/110879747">WebSocket错误码</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/AnNanDu/article/details/126603005">WebSocket保活（PingPong）机制</a></li>
+</ul>
+</blockquote>
+<h3 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qianlia/article/details/105508138">RPC入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/belongtocode/article/details/118639448">RPC进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yjp198713/article/details/79410521">RPC详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Ruishine/article/details/122534965">RPC和RMI的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qian_348840260/article/details/116753405">RPC和HTTP的关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weichi7549/article/details/107721623">RPC和Restful对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/en_joker/article/details/105556828">RPC框架选型入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liutong123987/article/details/78887604">RPC框架选型进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_70730532/article/details/126543677">RPC框架选型详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Specification"><a href="#Specification" class="headerlink" title="Specification"></a>Specification</h2><h3 id="Restful（Web-API）"><a href="#Restful（Web-API）" class="headerlink" title="Restful（Web API）"></a>Restful（Web API）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/duninet/article/details/103835372">Restful入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zzvar/article/details/118164133">Restful进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/langfeiyes/article/details/122871361">Restful详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_33446638/article/details/111144735">Restful之状态码设计详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42519804/article/details/106883972">Restful之Post和Put的区别入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/maxmao1024/article/details/79591726">Restful之Post和Put的区别详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/varyall/article/details/80895945">Restful之Patch和Put的区别详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wufagang/article/details/105306108">Restful之Spring的HiddenHttpMethodFilter</a></li>
+</ul>
+</blockquote>
+<h3 id="SOAP（Web-Service）"><a href="#SOAP（Web-Service）" class="headerlink" title="SOAP（Web Service）"></a>SOAP（Web Service）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39198749/article/details/102627247">SOAP入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/caisini_vc/article/details/48465731">SOAP进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44651073/article/details/129468001">SOAP详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cherry_11qianqian/article/details/82660383">WSDL入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/DmxExcalibur/article/details/90610596">WSDL进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_19714937/article/details/68922185">WSDL详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/vtopqx/article/details/86674184">SOAP和WSDL的区别</a></li>
+</ul>
+</blockquote>
+<h2 id="Framework"><a href="#Framework" class="headerlink" title="Framework"></a>Framework</h2><h3 id="Netty"><a href="#Netty" class="headerlink" title="Netty"></a>Netty</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/vermont_/article/details/118755017">Netty入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45722941/article/details/120219166">Netty进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37583655/article/details/122048480">Netty详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38685503/article/details/114168722">Netty图解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ww2651071028/article/details/130003959">Netty经典32连问</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Diamond_Tao/article/details/117392294">Netty粘包和拆包入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lt_xiaodou/article/details/126191257">Netty粘包和拆包进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/crazymakercircle/article/details/83957259">Netty粘包和拆包详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Container"><a href="#Container" class="headerlink" title="Container"></a>Container</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/JAVA_MHH/article/details/115417612">Spring内置容器切换</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yiyuzz/article/details/117169403">tomcat和jetty、netty的区别</a></li>
+</ul>
+</blockquote>
+<h3 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Jiangbohao_/article/details/107033497">tomcat最大线程数、最大等待数和最大连接数</a></li>
+</ul>
+</blockquote>
+<h2 id="Asynchronization"><a href="#Asynchronization" class="headerlink" title="Asynchronization"></a>Asynchronization</h2><h3 id="WebFlux"><a href="#WebFlux" class="headerlink" title="WebFlux"></a>WebFlux</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_65647788/article/details/124421641">WebFlux入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhang33565417/article/details/122012459">WebFlux进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43404873/article/details/112135552">WebFlux详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/crazymakercircle/article/details/113201320">WebFlux专题</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/crazymakercircle/article/details/112977951">WebFlux演示</a></li>
+</ul>
+</blockquote>
+<h1 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinolover/article/details/111629668">TDD详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tyw15/article/details/108123562">单元测试和集成测试入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhang_xiaoyi/article/details/79041145">单元测试和集成测试详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Framework-1"><a href="#Framework-1" class="headerlink" title="Framework"></a>Framework</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qf2019/article/details/118379665">java测试框架选型入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36328839/article/details/112543406">java测试框架选型详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/skh2015java/article/details/121775806">java单元测试覆盖率框架详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zjuxsl/article/details/90762088">python测试框架选型详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Faith_Lzt/article/details/117932831">python测试框架pytest详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Unit-Test"><a href="#Unit-Test" class="headerlink" title="Unit Test"></a>Unit Test</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44170221/article/details/106463482">Junit4详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/pan_junbiao/article/details/104296855">Junit5详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010675669/article/details/86574956">JUnit5和JUnit4对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w605283073/article/details/80051229">Junit4参数化测试</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013019701/article/details/103330908">Junit5参数化测试</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cunchi4221/article/details/107475374">Junit重复测试</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33742618/article/details/91799240">@RunWith详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ryo1060732496/article/details/80823898">@ExtendWith详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/neweastsun/article/details/104006208">AssertJ详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Spring-Test"><a href="#Spring-Test" class="headerlink" title="Spring Test"></a>Spring Test</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000040803747">Spring单元测试和集成测试详解</a></li>
+</ul>
+</blockquote>
+<h4 id="SpringTest"><a href="#SpringTest" class="headerlink" title="SpringTest"></a>SpringTest</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/QGhurt/article/details/116322115">SpringTest入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44895829/article/details/123508674">SpringTest详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_45406092/article/details/114693685">SpringTest之SpringJUnit4ClassRunner详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40775879/article/details/102968817">SpringtTest之SpringJUnit4ClassRunner和SpringRunner的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37941483/article/details/90727830">SpringTest之@ContextConfiguration详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/SmileLucki/article/details/105264188">SpringTest之@ContextConfiguration和@SpringJUnitConfig的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42115003/article/details/113329348">SpringTest之单元测试不启动整个项目</a></li>
+</ul>
+</blockquote>
+<h4 id="SpringBootTest"><a href="#SpringBootTest" class="headerlink" title="SpringBootTest"></a>SpringBootTest</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangxi06/article/details/114630426">SpringBootTest入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_40770656/article/details/109322538">SpringBootTest详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/HD243608836/article/details/122239150">SpringBootTest之JUnit5和JUnit4</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dnc8371/article/details/106701279">SpringBootTest之@SpringApplicationConfiguration和@ContextConfiguration区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangjie919/article/details/80347150">SpringBootTest之@SpringApplicationConfiguration废弃和替代方案</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44750696/article/details/121360008">SpringBootTest之@SpringBootTest详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40569991/article/details/108253102">SpringBootTest之单元测试不启动整个项目</a></li>
+</ul>
+</blockquote>
+<h3 id="Mock-Test"><a href="#Mock-Test" class="headerlink" title="Mock Test"></a>Mock Test</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33561055/article/details/103978412">Mock测试之修改字段</a></li>
+</ul>
+</blockquote>
+<h4 id="MockMvc"><a href="#MockMvc" class="headerlink" title="MockMvc"></a>MockMvc</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42105629/article/details/104652955">MockMvc入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/IManiy/article/details/120833041">MockMvc进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wo541075754/article/details/88983708">MockMvc详解</a></li>
+</ul>
+</blockquote>
+<h4 id="Mockito"><a href="#Mockito" class="headerlink" title="Mockito"></a>Mockito</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44668898/article/details/121912233">Mockito入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/nanchengyu/article/details/112431258">Mockito进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/IT_LanTian/article/details/121356565">Mockito详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/b1480521874/article/details/100972837">Mockito之打桩入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Aqu415/article/details/118445876">Mockito之打桩进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/moshowgame/article/details/100983711">Mockito之打桩详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dihuadihua/article/details/113190755">Mockito之打桩精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_30141957/article/details/81273829">Mockito之Mock和Spy的区别入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/csdn_tiger1993/article/details/127209370">Mockito之Mock和Spy的区别进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37514242/article/details/116958609">Mockito之Mock和Spy的区别详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011047968/article/details/91970070">Mockito之@InjectMocks入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jieyingxiao/article/details/98217955">Mockito之@InjectMocks进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lzhcoder/article/details/121466257">Mockito之@InjectMocks详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tcctcszhanghao/article/details/107079445">Mockito之修改字段</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jamesdoctor/article/details/50019103">Mockito原理入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7034528267721768990">Mockito原理详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_45406092/article/details/124044126">Mockito原理之字节码增强技术</a></li>
+</ul>
+</blockquote>
+<h4 id="Spock"><a href="#Spock" class="headerlink" title="Spock"></a>Spock</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/q15858187033/article/details/106940780">Spock入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/csdnlijingran/article/details/123405187">Spock进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/vipshop_fin_dev/article/details/117908916">Spock详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_52740442/article/details/118928219">java测试工具详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Benchmark-Test"><a href="#Benchmark-Test" class="headerlink" title="Benchmark Test"></a>Benchmark Test</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_48121024/article/details/129145124">java压力测试工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cky8792/article/details/100208747">Jmeter与LoadRunner的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/basicworld/article/details/117828986">Jmeter与Apache Benchmark的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40943297/article/details/96480607">Jmeter详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sangyongjia/article/details/49093945">Apache Benchmark详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq1620657419/article/details/111669194">JMH详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Automation-Test"><a href="#Automation-Test" class="headerlink" title="Automation Test"></a>Automation Test</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44534541/article/details/108556764">java自动化测试工具</a></li>
+</ul>
+</blockquote>
+<h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><h2 id="GraphQL"><a href="#GraphQL" class="headerlink" title="GraphQL"></a>GraphQL</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kevin_tech/article/details/120735500">GraphQL详解</a></li>
+</ul>
+</blockquote>
+<h2 id="StateMachine"><a href="#StateMachine" class="headerlink" title="StateMachine"></a>StateMachine</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xielinrui123/article/details/105376158">Spring状态机入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/im_hwp/article/details/120032616">Spring状态机进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012129558/article/details/90519577">Spring状态机详解</a></li>
+</ul>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>只想买包辣条</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/pay/wechatpay.jpeg" alt="朱继鹏 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># + java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/07/01/lang/lang-1-java/middle/java-1-spring/" rel="prev" title="spring">
+      <i class="fa fa-chevron-left"></i> spring
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/07/01/lang/lang-1-java/middle/java-3-spring-data/" rel="next" title="spring-data">
+      spring-data <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MVC"><span class="nav-number">1.</span> <span class="nav-text">MVC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">请求流程描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E8%BD%AC%E5%8F%91%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">1.2.</span> <span class="nav-text">请求转发和重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="nav-number">1.3.</span> <span class="nav-text">过滤器和拦截器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic"><span class="nav-number">1.3.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Filter%EF%BC%88%E8%BF%87%E6%BB%A4%E5%99%A8%EF%BC%89"><span class="nav-number">1.3.2.</span> <span class="nav-text">Filter（过滤器）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interceptor%EF%BC%88%E6%8B%A6%E6%88%AA%E5%99%A8%EF%BC%89"><span class="nav-number">1.3.3.</span> <span class="nav-text">Interceptor（拦截器）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Controller"><span class="nav-number">2.</span> <span class="nav-text">Controller</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Request"><span class="nav-number">2.1.</span> <span class="nav-text">Request</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Route"><span class="nav-number">2.1.1.</span> <span class="nav-text">Route</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Param"><span class="nav-number">2.1.2.</span> <span class="nav-text">Param</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#get"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">get</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bind"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">bind</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mime"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">mime</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#default"><span class="nav-number">2.1.2.4.</span> <span class="nav-text">default</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#annotation"><span class="nav-number">2.1.2.5.</span> <span class="nav-text">annotation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Header"><span class="nav-number">2.1.3.</span> <span class="nav-text">Header</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie"><span class="nav-number">2.1.4.</span> <span class="nav-text">Cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session"><span class="nav-number">2.1.5.</span> <span class="nav-text">Session</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model"><span class="nav-number">2.1.6.</span> <span class="nav-text">Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Response"><span class="nav-number">2.2.</span> <span class="nav-text">Response</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Result"><span class="nav-number">2.2.1.</span> <span class="nav-text">Result</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Context"><span class="nav-number">2.3.</span> <span class="nav-text">Context</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Invalid"><span class="nav-number">2.3.2.</span> <span class="nav-text">Invalid</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Validation"><span class="nav-number">2.4.</span> <span class="nav-text">Validation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Converter"><span class="nav-number">2.5.</span> <span class="nav-text">Converter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Date"><span class="nav-number">2.5.1.</span> <span class="nav-text">Date</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Enum"><span class="nav-number">2.5.2.</span> <span class="nav-text">Enum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Json"><span class="nav-number">2.5.3.</span> <span class="nav-text">Json</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Performance"><span class="nav-number">2.6.</span> <span class="nav-text">Performance</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#View"><span class="nav-number">3.</span> <span class="nav-text">View</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet"><span class="nav-number">3.1.</span> <span class="nav-text">Servlet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jsp"><span class="nav-number">3.2.</span> <span class="nav-text">Jsp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thymeleaf"><span class="nav-number">3.3.</span> <span class="nav-text">Thymeleaf</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Service"><span class="nav-number">4.</span> <span class="nav-text">Service</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Transform"><span class="nav-number">4.1.</span> <span class="nav-text">Transform</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exception"><span class="nav-number">5.</span> <span class="nav-text">Exception</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Retry"><span class="nav-number">5.1.</span> <span class="nav-text">Retry</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Idempotent"><span class="nav-number">6.</span> <span class="nav-text">Idempotent</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Repeat"><span class="nav-number">6.1.</span> <span class="nav-text">Repeat</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web"><span class="nav-number">7.</span> <span class="nav-text">Web</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Protocol"><span class="nav-number">7.1.</span> <span class="nav-text">Protocol</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Http"><span class="nav-number">7.1.1.</span> <span class="nav-text">Http</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebSocket"><span class="nav-number">7.1.2.</span> <span class="nav-text">WebSocket</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RPC"><span class="nav-number">7.1.3.</span> <span class="nav-text">RPC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Specification"><span class="nav-number">7.2.</span> <span class="nav-text">Specification</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Restful%EF%BC%88Web-API%EF%BC%89"><span class="nav-number">7.2.1.</span> <span class="nav-text">Restful（Web API）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SOAP%EF%BC%88Web-Service%EF%BC%89"><span class="nav-number">7.2.2.</span> <span class="nav-text">SOAP（Web Service）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Framework"><span class="nav-number">7.3.</span> <span class="nav-text">Framework</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Netty"><span class="nav-number">7.3.1.</span> <span class="nav-text">Netty</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Container"><span class="nav-number">7.4.</span> <span class="nav-text">Container</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat"><span class="nav-number">7.4.1.</span> <span class="nav-text">Tomcat</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Asynchronization"><span class="nav-number">7.5.</span> <span class="nav-text">Asynchronization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WebFlux"><span class="nav-number">7.5.1.</span> <span class="nav-text">WebFlux</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Testing"><span class="nav-number">8.</span> <span class="nav-text">Testing</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Framework-1"><span class="nav-number">8.1.</span> <span class="nav-text">Framework</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Unit-Test"><span class="nav-number">8.1.1.</span> <span class="nav-text">Unit Test</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Test"><span class="nav-number">8.1.2.</span> <span class="nav-text">Spring Test</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SpringTest"><span class="nav-number">8.1.2.1.</span> <span class="nav-text">SpringTest</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SpringBootTest"><span class="nav-number">8.1.2.2.</span> <span class="nav-text">SpringBootTest</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mock-Test"><span class="nav-number">8.1.3.</span> <span class="nav-text">Mock Test</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MockMvc"><span class="nav-number">8.1.3.1.</span> <span class="nav-text">MockMvc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mockito"><span class="nav-number">8.1.3.2.</span> <span class="nav-text">Mockito</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spock"><span class="nav-number">8.1.3.3.</span> <span class="nav-text">Spock</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tools"><span class="nav-number">8.2.</span> <span class="nav-text">Tools</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Benchmark-Test"><span class="nav-number">8.2.1.</span> <span class="nav-text">Benchmark Test</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Automation-Test"><span class="nav-number">8.2.2.</span> <span class="nav-text">Automation Test</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GraphQL"><span class="nav-number">9.1.</span> <span class="nav-text">GraphQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StateMachine"><span class="nav-number">9.2.</span> <span class="nav-text">StateMachine</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="朱继鹏"
+      src="/images/avatar/zhujipeng.jpg">
+  <p class="site-author-name" itemprop="name">朱继鹏</p>
+  <div class="site-description" itemprop="description">在全栈的路上狂奔不止</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jipengzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jipengzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jipengzhu@qq.com" title="E-Mail → mailto:jipengzhu@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱继鹏</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
