@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="spring-security">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring-security">
+<meta property="og:url" content="http://example.com/2017/07/01/lang/lang-1-java/senior/java-4-spring-security/index.html">
+<meta property="og:site_name" content="朱继鹏的博客">
+<meta property="og:description" content="spring-security">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-06-30T19:04:00.000Z">
+<meta property="article:modified_time" content="2023-05-28T11:36:33.510Z">
+<meta property="article:author" content="朱继鹏">
+<meta property="article:tag" content="+ java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2017/07/01/lang/lang-1-java/senior/java-4-spring-security/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>spring-security | 朱继鹏的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">朱继鹏的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">天道酬勤，全栈不停</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2017/07/01/lang/lang-1-java/senior/java-4-spring-security/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar/zhujipeng.jpg">
+      <meta itemprop="name" content="朱继鹏">
+      <meta itemprop="description" content="在全栈的路上狂奔不止">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朱继鹏的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          spring-security
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-07-01 03:04:00" itemprop="dateCreated datePublished" datetime="2017-07-01T03:04:00+08:00">2017-07-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-28 19:36:33" itemprop="dateModified" datetime="2023-05-28T19:36:33+08:00">2023-05-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-senior/" itemprop="url" rel="index"><span itemprop="name">+ java + senior</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">spring-security</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Security"><a href="#Security" class="headerlink" title="Security"></a>Security</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/penriver/article/details/119875226">java安全体系详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/gonghaiyu/article/details/109151198">java使用无限制的加密算法</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_29689487/article/details/81634057">对称加密和非对称加密的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/boweiqiang/article/details/105737017">加密（Encryption）和签名（Signature）的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44848480/article/details/129037634">认证（Authentication）和授权（Authorization）详解</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>Crypto：密码（学）</li>
+<li>Cipher：密码（工具）</li>
+<li>Secret：密钥（密码）、密文</li>
+<li>Encrypt&#x2F;Encryption：加密</li>
+<li>Oq&#x2F;Decryption：解密</li>
+<li>Sign&#x2F;Signature：签名</li>
+<li>Verify&#x2F;Verification：校验</li>
+<li>Authenticate&#x2F;Authentication：认证</li>
+<li>Authorize&#x2F;Authorization：授权</li>
+</ul>
+<h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/network_idiot/article/details/119281070">信息安全入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37233070/article/details/124213720">信息安全进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6995549209348816909">信息安全详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39440893/article/details/114185672">信息安全五大特性详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/itworld123/article/details/122905582">信息安全三要素（CIA）入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cunjiu9486/article/details/109075217">信息安全三要素（CIA）进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ab13167235280/article/details/101308841">信息安全三要素（CIA）详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37771475/article/details/86153799">SpringSecurity入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43847283/article/details/124075302">SpringSecurity详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Jianyang_usst/article/details/121381839">SpringSecurity之过滤链FilterChain</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45393094/article/details/104929720">ApacheShiro入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Yearingforthefuture/article/details/117384035">ApacheShiro详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42759582/article/details/113853921">SpringSecurity和ApacheShiro对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39652397/article/details/123070913">不再推荐使用WebSecurityConfigurerAdapter</a></li>
+</ul>
+</blockquote>
+<h3 id="SecureRandom"><a href="#SecureRandom" class="headerlink" title="SecureRandom"></a>SecureRandom</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/white_hats/article/details/89382843">java安全之SecureRandom入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/libusi001/article/details/113586904">java安全之SecureRandom进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31635851/article/details/120203046">java安全之SecureRandom详解</a></li>
+</ul>
+</blockquote>
+<h3 id="MessageDigest"><a href="#MessageDigest" class="headerlink" title="MessageDigest"></a>MessageDigest</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lanfeng_lan/article/details/120868628">java安全之MessageDigest入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiao__gui/article/details/8148203">java安全之MessageDigest进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41918166/article/details/115552035">java安全之MessageDigest详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Cipher"><a href="#Cipher" class="headerlink" title="Cipher"></a>Cipher</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/b1303110335/article/details/109717838">java安全之Cipher入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangmx1993328/article/details/106170060">java安全之Cipher进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/SeptDays/article/details/121102385">java安全之Cipher详解</a></li>
+</ul>
+</blockquote>
+<h3 id="KeyGenerator"><a href="#KeyGenerator" class="headerlink" title="KeyGenerator"></a>KeyGenerator</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42272869/article/details/124293081">java安全之KeyGenerator入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43842093/article/details/124069708">java安全之KeyGenerator进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yanbin0830/article/details/89929045">java安全之KeyGenerator详解</a></li>
+</ul>
+</blockquote>
+<h3 id="KeyStore"><a href="#KeyStore" class="headerlink" title="KeyStore"></a>KeyStore</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31856061/article/details/125542695">java安全之KeyStore入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zlfing/article/details/77648444">java安全之KeyStore进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dnc8371/article/details/106704333">java安全之KeyStore详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><h3 id="安全有哪些方向"><a href="#安全有哪些方向" class="headerlink" title="安全有哪些方向"></a>安全有哪些方向</h3><p>数据安全、服务安全（API和WEB）、机器安全、网络安全、信息安全</p>
+<h3 id="安全有哪些技术"><a href="#安全有哪些技术" class="headerlink" title="安全有哪些技术"></a>安全有哪些技术</h3><h4 id="古代有哪些安全相关的技术"><a href="#古代有哪些安全相关的技术" class="headerlink" title="古代有哪些安全相关的技术"></a>古代有哪些安全相关的技术</h4><ul>
+<li>签字</li>
+<li>画押</li>
+<li>印章<ul>
+<li>私印（私（印）章，适用于书画）</li>
+<li>官印（公（印）章，适用于公文）</li>
+</ul>
+</li>
+<li>银票</li>
+<li>地契</li>
+</ul>
+<h4 id="近代有哪些安全相关的技术"><a href="#近代有哪些安全相关的技术" class="headerlink" title="近代有哪些安全相关的技术"></a>近代有哪些安全相关的技术</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/panshi5188/article/details/110492745">数字证书和电子签名、电子印章详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/s1441101265/article/details/115486810">java实现电子发票</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>数字证书</li>
+<li>电子签名</li>
+<li>电子印章<ul>
+<li>电子发票</li>
+<li>电子合同</li>
+</ul>
+</li>
+<li>电子证件（身份证，驾驶证）</li>
+<li>数字人名币</li>
+</ul>
+<blockquote>
+<p>ps：电子邮件（email）也是电子的，电子邮件（email）是邮件（mail）的一种</p>
+</blockquote>
+<h3 id="数字证书的主要功能"><a href="#数字证书的主要功能" class="headerlink" title="数字证书的主要功能"></a>数字证书的主要功能</h3><p>数字证书（Certificate）主要功能为 </p>
+<ul>
+<li>加密（Encrypt）：防泄密（保密性）</li>
+<li>签名（Sign）：防抵赖（不可否认性）</li>
+<li>校验（Verify）：防篡改（完整性）、防伪造（真实性）</li>
+</ul>
+<h1 id="Algorithm（算法）"><a href="#Algorithm（算法）" class="headerlink" title="Algorithm（算法）"></a>Algorithm（算法）</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq877728715/article/details/104387739">常见的安全算法</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34845394/article/details/102720288">常见的编码算法</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43354104/article/details/106452921">常见的摘要算法</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012391423/article/details/116465048">常见的哈希算法</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhuimeng_by/article/details/111768041">常见的加密算法</a></li>
+</ul>
+</blockquote>
+<h2 id="Codec（编码算法）"><a href="#Codec（编码算法）" class="headerlink" title="Codec（编码算法）"></a>Codec（编码算法）</h2><h3 id="Url"><a href="#Url" class="headerlink" title="Url"></a>Url</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fuhanghang/article/details/122189358">URLEncode入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhanshixiang/article/details/122876377">URLEncode详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/androidyue/article/details/106545324">URLEncode之encodeURI和encodeURIComponent的区别</a></li>
+</ul>
+</blockquote>
+<h3 id="Base64"><a href="#Base64" class="headerlink" title="Base64"></a>Base64</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ShuSheng0007/article/details/118220299">Base64算法详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_19782019/article/details/88117150">Base64算法原理</a></li>
+</ul>
+</blockquote>
+<h2 id="Digest（摘要算法）"><a href="#Digest（摘要算法）" class="headerlink" title="Digest（摘要算法）"></a>Digest（摘要算法）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/notechsolution/article/details/106270315">Hash算法入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43935927/article/details/109126787">Hash算法进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tanggao1314/article/details/51457585">Hash算法详解</a></li>
+</ul>
+</blockquote>
+<h3 id="CRC32"><a href="#CRC32" class="headerlink" title="CRC32"></a>CRC32</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_61298445/article/details/124360115">CRC32算法入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lianyunyouyou/article/details/107217125">CRC32算法详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jc_benben/article/details/107905030">CRC32算法原理</a></li>
+</ul>
+</blockquote>
+<h3 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/bandaoyu/article/details/105241661">MD5和CRC32的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37730370/article/details/98595464">MD5和Base64的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Dean_xiu/article/details/123059413">MD5和SHA1的区别</a></li>
+</ul>
+</blockquote>
+<h3 id="SHA1"><a href="#SHA1" class="headerlink" title="SHA1"></a>SHA1</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yinkai1205/article/details/8313589">HMAC_SHA1和SHA1的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/linuxprobe2017/article/details/62049001">hash碰撞之SHA1</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23789956">hash碰撞之Git</a></li>
+</ul>
+</blockquote>
+<h2 id="Crypto（加密算法）"><a href="#Crypto（加密算法）" class="headerlink" title="Crypto（加密算法）"></a>Crypto（加密算法）</h2><h3 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h3><p>DES（已经不安全了）、AES</p>
+<h3 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h3><p>RSA</p>
+<h3 id="Question-1"><a href="#Question-1" class="headerlink" title="Question"></a>Question</h3><h4 id="base64和md5是加密算法吗"><a href="#base64和md5是加密算法吗" class="headerlink" title="base64和md5是加密算法吗"></a>base64和md5是加密算法吗</h4><p>base64和md5不是加密算法</p>
+<p>加密算法保密性的特性</p>
+<ol>
+<li>隐蔽的传递信息</li>
+<li>自己人（持有密钥或者密码本）可以解密</li>
+<li>其他人（不持有密钥或者密码本）不能解密</li>
+</ol>
+<p>urlencode base64 任何人可以编码和解码，所以不能算加密算法，只能算编码算法</p>
+<p>crc32 md5 sha1 任何人不能不依靠查表解密，所以也不算加密算法，只能算摘要算法</p>
+<p>如果依靠不能简单读懂来判断base64和md5算加密算法的话，那</p>
+<p>方言（dialect）<br>压缩（compress）<br>进制（十六进制 hex、八进制 octal、二进制 binary）转换</p>
+<p>岂不是也能算作加密算法</p>
+<h1 id="Authentication（认证）"><a href="#Authentication（认证）" class="headerlink" title="Authentication（认证）"></a>Authentication（认证）</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39766005/article/details/120976857">常见的认证方式入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zwkkkk1/article/details/82179310">常见的认证方式进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012324798/article/details/104533817">常见的认证方式详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/maoliran/article/details/51841420">认证之WWW-Authenticate的作用</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaokanfuchen86/article/details/123033611">认证之Authorization的Basic和Bearer区别</a></li>
+</ul>
+</blockquote>
+<h2 id="Login"><a href="#Login" class="headerlink" title="Login"></a>Login</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lixinyi0622/article/details/107197720">登录方案详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_58719994/article/details/128452426">邮箱登录详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/david2000999/article/details/122249949">手机号登录详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangwenzhe222/article/details/121781950">第三方登录详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_40770656/article/details/120895653">扫码登录入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/z694644032/article/details/105237912">扫码登录详解</a></li>
+</ul>
+</blockquote>
+<p>账户密码登录、邮箱登录、手机号登录、第三方登录、扫码登录</p>
+<h3 id="Account"><a href="#Account" class="headerlink" title="Account"></a>Account</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40392053/article/details/116460406">用户UID的几种生成方案</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/youdingte/article/details/128492393">多租户系统架构设计</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41990222/article/details/111587331">微信之appid、openid、unionid的区别和关联</a></li>
+</ul>
+</blockquote>
+<h3 id="SSO"><a href="#SSO" class="headerlink" title="SSO"></a>SSO</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xue_xiaofei/article/details/110061862">SSO入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ban_tang/article/details/80015946">SSO进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ruanchengshen/article/details/129493166">SSO详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hancky/article/details/79449588">SSO和Cookie入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shallum/article/details/117735532">SSO和Cookie详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/makenothing/article/details/101678229">SSO和JWT入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhang_java_11/article/details/107690042">SSO和JWT进阶</a></li>
+</ul>
+</blockquote>
+<h2 id="Auth"><a href="#Auth" class="headerlink" title="Auth"></a>Auth</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/huangpb123/article/details/103933400">Auth之Cookie、Session、Token入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ChaITSimpleLove/article/details/108814753">Auth之Cookie、Session、Token进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yaoyaochengxian/article/details/117138791">Auth之Cookie、Session、Token详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43556773/article/details/113737921">基于Session的和基于Token的认证方案对比入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/swq463/article/details/107810849">基于Session的和基于Token的认证方案对比详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xw_LazyCat/article/details/79786195">基于Cookie的登录认证方案入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38148024/article/details/108148876">基于Cookie的登录认证方案进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/awhip9/article/details/78007600">基于Cookie的登录认证方案详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43972437/article/details/106187588">基于Session的登录认证方案入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_56444564/article/details/128840277">基于Session的登录认证方案进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44176696/article/details/107140955">基于Session的登录认证方案详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/oscar999/article/details/102728303">基于Token的登录认证方案入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38658567/article/details/107840554">基于Token的登录认证方案进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Top_L398/article/details/109361680">基于Token的登录认证方案详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45070175/article/details/118559272">JWT详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42764468/article/details/107731844">JWT注销问题详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a704397849/article/details/90216739">JWT过期问题详解</a></li>
+</ul>
+</blockquote>
+<p>token一般只包含认证信息，也可以包含授权信息</p>
+<h2 id="Cloud"><a href="#Cloud" class="headerlink" title="Cloud"></a>Cloud</h2><h3 id="OpenAPI"><a href="#OpenAPI" class="headerlink" title="OpenAPI"></a>OpenAPI</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41856814/article/details/89290195">免费的开放接口大全</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36836847/article/details/95206329">开放接口（OpenAPI）入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chuijiongye5810/article/details/101021508">开放接口（OpenAPI）进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaoyi52/article/details/121198620">开放接口（OpenAPI）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dsq_MaDing/article/details/128807455">开放接口认证（AK&#x2F;SK）入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/makenothing/article/details/81158481">开放接口认证（AK&#x2F;SK）进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lijialexiao/article/details/121288347">开放接口认证（AK&#x2F;SK）详解</a></li>
+</ul>
+</blockquote>
+<h3 id="OpenID"><a href="#OpenID" class="headerlink" title="OpenID"></a>OpenID</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xcjing/article/details/73826889">OpenID入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cnwuyuqun/article/details/5685518">OpenID进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_24550639/article/details/111089296">OpenID详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Authorization（授权）"><a href="#Authorization（授权）" class="headerlink" title="Authorization（授权）"></a>Authorization（授权）</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/brother_Cheng_Py/article/details/121970486">常见的授权方式入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43314519/article/details/118365309">常见的授权方式详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><h3 id="OAuth2"><a href="#OAuth2" class="headerlink" title="OAuth2"></a>OAuth2</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/TheWindOfSon/article/details/107703234">OAuth2入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012324798/article/details/105612706">OAuth2进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zou8944/article/details/122116339">OAuth2详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhoubangbang1/article/details/124087698">OAuth2精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/best_luxi/article/details/121960777">OAuth2和JWT入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/grd_java/article/details/107584578">OAuth2和JWT详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39973810/article/details/84673548">OAuth2之Bearer Token和MAC Token的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44388689/article/details/121602585">OAuth2之accessToken和refreshToken的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/oplatform/Mobile_App/WeChat_Login/Development_Guide.html">OAuth2之微信小程序</a></li>
+</ul>
+</blockquote>
+<p>OAuth是一个行业标准的授权协议，包含一系列流程和标准</p>
+<h2 id="Database"><a href="#Database" class="headerlink" title="Database"></a>Database</h2><p>Database的操作权限是基于RBAC（Role-Based Access Control）权限模型实现的</p>
+<p>基于用户角色的认证</p>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><p>Linux的文件权限是基于ACL（Access Control List）权限模型实现的</p>
+<p>基于控制列表的认证</p>
+<h1 id="Data（数据安全）"><a href="#Data（数据安全）" class="headerlink" title="Data（数据安全）"></a>Data（数据安全）</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_63108102/article/details/128414214">数据脱敏和数据加密入门</a></li>
+</ul>
+</blockquote>
+<p>数据脱敏、数据加密</p>
+<h2 id="Password"><a href="#Password" class="headerlink" title="Password"></a>Password</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zgl_cyy/article/details/113826689">用户密码加密方式入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a1405/article/details/112801976">用户密码加密方式详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39234639/article/details/122386502">用户密码加密之MD5和Bcrypt</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Debug_zhang/article/details/50895732">用户密码加密之哈希加盐详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/acm_yuuji/article/details/27642221">用户密码加密之哈希加盐流程</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/GrassEva/article/details/82656524">用户密码加密之哈希加盐实现</a></li>
+</ul>
+</blockquote>
+<h1 id="Service（服务安全）"><a href="#Service（服务安全）" class="headerlink" title="Service（服务安全）"></a>Service（服务安全）</h1><h2 id="API（接口安全）"><a href="#API（接口安全）" class="headerlink" title="API（接口安全）"></a>API（接口安全）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yifan_lion/article/details/105180779">接口安全入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33642970/article/details/129236360">接口安全进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq877728715/article/details/112032081">接口安全详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDN_WYL2016/article/details/113861997">接口安全精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ThinPikachu/article/details/123443911">接口安全之中间人攻击详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46700042/article/details/109029455">接口安全之重放攻击详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_30566629/article/details/109783888">接口安全之DDos攻击详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/maocai008/article/details/79064542">接口安全之令牌（token）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/TL_ATC/article/details/113092201">接口安全之防中间人攻击之签名（sign）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lvxiangan/article/details/96331706">接口安全之防重放攻击之随机数（nonce）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wjg8209/article/details/118806853">接口安全之防DDos攻击之时间戳（timestamp）详解</a></li>
+</ul>
+</blockquote>
+<p>接口认证、接口签名、接口加密</p>
+<h3 id="Auth-1"><a href="#Auth-1" class="headerlink" title="Auth"></a>Auth</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lishirong/article/details/52851014">接口认证之如何保证云存储服务的SecretKey的安全</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/community/minihome/doc/0004a84fcb0bb0e89eddbaa5156401">接口认证之如何保证微信的AppSecret的安全</a></li>
+</ul>
+</blockquote>
+<h3 id="Signature"><a href="#Signature" class="headerlink" title="Signature"></a>Signature</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hjzgg/p/11062043.html">接口签名入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hujunzheng/p/9725168.html">接口签名进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq877728715/article/details/113555907">接口签名详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_63437643/article/details/124061112">接口签名精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/inthat/article/details/103140515">接口签名之appkey和appsecret详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011627980/article/details/52778326">接口签名之MD5</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012105931/article/details/51088312">接口签名之SHA1</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43040108/article/details/120760046">接口签名之HmacSHA1</a></li>
+<li><a target="_blank" rel="noopener" href="https://cnodejs.org/topic/5955f21e984e31dd458c15f2">接口签名之客户端如何保证appsecret的安全讨论1</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/24575506">接口签名之客户端如何保证appsecret的安全讨论2</a></li>
+</ul>
+</blockquote>
+<h3 id="Encryption"><a href="#Encryption" class="headerlink" title="Encryption"></a>Encryption</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43199016/article/details/106999613">接口加密入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37636884/article/details/82689849">接口加密进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lxf2323881/article/details/78845822">接口加密详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37284798/article/details/128397671">接口加密精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014294681/article/details/86599741">接口加密之https和二次加密</a></li>
+</ul>
+</blockquote>
+<h3 id="Captcha"><a href="#Captcha" class="headerlink" title="Captcha"></a>Captcha</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/XZ85201/article/details/124913874">接口安全之验证码详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Crawler"><a href="#Crawler" class="headerlink" title="Crawler"></a>Crawler</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46092061/article/details/119807084">接口安全之反爬虫详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Web（Web安全）"><a href="#Web（Web安全）" class="headerlink" title="Web（Web安全）"></a>Web（Web安全）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38936266/article/details/108520281">常见的漏洞概念</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/2201_75362610/article/details/129851907">常见的Web漏洞</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/java_collect/article/details/95019422">常见的Web攻击方式</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45996361/article/details/124348023">同源策略（sop）和跨域资源（cors）共享详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/l_ppp/article/details/106402136">同源策略入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41688840/article/details/108719837">同源策略详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43272781/article/details/104524786">同源策略之跨域方案详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/guorui_java/article/details/107345499">同源策略之jsonp原理</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43972437/article/details/107291071">同源策略之vue代理原理</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/unlilalila/article/details/121107428">跨域资源共享入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/AnitaSun/article/details/117917945">跨域资源共享详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43571641/article/details/119847981">跨域资源共享之漏洞入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46622976/article/details/128452494">跨域资源共享之漏洞详解</a></li>
+</ul>
+</blockquote>
+<p>攻击方式：sql注入、跨站脚本攻击（xss）、跨站请求伪造（csrf）<br>安全策略：同源策略（sop）<br>资源共享：跨域资源共享（cors）</p>
+<p>sql注入：Sql Injection<br>跨站脚本攻击（xss）：Cross Site Scripting<br>跨站请求伪造（csrf）： Cross-site Request Forgery<br>同源策略（sop）：Same Origin Policy<br>跨域资源共享（cors）：Cross-Origin Resource Sharing</p>
+<h3 id="Https"><a href="#Https" class="headerlink" title="Https"></a>Https</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaoming100001/article/details/81109617">Https入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/seujava_er/article/details/90018326">Https进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/scanf_linux/article/details/107614117">Https详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sarafina527/article/details/89333536">Https之握手过程图解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31442743/article/details/116199453">Https之三个随机数的作用</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/enweitech/article/details/81781405">HTTPS、SSL、TLS三者之间的联系和区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/oZhuZhiYuan/article/details/106650944">Https之中间人攻击</a></li>
+</ul>
+</blockquote>
+<h4 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013258415/article/details/77863043">抓包工具之fiddler和wireshark对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/L_980317/article/details/130332874">抓包工具之fiddler和charles对比</a></li>
+</ul>
+</blockquote>
+<h3 id="Certificate"><a href="#Certificate" class="headerlink" title="Certificate"></a>Certificate</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fuhanghang/article/details/129037600">数字证书简介</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/swadian2008/article/details/130177577">数字证书入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38425803/article/details/106730288">数字证书进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xw_classmate/article/details/109324109">数字证书详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lk2684753/article/details/100160856">数字证书精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38451161/article/details/108180919">数字证书之X509详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sky8336/article/details/113696551">数字证书之证书链详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/GDUT_xin/article/details/109307374">数字证书之CA证书和机构详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yxg520s/article/details/121358679">数字证书之支持多域名吗</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shyrainxy/article/details/108804666">数字证书之单向认证和双向认证</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/caomiao2006/article/details/23677565">数字证书之x509和pkcs的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weter_drop/article/details/108066426">数字证书之crt和key的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/itworld123/article/details/115553346">数字证书之crt和pfx的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kq1983/article/details/100680170">数字证书之crt和csr的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33745102/article/details/123280477">数字证书之crt和pem的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangh571354026/article/details/129040023">数字证书之pem和key的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yetugeng/article/details/100629159">数字证书之pem和der的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hhr603894090/article/details/108758969">数字证书之dsa和rsa的区别</a></li>
+</ul>
+</blockquote>
+<p>签名和验签</p>
+<h4 id="Tools-1"><a href="#Tools-1" class="headerlink" title="Tools"></a>Tools</h4><h5 id="KeyTool"><a href="#KeyTool" class="headerlink" title="KeyTool"></a>KeyTool</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w47_csdn/article/details/87564029">KeyTool入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/HD243608836/article/details/109105540">KeyTool进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a82514921/article/details/104588573">KeyTool详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xzlAwin/article/details/115013255">KeyTool精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kunlyy/article/details/105399255">KeyTool生成自签名证书详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chuzhanhuang0199/article/details/101055604">KeyTool之keypass和storepass的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/andy_zhang2007/article/details/78805578">KeyTool之KeyStore和TrustStore的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LawssssCat/article/details/104870347">Keytool和OpenSSL的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/NewTWG/article/details/104478220">Keytool和OpenSSL互转</a></li>
+</ul>
+</blockquote>
+<h5 id="Openssl"><a href="#Openssl" class="headerlink" title="Openssl"></a>Openssl</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zyhse/article/details/112029649">Openssl入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Mzxy_1/article/details/130252776">Openssl进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/scuyxi/article/details/54884976">Openssl详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39565764/article/details/120419199">Openssl精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_22239675/article/details/86541088">Openssl生成自签名证书详解</a></li>
+</ul>
+</blockquote>
+<h5 id="ssh-keygen"><a href="#ssh-keygen" class="headerlink" title="ssh-keygen"></a>ssh-keygen</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40932679/article/details/117487540">ssh-keygen详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MumuziD/article/details/122640155">ssh使用密钥登录入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/clover661/article/details/112796091">ssh使用密钥登录详解</a></li>
+</ul>
+</blockquote>
+<h4 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ming54ming/article/details/85067403">数字证书之Android自定义信任策略入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jiushi1995/article/details/114021074">数字证书之Android自定义信任策略详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Hijack"><a href="#Hijack" class="headerlink" title="Hijack"></a>Hijack</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45598506/article/details/117196933">运营商劫持详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/st_andrews/article/details/102947188">DNS劫持详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Pay（支付安全）"><a href="#Pay（支付安全）" class="headerlink" title="Pay（支付安全）"></a>Pay（支付安全）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/34813040">U盾原理详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/24522619">为什么支付宝不用U盾</a></li>
+</ul>
+</blockquote>
+<h1 id="Machine（机器安全）"><a href="#Machine（机器安全）" class="headerlink" title="Machine（机器安全）"></a>Machine（机器安全）</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ShiXiao0121/article/details/121596572">Linux账号管理详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42363315/article/details/116603703">Linux动态密码详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/superzlc/article/details/113873019">Linux动态口令详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_61703951/article/details/121247117">动态密码详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/grandachn/article/details/129075315">动态口令详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39761655/article/details/110864978">堡垒机详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CN_TangZheng/article/details/116705708">堡垒机之JumpServer详解</a></li>
+</ul>
+</blockquote>
+<p>动态密码 动态口令（令牌） 堡垒机（跳板机）</p>
+<h1 id="Network（网络安全）"><a href="#Network（网络安全）" class="headerlink" title="Network（网络安全）"></a>Network（网络安全）</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Amdy_amdy/article/details/82884760">网络安全入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/oopxiajun2011/article/details/106389826">网络安全进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/FFNB_666/article/details/107816671">网络安全详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jklbnm12/article/details/119255268">网安教程入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/internet_xx/article/details/119953419">网安教程进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Javachichi/article/details/125739146">网安教程详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Information（信息安全）"><a href="#Information（信息安全）" class="headerlink" title="Information（信息安全）"></a>Information（信息安全）</h1><h2 id="信息安全"><a href="#信息安全" class="headerlink" title="信息安全"></a>信息安全</h2><p>流量监控、电脑截屏、截图水印</p>
+<h2 id="代码安全"><a href="#代码安全" class="headerlink" title="代码安全"></a>代码安全</h2><p>代码混淆</p>
+<p>Android、Python（magic number）、JavaScript</p>
+<h2 id="密钥安全"><a href="#密钥安全" class="headerlink" title="密钥安全"></a>密钥安全</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chikuai9995/article/details/100723322">工程师的灵魂拷问：你的密钥安全吗</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hl449006540/article/details/96286627">密钥安全管理入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CHYabc123456hh/article/details/109568766">密钥安全管理进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Lapedius/article/details/116075151">密钥安全管理详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44161038/article/details/105130098">密钥安全管理精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/35136485">客户端如何保证密钥的安全入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/24279535">客户端如何保证密钥的安全进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30197685/article/details/104937145">客户端如何保证密钥的安全详解</a></li>
+</ul>
+</blockquote>
+<p>数据库密码、各种密钥</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>只想买包辣条</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/pay/wechatpay.jpeg" alt="朱继鹏 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># + java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/07/01/lang/lang-1-java/senior/java-3-spring-data/" rel="prev" title="spring-data">
+      <i class="fa fa-chevron-left"></i> spring-data
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/07/01/lang/lang-1-java/senior/java-5-spring-task/" rel="next" title="spring-task">
+      spring-task <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Security"><span class="nav-number">1.</span> <span class="nav-text">Security</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Theory"><span class="nav-number">1.1.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">1.2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SecureRandom"><span class="nav-number">1.2.1.</span> <span class="nav-text">SecureRandom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MessageDigest"><span class="nav-number">1.2.2.</span> <span class="nav-text">MessageDigest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cipher"><span class="nav-number">1.2.3.</span> <span class="nav-text">Cipher</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KeyGenerator"><span class="nav-number">1.2.4.</span> <span class="nav-text">KeyGenerator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KeyStore"><span class="nav-number">1.2.5.</span> <span class="nav-text">KeyStore</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question"><span class="nav-number">1.3.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E5%90%91"><span class="nav-number">1.3.1.</span> <span class="nav-text">安全有哪些方向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%9C%89%E5%93%AA%E4%BA%9B%E6%8A%80%E6%9C%AF"><span class="nav-number">1.3.2.</span> <span class="nav-text">安全有哪些技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%A4%E4%BB%A3%E6%9C%89%E5%93%AA%E4%BA%9B%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3%E7%9A%84%E6%8A%80%E6%9C%AF"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">古代有哪些安全相关的技术</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%91%E4%BB%A3%E6%9C%89%E5%93%AA%E4%BA%9B%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3%E7%9A%84%E6%8A%80%E6%9C%AF"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">近代有哪些安全相关的技术</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="nav-number">1.3.3.</span> <span class="nav-text">数字证书的主要功能</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Algorithm%EF%BC%88%E7%AE%97%E6%B3%95%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">Algorithm（算法）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Codec%EF%BC%88%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">Codec（编码算法）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Url"><span class="nav-number">2.1.1.</span> <span class="nav-text">Url</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Base64"><span class="nav-number">2.1.2.</span> <span class="nav-text">Base64</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Digest%EF%BC%88%E6%91%98%E8%A6%81%E7%AE%97%E6%B3%95%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">Digest（摘要算法）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CRC32"><span class="nav-number">2.2.1.</span> <span class="nav-text">CRC32</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MD5"><span class="nav-number">2.2.2.</span> <span class="nav-text">MD5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SHA1"><span class="nav-number">2.2.3.</span> <span class="nav-text">SHA1</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Crypto%EF%BC%88%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">Crypto（加密算法）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">2.3.1.</span> <span class="nav-text">对称加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">2.3.2.</span> <span class="nav-text">非对称加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-1"><span class="nav-number">2.3.3.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#base64%E5%92%8Cmd5%E6%98%AF%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E5%90%97"><span class="nav-number">2.3.3.1.</span> <span class="nav-text">base64和md5是加密算法吗</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Authentication%EF%BC%88%E8%AE%A4%E8%AF%81%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">Authentication（认证）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Login"><span class="nav-number">3.1.</span> <span class="nav-text">Login</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Account"><span class="nav-number">3.1.1.</span> <span class="nav-text">Account</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSO"><span class="nav-number">3.1.2.</span> <span class="nav-text">SSO</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Auth"><span class="nav-number">3.2.</span> <span class="nav-text">Auth</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie"><span class="nav-number">3.2.1.</span> <span class="nav-text">Cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session"><span class="nav-number">3.2.2.</span> <span class="nav-text">Session</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Token"><span class="nav-number">3.2.3.</span> <span class="nav-text">Token</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cloud"><span class="nav-number">3.3.</span> <span class="nav-text">Cloud</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenAPI"><span class="nav-number">3.3.1.</span> <span class="nav-text">OpenAPI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenID"><span class="nav-number">3.3.2.</span> <span class="nav-text">OpenID</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Authorization%EF%BC%88%E6%8E%88%E6%9D%83%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">Authorization（授权）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Service"><span class="nav-number">4.1.</span> <span class="nav-text">Service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OAuth2"><span class="nav-number">4.1.1.</span> <span class="nav-text">OAuth2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Database"><span class="nav-number">4.2.</span> <span class="nav-text">Database</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">4.3.</span> <span class="nav-text">Linux</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data%EF%BC%88%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">Data（数据安全）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Password"><span class="nav-number">5.1.</span> <span class="nav-text">Password</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Service%EF%BC%88%E6%9C%8D%E5%8A%A1%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">Service（服务安全）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#API%EF%BC%88%E6%8E%A5%E5%8F%A3%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">6.1.</span> <span class="nav-text">API（接口安全）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Auth-1"><span class="nav-number">6.1.1.</span> <span class="nav-text">Auth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Signature"><span class="nav-number">6.1.2.</span> <span class="nav-text">Signature</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Encryption"><span class="nav-number">6.1.3.</span> <span class="nav-text">Encryption</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Captcha"><span class="nav-number">6.1.4.</span> <span class="nav-text">Captcha</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Crawler"><span class="nav-number">6.1.5.</span> <span class="nav-text">Crawler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web%EF%BC%88Web%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">6.2.</span> <span class="nav-text">Web（Web安全）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Https"><span class="nav-number">6.2.1.</span> <span class="nav-text">Https</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Tools"><span class="nav-number">6.2.1.1.</span> <span class="nav-text">Tools</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Certificate"><span class="nav-number">6.2.2.</span> <span class="nav-text">Certificate</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Tools-1"><span class="nav-number">6.2.2.1.</span> <span class="nav-text">Tools</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#KeyTool"><span class="nav-number">6.2.2.1.1.</span> <span class="nav-text">KeyTool</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Openssl"><span class="nav-number">6.2.2.1.2.</span> <span class="nav-text">Openssl</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ssh-keygen"><span class="nav-number">6.2.2.1.3.</span> <span class="nav-text">ssh-keygen</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Android"><span class="nav-number">6.2.2.2.</span> <span class="nav-text">Android</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hijack"><span class="nav-number">6.2.3.</span> <span class="nav-text">Hijack</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pay%EF%BC%88%E6%94%AF%E4%BB%98%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">6.3.</span> <span class="nav-text">Pay（支付安全）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Machine%EF%BC%88%E6%9C%BA%E5%99%A8%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">7.</span> <span class="nav-text">Machine（机器安全）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Network%EF%BC%88%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">8.</span> <span class="nav-text">Network（网络安全）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Information%EF%BC%88%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">9.</span> <span class="nav-text">Information（信息安全）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8"><span class="nav-number">9.1.</span> <span class="nav-text">信息安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%89%E5%85%A8"><span class="nav-number">9.2.</span> <span class="nav-text">代码安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%86%E9%92%A5%E5%AE%89%E5%85%A8"><span class="nav-number">9.3.</span> <span class="nav-text">密钥安全</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="朱继鹏"
+      src="/images/avatar/zhujipeng.jpg">
+  <p class="site-author-name" itemprop="name">朱继鹏</p>
+  <div class="site-description" itemprop="description">在全栈的路上狂奔不止</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jipengzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jipengzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jipengzhu@qq.com" title="E-Mail → mailto:jipengzhu@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱继鹏</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

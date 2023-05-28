@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="spring-cloud">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring-cloud">
+<meta property="og:url" content="http://example.com/2017/07/01/lang/lang-1-java/senior/java-7-spring-cloud/index.html">
+<meta property="og:site_name" content="朱继鹏的博客">
+<meta property="og:description" content="spring-cloud">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-06-30T19:07:00.000Z">
+<meta property="article:modified_time" content="2023-05-28T11:36:33.515Z">
+<meta property="article:author" content="朱继鹏">
+<meta property="article:tag" content="+ java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2017/07/01/lang/lang-1-java/senior/java-7-spring-cloud/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>spring-cloud | 朱继鹏的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">朱继鹏的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">天道酬勤，全栈不停</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2017/07/01/lang/lang-1-java/senior/java-7-spring-cloud/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar/zhujipeng.jpg">
+      <meta itemprop="name" content="朱继鹏">
+      <meta itemprop="description" content="在全栈的路上狂奔不止">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朱继鹏的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          spring-cloud
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-07-01 03:07:00" itemprop="dateCreated datePublished" datetime="2017-07-01T03:07:00+08:00">2017-07-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-28 19:36:33" itemprop="dateModified" datetime="2023-05-28T19:36:33+08:00">2023-05-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-senior/" itemprop="url" rel="index"><span itemprop="name">+ java + senior</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">spring-cloud</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w372426096/article/details/78526591">命名服务入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/HelloCedar/article/details/109321482">命名服务进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Firehotest/article/details/70837274">命名服务详解</a></li>
+</ul>
+</blockquote>
+<h1 id="MicroService"><a href="#MicroService" class="headerlink" title="MicroService"></a>MicroService</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/j1231230/article/details/117283740">微服务组件入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/A1342772/article/details/122016394">微服务组件详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41715077/article/details/103832340">微服务网关入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lml200701158/article/details/123153378">微服务网关进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38405253/article/details/119066381">微服务网关详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hey_girl_/article/details/125021024">python微服务方案详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hey_girl_/article/details/127199059">python微服务网关详解</a></li>
+</ul>
+</blockquote>
+<p>服务治理：配置中心、注册中心、网关<br>服务调用：负载均衡<br>服务容错：熔断、降级、限流</p>
+<h2 id="Service-Management（服务治理）"><a href="#Service-Management（服务治理）" class="headerlink" title="Service Management（服务治理）"></a>Service Management（服务治理）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kiranet/article/details/117406680">微服务之配置中心对比详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42046105/article/details/123436832">微服务之注册中心对比详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39928446/article/details/116263035">微服务之Zuul和Ribbon的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45525272/article/details/125945303">微服务之Zuul和Nginx的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tyyking/article/details/82750754">微服务之Ribbon和Nginx的区别</a></li>
+</ul>
+</blockquote>
+<h2 id="Service-Invocation（服务调用）"><a href="#Service-Invocation（服务调用）" class="headerlink" title="Service Invocation（服务调用）"></a>Service Invocation（服务调用）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/songyinyi/article/details/106191656">微服务之Feign和OpenFeign的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44750696/article/details/125020260">微服务之Feign、Ribbon、Hystrix的关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_45406092/article/details/121640717">微服务之Feign和Dubbo对比入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/csdn2497242041/article/details/119875908">微服务之Feign和Dubbo对比详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36906627/article/details/104419474">微服务之Thrift和Dubbo对比详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Service-Tolerant（服务容错）"><a href="#Service-Tolerant（服务容错）" class="headerlink" title="Service Tolerant（服务容错）"></a>Service Tolerant（服务容错）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhizhengguan/article/details/120814063">微服务之降级、熔断、限流与缓存预热</a></li>
+</ul>
+</blockquote>
+<h3 id="Breaker（熔断）"><a href="#Breaker（熔断）" class="headerlink" title="Breaker（熔断）"></a>Breaker（熔断）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_27184497/article/details/119993725">微服务之降级和熔断详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43945983/article/details/84832047">微服务之隔离和熔断详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Fallback（降级）"><a href="#Fallback（降级）" class="headerlink" title="Fallback（降级）"></a>Fallback（降级）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ityouknow/article/details/81230412">微服务之降级入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44750696/article/details/125230193">微服务之降级进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/IT__learning/article/details/121712616">微服务之降级详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Limiter（限流）"><a href="#Limiter（限流）" class="headerlink" title="Limiter（限流）"></a>Limiter（限流）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zheng45/article/details/121053335">微服务之限流详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CrankZ/article/details/115152054">微服务之限流算法</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qianshangding0708/article/details/104026669">微服务之漏桶和令牌桶限流算法的区别</a></li>
+</ul>
+</blockquote>
+<h3 id="Retry（重试）"><a href="#Retry（重试）" class="headerlink" title="Retry（重试）"></a>Retry（重试）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41715077/article/details/83792542">微服务之重试详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34417408/article/details/116943097">微服务之重试算法</a></li>
+</ul>
+</blockquote>
+<h3 id="WarmUp（预热）"><a href="#WarmUp（预热）" class="headerlink" title="WarmUp（预热）"></a>WarmUp（预热）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lp19861126/article/details/117399376">微服务之预热详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Service-EventBus（服务总线）"><a href="#Service-EventBus（服务总线）" class="headerlink" title="Service EventBus（服务总线）"></a>Service EventBus（服务总线）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45606067/article/details/120115003">微服务之事件总线详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Service-Message（服务消息）"><a href="#Service-Message（服务消息）" class="headerlink" title="Service Message（服务消息）"></a>Service Message（服务消息）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cckevincyh/article/details/107624093">微服务之消息驱动入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MinggeQingchun/article/details/125422875">微服务之消息驱动进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38399962/article/details/82192340">微服务之消息驱动详解</a></li>
+</ul>
+</blockquote>
+<h1 id="ServiceMesh"><a href="#ServiceMesh" class="headerlink" title="ServiceMesh"></a>ServiceMesh</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wmq880204/article/details/111624017">微服务之ServiceMesh和SpringCloud对比</a></li>
+</ul>
+</blockquote>
+<h1 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h1><h2 id="SpringCloudAlibaba"><a href="#SpringCloudAlibaba" class="headerlink" title="SpringCloudAlibaba"></a>SpringCloudAlibaba</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000022949339">SpringCloudAlibaba详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://spring-cloud-alibaba-group.github.io/github-pages/hoxton/zh-cn/index.html">SpringCloudAlibaba文档</a></li>
+</ul>
+</blockquote>
+<h3 id="Nacos"><a href="#Nacos" class="headerlink" title="Nacos"></a>Nacos</h3><p>配置中心和注册中心</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Burnup_110/article/details/110230771">Nacos入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Top_L398/article/details/111352983">Nacos进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://nacos.io/zh-cn/docs/what-is-nacos.html">Nacos详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Sentinel"><a href="#Sentinel" class="headerlink" title="Sentinel"></a>Sentinel</h3><p>服务容错</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LeoHan163/article/details/121745164">Sentinel入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cdbdqn001/article/details/88683577">Sentinel进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/alibaba/Sentinel/wiki/%E4%BB%8B%E7%BB%8D">Sentinel详解</a></li>
+</ul>
+</blockquote>
+<h2 id="SpringCloudNetflix"><a href="#SpringCloudNetflix" class="headerlink" title="SpringCloudNetflix"></a>SpringCloudNetflix</h2><h3 id="Zuul"><a href="#Zuul" class="headerlink" title="Zuul"></a>Zuul</h3><p>网关</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44112474/article/details/109094775">Zuul入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/as_hswa/article/details/120180425">Zuul进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013277209/article/details/111196171">Zuul详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/skh2015java/article/details/120141371">Zuul配置</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/k_young1997/article/details/104100361">Zuul限流</a></li>
+</ul>
+</blockquote>
+<h3 id="Hystrix"><a href="#Hystrix" class="headerlink" title="Hystrix"></a>Hystrix</h3><p>服务容错</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38149225/article/details/109454418">Hystrix入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43700718/article/details/107366659">Hystrix进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38192427/article/details/121184221">Hystrix详解</a></li>
+</ul>
+</blockquote>
+<h2 id="SpringCloudOfficial"><a href="#SpringCloudOfficial" class="headerlink" title="SpringCloudOfficial"></a>SpringCloudOfficial</h2><h1 id="SpringNative"><a href="#SpringNative" class="headerlink" title="SpringNative"></a>SpringNative</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41354631/article/details/127847889">SpringNative入门</a></li>
+</ul>
+</blockquote>
+<h1 id="MWS"><a href="#MWS" class="headerlink" title="MWS"></a>MWS</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_58008803/article/details/122190997">美团服务平台MWS详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MeituanTech/article/details/100933270">美团容器调度平台 Hulk</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MeituanTech/article/details/123564403">美团服务发布平台 Plus</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MeituanTech/article/details/114683799">美团服务治理平台 OCTO</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MeituanTech/article/details/82495858">美团服务网关平台 Oceanus</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/nikeylee/article/details/117712209">美团服务监控平台 Cat</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_18603599/article/details/80767920">美团链路追踪 MTrace</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/minkeyto/article/details/104943883">美团全局ID Leaf</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shijinghan1126/article/details/110871920">美团KV存储 Squirrel</a></li>
+<li><a target="_blank" rel="noopener" href="https://tech.meituan.com/archives">美团命名服务 MNS</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/43122658">美团环境管理 Cargo</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>美团容器调度平台 Hulk</li>
+<li>美团服务发布平台 Plus</li>
+<li>美团服务治理平台 OCTO</li>
+<li>美团服务网关平台 Oceanus</li>
+<li>美团服务配置平台 MCC、Lion</li>
+<li>美团服务监控平台 Cat</li>
+<li>美团服务告警平台 Raptor</li>
+<li>美团任务调度平台 Crane</li>
+<li>美团链路追踪 MTrace</li>
+<li>美团全局ID Leaf</li>
+<li>美团KV存储 Squirrel、Cellar</li>
+<li>美团项目管理 Avatar</li>
+<li>美团环境管理 Cargo</li>
+<li>美团命名服务 MNS</li>
+<li>美团移动端推送服务 Pike</li>
+<li>美团移动端长链接 Shark</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>只想买包辣条</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/pay/wechatpay.jpeg" alt="朱继鹏 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># + java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/07/01/lang/lang-1-java/senior/java-6-spring-message/" rel="prev" title="spring-message">
+      <i class="fa fa-chevron-left"></i> spring-message
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/07/01/lang/lang-1-java/senior/java-8-mysql/" rel="next" title="mysql">
+      mysql <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MicroService"><span class="nav-number">1.</span> <span class="nav-text">MicroService</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Service-Management%EF%BC%88%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">Service Management（服务治理）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service-Invocation%EF%BC%88%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">Service Invocation（服务调用）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service-Tolerant%EF%BC%88%E6%9C%8D%E5%8A%A1%E5%AE%B9%E9%94%99%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">Service Tolerant（服务容错）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Breaker%EF%BC%88%E7%86%94%E6%96%AD%EF%BC%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">Breaker（熔断）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fallback%EF%BC%88%E9%99%8D%E7%BA%A7%EF%BC%89"><span class="nav-number">1.3.2.</span> <span class="nav-text">Fallback（降级）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Limiter%EF%BC%88%E9%99%90%E6%B5%81%EF%BC%89"><span class="nav-number">1.3.3.</span> <span class="nav-text">Limiter（限流）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Retry%EF%BC%88%E9%87%8D%E8%AF%95%EF%BC%89"><span class="nav-number">1.3.4.</span> <span class="nav-text">Retry（重试）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WarmUp%EF%BC%88%E9%A2%84%E7%83%AD%EF%BC%89"><span class="nav-number">1.3.5.</span> <span class="nav-text">WarmUp（预热）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service-EventBus%EF%BC%88%E6%9C%8D%E5%8A%A1%E6%80%BB%E7%BA%BF%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">Service EventBus（服务总线）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service-Message%EF%BC%88%E6%9C%8D%E5%8A%A1%E6%B6%88%E6%81%AF%EF%BC%89"><span class="nav-number">1.5.</span> <span class="nav-text">Service Message（服务消息）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ServiceMesh"><span class="nav-number">2.</span> <span class="nav-text">ServiceMesh</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringCloud"><span class="nav-number">3.</span> <span class="nav-text">SpringCloud</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringCloudAlibaba"><span class="nav-number">3.1.</span> <span class="nav-text">SpringCloudAlibaba</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nacos"><span class="nav-number">3.1.1.</span> <span class="nav-text">Nacos</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sentinel"><span class="nav-number">3.1.2.</span> <span class="nav-text">Sentinel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringCloudNetflix"><span class="nav-number">3.2.</span> <span class="nav-text">SpringCloudNetflix</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Zuul"><span class="nav-number">3.2.1.</span> <span class="nav-text">Zuul</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hystrix"><span class="nav-number">3.2.2.</span> <span class="nav-text">Hystrix</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringCloudOfficial"><span class="nav-number">3.3.</span> <span class="nav-text">SpringCloudOfficial</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringNative"><span class="nav-number">4.</span> <span class="nav-text">SpringNative</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MWS"><span class="nav-number">5.</span> <span class="nav-text">MWS</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="朱继鹏"
+      src="/images/avatar/zhujipeng.jpg">
+  <p class="site-author-name" itemprop="name">朱继鹏</p>
+  <div class="site-description" itemprop="description">在全栈的路上狂奔不止</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jipengzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jipengzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jipengzhu@qq.com" title="E-Mail → mailto:jipengzhu@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱继鹏</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
