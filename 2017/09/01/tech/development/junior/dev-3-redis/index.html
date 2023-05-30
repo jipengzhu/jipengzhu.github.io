@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis">
+<meta property="og:url" content="http://example.com/2017/09/01/tech/development/junior/dev-3-redis/index.html">
+<meta property="og:site_name" content="朱继鹏的博客">
+<meta property="og:description" content="redis">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-08-31T17:03:00.000Z">
+<meta property="article:modified_time" content="2023-05-30T10:15:20.233Z">
+<meta property="article:author" content="朱继鹏">
+<meta property="article:tag" content="+ dev">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2017/09/01/tech/development/junior/dev-3-redis/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>redis | 朱继鹏的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">朱继鹏的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">天道酬勤，全栈不停</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2017/09/01/tech/development/junior/dev-3-redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar/zhujipeng.jpg">
+      <meta itemprop="name" content="朱继鹏">
+      <meta itemprop="description" content="在全栈的路上狂奔不止">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朱继鹏的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          redis
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-01 01:03:00" itemprop="dateCreated datePublished" datetime="2017-09-01T01:03:00+08:00">2017-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-30 18:15:20" itemprop="dateModified" datetime="2023-05-30T18:15:20+08:00">2023-05-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/skill-dev-junior/" itemprop="url" rel="index"><span itemprop="name">+ skill + dev + junior</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">redis</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/salyty/article/details/83106237">kv存储系统详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/S_ZaiJiangHu/article/details/127261008">Redis全版本之RedisMod</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/caijunsen/article/details/116482230">Ehcache、Memcached、Redis对比入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lonelymanontheway/article/details/104534221">Ehcache、Memcached、Redis对比详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cuidiwhere/article/details/102764336">Redis和Tair对比入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chengbinbbs/article/details/98874487">Redis和Tair对比详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42319496/article/details/119944511">Redis和LevelDB对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tzdjzs/article/details/20838945">RocksDB和LevelDB对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35423154/article/details/123808990">LevelDB详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44607611/article/details/113742388">RocksDB详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Tutorial"><a href="#Tutorial" class="headerlink" title="Tutorial"></a>Tutorial</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hellozpc/article/details/81267030">redis入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38327769/article/details/123984695">redis进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44981707/article/details/115610686">redis详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45683550/article/details/122565733">redis精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/agonie201218/article/details/123640871">redis场景</a></li>
+</ul>
+</blockquote>
+<h2 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w15558056319/article/details/121414742">redis配置入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45988641/article/details/118328708">redis配置详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Command"><a href="#Command" class="headerlink" title="Command"></a>Command</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/luna_a/article/details/107292994">Redis命令入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44794280/article/details/123557566">Redis命令详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h1><h2 id="Type"><a href="#Type" class="headerlink" title="Type"></a>Type</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46460843/article/details/119088112">redis数据类型入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43246215/article/details/108041739">redis数据类型详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yongbutingxide/article/details/122608661">redis数据类型原理</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45901741/article/details/113885961">redis数据类型结构</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Muscleape/article/details/105910512">redis数据类型编码</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39809613/article/details/100146081">redis数据类型之embstr界限</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wuyujin1997/article/details/106267676">redis之key命名规范</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43944305/article/details/124446227">redis之hash元素过期方案</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_48826531/article/details/125717224">redis之set元素过期方案</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>String<ul>
+<li>Structure：sds</li>
+<li>Encoding<ul>
+<li>REDIS_ENCODING_INT：当数据是整数时</li>
+<li>REDIS_ENCODING_EMBSTR：当数据是字符串且长度小于44（3.0之前是39）个字节时</li>
+<li>REDIS_ENCODING_RAW：当数据是字符串且长度大于44（3.0之前是39）个字节时</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>List<ul>
+<li>Structure：ziplist、linkedlist、quicklist</li>
+<li>Encoding<ul>
+<li>REDIS_ENCODING_ZIPLIST：redis3.2之前，默认的编码</li>
+<li>REDIS_ENCODING_LINKEDLIST：redis3.2之前，当元素大小大于配置的list-max-ziplist-value（默认64）或元素个数大于配置的list-max-ziplist-entries（默认512）时使用此编码</li>
+<li>REDIS_ENCODING_QUICKLIST：redis3.2之后使用此编码</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Hash<ul>
+<li>Structure：ziplist、hashtable</li>
+<li>Encoding<ul>
+<li>REDIS_ENCODING_ZIPLIST：默认的编码</li>
+<li>REDIS_ENCODING_HT：当元素大小大于配置的hash-max-ziplist-value（默认64）或元素个数大于配置的hash-max-ziplist-entries（默认512）时使用此编码</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Set<ul>
+<li>Structure：intset、hashtable</li>
+<li>Encoding<ul>
+<li>REDIS_ENCODING_INTSET：当元素类型是整数时</li>
+<li>REDIS_ENCODING_HT：当元素类型不是整数时或元素个数大于配置的set-max-intset-entries（默认512）时使用此编码</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Zset<ul>
+<li>Structure：</li>
+<li>Encoding：<ul>
+<li>REDIS_ENCODING_ZIPLIST：默认的编码</li>
+<li>REDIS_ENCODING_SKIPLIST：当元素大小大于配置的zset-max-ziplist-value（默认64）或元素个数大于配置的zset-max-ziplist-entries（默认128）时使用此编码</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_22903841/article/details/113531818">redis数据类型之String命令详解</a></li>
+</ul>
+</blockquote>
+<h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ETalien_/article/details/107334967">redis数据类型之List命令详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/pengjunlee/article/details/78838262">redis数据类型之Hash命令详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/gymaisyl/article/details/99718163">redis数据类型之Set命令详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Zset"><a href="#Zset" class="headerlink" title="Zset"></a>Zset</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36109528/article/details/120945672">redis数据类型之Zset命令详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Geo"><a href="#Geo" class="headerlink" title="Geo"></a>Geo</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/baichrn/article/details/119246304">redis类型之geo入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mrlin6688/article/details/111194172">redis类型之geo进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/myli_binbin/article/details/121334710">redis类型之geo详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Ip"><a href="#Ip" class="headerlink" title="Ip"></a>Ip</h3><p>可以参考mysql篇</p>
+<h3 id="Bitmap"><a href="#Bitmap" class="headerlink" title="Bitmap"></a>Bitmap</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46794373/article/details/109199618">redis数据类型之Bitmap详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/truelove12358/article/details/106698085">Bitmap详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Qgf_666/article/details/88580919">Bitmap应用</a></li>
+</ul>
+</blockquote>
+<h3 id="BloomFilter"><a href="#BloomFilter" class="headerlink" title="BloomFilter"></a>BloomFilter</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41125219/article/details/119982158">redis数据类型之BloomFilter（布隆过滤器）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/minghao0508/article/details/124313066">BloomFilter入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42393929/article/details/112438183">BloomFilter进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38571892/article/details/123503418">BloomFilter详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41125219/article/details/119982158">BloomFilter使用</a></li>
+<li><a target="_blank" rel="noopener" href="https://tianyalei.blog.csdn.net/article/details/74721877">BloomFilter误判</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42425970/article/details/102532185">BloomFilter之url去重的几种方式入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38759383/article/details/125283029">BloomFilter之url去重的几种方式详解</a></li>
+</ul>
+</blockquote>
+<p>布隆过滤器使用场景和问题</p>
+<ul>
+<li>过滤场景（黑名单）：由于（黑名单）布隆过滤器存在性判断会误判的原因，会导致部分正常的被丢弃<ul>
+<li>垃圾邮件过滤：由于误判会将一小部分正常邮件判定为垃圾邮件，从而导致用户的正常邮件被丢弃或进入垃圾箱</li>
+<li>爬虫地址去重：由于误判会将一小部分没有抓取过的网页判断为抓取过，从而导致这部分网页不能被抓取到系统</li>
+<li>新闻推荐去重：由于误判会将一小部分没有推送过的新闻判断为推送过，从而导致这部分新闻不能被推送到用户</li>
+</ul>
+</li>
+<li>筛选场景（白名单）：由于（白名单）布隆过滤器存在性判断会误判的原因，会导致部分异常的被通过<ul>
+<li>缓存穿透解决：由于误判会将一小部分不存在的key判定为存在，从而穿透缓存</li>
+<li>非法攻击防御：HBase\RocksDB\LevelDB等数据库内置布隆过滤器，用于判断数据是否存在，可以减少数据库的IO请求</li>
+</ul>
+</li>
+</ul>
+<h2 id="Expire"><a href="#Expire" class="headerlink" title="Expire"></a>Expire</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://dongshao.blog.csdn.net/article/details/106022331">redis过期命令详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chinesesoftware/article/details/122562887">redis过期策略详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Eliminate"><a href="#Eliminate" class="headerlink" title="Eliminate"></a>Eliminate</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37286668/article/details/110631680">redis淘汰策略入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/crazymakercircle/article/details/115360829">redis淘汰策略详解</a></li>
+</ul>
+</blockquote>
+<p>LRU（Least Recently Used）：最久未使用算法，基于时间，淘汰闲置时间最长的数据<br>LFU（Least Frequently Used）：最少使用算法，基于频率，淘汰使用频率最低的数据</p>
+<h2 id="Stream"><a href="#Stream" class="headerlink" title="Stream"></a>Stream</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/li_w_ch/article/details/110638434">redis高级功能之Stream（消息队列）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_56252652/article/details/117884303">redis消息队列的三种方案</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012060033/article/details/116257400">redis为什么不适合做消息队列</a></li>
+</ul>
+</blockquote>
+<h2 id="PubSub"><a href="#PubSub" class="headerlink" title="PubSub"></a>PubSub</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41125219/article/details/120299819">redis高级功能之PubSub（发布和订阅）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33708432/article/details/92531146">redis掉线重连（java版）</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/one_and_only4711/article/details/108061526">redis掉线重连（python版）</a></li>
+</ul>
+</blockquote>
+<h1 id="Transaction"><a href="#Transaction" class="headerlink" title="Transaction"></a>Transaction</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/FlatTiger/article/details/113752059">redis事务入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43520450/article/details/107548277">redis事务详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Skying_/article/details/117929171">redis事务（Transaction）和管道（Pipeline）</a></li>
+</ul>
+</blockquote>
+<h2 id="Durability"><a href="#Durability" class="headerlink" title="Durability"></a>Durability</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43064185/article/details/122035596">redis之RDB和AOF详解</a></li>
+</ul>
+</blockquote>
+<h3 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ctwctw/article/details/105147277">redis之RDB详解</a></li>
+</ul>
+</blockquote>
+<h3 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44743841/article/details/107915188">redis之AOF详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><h2 id="缓存失效"><a href="#缓存失效" class="headerlink" title="缓存失效"></a>缓存失效</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tszc95/article/details/128999587">缓存穿透、击穿、雪崩详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wx1528159409/article/details/88357728">缓存穿透和布隆过滤器入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/W1sper/article/details/119459257">缓存穿透和布隆过滤器详解</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>缓存穿透：不存在的key（布隆过滤器、缓存空值、接口校验、防火墙拉黑恶意攻击）</li>
+<li>缓存击穿：单个热点key失效了（热点key永不过期、加互斥锁、监控热点key并延长过期时间）</li>
+<li>缓存雪崩：大量key同时失效了（过期时间随机、加互斥锁、监控热点key并延长过期时间）</li>
+</ul>
+<h2 id="缓存一致性"><a href="#缓存一致性" class="headerlink" title="缓存一致性"></a>缓存一致性</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhizhengguan/article/details/121275331">CPU缓存一致性入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/youzhangjing_/article/details/124106900">CPU缓存一致性详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a3961401/article/details/111655856">redis缓存一致性入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44129618/article/details/122358133">redis缓存一致性进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010180738/article/details/105786711">redis缓存一致性详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_70651612/article/details/125522473">redis缓存一致性精进</a></li>
+</ul>
+</blockquote>
+<h3 id="脏数据问题"><a href="#脏数据问题" class="headerlink" title="脏数据问题"></a>脏数据问题</h3><ol>
+<li>先删除缓存再更新数据库：A del cache &#x3D;&gt; A update db &#x3D;&gt; B read db &#x3D;&gt; B update cache</li>
+<li>先删除缓存再更新数据库：A del cache &#x3D;&gt; B read db &#x3D;&gt; B update cache &#x3D;&gt; A update db</li>
+<li>先删除缓存再更新数据库：A del cache &#x3D;&gt; B read db &#x3D;&gt; A update db &#x3D;&gt; B update cache</li>
+<li>先更新数据库再删除缓存：B read db &#x3D;&gt; B update cache &#x3D;&gt; A update db &#x3D;&gt; A del cache</li>
+<li>先更新数据库再删除缓存：B read db &#x3D;&gt; A update db &#x3D;&gt; B update cache &#x3D;&gt; A del cache</li>
+<li>先更新数据库再删除缓存：B read db &#x3D;&gt; A update db &#x3D;&gt; A del cache &#x3D;&gt; B update cache</li>
+</ol>
+<p>总结：情况2、3、6会产生缓存脏数据，只要 B read db 发生在 A update db 之前，且B update cache 发生在 A del cache之后就会产生缓存脏数据，但是情况6的发生概率比较低（因为B update cache比A update db快，B update cache一般不会晚于A update db完成，所以先更新数据库再删除缓存出现情况4的概率比较高）</p>
+<h2 id="数据丢失"><a href="#数据丢失" class="headerlink" title="数据丢失"></a>数据丢失</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/real_myth/article/details/52582739">redis数据丢失详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yangbindxj/article/details/123199039">redis性能优化1</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/smartbetter/article/details/97971151">redis性能优化2</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/guotianqing/article/details/114398036">redis性能优化3</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wf_feng/article/details/121046703">redis性能优化4</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44259720/article/details/127620232">redis性能优化5</a></li>
+</ul>
+</blockquote>
+<h2 id="Redis为什么这么快"><a href="#Redis为什么这么快" class="headerlink" title="Redis为什么这么快"></a>Redis为什么这么快</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hollis_chuang/article/details/118865058">redis为什么这么快入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDN2497242041/article/details/120755188">redis为什么这么快进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35190492/article/details/122293594">redis为什么这么快详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Redis为什么QPS这么高"><a href="#Redis为什么QPS这么高" class="headerlink" title="Redis为什么QPS这么高"></a>Redis为什么QPS这么高</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38461724/article/details/107205416">Redis为什么QPS这么高入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/singwhatiwanna/article/details/108543949">Redis为什么QPS这么高进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zzti_erlie/article/details/113429308">Redis为什么QPS这么高详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Redis为什么要引入多线程"><a href="#Redis为什么要引入多线程" class="headerlink" title="Redis为什么要引入多线程"></a>Redis为什么要引入多线程</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shijinghan1126/article/details/117329849">Redis为什么要引入多线程</a></li>
+</ul>
+</blockquote>
+<h2 id="Redis键名长度和性能"><a href="#Redis键名长度和性能" class="headerlink" title="Redis键名长度和性能"></a>Redis键名长度和性能</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_17231297/article/details/106622060">Redis键名长度和性能</a></li>
+</ul>
+</blockquote>
+<h2 id="Redis大key问题排查"><a href="#Redis大key问题排查" class="headerlink" title="Redis大key问题排查"></a>Redis大key问题排查</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36642528/article/details/111238496">Redis大key问题排查</a></li>
+</ul>
+</blockquote>
+<h1 id="Availability"><a href="#Availability" class="headerlink" title="Availability"></a>Availability</h1><h2 id="Replication"><a href="#Replication" class="headerlink" title="Replication"></a>Replication</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Cantevenl/article/details/115839649">redis主从复制详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a745233700/article/details/112404218">redis主从复制原理</a></li>
+</ul>
+</blockquote>
+<h2 id="Cluster"><a href="#Cluster" class="headerlink" title="Cluster"></a>Cluster</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/NF_ALONG/article/details/128881323">redis集群方案入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Seky_fei/article/details/107239765">redis集群方案详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44422604/article/details/108133908">redis之一致性hash</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44642403/article/details/118885921">redis集群搭建和使用</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/men_wen/article/details/72896682">redis集群扩容和收缩</a></li>
+</ul>
+</blockquote>
+<h1 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h1><h2 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fuzhongmin05/article/details/119251590">Redis分布式锁入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42201180/article/details/129336925">redis分布式锁进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/asd051377305/article/details/108384490">redis分布式锁详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a184477587/article/details/114454415">redis分布式锁分类</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Weixiaohuai/article/details/116293762">redis分布式锁之红锁</a></li>
+</ul>
+</blockquote>
+<h1 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhutianrong520/article/details/102715414">redis为什么用跳表而不是红黑树详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Micro_Micro_Hard/article/details/127758524">redis之跳表和红黑树对比</a></li>
+</ul>
+</blockquote>
+<h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><h2 id="Management"><a href="#Management" class="headerlink" title="Management"></a>Management</h2><h3 id="Visual"><a href="#Visual" class="headerlink" title="Visual"></a>Visual</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w8y56f/article/details/120224720">redis可视化客户端推荐1</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tester_runing/article/details/106119249">redis可视化客户端推荐2</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/afreon/article/details/123815203">redis可视化客户端推荐3</a></li>
+</ul>
+</blockquote>
+<h3 id="Monitor"><a href="#Monitor" class="headerlink" title="Monitor"></a>Monitor</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wyouwd1/article/details/124719811">redis监控指标</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_38039437/article/details/96479174">redis监控命令</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33697094/article/details/122618943">redis监控入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_48380416/article/details/125435608">redis监控进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yangbindxj/article/details/123184787">redis监控详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37668842/article/details/82145356">redis自带工具入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41453285/article/details/106052698">redis自带工具详解</a></li>
+</ul>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>只想买包辣条</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/pay/wechatpay.jpeg" alt="朱继鹏 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/dev/" rel="tag"># + dev</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/09/01/tech/development/junior/dev-2-mongodb/" rel="prev" title="mongodb">
+      <i class="fa fa-chevron-left"></i> mongodb
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/09/01/tech/development/junior/dev-4-mq/" rel="next" title="mq">
+      mq <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tutorial"><span class="nav-number">1.1.</span> <span class="nav-text">Tutorial</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config"><span class="nav-number">1.2.</span> <span class="nav-text">Config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Command"><span class="nav-number">1.3.</span> <span class="nav-text">Command</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Usage"><span class="nav-number">2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Type"><span class="nav-number">2.1.</span> <span class="nav-text">Type</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String"><span class="nav-number">2.1.1.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#List"><span class="nav-number">2.1.2.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash"><span class="nav-number">2.1.3.</span> <span class="nav-text">Hash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set"><span class="nav-number">2.1.4.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zset"><span class="nav-number">2.1.5.</span> <span class="nav-text">Zset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Geo"><span class="nav-number">2.1.6.</span> <span class="nav-text">Geo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ip"><span class="nav-number">2.1.7.</span> <span class="nav-text">Ip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bitmap"><span class="nav-number">2.1.8.</span> <span class="nav-text">Bitmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BloomFilter"><span class="nav-number">2.1.9.</span> <span class="nav-text">BloomFilter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Expire"><span class="nav-number">2.2.</span> <span class="nav-text">Expire</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eliminate"><span class="nav-number">2.3.</span> <span class="nav-text">Eliminate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stream"><span class="nav-number">2.4.</span> <span class="nav-text">Stream</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PubSub"><span class="nav-number">2.5.</span> <span class="nav-text">PubSub</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transaction"><span class="nav-number">3.</span> <span class="nav-text">Transaction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Durability"><span class="nav-number">3.1.</span> <span class="nav-text">Durability</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RDB"><span class="nav-number">3.1.1.</span> <span class="nav-text">RDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOF"><span class="nav-number">3.1.2.</span> <span class="nav-text">AOF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem"><span class="nav-number">4.</span> <span class="nav-text">Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%A4%B1%E6%95%88"><span class="nav-number">4.1.</span> <span class="nav-text">缓存失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">4.2.</span> <span class="nav-text">缓存一致性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%8F%E6%95%B0%E6%8D%AE%E9%97%AE%E9%A2%98"><span class="nav-number">4.2.1.</span> <span class="nav-text">脏数据问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1"><span class="nav-number">4.3.</span> <span class="nav-text">数据丢失</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Performance"><span class="nav-number">5.</span> <span class="nav-text">Performance</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E5%BF%AB"><span class="nav-number">5.1.</span> <span class="nav-text">Redis为什么这么快</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E4%B8%BA%E4%BB%80%E4%B9%88QPS%E8%BF%99%E4%B9%88%E9%AB%98"><span class="nav-number">5.2.</span> <span class="nav-text">Redis为什么QPS这么高</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BC%95%E5%85%A5%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">5.3.</span> <span class="nav-text">Redis为什么要引入多线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E9%94%AE%E5%90%8D%E9%95%BF%E5%BA%A6%E5%92%8C%E6%80%A7%E8%83%BD"><span class="nav-number">5.4.</span> <span class="nav-text">Redis键名长度和性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E5%A4%A7key%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5"><span class="nav-number">5.5.</span> <span class="nav-text">Redis大key问题排查</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Availability"><span class="nav-number">6.</span> <span class="nav-text">Availability</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Replication"><span class="nav-number">6.1.</span> <span class="nav-text">Replication</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster"><span class="nav-number">6.2.</span> <span class="nav-text">Cluster</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Application"><span class="nav-number">7.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lock"><span class="nav-number">7.1.</span> <span class="nav-text">Lock</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theory"><span class="nav-number">8.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Management"><span class="nav-number">9.1.</span> <span class="nav-text">Management</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual"><span class="nav-number">9.1.1.</span> <span class="nav-text">Visual</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monitor"><span class="nav-number">9.1.2.</span> <span class="nav-text">Monitor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tools"><span class="nav-number">9.1.3.</span> <span class="nav-text">Tools</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="朱继鹏"
+      src="/images/avatar/zhujipeng.jpg">
+  <p class="site-author-name" itemprop="name">朱继鹏</p>
+  <div class="site-description" itemprop="description">在全栈的路上狂奔不止</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jipengzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jipengzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jipengzhu@qq.com" title="E-Mail → mailto:jipengzhu@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱继鹏</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

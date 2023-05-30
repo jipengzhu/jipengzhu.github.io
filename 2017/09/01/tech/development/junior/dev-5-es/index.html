@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="es">
+<meta property="og:type" content="article">
+<meta property="og:title" content="es">
+<meta property="og:url" content="http://example.com/2017/09/01/tech/development/junior/dev-5-es/index.html">
+<meta property="og:site_name" content="朱继鹏的博客">
+<meta property="og:description" content="es">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-08-31T17:05:00.000Z">
+<meta property="article:modified_time" content="2023-05-30T10:15:20.237Z">
+<meta property="article:author" content="朱继鹏">
+<meta property="article:tag" content="+ dev">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2017/09/01/tech/development/junior/dev-5-es/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>es | 朱继鹏的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">朱继鹏的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">天道酬勤，全栈不停</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2017/09/01/tech/development/junior/dev-5-es/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar/zhujipeng.jpg">
+      <meta itemprop="name" content="朱继鹏">
+      <meta itemprop="description" content="在全栈的路上狂奔不止">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朱继鹏的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          es
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-01 01:05:00" itemprop="dateCreated datePublished" datetime="2017-09-01T01:05:00+08:00">2017-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-30 18:15:20" itemprop="dateModified" datetime="2023-05-30T18:15:20+08:00">2023-05-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/skill-dev-junior/" itemprop="url" rel="index"><span itemprop="name">+ skill + dev + junior</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">es</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/UbuntuTouch/article/details/98871531">ElasticSearch详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Jaccccck/article/details/130104268">OpenSearch详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wbsu2004/article/details/122836549">MeiliSaerch详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_16494381/article/details/123640165">RediSearch详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41832850/article/details/103201633">ElasticSearch和Solr对比入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yb546822612/article/details/103196486">ElasticSearch和Solr对比详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37871594/article/details/109521668">es入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Huang_ZX_259/article/details/123076305">es进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/aibo_yyds/article/details/120081333">es详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CY19980216/article/details/109212087">es教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_26803795/article/details/106522611">es分词</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40125653/article/details/103953611">es新特性入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/laoyang360/article/details/130037089">es新特性进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/star1210644725/article/details/125437649">es新特性详解</a></li>
+</ul>
+</blockquote>
+<h2 id="DDL（Data-Definition-Language）"><a href="#DDL（Data-Definition-Language）" class="headerlink" title="DDL（Data Definition Language）"></a>DDL（Data Definition Language）</h2><h3 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yangchao1125/article/details/115935791">es之index入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_38030719/article/details/109103650">es之index进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41297324/article/details/83758033">es之index详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tengxing007/article/details/100663530">es之index和doc_type对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fy_java1995/article/details/106591112">es之doc_type原理</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hanjun0612/article/details/123063489">es之doc_type废弃</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xulong5000/article/details/118764369">es命名规范</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/youzhiji/article/details/122319497">文件名命名规范</a></li>
+</ul>
+</blockquote>
+<h3 id="Type"><a href="#Type" class="headerlink" title="Type"></a>Type</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/aben_sky/article/details/121515175">es数据类型入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36551991/article/details/108858361">es数据类型详解</a></li>
+</ul>
+</blockquote>
+<h4 id="datetime"><a href="#datetime" class="headerlink" title="datetime"></a>datetime</h4><h5 id="datatime"><a href="#datatime" class="headerlink" title="datatime"></a>datatime</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wlei0618/article/details/123712605">es时间问题详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/love1793912554/article/details/103985950">es时间中的T和Z</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LJFPHP/article/details/89445339">es时间范围查询</a></li>
+</ul>
+</blockquote>
+<h5 id="timezone"><a href="#timezone" class="headerlink" title="timezone"></a>timezone</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_23160237/article/details/88323822">es时区问题入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28988969/article/details/103498476">es时区问题进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lijingjingchn/article/details/106925871">es时区问题详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://discuss.elastic.co/t/elasticsearch-query-range-with-timezone-is-not-working/250877">es时区和范围查询入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://discuss.elastic.co/t/elasticsearch-date-rangequery-affected-by-timezone/43225">es时区和范围查询详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Template"><a href="#Template" class="headerlink" title="Template"></a>Template</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yyuggjggg/article/details/122476638">es索引模板入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44692700/article/details/122160837">es索引模板进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiangjai/article/details/109102294">es索引模板详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangguoqing_it/article/details/121389167">es动态模板详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq330983778/article/details/103625290">es查询模板详解</a></li>
+</ul>
+</blockquote>
+<h4 id="mappings"><a href="#mappings" class="headerlink" title="mappings"></a>mappings</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41188291/article/details/108136165">es模板映射详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32165041/article/details/83688593">es模板映射之fields入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/vincent_duan/article/details/103969127">es模板映射之fields详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a745233700/article/details/117915118">es模板映射之config入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/napoay/article/details/62233031">es模板映射之config详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/pony_maggie/article/details/113617710">es模板映射之_source详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jiao_fuyou/article/details/49800969">es模板映射之_all详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40123451/article/details/120061263">es模板映射之index参数详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lijingjingchn/article/details/105682618">es模板映射之store参数入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liyantianmin/article/details/52531310">es模板映射之store参数详解</a></li>
+</ul>
+</blockquote>
+<h4 id="settings"><a href="#settings" class="headerlink" title="settings"></a>settings</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_48990070/article/details/120342792">es模板设置详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Analyzer"><a href="#Analyzer" class="headerlink" title="Analyzer"></a>Analyzer</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_26803795/article/details/106522611">es分词入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40612128/article/details/123476053">es分词进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31960623/article/details/119811859">es分词详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ZYC88888/article/details/83620572">es分词精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36546319/article/details/115375003">es分词之解决默认不按照下划线分词的方法</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jsloveyou/article/details/117282922">es分词之下划线和连字符（中划线）的区别入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41570658/article/details/108247274">es分词之下划线和连字符（中划线）的区别进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/loblab/article/details/125713749">es分词之下划线和连字符（中划线）的区别详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://elasticsearch.cn/question/5203">es分词之keyword和not_analyzed的区别</a></li>
+</ul>
+</blockquote>
+<h3 id="Alias"><a href="#Alias" class="headerlink" title="Alias"></a>Alias</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Weixiaohuai/article/details/124745320">es别名（alias）入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDN_WYL2016/article/details/117717224">es别名（alias）进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wlei0618/article/details/125363206">es别名（alias）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/index-aliases.html">es别名（alias）精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_27818541/article/details/121578814">es别名（alias）写入</a></li>
+</ul>
+</blockquote>
+<h3 id="Reindex"><a href="#Reindex" class="headerlink" title="Reindex"></a>Reindex</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_21383435/article/details/108953326">es之索引重建（Reindex）入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/winterking3/article/details/108242124">es之索引重建（Reindex）进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w1014074794/article/details/120483334">es之索引重建（Reindex）详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Rollover"><a href="#Rollover" class="headerlink" title="Rollover"></a>Rollover</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Norman_Hu/article/details/89917569">es之索引按日期分割入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a_nuo/article/details/121712137">es之索引按日期分割详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43820556/article/details/122072407">es之索引翻滚（rollover）入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Lyncai/article/details/120074968">es之索引翻滚（rollover）进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ubuntutouch/article/details/102670918">es之索引翻滚（rollover）详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Lifecycle"><a href="#Lifecycle" class="headerlink" title="Lifecycle"></a>Lifecycle</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hellozhxy/article/details/117551755">es之索引按冷热分离入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w1014074794/article/details/120665378">es之索引按冷热分离详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ubuntutouch/article/details/102728987">es之索引生命周期（lifecycle）入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/feifuzeng/article/details/108270021">es之索引生命周期（lifecycle）进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Lyncai/article/details/120066823">es之索引生命周期（lifecycle）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/laoyang360/article/details/117408365">es之索引生命周期（lifecycle）精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/laoyang360/article/details/122531708">es之索引生命周期（lifecycle）避坑</a></li>
+</ul>
+</blockquote>
+<h3 id="Snapshot"><a href="#Snapshot" class="headerlink" title="Snapshot"></a>Snapshot</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/My__CSDN/article/details/129881702">es之索引备份（snapshot）入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_16164711/article/details/123209413">es之索引备份（snapshot）进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44006354/article/details/103768077">es之索引备份（snapshot）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/backing-up-your-cluster.html">es之索引备份（snapshot）精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35008624/article/details/99676124">es之索引备份（snapshot）迁移</a></li>
+</ul>
+</blockquote>
+<h2 id="DML（Data-Manipulation-Language）"><a href="#DML（Data-Manipulation-Language）" class="headerlink" title="DML（Data Manipulation Language）"></a>DML（Data Manipulation Language）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42697271/article/details/119455896">es之post和put的区别入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sundenskyqq/article/details/105058854">es之post和put的区别详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaoyu_BD/article/details/81914567">es之各种insert的区别1</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/TreeCode/article/details/120556179">es之各种insert的区别2</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28988969/article/details/104016579">es之各种insert的区别3</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w1014074794/article/details/121226368">es之脚本操作</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39723544/article/details/109237175">es之批量操作</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>insert：插入<ul>
+<li>insertOrReject：不存在就插入，存在时就拒绝</li>
+<li>insertOrIgnore：不存在就插入，存在时就忽略</li>
+<li>insertOrUpdate：不存在就插入，存在时就更新</li>
+<li>insertOrReplace：不存在就插入，存在时就替换</li>
+</ul>
+</li>
+<li>update（modify）：（部分）更新（修改）<ul>
+<li>updateOrReject：存在时就更新，不存在就拒绝（不常见） </li>
+<li>updateOrIgnore：存在时就更新，不存在就忽略</li>
+<li>updateOrInsert：存在时就更新，不存在就插入（等同于insertOrUpdate）</li>
+</ul>
+</li>
+<li>replace（modify）：（整体）替换（修改）<ul>
+<li>replaceOrReject：存在时就替换，不存在就拒绝（不常见）</li>
+<li>replaceOrIgnore：存在时就替换，不存在就忽略</li>
+<li>replaceOrInsert：存在时就替换，不存在就插入（等同于insertOrReplace）</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">POST /&lt;target&gt;/_doc/</span><br><span class="line">POST /&lt;target&gt;/_doc/&lt;_id&gt;/_create</span><br><span class="line">POST /&lt;target&gt;/_doc/&lt;_id&gt;?op_type=create</span><br><span class="line">POST /&lt;target&gt;/_create/&lt;_id&gt;</span><br><span class="line">POST /&lt;target&gt;/_doc/&lt;_id&gt;/_update</span><br><span class="line"></span><br><span class="line">PUT /&lt;target&gt;/_doc/&lt;_id&gt;</span><br><span class="line">PUT /&lt;target&gt;/_doc/&lt;_id&gt;/_create</span><br><span class="line">PUT /&lt;target&gt;/_doc/&lt;_id&gt;?op_type=create</span><br><span class="line">PUT /&lt;target&gt;/_create/&lt;_id&gt;</span><br></pre></td></tr></table></figure>
+
+<p>总结如下：</p>
+<ol>
+<li>不指定id时，post会创建新的，put操作不合法</li>
+<li>指定id时，如果id不存在，post会创建，put不会创建，但是put可以通过接口&#x2F;_create&#x2F;&lt;_id&gt;实现强制创建</li>
+<li>指定id时，如果id存在，post和put都是整体更新，但是post可以通过末端&#x2F;_update实现部分更新</li>
+<li>post时可以通过末端&#x2F;&lt;_id&gt;&#x2F;_create或参数op_type&#x3D;create控制id冲突时拒绝插入</li>
+<li>put时可以通过末端&#x2F;&lt;_id&gt;&#x2F;_create或参数op_type&#x3D;create控制id不存在时拒绝更新</li>
+<li>post时可以通过末端&#x2F;_update实现部分更新</li>
+<li>put时可以通过接口&#x2F;_create&#x2F;&lt;_id&gt;控制不存在时强制创建</li>
+</ol>
+<h3 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liyu121/article/details/100066427">es插入之insertOrReject入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44901065/article/details/97511840">es插入之insertOrReject详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/UbuntuTouch/article/details/115480681">es更新之insertOrIgnore入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39713833/article/details/111683277">es更新之insertOrIgnore详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/brotherdong90/article/details/50673928">es更新之insertOrUpdate入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/andy_only/article/details/102919423">es更新之insertOrUpdate详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chican2485/article/details/100639903">es替换之insertOrReplace入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wd2014610/article/details/81136995">es替换之insertOrReplace详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45012575/article/details/100695333">es插入之批量insert</a></li>
+</ul>
+</blockquote>
+<p>单个插入、批量插入</p>
+<p>insertOrReject：es index（post &#x2F;&lt;_id&gt;&#x2F;_create） op<br>insertOrIgnore：es index（post &#x2F;&lt;_id&gt;&#x2F;_update_by_query） op with id condition<br>insertOrUpdate: es index（post &#x2F;&lt;_id&gt;&#x2F;_update） op with upsert param<br>insertOrReplace：es index（post） op || es index（put &#x2F;_create&#x2F;&lt;_id&gt;） op</p>
+<h3 id="update"><a href="#update" class="headerlink" title="update"></a>update</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42475367/article/details/102673691">es更新之updateOrIgnore入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36551991/article/details/110096269">es更新之updateOrIgnore详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDNgaoqingrui/article/details/106812291">es更新之批量update</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/star1210644725/article/details/122389280">es更新之脚本更新</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38809962/article/details/79768002">es更新之运算更新</a></li>
+</ul>
+</blockquote>
+<p>单个更新、批量更新</p>
+<p>updateOrReject：无<br>updateOrIgnore：es index（post &#x2F;&lt;_id&gt;&#x2F;_update） op<br>updateOrInsert：等同于insertOrUpdate</p>
+<h3 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h3><p>单个替换、批量替换</p>
+<p>replaceOrReject：es index（put &#x2F;&lt;_id&gt;&#x2F;_create） op<br>replaceOrIgnore：es index（put） op<br>replaceOrInsert：等同于insertOrReplace</p>
+<h3 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lizz861109/article/details/113109005">es删除之delete入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/york_888/article/details/106789584">es删除之delete详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lizz861109/article/details/113109005">es删除之批量delete</a></li>
+</ul>
+</blockquote>
+<p>单个删除、批量删除</p>
+<h2 id="DQL（Data-Query-Language）"><a href="#DQL（Data-Query-Language）" class="headerlink" title="DQL（Data Query Language）"></a>DQL（Data Query Language）</h2><p>等值查询、范围查询、模糊查询、聚合查询、组合查询、关联查询、子查询</p>
+<h3 id="general（常规查询）"><a href="#general（常规查询）" class="headerlink" title="general（常规查询）"></a>general（常规查询）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40149557/article/details/122467971">es常规查询入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LeoHan163/article/details/126433158">es常规查询进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42998034/article/details/117745696">es常规查询详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/winterking3/article/details/108235285">es常规查询之_source详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lzxlfly/article/details/113484869">es常规查询之term详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wuxintdrh/article/details/115344677">es常规查询之match详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zidongxiangxi/article/details/111957568">es常规查询之match_phrase详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42383787/article/details/100036723">es常规查询之constant_score详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ctwy291314/article/details/82770108">es常规查询之query_string详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_15058425/article/details/105909847">es常规查询之exists详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w1014074794/article/details/121115237">es常规查询之sql详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014646662/article/details/98170053">es常规查询之script_fields详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ChengHuanHuaning/article/details/117696054">es常规查询之分页详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq330983778/article/details/103723921">es常规查询之排序详解</a></li>
+</ul>
+</blockquote>
+<h3 id="range（范围查询）"><a href="#range（范围查询）" class="headerlink" title="range（范围查询）"></a>range（范围查询）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chinus_yan/article/details/121006236">es范围查询入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wei_bo_cai/article/details/106331465">es范围查询进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36095679/article/details/106561906">es范围查询详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44207827/article/details/122365250">es范围查询之between详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w1014074794/article/details/119345344">es范围查询之in详解</a></li>
+</ul>
+</blockquote>
+<p>范围查询：左闭右闭（数据库用的多）、左闭右开（编程语言用的多）、左开右闭、左开右开</p>
+<h3 id="fuzzy（模糊查询）"><a href="#fuzzy（模糊查询）" class="headerlink" title="fuzzy（模糊查询）"></a>fuzzy（模糊查询）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012161251/article/details/120559438">es精确查询入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w1014074794/article/details/119643883">es精确查询进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Y_anger/article/details/114253092">es精确查询详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43859729/article/details/108134329">es模糊查询入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w1014074794/article/details/119329627">es模糊查询进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/pony_maggie/article/details/113951893">es模糊查询详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_21383435/article/details/108808041">es模糊查询大全</a></li>
+</ul>
+</blockquote>
+<p>prefix、contains、wildcard、regexp、fuzzy</p>
+<h3 id="aggregation（聚合查询）"><a href="#aggregation（聚合查询）" class="headerlink" title="aggregation（聚合查询）"></a>aggregation（聚合查询）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Derrick_kkuang/article/details/119122347">es聚合查询入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fu_huo_1993/article/details/127835403">es聚合查询进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mclongyi/article/details/107826997">es聚合查询详解</a></li>
+</ul>
+</blockquote>
+<h3 id="combinedQuery（组合查询）"><a href="#combinedQuery（组合查询）" class="headerlink" title="combinedQuery（组合查询）"></a>combinedQuery（组合查询）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shen198623/article/details/123251472">es多字段查询入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/laoyang360/article/details/111412721">es多字段查询进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wlei0618/article/details/120451249">es多字段查询详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38399962/article/details/108004303">es组合查询入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fan5522009/article/details/121004528">es组合查询进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Octopus21/article/details/109556672">es组合查询详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/JineD/article/details/109106049">es组合查询boost权重</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lijingjingchn/article/details/88654714">es组合查询dis_max分离最大化</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39723544/article/details/103676958">es组合查询filtered和bool的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36951116/article/details/112594223">es组合查询should失效问题入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengchanmin/article/details/113723890">es组合查询should失效问题进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31748587/article/details/101449613">es组合查询should失效问题详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/metheir/article/details/85080334">es组合查询filter为什么比较快</a></li>
+</ul>
+</blockquote>
+<h3 id="relatedQuery（关联查询）"><a href="#relatedQuery（关联查询）" class="headerlink" title="relatedQuery（关联查询）"></a>relatedQuery（关联查询）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lzxlfly/article/details/127925375">es关联查询详解</a></li>
+</ul>
+</blockquote>
+<h3 id="subQuery（子查询）"><a href="#subQuery（子查询）" class="headerlink" title="subQuery（子查询）"></a>subQuery（子查询）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/nyzzht123/article/details/109578796">es子查询详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Reliability"><a href="#Reliability" class="headerlink" title="Reliability"></a>Reliability</h1><h2 id="事务（Transaction）"><a href="#事务（Transaction）" class="headerlink" title="事务（Transaction）"></a>事务（Transaction）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/laoyang360/article/details/81052892">es事务详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/oZhenDe/article/details/85870818">es事务日志</a></li>
+</ul>
+</blockquote>
+<h2 id="持久化（Durability）"><a href="#持久化（Durability）" class="headerlink" title="持久化（Durability）"></a>持久化（Durability）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/gongpulin/article/details/78766303">es持久化入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/aa1215018028/article/details/108746679">es持久化详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><h1 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h1><h2 id="Explain"><a href="#Explain" class="headerlink" title="Explain"></a>Explain</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44993313/article/details/106528719">es之explain详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w1992wishes/article/details/102523633">es之analyze详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq330983778/article/details/103657930">es之profile详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Diagnosis"><a href="#Diagnosis" class="headerlink" title="Diagnosis"></a>Diagnosis</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/star1210644725/article/details/109565434">es之诊断入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/icanlove/article/details/125636857">es之诊断进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011499747/article/details/78877922">es之诊断详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012834750/article/details/101780815">es之诊断精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tanguomin/article/details/119064243">es之任务入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/asty9000/article/details/100643406">es之任务进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/asty9000/article/details/100903593">es之任务详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_pending_tasks.html">es之任务精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/justlpf/article/details/103233215">es之线程池入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/laoyang360/article/details/114267168">es之线程池进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013200380/article/details/109285295">es之线程池详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/feiying0canglang/article/details/126517444">es之线程池精进</a></li>
+</ul>
+</blockquote>
+<h1 id="Availability"><a href="#Availability" class="headerlink" title="Availability"></a>Availability</h1><h2 id="Replication"><a href="#Replication" class="headerlink" title="Replication"></a>Replication</h2><h2 id="Cluster"><a href="#Cluster" class="headerlink" title="Cluster"></a>Cluster</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hanchao5272/article/details/102790741">es之节点类型详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h1><h1 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhoushimiao1990/article/details/103226496">es原理入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chuixue24/article/details/104022065">es原理详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/pony_maggie/article/details/104135289">es原理之排序和聚合详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Query"><a href="#Query" class="headerlink" title="Query"></a>Query</h2><h3 id="TF-IDF"><a href="#TF-IDF" class="headerlink" title="TF-IDF"></a>TF-IDF</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37870649/article/details/81123506">TF-IDF算法入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44715126/article/details/112094964">TF-IDF算法进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/asialee_bird/article/details/81486700">TF-IDF算法详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Shard"><a href="#Shard" class="headerlink" title="Shard"></a>Shard</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38486203/article/details/80077844">es分片（Shard）入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jiankunking/article/details/109172570">es分片（Shard）进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41489540/article/details/113816617">es分片（Shard）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jiaojiao521765146514/article/details/82761645">es分片副本（Replica）入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/airenKKK/article/details/113184518">es分片副本（Replica）进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41290471/article/details/90318123">es分片副本（Replica）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ZhongGuoZhiChuang/article/details/106804423">es分片路由（Routing）入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36428889/article/details/118737115">es分片路由（Routing）进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangxuelei036/article/details/106634367">es分片路由（Routing）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32727095/article/details/113868110">es分片大小入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yht520100/article/details/121615654">es分片大小进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wlei0618/article/details/127434907">es分片大小详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lixia0417mul2/article/details/119792884">es的分片（shard）和kafka分区（partition）对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w1014074794/article/details/119802550">es分片之主分片为什么不能修改</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/laoyang360/article/details/78443006">es分片之健康状态详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/litterfrog/article/details/125298181">es分片之未分配的分片详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Segment"><a href="#Segment" class="headerlink" title="Segment"></a>Segment</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wang7075202/article/details/111308905">es分段（Segment）入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43930865/article/details/108509540">es分段（Segment）进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33748818/article/details/91931945">es分段（Segment）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a745233700/article/details/117953198">es分段（Segment）精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/likui1314159/article/details/53217750">es分段（Segment）和分片（Shard）关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010454030/article/details/79586072">为什么说es搜索是近实时的</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hanchao5272/article/details/100078523">es之refresh详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lijingjingchn/article/details/107673900">es之flush详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/star1210644725/article/details/107350978">es之merge详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/UbuntuTouch/article/details/103641544">es之refresh、flush详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_37692493/article/details/108182161">es之refresh、flush、merge详解</a></li>
+</ul>
+</blockquote>
+<p>分段存储、延迟写、段合并</p>
+<h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><h2 id="Management"><a href="#Management" class="headerlink" title="Management"></a>Management</h2><h3 id="Visual"><a href="#Visual" class="headerlink" title="Visual"></a>Visual</h3><h3 id="Monitor"><a href="#Monitor" class="headerlink" title="Monitor"></a>Monitor</h3>
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>只想买包辣条</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/pay/wechatpay.jpeg" alt="朱继鹏 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/dev/" rel="tag"># + dev</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/09/01/tech/development/junior/dev-4-mq/" rel="prev" title="mq">
+      <i class="fa fa-chevron-left"></i> mq
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/09/01/tech/development/junior/dev-6-nginx/" rel="next" title="nginx">
+      nginx <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Usage"><span class="nav-number">2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DDL%EF%BC%88Data-Definition-Language%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">DDL（Data Definition Language）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Index"><span class="nav-number">2.1.1.</span> <span class="nav-text">Index</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Type"><span class="nav-number">2.1.2.</span> <span class="nav-text">Type</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#datetime"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">datetime</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#datatime"><span class="nav-number">2.1.2.1.1.</span> <span class="nav-text">datatime</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#timezone"><span class="nav-number">2.1.2.1.2.</span> <span class="nav-text">timezone</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Template"><span class="nav-number">2.1.3.</span> <span class="nav-text">Template</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mappings"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">mappings</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#settings"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">settings</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analyzer"><span class="nav-number">2.1.4.</span> <span class="nav-text">Analyzer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Alias"><span class="nav-number">2.1.5.</span> <span class="nav-text">Alias</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reindex"><span class="nav-number">2.1.6.</span> <span class="nav-text">Reindex</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rollover"><span class="nav-number">2.1.7.</span> <span class="nav-text">Rollover</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lifecycle"><span class="nav-number">2.1.8.</span> <span class="nav-text">Lifecycle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Snapshot"><span class="nav-number">2.1.9.</span> <span class="nav-text">Snapshot</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DML%EF%BC%88Data-Manipulation-Language%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">DML（Data Manipulation Language）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#insert"><span class="nav-number">2.2.1.</span> <span class="nav-text">insert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#update"><span class="nav-number">2.2.2.</span> <span class="nav-text">update</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#replace"><span class="nav-number">2.2.3.</span> <span class="nav-text">replace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#delete"><span class="nav-number">2.2.4.</span> <span class="nav-text">delete</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DQL%EF%BC%88Data-Query-Language%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">DQL（Data Query Language）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#general%EF%BC%88%E5%B8%B8%E8%A7%84%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.1.</span> <span class="nav-text">general（常规查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#range%EF%BC%88%E8%8C%83%E5%9B%B4%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.2.</span> <span class="nav-text">range（范围查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fuzzy%EF%BC%88%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.3.</span> <span class="nav-text">fuzzy（模糊查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#aggregation%EF%BC%88%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.4.</span> <span class="nav-text">aggregation（聚合查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#combinedQuery%EF%BC%88%E7%BB%84%E5%90%88%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.5.</span> <span class="nav-text">combinedQuery（组合查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#relatedQuery%EF%BC%88%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.6.</span> <span class="nav-text">relatedQuery（关联查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#subQuery%EF%BC%88%E5%AD%90%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.7.</span> <span class="nav-text">subQuery（子查询）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reliability"><span class="nav-number">3.</span> <span class="nav-text">Reliability</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%EF%BC%88Transaction%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">事务（Transaction）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96%EF%BC%88Durability%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">持久化（Durability）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem"><span class="nav-number">4.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Performance"><span class="nav-number">5.</span> <span class="nav-text">Performance</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Explain"><span class="nav-number">5.1.</span> <span class="nav-text">Explain</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Diagnosis"><span class="nav-number">5.2.</span> <span class="nav-text">Diagnosis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Availability"><span class="nav-number">6.</span> <span class="nav-text">Availability</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Replication"><span class="nav-number">6.1.</span> <span class="nav-text">Replication</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster"><span class="nav-number">6.2.</span> <span class="nav-text">Cluster</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Application"><span class="nav-number">7.</span> <span class="nav-text">Application</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theory"><span class="nav-number">8.</span> <span class="nav-text">Theory</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Query"><span class="nav-number">8.1.</span> <span class="nav-text">Query</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TF-IDF"><span class="nav-number">8.1.1.</span> <span class="nav-text">TF-IDF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shard"><span class="nav-number">8.2.</span> <span class="nav-text">Shard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Segment"><span class="nav-number">8.3.</span> <span class="nav-text">Segment</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Management"><span class="nav-number">9.1.</span> <span class="nav-text">Management</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual"><span class="nav-number">9.1.1.</span> <span class="nav-text">Visual</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monitor"><span class="nav-number">9.1.2.</span> <span class="nav-text">Monitor</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="朱继鹏"
+      src="/images/avatar/zhujipeng.jpg">
+  <p class="site-author-name" itemprop="name">朱继鹏</p>
+  <div class="site-description" itemprop="description">在全栈的路上狂奔不止</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jipengzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jipengzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jipengzhu@qq.com" title="E-Mail → mailto:jipengzhu@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱继鹏</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

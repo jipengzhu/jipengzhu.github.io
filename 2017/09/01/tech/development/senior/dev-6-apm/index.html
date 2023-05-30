@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="apm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="apm">
+<meta property="og:url" content="http://example.com/2017/09/01/tech/development/senior/dev-6-apm/index.html">
+<meta property="og:site_name" content="朱继鹏的博客">
+<meta property="og:description" content="apm">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-08-31T19:06:00.000Z">
+<meta property="article:modified_time" content="2023-05-30T10:15:20.253Z">
+<meta property="article:author" content="朱继鹏">
+<meta property="article:tag" content="+ dev">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2017/09/01/tech/development/senior/dev-6-apm/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>apm | 朱继鹏的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">朱继鹏的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">天道酬勤，全栈不停</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2017/09/01/tech/development/senior/dev-6-apm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar/zhujipeng.jpg">
+      <meta itemprop="name" content="朱继鹏">
+      <meta itemprop="description" content="在全栈的路上狂奔不止">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朱继鹏的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          apm
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-01 03:06:00" itemprop="dateCreated datePublished" datetime="2017-09-01T03:06:00+08:00">2017-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-30 18:15:20" itemprop="dateModified" datetime="2023-05-30T18:15:20+08:00">2023-05-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/skill-dev-senior/" itemprop="url" rel="index"><span itemprop="name">+ skill + dev + senior</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">apm</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="APM"><a href="#APM" class="headerlink" title="APM"></a>APM</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/garyond/article/details/81737866">应用性能管理（APM）综述</a></li>
+</ul>
+</blockquote>
+<p>APM：Application Performance Management</p>
+<h2 id="Monitor"><a href="#Monitor" class="headerlink" title="Monitor"></a>Monitor</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/William0318/article/details/104304664">常用的监控系统对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44411385/article/details/124234502">Prometheus和OpenFalcon对比</a></li>
+</ul>
+</blockquote>
+<h3 id="Prometheus"><a href="#Prometheus" class="headerlink" title="Prometheus"></a>Prometheus</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42684940/article/details/116303861">Prometheus入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shenyuanhaojie/article/details/121775976">Prometheus详解</a></li>
+</ul>
+</blockquote>
+<h3 id="OpenFalcon"><a href="#OpenFalcon" class="headerlink" title="OpenFalcon"></a>OpenFalcon</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42309324/article/details/107013925">OpenFalcon入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Danielsm/article/details/123531933">OpenFalcon详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Ganglia"><a href="#Ganglia" class="headerlink" title="Ganglia"></a>Ganglia</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/pisa8559/article/details/110904080">Ganglia入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/astudybear/article/details/124384425">Ganglia详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Zabbix"><a href="#Zabbix" class="headerlink" title="Zabbix"></a>Zabbix</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wt334502157/article/details/117994107">Zabbix入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/F2001523/article/details/112855504">Zabbix详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Nagios"><a href="#Nagios" class="headerlink" title="Nagios"></a>Nagios</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40283570/article/details/106540770">Nagios入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41819965/article/details/109702039">Nagios详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Visual"><a href="#Visual" class="headerlink" title="Visual"></a>Visual</h2><h3 id="Grafana"><a href="#Grafana" class="headerlink" title="Grafana"></a>Grafana</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/A13581861752/article/details/124148803">Grafana入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/freeking101/article/details/128585245">Grafana详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39458679/article/details/79865744">Grafana和OpenTSDB</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41475058/article/details/108050440">Grafana和InfluxDB</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/leifurong6/article/details/42414279">Grafana和Graphite</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/forrest420/article/details/121569253">Grafana和Elasticsearch</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_67159981/article/details/129033441">Grafana和Prometheus</a></li>
+</ul>
+</blockquote>
+<h2 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h2><h3 id="Sentry"><a href="#Sentry" class="headerlink" title="Sentry"></a>Sentry</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/arnolan/article/details/105880882">Sentry入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hjb2722404/article/details/120001825">Sentry详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Metric"><a href="#Metric" class="headerlink" title="Metric"></a>Metric</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/linjiaYY/article/details/121661716">维度和指标</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37688023/article/details/106460962">指标分析工具之Telegraf+InfluxDB+Grafana</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37688023/article/details/106440503">接口测试报告之Jmeter+InfluxDB+Grafana</a></li>
+</ul>
+</blockquote>
+<h3 id="Telegraf"><a href="#Telegraf" class="headerlink" title="Telegraf"></a>Telegraf</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43786255/article/details/107127508">Telegraf入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lulongji2035/article/details/109029677">Telegraf详解</a></li>
+</ul>
+</blockquote>
+<h3 id="MetricBeat"><a href="#MetricBeat" class="headerlink" title="MetricBeat"></a>MetricBeat</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/laoyang360/article/details/122833878">MetricBeat入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shm19990131/article/details/107323076">MetricBeat详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Trace"><a href="#Trace" class="headerlink" title="Trace"></a>Trace</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_21033663/article/details/114168332">常用的链路追踪框架对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/generalfu/article/details/105801005">通过字节码插桩监控方法采集运行时入参出参和异常信息</a></li>
+</ul>
+</blockquote>
+<h3 id="Zipkin"><a href="#Zipkin" class="headerlink" title="Zipkin"></a>Zipkin</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lovelichao12/article/details/115321413">Zipkin入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40587263/article/details/117338097">Zipkin详解</a></li>
+</ul>
+</blockquote>
+<h3 id="SkyWalking"><a href="#SkyWalking" class="headerlink" title="SkyWalking"></a>SkyWalking</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_38001814/article/details/104061708">SkyWalking入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDN_WYL2016/article/details/115689947">SkyWalking详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Cat"><a href="#Cat" class="headerlink" title="Cat"></a>Cat</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tiny_du/article/details/119148287">Cat入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/My_Way666/article/details/86679229">Cat详解</a></li>
+</ul>
+</blockquote>
+<h1 id="TSDB"><a href="#TSDB" class="headerlink" title="TSDB"></a>TSDB</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011537073/article/details/80305804">常用的时序数据库对比入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xuruilll/article/details/125808992">常用的时序数据库对比进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/vtnews/article/details/80307023">常用的时序数据库对比详解</a></li>
+</ul>
+</blockquote>
+<h2 id="OpenTSDB"><a href="#OpenTSDB" class="headerlink" title="OpenTSDB"></a>OpenTSDB</h2><p>基于HBase</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lixinkuan328/article/details/106782643">OpenTSDB入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_24084925/article/details/80339695">OpenTSDB详解</a></li>
+</ul>
+</blockquote>
+<h2 id="InfluxDB"><a href="#InfluxDB" class="headerlink" title="InfluxDB"></a>InfluxDB</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangxm_qz/article/details/121723919">InfluxDB入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fuhanghang/article/details/105484610">InfluxDB详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Graphite"><a href="#Graphite" class="headerlink" title="Graphite"></a>Graphite</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chszs/article/details/50927812">Graphite入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010467184/article/details/106733326">Graphite详解</a></li>
+</ul>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>只想买包辣条</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/pay/wechatpay.jpeg" alt="朱继鹏 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/dev/" rel="tag"># + dev</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/09/01/tech/development/senior/dev-5-bigdata/" rel="prev" title="bigdata">
+      <i class="fa fa-chevron-left"></i> bigdata
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/09/01/tech/development/senior/dev-7-ops/" rel="next" title="ops">
+      ops <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#APM"><span class="nav-number">1.</span> <span class="nav-text">APM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Monitor"><span class="nav-number">1.1.</span> <span class="nav-text">Monitor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Prometheus"><span class="nav-number">1.1.1.</span> <span class="nav-text">Prometheus</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenFalcon"><span class="nav-number">1.1.2.</span> <span class="nav-text">OpenFalcon</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ganglia"><span class="nav-number">1.1.3.</span> <span class="nav-text">Ganglia</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zabbix"><span class="nav-number">1.1.4.</span> <span class="nav-text">Zabbix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nagios"><span class="nav-number">1.1.5.</span> <span class="nav-text">Nagios</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Visual"><span class="nav-number">1.2.</span> <span class="nav-text">Visual</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Grafana"><span class="nav-number">1.2.1.</span> <span class="nav-text">Grafana</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Error"><span class="nav-number">1.3.</span> <span class="nav-text">Error</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sentry"><span class="nav-number">1.3.1.</span> <span class="nav-text">Sentry</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Metric"><span class="nav-number">1.4.</span> <span class="nav-text">Metric</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Telegraf"><span class="nav-number">1.4.1.</span> <span class="nav-text">Telegraf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MetricBeat"><span class="nav-number">1.4.2.</span> <span class="nav-text">MetricBeat</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Trace"><span class="nav-number">1.5.</span> <span class="nav-text">Trace</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Zipkin"><span class="nav-number">1.5.1.</span> <span class="nav-text">Zipkin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SkyWalking"><span class="nav-number">1.5.2.</span> <span class="nav-text">SkyWalking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cat"><span class="nav-number">1.5.3.</span> <span class="nav-text">Cat</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TSDB"><span class="nav-number">2.</span> <span class="nav-text">TSDB</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenTSDB"><span class="nav-number">2.1.</span> <span class="nav-text">OpenTSDB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InfluxDB"><span class="nav-number">2.2.</span> <span class="nav-text">InfluxDB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Graphite"><span class="nav-number">2.3.</span> <span class="nav-text">Graphite</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="朱继鹏"
+      src="/images/avatar/zhujipeng.jpg">
+  <p class="site-author-name" itemprop="name">朱继鹏</p>
+  <div class="site-description" itemprop="description">在全栈的路上狂奔不止</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jipengzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jipengzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jipengzhu@qq.com" title="E-Mail → mailto:jipengzhu@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱继鹏</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
