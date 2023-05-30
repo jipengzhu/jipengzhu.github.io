@@ -28,7 +28,7 @@
 <meta property="og:description" content="待做事项">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2015-07-06T16:01:00.000Z">
-<meta property="article:modified_time" content="2023-05-30T10:15:20.262Z">
+<meta property="article:modified_time" content="2023-05-30T12:17:28.820Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ todo">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-30 18:15:20" itemprop="dateModified" datetime="2023-05-30T18:15:20+08:00">2023-05-30</time>
+                <time title="修改时间：2023-05-30 20:17:28" itemprop="dateModified" datetime="2023-05-30T20:17:28+08:00">2023-05-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -249,11 +249,65 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Todo"><a href="#Todo" class="headerlink" title="Todo"></a>Todo</h1><p>系统软件 office要压缩</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd g:</span><br><span class="line"></span><br><span class="line">ls data* | foreach-object &#123; $_.CreationTime = &#x27;2021/01/01 19:00:00&#x27; ; $_.LastWriteTime = &#x27;2021/01/01 19:00:00&#x27; ; $_.LastAccessTime = &#x27;2021/01/01 19:00:00&#x27; &#125;</span><br><span class="line"></span><br><span class="line">cd g:/data</span><br><span class="line"></span><br><span class="line">Get-ChildItem -Recurse -Attributes !System+!ReadOnly+!Hidden | foreach-object &#123; $_.CreationTime = &#x27;2021/01/01 19:00:00&#x27; ; $_.LastWriteTime = &#x27;2021/01/01 19:00:00&#x27; ; $_.LastAccessTime = &#x27;2021/01/01 19:00:00&#x27; &#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd d:/data/code/myblog</span><br><span class="line"></span><br><span class="line">Get-ChildItem -Recurse -Attributes !System+!ReadOnly+!Hidden | foreach-object &#123; $_.CreationTime = &#x27;2021/01/01 19:00:00&#x27; ; $_.LastWriteTime = &#x27;2021/01/01 19:00:00&#x27; ; $_.LastAccessTime = &#x27;2021/01/01 19:00:00&#x27; &#125;</span><br></pre></td></tr></table></figure>
-
+        <h1 id="Todo"><a href="#Todo" class="headerlink" title="Todo"></a>Todo</h1><p>照片和资料 上传到邮箱</p>
+<p>老爸的身份证和银行卡<br>房贷结清记录<br>公积金提取记录<br>租房登记<br>租房退房</p>
+<p>笔记 同步到博客</p>
+<p>系统软件 office要压缩</p>
+<p>g盘 U盘 网盘 手机号关联 移到外面<br>g盘 U盘 网盘 常用的软件和浏览器插件 删除<br>g盘 U盘 删除 &#x2F;g&#x2F;data&#x2F;software&#x2F;game&#x2F;红警3起义时刻_完整版&#x2F;B8A2F1652A41D1481AD961C467F03EE43E4D32AD.torrent</p>
+<p>同步到U盘 网盘<br>&#x2F;g&#x2F;data&#x2F;datum&#x2F;社保资料&#x2F;武汉公积金截图.jpg<br>&#x2F;g&#x2F;data&#x2F;datum&#x2F;职业资料&#x2F;租房身份证照片.jpg</p>
+<p>更新 g盘 U盘时间</p>
+<p>检查zjpCount</p>
+<p>记录手机布局</p>
+<p>整理还贷，公积金提取，租房照片到邮箱</p>
+<p>basic core<br>linux date<br>添加dev&#x2F;topic&#x2F;time.md<br>运行脚本更新post的创建时间<br>time 时间，狭义上的时间，只包含时分秒<br>date日期，狭义上的日期，只包含年月日<br>datetime 时间点，广义上的日期或者时间，包含年月日和时分秒<br>timezone 时区<br>java timezone TZ变量<br>timestamp 时间戳<br>unix timestamp 秒<br>java timestamp 毫秒<br>mysql timestamp 秒 2038<br>epoch</p>
+<p>mysql等放到skill&#x2F;development&#x2F;senior<br>component 改为 dev&#x2F;tools&#x2F;docker.md<br>framework 改为 library</p>
+<p>添加 spring batch.md integration.md<br>eventbus 放到 integration里面</p>
+<p>library function application<br>library java python go javascript android</p>
+<p>dev-summary concept<br>program 程序 指令和数据的集合，可以下载和部署，可以启动和停止<br>process 进程 program的运行态<br>software 软件 program的集合，可以安装和卸载，可以启动和停止，还可以开机启动<br>service 服务 software的运行态<br>application 应用 功能的集合</p>
+<p>program 操作系统的视角 application 开发者的视角</p>
+<p>program - process，thread，pipe<br>package</p>
+<p>library 依赖关系，自己还需要大量的开发工作<br>framewok 继承关系，自己还需要少量的开发工作<br>component 聚合关系，直接用或者还需要极少的开发工作</p>
+<p>plugin 插件机制，添加功能<br>extend 扩展机制，添加或者修改功能</p>
+<p>middleware 中间层技术<br>mixin 混入技术</p>
+<p>内存 外存 闪存<br>内存 rom ram<br>外存 磁盘 光盘<br>闪存 sd卡 u盘<br>磁盘 软盘 硬盘<br>硬盘 机械硬盘 固态硬盘<br>耳机，麦克风，光驱，读卡器，摄像头<br>usb口 hdmi口 网线口<br>usb type-c lighting 绿联多功能拓展坞<br>网线 rj45 rj11<br>vga dvi hdmi dp</p>
+<p>人事部 负责人员管理<br>行政部 负责事物管理<br>  前勤 前台，秘书<br>  后勤 保洁，保安，司机<br>  物资 办公用品 清洁用品<br>  设备 电脑 打印机 网络<br>  食堂 厨师 服务员<br>财务部 负责资金管理<br>科技部 负责产品研发<br>  项目经理 负责功能的设计和项目管理 PM<br>  设计师 负责界面的设计和用户体验 UI UE<br>  研发工程师 负责产品的实现和交付 RD FE BE<br>  质量工程师 负责产品的质量和测试 QA<br>  安全工程师 负责产品得安全和防护 SE<br>  运维工程师 负责产品的部署和维护 OPS<br>  pm product manger 或者 project manager<br>  ui user interface<br>  ue user experience<br>  rd research developer<br>  fe frontend engineer<br>  be backend engineer<br>  qa quality assurance<br>  se security engineer<br>  ops opreations<br>生产部 负责产品生产<br>销售部 负责产品销售<br>运营部 负责产品运营<br>商务部 负责招商引资和商务合作<br>宣传部 负责公司和产品的宣传推广<br>公关部 负责政府关系<br>战略部 负责制定战略<br>投资部 负责进行投资</p>
+<p>并发和并行 是通过对任务（task）的切分和工作者（worker，更抽象的说法为资源 resource）的增加来减少处理任务的时间</p>
+<p>举例<br>做菜：称为task，包含洗菜、切菜、炒菜三个步骤<br>洗菜：称为subTask1，耗时为t1<br>切菜：称为subTask2，耗时为t2<br>炒菜：称为subTask3，耗时为t3<br>时间:t1 &lt; t2 &lt; t3</p>
+<p>为了便于理解 负责处理task的worker称为worker。负责处理subTask的worker称为subWorker。</p>
+<p>未切分<br>只有一个worker<br>完成1个task耗时为 t1 + t2 + t3<br>完成n个task耗时为 n * (t1 + t2 + t3)</p>
+<p>垂直切分（并发）<br>将1个task分为k个不相互独立的subTask</p>
+<p>有1个workerGroup，负责n个task<br>1个workerGroup有k个worker，各自负责一个subTask<br>所以一共需要k个worker</p>
+<p>完成1个task耗时为 t1 + t2 + t3</p>
+<p>乍一看没有提高效率，但是比如subTask1的工作者worker1不必等待整个task完成就可以继续下一个task的subTask1<br>第一个task时subTask2需要等待subTask1，subTask3需要等待subTask2<br>后续的task由于t1＜ t2，subTask2执行时subTask1已经完成了，由于t2＜ t3，subTask3执行时subTask2已经完成了<br>所以后续的task只需要耗时 (n - 1) * t3<br>所以完成n个task耗时为<br>t1 + t2 + t3 + (n - 1) * t3 &#x3D; t1 + t2 + n * t3为比切分时少，所以提高了效率</p>
+<p>如果t2大于t3（比如需要菜需要腌制），subTask3需要等待subTask2，耗时就不好计算了，但是还是会比未切分小</p>
+<p>水平切分（并行）<br>将n个task分为m个相互独立的taskGroup</p>
+<p>有m个workerGroup，各自负责一个taskGroup<br>1个workerGroup有k个worker，各自负责一个subTask<br>所以一共需要m*k个worker</p>
+<p>完成1个task耗时为 t1 + t2 + t3</p>
+<p>完成n个task耗时为 n&#x2F;m * (t1 + t2 + t3)</p>
+<p>效率提高到了m倍</p>
+<p>问题</p>
+<ol>
+<li>垂直切分中subTask的依赖会导致任务暂停等待，使得效率降低，即生产者的速度低于消费者</li>
+<li>垂直切分中worker不足也会导致任务暂停等待，使得效率降低，即worker的数量小于subTask的数量</li>
+<li>水平切分中的资源浪费，subTask1和subTask3都有m个worker，但是subTask1的活干完后到subTask3的活干完时subTask1的worker处于空闲状态，所以subTask1要少点worker，所以subTask3要多点worker</li>
+</ol>
+<p>灵活切分<br>有k个workerGroup，各自负责一个subTask<br>1个workerGroup有若干个worker</p>
+<p>更丰富的东西可以参考 spark stream</p>
+<p>java中thread（线程）就是worker<br>executor（线程池）就是workerGroup<br>runnable就是task和subTask</p>
+<p>java stream</p>
+<p>生产者和消费者</p>
+<p>观察者模式（事件和回调）<br>发布订阅模式（推和拉）</p>
+<p>响应式编程和流式编程的区别</p>
+<p>producer </p>
+<blockquote>
+<p>broker（optional）<br>worker（consume-operate-produce）<br>broker（optional）<br>worker（consume-operate-produce）</p>
+</blockquote>
+<p>……（省略剩余的worker）</p>
+<blockquote>
+<p>broker（optional）<br>consumer</p>
+</blockquote>
+<p>consume：推或者拉<br>opreate：rxjava中为操作符<br>produce：同步还是异步</p>
+<p>worker之间直接连接（没有broker）就是观察者模式<br>worker之间通过中介（有broker）就是发布和订阅模式</p>
 <h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><p>java代理 cglib 字节码技术</p>
 <p>设计C++函数传参时如何决定使用指针还是引用？ - 知乎 : <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/31276547?utm_id=0">https://www.zhihu.com/question/31276547?utm_id=0</a></p>
 <p> 字节码增强技术在监控埋点场景的大规模实践落地及其他领域探索-今日头条 : <a target="_blank" rel="noopener" href="https://m.toutiao.com/article/7220976921910247973/?app=news_article&amp;timestamp=1681401075&amp;use_new_style=1&amp;req_id=202304132351146579747C4AF25C21785E&amp;group_id=7220976921910247973&amp;share_token=955bc357-fe3e-4d76-a342-17e34e892eeb&amp;tt_from=copy_link&amp;utm_source=copy_link&amp;utm_medium=toutiao_android&amp;utm_campaign=client_share">https://m.toutiao.com/article/7220976921910247973/?app=news_article&amp;timestamp=1681401075&amp;use_new_style=1&amp;req_id=202304132351146579747C4AF25C21785E&amp;group_id=7220976921910247973&amp;share_token=955bc357-fe3e-4d76-a342-17e34e892eeb&amp;tt_from=copy_link&amp;utm_source=copy_link&amp;utm_medium=toutiao_android&amp;utm_campaign=client_share</a></p>
