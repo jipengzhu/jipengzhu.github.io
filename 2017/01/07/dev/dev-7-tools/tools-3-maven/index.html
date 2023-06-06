@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="maven">
+<meta property="og:type" content="article">
+<meta property="og:title" content="maven">
+<meta property="og:url" content="http://example.com/2017/01/07/dev/dev-7-tools/tools-3-maven/index.html">
+<meta property="og:site_name" content="朱继鹏的博客">
+<meta property="og:description" content="maven">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-01-06T19:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-06T12:17:29.517Z">
+<meta property="article:author" content="朱继鹏">
+<meta property="article:tag" content="+ dev">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2017/01/07/dev/dev-7-tools/tools-3-maven/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>maven | 朱继鹏的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">朱继鹏的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">天道酬勤，全栈不停</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2017/01/07/dev/dev-7-tools/tools-3-maven/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar/zhujipeng.jpg">
+      <meta itemprop="name" content="朱继鹏">
+      <meta itemprop="description" content="在全栈的路上狂奔不止">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朱继鹏的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          maven
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-01-07 03:00:00" itemprop="dateCreated datePublished" datetime="2017-01-07T03:00:00+08:00">2017-01-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-06 20:17:29" itemprop="dateModified" datetime="2023-06-06T20:17:29+08:00">2023-06-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/dev-tools/" itemprop="url" rel="index"><span itemprop="name">+ dev + tools</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">maven</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mvnrepository.com/">maven官方仓库</a></li>
+<li><a target="_blank" rel="noopener" href="https://book.huihoo.com/maven-the-definitive-guide/index.html">maven文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hcmony/article/details/56013655">maven入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dghkgjlh/article/details/113471655">maven进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43410878/article/details/123812267">maven详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/layonly/article/details/120625336">maven精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/vhfdff/article/details/89048334">maven项目结构详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cx1110162/article/details/78297654">maven之archetype详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45542380/article/details/110483615">idea中使用maven入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_47346664/article/details/120426807">idea中使用maven详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/GyaoG/article/details/120599475">idea中使用maven插件</a></li>
+</ul>
+</blockquote>
+<h1 id="Pom"><a href="#Pom" class="headerlink" title="Pom"></a>Pom</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_47061482/article/details/109817802">maven之pom.xml入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jk418756/article/details/87917776">maven之pom.xml进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42601136/article/details/121806064">maven之pom.xml详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fzhu008/article/details/105377087">maven之Properties入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/DaiH09/article/details/113933087">maven之Properties进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/moonpure/article/details/82380456">maven之Properties详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Dependency"><a href="#Dependency" class="headerlink" title="Dependency"></a>Dependency</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wohaqiyi/article/details/119322984">maven依赖之版本号详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w8y56f/article/details/108243496">maven依赖之snapshot详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liaowenxiong/article/details/122350988">maven依赖之scope详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010979642/article/details/108534860">maven依赖之dependencies与dependencyManagement的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/csdn_mrsongyang/article/details/118580215">maven依赖冲突解决入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010786653/article/details/119759060">maven依赖冲突解决进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kingwinstar/article/details/106916140">maven依赖冲突解决详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a>Plugin</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liupeifeng3514/article/details/80236827">maven插件之plugins和pluginManagement的区别</a></li>
+</ul>
+</blockquote>
+<h1 id="Package"><a href="#Package" class="headerlink" title="Package"></a>Package</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42873554/article/details/107946927">maven生命周期入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014241071/article/details/81668312">maven生命周期进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40017062/article/details/122658297">maven生命周期详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cyan20115/article/details/106551162">mvn clean入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012683399/article/details/96132763">mvn clean详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhaojianting/article/details/80324533">mvn package入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sdrfengmi/article/details/87191944">mvn package详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sky_jiangcheng/article/details/78223308">mvn install入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/DaiH09/article/details/110086415">mvn install详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lisheng19870305/article/details/103506063">mvn deploy入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/djrm11/article/details/121340829">mvn deploy详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/arkblue/article/details/50974957">mvn skipTests详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Resource"><a href="#Resource" class="headerlink" title="Resource"></a>Resource</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30407099/article/details/99811538">maven打包额外的资源文件</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39940205/article/details/80517244">maven打包额外的配置文件</a></li>
+</ul>
+</blockquote>
+<h2 id="Dependency-1"><a href="#Dependency-1" class="headerlink" title="Dependency"></a>Dependency</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014163312/article/details/127330574">maven打包依赖包入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sgyuanshi/article/details/98115890">maven打包依赖包详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Plugin-1"><a href="#Plugin-1" class="headerlink" title="Plugin"></a>Plugin</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/calm_encode/article/details/103931537">maven打包插件详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_22222499/article/details/92800859">maven打包插件之assembly和shade对比入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cool0/article/details/107625828">maven打包插件之assembly和shade对比详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014163312/article/details/104854590">maven打包插件之依赖插件maven-dependency-plugin详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Java_1710/article/details/120992614">maven打包插件之编译插件maven-compiler-plugin详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/BUCTOJ/article/details/108851118">maven模块详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38249409/article/details/129369551">maven模块之继承和聚合详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wb1046329430/article/details/119775973">maven创建子模块详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/allway2/article/details/124840866">maven多模块创建入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41010294/article/details/105823296">maven多模块创建进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_41885330/article/details/81875395">maven多模块创建详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zxh1991811/article/details/113368918">maven多模块打包入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/DHCliaozheng/article/details/105555842">maven多模块打包进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39546312/article/details/110219578">maven多模块打包详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44695727/article/details/109154845">maven多模块之Spring扫描</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/J080624/article/details/81067587">maven模块之Module和Project对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ailifang/article/details/114667553">maven模块之Pom和Project对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/isea533/article/details/85065086">maven模块之Module和Git Submodule对比</a></li>
+</ul>
+</blockquote>
+<h1 id="Setting"><a href="#Setting" class="headerlink" title="Setting"></a>Setting</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_47061482/article/details/109816261">maven之settings.xml入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43740223/article/details/114253461">maven之settings.xml进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zxd1435513775/article/details/99294705">maven之settings.xml详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Repository"><a href="#Repository" class="headerlink" title="Repository"></a>Repository</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq32933432/article/details/104440175">maven之Repository详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sayyy/article/details/80451531">maven之Repository多仓库入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44730056/article/details/89504198">maven之Repository多仓库进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ceo158/article/details/120244422">maven之Repository多仓库详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/abu935009066/article/details/124206273">maven之Repository优先级入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wwd0501/article/details/92830558">maven之Repository优先级进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/taugast/article/details/113787531">maven之Repository优先级详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Profile"><a href="#Profile" class="headerlink" title="Profile"></a>Profile</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zy103118/article/details/79879879">maven之Profile入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/java_collect/article/details/83870215">maven之Profile进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_29235677/article/details/118528996">maven之Profile详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Command"><a href="#Command" class="headerlink" title="Command"></a>Command</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/adparking/article/details/114692211">maven之mvn和mvnw的关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xfg0218/article/details/80549988">maven之mvn入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/good_good_xiu/article/details/116740333">maven之mvn详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/nthack5730/article/details/82385124">maven之mvn help命令详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Deschampszzzz/article/details/114492653">maven之mvn dependency命令详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/bawcwchen/article/details/80298173">maven之mvn archetype命令详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Cache"><a href="#Cache" class="headerlink" title="Cache"></a>Cache</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37156624/article/details/117928547">maven之cache详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/love_right/article/details/106074575">idea之maven刷新（refresh）</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35502206/article/details/113850165">idea之maven重导入（reimport）</a></li>
+</ul>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>只想买包辣条</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/pay/wechatpay.jpeg" alt="朱继鹏 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/dev/" rel="tag"># + dev</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/01/07/dev/dev-7-tools/tools-1-git/" rel="prev" title="git">
+      <i class="fa fa-chevron-left"></i> git
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/01/07/dev/dev-7-tools/tools-5-docker/" rel="next" title="docker">
+      docker <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pom"><span class="nav-number">2.</span> <span class="nav-text">Pom</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Properties"><span class="nav-number">2.1.</span> <span class="nav-text">Properties</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dependency"><span class="nav-number">2.2.</span> <span class="nav-text">Dependency</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Plugin"><span class="nav-number">2.3.</span> <span class="nav-text">Plugin</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Package"><span class="nav-number">3.</span> <span class="nav-text">Package</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Resource"><span class="nav-number">3.1.</span> <span class="nav-text">Resource</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dependency-1"><span class="nav-number">3.2.</span> <span class="nav-text">Dependency</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Plugin-1"><span class="nav-number">3.3.</span> <span class="nav-text">Plugin</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Module"><span class="nav-number">4.</span> <span class="nav-text">Module</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Setting"><span class="nav-number">5.</span> <span class="nav-text">Setting</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Repository"><span class="nav-number">6.</span> <span class="nav-text">Repository</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Profile"><span class="nav-number">7.</span> <span class="nav-text">Profile</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Command"><span class="nav-number">8.</span> <span class="nav-text">Command</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cache"><span class="nav-number">9.</span> <span class="nav-text">Cache</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="朱继鹏"
+      src="/images/avatar/zhujipeng.jpg">
+  <p class="site-author-name" itemprop="name">朱继鹏</p>
+  <div class="site-description" itemprop="description">在全栈的路上狂奔不止</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jipengzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jipengzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jipengzhu@qq.com" title="E-Mail → mailto:jipengzhu@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱继鹏</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

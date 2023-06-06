@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git">
+<meta property="og:url" content="http://example.com/2017/01/07/dev/dev-7-tools/tools-1-git/index.html">
+<meta property="og:site_name" content="朱继鹏的博客">
+<meta property="og:description" content="git">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-01-06T17:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-06T12:17:29.515Z">
+<meta property="article:author" content="朱继鹏">
+<meta property="article:tag" content="+ dev">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2017/01/07/dev/dev-7-tools/tools-1-git/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>git | 朱继鹏的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">朱继鹏的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">天道酬勤，全栈不停</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2017/01/07/dev/dev-7-tools/tools-1-git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar/zhujipeng.jpg">
+      <meta itemprop="name" content="朱继鹏">
+      <meta itemprop="description" content="在全栈的路上狂奔不止">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朱继鹏的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-01-07 01:00:00" itemprop="dateCreated datePublished" datetime="2017-01-07T01:00:00+08:00">2017-01-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-06 20:17:29" itemprop="dateModified" datetime="2023-06-06T20:17:29+08:00">2023-06-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/dev-tools/" itemprop="url" rel="index"><span itemprop="name">+ dev + tools</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">git</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2">git文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaoputao0903/article/details/23912561">Git入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/XH_jing/article/details/121900458">Git进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qtiao/article/details/97783243">Git详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/freeking101/article/details/90289202">Git精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43425487/category_9895272.html">Git教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Codinglaoshi/article/details/128690666">git之不常用的命令</a></li>
+</ul>
+</blockquote>
+<h2 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/HO1_K/article/details/121038247">git config详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012757419/article/details/105614028">git换行符详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yzpbright/article/details/116144006">git diff –staged与 git diff –cached有什么区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010037020/article/details/81537809">git stash和stage有什么区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44781409/article/details/107560533">git reset、revert、rebase有什么区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51971452/article/details/113871247">git restore、reset、revert有什么区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/heart_mine/article/details/79424591">git中working tree, index, commit详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/boyzzy1995/article/details/128733516">git pathspec详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cnzhaocc/article/details/39438059">git revision详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/aitazhixin/article/details/54089447">git tree-ish详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Activity_Time/article/details/90550656">git commit-id详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Area"><a href="#Area" class="headerlink" title="Area"></a>Area</h2><p>git分为三个区</p>
+<ul>
+<li>工作区：修改的东西会先保存在这个区域，git add操作后会并缓存到暂存区</li>
+<li>暂存区：待提交的东西保存在这个区域，git commit操作时会并打包到仓库区</li>
+<li>仓库区：归档的东西保存在这个区域</li>
+</ul>
+<h2 id="Name"><a href="#Name" class="headerlink" title="Name"></a>Name</h2><ul>
+<li>工作区：working area</li>
+<li>暂存区：stage area 也叫缓存区（cache area）</li>
+<li>仓库区：repository area</li>
+</ul>
+<blockquote>
+<p>git diff –staged 和 –cached 是一个意思<br>注意存在 git restore –staged 但不存在 git restore –cached</p>
+</blockquote>
+<h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><ul>
+<li>工作区：结构为working tree</li>
+<li>暂存区：结构为index tree</li>
+<li>仓库区：结构为commit tree</li>
+</ul>
+<h1 id="Repository"><a href="#Repository" class="headerlink" title="Repository"></a>Repository</h1><h2 id="Clone"><a href="#Clone" class="headerlink" title="Clone"></a>Clone</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42672770/article/details/81317778">git clone详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jilijo/article/details/119566455">git init详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Remote"><a href="#Remote" class="headerlink" title="Remote"></a>Remote</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33210042/article/details/119730978">git remote入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38085855/article/details/82684167">git remote详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44863237/article/details/130116543">git添加多个远程仓库入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012022003/article/details/53734730">git添加多个远程仓库进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yangyangrenren/article/details/121133338">git添加多个远程仓库详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Submodule"><a href="#Submodule" class="headerlink" title="Submodule"></a>Submodule</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/guotianqing/article/details/82391665">git submodule入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Java0258/article/details/108532507">git submodule进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wkyseo/article/details/81589477">git submodule详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tyustli/article/details/129460567">git 添加子模块详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Lee_queenie/article/details/127386151">git 删除子模块详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dongguanghuiyin/article/details/78792992">git 重新添加子模块详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Object-1"><a href="#Object-1" class="headerlink" title="Object"></a>Object</h1><h2 id="Branch"><a href="#Branch" class="headerlink" title="Branch"></a>Branch</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chaogu94/article/details/111057918">git branch详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kingyc123456789/article/details/108683676">git checkout（切换分支）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zxlyx/article/details/124218646">git switch详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010665216/article/details/129736023">git 删除分支详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_49343190/article/details/121924241">git 重命名分支详解</a></li>
+</ul>
+</blockquote>
+<p>推荐用git switch代替git checkout来切换分支</p>
+<h2 id="Tag"><a href="#Tag" class="headerlink" title="Tag"></a>Tag</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jdsjlzx/article/details/98654951">git tag详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/i_dont_know_a/article/details/90202674">git 删除标签详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Change"><a href="#Change" class="headerlink" title="Change"></a>Change</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44567318/article/details/119701438">git status详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39505245/article/details/119899171">git diff详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_61502213/article/details/120610030">git add详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42780289/article/details/98353792">git rm详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yan3013216087/article/details/103136868">git mv详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/raoxiaoya/article/details/111321583">git checkout（检出文件）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_20817327/article/details/116898718">git restore详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/stone_yw/article/details/80795669">git stash详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44815943/article/details/117476879">git ls-files详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/littlehaes/article/details/106960889">git ls-tree详解</a></li>
+</ul>
+</blockquote>
+<p>推荐用git restore代替git checkout来还原变更</p>
+<h1 id="Commit"><a href="#Commit" class="headerlink" title="Commit"></a>Commit</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40994734/article/details/128694274">git commit详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/asdfgh0077/article/details/103984900">git commit signoff详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36125138/article/details/118606548">git revert和reset详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/guyue35/article/details/82703065">git revert详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zts_zts/article/details/115220786">git reset详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/carolzhang8406/article/details/49761927">git reset模式入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44544859/article/details/122325272">git reset模式进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lishuoboy/article/details/112066463">git reset模式详解</a></li>
+</ul>
+</blockquote>
+<p>git revert：丢弃已提交记录的变更，并生成新的提交<br>git reset：丢弃已提交记录的变更，不生成新的提交</p>
+<blockquote>
+<p>注意：如果提交已经推送到仓库并被别人同步了，就不能使用git reset，否则会造成代码丢失</p>
+</blockquote>
+<h1 id="Sync"><a href="#Sync" class="headerlink" title="Sync"></a>Sync</h1><h2 id="Fetch"><a href="#Fetch" class="headerlink" title="Fetch"></a>Fetch</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42780289/article/details/98049574">git fetch详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Merge"><a href="#Merge" class="headerlink" title="Merge"></a>Merge</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42780289/article/details/97945300">git merge入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chaiyu2002/article/details/81020370">git merge进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28107929/article/details/104555680">git merge详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42310154/article/details/119004977">git rebase入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42780289/article/details/98078717">git rebase进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/small_white_123/article/details/121563248">git rebase详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/muzidigbig/article/details/122321393">git cherry-pick详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43201350/article/details/125757531">git显示冲突的文件</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zengjianze/article/details/105627349">git查找冲突的文件</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44297716/article/details/116117492">git查看未合并的分支</a></li>
+</ul>
+</blockquote>
+<h2 id="Pull"><a href="#Pull" class="headerlink" title="Pull"></a>Pull</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/BUCTOJ/article/details/89879619">git pull详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Push"><a href="#Push" class="headerlink" title="Push"></a>Push</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhs260133172/article/details/113882525">git push入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yzpbright/article/details/115574130">git push进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40816738/article/details/105109944">git push详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Upstream"><a href="#Upstream" class="headerlink" title="Upstream"></a>Upstream</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xixihahalelehehe/article/details/129158399">git upstream入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ken1583096683/article/details/83021257">git upstream进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cllcsy/article/details/122136524">git upstream详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Fork"><a href="#Fork" class="headerlink" title="Fork"></a>Fork</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/whutshiliu/article/details/112504520">git fork保持同步入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wakarimasu/article/details/109152932">git fork保持同步进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43207025/article/details/106875614">git fork保持同步详解</a></li>
+</ul>
+</blockquote>
+<h1 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/daguanjia11/article/details/73823617">git log入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/albertsh/article/details/108439423">git log进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011106915/article/details/105836289">git log详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jjlovefj/article/details/86476925">git log精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ystyaoshengting/article/details/113781167">git show详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wq6ylg08/article/details/88909813">git blame详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chaiyu2002/article/details/81773041">git reflog详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangphil/article/details/79964751">git log之查看最近的提交记录</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/asdfgh0077/article/details/103453994">git log之搜索指定的变更记录</a></li>
+</ul>
+</blockquote>
+<h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><p>git prune：清除所有不可达的对象<br>git clean：清除所有未追踪的对象</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sgs595595/article/details/72480346">git prune详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44137575/article/details/108142088">git clean详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012835970/article/details/117948368">git 清除所有提交记录并成为一个新的干净仓库</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/asdfgh0077/article/details/106939756">git 列出仓库中的文件</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.git-tower.com/learn/git/faq/restoring-deleted-files/">git 恢复已删除的文件</a></li>
+</ul>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>只想买包辣条</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/pay/wechatpay.jpeg" alt="朱继鹏 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/dev/" rel="tag"># + dev</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/01/05/dev/dev-5-editor/editor-5-vim/" rel="prev" title="vim编辑器">
+      <i class="fa fa-chevron-left"></i> vim编辑器
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/01/07/dev/dev-7-tools/tools-3-maven/" rel="next" title="maven">
+      maven <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Config"><span class="nav-number">1.1.</span> <span class="nav-text">Config</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Concept"><span class="nav-number">2.</span> <span class="nav-text">Concept</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Area"><span class="nav-number">2.1.</span> <span class="nav-text">Area</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Name"><span class="nav-number">2.2.</span> <span class="nav-text">Name</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object"><span class="nav-number">2.3.</span> <span class="nav-text">Object</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Repository"><span class="nav-number">3.</span> <span class="nav-text">Repository</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Clone"><span class="nav-number">3.1.</span> <span class="nav-text">Clone</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remote"><span class="nav-number">3.2.</span> <span class="nav-text">Remote</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Submodule"><span class="nav-number">3.3.</span> <span class="nav-text">Submodule</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Object-1"><span class="nav-number">4.</span> <span class="nav-text">Object</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Branch"><span class="nav-number">4.1.</span> <span class="nav-text">Branch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tag"><span class="nav-number">4.2.</span> <span class="nav-text">Tag</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Change"><span class="nav-number">5.</span> <span class="nav-text">Change</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Commit"><span class="nav-number">6.</span> <span class="nav-text">Commit</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sync"><span class="nav-number">7.</span> <span class="nav-text">Sync</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fetch"><span class="nav-number">7.1.</span> <span class="nav-text">Fetch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Merge"><span class="nav-number">7.2.</span> <span class="nav-text">Merge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pull"><span class="nav-number">7.3.</span> <span class="nav-text">Pull</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Push"><span class="nav-number">7.4.</span> <span class="nav-text">Push</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Upstream"><span class="nav-number">7.5.</span> <span class="nav-text">Upstream</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fork"><span class="nav-number">7.6.</span> <span class="nav-text">Fork</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Log"><span class="nav-number">8.</span> <span class="nav-text">Log</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="朱继鹏"
+      src="/images/avatar/zhujipeng.jpg">
+  <p class="site-author-name" itemprop="name">朱继鹏</p>
+  <div class="site-description" itemprop="description">在全栈的路上狂奔不止</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jipengzhu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jipengzhu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jipengzhu@qq.com" title="E-Mail → mailto:jipengzhu@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱继鹏</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
