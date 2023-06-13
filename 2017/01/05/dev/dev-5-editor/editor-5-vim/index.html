@@ -28,7 +28,7 @@
 <meta property="og:description" content="vim编辑器">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-01-04T21:00:00.000Z">
-<meta property="article:modified_time" content="2023-06-08T12:27:35.922Z">
+<meta property="article:modified_time" content="2023-06-13T11:27:33.711Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-08 20:27:35" itemprop="dateModified" datetime="2023-06-08T20:27:35+08:00">2023-06-08</time>
+                <time title="修改时间：2023-06-13 19:27:33" itemprop="dateModified" datetime="2023-06-13T19:27:33+08:00">2023-06-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -259,80 +259,51 @@
 <li><a target="_blank" rel="noopener" href="https://yianwillis.github.io/vimcdoc/doc/">vim文档</a></li>
 </ul>
 </blockquote>
-<h2 id="Shortcut"><a href="#Shortcut" class="headerlink" title="Shortcut"></a>Shortcut</h2><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zc21463071/article/details/106032116">vim快捷键入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MyronCham/article/details/86746279">vim快捷键进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mier9042/article/details/82981833">vim快捷键详解</a></li>
-</ul>
-</blockquote>
-<h3 id="Leader"><a href="#Leader" class="headerlink" title="Leader"></a>Leader</h3><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32949893/article/details/113339607">vim之leader键入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37280924/article/details/107753266">vim之leader键进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jiangkejkl/article/details/121634786">vim之leader键详解</a></li>
-</ul>
-</blockquote>
-<h2 id="Grammar"><a href="#Grammar" class="headerlink" title="Grammar"></a>Grammar</h2><h3 id="Mode"><a href="#Mode" class="headerlink" title="Mode"></a>Mode</h3><blockquote>
+<h2 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h2><h3 id="Mode"><a href="#Mode" class="headerlink" title="Mode"></a>Mode</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangzeyuaaa/article/details/53404808">vim之mode入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Mark_md/article/details/111040008">vim之mode进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39147299/article/details/108972206">vim之mode详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013408061/article/details/77853130">vim之命令模式入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chenhuanyang/article/details/48680549">vim之命令模式进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hitlion2008/article/details/8799327">vim之命令模式详解</a></li>
 </ul>
 </blockquote>
 <ul>
-<li>普通模式：按esc进入</li>
-<li>编辑模式：普通模式时按i（insert）、a（append）、o进入</li>
-<li>命令模式：普通模式时按冒号（: 执行命令）或斜杠（&#x2F; 向前搜索）或问号（? 向后搜索）进入</li>
-<li>可视模式：普通模式时按v（visual 会选中一个字）或V（Visual 会选中一整行）进入</li>
+<li>普通模式：按<code>esc</code>进入</li>
+<li>编辑模式：普通模式时按<code>i</code>（在光标前插入）或<code>a</code>（在光标后插入）或<code>o</code>（在下一行插入）进入</li>
+<li>末行模式：普通模式时按<code>:</code>（冒号执行命令）或<code>/</code>（斜杠向前搜索）或<code>?</code>（问号向后搜索）进入</li>
+<li>可视模式：普通模式时按<code>v</code>（小v会选中一个字）或<code>V</code>（大V会选中一整行）进入</li>
 </ul>
 <h4 id="Edit-Mode"><a href="#Edit-Mode" class="headerlink" title="Edit Mode"></a>Edit Mode</h4><ul>
-<li>i：在光标前插入</li>
-<li>I：在行首（bol）处插入</li>
-<li>a：在光标后插入</li>
-<li>A：在行尾（eol）处插入</li>
-<li>o：在下一行插入空行</li>
-<li>O：在上一行插入空行</li>
+<li><code>i</code>：进入插入编辑模式，在光标前插入</li>
+<li><code>I</code>：进入插入编辑模式，在行首（bol）处插入</li>
+<li><code>a</code>：进入追加编辑模式，在光标后追加</li>
+<li><code>A</code>：进入追加编辑模式，在行尾（eol）后追加</li>
+<li><code>o</code>：进入新行编辑模式，在下一行添加新行</li>
+<li><code>O</code>：进入新行编辑模式，在上一行添加新行</li>
+<li><code>r</code>：进入替换编辑模式，重复替换多个字（前面可接数字）</li>
+<li><code>R</code>：进入替换编辑模式，连续替换多个字（按<code>esc</code>结束）</li>
 </ul>
-<h4 id="Command-Mode"><a href="#Command-Mode" class="headerlink" title="Command Mode"></a>Command Mode</h4><ul>
-<li>:（冒号）：执行命令</li>
-<li>&#x2F;（斜杠）：向前搜索</li>
-<li>?（问号）：向后搜索</li>
-</ul>
-<p>快捷键如下</p>
+<blockquote>
+<p><code>i</code> ：insert， <code>a</code> ：append， <code>o</code> ：open， <code>r</code> ：replace</p>
+</blockquote>
+<h4 id="Line-Mode"><a href="#Line-Mode" class="headerlink" title="Line Mode"></a>Line Mode</h4><blockquote>
 <ul>
-<li>移动到行首：home、ctrl + b</li>
-<li>移动到行尾：end、ctrl + e</li>
-<li>移动到（上一个）词首：ctrl + arrow left</li>
-<li>移动到（下一个）词尾：ctrl + arrow right</li>
-<li>从光标前删除到行首：ctrl + u</li>
-<li>从光标前删除到词首：ctrl + w</li>
-</ul>
-<h4 id="Visual-Mode"><a href="#Visual-Mode" class="headerlink" title="Visual Mode"></a>Visual Mode</h4><ul>
-<li>v：进入可视模式，并选中一个字</li>
-<li>V：进入可视模式，并选中一整行</li>
-</ul>
-<h3 id="Command"><a href="#Command" class="headerlink" title="Command"></a>Command</h3><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ningyanggege/article/details/104905996">vim之命令g详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zkreats/article/details/52644906">vim之执行外部命令入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/songtianlun/article/details/107614363">vim之执行外部命令详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013408061/article/details/77853130">vim之末行模式入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chenhuanyang/article/details/48680549">vim之末行模式进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hitlion2008/article/details/8799327">vim之末行模式详解</a></li>
 </ul>
 </blockquote>
-<p>vim命令格式：cmd[n][space|motion]</p>
 <ul>
-<li>x：cut，剪切，会停留在普通模式</li>
-<li>s：substitute，剪切，会进入编辑模式</li>
-<li>d：delete，剪切，会停留在普通模式</li>
-<li>c：change，剪切，会进入编辑模式</li>
-<li>r：replace，替换</li>
-<li>y：yank，复制</li>
-<li>p：paste，粘贴，p（粘贴到光标后）、P（粘贴到光标前）</li>
-<li>g：goto，跳转</li>
+<li><code>:</code>（冒号）：执行命令</li>
+<li><code>/</code>（斜杠）：向前搜索</li>
+<li><code>?</code>（问号）：向后搜索</li>
 </ul>
+<h4 id="Visual-Mode"><a href="#Visual-Mode" class="headerlink" title="Visual Mode"></a>Visual Mode</h4><ul>
+<li><code>v</code>：进入可视模式，并选中一个字</li>
+<li><code>V</code>：进入可视模式，并选中一整行</li>
+</ul>
+<blockquote>
+<p><code>v</code> ：visual</p>
+</blockquote>
 <h3 id="Motion"><a href="#Motion" class="headerlink" title="Motion"></a>Motion</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MrNoboday/article/details/105202740">vim之motion入门</a></li>
@@ -342,38 +313,69 @@
 </blockquote>
 <p>vim移动格式：[n]motion</p>
 <ul>
-<li>h：左移</li>
-<li>l：右移</li>
-<li>j：下移</li>
-<li>k：上移</li>
-<li>b：移动到（上一个）词首</li>
-<li>e：移动到（下一个）词尾</li>
-<li>w：移动到下一个词首</li>
-<li>0：移到行首</li>
-<li>^：移到行首（第一个非空白字符）</li>
-<li>$：移到行尾</li>
-<li>gg：移到页顶</li>
-<li>G：移到页底</li>
+<li><code>h</code>：左</li>
+<li><code>l</code>：右</li>
+<li><code>j</code>：下</li>
+<li><code>k</code>：上</li>
+<li><code>b</code>：词首</li>
+<li><code>e</code>：词尾</li>
+<li><code>w</code>：下一个词的词首</li>
+<li><code>0</code>：行首</li>
+<li><code>^</code>：行首（第一个非空白字符）</li>
+<li><code>$</code>：行尾</li>
 </ul>
-<h2 id="Exit"><a href="#Exit" class="headerlink" title="Exit"></a>Exit</h2><blockquote>
+<blockquote>
+<p><code>b</code> ：begin， <code>e</code> ：end， <code>w</code> ：word</p>
+</blockquote>
+<h2 id="Shortcut"><a href="#Shortcut" class="headerlink" title="Shortcut"></a>Shortcut</h2><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43768851/article/details/121629428">vim之exit入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/abc1716975442/article/details/104407263">vim之exit进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013347451/article/details/107859580">vim之exit详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zc21463071/article/details/106032116">vim快捷键入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MyronCham/article/details/86746279">vim快捷键进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mier9042/article/details/82981833">vim快捷键详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32949893/article/details/113339607">vim快捷键之leader键入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37280924/article/details/107753266">vim快捷键之leader键进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jiangkejkl/article/details/121634786">vim快捷键之leader键详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cwtxyi/article/details/120013003">vim快捷键之翻页</a></li>
 </ul>
 </blockquote>
-<ul>
-<li>w：保存不退出</li>
-<li>q：不保存退出（如果有修改会提示保存）</li>
-<li>wq：保存退出</li>
-<li>x：保存退出（有修改时）或者退出（无修改时）</li>
-<li>w!：强制保存不退出</li>
-<li>q!：强制不保存退出</li>
-<li>wq!：强制保存退出</li>
+<h3 id="普通模式快捷键"><a href="#普通模式快捷键" class="headerlink" title="普通模式快捷键"></a>普通模式快捷键</h3><ul>
+<li>移到首行：gg</li>
+<li>移到尾行：G</li>
+<li>向上翻页（整页）：ctrl + b</li>
+<li>向下翻页（整页）：ctrl + f</li>
+<li>向上翻页（半页）：ctrl + u</li>
+<li>向下翻页（半页）：ctrl + d</li>
+<li>光标行居中：zz</li>
+<li>光标行置顶：zt</li>
+<li>光标行置底：zb</li>
 </ul>
-<h1 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h1><h2 id="Edit"><a href="#Edit" class="headerlink" title="Edit"></a>Edit</h2><blockquote>
+<blockquote>
+<p><code>b</code> ：backward， <code>f</code> ：forward， <code>u</code> ：up， <code>d</code> ：down， <code>t</code> ：top， <code>b</code> ：bottom</p>
+</blockquote>
+<h3 id="末行模式快捷键"><a href="#末行模式快捷键" class="headerlink" title="末行模式快捷键"></a>末行模式快捷键</h3><ul>
+<li>移动到行首：home、ctrl + b</li>
+<li>移动到行尾：end、ctrl + e</li>
+<li>移动到（上一个）词首：ctrl + arrow left</li>
+<li>移动到（下一个）词尾：ctrl + arrow right</li>
+<li>从光标前删除到行首：ctrl + u</li>
+<li>从光标前删除到词首：ctrl + w</li>
+</ul>
+<blockquote>
+<p><code>b</code> ：begin， <code>e</code> ：end， <code>w</code> ：word</p>
+</blockquote>
+<h1 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h1><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46556293/article/details/124627889">vim编辑详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zuoyioo7/article/details/114273590">vim命令缩写入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43808700/article/details/104350155">vim命令缩写详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ningyanggege/article/details/104905996">vim之命令g详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zkreats/article/details/52644906">vim之执行外部命令入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/songtianlun/article/details/107614363">vim之执行外部命令详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Edit"><a href="#Edit" class="headerlink" title="Edit"></a>Edit</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46556293/article/details/124627889">vim编辑命令详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a3192048/article/details/88290444">vim编辑之寄存器和剪切板详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/guowake/article/details/2217086">vim编辑之大小写转换</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ly890700/article/details/52662161">vim编辑之撤销和重做</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39728909/article/details/112643802">vim编辑之删除空白符</a></li>
@@ -383,18 +385,38 @@
 <h3 id="Basic-1"><a href="#Basic-1" class="headerlink" title="Basic"></a>Basic</h3><ul>
 <li>全选（Select All）：ggVG</li>
 <li>删除（Delete）：</li>
-<li>剪切（Cut）：x、d + space|motion、c + space|motion</li>
-<li>复制（Copy）：y + space|motion</li>
+<li>剪切（Cut）：d[space|motion]、c[space|motion]</li>
+<li>复制（Copy）：y[space|motion]</li>
 <li>粘贴（Paste）：p（粘贴到光标后）、P（粘贴到光标前）、ctrl + v（编辑模式时）</li>
-<li>保存（Save）：w（命令模式时）</li>
+<li>保存（Save）：w（末行模式时）</li>
 </ul>
+<blockquote>
+<p><code>d</code> ：delete， <code>c</code> ：change， <code>y</code> ：yank， <code>p</code> ：put</p>
+</blockquote>
 <h3 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h3><ul>
 <li>剪切行：[n]dd、[n]cc</li>
 <li>复制行：[n]yy</li>
 </ul>
+<h4 id="Cut"><a href="#Cut" class="headerlink" title="Cut"></a>Cut</h4><p>eoi：end of input（vim中普通模式输入时空格和箭头可以做会输入结束符，回车和TAB不行）</p>
+<p>vim命令格式1： <code>[n]cmd</code></p>
+<ul>
+<li><code>x</code>：删除多个字，会停留在普通模式，会存到寄存器</li>
+<li><code>s</code>：删除多个字，会进入编辑模式，会存到寄存器</li>
+</ul>
+<blockquote>
+<p><code>x</code> ：remove， <code>s</code> ：substitute</p>
+</blockquote>
+<p>vim命令格式2： <code>[n]cmd&lt;eoi&gt;</code> 或 <code>cmd[n]&lt;eoi&gt;</code></p>
+<ul>
+<li><code>d</code>：删除多个字，会停留在普通模式，会存到寄存器</li>
+<li><code>c</code>：修改多个字，会进入编辑模式，会存到寄存器</li>
+</ul>
+<blockquote>
+<p><code>d</code> ：delete， <code>c</code> ：change</p>
+</blockquote>
 <h3 id="Transform"><a href="#Transform" class="headerlink" title="Transform"></a>Transform</h3><ul>
-<li>转大写（UpperCase）：gU + space|motion</li>
-<li>转小写（LowerCase）：gu + space|motion</li>
+<li>转大写（UpperCase）：gU[space|motion]</li>
+<li>转小写（LowerCase）：gu[space|motion]</li>
 <li>转标题（Capitalize）：</li>
 <li>转驼峰（CamelCase）：</li>
 <li>转蛇形（SnakeCase）：</li>
@@ -409,14 +431,17 @@
 </blockquote>
 <h3 id="Basic-2"><a href="#Basic-2" class="headerlink" title="Basic"></a>Basic</h3><ul>
 <li>常规性移动：arrow、hjkl</li>
-<li>移动到页顶：gg</li>
-<li>移动到页底：G</li>
+<li>移动到首行：gg</li>
+<li>移动到尾行：G</li>
 <li>移动到行首：home、0、^</li>
 <li>移动到行尾：end、$</li>
 <li>移动到（上一个）词首：ctrl + arrow left、b</li>
 <li>移动到（下一个）词尾：ctrl + arrow right、e</li>
 <li>移动到下一个词首：w</li>
 </ul>
+<blockquote>
+<p><code>g</code> ：goto， <code>b</code> ：begin， <code>e</code> ：end</p>
+</blockquote>
 <h3 id="Backward"><a href="#Backward" class="headerlink" title="Backward"></a>Backward</h3><ul>
 <li>后退（Backward）：ctrl + o</li>
 </ul>
@@ -443,6 +468,22 @@
 <h3 id="Shrink"><a href="#Shrink" class="headerlink" title="Shrink"></a>Shrink</h3><ul>
 <li>收缩（Shrink）选择：v + motion</li>
 </ul>
+<h2 id="Exit"><a href="#Exit" class="headerlink" title="Exit"></a>Exit</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43768851/article/details/121629428">vim之exit入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/abc1716975442/article/details/104407263">vim之exit进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013347451/article/details/107859580">vim之exit详解</a></li>
+</ul>
+</blockquote>
+<ul>
+<li><code>w</code>：保存不退出</li>
+<li><code>q</code>：不保存退出（如果有修改会提示保存）</li>
+<li><code>wq</code>：保存退出</li>
+<li><code>x</code>：保存退出（有修改时）或者退出（无修改时）</li>
+<li><code>w!</code>：强制保存不退出</li>
+<li><code>q!</code>：强制不保存退出</li>
+<li><code>wq!</code>：强制保存退出</li>
+</ul>
 <h2 id="Find"><a href="#Find" class="headerlink" title="Find"></a>Find</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35624263/article/details/77181057">vim查找入门</a></li>
@@ -450,8 +491,14 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39834780/article/details/116890822">vim查找详解</a></li>
 </ul>
 </blockquote>
-<p>vim查找格式：&#x2F;pattern</p>
-<h3 id="pattern"><a href="#pattern" class="headerlink" title="pattern"></a>pattern</h3><blockquote>
+<p>vim查找格式： <code>/pattern</code> 和 <code>?pattern</code></p>
+<ul>
+<li><code>*</code>：快速正向查找一个单词</li>
+<li><code>#</code>：快速反向查找一个单词</li>
+<li><code>n</code>：搜索中的下一个</li>
+<li><code>N</code>：搜索中的上一个</li>
+</ul>
+<h3 id="Pattern"><a href="#Pattern" class="headerlink" title="Pattern"></a>Pattern</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://yianwillis.github.io/vimcdoc/doc/pattern.html">vim之pattern详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liaowenxiong/article/details/118265794">vim之magic详解</a></li>
@@ -466,8 +513,8 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39955418/article/details/110373502">vim替换详解</a></li>
 </ul>
 </blockquote>
-<p>vim替换格式：[range]s&#x2F;source&#x2F;target&#x2F;option</p>
-<h3 id="range"><a href="#range" class="headerlink" title="range"></a>range</h3><p>range的边界格式如下</p>
+<p>vim替换格式： <code>[range]s/source/target/option</code></p>
+<h3 id="Range"><a href="#Range" class="headerlink" title="Range"></a>Range</h3><p>range的边界格式如下</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.：代表当前行</span><br><span class="line">n：代表第n行</span><br><span class="line">%：代表所有行</span><br><span class="line">$：代表最后一行</span><br><span class="line">/search-pattern/：代表下一个搜索结果所在的行</span><br><span class="line">?backwards-search-pattern?：代表上一个搜索结果所在的行</span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -476,13 +523,37 @@
 <p>range是左闭右闭的，省去range使用光标所在的行，range的一边缺省使用光标所在的行代替那一边</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">%：所有行</span><br><span class="line">1,3：第1到3行</span><br><span class="line">3,$：第3行到最后一行</span><br><span class="line">1,.：第1行到当前行</span><br><span class="line">.,$：当前行到最后一行</span><br><span class="line">1,：第1行到当前行</span><br><span class="line">,$：当前行到最后一行</span><br></pre></td></tr></table></figure>
 
-<h3 id="option"><a href="#option" class="headerlink" title="option"></a>option</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">g：表示全局替换，将匹配到的所有项都替换掉，而不仅仅是第一个</span><br><span class="line">c：表示每次替换前需要确认，即弹出一个界面供用户确认是否替换</span><br><span class="line">e：表示没有匹配项时不显示错误</span><br><span class="line">i：表示忽略大小写</span><br><span class="line">I：表示区分大小写</span><br></pre></td></tr></table></figure>
+<h3 id="Option"><a href="#Option" class="headerlink" title="Option"></a>Option</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">g：表示全局替换，将匹配到的所有项都替换掉，而不仅仅是第一个</span><br><span class="line">c：表示每次替换前需要确认，即弹出一个界面供用户确认是否替换</span><br><span class="line">e：表示没有匹配项时不显示错误</span><br><span class="line">i：表示忽略大小写</span><br><span class="line">I：表示区分大小写</span><br></pre></td></tr></table></figure>
 
+<h1 id="Skill"><a href="#Skill" class="headerlink" title="Skill"></a>Skill</h1><h2 id="File"><a href="#File" class="headerlink" title="File"></a>File</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/deng529828/article/details/6031261">vim之强制保存只读文件</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cscrazybing/article/details/48969183">vim之用只读模式打开文件</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jy692405180/article/details/79775125">vim之Buffer、Window和Tab入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/gaoyuan_zz/article/details/90812755">vim之Buffer、Window和Tab详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_57943685/article/details/130547911">vim之Buffer详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://lusing.blog.csdn.net/article/details/74943831">vim之Window详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lusing/article/details/74973914">vim之Tab详解</a></li>
+</ul>
+</blockquote>
+<ul>
+<li><code>:split</code>：打开一个文件（水平切分窗口）</li>
+<li><code>:vsplit</code>：打开一个文件（垂直切分窗口）</li>
+<li><code>:sview</code>：用只读模式打开一个文件（水平切分窗口）</li>
+<li><code>:vertical sview</code> 用只读模式打开一个文件（垂直切分窗口）</li>
+<li><code>:new</code>：新建一个文件（水平切分窗口）</li>
+<li><code>:vnew</code>：新建一个文件（垂直切分窗口）</li>
+<li><code>:edit</code>：编辑一个文件（替换当前窗口）</li>
+</ul>
 <h2 id="Diff"><a href="#Diff" class="headerlink" title="Diff"></a>Diff</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Zen_y/article/details/117774000">vim之diff详解</a></li>
 </ul>
 </blockquote>
+<ul>
+<li><code>:diffsplit</code>：比较两个文件（水平切分窗口）</li>
+<li><code>:vertical diffsplit</code> 比较两个文件（垂直切分窗口）</li>
+</ul>
 <h2 id="Grep"><a href="#Grep" class="headerlink" title="Grep"></a>Grep</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jiangkejkl/article/details/121422352">vim之grep详解</a></li>
@@ -625,7 +696,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Shortcut"><span class="nav-number">1.1.</span> <span class="nav-text">Shortcut</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Leader"><span class="nav-number">1.1.1.</span> <span class="nav-text">Leader</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Grammar"><span class="nav-number">1.2.</span> <span class="nav-text">Grammar</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mode"><span class="nav-number">1.2.1.</span> <span class="nav-text">Mode</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Edit-Mode"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Edit Mode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Command-Mode"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">Command Mode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Visual-Mode"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">Visual Mode</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Command"><span class="nav-number">1.2.2.</span> <span class="nav-text">Command</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Motion"><span class="nav-number">1.2.3.</span> <span class="nav-text">Motion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exit"><span class="nav-number">1.3.</span> <span class="nav-text">Exit</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Usage"><span class="nav-number">2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Edit"><span class="nav-number">2.1.</span> <span class="nav-text">Edit</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advanced"><span class="nav-number">2.1.2.</span> <span class="nav-text">Advanced</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transform"><span class="nav-number">2.1.3.</span> <span class="nav-text">Transform</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Undo"><span class="nav-number">2.1.4.</span> <span class="nav-text">Undo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redo"><span class="nav-number">2.1.5.</span> <span class="nav-text">Redo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Move"><span class="nav-number">2.2.</span> <span class="nav-text">Move</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-2"><span class="nav-number">2.2.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Backward"><span class="nav-number">2.2.2.</span> <span class="nav-text">Backward</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Forward"><span class="nav-number">2.2.3.</span> <span class="nav-text">Forward</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Select"><span class="nav-number">2.3.</span> <span class="nav-text">Select</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-3"><span class="nav-number">2.3.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expand"><span class="nav-number">2.3.2.</span> <span class="nav-text">Expand</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shrink"><span class="nav-number">2.3.3.</span> <span class="nav-text">Shrink</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Find"><span class="nav-number">2.4.</span> <span class="nav-text">Find</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pattern"><span class="nav-number">2.4.1.</span> <span class="nav-text">pattern</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Replace"><span class="nav-number">2.5.</span> <span class="nav-text">Replace</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#range"><span class="nav-number">2.5.1.</span> <span class="nav-text">range</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#option"><span class="nav-number">2.5.2.</span> <span class="nav-text">option</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Diff"><span class="nav-number">2.6.</span> <span class="nav-text">Diff</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Grep"><span class="nav-number">2.7.</span> <span class="nav-text">Grep</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#View"><span class="nav-number">3.</span> <span class="nav-text">View</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Search"><span class="nav-number">3.1.</span> <span class="nav-text">Search</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Explore"><span class="nav-number">3.2.</span> <span class="nav-text">Explore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Outline"><span class="nav-number">3.3.</span> <span class="nav-text">Outline</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Intellisense"><span class="nav-number">4.</span> <span class="nav-text">Intellisense</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Plugins"><span class="nav-number">5.</span> <span class="nav-text">Plugins</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">6.</span> <span class="nav-text">Other</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Concept"><span class="nav-number">1.1.</span> <span class="nav-text">Concept</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mode"><span class="nav-number">1.1.1.</span> <span class="nav-text">Mode</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Edit-Mode"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">Edit Mode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Line-Mode"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">Line Mode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Visual-Mode"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">Visual Mode</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Motion"><span class="nav-number">1.1.2.</span> <span class="nav-text">Motion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shortcut"><span class="nav-number">1.2.</span> <span class="nav-text">Shortcut</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E6%A8%A1%E5%BC%8F%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">1.2.1.</span> <span class="nav-text">普通模式快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AB%E8%A1%8C%E6%A8%A1%E5%BC%8F%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">1.2.2.</span> <span class="nav-text">末行模式快捷键</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Usage"><span class="nav-number">2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Edit"><span class="nav-number">2.1.</span> <span class="nav-text">Edit</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advanced"><span class="nav-number">2.1.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Cut"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">Cut</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transform"><span class="nav-number">2.1.3.</span> <span class="nav-text">Transform</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Undo"><span class="nav-number">2.1.4.</span> <span class="nav-text">Undo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redo"><span class="nav-number">2.1.5.</span> <span class="nav-text">Redo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Move"><span class="nav-number">2.2.</span> <span class="nav-text">Move</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-2"><span class="nav-number">2.2.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Backward"><span class="nav-number">2.2.2.</span> <span class="nav-text">Backward</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Forward"><span class="nav-number">2.2.3.</span> <span class="nav-text">Forward</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Select"><span class="nav-number">2.3.</span> <span class="nav-text">Select</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-3"><span class="nav-number">2.3.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expand"><span class="nav-number">2.3.2.</span> <span class="nav-text">Expand</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shrink"><span class="nav-number">2.3.3.</span> <span class="nav-text">Shrink</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exit"><span class="nav-number">2.4.</span> <span class="nav-text">Exit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Find"><span class="nav-number">2.5.</span> <span class="nav-text">Find</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pattern"><span class="nav-number">2.5.1.</span> <span class="nav-text">Pattern</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Replace"><span class="nav-number">2.6.</span> <span class="nav-text">Replace</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Range"><span class="nav-number">2.6.1.</span> <span class="nav-text">Range</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Option"><span class="nav-number">2.6.2.</span> <span class="nav-text">Option</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Skill"><span class="nav-number">3.</span> <span class="nav-text">Skill</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#File"><span class="nav-number">3.1.</span> <span class="nav-text">File</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Diff"><span class="nav-number">3.2.</span> <span class="nav-text">Diff</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Grep"><span class="nav-number">3.3.</span> <span class="nav-text">Grep</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#View"><span class="nav-number">4.</span> <span class="nav-text">View</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Search"><span class="nav-number">4.1.</span> <span class="nav-text">Search</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Explore"><span class="nav-number">4.2.</span> <span class="nav-text">Explore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Outline"><span class="nav-number">4.3.</span> <span class="nav-text">Outline</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Intellisense"><span class="nav-number">5.</span> <span class="nav-text">Intellisense</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Plugins"><span class="nav-number">6.</span> <span class="nav-text">Plugins</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">7.</span> <span class="nav-text">Other</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
