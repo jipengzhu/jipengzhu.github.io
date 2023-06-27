@@ -28,7 +28,7 @@
 <meta property="og:description" content="mysql">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-31T17:01:00.000Z">
-<meta property="article:modified_time" content="2023-06-26T05:09:35.600Z">
+<meta property="article:modified_time" content="2023-06-27T05:01:32.103Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-26 13:09:35" itemprop="dateModified" datetime="2023-06-26T13:09:35+08:00">2023-06-26</time>
+                <time title="修改时间：2023-06-27 13:01:32" itemprop="dateModified" datetime="2023-06-27T13:01:32+08:00">2023-06-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -532,6 +532,12 @@
 </blockquote>
 <p>单个插入、批量插入</p>
 <p>insertOrReject：insert into<br>insertOrIgnore：insert ignore into<br>insertOrUpdate: insert into … on duplicate key update<br>insertOrReplace：replace into</p>
+<p>全局唯一主键插入防重复方案</p>
+<ul>
+<li>重试：捕获主键重复异常（比如DuplicateKeyException）并换一个主键重试（适合读多写少的场景）</li>
+<li>加锁：<code>select for update</code>检测到重复后并换一个主键重试（适合常规读写的场景）</li>
+<li>发号：使用不会生成重复号码的发号器</li>
+</ul>
 <h3 id="update"><a href="#update" class="headerlink" title="update"></a>update</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a6458360/article/details/107968858">mysql更新之updateOrIgnore入门</a></li>
