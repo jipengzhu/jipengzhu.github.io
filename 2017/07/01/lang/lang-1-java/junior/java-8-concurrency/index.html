@@ -28,7 +28,7 @@
 <meta property="og:description" content="java并发篇">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T17:08:00.000Z">
-<meta property="article:modified_time" content="2023-06-28T11:28:54.387Z">
+<meta property="article:modified_time" content="2023-06-30T07:25:38.459Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-28 19:28:54" itemprop="dateModified" datetime="2023-06-28T19:28:54+08:00">2023-06-28</time>
+                <time title="修改时间：2023-06-30 15:25:38" itemprop="dateModified" datetime="2023-06-30T15:25:38+08:00">2023-06-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -325,6 +325,9 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_34167819/article/details/85629990">Thread之阻塞IO如何中断</a></li>
 </ul>
 </blockquote>
+<blockquote>
+<p>ps： <code>interrupt</code> 可以中断 <code>sleep</code>、<code>join</code>、<code>wait</code> 等那些判断了 <code>isInterrupted</code> 的操作</p>
+</blockquote>
 <h3 id="Terminate"><a href="#Terminate" class="headerlink" title="Terminate"></a>Terminate</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_26482855/article/details/118676625">Thread之线程终止入门</a></li>
@@ -349,20 +352,10 @@
 <li>线程（Thread）是执行和调度的基本单位</li>
 <li>进程（Process）是分配资源的基本单位</li>
 </ul>
-<h3 id="创建线程的方式有哪些"><a href="#创建线程的方式有哪些" class="headerlink" title="创建线程的方式有哪些"></a>创建线程的方式有哪些</h3><ul>
+<h3 id="java创建线程的方式有哪些"><a href="#java创建线程的方式有哪些" class="headerlink" title="java创建线程的方式有哪些"></a>java创建线程的方式有哪些</h3><ul>
 <li>继承Thread，并实现run方法，然后调用start启动</li>
 <li>实现Runnable，并作为target传递给线程进行启动</li>
 <li>实现Callable，并用FutureTask包装后作为target传递给线程进行启动</li>
-</ul>
-<h3 id="说一下线程的状态变化"><a href="#说一下线程的状态变化" class="headerlink" title="说一下线程的状态变化"></a>说一下线程的状态变化</h3><p>NEW、READY、RUNNING、WAITING、TIMED_WAITING、BLOCKED、TERMINATED</p>
-<ul>
-<li>NEW（新建）：创建线程后进入此状态</li>
-<li>READY（就绪）：创建后调用Thread.start或者运行时调用Thread.yield进入此状态</li>
-<li>RUNNING（运行）：获取资源（cpu和lock）成功后进入此状态</li>
-<li>WAITING（等待）：调用Thread.join、Object.wait、LockSupport.park的非超时方法后进入此状态</li>
-<li>TIMED_WAITING（超时等待）：调用Thread.sleep、Thread.join、Object.wait、LockSupport.park的超时方法后进入此状态</li>
-<li>BLOCKED（阻塞）：获取lock失败或者等待超时后进入此状态</li>
-<li>TERMINATED（死亡）：结束线程后进入此状态</li>
 </ul>
 <h3 id="Runnable和Callable的区别"><a href="#Runnable和Callable的区别" class="headerlink" title="Runnable和Callable的区别"></a>Runnable和Callable的区别</h3><blockquote>
 <ul>
@@ -373,19 +366,19 @@
 <li>Runnable不能获取返回值</li>
 <li>Callable和Future、FutureTask配合可以获取返回值</li>
 </ul>
-<h3 id="run和start的区别"><a href="#run和start的区别" class="headerlink" title="run和start的区别"></a>run和start的区别</h3><blockquote>
+<h3 id="Thread的start和run的区别"><a href="#Thread的start和run的区别" class="headerlink" title="Thread的start和run的区别"></a>Thread的start和run的区别</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Mypromise_TFS/article/details/81096007">run和start的区别</a></li>
 </ul>
 </blockquote>
 <ul>
-<li>run是普通方法，不会启动线程</li>
 <li>start是本地方法，会启动线程</li>
+<li>run是普通方法，不会启动线程</li>
 </ul>
 <blockquote>
 <p>start调用了start0，start0是本地方法</p>
 </blockquote>
-<h3 id="sleep和yield的区别"><a href="#sleep和yield的区别" class="headerlink" title="sleep和yield的区别"></a>sleep和yield的区别</h3><blockquote>
+<h3 id="Thread的sleep和yield的区别"><a href="#Thread的sleep和yield的区别" class="headerlink" title="Thread的sleep和yield的区别"></a>Thread的sleep和yield的区别</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/rod0320/article/details/123167174">sleep和yield的区别</a></li>
 </ul>
@@ -395,7 +388,7 @@
 <li>锁：都不释放锁</li>
 <li>状态：sleep进入到等待状态，yield进入到就绪状态</li>
 </ul>
-<h3 id="sleep和join的区别"><a href="#sleep和join的区别" class="headerlink" title="sleep和join的区别"></a>sleep和join的区别</h3><blockquote>
+<h3 id="Thread的sleep和join的区别"><a href="#Thread的sleep和join的区别" class="headerlink" title="Thread的sleep和join的区别"></a>Thread的sleep和join的区别</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/rod0320/article/details/123167174">sleep和join的区别</a></li>
 </ul>
@@ -587,7 +580,7 @@
 </blockquote>
 <h3 id="锁的问题"><a href="#锁的问题" class="headerlink" title="锁的问题"></a>锁的问题</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37734042/article/details/108417432">饥饿和公平详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37734042/article/details/108417432">饥饿和公平问题详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chow__zh/article/details/123968286">死锁问题详解</a></li>
 </ul>
 </blockquote>
@@ -606,9 +599,9 @@
 <li>修饰实例方法，锁是当前实例对象</li>
 <li>修饰代码块，锁是括号里面的对象</li>
 </ul>
-<h4 id="synchronized锁优化"><a href="#synchronized锁优化" class="headerlink" title="synchronized锁优化"></a>synchronized锁优化</h4><blockquote>
+<h4 id="synchronized锁膨胀"><a href="#synchronized锁膨胀" class="headerlink" title="synchronized锁膨胀"></a>synchronized锁膨胀</h4><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41590779/article/details/107821829">synchronized锁优化</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41590779/article/details/107821829">synchronized锁膨胀</a></li>
 </ul>
 </blockquote>
 <ul>
@@ -642,6 +635,10 @@
 <li>synchronized是java关键字，Lock是java类</li>
 </ul>
 </li>
+<li>实现：<ul>
+<li>synchronized基于操作系统mutex机制实现，Lock基于java的AQS机制实现</li>
+</ul>
+</li>
 <li>操作：<ul>
 <li>synchronized会自动释放锁，Lock需要手动释放</li>
 </ul>
@@ -658,10 +655,6 @@
 <li>synchronized支持重入，Lock也支持重入</li>
 <li>synchronized不支持中断，Lock可支持中断（也支持不可中断）</li>
 <li>synchronized不支持公平锁，Lock可支持公平锁（也支持非公平）</li>
-</ul>
-</li>
-<li>实现：<ul>
-<li>synchronized基于操作系统mutex机制实现，Lock基于jvm实现</li>
 </ul>
 </li>
 </ul>
@@ -699,7 +692,7 @@
 </ul>
 </blockquote>
 <h3 id="LockSupport"><a href="#LockSupport" class="headerlink" title="LockSupport"></a>LockSupport</h3><p>LockSupport.park可以实现阻塞功能但不能实现互斥功能</p>
-<h1 id="Task"><a href="#Task" class="headerlink" title="Task"></a>Task</h1><h2 id="SyncTask"><a href="#SyncTask" class="headerlink" title="SyncTask"></a>SyncTask</h2><p>java中没有SyncTask类，对应的类为FutureTask</p>
+<h1 id="Task"><a href="#Task" class="headerlink" title="Task"></a>Task</h1><h2 id="Basic-4"><a href="#Basic-4" class="headerlink" title="Basic"></a>Basic</h2><h2 id="Usage-1"><a href="#Usage-1" class="headerlink" title="Usage"></a>Usage</h2><h3 id="SyncTask"><a href="#SyncTask" class="headerlink" title="SyncTask"></a>SyncTask</h3><p>java中没有SyncTask类，对应的类为FutureTask</p>
 <ul>
 <li>Future：普通任务的接口，对应的实现类为FutureTask</li>
 <li>RunnableFuture：对Runnable进行包装的Future</li>
@@ -711,22 +704,23 @@
 <li>ExecutorService：普通任务的执行器，对应的实现类为ThreadPoolExecutor</li>
 <li>ScheduledExecutorService：调度任务的执行器，对应的实现类为ScheduledThreadPoolExecutor</li>
 </ul>
-<h3 id="Future"><a href="#Future" class="headerlink" title="Future"></a>Future</h3><blockquote>
+<h4 id="Future"><a href="#Future" class="headerlink" title="Future"></a>Future</h4><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014209205/article/details/80598209">Future详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43145361/article/details/97049103">RunnableFuture详解</a></li>
 </ul>
 </blockquote>
-<h4 id="FutureTask"><a href="#FutureTask" class="headerlink" title="FutureTask"></a>FutureTask</h4><h5 id="Basic-4"><a href="#Basic-4" class="headerlink" title="Basic"></a>Basic</h5><blockquote>
+<h4 id="FutureTask"><a href="#FutureTask" class="headerlink" title="FutureTask"></a>FutureTask</h4><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lp284558195/article/details/115670103">FutureTask使用入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40685275/article/details/99838677">FutureTask使用详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_27264789/article/details/100129323">FutureTask原理详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33591903/article/details/108422098">FutureTask为什么支持传递给线程</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014644574/article/details/114327939">FutureTask.cancel取消任务</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cuiwjava/article/details/108186030">FutureTask.get超时原理</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zn0999/article/details/109034085">FutureTask.get异常详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/luzhensmart/article/details/103421143">FutureTask异常处理</a></li>
+</ul>
+</blockquote>
+<h5 id="Basic-5"><a href="#Basic-5" class="headerlink" title="Basic"></a>Basic</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kking_edc/article/details/108297917">FutureTask调用之使用Thread运行</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38750084/article/details/84801211">FutureTask调用之使用线程池运行</a></li>
 </ul>
 </blockquote>
 <h5 id="State-1"><a href="#State-1" class="headerlink" title="State"></a>State</h5><blockquote>
@@ -743,23 +737,39 @@
 <li>INTERRUPTING（中断中）：中断开始时，是一个中间过渡态</li>
 <li>INTERRUPTED（已断中）：中断结束后</li>
 </ul>
+<h5 id="Exception"><a href="#Exception" class="headerlink" title="Exception"></a>Exception</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zn0999/article/details/109034085">FutureTask.get异常捕获详解</a></li>
+</ul>
+</blockquote>
+<p>FutureTask.get异常如下</p>
+<ul>
+<li>CancellationException：任务提交后<code>取消</code>抛出的异常</li>
+<li>InterruptedException：任务执行时<code>中断</code>抛出的异常</li>
+<li>ExecutionException：任务执行时<code>出错</code>抛出的异常</li>
+<li>TimeoutException：任务执行时<code>超时</code>抛出的异常</li>
+</ul>
+<blockquote>
+<p>ps：cancel时如果任务还没有执行，就抛出CancellationException，否则就可能抛出InterruptedException</p>
+</blockquote>
+<h5 id="Cancel"><a href="#Cancel" class="headerlink" title="Cancel"></a>Cancel</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014644574/article/details/114327939">FutureTask.cancel取消任务详解</a></li>
+</ul>
+</blockquote>
+<blockquote>
+<p>ps：cancel时如果任务已经执行，会调用 <code>Thread.interrupt</code> 对执行线程进行中断</p>
+</blockquote>
 <h5 id="Timeout"><a href="#Timeout" class="headerlink" title="Timeout"></a>Timeout</h5><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cenjianteng/article/details/91873019">FutureTask任务超时</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cuiwjava/article/details/108186030">FutureTask.get超时原理</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cenjianteng/article/details/91873019">FutureTask之实现超时任务</a></li>
 </ul>
 </blockquote>
-<h3 id="ScheduledFuture"><a href="#ScheduledFuture" class="headerlink" title="ScheduledFuture"></a>ScheduledFuture</h3><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013851082/article/details/70175394">ScheduledFuture详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a355586533/article/details/78455788">RunnableScheduledFuture详解</a></li>
-</ul>
+<blockquote>
+<p>ps：get超时是通过LockSupport.park或者LockSupport.parkNanos实现的</p>
 </blockquote>
-<h4 id="ScheduledFutureTask"><a href="#ScheduledFutureTask" class="headerlink" title="ScheduledFutureTask"></a>ScheduledFutureTask</h4><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_50518271/article/details/119087739">ScheduledFutureTask详解</a></li>
-</ul>
-</blockquote>
-<h2 id="AsyncTask"><a href="#AsyncTask" class="headerlink" title="AsyncTask"></a>AsyncTask</h2><blockquote>
+<h3 id="AsyncTask"><a href="#AsyncTask" class="headerlink" title="AsyncTask"></a>AsyncTask</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ChenRui_yz/article/details/126926950">java异步编程</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_62789540/article/details/123223427">python异步编程</a></li>
@@ -771,12 +781,12 @@
 <li>CompletionStage：异步任务调度和计算的接口</li>
 <li>CompletableFuture：异步任务调度和计算的实现类</li>
 </ul>
-<h3 id="CompletionStage"><a href="#CompletionStage" class="headerlink" title="CompletionStage"></a>CompletionStage</h3><blockquote>
+<h4 id="CompletionStage"><a href="#CompletionStage" class="headerlink" title="CompletionStage"></a>CompletionStage</h4><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42695485/article/details/110407485">CompletionStage详解</a></li>
 </ul>
 </blockquote>
-<h3 id="CompletableFuture"><a href="#CompletableFuture" class="headerlink" title="CompletableFuture"></a>CompletableFuture</h3><h4 id="Basic-5"><a href="#Basic-5" class="headerlink" title="Basic"></a>Basic</h4><blockquote>
+<h4 id="CompletableFuture"><a href="#CompletableFuture" class="headerlink" title="CompletableFuture"></a>CompletableFuture</h4><h5 id="Basic-6"><a href="#Basic-6" class="headerlink" title="Basic"></a>Basic</h5><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43631716/article/details/121766969">CompletableFuture使用详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44337445/article/details/121710515">CompletableFuture方法总结</a></li>
@@ -796,26 +806,35 @@
 <li>包含supply的都使用Supplier回调，没有输入，有返回</li>
 <li>包含run的都使用Runnable回调，没有输入，没有返回</li>
 </ul>
-<h5 id="创建任务（createTask）"><a href="#创建任务（createTask）" class="headerlink" title="创建任务（createTask）"></a>创建任务（createTask）</h5><h6 id="supplyAsync"><a href="#supplyAsync" class="headerlink" title="supplyAsync"></a>supplyAsync</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;U&gt; CompletableFuture&lt;U&gt; <span class="title function_">supplyAsync</span><span class="params">(Supplier&lt;U&gt; supplier)</span></span><br></pre></td></tr></table></figure>
+<h6 id="创建任务（createTask）"><a href="#创建任务（createTask）" class="headerlink" title="创建任务（createTask）"></a>创建任务（createTask）</h6><p>####### supplyAsync</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;U&gt; CompletableFuture&lt;U&gt; <span class="title function_">supplyAsync</span><span class="params">(Supplier&lt;U&gt; supplier)</span></span><br></pre></td></tr></table></figure>
 
-<h6 id="runAsync"><a href="#runAsync" class="headerlink" title="runAsync"></a>runAsync</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> CompletableFuture&lt;Void&gt; <span class="title function_">runAsync</span><span class="params">(Runnable runnable)</span></span><br></pre></td></tr></table></figure>
+<p>####### runAsync</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> CompletableFuture&lt;Void&gt; <span class="title function_">runAsync</span><span class="params">(Runnable runnable)</span></span><br></pre></td></tr></table></figure>
 
-<h6 id="completedFuture"><a href="#completedFuture" class="headerlink" title="completedFuture"></a>completedFuture</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;U&gt; CompletableFuture&lt;U&gt; <span class="title function_">completedFuture</span><span class="params">(U value)</span></span><br></pre></td></tr></table></figure>
+<p>####### completedFuture</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;U&gt; CompletableFuture&lt;U&gt; <span class="title function_">completedFuture</span><span class="params">(U value)</span></span><br></pre></td></tr></table></figure>
 
-<h5 id="处理结果（handleResult）"><a href="#处理结果（handleResult）" class="headerlink" title="处理结果（handleResult）"></a>处理结果（handleResult）</h5><blockquote>
+<h6 id="处理结果（handleResult）"><a href="#处理结果（handleResult）" class="headerlink" title="处理结果（handleResult）"></a>处理结果（handleResult）</h6><blockquote>
 <p>result &#x3D; value or error</p>
 </blockquote>
-<h6 id="thenApply（thenApplyValue）"><a href="#thenApply（thenApplyValue）" class="headerlink" title="thenApply（thenApplyValue）"></a>thenApply（thenApplyValue）</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;U&gt; CompletableFuture&lt;U&gt; <span class="title function_">thenApply</span><span class="params">(Function&lt;? <span class="built_in">super</span> T,? extends U&gt; fn)</span></span><br></pre></td></tr></table></figure>
+<p>####### thenApply（thenApplyValue）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;U&gt; CompletableFuture&lt;U&gt; <span class="title function_">thenApply</span><span class="params">(Function&lt;? <span class="built_in">super</span> T,? extends U&gt; fn)</span></span><br></pre></td></tr></table></figure>
 
-<h6 id="thenAccept（thenAcceptValue）"><a href="#thenAccept（thenAcceptValue）" class="headerlink" title="thenAccept（thenAcceptValue）"></a>thenAccept（thenAcceptValue）</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> CompletableFuture&lt;Void&gt; <span class="title function_">thenAccept</span><span class="params">(Consumer&lt;? <span class="built_in">super</span> T&gt; action)</span></span><br></pre></td></tr></table></figure>
+<p>####### thenAccept（thenAcceptValue）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> CompletableFuture&lt;Void&gt; <span class="title function_">thenAccept</span><span class="params">(Consumer&lt;? <span class="built_in">super</span> T&gt; action)</span></span><br></pre></td></tr></table></figure>
 
-<h6 id="thenRun（thenRun）"><a href="#thenRun（thenRun）" class="headerlink" title="thenRun（thenRun）"></a>thenRun（thenRun）</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> CompletableFuture&lt;Void&gt; <span class="title function_">thenRun</span><span class="params">(Runnable action)</span></span><br></pre></td></tr></table></figure>
+<p>####### thenRun（thenRun）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> CompletableFuture&lt;Void&gt; <span class="title function_">thenRun</span><span class="params">(Runnable action)</span></span><br></pre></td></tr></table></figure>
 
-<h6 id="exceptionally（thenApplyError）"><a href="#exceptionally（thenApplyError）" class="headerlink" title="exceptionally（thenApplyError）"></a>exceptionally（thenApplyError）</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> CompletableFuture&lt;T&gt; <span class="title function_">exceptionally</span><span class="params">(Function&lt;Throwable,? extends T&gt; fn)</span></span><br></pre></td></tr></table></figure>
+<p>####### exceptionally（thenApplyError）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> CompletableFuture&lt;T&gt; <span class="title function_">exceptionally</span><span class="params">(Function&lt;Throwable,? extends T&gt; fn)</span></span><br></pre></td></tr></table></figure>
 
-<h6 id="handle（thenApplyResult）"><a href="#handle（thenApplyResult）" class="headerlink" title="handle（thenApplyResult）"></a>handle（thenApplyResult）</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;U&gt; CompletableFuture&lt;U&gt; <span class="title function_">handle</span><span class="params">(BiFunction&lt;? <span class="built_in">super</span> T,Throwable,? extends U&gt; fn)</span></span><br></pre></td></tr></table></figure>
+<p>####### handle（thenApplyResult）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;U&gt; CompletableFuture&lt;U&gt; <span class="title function_">handle</span><span class="params">(BiFunction&lt;? <span class="built_in">super</span> T,Throwable,? extends U&gt; fn)</span></span><br></pre></td></tr></table></figure>
 
-<h6 id="whenComplete（thenAcceptResult）"><a href="#whenComplete（thenAcceptResult）" class="headerlink" title="whenComplete（thenAcceptResult）"></a>whenComplete（thenAcceptResult）</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> CompletableFuture&lt;T&gt; <span class="title function_">whenComplete</span><span class="params">(BiConsumer&lt;? <span class="built_in">super</span> T,? <span class="built_in">super</span> Throwable&gt; action)</span></span><br></pre></td></tr></table></figure>
+<p>####### whenComplete（thenAcceptResult）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> CompletableFuture&lt;T&gt; <span class="title function_">whenComplete</span><span class="params">(BiConsumer&lt;? <span class="built_in">super</span> T,? <span class="built_in">super</span> Throwable&gt; action)</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <ul>
@@ -826,73 +845,76 @@
 <li>whenComplete既关心值，也关心异常（不会吃掉异常，不支持从异常中恢复并中断后面的操作）</li>
 </ul>
 </blockquote>
-<h5 id="设置结果（setResult）"><a href="#设置结果（setResult）" class="headerlink" title="设置结果（setResult）"></a>设置结果（setResult）</h5><h6 id="设置结果（setValue）"><a href="#设置结果（setValue）" class="headerlink" title="设置结果（setValue）"></a>设置结果（setValue）</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">complete</span><span class="params">(T value)</span></span><br></pre></td></tr></table></figure>
+<h6 id="设置结果（setResult）"><a href="#设置结果（setResult）" class="headerlink" title="设置结果（setResult）"></a>设置结果（setResult）</h6><p>####### 设置结果（setValue）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">complete</span><span class="params">(T value)</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">obtrudeValue</span><span class="params">(T value)</span></span><br></pre></td></tr></table></figure>
 
-<h6 id="设置结果（setError）"><a href="#设置结果（setError）" class="headerlink" title="设置结果（setError）"></a>设置结果（setError）</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">completeExceptionally</span><span class="params">(Throwable ex)</span></span><br></pre></td></tr></table></figure>
+<p>####### 设置结果（setError）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">completeExceptionally</span><span class="params">(Throwable ex)</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">obtrudeException</span><span class="params">(Throwable ex)</span></span><br></pre></td></tr></table></figure>
 
-<h5 id="获取结果（getResult）"><a href="#获取结果（getResult）" class="headerlink" title="获取结果（getResult）"></a>获取结果（getResult）</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> T <span class="title function_">get</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException, ExecutionException</span><br></pre></td></tr></table></figure>
+<h6 id="获取结果（getResult）"><a href="#获取结果（getResult）" class="headerlink" title="获取结果（getResult）"></a>获取结果（getResult）</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> T <span class="title function_">get</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException, ExecutionException</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> T <span class="title function_">join</span><span class="params">()</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> T <span class="title function_">getNow</span><span class="params">(T valueIfAbsent)</span></span><br></pre></td></tr></table></figure>
 
-<h5 id="检查状态（checkState）"><a href="#检查状态（checkState）" class="headerlink" title="检查状态（checkState）"></a>检查状态（checkState）</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isDone</span><span class="params">()</span></span><br></pre></td></tr></table></figure>
+<h6 id="检查状态（checkState）"><a href="#检查状态（checkState）" class="headerlink" title="检查状态（checkState）"></a>检查状态（checkState）</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isDone</span><span class="params">()</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isCompletedExceptionally</span><span class="params">()</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="Choreography"><a href="#Choreography" class="headerlink" title="Choreography"></a>Choreography</h4><p>Choreography：编排</p>
-<h5 id="链式调用（chain）"><a href="#链式调用（chain）" class="headerlink" title="链式调用（chain）"></a>链式调用（chain）</h5><h6 id="thenCompose（thenApplyValue）"><a href="#thenCompose（thenApplyValue）" class="headerlink" title="thenCompose（thenApplyValue）"></a>thenCompose（thenApplyValue）</h6><p>将结果交给另一个异步任务处理，并返回另一个异步任务，即串联执行两个任务</p>
+<h6 id="编排任务（Choreography）"><a href="#编排任务（Choreography）" class="headerlink" title="编排任务（Choreography）"></a>编排任务（Choreography）</h6><p>####### 链式调用（chain）</p>
+<p>######## thenCompose（thenChain）</p>
+<p>将当前异步任务的结果交给另一个异步任务处理，并返回另一个异步任务，即串联执行两个任务</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;U&gt; CompletableFuture&lt;U&gt; <span class="title function_">thenCompose</span><span class="params">(Function&lt;? <span class="built_in">super</span> T,? extends CompletionStage&lt;U&gt;&gt; fn)</span></span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<ul>
-<li>thenApply类似于Optional的map操作，返回的是转换后的CompletableFuture</li>
-<li>thenCompose类似于Optional的flatMap操作，返回的是输入时的CompletableFuture</li>
-</ul>
-</blockquote>
-<h5 id="组合调用（group）"><a href="#组合调用（group）" class="headerlink" title="组合调用（group）"></a>组合调用（group）</h5><h6 id="组合调用（and）"><a href="#组合调用（and）" class="headerlink" title="组合调用（and）"></a>组合调用（and）</h6><p>解决任务之间的 <code>与</code> 编排（choreography）关系，等待两个任务同时完成，并处理两个任务的结果</p>
-<p>####### thenCombine（thenApplyBoth）</p>
+<p>####### 组合调用（group）</p>
+<p>组合处理两个或多个任务</p>
+<p>######## 组合调用（and）</p>
+<p>解决任务之间的 <code>与</code> 编排（choreography）关系，等待两个任务同时完成，并处理两个任务的结果</p>
+<p>######### thenCombine（thenApplyBoth）</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;U,V&gt; CompletableFuture&lt;V&gt; <span class="title function_">thenCombine</span><span class="params">(CompletionStage&lt;? extends U&gt; other, BiFunction&lt;? <span class="built_in">super</span> T,? <span class="built_in">super</span> U,? extends V&gt; fn)</span></span><br></pre></td></tr></table></figure>
 
-<p>####### thenAcceptBoth（thenAcceptBoth）</p>
+<p>######### thenAcceptBoth（thenAcceptBoth）</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;U&gt; CompletableFuture&lt;Void&gt; <span class="title function_">thenAcceptBoth</span><span class="params">(CompletionStage&lt;? extends U&gt; other, BiConsumer&lt;? <span class="built_in">super</span> T,? <span class="built_in">super</span> U&gt; action)</span></span><br></pre></td></tr></table></figure>
 
-<p>####### runAfterBoth（thenRunBoth）</p>
+<p>######### runAfterBoth（thenRunBoth）</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> CompletableFuture&lt;Void&gt; <span class="title function_">runAfterBoth</span><span class="params">(CompletionStage&lt;?&gt; other, Runnable action)</span></span><br></pre></td></tr></table></figure>
 
-<h6 id="组合调用（or）"><a href="#组合调用（or）" class="headerlink" title="组合调用（or）"></a>组合调用（or）</h6><p>解决任务之间的 <code>或</code> 编排（choreography）关系，等待任意一个任务完成，并处理快的任务的结果</p>
-<p>####### applyToEither（thenApplyEither）</p>
+<p>######## 组合调用（or）</p>
+<p>解决任务之间的 <code>或</code> 编排（choreography）关系，等待任意一个任务完成，并处理快的任务的结果</p>
+<p>######### applyToEither（thenApplyEither）</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;U&gt; CompletableFuture&lt;U&gt; <span class="title function_">applyToEither</span><span class="params">(CompletionStage&lt;? extends T&gt; other, Function&lt;? <span class="built_in">super</span> T,U&gt; fn)</span></span><br></pre></td></tr></table></figure>
 
-<p>####### acceptEither（thenAcceptEither）</p>
+<p>######### acceptEither（thenAcceptEither）</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> CompletableFuture&lt;Void&gt; <span class="title function_">acceptEither</span><span class="params">(CompletionStage&lt;? extends T&gt; other, Consumer&lt;? <span class="built_in">super</span> T&gt; action)</span></span><br></pre></td></tr></table></figure>
 
-<p>####### runAfterEither（thenRunEither）</p>
+<p>######### runAfterEither（thenRunEither）</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> CompletableFuture&lt;Void&gt; <span class="title function_">runAfterEither</span><span class="params">(CompletionStage&lt;?&gt; other, Runnable action)</span></span><br></pre></td></tr></table></figure>
 
-<h6 id="组合调用（all）"><a href="#组合调用（all）" class="headerlink" title="组合调用（all）"></a>组合调用（all）</h6><p>解决任务之间的 <code>与</code> 编排（choreography）关系，等待所有任务同时完成，并忽略所有任务的结果</p>
+<p>######## 组合调用（all）</p>
+<p>解决任务之间的 <code>与</code> 编排（choreography）关系，等待所有任务同时完成，并忽略所有任务的结果</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> CompletableFuture&lt;Void&gt; <span class="title function_">allOf</span><span class="params">(CompletableFuture&lt;?&gt;... cfs)</span></span><br></pre></td></tr></table></figure>
 
-<h6 id="组合调用（any）"><a href="#组合调用（any）" class="headerlink" title="组合调用（any）"></a>组合调用（any）</h6><p>解决任务之间的 <code>或</code> 编排（choreography）关系，等待任意一个任务完成，并返回快的任务的结果</p>
+<p>######## 组合调用（any）</p>
+<p>解决任务之间的 <code>或</code> 编排（choreography）关系，等待任意一个任务完成，并返回快的任务的结果</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> CompletableFuture&lt;Object&gt; <span class="title function_">anyOf</span><span class="params">(CompletableFuture&lt;?&gt;... cfs)</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="Timeout-1"><a href="#Timeout-1" class="headerlink" title="Timeout"></a>Timeout</h4><blockquote>
+<h5 id="State-2"><a href="#State-2" class="headerlink" title="State"></a>State</h5><h5 id="Exception-1"><a href="#Exception-1" class="headerlink" title="Exception"></a>Exception</h5><h5 id="Cancel-1"><a href="#Cancel-1" class="headerlink" title="Cancel"></a>Cancel</h5><h5 id="Timeout-1"><a href="#Timeout-1" class="headerlink" title="Timeout"></a>Timeout</h5><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013905744/article/details/109134516">CompletableFuture任务超时</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013905744/article/details/109134516">CompletableFuture之实现超时任务</a></li>
 </ul>
 </blockquote>
-<h3 id="More"><a href="#More" class="headerlink" title="More"></a>More</h3><h4 id="AsyncTask（python）"><a href="#AsyncTask（python）" class="headerlink" title="AsyncTask（python）"></a>AsyncTask（python）</h4><h5 id="async和await（python）"><a href="#async和await（python）" class="headerlink" title="async和await（python）"></a>async和await（python）</h5><blockquote>
+<h4 id="More"><a href="#More" class="headerlink" title="More"></a>More</h4><h5 id="AsyncTask（python）"><a href="#AsyncTask（python）" class="headerlink" title="AsyncTask（python）"></a>AsyncTask（python）</h5><h6 id="async和await（python）"><a href="#async和await（python）" class="headerlink" title="async和await（python）"></a>async和await（python）</h6><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43380180/article/details/111573642">python async和await详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/permike/article/details/110821246">python async和await原理</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51078229/article/details/112343124">python await必须在async函数中使用</a></li>
 </ul>
 </blockquote>
-<h5 id="coroutine（python）"><a href="#coroutine（python）" class="headerlink" title="coroutine（python）"></a>coroutine（python）</h5><blockquote>
+<h6 id="coroutine（python）"><a href="#coroutine（python）" class="headerlink" title="coroutine（python）"></a>coroutine（python）</h6><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yifengchaoran/article/details/113854853">python 迭代器和生成器详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36338224/article/details/109231279">python 生成器和协程详解</a></li>
@@ -905,17 +927,17 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43192617/article/details/117791470">python yield和yield from的区别</a></li>
 </ul>
 </blockquote>
-<h5 id="asyncio（python）"><a href="#asyncio（python）" class="headerlink" title="asyncio（python）"></a>asyncio（python）</h5><blockquote>
+<h6 id="asyncio（python）"><a href="#asyncio（python）" class="headerlink" title="asyncio（python）"></a>asyncio（python）</h6><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xixihahalelehehe/article/details/106398084">python asyncio详解</a></li>
 </ul>
 </blockquote>
-<h5 id="aiohttp（python）"><a href="#aiohttp（python）" class="headerlink" title="aiohttp（python）"></a>aiohttp（python）</h5><blockquote>
+<h6 id="aiohttp（python）"><a href="#aiohttp（python）" class="headerlink" title="aiohttp（python）"></a>aiohttp（python）</h6><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhb_feng/article/details/118081327">python aiohttp详解</a></li>
 </ul>
 </blockquote>
-<h5 id="Tornado（python）"><a href="#Tornado（python）" class="headerlink" title="Tornado（python）"></a>Tornado（python）</h5><blockquote>
+<h6 id="Tornado（python）"><a href="#Tornado（python）" class="headerlink" title="Tornado（python）"></a>Tornado（python）</h6><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44634704/article/details/115917628">python tornado异步使用详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013421629/article/details/101293065">python tornado异步原理入门</a></li>
@@ -924,20 +946,20 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lyc2016012170/article/details/127219152">python tornado异步库</a></li>
 </ul>
 </blockquote>
-<h5 id="Celery（python）"><a href="#Celery（python）" class="headerlink" title="Celery（python）"></a>Celery（python）</h5><blockquote>
+<h6 id="Celery（python）"><a href="#Celery（python）" class="headerlink" title="Celery（python）"></a>Celery（python）</h6><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/aaahtml/article/details/115131246">Celery详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://celeryproject.readthedocs.io/zh_CN/latest/userguide/canvas.html">Celery工作流详解</a></li>
 </ul>
 </blockquote>
-<h4 id="AsyncTask（javascript）"><a href="#AsyncTask（javascript）" class="headerlink" title="AsyncTask（javascript）"></a>AsyncTask（javascript）</h4><h5 id="async和await（javascript）"><a href="#async和await（javascript）" class="headerlink" title="async和await（javascript）"></a>async和await（javascript）</h5><blockquote>
+<h5 id="AsyncTask（javascript）"><a href="#AsyncTask（javascript）" class="headerlink" title="AsyncTask（javascript）"></a>AsyncTask（javascript）</h5><h6 id="async和await（javascript）"><a href="#async和await（javascript）" class="headerlink" title="async和await（javascript）"></a>async和await（javascript）</h6><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MrWangJB/article/details/107881183">javascript async和await详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/codebay118/article/details/72596951">javascript async和await解决地狱回调</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lgno2/article/details/109446348">javascript await必须在async函数中使用</a></li>
 </ul>
 </blockquote>
-<h5 id="Promise（javascript）"><a href="#Promise（javascript）" class="headerlink" title="Promise（javascript）"></a>Promise（javascript）</h5><blockquote>
+<h6 id="Promise（javascript）"><a href="#Promise（javascript）" class="headerlink" title="Promise（javascript）"></a>Promise（javascript）</h6><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yes1983/article/details/83629647">javascript Promise入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_53993283/article/details/119945800">javascript Promise详解</a></li>
@@ -952,32 +974,52 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/github_39319000/article/details/89472033">javascript箭头函数的返回值</a></li>
 </ul>
 </blockquote>
-<h2 id="ScheduleTask"><a href="#ScheduleTask" class="headerlink" title="ScheduleTask"></a>ScheduleTask</h2><blockquote>
+<h3 id="ScheduleTask"><a href="#ScheduleTask" class="headerlink" title="ScheduleTask"></a>ScheduleTask</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lijianqingfeng/article/details/112465288">Timer与ExecutorService对比入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37113604/article/details/89429986">Timer与ExecutorService对比详解</a></li>
 </ul>
 </blockquote>
-<h3 id="任务的调度方式"><a href="#任务的调度方式" class="headerlink" title="任务的调度方式"></a>任务的调度方式</h3><blockquote>
+<h4 id="ScheduledFuture"><a href="#ScheduledFuture" class="headerlink" title="ScheduledFuture"></a>ScheduledFuture</h4><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013288190/article/details/114257211">任务的调度方式</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013851082/article/details/70175394">ScheduledFuture详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a355586533/article/details/78455788">RunnableScheduledFuture详解</a></li>
 </ul>
 </blockquote>
-<p>任务的调度（控制）方式如下</p>
+<h4 id="ScheduledFutureTask"><a href="#ScheduledFutureTask" class="headerlink" title="ScheduledFutureTask"></a>ScheduledFutureTask</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_50518271/article/details/119087739">ScheduledFutureTask详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Question-2"><a href="#Question-2" class="headerlink" title="Question"></a>Question</h2><h3 id="FutureTask为什么支持传递给线程"><a href="#FutureTask为什么支持传递给线程" class="headerlink" title="FutureTask为什么支持传递给线程"></a>FutureTask为什么支持传递给线程</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33591903/article/details/108422098">FutureTask为什么支持传递给线程</a></li>
+</ul>
+</blockquote>
+<h1 id="Executor"><a href="#Executor" class="headerlink" title="Executor"></a>Executor</h1><h2 id="Basic-7"><a href="#Basic-7" class="headerlink" title="Basic"></a>Basic</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tongdanping/article/details/79604637">Executor框架入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40093255/article/details/116990431">Executor框架详解</a></li>
+</ul>
+</blockquote>
+<h3 id="任务的运行方式"><a href="#任务的运行方式" class="headerlink" title="任务的运行方式"></a>任务的运行方式</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013288190/article/details/114257211">任务的运行方式</a></li>
+</ul>
+</blockquote>
+<p><code>任务（Task）</code> 的 <code>控制</code> 方式如下</p>
 <ul>
 <li>顺序：sequential</li>
 <li>并发：concurrent</li>
 </ul>
-<p>任务的调度（执行）方式如下</p>
+<p><code>执行器（Executor）</code> 的 <code>执行</code> 方式如下</p>
 <ul>
 <li>串行：serial</li>
 <li>并行：parallel</li>
 </ul>
-<p>任务的调度方式区别如下</p>
-<ul>
-<li>顺序和并发是指多个任务能否同时<code>开始</code>，描述的是任务（task）的<code>控制</code>方式</li>
-<li>串行和并行是指多个任务能否同时<code>执行</code>，描述的是执行器（cpu、thread）的<code>执行</code>方式</li>
-</ul>
+<blockquote>
+<p>ps：顺序和并发描述的是任务能否同时 <code>开始</code> ，串行和并行描述的是任务能否同时 <code>执行</code></p>
+</blockquote>
 <h4 id="并发和并行的区别"><a href="#并发和并行的区别" class="headerlink" title="并发和并行的区别"></a>并发和并行的区别</h4><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kevin_mails/article/details/80251234">并发和并行的区别</a></li>
@@ -988,14 +1030,17 @@
 <li>并发（Concurrency）：一个人<code>分时</code>干多件事</li>
 <li>并行（Parallelism）：多个人<code>分工</code>干多件事</li>
 </ul>
-<h3 id="延时任务（delay）"><a href="#延时任务（delay）" class="headerlink" title="延时任务（delay）"></a>延时任务（delay）</h3><p>可以使用ScheduledThreadPoolExecutor的 <code>schedule</code> 方法中的 <code>delay</code> 参数实现</p>
-<h3 id="定时任务（timing）"><a href="#定时任务（timing）" class="headerlink" title="定时任务（timing）"></a>定时任务（timing）</h3><p>可以使用ScheduledThreadPoolExecutor的 <code>scheduleAtFixedRate</code> 和 <code>scheduleWithFixedDelay</code> 方法实现</p>
-<h1 id="Executor"><a href="#Executor" class="headerlink" title="Executor"></a>Executor</h1><h2 id="Basic-6"><a href="#Basic-6" class="headerlink" title="Basic"></a>Basic</h2><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tongdanping/article/details/79604637">Executor框架入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40093255/article/details/116990431">Executor框架详解</a></li>
+<h4 id="集群和分布式的区别"><a href="#集群和分布式的区别" class="headerlink" title="集群和分布式的区别"></a>集群和分布式的区别</h4><ul>
+<li>集群（Cluster）：多个人<code>轮流</code>干一件事</li>
+<li>分布式（Distributed）：多个人<code>分工</code>干一件事</li>
 </ul>
-</blockquote>
+<h3 id="任务的调度方式"><a href="#任务的调度方式" class="headerlink" title="任务的调度方式"></a>任务的调度方式</h3><h4 id="普通调度（normal）"><a href="#普通调度（normal）" class="headerlink" title="普通调度（normal）"></a>普通调度（normal）</h4><p>可以使用ScheduledThreadPoolExecutor的 <code>schedule</code> 方法实现</p>
+<h4 id="延时调度（delay）"><a href="#延时调度（delay）" class="headerlink" title="延时调度（delay）"></a>延时调度（delay）</h4><p>可以使用ScheduledThreadPoolExecutor的 <code>schedule</code> 方法中的 <code>delay</code> 参数实现</p>
+<h4 id="定时调度（timing）"><a href="#定时调度（timing）" class="headerlink" title="定时调度（timing）"></a>定时调度（timing）</h4><p>可以使用ScheduledThreadPoolExecutor的如下方法实现</p>
+<ul>
+<li><code>scheduleAtFixedRate</code>：固定<code>频率</code>的开始任务的执行</li>
+<li><code>scheduleWithFixedDelay</code>：固定<code>延迟</code>后开始任务执行</li>
+</ul>
 <h3 id="线程池的创建方式"><a href="#线程池的创建方式" class="headerlink" title="线程池的创建方式"></a>线程池的创建方式</h3><ul>
 <li>使用Executors快速创建</li>
 <li>使用ExecutorService手动创建</li>
@@ -1003,20 +1048,6 @@
 <h3 id="线程池的参数选择"><a href="#线程池的参数选择" class="headerlink" title="线程池的参数选择"></a>线程池的参数选择</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/riemann_/article/details/104704197">线程池的参数选择</a></li>
-</ul>
-</blockquote>
-<h3 id="线程池的关闭方式"><a href="#线程池的关闭方式" class="headerlink" title="线程池的关闭方式"></a>线程池的关闭方式</h3><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zlp1992/article/details/104197515">线程池的关闭方式</a></li>
-</ul>
-</blockquote>
-<ul>
-<li>shutdown：线程池的状态变为SHUTDOWN，不再接受新任务了，但是队列里的任务会执行完毕</li>
-<li>shutdownNow：线程池的状态变为STOP，会终止当前正在运行的任务，并停止处理排队的任务，返回等待执行的任务列表</li>
-</ul>
-<h4 id="shutdown和shutdownNow的区别"><a href="#shutdown和shutdownNow的区别" class="headerlink" title="shutdown和shutdownNow的区别"></a>shutdown和shutdownNow的区别</h4><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaojin21cen/article/details/81778651">shutdown和shutdownNow的区别</a></li>
 </ul>
 </blockquote>
 <h3 id="线程池的任务提交"><a href="#线程池的任务提交" class="headerlink" title="线程池的任务提交"></a>线程池的任务提交</h3><blockquote>
@@ -1046,7 +1077,21 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/silyvin/article/details/80025165">线程池之异常捕获</a></li>
 </ul>
 </blockquote>
-<h2 id="Usage-1"><a href="#Usage-1" class="headerlink" title="Usage"></a>Usage</h2><h3 id="Executors"><a href="#Executors" class="headerlink" title="Executors"></a>Executors</h3><blockquote>
+<h3 id="线程池的关闭方式"><a href="#线程池的关闭方式" class="headerlink" title="线程池的关闭方式"></a>线程池的关闭方式</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zlp1992/article/details/104197515">线程池的关闭方式</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>shutdown：线程池的状态变为SHUTDOWN，不再接受新任务了，但是队列里的任务会执行完毕</li>
+<li>shutdownNow：线程池的状态变为STOP，会终止当前正在运行的任务，并停止处理排队的任务，返回等待执行的任务列表</li>
+</ul>
+<h4 id="shutdown和shutdownNow的区别"><a href="#shutdown和shutdownNow的区别" class="headerlink" title="shutdown和shutdownNow的区别"></a>shutdown和shutdownNow的区别</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaojin21cen/article/details/81778651">shutdown和shutdownNow的区别</a></li>
+</ul>
+</blockquote>
+<h2 id="Usage-2"><a href="#Usage-2" class="headerlink" title="Usage"></a>Usage</h2><h3 id="Executors"><a href="#Executors" class="headerlink" title="Executors"></a>Executors</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u022812849/article/details/109097171">Executors入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Think_and_work/article/details/123667645">Executors详解</a></li>
@@ -1116,7 +1161,7 @@
 <li>DiscardOldestPolicy：丢弃最老的（队列头部）任务</li>
 <li>CallerRunsPolicy：在提交的线程中直接执行任务</li>
 </ul>
-<h5 id="State-2"><a href="#State-2" class="headerlink" title="State"></a>State</h5><blockquote>
+<h5 id="State-3"><a href="#State-3" class="headerlink" title="State"></a>State</h5><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/AlbenXie/article/details/84702331">ThreadPoolExecutor的状态详解</a></li>
 </ul>
@@ -1155,7 +1200,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Bof_jangle/article/details/108297499">ForkJoinPool异常处理</a></li>
 </ul>
 </blockquote>
-<h2 id="Question-2"><a href="#Question-2" class="headerlink" title="Question"></a>Question</h2><h3 id="线程池是如何保证核心线程不被销毁的"><a href="#线程池是如何保证核心线程不被销毁的" class="headerlink" title="线程池是如何保证核心线程不被销毁的"></a>线程池是如何保证核心线程不被销毁的</h3><blockquote>
+<h2 id="Question-3"><a href="#Question-3" class="headerlink" title="Question"></a>Question</h2><h3 id="线程池是如何保证核心线程不被销毁的"><a href="#线程池是如何保证核心线程不被销毁的" class="headerlink" title="线程池是如何保证核心线程不被销毁的"></a>线程池是如何保证核心线程不被销毁的</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/smile_from_2015/article/details/105259789">线程池是如何保证核心线程不被销毁的</a></li>
 </ul>
@@ -1359,7 +1404,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Thread"><span class="nav-number">1.</span> <span class="nav-text">Thread</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">1.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create"><span class="nav-number">1.1.1.</span> <span class="nav-text">Create</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Priority"><span class="nav-number">1.1.2.</span> <span class="nav-text">Priority</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Daemon"><span class="nav-number">1.1.3.</span> <span class="nav-text">Daemon</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#State"><span class="nav-number">1.1.4.</span> <span class="nav-text">State</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resource"><span class="nav-number">1.1.5.</span> <span class="nav-text">Resource</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Control"><span class="nav-number">1.1.6.</span> <span class="nav-text">Control</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interrupt"><span class="nav-number">1.1.7.</span> <span class="nav-text">Interrupt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Terminate"><span class="nav-number">1.1.8.</span> <span class="nav-text">Terminate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deprecated"><span class="nav-number">1.1.9.</span> <span class="nav-text">Deprecated</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question"><span class="nav-number">1.2.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.1.</span> <span class="nav-text">线程和进程的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">1.2.2.</span> <span class="nav-text">创建线程的方式有哪些</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8B%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%8A%B6%E6%80%81%E5%8F%98%E5%8C%96"><span class="nav-number">1.2.3.</span> <span class="nav-text">说一下线程的状态变化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Runnable%E5%92%8CCallable%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.4.</span> <span class="nav-text">Runnable和Callable的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#run%E5%92%8Cstart%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.5.</span> <span class="nav-text">run和start的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sleep%E5%92%8Cyield%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.6.</span> <span class="nav-text">sleep和yield的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sleep%E5%92%8Cjoin%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.7.</span> <span class="nav-text">sleep和join的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ThreadLocal"><span class="nav-number">2.</span> <span class="nav-text">ThreadLocal</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-1"><span class="nav-number">2.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Scene"><span class="nav-number">2.1.1.</span> <span class="nav-text">Scene</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Leak"><span class="nav-number">2.1.2.</span> <span class="nav-text">Leak</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inherit"><span class="nav-number">2.1.3.</span> <span class="nav-text">Inherit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question-1"><span class="nav-number">2.2.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocal%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F"><span class="nav-number">2.2.1.</span> <span class="nav-text">ThreadLocal为什么会内存泄漏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocalMap%E7%9A%84key%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%BC%B1%E5%BC%95%E7%94%A8"><span class="nav-number">2.2.2.</span> <span class="nav-text">ThreadLocalMap的key为什么是弱引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocalMap%E7%9A%84value%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%BC%BA%E5%BC%95%E7%94%A8"><span class="nav-number">2.2.3.</span> <span class="nav-text">ThreadLocalMap的value为什么是强引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocalMap%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8Thread%E5%81%9Akey"><span class="nav-number">2.2.4.</span> <span class="nav-text">ThreadLocalMap为什么不用Thread做key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocal%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AE%9A%E4%B9%89%E6%88%90%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F"><span class="nav-number">2.2.5.</span> <span class="nav-text">ThreadLocal为什么要定义成静态变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocal%E5%92%8C%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.2.6.</span> <span class="nav-text">ThreadLocal和局部变量的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Safe"><span class="nav-number">3.</span> <span class="nav-text">Safe</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-2"><span class="nav-number">3.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced"><span class="nav-number">3.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B9%8B%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99"><span class="nav-number">3.2.1.</span> <span class="nav-text">线程安全之基本原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B9%8B%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88"><span class="nav-number">3.2.2.</span> <span class="nav-text">线程安全之实现方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B9%8B%E5%AF%B9%E8%B1%A1%E5%AE%89%E5%85%A8"><span class="nav-number">3.2.3.</span> <span class="nav-text">线程安全之对象安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8F%98%E9%87%8F%E5%AE%89%E5%85%A8"><span class="nav-number">3.2.4.</span> <span class="nav-text">线程安全之变量安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B9%8B%E5%86%85%E5%AD%98%E5%AE%89%E5%85%A8"><span class="nav-number">3.2.5.</span> <span class="nav-text">线程安全之内存安全</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lock"><span class="nav-number">4.</span> <span class="nav-text">Lock</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-3"><span class="nav-number">4.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">4.1.1.</span> <span class="nav-text">锁的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">4.1.2.</span> <span class="nav-text">锁的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">4.1.3.</span> <span class="nav-text">锁的特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">4.1.4.</span> <span class="nav-text">锁的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E9%94%81"><span class="nav-number">4.1.5.</span> <span class="nav-text">常见的锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">4.2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized%EF%BC%88%E5%90%8C%E6%AD%A5%E9%94%81%EF%BC%89"><span class="nav-number">4.2.1.</span> <span class="nav-text">synchronized（同步锁）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronized%E9%94%81%E8%AF%A6%E8%A7%A3"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">synchronized锁详解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronized%E9%94%81%E4%BC%98%E5%8C%96"><span class="nav-number">4.2.1.2.</span> <span class="nav-text">synchronized锁优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronized%E9%94%81%E5%8E%9F%E7%90%86"><span class="nav-number">4.2.1.3.</span> <span class="nav-text">synchronized锁原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronized%E5%92%8Cvolatile%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.2.1.4.</span> <span class="nav-text">synchronized和volatile的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronized%E5%92%8CLock%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.2.1.5.</span> <span class="nav-text">synchronized和Lock的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReentrantLock%EF%BC%88%E9%87%8D%E5%85%A5%E9%94%81%EF%BC%89"><span class="nav-number">4.2.2.</span> <span class="nav-text">ReentrantLock（重入锁）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lock-lock-%E5%86%99%E5%9C%A8-try-%E4%BB%A3%E7%A0%81%E5%9D%97%E5%86%85%E9%83%A8%E8%A1%8C%E5%90%97%EF%BC%9F"><span class="nav-number">4.2.2.1.</span> <span class="nav-text">lock.lock() 写在 try 代码块内部行吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%AE%89%E5%85%A8%E7%9A%84unlock"><span class="nav-number">4.2.2.2.</span> <span class="nav-text">如何安全的unlock</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReentrantReadWriteLock%EF%BC%88%E8%AF%BB%E5%86%99%E9%94%81%EF%BC%89"><span class="nav-number">4.2.3.</span> <span class="nav-text">ReentrantReadWriteLock（读写锁）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SpinLock%EF%BC%88%E8%87%AA%E6%97%8B%E9%94%81%EF%BC%89"><span class="nav-number">4.2.4.</span> <span class="nav-text">SpinLock（自旋锁）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LockSupport"><span class="nav-number">4.2.5.</span> <span class="nav-text">LockSupport</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Task"><span class="nav-number">5.</span> <span class="nav-text">Task</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SyncTask"><span class="nav-number">5.1.</span> <span class="nav-text">SyncTask</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Future"><span class="nav-number">5.1.1.</span> <span class="nav-text">Future</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#FutureTask"><span class="nav-number">5.1.1.1.</span> <span class="nav-text">FutureTask</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Basic-4"><span class="nav-number">5.1.1.1.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#State-1"><span class="nav-number">5.1.1.1.2.</span> <span class="nav-text">State</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Timeout"><span class="nav-number">5.1.1.1.3.</span> <span class="nav-text">Timeout</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ScheduledFuture"><span class="nav-number">5.1.2.</span> <span class="nav-text">ScheduledFuture</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ScheduledFutureTask"><span class="nav-number">5.1.2.1.</span> <span class="nav-text">ScheduledFutureTask</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AsyncTask"><span class="nav-number">5.2.</span> <span class="nav-text">AsyncTask</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CompletionStage"><span class="nav-number">5.2.1.</span> <span class="nav-text">CompletionStage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CompletableFuture"><span class="nav-number">5.2.2.</span> <span class="nav-text">CompletableFuture</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Basic-5"><span class="nav-number">5.2.2.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%BB%BB%E5%8A%A1%EF%BC%88createTask%EF%BC%89"><span class="nav-number">5.2.2.1.1.</span> <span class="nav-text">创建任务（createTask）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#supplyAsync"><span class="nav-number">5.2.2.1.1.1.</span> <span class="nav-text">supplyAsync</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#runAsync"><span class="nav-number">5.2.2.1.1.2.</span> <span class="nav-text">runAsync</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#completedFuture"><span class="nav-number">5.2.2.1.1.3.</span> <span class="nav-text">completedFuture</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E7%BB%93%E6%9E%9C%EF%BC%88handleResult%EF%BC%89"><span class="nav-number">5.2.2.1.2.</span> <span class="nav-text">处理结果（handleResult）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#thenApply%EF%BC%88thenApplyValue%EF%BC%89"><span class="nav-number">5.2.2.1.2.1.</span> <span class="nav-text">thenApply（thenApplyValue）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#thenAccept%EF%BC%88thenAcceptValue%EF%BC%89"><span class="nav-number">5.2.2.1.2.2.</span> <span class="nav-text">thenAccept（thenAcceptValue）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#thenRun%EF%BC%88thenRun%EF%BC%89"><span class="nav-number">5.2.2.1.2.3.</span> <span class="nav-text">thenRun（thenRun）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#exceptionally%EF%BC%88thenApplyError%EF%BC%89"><span class="nav-number">5.2.2.1.2.4.</span> <span class="nav-text">exceptionally（thenApplyError）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#handle%EF%BC%88thenApplyResult%EF%BC%89"><span class="nav-number">5.2.2.1.2.5.</span> <span class="nav-text">handle（thenApplyResult）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#whenComplete%EF%BC%88thenAcceptResult%EF%BC%89"><span class="nav-number">5.2.2.1.2.6.</span> <span class="nav-text">whenComplete（thenAcceptResult）</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%BB%93%E6%9E%9C%EF%BC%88setResult%EF%BC%89"><span class="nav-number">5.2.2.1.3.</span> <span class="nav-text">设置结果（setResult）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%BB%93%E6%9E%9C%EF%BC%88setValue%EF%BC%89"><span class="nav-number">5.2.2.1.3.1.</span> <span class="nav-text">设置结果（setValue）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%BB%93%E6%9E%9C%EF%BC%88setError%EF%BC%89"><span class="nav-number">5.2.2.1.3.2.</span> <span class="nav-text">设置结果（setError）</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%BB%93%E6%9E%9C%EF%BC%88getResult%EF%BC%89"><span class="nav-number">5.2.2.1.4.</span> <span class="nav-text">获取结果（getResult）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E7%8A%B6%E6%80%81%EF%BC%88checkState%EF%BC%89"><span class="nav-number">5.2.2.1.5.</span> <span class="nav-text">检查状态（checkState）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Choreography"><span class="nav-number">5.2.2.2.</span> <span class="nav-text">Choreography</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8%EF%BC%88chain%EF%BC%89"><span class="nav-number">5.2.2.2.1.</span> <span class="nav-text">链式调用（chain）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#thenCompose%EF%BC%88thenApplyValue%EF%BC%89"><span class="nav-number">5.2.2.2.1.1.</span> <span class="nav-text">thenCompose（thenApplyValue）</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E8%B0%83%E7%94%A8%EF%BC%88group%EF%BC%89"><span class="nav-number">5.2.2.2.2.</span> <span class="nav-text">组合调用（group）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E8%B0%83%E7%94%A8%EF%BC%88and%EF%BC%89"><span class="nav-number">5.2.2.2.2.1.</span> <span class="nav-text">组合调用（and）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E8%B0%83%E7%94%A8%EF%BC%88or%EF%BC%89"><span class="nav-number">5.2.2.2.2.2.</span> <span class="nav-text">组合调用（or）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E8%B0%83%E7%94%A8%EF%BC%88all%EF%BC%89"><span class="nav-number">5.2.2.2.2.3.</span> <span class="nav-text">组合调用（all）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E8%B0%83%E7%94%A8%EF%BC%88any%EF%BC%89"><span class="nav-number">5.2.2.2.2.4.</span> <span class="nav-text">组合调用（any）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Timeout-1"><span class="nav-number">5.2.2.3.</span> <span class="nav-text">Timeout</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#More"><span class="nav-number">5.2.3.</span> <span class="nav-text">More</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AsyncTask%EF%BC%88python%EF%BC%89"><span class="nav-number">5.2.3.1.</span> <span class="nav-text">AsyncTask（python）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#async%E5%92%8Cawait%EF%BC%88python%EF%BC%89"><span class="nav-number">5.2.3.1.1.</span> <span class="nav-text">async和await（python）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#coroutine%EF%BC%88python%EF%BC%89"><span class="nav-number">5.2.3.1.2.</span> <span class="nav-text">coroutine（python）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#asyncio%EF%BC%88python%EF%BC%89"><span class="nav-number">5.2.3.1.3.</span> <span class="nav-text">asyncio（python）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#aiohttp%EF%BC%88python%EF%BC%89"><span class="nav-number">5.2.3.1.4.</span> <span class="nav-text">aiohttp（python）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Tornado%EF%BC%88python%EF%BC%89"><span class="nav-number">5.2.3.1.5.</span> <span class="nav-text">Tornado（python）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Celery%EF%BC%88python%EF%BC%89"><span class="nav-number">5.2.3.1.6.</span> <span class="nav-text">Celery（python）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AsyncTask%EF%BC%88javascript%EF%BC%89"><span class="nav-number">5.2.3.2.</span> <span class="nav-text">AsyncTask（javascript）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#async%E5%92%8Cawait%EF%BC%88javascript%EF%BC%89"><span class="nav-number">5.2.3.2.1.</span> <span class="nav-text">async和await（javascript）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Promise%EF%BC%88javascript%EF%BC%89"><span class="nav-number">5.2.3.2.2.</span> <span class="nav-text">Promise（javascript）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ScheduleTask"><span class="nav-number">5.3.</span> <span class="nav-text">ScheduleTask</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E7%9A%84%E8%B0%83%E5%BA%A6%E6%96%B9%E5%BC%8F"><span class="nav-number">5.3.1.</span> <span class="nav-text">任务的调度方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E5%92%8C%E5%B9%B6%E8%A1%8C%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">5.3.1.1.</span> <span class="nav-text">并发和并行的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%B6%E6%97%B6%E4%BB%BB%E5%8A%A1%EF%BC%88delay%EF%BC%89"><span class="nav-number">5.3.2.</span> <span class="nav-text">延时任务（delay）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%EF%BC%88timing%EF%BC%89"><span class="nav-number">5.3.3.</span> <span class="nav-text">定时任务（timing）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Executor"><span class="nav-number">6.</span> <span class="nav-text">Executor</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-6"><span class="nav-number">6.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F"><span class="nav-number">6.1.1.</span> <span class="nav-text">线程池的创建方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%8F%82%E6%95%B0%E9%80%89%E6%8B%A9"><span class="nav-number">6.1.2.</span> <span class="nav-text">线程池的参数选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%85%B3%E9%97%AD%E6%96%B9%E5%BC%8F"><span class="nav-number">6.1.3.</span> <span class="nav-text">线程池的关闭方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#shutdown%E5%92%8CshutdownNow%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">6.1.3.1.</span> <span class="nav-text">shutdown和shutdownNow的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E4%BB%BB%E5%8A%A1%E6%8F%90%E4%BA%A4"><span class="nav-number">6.1.4.</span> <span class="nav-text">线程池的任务提交</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#submit%E5%92%8Cexecute%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">6.1.4.1.</span> <span class="nav-text">submit和execute的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%BC%82%E5%B8%B8%E6%8D%95%E8%8E%B7"><span class="nav-number">6.1.5.</span> <span class="nav-text">线程池的异常捕获</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage-1"><span class="nav-number">6.2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Executors"><span class="nav-number">6.2.1.</span> <span class="nav-text">Executors</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">6.2.1.1.</span> <span class="nav-text">快速创建线程池的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Executors-newSingleThreadExecutor"><span class="nav-number">6.2.1.1.1.</span> <span class="nav-text">Executors.newSingleThreadExecutor</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Executors-newFixedThreadPool"><span class="nav-number">6.2.1.1.2.</span> <span class="nav-text">Executors.newFixedThreadPool</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Executors-newCachedThreadPool"><span class="nav-number">6.2.1.1.3.</span> <span class="nav-text">Executors.newCachedThreadPool</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Executors-newScheduledThreadPool"><span class="nav-number">6.2.1.1.4.</span> <span class="nav-text">Executors.newScheduledThreadPool</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Executors-newSingleThreadScheduledExecutor"><span class="nav-number">6.2.1.1.5.</span> <span class="nav-text">Executors.newSingleThreadScheduledExecutor</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Executors-newWorkStealingPool"><span class="nav-number">6.2.1.1.6.</span> <span class="nav-text">Executors.newWorkStealingPool</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">6.2.1.2.</span> <span class="nav-text">快速创建线程池的问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ExecutorService"><span class="nav-number">6.2.2.</span> <span class="nav-text">ExecutorService</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ThreadPoolExecutor"><span class="nav-number">6.2.2.1.</span> <span class="nav-text">ThreadPoolExecutor</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#State-2"><span class="nav-number">6.2.2.1.1.</span> <span class="nav-text">State</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ScheduledExecutorService"><span class="nav-number">6.2.3.</span> <span class="nav-text">ScheduledExecutorService</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ScheduledThreadPoolExecutor"><span class="nav-number">6.2.3.1.</span> <span class="nav-text">ScheduledThreadPoolExecutor</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CompletionService"><span class="nav-number">6.2.4.</span> <span class="nav-text">CompletionService</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ExecutorCompletionService"><span class="nav-number">6.2.4.1.</span> <span class="nav-text">ExecutorCompletionService</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ForkJoinPool"><span class="nav-number">6.2.5.</span> <span class="nav-text">ForkJoinPool</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question-2"><span class="nav-number">6.3.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%98%AF%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%A0%B8%E5%BF%83%E7%BA%BF%E7%A8%8B%E4%B8%8D%E8%A2%AB%E9%94%80%E6%AF%81%E7%9A%84"><span class="nav-number">6.3.1.</span> <span class="nav-text">线程池是如何保证核心线程不被销毁的</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cooperation"><span class="nav-number">7.</span> <span class="nav-text">Cooperation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Communication"><span class="nav-number">7.1.</span> <span class="nav-text">Communication</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3"><span class="nav-number">7.1.1.</span> <span class="nav-text">线程通信机制详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Object%E7%9A%84wait%E5%92%8Cnotify"><span class="nav-number">7.1.1.1.</span> <span class="nav-text">Object的wait和notify</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Condition%E7%9A%84await%E5%92%8Csignal"><span class="nav-number">7.1.1.2.</span> <span class="nav-text">Condition的await和signal</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LockSupport%E7%9A%84park%E5%92%8Cunpark"><span class="nav-number">7.1.1.3.</span> <span class="nav-text">LockSupport的park和unpark</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6%E6%AF%94%E8%BE%83"><span class="nav-number">7.1.2.</span> <span class="nav-text">线程通信机制比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Collaboration"><span class="nav-number">7.2.</span> <span class="nav-text">Collaboration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mutex"><span class="nav-number">7.2.1.</span> <span class="nav-text">Mutex</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Semaphore"><span class="nav-number">7.2.2.</span> <span class="nav-text">Semaphore</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Semaphore%E5%92%8CMutex%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">7.2.2.1.</span> <span class="nav-text">Semaphore和Mutex的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Semaphore%E5%92%8CLock%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">7.2.2.2.</span> <span class="nav-text">Semaphore和Lock的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CountDownLatch"><span class="nav-number">7.2.3.</span> <span class="nav-text">CountDownLatch</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CountDownLatch%E5%92%8CSemaphore%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">7.2.3.1.</span> <span class="nav-text">CountDownLatch和Semaphore的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CyclicBarrier"><span class="nav-number">7.2.4.</span> <span class="nav-text">CyclicBarrier</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CyclicBarrier%E5%92%8CCountDownLatch%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">7.2.4.1.</span> <span class="nav-text">CyclicBarrier和CountDownLatch的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exchanger"><span class="nav-number">7.2.5.</span> <span class="nav-text">Exchanger</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">8.</span> <span class="nav-text">Other</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Utils"><span class="nav-number">9.</span> <span class="nav-text">Utils</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java"><span class="nav-number">9.1.</span> <span class="nav-text">Java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Apache-Commons"><span class="nav-number">9.2.</span> <span class="nav-text">Apache Commons</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Google-Guava"><span class="nav-number">9.3.</span> <span class="nav-text">Google Guava</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Thread"><span class="nav-number">1.</span> <span class="nav-text">Thread</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">1.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create"><span class="nav-number">1.1.1.</span> <span class="nav-text">Create</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Priority"><span class="nav-number">1.1.2.</span> <span class="nav-text">Priority</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Daemon"><span class="nav-number">1.1.3.</span> <span class="nav-text">Daemon</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#State"><span class="nav-number">1.1.4.</span> <span class="nav-text">State</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resource"><span class="nav-number">1.1.5.</span> <span class="nav-text">Resource</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Control"><span class="nav-number">1.1.6.</span> <span class="nav-text">Control</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interrupt"><span class="nav-number">1.1.7.</span> <span class="nav-text">Interrupt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Terminate"><span class="nav-number">1.1.8.</span> <span class="nav-text">Terminate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deprecated"><span class="nav-number">1.1.9.</span> <span class="nav-text">Deprecated</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question"><span class="nav-number">1.2.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.1.</span> <span class="nav-text">线程和进程的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">1.2.2.</span> <span class="nav-text">java创建线程的方式有哪些</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Runnable%E5%92%8CCallable%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.3.</span> <span class="nav-text">Runnable和Callable的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thread%E7%9A%84start%E5%92%8Crun%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.4.</span> <span class="nav-text">Thread的start和run的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thread%E7%9A%84sleep%E5%92%8Cyield%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.5.</span> <span class="nav-text">Thread的sleep和yield的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thread%E7%9A%84sleep%E5%92%8Cjoin%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.6.</span> <span class="nav-text">Thread的sleep和join的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ThreadLocal"><span class="nav-number">2.</span> <span class="nav-text">ThreadLocal</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-1"><span class="nav-number">2.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Scene"><span class="nav-number">2.1.1.</span> <span class="nav-text">Scene</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Leak"><span class="nav-number">2.1.2.</span> <span class="nav-text">Leak</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inherit"><span class="nav-number">2.1.3.</span> <span class="nav-text">Inherit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question-1"><span class="nav-number">2.2.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocal%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F"><span class="nav-number">2.2.1.</span> <span class="nav-text">ThreadLocal为什么会内存泄漏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocalMap%E7%9A%84key%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%BC%B1%E5%BC%95%E7%94%A8"><span class="nav-number">2.2.2.</span> <span class="nav-text">ThreadLocalMap的key为什么是弱引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocalMap%E7%9A%84value%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%BC%BA%E5%BC%95%E7%94%A8"><span class="nav-number">2.2.3.</span> <span class="nav-text">ThreadLocalMap的value为什么是强引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocalMap%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8Thread%E5%81%9Akey"><span class="nav-number">2.2.4.</span> <span class="nav-text">ThreadLocalMap为什么不用Thread做key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocal%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AE%9A%E4%B9%89%E6%88%90%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F"><span class="nav-number">2.2.5.</span> <span class="nav-text">ThreadLocal为什么要定义成静态变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocal%E5%92%8C%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.2.6.</span> <span class="nav-text">ThreadLocal和局部变量的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Safe"><span class="nav-number">3.</span> <span class="nav-text">Safe</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-2"><span class="nav-number">3.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced"><span class="nav-number">3.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B9%8B%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99"><span class="nav-number">3.2.1.</span> <span class="nav-text">线程安全之基本原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B9%8B%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88"><span class="nav-number">3.2.2.</span> <span class="nav-text">线程安全之实现方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B9%8B%E5%AF%B9%E8%B1%A1%E5%AE%89%E5%85%A8"><span class="nav-number">3.2.3.</span> <span class="nav-text">线程安全之对象安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8F%98%E9%87%8F%E5%AE%89%E5%85%A8"><span class="nav-number">3.2.4.</span> <span class="nav-text">线程安全之变量安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B9%8B%E5%86%85%E5%AD%98%E5%AE%89%E5%85%A8"><span class="nav-number">3.2.5.</span> <span class="nav-text">线程安全之内存安全</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lock"><span class="nav-number">4.</span> <span class="nav-text">Lock</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-3"><span class="nav-number">4.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">4.1.1.</span> <span class="nav-text">锁的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">4.1.2.</span> <span class="nav-text">锁的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">4.1.3.</span> <span class="nav-text">锁的特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">4.1.4.</span> <span class="nav-text">锁的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E9%94%81"><span class="nav-number">4.1.5.</span> <span class="nav-text">常见的锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">4.2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized%EF%BC%88%E5%90%8C%E6%AD%A5%E9%94%81%EF%BC%89"><span class="nav-number">4.2.1.</span> <span class="nav-text">synchronized（同步锁）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronized%E9%94%81%E8%AF%A6%E8%A7%A3"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">synchronized锁详解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronized%E9%94%81%E8%86%A8%E8%83%80"><span class="nav-number">4.2.1.2.</span> <span class="nav-text">synchronized锁膨胀</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronized%E9%94%81%E5%8E%9F%E7%90%86"><span class="nav-number">4.2.1.3.</span> <span class="nav-text">synchronized锁原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronized%E5%92%8Cvolatile%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.2.1.4.</span> <span class="nav-text">synchronized和volatile的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronized%E5%92%8CLock%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.2.1.5.</span> <span class="nav-text">synchronized和Lock的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReentrantLock%EF%BC%88%E9%87%8D%E5%85%A5%E9%94%81%EF%BC%89"><span class="nav-number">4.2.2.</span> <span class="nav-text">ReentrantLock（重入锁）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lock-lock-%E5%86%99%E5%9C%A8-try-%E4%BB%A3%E7%A0%81%E5%9D%97%E5%86%85%E9%83%A8%E8%A1%8C%E5%90%97%EF%BC%9F"><span class="nav-number">4.2.2.1.</span> <span class="nav-text">lock.lock() 写在 try 代码块内部行吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%AE%89%E5%85%A8%E7%9A%84unlock"><span class="nav-number">4.2.2.2.</span> <span class="nav-text">如何安全的unlock</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReentrantReadWriteLock%EF%BC%88%E8%AF%BB%E5%86%99%E9%94%81%EF%BC%89"><span class="nav-number">4.2.3.</span> <span class="nav-text">ReentrantReadWriteLock（读写锁）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SpinLock%EF%BC%88%E8%87%AA%E6%97%8B%E9%94%81%EF%BC%89"><span class="nav-number">4.2.4.</span> <span class="nav-text">SpinLock（自旋锁）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LockSupport"><span class="nav-number">4.2.5.</span> <span class="nav-text">LockSupport</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Task"><span class="nav-number">5.</span> <span class="nav-text">Task</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-4"><span class="nav-number">5.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage-1"><span class="nav-number">5.2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SyncTask"><span class="nav-number">5.2.1.</span> <span class="nav-text">SyncTask</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Future"><span class="nav-number">5.2.1.1.</span> <span class="nav-text">Future</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FutureTask"><span class="nav-number">5.2.1.2.</span> <span class="nav-text">FutureTask</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Basic-5"><span class="nav-number">5.2.1.2.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#State-1"><span class="nav-number">5.2.1.2.2.</span> <span class="nav-text">State</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Exception"><span class="nav-number">5.2.1.2.3.</span> <span class="nav-text">Exception</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Cancel"><span class="nav-number">5.2.1.2.4.</span> <span class="nav-text">Cancel</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Timeout"><span class="nav-number">5.2.1.2.5.</span> <span class="nav-text">Timeout</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AsyncTask"><span class="nav-number">5.2.2.</span> <span class="nav-text">AsyncTask</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CompletionStage"><span class="nav-number">5.2.2.1.</span> <span class="nav-text">CompletionStage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CompletableFuture"><span class="nav-number">5.2.2.2.</span> <span class="nav-text">CompletableFuture</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Basic-6"><span class="nav-number">5.2.2.2.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%BB%BB%E5%8A%A1%EF%BC%88createTask%EF%BC%89"><span class="nav-number">5.2.2.2.1.1.</span> <span class="nav-text">创建任务（createTask）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E7%BB%93%E6%9E%9C%EF%BC%88handleResult%EF%BC%89"><span class="nav-number">5.2.2.2.1.2.</span> <span class="nav-text">处理结果（handleResult）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%BB%93%E6%9E%9C%EF%BC%88setResult%EF%BC%89"><span class="nav-number">5.2.2.2.1.3.</span> <span class="nav-text">设置结果（setResult）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%BB%93%E6%9E%9C%EF%BC%88getResult%EF%BC%89"><span class="nav-number">5.2.2.2.1.4.</span> <span class="nav-text">获取结果（getResult）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E7%8A%B6%E6%80%81%EF%BC%88checkState%EF%BC%89"><span class="nav-number">5.2.2.2.1.5.</span> <span class="nav-text">检查状态（checkState）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BC%96%E6%8E%92%E4%BB%BB%E5%8A%A1%EF%BC%88Choreography%EF%BC%89"><span class="nav-number">5.2.2.2.1.6.</span> <span class="nav-text">编排任务（Choreography）</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#State-2"><span class="nav-number">5.2.2.2.2.</span> <span class="nav-text">State</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Exception-1"><span class="nav-number">5.2.2.2.3.</span> <span class="nav-text">Exception</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Cancel-1"><span class="nav-number">5.2.2.2.4.</span> <span class="nav-text">Cancel</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Timeout-1"><span class="nav-number">5.2.2.2.5.</span> <span class="nav-text">Timeout</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#More"><span class="nav-number">5.2.2.3.</span> <span class="nav-text">More</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#AsyncTask%EF%BC%88python%EF%BC%89"><span class="nav-number">5.2.2.3.1.</span> <span class="nav-text">AsyncTask（python）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#async%E5%92%8Cawait%EF%BC%88python%EF%BC%89"><span class="nav-number">5.2.2.3.1.1.</span> <span class="nav-text">async和await（python）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#coroutine%EF%BC%88python%EF%BC%89"><span class="nav-number">5.2.2.3.1.2.</span> <span class="nav-text">coroutine（python）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#asyncio%EF%BC%88python%EF%BC%89"><span class="nav-number">5.2.2.3.1.3.</span> <span class="nav-text">asyncio（python）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#aiohttp%EF%BC%88python%EF%BC%89"><span class="nav-number">5.2.2.3.1.4.</span> <span class="nav-text">aiohttp（python）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Tornado%EF%BC%88python%EF%BC%89"><span class="nav-number">5.2.2.3.1.5.</span> <span class="nav-text">Tornado（python）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Celery%EF%BC%88python%EF%BC%89"><span class="nav-number">5.2.2.3.1.6.</span> <span class="nav-text">Celery（python）</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#AsyncTask%EF%BC%88javascript%EF%BC%89"><span class="nav-number">5.2.2.3.2.</span> <span class="nav-text">AsyncTask（javascript）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#async%E5%92%8Cawait%EF%BC%88javascript%EF%BC%89"><span class="nav-number">5.2.2.3.2.1.</span> <span class="nav-text">async和await（javascript）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Promise%EF%BC%88javascript%EF%BC%89"><span class="nav-number">5.2.2.3.2.2.</span> <span class="nav-text">Promise（javascript）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ScheduleTask"><span class="nav-number">5.2.3.</span> <span class="nav-text">ScheduleTask</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ScheduledFuture"><span class="nav-number">5.2.3.1.</span> <span class="nav-text">ScheduledFuture</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ScheduledFutureTask"><span class="nav-number">5.2.3.2.</span> <span class="nav-text">ScheduledFutureTask</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question-2"><span class="nav-number">5.3.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FutureTask%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%AF%E6%8C%81%E4%BC%A0%E9%80%92%E7%BB%99%E7%BA%BF%E7%A8%8B"><span class="nav-number">5.3.1.</span> <span class="nav-text">FutureTask为什么支持传递给线程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Executor"><span class="nav-number">6.</span> <span class="nav-text">Executor</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-7"><span class="nav-number">6.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E7%9A%84%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F"><span class="nav-number">6.1.1.</span> <span class="nav-text">任务的运行方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E5%92%8C%E5%B9%B6%E8%A1%8C%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">6.1.1.1.</span> <span class="nav-text">并发和并行的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">6.1.1.2.</span> <span class="nav-text">集群和分布式的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E7%9A%84%E8%B0%83%E5%BA%A6%E6%96%B9%E5%BC%8F"><span class="nav-number">6.1.2.</span> <span class="nav-text">任务的调度方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E8%B0%83%E5%BA%A6%EF%BC%88normal%EF%BC%89"><span class="nav-number">6.1.2.1.</span> <span class="nav-text">普通调度（normal）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BB%B6%E6%97%B6%E8%B0%83%E5%BA%A6%EF%BC%88delay%EF%BC%89"><span class="nav-number">6.1.2.2.</span> <span class="nav-text">延时调度（delay）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E6%97%B6%E8%B0%83%E5%BA%A6%EF%BC%88timing%EF%BC%89"><span class="nav-number">6.1.2.3.</span> <span class="nav-text">定时调度（timing）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F"><span class="nav-number">6.1.3.</span> <span class="nav-text">线程池的创建方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%8F%82%E6%95%B0%E9%80%89%E6%8B%A9"><span class="nav-number">6.1.4.</span> <span class="nav-text">线程池的参数选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E4%BB%BB%E5%8A%A1%E6%8F%90%E4%BA%A4"><span class="nav-number">6.1.5.</span> <span class="nav-text">线程池的任务提交</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#submit%E5%92%8Cexecute%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">6.1.5.1.</span> <span class="nav-text">submit和execute的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%BC%82%E5%B8%B8%E6%8D%95%E8%8E%B7"><span class="nav-number">6.1.6.</span> <span class="nav-text">线程池的异常捕获</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%85%B3%E9%97%AD%E6%96%B9%E5%BC%8F"><span class="nav-number">6.1.7.</span> <span class="nav-text">线程池的关闭方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#shutdown%E5%92%8CshutdownNow%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">6.1.7.1.</span> <span class="nav-text">shutdown和shutdownNow的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage-2"><span class="nav-number">6.2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Executors"><span class="nav-number">6.2.1.</span> <span class="nav-text">Executors</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">6.2.1.1.</span> <span class="nav-text">快速创建线程池的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Executors-newSingleThreadExecutor"><span class="nav-number">6.2.1.1.1.</span> <span class="nav-text">Executors.newSingleThreadExecutor</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Executors-newFixedThreadPool"><span class="nav-number">6.2.1.1.2.</span> <span class="nav-text">Executors.newFixedThreadPool</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Executors-newCachedThreadPool"><span class="nav-number">6.2.1.1.3.</span> <span class="nav-text">Executors.newCachedThreadPool</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Executors-newScheduledThreadPool"><span class="nav-number">6.2.1.1.4.</span> <span class="nav-text">Executors.newScheduledThreadPool</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Executors-newSingleThreadScheduledExecutor"><span class="nav-number">6.2.1.1.5.</span> <span class="nav-text">Executors.newSingleThreadScheduledExecutor</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Executors-newWorkStealingPool"><span class="nav-number">6.2.1.1.6.</span> <span class="nav-text">Executors.newWorkStealingPool</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">6.2.1.2.</span> <span class="nav-text">快速创建线程池的问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ExecutorService"><span class="nav-number">6.2.2.</span> <span class="nav-text">ExecutorService</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ThreadPoolExecutor"><span class="nav-number">6.2.2.1.</span> <span class="nav-text">ThreadPoolExecutor</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#State-3"><span class="nav-number">6.2.2.1.1.</span> <span class="nav-text">State</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ScheduledExecutorService"><span class="nav-number">6.2.3.</span> <span class="nav-text">ScheduledExecutorService</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ScheduledThreadPoolExecutor"><span class="nav-number">6.2.3.1.</span> <span class="nav-text">ScheduledThreadPoolExecutor</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CompletionService"><span class="nav-number">6.2.4.</span> <span class="nav-text">CompletionService</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ExecutorCompletionService"><span class="nav-number">6.2.4.1.</span> <span class="nav-text">ExecutorCompletionService</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ForkJoinPool"><span class="nav-number">6.2.5.</span> <span class="nav-text">ForkJoinPool</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question-3"><span class="nav-number">6.3.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%98%AF%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%A0%B8%E5%BF%83%E7%BA%BF%E7%A8%8B%E4%B8%8D%E8%A2%AB%E9%94%80%E6%AF%81%E7%9A%84"><span class="nav-number">6.3.1.</span> <span class="nav-text">线程池是如何保证核心线程不被销毁的</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cooperation"><span class="nav-number">7.</span> <span class="nav-text">Cooperation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Communication"><span class="nav-number">7.1.</span> <span class="nav-text">Communication</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3"><span class="nav-number">7.1.1.</span> <span class="nav-text">线程通信机制详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Object%E7%9A%84wait%E5%92%8Cnotify"><span class="nav-number">7.1.1.1.</span> <span class="nav-text">Object的wait和notify</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Condition%E7%9A%84await%E5%92%8Csignal"><span class="nav-number">7.1.1.2.</span> <span class="nav-text">Condition的await和signal</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LockSupport%E7%9A%84park%E5%92%8Cunpark"><span class="nav-number">7.1.1.3.</span> <span class="nav-text">LockSupport的park和unpark</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6%E6%AF%94%E8%BE%83"><span class="nav-number">7.1.2.</span> <span class="nav-text">线程通信机制比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Collaboration"><span class="nav-number">7.2.</span> <span class="nav-text">Collaboration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mutex"><span class="nav-number">7.2.1.</span> <span class="nav-text">Mutex</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Semaphore"><span class="nav-number">7.2.2.</span> <span class="nav-text">Semaphore</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Semaphore%E5%92%8CMutex%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">7.2.2.1.</span> <span class="nav-text">Semaphore和Mutex的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Semaphore%E5%92%8CLock%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">7.2.2.2.</span> <span class="nav-text">Semaphore和Lock的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CountDownLatch"><span class="nav-number">7.2.3.</span> <span class="nav-text">CountDownLatch</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CountDownLatch%E5%92%8CSemaphore%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">7.2.3.1.</span> <span class="nav-text">CountDownLatch和Semaphore的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CyclicBarrier"><span class="nav-number">7.2.4.</span> <span class="nav-text">CyclicBarrier</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CyclicBarrier%E5%92%8CCountDownLatch%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">7.2.4.1.</span> <span class="nav-text">CyclicBarrier和CountDownLatch的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exchanger"><span class="nav-number">7.2.5.</span> <span class="nav-text">Exchanger</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">8.</span> <span class="nav-text">Other</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Utils"><span class="nav-number">9.</span> <span class="nav-text">Utils</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java"><span class="nav-number">9.1.</span> <span class="nav-text">Java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Apache-Commons"><span class="nav-number">9.2.</span> <span class="nav-text">Apache Commons</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Google-Guava"><span class="nav-number">9.3.</span> <span class="nav-text">Google Guava</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
