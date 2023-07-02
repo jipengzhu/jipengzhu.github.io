@@ -28,7 +28,7 @@
 <meta property="og:description" content="mysql">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-31T17:01:00.000Z">
-<meta property="article:modified_time" content="2023-07-01T11:27:50.408Z">
+<meta property="article:modified_time" content="2023-07-02T09:32:52.562Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-01 19:27:50" itemprop="dateModified" datetime="2023-07-01T19:27:50+08:00">2023-07-01</time>
+                <time title="修改时间：2023-07-02 17:32:52" itemprop="dateModified" datetime="2023-07-02T17:32:52+08:00">2023-07-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -879,8 +879,13 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wang_luwei/article/details/119619105">mysql事务详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_47902348/article/details/109090735">mysql事务原理</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_45406092/article/details/109624425">mysql事务范围</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_45406092/article/details/109624425">mysql事务之配置修改生效范围</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MarkusZhang/article/details/107335259">mysql事务之快照读和当前读入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44844089/article/details/115532014">mysql事务之快照读和当前读详解</a></li>
 </ul>
+</blockquote>
+<blockquote>
+<p>ps：read不等于select，还包含insert、update、delete时的read</p>
 </blockquote>
 <p>mysql事务配置修改生效范围</p>
 <ul>
@@ -906,8 +911,6 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/AI_STUDENT_QYB/article/details/121113991">mysql事务隔离级别详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42144277/article/details/106916092">mysql事务隔离级别RC和RR选择比较</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/NoviceZ/article/details/124627347">mysql事务隔离级别为什么选择RC</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MarkusZhang/article/details/107335259">mysql事务隔离之快照读和当前读入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44844089/article/details/115532014">mysql事务隔离之快照读和当前读详解</a></li>
 </ul>
 </blockquote>
 <ul>
@@ -916,9 +919,6 @@
 <li>可重复读（RR -&gt; Repeatable Read）：问题为幻读（记录数量前后发生了变化或者部分记录删除了）</li>
 <li>串行化（Serializable）：没有问题，但性能差</li>
 </ul>
-<blockquote>
-<p>ps：read不等于select，还包含insert、update、delete时的read</p>
-</blockquote>
 <h5 id="Repeatable-Read（可重复读）"><a href="#Repeatable-Read（可重复读）" class="headerlink" title="Repeatable Read（可重复读）"></a>Repeatable Read（可重复读）</h5><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liuguang212/article/details/116122295">mysql可重复读入门</a></li>
@@ -931,11 +931,8 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43207025/article/details/115412974">mysql幻读入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31930499/article/details/110393988">mysql幻读进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43477531/article/details/121963884">mysql幻读详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42512836/article/details/113388876">mysql幻读之MVCC不能完全解决幻读的问题入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/godloveleo9527/article/details/109554263">mysql幻读之MVCC不能完全解决幻读的问题详解</a></li>
 </ul>
 </blockquote>
-<p>MVCC只能解决 <code>快照读</code> 的幻读问题，不能解决 <code>当前读</code> 的幻读问题</p>
 <h4 id="Durability"><a href="#Durability" class="headerlink" title="Durability"></a>Durability</h4><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_25448409/article/details/105376450">mysql持久化原理</a></li>
@@ -946,9 +943,11 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/huaishu/article/details/89924250">MVCC入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/DILIGENT203/article/details/100751755">MVCC进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/SnailMann/article/details/94724197">MVCC详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42512836/article/details/113388876">MVCC之可重复读的隔离级别不能完全解决幻读的问题入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/godloveleo9527/article/details/109554263">MVCC之可重复读的隔离级别不能完全解决幻读的问题详解</a></li>
 </ul>
 </blockquote>
-<p>MVCC只能解决 <code>快照读</code> 的幻读问题，不能解决 <code>当前读</code> 的幻读问题</p>
+<p>MVCC可以解决不可重复读的问题<br>MVCC只能解决 <code>快照读</code> 的幻读问题，不能解决 <code>当前读</code> 的幻读问题</p>
 <h3 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/vicoqi/article/details/115288261">mysql的锁入门</a></li>
