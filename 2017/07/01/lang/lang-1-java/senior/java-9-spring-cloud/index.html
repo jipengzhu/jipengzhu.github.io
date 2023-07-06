@@ -28,7 +28,7 @@
 <meta property="og:description" content="spring-cloud">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T19:09:00.000Z">
-<meta property="article:modified_time" content="2023-07-03T12:05:03.323Z">
+<meta property="article:modified_time" content="2023-07-06T07:36:25.528Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-03 20:05:03" itemprop="dateModified" datetime="2023-07-03T20:05:03+08:00">2023-07-03</time>
+                <time title="修改时间：2023-07-06 15:36:25" itemprop="dateModified" datetime="2023-07-06T15:36:25+08:00">2023-07-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -249,21 +249,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="CloudService"><a href="#CloudService" class="headerlink" title="CloudService"></a>CloudService</h1><p>service mesh spring cloud<br>docker docker compose docker swarm<br>k8s yarn mesos</p>
-<p>一切基于网络的服务都可以上云<br>iaas 提供设施（facility）<br>paas 提供平台（platform）<br>saas 提供服务（service）</p>
-<p>设施 服务器 存储 网络 云电脑 云手机<br>平台 云计算 云存储 云相册 云媒体 云游戏<br>服务 cdn iot 云推送 云打印 云冲洗</p>
-<p>统一认证平台 sso<br>统一授权平台<br>统一发号平台<br>统一邮件平台<br>统一短信平台<br>统一电话平台<br>统一日志平台<br>统一监控平台<br>统一告警平台</p>
-<p>统一通知平台<br>统一营销平台</p>
-<h1 id="MicroService"><a href="#MicroService" class="headerlink" title="MicroService"></a>MicroService</h1><blockquote>
+        <h1 id="MicroService"><a href="#MicroService" class="headerlink" title="MicroService"></a>MicroService</h1><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/j1231230/article/details/117283740">微服务组件入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/A1342772/article/details/122016394">微服务组件详解</a></li>
 </ul>
 </blockquote>
 <ul>
 <li>服务治理：注册中心（注册和发现）、配置中心、网关</li>
 <li>服务调用：负载均衡</li>
-<li>服务容错：熔断、降级、限流</li>
+<li>服务防护：重试、熔断、降级、限流、预热</li>
 </ul>
 <h2 id="Service-Management（服务治理）"><a href="#Service-Management（服务治理）" class="headerlink" title="Service Management（服务治理）"></a>Service Management（服务治理）</h2><h3 id="注册中心"><a href="#注册中心" class="headerlink" title="注册中心"></a>注册中心</h3><blockquote>
 <ul>
@@ -282,7 +276,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38405253/article/details/119066381">微服务网关详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hey_girl_/article/details/125021024">python微服务方案详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hey_girl_/article/details/127199059">python微服务网关详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39928446/article/details/116263035">微服务网关之Zuul和Ribbon的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39928446/article/details/116263035">微服务网关之Zuul和Ribbon的关系</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45525272/article/details/125945303">微服务网关之Zuul和Nginx的区别</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tyyking/article/details/82750754">微服务网关之Ribbon和Nginx的区别</a></li>
 </ul>
@@ -290,7 +284,6 @@
 <ul>
 <li>Nginx：支持所以语言的网关，可通过插件进行增强</li>
 <li>Zuul：支持java语言的网关，可编程进行增强</li>
-<li>Ribbon：支持负载均衡的组件，不是网关</li>
 </ul>
 <h2 id="Service-Invocation（服务调用）"><a href="#Service-Invocation（服务调用）" class="headerlink" title="Service Invocation（服务调用）"></a>Service Invocation（服务调用）</h2><blockquote>
 <ul>
@@ -301,15 +294,26 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36906627/article/details/104419474">微服务之Thrift和Dubbo对比详解</a></li>
 </ul>
 </blockquote>
-<h2 id="Service-Tolerant（服务容错）"><a href="#Service-Tolerant（服务容错）" class="headerlink" title="Service Tolerant（服务容错）"></a>Service Tolerant（服务容错）</h2><blockquote>
+<ul>
+<li>Feign：客户端请求库（Request）</li>
+<li>Ribbon：客户端请求负载均衡器（LoadBalance）</li>
+<li>Hystrix：客户端请求断路器（Breaker）和限流器（Limiter）</li>
+</ul>
+<h2 id="Service-Shield（服务防护）"><a href="#Service-Shield（服务防护）" class="headerlink" title="Service Shield（服务防护）"></a>Service Shield（服务防护）</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhizhengguan/article/details/120814063">微服务之降级、熔断、限流与缓存预热</a></li>
 </ul>
 </blockquote>
+<h3 id="Retry（重试）"><a href="#Retry（重试）" class="headerlink" title="Retry（重试）"></a>Retry（重试）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41715077/article/details/83792542">微服务之重试详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34417408/article/details/116943097">微服务之重试算法</a></li>
+</ul>
+</blockquote>
 <h3 id="Breaker（熔断）"><a href="#Breaker（熔断）" class="headerlink" title="Breaker（熔断）"></a>Breaker（熔断）</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_27184497/article/details/119993725">微服务之降级和熔断详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43945983/article/details/84832047">微服务之隔离和熔断详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_27184497/article/details/119993725">微服务之熔断和降级详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43945983/article/details/84832047">微服务之熔断和隔离详解</a></li>
 </ul>
 </blockquote>
 <h3 id="Fallback（降级）"><a href="#Fallback（降级）" class="headerlink" title="Fallback（降级）"></a>Fallback（降级）</h3><blockquote>
@@ -326,30 +330,12 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qianshangding0708/article/details/104026669">微服务之漏桶和令牌桶限流算法的区别</a></li>
 </ul>
 </blockquote>
-<h3 id="Retry（重试）"><a href="#Retry（重试）" class="headerlink" title="Retry（重试）"></a>Retry（重试）</h3><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41715077/article/details/83792542">微服务之重试详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34417408/article/details/116943097">微服务之重试算法</a></li>
-</ul>
-</blockquote>
 <h3 id="WarmUp（预热）"><a href="#WarmUp（预热）" class="headerlink" title="WarmUp（预热）"></a>WarmUp（预热）</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lp19861126/article/details/117399376">微服务之预热详解</a></li>
 </ul>
 </blockquote>
-<h2 id="Service-EventBus（服务总线）"><a href="#Service-EventBus（服务总线）" class="headerlink" title="Service EventBus（服务总线）"></a>Service EventBus（服务总线）</h2><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45606067/article/details/120115003">微服务之事件总线详解</a></li>
-</ul>
-</blockquote>
-<h2 id="Service-Message（服务消息）"><a href="#Service-Message（服务消息）" class="headerlink" title="Service Message（服务消息）"></a>Service Message（服务消息）</h2><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cckevincyh/article/details/107624093">微服务之消息驱动入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MinggeQingchun/article/details/125422875">微服务之消息驱动进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38399962/article/details/82192340">微服务之消息驱动详解</a></li>
-</ul>
-</blockquote>
-<h1 id="NamingService"><a href="#NamingService" class="headerlink" title="NamingService"></a>NamingService</h1><blockquote>
+<h1 id="CommonService"><a href="#CommonService" class="headerlink" title="CommonService"></a>CommonService</h1><h2 id="Naming（命名服务）"><a href="#Naming（命名服务）" class="headerlink" title="Naming（命名服务）"></a>Naming（命名服务）</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w372426096/article/details/78526591">命名服务入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/HelloCedar/article/details/109321482">命名服务进阶</a></li>
@@ -361,30 +347,24 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wmq880204/article/details/111624017">微服务之ServiceMesh和SpringCloud对比</a></li>
 </ul>
 </blockquote>
-<h1 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h1><h2 id="SpringCloudAlibaba"><a href="#SpringCloudAlibaba" class="headerlink" title="SpringCloudAlibaba"></a>SpringCloudAlibaba</h2><blockquote>
+<h1 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h1><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000022949339">SpringCloudAlibaba详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://spring-cloud-alibaba-group.github.io/github-pages/hoxton/zh-cn/index.html">SpringCloudAlibaba文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000022949339">SpringCloud详解</a></li>
 </ul>
 </blockquote>
-<h3 id="Nacos"><a href="#Nacos" class="headerlink" title="Nacos"></a>Nacos</h3><p>配置中心和注册中心</p>
-<blockquote>
+<h2 id="SpringCloudNetflix"><a href="#SpringCloudNetflix" class="headerlink" title="SpringCloudNetflix"></a>SpringCloudNetflix</h2><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Burnup_110/article/details/110230771">Nacos入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Top_L398/article/details/111352983">Nacos进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://nacos.io/zh-cn/docs/what-is-nacos.html">Nacos详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/j1231230/article/details/117283740">SpringCloudNetflix详解</a></li>
 </ul>
 </blockquote>
-<h3 id="Sentinel"><a href="#Sentinel" class="headerlink" title="Sentinel"></a>Sentinel</h3><p>服务容错</p>
-<blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LeoHan163/article/details/121745164">Sentinel入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cdbdqn001/article/details/88683577">Sentinel进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/alibaba/Sentinel/wiki/%E4%BB%8B%E7%BB%8D">Sentinel详解</a></li>
+<li>注册中心：Eureka</li>
+<li>配置中心：Archaius</li>
+<li>网关中心：Zuul</li>
+<li>服务调用：Feign + Ribbon</li>
+<li>服务防护：Hystrix</li>
 </ul>
-</blockquote>
-<h2 id="SpringCloudNetflix"><a href="#SpringCloudNetflix" class="headerlink" title="SpringCloudNetflix"></a>SpringCloudNetflix</h2><h3 id="Zuul"><a href="#Zuul" class="headerlink" title="Zuul"></a>Zuul</h3><p>网关</p>
-<blockquote>
+<h3 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a>Eureka</h3><h3 id="Archaius"><a href="#Archaius" class="headerlink" title="Archaius"></a>Archaius</h3><h3 id="Zuul"><a href="#Zuul" class="headerlink" title="Zuul"></a>Zuul</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44112474/article/details/109094775">Zuul入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/as_hswa/article/details/120180425">Zuul进阶</a></li>
@@ -393,20 +373,76 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/k_young1997/article/details/104100361">Zuul限流</a></li>
 </ul>
 </blockquote>
-<h3 id="Hystrix"><a href="#Hystrix" class="headerlink" title="Hystrix"></a>Hystrix</h3><p>服务容错</p>
-<blockquote>
+<h3 id="Feign"><a href="#Feign" class="headerlink" title="Feign"></a>Feign</h3><h3 id="Hystrix"><a href="#Hystrix" class="headerlink" title="Hystrix"></a>Hystrix</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38149225/article/details/109454418">Hystrix入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43700718/article/details/107366659">Hystrix进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38192427/article/details/121184221">Hystrix详解</a></li>
 </ul>
 </blockquote>
-<h2 id="SpringCloudOfficial"><a href="#SpringCloudOfficial" class="headerlink" title="SpringCloudOfficial"></a>SpringCloudOfficial</h2><h1 id="SpringNative"><a href="#SpringNative" class="headerlink" title="SpringNative"></a>SpringNative</h1><blockquote>
+<h2 id="SpringCloudAlibaba"><a href="#SpringCloudAlibaba" class="headerlink" title="SpringCloudAlibaba"></a>SpringCloudAlibaba</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://spring-cloud-alibaba-group.github.io/github-pages/hoxton/zh-cn/index.html">SpringCloudAlibaba文档</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>注册中心：Nacos</li>
+<li>配置中心：Nacos</li>
+<li>网关中心：无</li>
+<li>服务调用：Dubbo</li>
+<li>服务防护：Sentinel</li>
+</ul>
+<h3 id="Nacos"><a href="#Nacos" class="headerlink" title="Nacos"></a>Nacos</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Burnup_110/article/details/110230771">Nacos入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Top_L398/article/details/111352983">Nacos进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://nacos.io/zh-cn/docs/what-is-nacos.html">Nacos详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Dubbo"><a href="#Dubbo" class="headerlink" title="Dubbo"></a>Dubbo</h3><h3 id="Sentinel"><a href="#Sentinel" class="headerlink" title="Sentinel"></a>Sentinel</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LeoHan163/article/details/121745164">Sentinel入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cdbdqn001/article/details/88683577">Sentinel进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/alibaba/Sentinel/wiki/%E4%BB%8B%E7%BB%8D">Sentinel详解</a></li>
+</ul>
+</blockquote>
+<h2 id="SpringCloudOfficial"><a href="#SpringCloudOfficial" class="headerlink" title="SpringCloudOfficial"></a>SpringCloudOfficial</h2><ul>
+<li>注册中心：无</li>
+<li>配置中心：SpringCloudConfig、SpringCloudVault</li>
+<li>网关中心：SpringCloudGateway</li>
+<li>服务调用：OpenFeign</li>
+<li>服务防护：无</li>
+</ul>
+<h3 id="SpringCloudConfig"><a href="#SpringCloudConfig" class="headerlink" title="SpringCloudConfig"></a>SpringCloudConfig</h3><h3 id="SpringCloudVault"><a href="#SpringCloudVault" class="headerlink" title="SpringCloudVault"></a>SpringCloudVault</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/seashouwang/article/details/90243984">SpringCloudVault</a></li>
+</ul>
+</blockquote>
+<p>支持配置信息加密存储</p>
+<h3 id="SpringCloudGateway"><a href="#SpringCloudGateway" class="headerlink" title="SpringCloudGateway"></a>SpringCloudGateway</h3><h1 id="SpringNative"><a href="#SpringNative" class="headerlink" title="SpringNative"></a>SpringNative</h1><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41354631/article/details/127847889">SpringNative入门</a></li>
 </ul>
 </blockquote>
-<h1 id="MWS"><a href="#MWS" class="headerlink" title="MWS"></a>MWS</h1><blockquote>
+<h1 id="PlatformService"><a href="#PlatformService" class="headerlink" title="PlatformService"></a>PlatformService</h1><p>统一认证平台 cas<br>统一授权平台 cas<br>统一发号平台</p>
+<p>统一邮件平台<br>统一短信平台<br>统一电话平台</p>
+<p>统一日志平台<br>统一监控平台<br>统一告警平台</p>
+<p>统一通知平台<br>统一推送平台<br>统一营销平台</p>
+<h2 id="MCS"><a href="#MCS" class="headerlink" title="MCS"></a>MCS</h2><h3 id="统一推送平台"><a href="#统一推送平台" class="headerlink" title="统一推送平台"></a>统一推送平台</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_48333563/article/details/125968144">消息推送方案详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ldw201510803006/article/details/130306152">消息推送技术之SSE详解</a></li>
+</ul>
+</blockquote>
+<p>消息推送方案</p>
+<ul>
+<li>轮询（短轮询和长轮询）</li>
+<li>WebSocket</li>
+<li>SSE</li>
+<li>MQTT</li>
+<li>第三方平台</li>
+</ul>
+<h2 id="MWS"><a href="#MWS" class="headerlink" title="MWS"></a>MWS</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_58008803/article/details/122190997">美团服务平台MWS详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MeituanTech/article/details/100933270">美团容器调度平台 Hulk</a></li>
@@ -439,6 +475,9 @@
 <li>美团移动端推送服务 Pike</li>
 <li>美团移动端长链接 Shark</li>
 </ul>
+<h1 id="CloudService"><a href="#CloudService" class="headerlink" title="CloudService"></a>CloudService</h1><p>service mesh spring cloud<br>docker docker compose docker swarm<br>k8s yarn mesos</p>
+<p>一切基于网络的服务都可以上云<br>iaas 提供设施（facility）<br>paas 提供平台（platform）<br>saas 提供服务（service）</p>
+<p>设施 服务器 存储 网络 云电脑 云手机<br>平台 云计算 云存储 云相册 云媒体 云游戏<br>服务 cdn iot 云推送 云打印 云冲洗</p>
 
     </div>
 
@@ -537,7 +576,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CloudService"><span class="nav-number">1.</span> <span class="nav-text">CloudService</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MicroService"><span class="nav-number">2.</span> <span class="nav-text">MicroService</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Service-Management%EF%BC%88%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">Service Management（服务治理）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-number">2.1.1.</span> <span class="nav-text">注册中心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83"><span class="nav-number">2.1.2.</span> <span class="nav-text">配置中心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E5%85%B3"><span class="nav-number">2.1.3.</span> <span class="nav-text">网关</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service-Invocation%EF%BC%88%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">Service Invocation（服务调用）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service-Tolerant%EF%BC%88%E6%9C%8D%E5%8A%A1%E5%AE%B9%E9%94%99%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">Service Tolerant（服务容错）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Breaker%EF%BC%88%E7%86%94%E6%96%AD%EF%BC%89"><span class="nav-number">2.3.1.</span> <span class="nav-text">Breaker（熔断）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fallback%EF%BC%88%E9%99%8D%E7%BA%A7%EF%BC%89"><span class="nav-number">2.3.2.</span> <span class="nav-text">Fallback（降级）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Limiter%EF%BC%88%E9%99%90%E6%B5%81%EF%BC%89"><span class="nav-number">2.3.3.</span> <span class="nav-text">Limiter（限流）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Retry%EF%BC%88%E9%87%8D%E8%AF%95%EF%BC%89"><span class="nav-number">2.3.4.</span> <span class="nav-text">Retry（重试）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WarmUp%EF%BC%88%E9%A2%84%E7%83%AD%EF%BC%89"><span class="nav-number">2.3.5.</span> <span class="nav-text">WarmUp（预热）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service-EventBus%EF%BC%88%E6%9C%8D%E5%8A%A1%E6%80%BB%E7%BA%BF%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">Service EventBus（服务总线）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service-Message%EF%BC%88%E6%9C%8D%E5%8A%A1%E6%B6%88%E6%81%AF%EF%BC%89"><span class="nav-number">2.5.</span> <span class="nav-text">Service Message（服务消息）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NamingService"><span class="nav-number">3.</span> <span class="nav-text">NamingService</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ServiceMesh"><span class="nav-number">4.</span> <span class="nav-text">ServiceMesh</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringCloud"><span class="nav-number">5.</span> <span class="nav-text">SpringCloud</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringCloudAlibaba"><span class="nav-number">5.1.</span> <span class="nav-text">SpringCloudAlibaba</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nacos"><span class="nav-number">5.1.1.</span> <span class="nav-text">Nacos</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sentinel"><span class="nav-number">5.1.2.</span> <span class="nav-text">Sentinel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringCloudNetflix"><span class="nav-number">5.2.</span> <span class="nav-text">SpringCloudNetflix</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Zuul"><span class="nav-number">5.2.1.</span> <span class="nav-text">Zuul</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hystrix"><span class="nav-number">5.2.2.</span> <span class="nav-text">Hystrix</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringCloudOfficial"><span class="nav-number">5.3.</span> <span class="nav-text">SpringCloudOfficial</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringNative"><span class="nav-number">6.</span> <span class="nav-text">SpringNative</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MWS"><span class="nav-number">7.</span> <span class="nav-text">MWS</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MicroService"><span class="nav-number">1.</span> <span class="nav-text">MicroService</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Service-Management%EF%BC%88%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">Service Management（服务治理）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-number">1.1.1.</span> <span class="nav-text">注册中心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83"><span class="nav-number">1.1.2.</span> <span class="nav-text">配置中心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E5%85%B3"><span class="nav-number">1.1.3.</span> <span class="nav-text">网关</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service-Invocation%EF%BC%88%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">Service Invocation（服务调用）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service-Shield%EF%BC%88%E6%9C%8D%E5%8A%A1%E9%98%B2%E6%8A%A4%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">Service Shield（服务防护）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Retry%EF%BC%88%E9%87%8D%E8%AF%95%EF%BC%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">Retry（重试）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Breaker%EF%BC%88%E7%86%94%E6%96%AD%EF%BC%89"><span class="nav-number">1.3.2.</span> <span class="nav-text">Breaker（熔断）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fallback%EF%BC%88%E9%99%8D%E7%BA%A7%EF%BC%89"><span class="nav-number">1.3.3.</span> <span class="nav-text">Fallback（降级）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Limiter%EF%BC%88%E9%99%90%E6%B5%81%EF%BC%89"><span class="nav-number">1.3.4.</span> <span class="nav-text">Limiter（限流）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WarmUp%EF%BC%88%E9%A2%84%E7%83%AD%EF%BC%89"><span class="nav-number">1.3.5.</span> <span class="nav-text">WarmUp（预热）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CommonService"><span class="nav-number">2.</span> <span class="nav-text">CommonService</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Naming%EF%BC%88%E5%91%BD%E5%90%8D%E6%9C%8D%E5%8A%A1%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">Naming（命名服务）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ServiceMesh"><span class="nav-number">3.</span> <span class="nav-text">ServiceMesh</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringCloud"><span class="nav-number">4.</span> <span class="nav-text">SpringCloud</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringCloudNetflix"><span class="nav-number">4.1.</span> <span class="nav-text">SpringCloudNetflix</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Eureka"><span class="nav-number">4.1.1.</span> <span class="nav-text">Eureka</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Archaius"><span class="nav-number">4.1.2.</span> <span class="nav-text">Archaius</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zuul"><span class="nav-number">4.1.3.</span> <span class="nav-text">Zuul</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Feign"><span class="nav-number">4.1.4.</span> <span class="nav-text">Feign</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hystrix"><span class="nav-number">4.1.5.</span> <span class="nav-text">Hystrix</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringCloudAlibaba"><span class="nav-number">4.2.</span> <span class="nav-text">SpringCloudAlibaba</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nacos"><span class="nav-number">4.2.1.</span> <span class="nav-text">Nacos</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dubbo"><span class="nav-number">4.2.2.</span> <span class="nav-text">Dubbo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sentinel"><span class="nav-number">4.2.3.</span> <span class="nav-text">Sentinel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringCloudOfficial"><span class="nav-number">4.3.</span> <span class="nav-text">SpringCloudOfficial</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringCloudConfig"><span class="nav-number">4.3.1.</span> <span class="nav-text">SpringCloudConfig</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringCloudVault"><span class="nav-number">4.3.2.</span> <span class="nav-text">SpringCloudVault</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringCloudGateway"><span class="nav-number">4.3.3.</span> <span class="nav-text">SpringCloudGateway</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringNative"><span class="nav-number">5.</span> <span class="nav-text">SpringNative</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PlatformService"><span class="nav-number">6.</span> <span class="nav-text">PlatformService</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MCS"><span class="nav-number">6.1.</span> <span class="nav-text">MCS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%9F%E4%B8%80%E6%8E%A8%E9%80%81%E5%B9%B3%E5%8F%B0"><span class="nav-number">6.1.1.</span> <span class="nav-text">统一推送平台</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MWS"><span class="nav-number">6.2.</span> <span class="nav-text">MWS</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CloudService"><span class="nav-number">7.</span> <span class="nav-text">CloudService</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
