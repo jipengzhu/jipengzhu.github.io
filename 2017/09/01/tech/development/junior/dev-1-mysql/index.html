@@ -28,7 +28,7 @@
 <meta property="og:description" content="mysql">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-31T17:01:00.000Z">
-<meta property="article:modified_time" content="2023-07-11T09:17:05.366Z">
+<meta property="article:modified_time" content="2023-07-15T10:06:06.533Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-11 17:17:05" itemprop="dateModified" datetime="2023-07-11T17:17:05+08:00">2023-07-11</time>
+                <time title="修改时间：2023-07-15 18:06:06" itemprop="dateModified" datetime="2023-07-15T18:06:06+08:00">2023-07-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -541,14 +541,19 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/risingsun001/article/details/38977797">mysql替换之insertOrReplace入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34845394/article/details/107632414">mysql替换之insertOrReplace详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41089622/article/details/114987649">mysql插入之批量insert</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012660464/article/details/117416047">mysql插入之防重插入</a></li>
 </ul>
 </blockquote>
 <p>单个插入、批量插入</p>
 <p>insertOrReject：insert into<br>insertOrIgnore：insert ignore into<br>insertOrUpdate: insert into … on duplicate key update<br>insertOrReplace：replace into</p>
 <p>全局唯一主键插入防重复方案</p>
 <ul>
-<li>重试：捕获主键重复异常（比如DuplicateKeyException）并换一个主键重试（适合读多写少的场景）</li>
-<li>加锁：<code>select for update</code>检测到重复后并换一个主键重试（适合常规读写的场景）</li>
+<li>重试：捕获主键重复异常（比如DuplicateKeyException）并换一个主键重试（适合<code>读多写少</code>的场景）</li>
+<li>加锁：<ul>
+<li>乐观锁：<code>insert ignore into</code>插入失败后换一个主键重试（适合<code>读多写少</code>的场景）</li>
+<li>悲观锁：<code>select for update</code>检测到重复后换一个主键重试（适合<code>常规读写</code>的场景）</li>
+</ul>
+</li>
 <li>发号：使用不会生成重复号码的发号器</li>
 </ul>
 <h3 id="update"><a href="#update" class="headerlink" title="update"></a>update</h3><blockquote>
@@ -953,10 +958,12 @@
 <p>MVCC可以解决不可重复读的问题<br>MVCC只能解决 <code>快照读</code> 的幻读问题，不能解决 <code>当前读</code> 的幻读问题</p>
 <h3 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h3><blockquote>
 <ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010841296/article/details/84204701">mysql的锁简介</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/vicoqi/article/details/115288261">mysql的锁入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39559071/article/details/110863015">mysql的锁进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42039228/article/details/123293597">mysql的锁详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38287269/article/details/102824620">mysql的锁精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chenghan_yang/article/details/129228113">mysql的意向锁</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yan88888888888888888/article/details/103695063">mysql的隐式和显式锁</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lixld/article/details/104542570">mysql的悲观锁和乐观锁</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34486648/article/details/129008639">mysql的悲观锁</a></li>
@@ -1000,7 +1007,8 @@
 </blockquote>
 <h1 id="Problem-2"><a href="#Problem-2" class="headerlink" title="Problem"></a>Problem</h1><h2 id="并发操作"><a href="#并发操作" class="headerlink" title="并发操作"></a>并发操作</h2><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41775852/article/details/111916026">mysql并发更新导致丢失更新与写入偏差</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sun8112133/article/details/89853755">mysql并发操作之更新丢失</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41775852/article/details/111916026">mysql并发操作之写入偏差</a></li>
 </ul>
 </blockquote>
 <h2 id="读写分离"><a href="#读写分离" class="headerlink" title="读写分离"></a>读写分离</h2><blockquote>
@@ -1010,7 +1018,7 @@
 </blockquote>
 <h2 id="数据丢失"><a href="#数据丢失" class="headerlink" title="数据丢失"></a>数据丢失</h2><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42515014/article/details/113167667">mysql数据丢失详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42515014/article/details/113167667">mysql数据存储之数据丢失详解</a></li>
 </ul>
 </blockquote>
 <h1 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h1><blockquote>
@@ -1065,12 +1073,18 @@
 </blockquote>
 <h2 id="Sharding"><a href="#Sharding" class="headerlink" title="Sharding"></a>Sharding</h2><blockquote>
 <ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/g6U8W7p06dCO99fQ3/article/details/128179735">数据库分库和分表简介</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/azhuyangjun/article/details/86976514">数据库分库和分表入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/FMC_WBL/article/details/128748726">数据库分库和分表进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/agonie201218/article/details/110823552">数据库分库和分表详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaowanzi_zj/article/details/122270389">数据库分库和分表精进</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41668084/article/details/113356941">数据库分库和分表问题</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jianzhang11/article/details/128141089">分库分表后非Sharding Key查询的三种方案</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jianzhang11/article/details/128141089">数据库分库和分表后非Sharding Key查询的三种方案</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42874635/article/details/127102146">数据库分库和分表条件（2000w）简介</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Edwin_Hu/article/details/124897224">数据库分库和分表条件（2000w）入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kwinH/article/details/114583497">数据库分库和分表条件（2000w）进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_74931226/article/details/128328857">数据库分库和分表条件（2000w）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/flynetcn/article/details/126494361">数据库分库和分表条件（2000w）精进</a></li>
 </ul>
 </blockquote>
 <h2 id="Partition"><a href="#Partition" class="headerlink" title="Partition"></a>Partition</h2><blockquote>
