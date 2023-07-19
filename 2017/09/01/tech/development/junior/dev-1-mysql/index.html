@@ -28,7 +28,7 @@
 <meta property="og:description" content="mysql">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-31T17:01:00.000Z">
-<meta property="article:modified_time" content="2023-07-18T10:19:07.738Z">
+<meta property="article:modified_time" content="2023-07-19T11:07:53.981Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-18 18:19:07" itemprop="dateModified" datetime="2023-07-18T18:19:07+08:00">2023-07-18</time>
+                <time title="修改时间：2023-07-19 19:07:53" itemprop="dateModified" datetime="2023-07-19T19:07:53+08:00">2023-07-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -557,8 +557,8 @@
 <ul>
 <li>重试：捕获主键重复异常（比如DuplicateKeyException）并换一个主键重试（适合<code>读多写少</code>的场景）</li>
 <li>加锁：<ul>
-<li>乐观锁：<code>insert ignore into</code>插入失败后换一个主键重试（适合<code>读多写少</code>的场景）</li>
 <li>悲观锁：<code>select for update</code>检测到重复后换一个主键重试（适合<code>常规读写</code>的场景）</li>
+<li>乐观锁：<code>insert ignore into</code>插入失败后换一个主键重试（适合<code>读多写少</code>的场景）</li>
 </ul>
 </li>
 <li>发号：使用不会生成重复号码的发号器</li>
@@ -904,7 +904,6 @@
 </ul>
 <h3 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a>ACID</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/http_red/article/details/105500104">mysql事务之基本特性入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39390545/article/details/116452271">mysql事务之基本特性详解</a></li>
 </ul>
 </blockquote>
@@ -987,19 +986,23 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/huaishu/article/details/89924250">MVCC入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/DILIGENT203/article/details/100751755">MVCC进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/SnailMann/article/details/94724197">MVCC详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46146718/article/details/121404423">MVCC和隔离级别的关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/WuLex/article/details/129481504">MVCC实现原理之版本控制</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangh571354026/article/details/124501658">MVCC实现原理之隐式字段</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_62436868/article/details/127202062">MVCC实现原理之ReadView</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lzb348110175/article/details/106788351">MVCC实现原理之UndoLog</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MarkusZhang/article/details/107335259">MVCC实现原理之快照读和当前读入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44844089/article/details/115532014">MVCC实现原理之快照读和当前读详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Mountainest/article/details/115922544">MVCC实现原理之MVCC和锁的关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDN_WYL2016/article/details/119793289">MVCC实现原理之MVCC和写时复制</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42512836/article/details/113388876">MVCC之不能完全解决幻读的问题入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/godloveleo9527/article/details/109554263">MVCC之不能完全解决幻读的问题详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MarkusZhang/article/details/107335259">MVCC之快照读和当前读入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44844089/article/details/115532014">MVCC之快照读和当前读详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/WuLex/article/details/129481504">MVCC之MVCC和版本控制</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Mountainest/article/details/115922544">MVCC之MVCC和锁的关系</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDN_WYL2016/article/details/119793289">MVCC之MVCC和写时复制</a></li>
 </ul>
 </blockquote>
 <blockquote>
 <p>ps：MVCC可以解决 <code>不可重复读</code> 的问题<br>ps：MVCC只能解决 <code>快照读</code> 的部分 <code>幻读</code> 问题，不能解决 <code>当前读</code> 的 <code>幻读</code> 问题<br>ps：read不等于select，还包含insert、update、delete时的read</p>
 </blockquote>
-<p>MVCC和隔离级别：隔离级别为时会启用MVCC机制<br>MVCC和锁的关系：写加锁，（快照）读不加锁<br>MVCC和读写的关系：写和写冲突，读和写不冲突（通过写时复制机制实现），读和读不冲突</p>
+<p>MVCC和隔离级别：隔离级别为读已提交和可重复读时会启用MVCC机制<br>MVCC和锁的关系：写加锁，（快照）读不加锁<br>MVCC和读写的关系：写写冲突，读写不冲突（通过写时复制机制实现），读读不冲突</p>
 <h3 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010841296/article/details/84204701">mysql的锁简介</a></li>
