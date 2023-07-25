@@ -28,7 +28,7 @@
 <meta property="og:description" content="spring">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T19:01:00.000Z">
-<meta property="article:modified_time" content="2023-07-23T11:19:13.080Z">
+<meta property="article:modified_time" content="2023-07-25T11:07:02.428Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-23 19:19:13" itemprop="dateModified" datetime="2023-07-23T19:19:13+08:00">2023-07-23</time>
+                <time title="修改时间：2023-07-25 19:07:02" itemprop="dateModified" datetime="2023-07-25T19:07:02+08:00">2023-07-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -256,6 +256,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44207403/article/details/106736102">Spring详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/uuuyy_/article/details/121889095">SpringBoot入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44494373/article/details/104566898">SpringBoot详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yinsizhilian/article/details/78521177">SSM框架和SSH框架的区别</a></li>
 </ul>
 </blockquote>
 <h2 id="Spring有哪些模块"><a href="#Spring有哪些模块" class="headerlink" title="Spring有哪些模块"></a>Spring有哪些模块</h2><blockquote>
@@ -542,19 +543,50 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43842093/article/details/121780649">AOP切点语法详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wang489687009/article/details/121099165">AOP的Advisor、Advised是什么</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wzy18210825916/article/details/96435588">AOP实现认证和授权</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013151053/article/details/106124048">AOP方法内部调用不生效的解决办法</a></li>
 </ul>
 </blockquote>
 <h2 id="Invalid"><a href="#Invalid" class="headerlink" title="Invalid"></a>Invalid</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_59244784/article/details/126795072">AOP失效的场景入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43790613/article/details/113091496">AOP失效的场景详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014365523/article/details/119849844">AOP同类调用失效解决方案</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013151053/article/details/106124048">AOP同类方法调用失效解决方案入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014365523/article/details/119849844">AOP同类方法调用失效解决方案详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44941128/article/details/121959259">AOP同类方法调用配置之@EnableAspectJAutoProxy的exposeProxy属性和proxyTargetClass属性</a></li>
 </ul>
 </blockquote>
-<h3 id="AOP同一个类方法调用时为什么不使用代理对象"><a href="#AOP同一个类方法调用时为什么不使用代理对象" class="headerlink" title="AOP同一个类方法调用时为什么不使用代理对象"></a>AOP同一个类方法调用时为什么不使用代理对象</h3><p>因为代理类的实例是在代理类生成后才能创建，<br>因此在代理类生成的时候进行同一个类的方法调用时代理类的实例还不存在，<br>所以只能通过原生类创建一个原生对象进行进行同一个类的方法。</p>
+<h3 id="AOP同类方法调用时失效的解决方案"><a href="#AOP同类方法调用时失效的解决方案" class="headerlink" title="AOP同类方法调用时失效的解决方案"></a>AOP同类方法调用时失效的解决方案</h3><ul>
+<li>通过AopContext.currentProxy代替this调用从而可以使用代理对象</li>
+<li>通过ApplicationContext.getBean代替this调用从而可以使用代理对象</li>
+<li>通过在A类中注入A类型的字段a并使用对象a代替this调用从而可以使用代理对象</li>
+</ul>
 <blockquote>
-<p>注：在方法里面通过AopContext.currentProxy和ApplicationContext.getBean代替this调用从而可以使用代理对象</p>
+<p>ps：AopContext.currentProxy需要添加 <code>@EnableAspectJAutoProxy(exposeProxy=true)</code> 注解</p>
+</blockquote>
+<h3 id="AOP同类方法调用时为什么不使用代理对象"><a href="#AOP同类方法调用时为什么不使用代理对象" class="headerlink" title="AOP同类方法调用时为什么不使用代理对象"></a>AOP同类方法调用时为什么不使用代理对象</h3><p>因为代理类的实例是在代理类生成后才能创建，<br>因此在代理类生成的时候进行同一个类的方法调用时代理类的实例还不存在，<br>所以只能通过原生类创建一个原生对象进行进行同一个类的方法。</p>
+<h1 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44641846/article/details/118251508">Spring代理入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cckevincyh/article/details/54962920">Spring代理进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_27414099/article/details/104440425">Spring代理详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yellow__star/article/details/102510545">Spring代理之JDK代理、CGLIB、AspectJ区别入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a837199685/article/details/68930987">Spring代理之JDK代理、CGLIB、AspectJ区别进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ory001/article/details/123465560">Spring代理之JDK代理、CGLIB、AspectJ区别详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq798280904/article/details/130078011">Spring代理之SpringAOP和AspectJ的关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/starryninglong/article/details/89737419">Spring代理之CGLIB的接口代理和非接口代理的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/gongsenlin341/article/details/111240114">Spring代理之代理对象的生成时机</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wang489687009/article/details/121214357">Spring代理之@Transactional代理实现详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wang489687009/article/details/121261406">Spring代理之@Async代理实现详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yaomingyang/article/details/108238121">Spring代理之@Configuration的属性proxyBeanMethods详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_22078107/article/details/85882211">Spring代理之Aop的的属性proxyTargetClass详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/okxuewei/article/details/104851358">Spring代理之@Transactional的属性proxyTargetClass详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/laoxilaoxi_/article/details/99896738">SpringBoot代理之@Transactional的属性proxyTargetClass不生效详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45089578/article/details/117259703">Spring代理之@EnableAspectJAutoProxy的属性proxyTargetClass详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_64491107/article/details/124389042">SpringBoot代理之@EnableAspectJAutoProxy的属性proxyTargetClass不生效详解</a></li>
+</ul>
+</blockquote>
+<p>@Configuration的proxyBeanMethods：是否对生成bean的方法进行代理，默认为true<br>@Transactional的proxyTargetClass：是否强制使用CGLIB进行代理，默认为false</p>
+<blockquote>
+<p>ps：SpringBoot中的spring.aop.proxy-target-class属性（默认为true）优先级比注解里的proxyTargetClass属性高</p>
 </blockquote>
 <h1 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h1><blockquote>
 <ul>
@@ -571,19 +603,18 @@
 <h2 id="SpringBootConfiguration"><a href="#SpringBootConfiguration" class="headerlink" title="SpringBootConfiguration"></a>SpringBootConfiguration</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44045828/article/details/117983882">@SpringBootConfiguration详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liangsheng_g/article/details/109556746">@EnableAutoConfiguration详解</a></li>
 </ul>
 </blockquote>
 <h3 id="AutoConfiguration"><a href="#AutoConfiguration" class="headerlink" title="AutoConfiguration"></a>AutoConfiguration</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42119730/article/details/127522419">SpringBoot自动配置机制流程</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_57434877/article/details/123933529">SpringBoot自动配置机制入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kerongao/article/details/109593794">SpringBoot自动配置机制详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33591903/article/details/119843446">SpringBoot自动配置机制原理</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42119730/article/details/127522419">SpringBoot自动配置机制流程</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lizhiyuan_eagle/article/details/91583834">SpringBoot自动配置机制之@Conditional详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zzuhkp/article/details/108443345">SpringBoot自动配置机制之@Conditional原理</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ynchyong/article/details/119384167">AutoConfiguration和@Configuration的区别</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43888891/article/details/127473290">@AutoConfiguration详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38566465/article/details/106256592">@AutoConfiguration原理</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lizhiyuan_eagle/article/details/91583834">@Conditional详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zzuhkp/article/details/108443345">@Conditional原理</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ynchyong/article/details/119384167">@AutoConfiguration和@Configuration的区别</a></li>
 </ul>
 </blockquote>
 <h2 id="SpringBootStarter"><a href="#SpringBootStarter" class="headerlink" title="SpringBootStarter"></a>SpringBootStarter</h2><blockquote>
@@ -608,6 +639,7 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35571554/article/details/82453684">Spring配置文件详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_27151401/article/details/115619803">Spring配置文件加载</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/harrychinese/p/SpringBoot_application_properties_and_document.html">Spring配置文件属性</a></li>
 </ul>
 </blockquote>
 <h3 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h3><blockquote>
@@ -691,7 +723,7 @@
 <blockquote>
 <p>ps：xml配置文件和properties配置文件都支持多个文件<br>ps：xml配置文件配置冲突时的解决方案是使用最开始的配置项并忽略后面的配置项<br>ps：properties配置文件配置冲突时的解决方案是后面的配置项覆盖前面的配置项</p>
 </blockquote>
-<h2 id="Configuration（Use）"><a href="#Configuration（Use）" class="headerlink" title="Configuration（Use）"></a>Configuration（Use）</h2><blockquote>
+<h2 id="Configuration（Usage）"><a href="#Configuration（Usage）" class="headerlink" title="Configuration（Usage）"></a>Configuration（Usage）</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq1309664161/article/details/119710994">Spring配置类之Environment详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/woheniccc/article/details/79804600">@Value入门</a></li>
@@ -712,38 +744,67 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/feng_xiaoshi/article/details/103825162">EnableXXX详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/daguanjia11/article/details/102882801">EnableXXX原理</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zxc123e/article/details/80222967">@EnableAutoConfiguration详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38566465/article/details/106256592">@EnableAutoConfiguration原理</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hd243608836/article/details/123056513">@EnableConfigurationProperties和@ConfigurationProperties详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/x763795151/article/details/85252540">@EnableWebMvc详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_24598601/article/details/89295515">@EnableAsync和@Async详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/pan_junbiao/article/details/109399280">@EnableScheduling和@Scheduled详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lifewinnerforever/article/details/103010889">@EnableRetry和@Retryable详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43849277/article/details/120058804">@EnableCaching与@Cacheable详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42478982/article/details/123251494">@EnableTransactionManagement和@Transactional详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013720069/article/details/112025020">@EnableAspectJAutoProxy详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/x763795151/article/details/85252540">@EnableWebMvc详解</a></li>
 </ul>
 </blockquote>
-<p>EnableXXX的作用：启用某项特性并引入（@Import）相关的配置类</p>
-<h2 id="Configuration（Async）"><a href="#Configuration（Async）" class="headerlink" title="Configuration（Async）"></a>Configuration（Async）</h2><blockquote>
+<p>EnableXXX的作用：启用某项特性和引入（@Import）相关的配置类使得相关的注解生效</p>
+<h2 id="Configuration（Function）"><a href="#Configuration（Function）" class="headerlink" title="Configuration（Function）"></a>Configuration（Function）</h2><h3 id="Configuration（MVC）"><a href="#Configuration（MVC）" class="headerlink" title="Configuration（MVC）"></a>Configuration（MVC）</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/goldenfish1919/article/details/106299821">AsyncConfigurerSupport详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangpower1993/article/details/89016503">WebMvcConfigurer详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wujiaqi0921/article/details/78324722">WebMvcConfigurerAdapter详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45612794/article/details/102551592">WebMvcConfigurationSupport详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lvyuanj/article/details/108554170">WebMvcConfigurer和WebMvcConfigurerAdapter、WebMvcConfigurationSupport的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sdname/article/details/109718768">WebMvcConfigurer和WebMvcConfigurerAdapter、WebMvcConfigurationSupport之选择</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/alex_xfboy/article/details/88724863">WebMvcConfigurationSupport问题之继承导致WebMvcAutoConfiguration自动配置失效</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zxc123e/article/details/84636521">@EnableWebMvc加和不加的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/andy_zhang2007/article/details/87357865">@EnableWebMvc原理</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>WebMvcConfigurer：WebMvc配置接口（提供了接口）</li>
+<li>WebMvcConfigurerAdapter：WebMvc配置抽象类（实现了少量的方法）</li>
+<li>WebMvcConfigurationSupport：WebMvc配置默认实现类（实现了大量的方法）</li>
+</ul>
+<blockquote>
+<p>ps：由于java8中的接口支持默认方法了，所以WebMvcConfigurerAdapter已经不需要了<br>ps：SpringBoot中不用显示添加@EnableWebMvc，WebMvcAutoConfiguration会实现相同的效果</p>
+</blockquote>
+<h3 id="Configuration（Async）"><a href="#Configuration（Async）" class="headerlink" title="Configuration（Async）"></a>Configuration（Async）</h3><blockquote>
+<ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37645861/article/details/116654469">AsyncConfigurer详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/andy_zhang2007/article/details/95802825">@EnableAsync原理</a></li>
 </ul>
 </blockquote>
-<h2 id="Configuration（MVC）"><a href="#Configuration（MVC）" class="headerlink" title="Configuration（MVC）"></a>Configuration（MVC）</h2><blockquote>
+<h3 id="Configuration（Schedule）"><a href="#Configuration（Schedule）" class="headerlink" title="Configuration（Schedule）"></a>Configuration（Schedule）</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wujiaqi0921/article/details/78324722">WebMvcConfigurerAdapter详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45612794/article/details/102551592">WebMvcConfigurationSupport详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangpower1993/article/details/89016503">WebMvcConfigurer详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kehonghg/article/details/81180731">WebMvcConfigurationSupport和WebMvcConfigurerAdapter的区别</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lvyuanj/article/details/108554170">WebMvcConfigurer和WebMvcConfigurerAdapter的区别</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sdname/article/details/109718768">不再推荐使用WebMvcConfigurerAdapter</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/andy_zhang2007/article/details/87357865">@EnableWebMvc原理</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41144667/article/details/103937193">SchedulingConfigurer详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/daliucheng/article/details/119884713">@EnableScheduling原理</a></li>
 </ul>
 </blockquote>
-<h2 id="Configuration（CORS）"><a href="#Configuration（CORS）" class="headerlink" title="Configuration（CORS）"></a>Configuration（CORS）</h2><blockquote>
+<h3 id="Configuration（Retry）"><a href="#Configuration（Retry）" class="headerlink" title="Configuration（Retry）"></a>Configuration（Retry）</h3><h3 id="Configuration（Cache）"><a href="#Configuration（Cache）" class="headerlink" title="Configuration（Cache）"></a>Configuration（Cache）</h3><h3 id="Configuration（Transaction）"><a href="#Configuration（Transaction）" class="headerlink" title="Configuration（Transaction）"></a>Configuration（Transaction）</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/JokerLJG/article/details/123659384">@CrossOrigin详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38106322/article/details/109966682">SpringBoot中不用显示添加@EnableTransactionManagement</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/avengerEug/article/details/118584174">@EnableTransactionManagement原理</a></li>
 </ul>
+</blockquote>
+<blockquote>
+<p>ps：SpringBoot中不用显示添加@EnableTransactionManagement，TransactionAutoConfiguration会实现相同的效果</p>
+</blockquote>
+<h3 id="Configuration（Aop）"><a href="#Configuration（Aop）" class="headerlink" title="Configuration（Aop）"></a>Configuration（Aop）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/band_mmbx/article/details/126851301">SpringBoot中不用显示添加@EnableAspectJAutoProxy</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhoushimiao1990/article/details/89853368">@EnableAspectJAutoProxy原理</a></li>
+</ul>
+</blockquote>
+<blockquote>
+<p>ps：SpringBoot中不用显示添加@EnableAspectJAutoProxy，AopAutoConfiguration会实现相同的效果</p>
 </blockquote>
 <h2 id="Configuration（Profile）"><a href="#Configuration（Profile）" class="headerlink" title="Configuration（Profile）"></a>Configuration（Profile）</h2><blockquote>
 <ul>
@@ -751,7 +812,12 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_29235677/article/details/118528996">Maven的Profile详解</a></li>
 </ul>
 </blockquote>
-<h1 id="Design"><a href="#Design" class="headerlink" title="Design"></a>Design</h1><blockquote>
+<h1 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36882793/article/details/106440723">Spring源码分析：全集整理</a></li>
+</ul>
+</blockquote>
+<h2 id="Design"><a href="#Design" class="headerlink" title="Design"></a>Design</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chao821/article/details/92400186">Spring设计模式：常用的设计模式</a></li>
 </ul>
@@ -764,11 +830,6 @@
 <li>模板模式</li>
 <li>策略模式</li>
 </ul>
-<h1 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h1><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36882793/article/details/106440723">Spring源码分析：全集整理</a></li>
-</ul>
-</blockquote>
 <h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><h2 id="LaunchRunner"><a href="#LaunchRunner" class="headerlink" title="LaunchRunner"></a>LaunchRunner</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chenlixiao007/article/details/113881768">Spring启动回调机制</a></li>
@@ -888,7 +949,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring"><span class="nav-number">1.</span> <span class="nav-text">Spring</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring%E6%9C%89%E5%93%AA%E4%BA%9B%E6%A8%A1%E5%9D%97"><span class="nav-number">1.1.</span> <span class="nav-text">Spring有哪些模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring%E6%A0%B8%E5%BF%83%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.2.</span> <span class="nav-text">Spring核心是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring%E5%B8%B8%E7%94%A8%E7%9A%84%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.3.</span> <span class="nav-text">Spring常用的注解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IOC"><span class="nav-number">2.</span> <span class="nav-text">IOC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DI"><span class="nav-number">2.1.</span> <span class="nav-text">DI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Register"><span class="nav-number">2.1.1.</span> <span class="nav-text">Register</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Scope"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">Scope</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lazy"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">Lazy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Alias"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">Alias</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inject"><span class="nav-number">2.1.2.</span> <span class="nav-text">Inject</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E6%B3%A8%E5%85%A5%E6%96%B9%E5%BC%8F"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">三种注入方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E6%B3%A8%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">字段注入的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setter%E6%B3%A8%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">setter注入的问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AutoWire"><span class="nav-number">2.1.3.</span> <span class="nav-text">AutoWire</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Naming"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">Naming</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Priority"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">Priority</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ordering"><span class="nav-number">2.1.4.</span> <span class="nav-text">Ordering</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dependency"><span class="nav-number">2.1.5.</span> <span class="nav-text">Dependency</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E5%92%8C%E6%B3%A8%E5%85%A5%E6%96%B9%E5%BC%8F"><span class="nav-number">2.1.5.1.</span> <span class="nav-text">循环依赖和注入方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E5%92%8C%E4%B8%89%E7%BA%A7%E7%BC%93%E5%AD%98"><span class="nav-number">2.1.5.2.</span> <span class="nav-text">循环依赖和三级缓存</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bean"><span class="nav-number">2.2.</span> <span class="nav-text">Bean</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">2.2.1.</span> <span class="nav-text">bean的作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bean%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8"><span class="nav-number">2.2.2.</span> <span class="nav-text">bean的线程安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">2.2.3.</span> <span class="nav-text">bean的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%A6%82%E8%A7%88"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">bean的生命周期概览</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E8%AF%A6%E8%BF%B0"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">bean的生命周期详述</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Factory"><span class="nav-number">2.3.</span> <span class="nav-text">Factory</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AOP"><span class="nav-number">3.</span> <span class="nav-text">AOP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Invalid"><span class="nav-number">3.1.</span> <span class="nav-text">Invalid</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP%E5%90%8C%E4%B8%80%E4%B8%AA%E7%B1%BB%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E6%97%B6%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.1.1.</span> <span class="nav-text">AOP同一个类方法调用时为什么不使用代理对象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringBoot"><span class="nav-number">4.</span> <span class="nav-text">SpringBoot</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBootApplication"><span class="nav-number">4.1.</span> <span class="nav-text">SpringBootApplication</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBootConfiguration"><span class="nav-number">4.2.</span> <span class="nav-text">SpringBootConfiguration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AutoConfiguration"><span class="nav-number">4.2.1.</span> <span class="nav-text">AutoConfiguration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBootStarter"><span class="nav-number">4.3.</span> <span class="nav-text">SpringBootStarter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBootActuator"><span class="nav-number">4.4.</span> <span class="nav-text">SpringBootActuator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBootAdmin"><span class="nav-number">4.5.</span> <span class="nav-text">SpringBootAdmin</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Configuration"><span class="nav-number">5.</span> <span class="nav-text">Configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration%EF%BC%88File%EF%BC%89"><span class="nav-number">5.1.</span> <span class="nav-text">Configuration（File）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Web"><span class="nav-number">5.1.1.</span> <span class="nav-text">Web</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-1"><span class="nav-number">5.1.2.</span> <span class="nav-text">Spring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringBoot-1"><span class="nav-number">5.1.3.</span> <span class="nav-text">SpringBoot</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration%EF%BC%88Import%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">Configuration（Import）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration%EF%BC%88Order%EF%BC%89"><span class="nav-number">5.3.</span> <span class="nav-text">Configuration（Order）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration%EF%BC%88Use%EF%BC%89"><span class="nav-number">5.4.</span> <span class="nav-text">Configuration（Use）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration%EF%BC%88Enable%EF%BC%89"><span class="nav-number">5.5.</span> <span class="nav-text">Configuration（Enable）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration%EF%BC%88Async%EF%BC%89"><span class="nav-number">5.6.</span> <span class="nav-text">Configuration（Async）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration%EF%BC%88MVC%EF%BC%89"><span class="nav-number">5.7.</span> <span class="nav-text">Configuration（MVC）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration%EF%BC%88CORS%EF%BC%89"><span class="nav-number">5.8.</span> <span class="nav-text">Configuration（CORS）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration%EF%BC%88Profile%EF%BC%89"><span class="nav-number">5.9.</span> <span class="nav-text">Configuration（Profile）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Design"><span class="nav-number">6.</span> <span class="nav-text">Design</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theory"><span class="nav-number">7.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">8.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LaunchRunner"><span class="nav-number">8.1.</span> <span class="nav-text">LaunchRunner</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StateMachine"><span class="nav-number">8.2.</span> <span class="nav-text">StateMachine</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Utils"><span class="nav-number">9.</span> <span class="nav-text">Utils</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring"><span class="nav-number">1.</span> <span class="nav-text">Spring</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring%E6%9C%89%E5%93%AA%E4%BA%9B%E6%A8%A1%E5%9D%97"><span class="nav-number">1.1.</span> <span class="nav-text">Spring有哪些模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring%E6%A0%B8%E5%BF%83%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.2.</span> <span class="nav-text">Spring核心是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring%E5%B8%B8%E7%94%A8%E7%9A%84%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.3.</span> <span class="nav-text">Spring常用的注解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IOC"><span class="nav-number">2.</span> <span class="nav-text">IOC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DI"><span class="nav-number">2.1.</span> <span class="nav-text">DI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Register"><span class="nav-number">2.1.1.</span> <span class="nav-text">Register</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Scope"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">Scope</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lazy"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">Lazy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Alias"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">Alias</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inject"><span class="nav-number">2.1.2.</span> <span class="nav-text">Inject</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E6%B3%A8%E5%85%A5%E6%96%B9%E5%BC%8F"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">三种注入方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E6%B3%A8%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">字段注入的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setter%E6%B3%A8%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">setter注入的问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AutoWire"><span class="nav-number">2.1.3.</span> <span class="nav-text">AutoWire</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Naming"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">Naming</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Priority"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">Priority</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ordering"><span class="nav-number">2.1.4.</span> <span class="nav-text">Ordering</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dependency"><span class="nav-number">2.1.5.</span> <span class="nav-text">Dependency</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E5%92%8C%E6%B3%A8%E5%85%A5%E6%96%B9%E5%BC%8F"><span class="nav-number">2.1.5.1.</span> <span class="nav-text">循环依赖和注入方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E5%92%8C%E4%B8%89%E7%BA%A7%E7%BC%93%E5%AD%98"><span class="nav-number">2.1.5.2.</span> <span class="nav-text">循环依赖和三级缓存</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bean"><span class="nav-number">2.2.</span> <span class="nav-text">Bean</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">2.2.1.</span> <span class="nav-text">bean的作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bean%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8"><span class="nav-number">2.2.2.</span> <span class="nav-text">bean的线程安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">2.2.3.</span> <span class="nav-text">bean的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%A6%82%E8%A7%88"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">bean的生命周期概览</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E8%AF%A6%E8%BF%B0"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">bean的生命周期详述</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Factory"><span class="nav-number">2.3.</span> <span class="nav-text">Factory</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AOP"><span class="nav-number">3.</span> <span class="nav-text">AOP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Invalid"><span class="nav-number">3.1.</span> <span class="nav-text">Invalid</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP%E5%90%8C%E7%B1%BB%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E6%97%B6%E5%A4%B1%E6%95%88%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">3.1.1.</span> <span class="nav-text">AOP同类方法调用时失效的解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP%E5%90%8C%E7%B1%BB%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E6%97%B6%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.1.2.</span> <span class="nav-text">AOP同类方法调用时为什么不使用代理对象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Proxy"><span class="nav-number">4.</span> <span class="nav-text">Proxy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringBoot"><span class="nav-number">5.</span> <span class="nav-text">SpringBoot</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBootApplication"><span class="nav-number">5.1.</span> <span class="nav-text">SpringBootApplication</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBootConfiguration"><span class="nav-number">5.2.</span> <span class="nav-text">SpringBootConfiguration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AutoConfiguration"><span class="nav-number">5.2.1.</span> <span class="nav-text">AutoConfiguration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBootStarter"><span class="nav-number">5.3.</span> <span class="nav-text">SpringBootStarter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBootActuator"><span class="nav-number">5.4.</span> <span class="nav-text">SpringBootActuator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBootAdmin"><span class="nav-number">5.5.</span> <span class="nav-text">SpringBootAdmin</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Configuration"><span class="nav-number">6.</span> <span class="nav-text">Configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration%EF%BC%88File%EF%BC%89"><span class="nav-number">6.1.</span> <span class="nav-text">Configuration（File）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Web"><span class="nav-number">6.1.1.</span> <span class="nav-text">Web</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-1"><span class="nav-number">6.1.2.</span> <span class="nav-text">Spring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringBoot-1"><span class="nav-number">6.1.3.</span> <span class="nav-text">SpringBoot</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration%EF%BC%88Import%EF%BC%89"><span class="nav-number">6.2.</span> <span class="nav-text">Configuration（Import）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration%EF%BC%88Order%EF%BC%89"><span class="nav-number">6.3.</span> <span class="nav-text">Configuration（Order）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration%EF%BC%88Usage%EF%BC%89"><span class="nav-number">6.4.</span> <span class="nav-text">Configuration（Usage）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration%EF%BC%88Enable%EF%BC%89"><span class="nav-number">6.5.</span> <span class="nav-text">Configuration（Enable）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration%EF%BC%88Function%EF%BC%89"><span class="nav-number">6.6.</span> <span class="nav-text">Configuration（Function）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuration%EF%BC%88MVC%EF%BC%89"><span class="nav-number">6.6.1.</span> <span class="nav-text">Configuration（MVC）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuration%EF%BC%88Async%EF%BC%89"><span class="nav-number">6.6.2.</span> <span class="nav-text">Configuration（Async）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuration%EF%BC%88Schedule%EF%BC%89"><span class="nav-number">6.6.3.</span> <span class="nav-text">Configuration（Schedule）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuration%EF%BC%88Retry%EF%BC%89"><span class="nav-number">6.6.4.</span> <span class="nav-text">Configuration（Retry）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuration%EF%BC%88Cache%EF%BC%89"><span class="nav-number">6.6.5.</span> <span class="nav-text">Configuration（Cache）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuration%EF%BC%88Transaction%EF%BC%89"><span class="nav-number">6.6.6.</span> <span class="nav-text">Configuration（Transaction）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuration%EF%BC%88Aop%EF%BC%89"><span class="nav-number">6.6.7.</span> <span class="nav-text">Configuration（Aop）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration%EF%BC%88Profile%EF%BC%89"><span class="nav-number">6.7.</span> <span class="nav-text">Configuration（Profile）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theory"><span class="nav-number">7.</span> <span class="nav-text">Theory</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Design"><span class="nav-number">7.1.</span> <span class="nav-text">Design</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">8.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LaunchRunner"><span class="nav-number">8.1.</span> <span class="nav-text">LaunchRunner</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StateMachine"><span class="nav-number">8.2.</span> <span class="nav-text">StateMachine</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Utils"><span class="nav-number">9.</span> <span class="nav-text">Utils</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
