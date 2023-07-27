@@ -28,7 +28,7 @@
 <meta property="og:description" content="spring-web">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T19:02:00.000Z">
-<meta property="article:modified_time" content="2023-07-25T11:07:02.429Z">
+<meta property="article:modified_time" content="2023-07-27T11:27:43.608Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-25 19:07:02" itemprop="dateModified" datetime="2023-07-25T19:07:02+08:00">2023-07-25</time>
+                <time title="修改时间：2023-07-27 19:27:43" itemprop="dateModified" datetime="2023-07-27T19:27:43+08:00">2023-07-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -298,6 +298,9 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LawssssCat/article/details/105249730">Filter（过滤器）和Interceptor（拦截器）对比入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41788977/article/details/103610068">Filter（过滤器）和Interceptor（拦截器）对比详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014496893/article/details/112286634">Filter（过滤器）、Interceptor（拦截器）、AOP对比入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fly910905/article/details/86537648">Filter（过滤器）、Interceptor（拦截器）、AOP对比进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shang_0122/article/details/112061671">Filter（过滤器）、Interceptor（拦截器）、AOP对比详解</a></li>
 </ul>
 </blockquote>
 <h3 id="Filter（过滤器）"><a href="#Filter（过滤器）" class="headerlink" title="Filter（过滤器）"></a>Filter（过滤器）</h3><blockquote>
@@ -516,15 +519,19 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w727655308/article/details/121207345">jq详解</a></li>
 </ul>
 </blockquote>
-<h2 id="CrossSite"><a href="#CrossSite" class="headerlink" title="CrossSite"></a>CrossSite</h2><blockquote>
+<h2 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/JokerLJG/article/details/123659384">@CrossOrigin详解</a></li>
 </ul>
 </blockquote>
-<p>CORS：跨域</p>
-<h2 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h2><blockquote>
+<p>CORS：CrossSite（跨域）</p>
+<h2 id="Auth"><a href="#Auth" class="headerlink" title="Auth"></a>Auth</h2><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_17231297/article/details/129787384">接口优化方案总结</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45704528/article/details/117639061">Spring认证和授权实现方案入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46073538/article/details/128641746">Spring认证和授权实现方案详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41496513/article/details/117259017">Spring认证和授权实现方案之使用Filter实现</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36526703/article/details/81910680">Spring认证和授权实现方案之使用Interceptor实现</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wzy18210825916/article/details/96435588">Spring认证和授权实现方案之使用AOP实现</a></li>
 </ul>
 </blockquote>
 <h1 id="View"><a href="#View" class="headerlink" title="View"></a>View</h1><blockquote>
@@ -577,8 +584,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yqw1401/article/details/120385937">MapStruct详解</a></li>
 </ul>
 </blockquote>
-<h1 id="Robustness"><a href="#Robustness" class="headerlink" title="Robustness"></a>Robustness</h1><p>Robustness：鲁棒性、健壮性、稳健性</p>
-<h2 id="Exception"><a href="#Exception" class="headerlink" title="Exception"></a>Exception</h2><blockquote>
+<h1 id="Availability"><a href="#Availability" class="headerlink" title="Availability"></a>Availability</h1><h2 id="Exception"><a href="#Exception" class="headerlink" title="Exception"></a>Exception</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41107231/article/details/115874974">Spring全局异常入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_27575627/article/details/129128997">Spring全局异常进阶</a></li>
@@ -617,112 +623,10 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sonicwater/article/details/114872095">防抖（debounce）和截流（throttle）详解</a></li>
 </ul>
 </blockquote>
-<h2 id="Performance-1"><a href="#Performance-1" class="headerlink" title="Performance"></a>Performance</h2><blockquote>
+<h2 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h2><blockquote>
 <ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_17231297/article/details/129787384">接口性能优化方案总结</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/china_coding/article/details/128895749">用了这些方案，接口性能提高了100倍</a></li>
-</ul>
-</blockquote>
-<h1 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h1><h2 id="Protocol"><a href="#Protocol" class="headerlink" title="Protocol"></a>Protocol</h2><h3 id="Http"><a href="#Http" class="headerlink" title="Http"></a>Http</h3><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yeyinfan123/article/details/106968850">HTTP入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq15035899256/article/details/126103840">HTTP进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45890970/article/details/122890674">HTTP详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44739349/article/details/106097201">Http请求库选型</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/petterp/article/details/129003792">Http请求库演进</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w372426096/article/details/82713315">HttpClient详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_32237719/article/details/100125359">OkHttp入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_32237719/article/details/109743388">OkHttp进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43842093/article/details/121877245">OkHttp详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sukisabishi/article/details/121878743">Retrofit详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Ares___/article/details/121620150">RestTemplate详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/f641385712/article/details/100713622">RestTemplate集成HttpClient和OkHttp</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chendasheng/article/details/107075468">OkHttp和HttpClient的区别</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fitaotao/article/details/103903429">Retrofit和OkHttp的区别</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/b644ROfP20z37485O35M/article/details/109505044">RestTemplate和Retrofit的区别</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/q1353122328/article/details/128812919">Feign和Retrofit的区别</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38233258/article/details/125706722">Forest和Retrofit的区别</a></li>
-</ul>
-</blockquote>
-<ul>
-<li>HttpClient：Apache组织出品的较早的Http请求库，支持<code>编程式调用</code></li>
-<li>OkHttp：Square公司出品的较新的Http请求库，支持<code>编程式调用</code></li>
-<li>Retrofit：Square公司出品的较新的Http请求库，基于OkHttp和RxJava，支持<code>声明式调用</code></li>
-<li>RestTemplate：Spring中使用，可以适配多种Http请求库</li>
-<li>Feign：SpringCloud中使用，可以使用Spring的注解</li>
-</ul>
-<blockquote>
-<p>ps：客户端的http请求方式可以分为 <code>同步请求</code> 和 <code>异步请求</code></p>
-</blockquote>
-<h3 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h3><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/asd051377305/article/details/108066378">WebSocket协议入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LL845876425/article/details/106393358">WebSocket协议进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sermonlizhi/article/details/118609757">WebSocket协议详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq991658923/article/details/127022522">WebSocket使用入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w1014074794/article/details/113845879">WebSocket使用进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_56995925/article/details/120543965">WebSocket使用详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43821679/article/details/110236715">WebSocket之数据实时更新</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42125556/article/details/120931552">分布式WebSocket入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhuwei_clark/article/details/83547193">分布式WebSocket进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/delicious_life/article/details/105305640">分布式WebSocket详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/aiwokache/article/details/117294920">WebSocket和Http的关系</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cai4561/article/details/106809244">WebSocket掉线重连</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/houbin0912/article/details/110879747">WebSocket错误码</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/AnNanDu/article/details/126603005">WebSocket保活（PingPong）机制</a></li>
-</ul>
-</blockquote>
-<h3 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h3><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qianlia/article/details/105508138">RPC入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/belongtocode/article/details/118639448">RPC进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yjp198713/article/details/79410521">RPC详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Ruishine/article/details/122534965">RPC和RMI的区别</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qian_348840260/article/details/116753405">RPC和HTTP的关系</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weichi7549/article/details/107721623">RPC和Restful对比</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/en_joker/article/details/105556828">RPC框架选型入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liutong123987/article/details/78887604">RPC框架选型进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_70730532/article/details/126543677">RPC框架选型详解</a></li>
-</ul>
-</blockquote>
-<h2 id="Specification"><a href="#Specification" class="headerlink" title="Specification"></a>Specification</h2><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Agreoself/p/17328343.html">Web API和Web Service的区别入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_30021219/article/details/93379588">Web API和Web Service的区别进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/realaction/p/11429253.html">Web API和Web Service的区别详解</a></li>
-</ul>
-</blockquote>
-<h3 id="Restful（Web-API）"><a href="#Restful（Web-API）" class="headerlink" title="Restful（Web API）"></a>Restful（Web API）</h3><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/duninet/article/details/103835372">Restful入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zzvar/article/details/118164133">Restful进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/langfeiyes/article/details/122871361">Restful详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_33446638/article/details/111144735">Restful之状态码设计详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42519804/article/details/106883972">Restful之Post和Put的区别入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/maxmao1024/article/details/79591726">Restful之Post和Put的区别详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/varyall/article/details/80895945">Restful之Patch和Put的区别详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wufagang/article/details/105306108">Restful之Spring的HiddenHttpMethodFilter</a></li>
-</ul>
-</blockquote>
-<h3 id="SOAP（Web-Service）"><a href="#SOAP（Web-Service）" class="headerlink" title="SOAP（Web Service）"></a>SOAP（Web Service）</h3><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39198749/article/details/102627247">SOAP入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/caisini_vc/article/details/48465731">SOAP进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44651073/article/details/129468001">SOAP详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cherry_11qianqian/article/details/82660383">WSDL入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/DmxExcalibur/article/details/90610596">WSDL进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_19714937/article/details/68922185">WSDL详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/vtopqx/article/details/86674184">SOAP和WSDL的区别</a></li>
-</ul>
-</blockquote>
-<h2 id="Container"><a href="#Container" class="headerlink" title="Container"></a>Container</h2><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/JAVA_MHH/article/details/115417612">Spring内置容器切换</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yiyuzz/article/details/117169403">tomcat和jetty、netty的区别</a></li>
-</ul>
-</blockquote>
-<h3 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h3><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Jiangbohao_/article/details/107033497">tomcat最大线程数、最大等待数和最大连接数</a></li>
 </ul>
 </blockquote>
 <h1 id="Logging"><a href="#Logging" class="headerlink" title="Logging"></a>Logging</h1><blockquote>
@@ -788,7 +692,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Px01Ih8/article/details/120479991">java日志适配详解</a></li>
 </ul>
 </blockquote>
-<h2 id="Specification-1"><a href="#Specification-1" class="headerlink" title="Specification"></a>Specification</h2><blockquote>
+<h2 id="Specification"><a href="#Specification" class="headerlink" title="Specification"></a>Specification</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a7151593/article/details/107919163">日志规范</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39755824/article/details/110793712">结构化日志</a></li>
@@ -957,6 +861,109 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51156601/article/details/126886040">自动化测试工具之playwright</a></li>
 </ul>
 </blockquote>
+<h1 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h1><h2 id="Protocol"><a href="#Protocol" class="headerlink" title="Protocol"></a>Protocol</h2><h3 id="Http"><a href="#Http" class="headerlink" title="Http"></a>Http</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yeyinfan123/article/details/106968850">HTTP入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq15035899256/article/details/126103840">HTTP进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45890970/article/details/122890674">HTTP详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44739349/article/details/106097201">Http请求库选型</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/petterp/article/details/129003792">Http请求库演进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w372426096/article/details/82713315">HttpClient详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_32237719/article/details/100125359">OkHttp入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_32237719/article/details/109743388">OkHttp进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43842093/article/details/121877245">OkHttp详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sukisabishi/article/details/121878743">Retrofit详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Ares___/article/details/121620150">RestTemplate详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/f641385712/article/details/100713622">RestTemplate集成HttpClient和OkHttp</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chendasheng/article/details/107075468">OkHttp和HttpClient的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fitaotao/article/details/103903429">Retrofit和OkHttp的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/b644ROfP20z37485O35M/article/details/109505044">RestTemplate和Retrofit的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/q1353122328/article/details/128812919">Feign和Retrofit的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38233258/article/details/125706722">Forest和Retrofit的区别</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>HttpClient：Apache组织出品的较早的Http请求库，支持<code>编程式调用</code></li>
+<li>OkHttp：Square公司出品的较新的Http请求库，支持<code>编程式调用</code></li>
+<li>Retrofit：Square公司出品的较新的Http请求库，基于OkHttp和RxJava，支持<code>声明式调用</code></li>
+<li>RestTemplate：Spring中使用，可以适配多种Http请求库</li>
+<li>Feign：SpringCloud中使用，可以使用Spring的注解</li>
+</ul>
+<blockquote>
+<p>ps：客户端的http请求方式可以分为 <code>同步请求</code> 和 <code>异步请求</code></p>
+</blockquote>
+<h3 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/asd051377305/article/details/108066378">WebSocket协议入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LL845876425/article/details/106393358">WebSocket协议进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sermonlizhi/article/details/118609757">WebSocket协议详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq991658923/article/details/127022522">WebSocket使用入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w1014074794/article/details/113845879">WebSocket使用进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_56995925/article/details/120543965">WebSocket使用详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43821679/article/details/110236715">WebSocket之数据实时更新</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42125556/article/details/120931552">分布式WebSocket入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhuwei_clark/article/details/83547193">分布式WebSocket进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/delicious_life/article/details/105305640">分布式WebSocket详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/aiwokache/article/details/117294920">WebSocket和Http的关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cai4561/article/details/106809244">WebSocket掉线重连</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/houbin0912/article/details/110879747">WebSocket错误码</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/AnNanDu/article/details/126603005">WebSocket保活（PingPong）机制</a></li>
+</ul>
+</blockquote>
+<h3 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qianlia/article/details/105508138">RPC入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/belongtocode/article/details/118639448">RPC进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yjp198713/article/details/79410521">RPC详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Ruishine/article/details/122534965">RPC和RMI的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qian_348840260/article/details/116753405">RPC和HTTP的关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weichi7549/article/details/107721623">RPC和Restful对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/en_joker/article/details/105556828">RPC框架选型入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liutong123987/article/details/78887604">RPC框架选型进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_70730532/article/details/126543677">RPC框架选型详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Specification-1"><a href="#Specification-1" class="headerlink" title="Specification"></a>Specification</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Agreoself/p/17328343.html">Web API和Web Service的区别入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_30021219/article/details/93379588">Web API和Web Service的区别进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/realaction/p/11429253.html">Web API和Web Service的区别详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Restful（Web-API）"><a href="#Restful（Web-API）" class="headerlink" title="Restful（Web API）"></a>Restful（Web API）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/duninet/article/details/103835372">Restful入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zzvar/article/details/118164133">Restful进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/langfeiyes/article/details/122871361">Restful详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_33446638/article/details/111144735">Restful之状态码设计详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42519804/article/details/106883972">Restful之Post和Put的区别入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/maxmao1024/article/details/79591726">Restful之Post和Put的区别详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/varyall/article/details/80895945">Restful之Patch和Put的区别详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wufagang/article/details/105306108">Restful之Spring的HiddenHttpMethodFilter</a></li>
+</ul>
+</blockquote>
+<h3 id="SOAP（Web-Service）"><a href="#SOAP（Web-Service）" class="headerlink" title="SOAP（Web Service）"></a>SOAP（Web Service）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39198749/article/details/102627247">SOAP入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/caisini_vc/article/details/48465731">SOAP进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44651073/article/details/129468001">SOAP详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cherry_11qianqian/article/details/82660383">WSDL入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/DmxExcalibur/article/details/90610596">WSDL进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_19714937/article/details/68922185">WSDL详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/vtopqx/article/details/86674184">SOAP和WSDL的区别</a></li>
+</ul>
+</blockquote>
+<h2 id="Container"><a href="#Container" class="headerlink" title="Container"></a>Container</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/JAVA_MHH/article/details/115417612">Spring内置容器切换</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yiyuzz/article/details/117169403">tomcat和jetty、netty的区别</a></li>
+</ul>
+</blockquote>
+<h3 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Jiangbohao_/article/details/107033497">tomcat最大线程数、最大等待数和最大连接数</a></li>
+</ul>
+</blockquote>
 <h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><h2 id="WebFlux"><a href="#WebFlux" class="headerlink" title="WebFlux"></a>WebFlux</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41805792/article/details/86605549">WebFlux简介</a></li>
@@ -1070,7 +1077,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MVC"><span class="nav-number">1.</span> <span class="nav-text">MVC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">请求流程描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E8%BD%AC%E5%8F%91%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">1.2.</span> <span class="nav-text">请求转发和重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="nav-number">1.3.</span> <span class="nav-text">过滤器和拦截器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Filter%EF%BC%88%E8%BF%87%E6%BB%A4%E5%99%A8%EF%BC%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">Filter（过滤器）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interceptor%EF%BC%88%E6%8B%A6%E6%88%AA%E5%99%A8%EF%BC%89"><span class="nav-number">1.3.2.</span> <span class="nav-text">Interceptor（拦截器）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Controller"><span class="nav-number">2.</span> <span class="nav-text">Controller</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Request"><span class="nav-number">2.1.</span> <span class="nav-text">Request</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Route"><span class="nav-number">2.1.1.</span> <span class="nav-text">Route</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Param"><span class="nav-number">2.1.2.</span> <span class="nav-text">Param</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#get"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">get</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bind"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">bind</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mime"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">mime</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#default"><span class="nav-number">2.1.2.4.</span> <span class="nav-text">default</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#annotation"><span class="nav-number">2.1.2.5.</span> <span class="nav-text">annotation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Header"><span class="nav-number">2.1.3.</span> <span class="nav-text">Header</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie"><span class="nav-number">2.1.4.</span> <span class="nav-text">Cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session"><span class="nav-number">2.1.5.</span> <span class="nav-text">Session</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model"><span class="nav-number">2.1.6.</span> <span class="nav-text">Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Response"><span class="nav-number">2.2.</span> <span class="nav-text">Response</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Result"><span class="nav-number">2.2.1.</span> <span class="nav-text">Result</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Context"><span class="nav-number">2.3.</span> <span class="nav-text">Context</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Invalid"><span class="nav-number">2.3.1.</span> <span class="nav-text">Invalid</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Validation"><span class="nav-number">2.4.</span> <span class="nav-text">Validation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Validated%E5%92%8C-Valid%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.4.1.</span> <span class="nav-text">@Validated和@Valid的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MethodArgumentNotValidException%E5%92%8CConstraintViolationException%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.4.2.</span> <span class="nav-text">MethodArgumentNotValidException和ConstraintViolationException的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Converter"><span class="nav-number">2.5.</span> <span class="nav-text">Converter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Date"><span class="nav-number">2.5.1.</span> <span class="nav-text">Date</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Enum"><span class="nav-number">2.5.2.</span> <span class="nav-text">Enum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Json"><span class="nav-number">2.5.3.</span> <span class="nav-text">Json</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CrossSite"><span class="nav-number">2.6.</span> <span class="nav-text">CrossSite</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Performance"><span class="nav-number">2.7.</span> <span class="nav-text">Performance</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#View"><span class="nav-number">3.</span> <span class="nav-text">View</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet"><span class="nav-number">3.1.</span> <span class="nav-text">Servlet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jsp"><span class="nav-number">3.2.</span> <span class="nav-text">Jsp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thymeleaf"><span class="nav-number">3.3.</span> <span class="nav-text">Thymeleaf</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Service"><span class="nav-number">4.</span> <span class="nav-text">Service</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#POJO"><span class="nav-number">4.1.</span> <span class="nav-text">POJO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transform"><span class="nav-number">4.2.</span> <span class="nav-text">Transform</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Robustness"><span class="nav-number">5.</span> <span class="nav-text">Robustness</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Exception"><span class="nav-number">5.1.</span> <span class="nav-text">Exception</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Retry"><span class="nav-number">5.1.1.</span> <span class="nav-text">Retry</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Idempotent"><span class="nav-number">5.2.</span> <span class="nav-text">Idempotent</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Repeat"><span class="nav-number">5.2.1.</span> <span class="nav-text">Repeat</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Performance-1"><span class="nav-number">5.3.</span> <span class="nav-text">Performance</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web"><span class="nav-number">6.</span> <span class="nav-text">Web</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Protocol"><span class="nav-number">6.1.</span> <span class="nav-text">Protocol</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Http"><span class="nav-number">6.1.1.</span> <span class="nav-text">Http</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebSocket"><span class="nav-number">6.1.2.</span> <span class="nav-text">WebSocket</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RPC"><span class="nav-number">6.1.3.</span> <span class="nav-text">RPC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Specification"><span class="nav-number">6.2.</span> <span class="nav-text">Specification</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Restful%EF%BC%88Web-API%EF%BC%89"><span class="nav-number">6.2.1.</span> <span class="nav-text">Restful（Web API）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SOAP%EF%BC%88Web-Service%EF%BC%89"><span class="nav-number">6.2.2.</span> <span class="nav-text">SOAP（Web Service）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Container"><span class="nav-number">6.3.</span> <span class="nav-text">Container</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat"><span class="nav-number">6.3.1.</span> <span class="nav-text">Tomcat</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Logging"><span class="nav-number">7.</span> <span class="nav-text">Logging</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Library"><span class="nav-number">7.1.</span> <span class="nav-text">Library</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#log4j2"><span class="nav-number">7.1.1.</span> <span class="nav-text">log4j2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#logback"><span class="nav-number">7.1.2.</span> <span class="nav-text">logback</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimize"><span class="nav-number">7.2.</span> <span class="nav-text">Optimize</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Placeholder"><span class="nav-number">7.2.1.</span> <span class="nav-text">Placeholder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Judgement"><span class="nav-number">7.2.2.</span> <span class="nav-text">Judgement</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question"><span class="nav-number">7.3.</span> <span class="nav-text">Question</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem"><span class="nav-number">7.4.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adapter"><span class="nav-number">7.5.</span> <span class="nav-text">Adapter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Specification-1"><span class="nav-number">7.6.</span> <span class="nav-text">Specification</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Category"><span class="nav-number">7.7.</span> <span class="nav-text">Category</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Event"><span class="nav-number">7.7.1.</span> <span class="nav-text">Event</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Action"><span class="nav-number">7.7.2.</span> <span class="nav-text">Action</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Trace"><span class="nav-number">7.7.3.</span> <span class="nav-text">Trace</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Testing"><span class="nav-number">8.</span> <span class="nav-text">Testing</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Framework"><span class="nav-number">8.1.</span> <span class="nav-text">Framework</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Unit-Test"><span class="nav-number">8.1.1.</span> <span class="nav-text">Unit Test</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Test"><span class="nav-number">8.1.2.</span> <span class="nav-text">Spring Test</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SpringTest"><span class="nav-number">8.1.2.1.</span> <span class="nav-text">SpringTest</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SpringBootTest"><span class="nav-number">8.1.2.2.</span> <span class="nav-text">SpringBootTest</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mock-Test"><span class="nav-number">8.1.3.</span> <span class="nav-text">Mock Test</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MockMvc"><span class="nav-number">8.1.3.1.</span> <span class="nav-text">MockMvc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mockito"><span class="nav-number">8.1.3.2.</span> <span class="nav-text">Mockito</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spock"><span class="nav-number">8.1.3.3.</span> <span class="nav-text">Spock</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tools"><span class="nav-number">8.2.</span> <span class="nav-text">Tools</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Benchmark-Test"><span class="nav-number">8.2.1.</span> <span class="nav-text">Benchmark Test</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Automation-Test"><span class="nav-number">8.2.2.</span> <span class="nav-text">Automation Test</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#WebFlux"><span class="nav-number">9.1.</span> <span class="nav-text">WebFlux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GraphQL"><span class="nav-number">9.2.</span> <span class="nav-text">GraphQL</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MVC"><span class="nav-number">1.</span> <span class="nav-text">MVC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">请求流程描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E8%BD%AC%E5%8F%91%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">1.2.</span> <span class="nav-text">请求转发和重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="nav-number">1.3.</span> <span class="nav-text">过滤器和拦截器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Filter%EF%BC%88%E8%BF%87%E6%BB%A4%E5%99%A8%EF%BC%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">Filter（过滤器）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interceptor%EF%BC%88%E6%8B%A6%E6%88%AA%E5%99%A8%EF%BC%89"><span class="nav-number">1.3.2.</span> <span class="nav-text">Interceptor（拦截器）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Controller"><span class="nav-number">2.</span> <span class="nav-text">Controller</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Request"><span class="nav-number">2.1.</span> <span class="nav-text">Request</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Route"><span class="nav-number">2.1.1.</span> <span class="nav-text">Route</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Param"><span class="nav-number">2.1.2.</span> <span class="nav-text">Param</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#get"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">get</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bind"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">bind</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mime"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">mime</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#default"><span class="nav-number">2.1.2.4.</span> <span class="nav-text">default</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#annotation"><span class="nav-number">2.1.2.5.</span> <span class="nav-text">annotation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Header"><span class="nav-number">2.1.3.</span> <span class="nav-text">Header</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie"><span class="nav-number">2.1.4.</span> <span class="nav-text">Cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session"><span class="nav-number">2.1.5.</span> <span class="nav-text">Session</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model"><span class="nav-number">2.1.6.</span> <span class="nav-text">Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Response"><span class="nav-number">2.2.</span> <span class="nav-text">Response</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Result"><span class="nav-number">2.2.1.</span> <span class="nav-text">Result</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Context"><span class="nav-number">2.3.</span> <span class="nav-text">Context</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Invalid"><span class="nav-number">2.3.1.</span> <span class="nav-text">Invalid</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Validation"><span class="nav-number">2.4.</span> <span class="nav-text">Validation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Validated%E5%92%8C-Valid%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.4.1.</span> <span class="nav-text">@Validated和@Valid的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MethodArgumentNotValidException%E5%92%8CConstraintViolationException%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.4.2.</span> <span class="nav-text">MethodArgumentNotValidException和ConstraintViolationException的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Converter"><span class="nav-number">2.5.</span> <span class="nav-text">Converter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Date"><span class="nav-number">2.5.1.</span> <span class="nav-text">Date</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Enum"><span class="nav-number">2.5.2.</span> <span class="nav-text">Enum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Json"><span class="nav-number">2.5.3.</span> <span class="nav-text">Json</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CORS"><span class="nav-number">2.6.</span> <span class="nav-text">CORS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Auth"><span class="nav-number">2.7.</span> <span class="nav-text">Auth</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#View"><span class="nav-number">3.</span> <span class="nav-text">View</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet"><span class="nav-number">3.1.</span> <span class="nav-text">Servlet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jsp"><span class="nav-number">3.2.</span> <span class="nav-text">Jsp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thymeleaf"><span class="nav-number">3.3.</span> <span class="nav-text">Thymeleaf</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Service"><span class="nav-number">4.</span> <span class="nav-text">Service</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#POJO"><span class="nav-number">4.1.</span> <span class="nav-text">POJO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transform"><span class="nav-number">4.2.</span> <span class="nav-text">Transform</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Availability"><span class="nav-number">5.</span> <span class="nav-text">Availability</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Exception"><span class="nav-number">5.1.</span> <span class="nav-text">Exception</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Retry"><span class="nav-number">5.1.1.</span> <span class="nav-text">Retry</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Idempotent"><span class="nav-number">5.2.</span> <span class="nav-text">Idempotent</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Repeat"><span class="nav-number">5.2.1.</span> <span class="nav-text">Repeat</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Performance"><span class="nav-number">5.3.</span> <span class="nav-text">Performance</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Logging"><span class="nav-number">6.</span> <span class="nav-text">Logging</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Library"><span class="nav-number">6.1.</span> <span class="nav-text">Library</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#log4j2"><span class="nav-number">6.1.1.</span> <span class="nav-text">log4j2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#logback"><span class="nav-number">6.1.2.</span> <span class="nav-text">logback</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimize"><span class="nav-number">6.2.</span> <span class="nav-text">Optimize</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Placeholder"><span class="nav-number">6.2.1.</span> <span class="nav-text">Placeholder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Judgement"><span class="nav-number">6.2.2.</span> <span class="nav-text">Judgement</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question"><span class="nav-number">6.3.</span> <span class="nav-text">Question</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem"><span class="nav-number">6.4.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adapter"><span class="nav-number">6.5.</span> <span class="nav-text">Adapter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Specification"><span class="nav-number">6.6.</span> <span class="nav-text">Specification</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Category"><span class="nav-number">6.7.</span> <span class="nav-text">Category</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Event"><span class="nav-number">6.7.1.</span> <span class="nav-text">Event</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Action"><span class="nav-number">6.7.2.</span> <span class="nav-text">Action</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Trace"><span class="nav-number">6.7.3.</span> <span class="nav-text">Trace</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Testing"><span class="nav-number">7.</span> <span class="nav-text">Testing</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Framework"><span class="nav-number">7.1.</span> <span class="nav-text">Framework</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Unit-Test"><span class="nav-number">7.1.1.</span> <span class="nav-text">Unit Test</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Test"><span class="nav-number">7.1.2.</span> <span class="nav-text">Spring Test</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SpringTest"><span class="nav-number">7.1.2.1.</span> <span class="nav-text">SpringTest</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SpringBootTest"><span class="nav-number">7.1.2.2.</span> <span class="nav-text">SpringBootTest</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mock-Test"><span class="nav-number">7.1.3.</span> <span class="nav-text">Mock Test</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MockMvc"><span class="nav-number">7.1.3.1.</span> <span class="nav-text">MockMvc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mockito"><span class="nav-number">7.1.3.2.</span> <span class="nav-text">Mockito</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spock"><span class="nav-number">7.1.3.3.</span> <span class="nav-text">Spock</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tools"><span class="nav-number">7.2.</span> <span class="nav-text">Tools</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Benchmark-Test"><span class="nav-number">7.2.1.</span> <span class="nav-text">Benchmark Test</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Automation-Test"><span class="nav-number">7.2.2.</span> <span class="nav-text">Automation Test</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web"><span class="nav-number">8.</span> <span class="nav-text">Web</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Protocol"><span class="nav-number">8.1.</span> <span class="nav-text">Protocol</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Http"><span class="nav-number">8.1.1.</span> <span class="nav-text">Http</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebSocket"><span class="nav-number">8.1.2.</span> <span class="nav-text">WebSocket</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RPC"><span class="nav-number">8.1.3.</span> <span class="nav-text">RPC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Specification-1"><span class="nav-number">8.2.</span> <span class="nav-text">Specification</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Restful%EF%BC%88Web-API%EF%BC%89"><span class="nav-number">8.2.1.</span> <span class="nav-text">Restful（Web API）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SOAP%EF%BC%88Web-Service%EF%BC%89"><span class="nav-number">8.2.2.</span> <span class="nav-text">SOAP（Web Service）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Container"><span class="nav-number">8.3.</span> <span class="nav-text">Container</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat"><span class="nav-number">8.3.1.</span> <span class="nav-text">Tomcat</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#WebFlux"><span class="nav-number">9.1.</span> <span class="nav-text">WebFlux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GraphQL"><span class="nav-number">9.2.</span> <span class="nav-text">GraphQL</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
