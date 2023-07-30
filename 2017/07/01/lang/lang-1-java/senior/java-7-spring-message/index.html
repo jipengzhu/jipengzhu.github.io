@@ -28,7 +28,7 @@
 <meta property="og:description" content="spring-message">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T19:07:00.000Z">
-<meta property="article:modified_time" content="2023-07-28T11:15:10.808Z">
+<meta property="article:modified_time" content="2023-07-30T11:28:39.938Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-28 19:15:10" itemprop="dateModified" datetime="2023-07-28T19:15:10+08:00">2023-07-28</time>
+                <time title="修改时间：2023-07-30 19:28:39" itemprop="dateModified" datetime="2023-07-30T19:28:39+08:00">2023-07-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -249,41 +249,77 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="SpringMessaging"><a href="#SpringMessaging" class="headerlink" title="SpringMessaging"></a>SpringMessaging</h1><blockquote>
+        <h1 id="SpringCommunication"><a href="#SpringCommunication" class="headerlink" title="SpringCommunication"></a>SpringCommunication</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Meiyang1990/article/details/78442418">事件总线和消息队列的区别详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/leiming01/article/details/113352087">EventBus入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/javatuo/article/details/130887708">EventBus进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/crazymakercircle/article/details/128627663">EventBus详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tenyears940326/article/details/111458171">EventBus（Spring版）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lyabc123456/article/details/90746210">EventBus（Android版）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46846526/article/details/118317794">EventBus（Vue版）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/codejas/article/details/79930909">MessageQueue入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36789243/article/details/119395557">MessageQueue进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51411338/article/details/125915374">MessageQueue详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lovedren/article/details/51701477">MessageQueue（Android版）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42291355/article/details/108146890">MessageQueue（Js版）详解</a></li>
+</ul>
+</blockquote>
+<p>系统之间进行数据通信有两种方式</p>
+<ul>
+<li>事件总线（EventBus）：传递的是 <code>事件</code> ，基于 <code>发布订阅模式</code> 实现（事件被订阅者 <code>共享</code> 订阅）</li>
+<li>消息队列（MessageQueue）：传递的是 <code>消息</code> ，基于 <code>生产消费模式</code> 实现（消息被消费者 <code>分工</code> 消费）</li>
+</ul>
+<h2 id="Publish-Subscribe"><a href="#Publish-Subscribe" class="headerlink" title="Publish-Subscribe"></a>Publish-Subscribe</h2><h3 id="发布订阅模式和观察者模式的区别"><a href="#发布订阅模式和观察者模式的区别" class="headerlink" title="发布订阅模式和观察者模式的区别"></a>发布订阅模式和观察者模式的区别</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44258574/article/details/129448435">发布订阅模式和观察者模式的区别</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>观察者模式：被观察者和观察者<code>直接连接</code></li>
+<li>发布订阅模式：发布者和订阅者<code>通过broker连接</code></li>
+</ul>
+<h2 id="Producer-Consumer"><a href="#Producer-Consumer" class="headerlink" title="Producer-Consumer"></a>Producer-Consumer</h2><h3 id="生产消费模式和发布订阅模式的区别"><a href="#生产消费模式和发布订阅模式的区别" class="headerlink" title="生产消费模式和发布订阅模式的区别"></a>生产消费模式和发布订阅模式的区别</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LiaoQuesg/article/details/123148726">生产消费模式和发布订阅模式的区别</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>发布订阅模式：传递的是<code>事件</code>，事件被订阅者<code>共享</code>订阅</li>
+<li>生产消费模式：传递的是<code>消息</code>，消息被消费者<code>分工</code>消费</li>
+</ul>
+<h1 id="SpringMessaging"><a href="#SpringMessaging" class="headerlink" title="SpringMessaging"></a>SpringMessaging</h1><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39404155/article/details/122565693">SpringMessaging入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/adknuf1202/article/details/102167947">SpringMessaging进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hahalan/article/details/122318178">SpringMessaging详解</a></li>
 </ul>
 </blockquote>
-<p>SpringMessaging：SpringBoot中使用MQ实现 <code>生产消费模式</code> 的框架</p>
-<h1 id="SpringStream"><a href="#SpringStream" class="headerlink" title="SpringStream"></a>SpringStream</h1><blockquote>
+<p>SpringMessaging：SpringBoot中实现 <code>生产消费模式</code> 的框架</p>
+<h1 id="SpringCloudStream"><a href="#SpringCloudStream" class="headerlink" title="SpringCloudStream"></a>SpringCloudStream</h1><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cckevincyh/article/details/107624093">SpringStream入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MinggeQingchun/article/details/125422875">SpringStream进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38399962/article/details/82192340">SpringStream详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cckevincyh/article/details/107624093">SpringCloudStream入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MinggeQingchun/article/details/125422875">SpringCloudStream进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38399962/article/details/82192340">SpringCloudStream详解</a></li>
 </ul>
 </blockquote>
-<p>SpringStream：SpringCloud中使用MQ实现 <code>生产消费模式</code> 的框架</p>
-<h1 id="EventBus"><a href="#EventBus" class="headerlink" title="EventBus"></a>EventBus</h1><blockquote>
+<p>SpringCloudStream：SpringCloud中实现 <code>生产消费模式</code> 的框架</p>
+<h1 id="SpringListener"><a href="#SpringListener" class="headerlink" title="SpringListener"></a>SpringListener</h1><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/leiming01/article/details/113352087">EventBus入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/javatuo/article/details/130887708">EventBus进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/crazymakercircle/article/details/128627663">EventBus详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zxh1991811/article/details/109737845">SpringListener入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_54355172/article/details/128592476">SpringListener进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u022812849/article/details/113988850">SpringListener详解</a></li>
+</ul>
+</blockquote>
+<p>SpringListener：SpringBoot中实现 <code>发布订阅模式</code> 的框架</p>
+<h1 id="SpringCloudBus"><a href="#SpringCloudBus" class="headerlink" title="SpringCloudBus"></a>SpringCloudBus</h1><blockquote>
+<ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43409401/article/details/127999009">SpringCloudBus入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ssehs/article/details/107310530">SpringCloudBus进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45606067/article/details/120115003">SpringCloudBus详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Meiyang1990/article/details/78442418">事件总线和消息队列的区别详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tenyears940326/article/details/111458171">EventBus（Spring版）详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lyabc123456/article/details/90746210">EventBus（Android版）详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46846526/article/details/118317794">EventBus（Vue版）详解</a></li>
 </ul>
 </blockquote>
-<p>EventBus：实现 <code>发布订阅模式</code> 的框架，可以实现配置（数据）变更通知的框架</p>
-<ul>
-<li>事件总线：基于<code>发布订阅模式</code>（消息被消费者<code>共享</code>消费）</li>
-<li>消息队列：基于<code>生产消费模式</code>（消息被消费者<code>分工</code>消费）</li>
-</ul>
+<p>SpringCloudBus：SpringCloud中实现 <code>发布订阅模式</code> 的框架</p>
 
     </div>
 
@@ -382,7 +418,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringMessaging"><span class="nav-number">1.</span> <span class="nav-text">SpringMessaging</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringStream"><span class="nav-number">2.</span> <span class="nav-text">SpringStream</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#EventBus"><span class="nav-number">3.</span> <span class="nav-text">EventBus</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringCommunication"><span class="nav-number">1.</span> <span class="nav-text">SpringCommunication</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Publish-Subscribe"><span class="nav-number">1.1.</span> <span class="nav-text">Publish-Subscribe</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%E5%92%8C%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.1.</span> <span class="nav-text">发布订阅模式和观察者模式的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Producer-Consumer"><span class="nav-number">1.2.</span> <span class="nav-text">Producer-Consumer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.1.</span> <span class="nav-text">生产消费模式和发布订阅模式的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringMessaging"><span class="nav-number">2.</span> <span class="nav-text">SpringMessaging</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringCloudStream"><span class="nav-number">3.</span> <span class="nav-text">SpringCloudStream</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringListener"><span class="nav-number">4.</span> <span class="nav-text">SpringListener</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringCloudBus"><span class="nav-number">5.</span> <span class="nav-text">SpringCloudBus</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
