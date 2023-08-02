@@ -28,7 +28,7 @@
 <meta property="og:description" content="spring-data">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T19:03:00.000Z">
-<meta property="article:modified_time" content="2023-08-01T11:13:09.578Z">
+<meta property="article:modified_time" content="2023-08-02T09:35:14.177Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-01 19:13:09" itemprop="dateModified" datetime="2023-08-01T19:13:09+08:00">2023-08-01</time>
+                <time title="修改时间：2023-08-02 17:35:14" itemprop="dateModified" datetime="2023-08-02T17:35:14+08:00">2023-08-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -310,6 +310,16 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_22172133/article/details/81266048">Jdbc入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_53601359/article/details/115574284">Jdbc进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37761437/article/details/110468944">Jdbc详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013905744/article/details/52437597">Jdbc之DriverManager和DataSource</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_52687456/article/details/120127179">Jdbc之Connection入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44945344/article/details/107497826">Jdbc之Connection进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39591031/article/details/110900414">Jdbc之Connection详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liaoshanggang/article/details/70173413">Jdbc之Statement入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaodanjava/article/details/8127805">Jdbc之Statement进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Re_view/article/details/97260270">Jdbc之Statement详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zl5230/article/details/105233436">Jdbc之ResultSet入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/rart2008/article/details/5634612">Jdbc之ResultSet进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/de273364045/article/details/84423669">Jdbc之ResultSet详解</a></li>
 </ul>
 </blockquote>
 <h4 id="JdbcUtils"><a href="#JdbcUtils" class="headerlink" title="JdbcUtils"></a>JdbcUtils</h4><blockquote>
@@ -362,12 +372,18 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43860634/article/details/127523712">Mybatis之SqlSession进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38192427/article/details/123298724">Mybatis之SqlSession详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Zhs901026/article/details/103997750">Mybatis之SqlSession线程安全详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wuqinduo/article/details/103750005">Mybatis之SqlSession和Connection的关系入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011649691/article/details/116045188">Mybatis之SqlSession和Connection的关系进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/AiMaiShanHuHai/article/details/102984764">Mybatis之SqlSession和Connection的关系详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42412601/article/details/104807547">Mybatis之SqlSession和Mapper的关系入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_16159433/article/details/121128555">Mybatis之SqlSession和Mapper的关系进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/AiMaiShanHuHai/article/details/102985294">Mybatis之SqlSession和Mapper的关系详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wuqinduo/article/details/103750005">Mybatis之SqlSession和Connection入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011649691/article/details/116045188">Mybatis之SqlSession和Connection进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/AiMaiShanHuHai/article/details/102984764">Mybatis之SqlSession和Connection详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42419406/article/details/118974116">Mybatis之SqlSession和Statement入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/javageektech/article/details/96539536">Mybatis之SqlSession和Statement进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Zack_tzh/article/details/112281176">Mybatis之SqlSession和Statement详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45085295/article/details/121284367">Mybatis之SqlSession和ResultMap</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhoushimiao1990/article/details/99944357">Mybatis之SqlSession和ResultMap</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_14945437/article/details/105227392">Mybatis之SqlSession和ResultMap</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42412601/article/details/104807547">Mybatis之SqlSession和Mapper入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_16159433/article/details/121128555">Mybatis之SqlSession和Mapper进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/AiMaiShanHuHai/article/details/102985294">Mybatis之SqlSession和Mapper详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yqf66/article/details/108347742">SqlSessionTemplate入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yu_kang/article/details/88941908">SqlSessionTemplate进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010841296/article/details/89367296">SqlSessionTemplate详解</a></li>
@@ -376,16 +392,31 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44479910/article/details/87185628">SqlSessionManager详解</a></li>
 </ul>
 </blockquote>
+<p>SqlSession是对Connection和Statement的高级封装</p>
 <h5 id="Mapper"><a href="#Mapper" class="headerlink" title="Mapper"></a>Mapper</h5><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43883917/article/details/113830667">Mybatis之Mapper入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43791238/article/details/93527217">Mybatis之Mapper进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37829947/article/details/117229334">Mybatis之Mapper详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wolfcode_cn/article/details/82665660">Mybatis之Mapper原理入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011567616/article/details/112695283">Mybatis之Mapper原理进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Howinfun/article/details/106383895">Mybatis之Mapper原理详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zmx729618/article/details/78646328">Mybatis之Mapper实现类是什么时候生成的</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chenxiaozhou0955/article/details/101040147">Mybatis之Mapper线程安全详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dwf_android/article/details/79359360">Mybatis通用Mapper详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/isea533/article/details/78493852">Mybatis通用Mapper原理</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_27414099/article/details/104440442">Mybatis映射之Mapper和xml的映射规范</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36658706/article/details/109582557">Mybatis映射之Mapper的方法重载</a></li>
 </ul>
+</blockquote>
+<p>Mapper是对SqlSession的高级封装</p>
+<p>Mapper执行sql是通过SqlSession和ThreadLocal实现的</p>
+<ul>
+<li>无事务时每次都创建新的SqlSession（不共享）</li>
+<li>有事务时用ThreadLocal存储SqlSession并重复使用（事务结束后会销毁）</li>
+</ul>
+<blockquote>
+<p>ps：SqlSession不是线程安全的，但是每次都创建新的SqlSession和用ThreadLocal存储SqlSession可以保证Mapper是线程安全的</p>
 </blockquote>
 <h4 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h4><h5 id="Field"><a href="#Field" class="headerlink" title="Field"></a>Field</h5><h6 id="id"><a href="#id" class="headerlink" title="id"></a>id</h6><blockquote>
 <ul>
@@ -503,7 +534,7 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/donggua3694857/article/details/69858827">Spring事务入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kangkang12221222/article/details/123482521">Spring事务详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wei_gg/article/details/115575391">Spring事务安全</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wei_gg/article/details/115575391">Spring事务之线程安全详解</a></li>
 </ul>
 </blockquote>
 <h3 id="Usage-1"><a href="#Usage-1" class="headerlink" title="Usage"></a>Usage</h3><blockquote>
@@ -558,6 +589,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/libusi001/article/details/127355073">Spring事务传播之同一个类的事务方法和事务方法的调用问题</a></li>
 </ul>
 </blockquote>
+<p>事务传播方式处理的是1个请求里面多个@Transactional注解的关系，比如加入事务或者新建事务等等</p>
 <ul>
 <li>新建事务<ul>
 <li>PROPAGATION_REQUIRED：如果当前存在事务就加入当前事务，否则就新建事务运行</li>

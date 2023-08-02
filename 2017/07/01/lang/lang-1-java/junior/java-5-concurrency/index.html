@@ -28,7 +28,7 @@
 <meta property="og:description" content="java并发篇">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T17:05:00.000Z">
-<meta property="article:modified_time" content="2023-08-01T11:13:09.547Z">
+<meta property="article:modified_time" content="2023-08-02T09:35:14.163Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-01 19:13:09" itemprop="dateModified" datetime="2023-08-01T19:13:09+08:00">2023-08-01</time>
+                <time title="修改时间：2023-08-02 17:35:14" itemprop="dateModified" datetime="2023-08-02T17:35:14+08:00">2023-08-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -507,7 +507,7 @@
 <li>不可变：不可变对象一定是安全的</li>
 <li>绝对安全：对象的单个操作和复合操作都是安全的</li>
 <li>相对安全：对象的单个操作是安全的，复合操作需要额外的同步措施来保证安全</li>
-<li>兼容安全：对象本身不安全，但可以通过额外的同步措施来保证安全</li>
+<li>兼容安全：对象的所有操作都不安全，但可以通过额外的同步措施来保证安全</li>
 <li>安全对立：即使采取了额外的同步措施也无法保证安全</li>
 </ul>
 <h2 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h2><h3 id="线程安全之基本原则"><a href="#线程安全之基本原则" class="headerlink" title="线程安全之基本原则"></a>线程安全之基本原则</h3><blockquote>
@@ -532,11 +532,27 @@
 </ul>
 </blockquote>
 <ul>
+<li>共享<ul>
+<li>不可变<ul>
+<li>不可变对象（Immutable）：通过对象不可变机制实现</li>
+</ul>
+</li>
+<li>访问控制<ul>
 <li>悲观锁（LOCK）：通过Mutex机制实现</li>
 <li>乐观锁（CAS）：通过CAS机制实现</li>
+</ul>
+</li>
+<li>读写分离<ul>
 <li>写时复制（COW）：通过COW机制实现</li>
-<li>线程隔离（ThreadLocal）：通过线程隔离机制实现</li>
-<li>不可变对象（Immutable）：通过不可变对象机制实现</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>私有<ul>
+<li>方法局部对象（LocalVariable）：通过方法私有机制实现</li>
+<li>线程隔离对象（ThreadLocal）：通过线程私有机制实现</li>
+</ul>
+</li>
 </ul>
 <h3 id="线程安全之对象安全"><a href="#线程安全之对象安全" class="headerlink" title="线程安全之对象安全"></a>线程安全之对象安全</h3><blockquote>
 <ul>
