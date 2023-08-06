@@ -28,7 +28,7 @@
 <meta property="og:description" content="spring-data">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T19:03:00.000Z">
-<meta property="article:modified_time" content="2023-08-02T11:15:10.252Z">
+<meta property="article:modified_time" content="2023-08-06T09:27:44.151Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-02 19:15:10" itemprop="dateModified" datetime="2023-08-02T19:15:10+08:00">2023-08-02</time>
+                <time title="修改时间：2023-08-06 17:27:44" itemprop="dateModified" datetime="2023-08-06T17:27:44+08:00">2023-08-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -395,9 +395,12 @@
 <p>SqlSession是对Connection和Statement的高级封装</p>
 <h5 id="Mapper"><a href="#Mapper" class="headerlink" title="Mapper"></a>Mapper</h5><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43883917/article/details/113830667">Mybatis之Mapper入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43791238/article/details/93527217">Mybatis之Mapper进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37829947/article/details/117229334">Mybatis之Mapper详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44238142/article/details/89391282">Mybatis之Mapper入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/song_hai_lei/article/details/121425311">Mybatis之Mapper进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42192693/article/details/116446346">Mybatis之Mapper详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43883917/article/details/113830667">Mybatis之Mapper注解入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43791238/article/details/93527217">Mybatis之Mapper注解进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46138492/article/details/129477550">Mybatis之Mapper注解详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wolfcode_cn/article/details/82665660">Mybatis之Mapper原理入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011567616/article/details/112695283">Mybatis之Mapper原理进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Howinfun/article/details/106383895">Mybatis之Mapper原理详解</a></li>
@@ -427,6 +430,11 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_53402685/article/details/124253722">Mybatis主键之雪花ID</a></li>
 </ul>
 </blockquote>
+<p>返回主键方案</p>
+<ul>
+<li>数据库支持主键自增时：useGeneratedKeys + keyProperty</li>
+<li>数据库不支持主键自增时：selectKey</li>
+</ul>
 <h6 id="mapping"><a href="#mapping" class="headerlink" title="mapping"></a>mapping</h6><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37040929/article/details/120615716">Mybatis映射之bean属性名和数据库列名的匹配规则</a></li>
@@ -441,16 +449,17 @@
 </blockquote>
 <h5 id="Query"><a href="#Query" class="headerlink" title="Query"></a>Query</h5><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/debugEDM/article/details/108393710">MyBatis查询之关联查询和嵌套查询</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/SGLP521/article/details/121509714">MyBatis查询之动态sql</a></li>
 </ul>
 </blockquote>
 <p>动态 sql 标签</p>
 <ul>
 <li><code>&lt;if&gt;&lt;/if&gt;</code></li>
-<li><code>&lt;where&gt;&lt;/where&gt;(trim, set)</code></li>
 <li><code>&lt;choose&gt;&lt;/choose&gt;(when, otherwise)</code></li>
 <li><code>&lt;foreach&gt;&lt;/foreach&gt;</code></li>
+<li><code>&lt;where&gt;&lt;/where&gt;</code></li>
+<li><code>&lt;set&gt;&lt;/set&gt;</code></li>
+<li><code>&lt;trim&gt;&lt;/trim&gt;</code></li>
 <li><code>&lt;bind/&gt;</code></li>
 </ul>
 <h6 id="fuzzy（模糊查询）"><a href="#fuzzy（模糊查询）" class="headerlink" title="fuzzy（模糊查询）"></a>fuzzy（模糊查询）</h6><blockquote>
@@ -460,6 +469,8 @@
 </blockquote>
 <h6 id="pagenation（分页查询）"><a href="#pagenation（分页查询）" class="headerlink" title="pagenation（分页查询）"></a>pagenation（分页查询）</h6><blockquote>
 <ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fhuqw/article/details/120635254">Mybatis分页入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wojiao228925661/article/details/82051654">Mybatis分页进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/huweiliyi/article/details/107910959">Mybatis分页详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43505211/article/details/128050083">Mybatis拦截器详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://pagehelper.github.io/">Mybatis之PageHelper文档</a></li>
@@ -469,14 +480,34 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MarcoAsensio/article/details/104942041">Mybatis之PageHelper原理</a></li>
 </ul>
 </blockquote>
-<p>Mybatis 使用 RowBounds 对象进行分页，它是针对 ResultSet 结果集执行的内存分页，而非物理分页</p>
-<p>可以在 sql 内直接书写带有物理分页的参数来完成物理分页功能，也可以使用分页插件来完成物理分页</p>
-<p>分页插件的基本原理是使用 Mybatis 提供的插件接口，实现自定义插件，在插件的拦截方法内拦截待执行的 sql，然后重写 sql，根据 dialect 方言，添加对应的物理分页语句和物理分页参数</p>
+<p>分页查询方案</p>
+<ul>
+<li>使用RowBounds来完成内存分页（它是针对ResultSet结果集执行的内存分页，而非物理分页）</li>
+<li>直接在sql中写分页条件来完成物理分页</li>
+<li>通过分页插件来完成物理分页</li>
+</ul>
+<blockquote>
+<p>ps：分页插件的基本原理是使用Mybatis提供的插件接口，实现自定义插件，在插件的拦截方法内拦截待执行的 sql并改写sql，改写时会根据方言（dialect）添加对应的物理分页条件</p>
+</blockquote>
 <h6 id="reference（关联查询）"><a href="#reference（关联查询）" class="headerlink" title="reference（关联查询）"></a>reference（关联查询）</h6><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yw_2022/article/details/122923724">MyBatis关联查询入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010358168/article/details/118193792">MyBatis关联查询入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37829947/article/details/117229334">MyBatis关联查询进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44276313/article/details/115719525">MyBatis关联查询详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sayyy/article/details/107672721">MyBatis关联查询之使用association实现一对一关联</a></li>
+<li><a target="_blank" rel="noopener" href="https://sayyy.blog.csdn.net/article/details/120106764">MyBatis关联查询之使用collection实现一对多关联</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43700340/article/details/124104386">MyBatis关联查询之懒加载和急加载</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/WSheng_Pyhon/article/details/113527471">MyBatis关联查询之懒加载原理</a></li>
 </ul>
+</blockquote>
+<ul>
+<li>一对一查询（selectOne）： association + join、association + select</li>
+<li>一对多查询（selectOne）：collection + join、collection + select</li>
+<li>多对一查询（selectMany）： association + join、association + select</li>
+<li>多对多查询（selectMany）：collection + join、collection + select</li>
+</ul>
+<blockquote>
+<p>ps： <code>多对一</code> 本质上还是 <code>一对一</code> ， <code>多对多</code> 本质上还是 <code>一对多</code></p>
 </blockquote>
 <h4 id="Extend"><a href="#Extend" class="headerlink" title="Extend"></a>Extend</h4><h5 id="tkMybatis"><a href="#tkMybatis" class="headerlink" title="tkMybatis"></a>tkMybatis</h5><blockquote>
 <ul>
