@@ -28,7 +28,7 @@
 <meta property="og:description" content="mysql">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-31T17:01:00.000Z">
-<meta property="article:modified_time" content="2023-08-07T09:15:45.684Z">
+<meta property="article:modified_time" content="2023-08-07T11:35:42.086Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-07 17:15:45" itemprop="dateModified" datetime="2023-08-07T17:15:45+08:00">2023-08-07</time>
+                <time title="修改时间：2023-08-07 19:35:42" itemprop="dateModified" datetime="2023-08-07T19:35:42+08:00">2023-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -441,10 +441,10 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46093829/article/details/118205064">mysql类型之null的常见问题入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wohu1104/article/details/105418756">mysql类型之null的常见问题进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MyronCham/article/details/110005743">mysql类型之null的常见问题详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013767919/article/details/123940635">mysql类型之null和比较符号的关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangqing84411433/article/details/102653793">mysql类型之null和算术运算的关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013767919/article/details/123940635">mysql类型之null和比较运算的关系</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33833327/article/details/81513152">mysql类型之null和不等操作的关系</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Crystalqy/article/details/114086528">mysql类型之null和聚合操作的关系</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/q3dxdx/article/details/49158933">mysql类型之null和聚合函数的关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/q3dxdx/article/details/49158933">mysql类型之null和聚合操作的关系</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/quiet_girl/article/details/88641787">mysql类型之null和数量统计的关系</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hellozhxy/article/details/120700284">mysql类型之null和索引的关系</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Dkangel/article/details/118688335">mysql类型之null会导致联合索引失效</a></li>
@@ -686,9 +686,15 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xinyi_jin/article/details/104925399">mysql等值查询之不等于入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41946557/article/details/103466057">mysql等值查询之不等于详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/An1090239782/article/details/100927224">mysql等值查询之不等于优化为范围查询</a></li>
 </ul>
 </blockquote>
+<ul>
+<li><code>=</code>（eq）</li>
+<li><code>!=</code>（ne）</li>
+<li><code>&lt;&gt;</code>（ne）</li>
+<li><code>is null</code></li>
+<li><code>is not null</code></li>
+</ul>
 <h3 id="multi（多值查询）"><a href="#multi（多值查询）" class="headerlink" title="multi（多值查询）"></a>multi（多值查询）</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yihanzhi/article/details/81065573">mysql多值查询之in入门</a></li>
@@ -696,6 +702,10 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Asce_zz/article/details/89000975">mysql多值查询之in和or对比</a></li>
 </ul>
 </blockquote>
+<ul>
+<li><code>in</code></li>
+<li><code>not in</code></li>
+</ul>
 <h3 id="range（范围查询）"><a href="#range（范围查询）" class="headerlink" title="range（范围查询）"></a>range（范围查询）</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43354181/article/details/88091989">mysql范围查询之大小比较入门</a></li>
@@ -709,6 +719,11 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46841421/article/details/109742410">范围操作之左闭右开详解</a></li>
 </ul>
 </blockquote>
+<ul>
+<li><code>&lt;（lt）、&lt;=（le、lte）、&gt;（gt）、&gt;=（ge、gte）</code></li>
+<li><code>between and</code></li>
+<li><code>range</code></li>
+</ul>
 <p>范围查询：左闭右闭（数据库用的多）、左闭右开（编程语言用的多）、左开右闭、左开右开</p>
 <h3 id="fuzzy（模糊查询）"><a href="#fuzzy（模糊查询）" class="headerlink" title="fuzzy（模糊查询）"></a>fuzzy（模糊查询）</h3><blockquote>
 <ul>
@@ -717,17 +732,32 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38405253/article/details/129869988">mysql模糊查询之如何高效的实现模糊查询</a></li>
 </ul>
 </blockquote>
-<p>prefix、contains、wildcard、regexp、fuzzy</p>
+<ul>
+<li>prefix（startsWith）</li>
+<li>suffix（endsWith）</li>
+<li>infix（contains）</li>
+<li>glob</li>
+<li>regexp</li>
+<li>fuzzy</li>
+</ul>
 <h3 id="aggregation（聚合查询）"><a href="#aggregation（聚合查询）" class="headerlink" title="aggregation（聚合查询）"></a>aggregation（聚合查询）</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wpc2018/article/details/122925224">mysql聚合查询入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013066244/article/details/121389279">mysql聚合查询详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Crystalqy/article/details/114086528">mysql聚合查询之处理null数据</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Hello_Mr_X/article/details/101013526">mysql聚合查询之count(1)和count(*)区别入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/A_dg_Jffery/article/details/107588525">mysql聚合查询之count(1)和count(*)区别进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/iFuMI/article/details/77920767">mysql聚合查询之count(1)和count(*)区别详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35387940/article/details/102914793">mysql聚合查询之count(1)和count(*)原理详解</a></li>
 </ul>
 </blockquote>
+<ul>
+<li>count</li>
+<li>sum</li>
+<li>avg</li>
+<li>max</li>
+<li>min</li>
+</ul>
 <h3 id="combination（组合查询）"><a href="#combination（组合查询）" class="headerlink" title="combination（组合查询）"></a>combination（组合查询）</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42373127/article/details/88909814">mysql组合查询入门</a></li>
@@ -737,16 +767,22 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chenyusbyongde/article/details/53584949">mysql范围查询之union和in对比</a></li>
 </ul>
 </blockquote>
+<ul>
+<li>and</li>
+<li>or</li>
+<li>union</li>
+</ul>
 <h3 id="relation（关联查询）"><a href="#relation（关联查询）" class="headerlink" title="relation（关联查询）"></a>relation（关联查询）</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43860260/article/details/96592108">mysql关联查询入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MinggeQingchun/article/details/122302972">mysql关联查询详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Carrie_Q/article/details/105930278">mysql关联查询图解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43286942/article/details/131341089">mysql关联查询之显示连接和隐式连接</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Tom_boy_/article/details/120752752">mysql关联查询之join多个表</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhaoyf7746/article/details/78044013">mysql关联查询之join之on和where的区别入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tayngh/article/details/99684035">mysql关联查询之join之on和where的区别详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/gtuu0123/article/details/5525704">mysql关联查询之join之on和where的性能差异</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39746794/article/details/110587843">mysql关联查询之join优化其他查询</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dsa572713470/article/details/100176476">mysql关联查询之join优化in子查询</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36551991/article/details/111145516">mysql关联查询之临时表</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/canot/article/details/104920558">mysql关联查询之临时表</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_16268979/article/details/112646329">mysql关联查询之临时表</a></li>
@@ -777,7 +813,7 @@
 </ul>
 </li>
 <li>子查询按返回分类<ul>
-<li>表子查询 返回多行多列，即返回一张表，用于父查询的FROM子句中</li>
+<li>表子查询 返回多行多列，即返回一张表格，用于父查询的FROM子句中</li>
 <li>行子查询 返回一行多列，即返回一条记录，用于父查询的FROM子句和WHERE子句中</li>
 <li>列子查询 返回多行一列，即返回一个集合，用于父查询的IN子句中</li>
 <li>标量子查询 返回一行一列，即返回一个值，用于父查询的任何地方</li>
@@ -884,7 +920,9 @@
 </blockquote>
 <h3 id="Optimize"><a href="#Optimize" class="headerlink" title="Optimize"></a>Optimize</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangweiwei2020/article/details/80005590">mysql索引之or优化</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/An1090239782/article/details/100927224">mysql索引之不等于优化为范围查询</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wenniuwuren/article/details/89472136">mysql索引之or优化入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangweiwei2020/article/details/80005590">mysql索引之or优化详解</a></li>
 </ul>
 </blockquote>
 <h3 id="Invalid"><a href="#Invalid" class="headerlink" title="Invalid"></a>Invalid</h3><blockquote>
@@ -896,9 +934,9 @@
 </blockquote>
 <ul>
 <li>查询时条件有问题导致失效<ul>
-<li>like最前面有的百分号</li>
-<li>or前后的字段没有索引</li>
 <li>not无法转换为范围查询</li>
+<li>like最前面有的百分号</li>
+<li>or前后的某个字段没有索引</li>
 </ul>
 </li>
 <li>查询时使用了函数导致失效</li>
@@ -912,27 +950,26 @@
 <h3 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/nizhongli37/article/details/117607722">mysql索引之常规查询where条件顺序会影响索引吗</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sz85850597/article/details/100124914">mysql索引之常规查询is null能使用索引吗</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38192427/article/details/122641828">mysql索引之常规查询like能使用索引吗</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xue_mind/article/details/122573493">mysql索引之常规查询or能使用索引吗入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wenniuwuren/article/details/89472136">mysql索引之常规查询or能使用索引吗进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wjxbj/article/details/84812361">mysql索引之常规查询or能使用索引吗详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33312725/article/details/129348629">mysql索引之范围查询not equals能使用索引吗</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sz85850597/article/details/100124914">mysql索引之等值查询is null能使用索引吗</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33312725/article/details/129348629">mysql索引之等值查询not equals能使用索引吗</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LJFPHP/article/details/89156326">mysql索引之多值查询in能使用索引吗</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Wu_Shang001/article/details/107607627">mysql索引之多值查询not in能使用索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiao_qing_ge/article/details/103702113">mysql索引之范围查询大小比较能使用索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yuruixin_china/article/details/105145049">mysql索引之范围查询between能使用索引吗</a></li>
 <li><a href="">mysql索引之范围查询not between能使用索引吗</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LJFPHP/article/details/89156326">mysql索引之范围查询in能使用索引吗</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Wu_Shang001/article/details/107607627">mysql索引之范围查询not in能使用索引吗</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38192427/article/details/122641828">mysql索引之模糊查询like能使用索引吗</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wjxbj/article/details/84812361">mysql索引之组合查询or能使用索引吗详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shanwu1/article/details/122695384">mysql索引之关联查询join能使用索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Jiangbohao_/article/details/120075859">mysql索引之orderBy能使用索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_14869093/article/details/85694897">mysql索引之orderBy如何使用索引</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lan12334321234/article/details/70048830">mysql索引之orderBy为何不走索引</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42768234/article/details/117019465">mysql索引之orderBy desc能使用索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/h2604396739/article/details/80535546">mysql索引之orderBy limit能使用索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sywangnaiqing/article/details/116064924">mysql索引之状态列可不可以加索引</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hello_sgw/article/details/78601762">mysql之时间字段适合建立索引吗</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDN_LGY_Java/article/details/111594640">mysql之时间字段如何使用索引</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDNcircular/article/details/107253747">mysql之时间字段为何不走索引</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shanwu1/article/details/122695384">mysql之join操作会使用索引吗</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hello_sgw/article/details/78601762">mysql索引之时间字段适合建立索引吗</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDN_LGY_Java/article/details/111594640">mysql索引之时间字段如何使用索引</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDNcircular/article/details/107253747">mysql索引之时间字段为何不走索引</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/molashaonian/article/details/107735359">mysql索引之每次只能使用一个索引吗</a></li>
 </ul>
 </blockquote>
 <h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><blockquote>
