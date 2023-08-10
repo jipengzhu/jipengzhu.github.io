@@ -28,7 +28,7 @@
 <meta property="og:description" content="mysql">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-31T17:01:00.000Z">
-<meta property="article:modified_time" content="2023-08-10T09:18:33.004Z">
+<meta property="article:modified_time" content="2023-08-10T11:27:53.201Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-10 17:18:33" itemprop="dateModified" datetime="2023-08-10T17:18:33+08:00">2023-08-10</time>
+                <time title="修改时间：2023-08-10 19:27:53" itemprop="dateModified" datetime="2023-08-10T19:27:53+08:00">2023-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -409,6 +409,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zzvar/article/details/115675248">mysql语法进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44944641/article/details/116840432">mysql语法详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Janson_Lin/article/details/116530497">mysql语法精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liang_0609/article/details/77334959">mysql版本变更</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/li1669852599/article/details/115912588">mysql之各种大小限制入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30670859/article/details/113199101">mysql之各种大小限制进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000024515231">mysql之各种大小限制详解</a></li>
@@ -436,6 +437,8 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41453285/article/details/104030996">mysql类型之string详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Gabriel_wei/article/details/107390761">mysql类型之string的存储范围</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30443075/article/details/99934679">mysql类型之string的存储宽度</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_30347133/article/details/121178124">mysql类型之string的存储宽度之后端校验</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41153943/article/details/101196312">mysql类型之string的存储宽度之前端校验</a></li>
 </ul>
 </blockquote>
 <ul>
@@ -466,7 +469,7 @@
 </blockquote>
 <ul>
 <li>char是定长存储，varchar是变长存储</li>
-<li>char存储时字符数不足用空格填充尾部，varchar存储时按照实际字符数存储（还需1到3个字节来存储长度）</li>
+<li>char存储时字符数不足用空格填充尾部，varchar存储时按照实际字符数存储（还需1到2个字节来存储长度）</li>
 <li>char的查询速度较快（定长存储），varchar的查询速度较慢（变长存储）</li>
 <li>char读取时会去除尾部的空格，varchar读取时不会去除尾部的空格</li>
 <li>char和varchar读取时都会去除头部的空格</li>
@@ -499,8 +502,9 @@
 <h6 id="char和varchar的长度选择"><a href="#char和varchar的长度选择" class="headerlink" title="char和varchar的长度选择"></a>char和varchar的长度选择</h6><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011582840/article/details/105887826">mysql类型之char和varchar的长度如何选择</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wzmde007/article/details/105994691">mysql类型之varchar的最大长度入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zgdwxp/article/details/103341778">mysql类型之varchar的最大长度详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zgdwxp/article/details/103341778">mysql类型之varchar的最大长度的影响因素</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wzmde007/article/details/105994691">mysql类型之varchar的最大长度和编码的关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sqlquan/article/details/113041833">mysql类型之varchar的最大长度和语言的关系</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/aben_sky/article/details/121514338">mysql类型之varchar的最大长度支持到65535了</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yinjinshui/article/details/102496340">mysql类型之varchar的长度单位由字节变为字符了</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39099905/article/details/125521665">mysql类型之varchar(255)为什么是255而不是256入门</a></li>
@@ -541,10 +545,46 @@
 </blockquote>
 <h5 id="datetime"><a href="#datetime" class="headerlink" title="datetime"></a>datetime</h5><h6 id="datetime-1"><a href="#datetime-1" class="headerlink" title="datetime"></a>datetime</h6><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/L_15156024189/article/details/120297227">mysql类型之datetime详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weter_drop/article/details/89924451">mysql类型之timestamp详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://dongshao.blog.csdn.net/article/details/87988521">mysql类型之datetime详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/myloverisxin/article/details/118309934">mysql类型之datetime的存储范围</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41981372/article/details/114382555">mysql类型之datetime的插入格式</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/L_15156024189/article/details/120297227">mysql类型之datetime之datetime详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weter_drop/article/details/89924451">mysql类型之datetime之timestamp详解</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>DATETIME：8个字节（<code>1000-01-01 00:00:00.000000~9999-12-31 23:59:59.999999</code>）</li>
+<li>TIMESTAMP：4个字节（<code>1970-01-01 00:00:01.000000~2038-01-19 03:14:07.999999</code>）</li>
+<li>DATE：3个字节（<code>1000-01-01~9999-12-31</code>）</li>
+<li>TIME：3个字节（<code>-838:59:59.000000~838:59:59.000000</code>）</li>
+<li>YEAR：1个字节（<code>1901~2155</code>或<code>0000</code>）</li>
+</ul>
+<p>####### datetime和timestamp对比和选择</p>
+<blockquote>
+<ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014696474/article/details/70568733">mysql类型之datetime和timestamp的区别入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zmzwll1314/article/details/100697670">mysql类型之datetime和timestamp的区别进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/riemann_/article/details/100679675">mysql类型之datetime和timestamp的区别详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/andybegin/article/details/108347001">mysql类型之datetime和timestamp如何选择入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44866828/article/details/120028474">mysql类型之datetime和timestamp如何选择详解</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>datetime可以表示的范围较大（占8个字节），timestamp可以表示的范围较小（占4个字节）</li>
+<li>datetime不受时区影响，timestamp存储时会从服务端时区转为UTC时区，timestamp读取时会从UTC时区转为U客户端时区</li>
+</ul>
+<p>####### datetime和timestamp的默认值</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Copperxcx/article/details/124314762">mysql类型之datetime和timestamp的默认值</a></li>
+</ul>
+</blockquote>
+<p>####### datetime和timestamp的自动更新</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zgdwxp/article/details/103168552">mysql类型之datetime和timestamp的自动更新</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cm15835106905/article/details/107847473">mysql类型之datetime支持自动更新了</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_53285159/article/details/120993761">mysql类型之timestamp支持多个列和自动更新了</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44967580/article/details/115422674">mysql类型之创建时间列（create_time）和更新时间列（update_time）入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Eternal_Blue/article/details/107929528">mysql类型之创建时间列（create_time）和更新时间列（update_time）详解</a></li>
 </ul>
