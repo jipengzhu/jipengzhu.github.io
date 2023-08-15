@@ -28,7 +28,7 @@
 <meta property="og:description" content="mysql">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-31T17:01:00.000Z">
-<meta property="article:modified_time" content="2023-08-13T09:19:51.846Z">
+<meta property="article:modified_time" content="2023-08-15T07:17:37.150Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-13 17:19:51" itemprop="dateModified" datetime="2023-08-13T17:19:51+08:00">2023-08-13</time>
+                <time title="修改时间：2023-08-15 15:17:37" itemprop="dateModified" datetime="2023-08-15T15:17:37+08:00">2023-08-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -826,7 +826,7 @@
 </ul>
 </blockquote>
 <p>单个删除、批量删除</p>
-<h2 id="DQL（Data-Query-Language）"><a href="#DQL（Data-Query-Language）" class="headerlink" title="DQL（Data Query Language）"></a>DQL（Data Query Language）</h2><p>等值查询、多值查询、范围查询、模糊查询、聚合查询、组合查询、关联查询、子查询</p>
+<h2 id="DQL（Data-Query-Language）"><a href="#DQL（Data-Query-Language）" class="headerlink" title="DQL（Data Query Language）"></a>DQL（Data Query Language）</h2><p>等值查询、多值查询、范围查询、模糊查询、组合查询、聚合查询、关联查询、子查询</p>
 <h3 id="general（常规查询）"><a href="#general（常规查询）" class="headerlink" title="general（常规查询）"></a>general（常规查询）</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wulimingde/article/details/109097424">mysql运算符入门</a></li>
@@ -907,7 +907,8 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44684303/article/details/124445293">mysql常规查询之orderBy之when</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35383263/article/details/81433693">mysql常规查询之orderBy默认排序</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/quader/article/details/122761023">mysql常规查询之orderBy自定义排序</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/vipshop_fin_dev/article/details/115537133">mysql常规查询之orderBy使用索引排序</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kuaileshifu/article/details/49558599">mysql常规查询之orderBy之文件排序</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/vipshop_fin_dev/article/details/115537133">mysql常规查询之orderBy之优化建议</a></li>
 </ul>
 </blockquote>
 <h4 id="limit"><a href="#limit" class="headerlink" title="limit"></a>limit</h4><blockquote>
@@ -984,6 +985,22 @@
 <li>regexp</li>
 <li>fuzzy</li>
 </ul>
+<h3 id="combination（组合查询）"><a href="#combination（组合查询）" class="headerlink" title="combination（组合查询）"></a>combination（组合查询）</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_54130714/article/details/123191676">mysql组合查询入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/atu1111/article/details/105667414">mysql组合查询详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42843770/article/details/106824778">mysql组合查询之union和union all的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lisainan66/article/details/106040944">mysql组合查询之union和or对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chenyusbyongde/article/details/53584949">mysql范围查询之union和in对比</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>and</li>
+<li>or</li>
+<li>not</li>
+<li>union</li>
+<li>union all</li>
+</ul>
 <h3 id="aggregation（聚合查询）"><a href="#aggregation（聚合查询）" class="headerlink" title="aggregation（聚合查询）"></a>aggregation（聚合查询）</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Tester_muller/article/details/132215209">mysql聚合查询入门</a></li>
@@ -1009,20 +1026,6 @@
 <blockquote>
 <p>ps： <code>count(column)</code> 是统计列值不为null的行数， <code>count(1)</code> 和 <code>count(*)</code> 是统计所有行数（理论上会全表扫描，但优化之后会利用索引覆盖）</p>
 </blockquote>
-<h3 id="combination（组合查询）"><a href="#combination（组合查询）" class="headerlink" title="combination（组合查询）"></a>combination（组合查询）</h3><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_54130714/article/details/123191676">mysql组合查询入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/atu1111/article/details/105667414">mysql组合查询详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42843770/article/details/106824778">mysql组合查询之union和union all的区别</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lisainan66/article/details/106040944">mysql组合查询之union和or对比</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chenyusbyongde/article/details/53584949">mysql范围查询之union和in对比</a></li>
-</ul>
-</blockquote>
-<ul>
-<li>and</li>
-<li>or</li>
-<li>union</li>
-</ul>
 <h3 id="relation（关联查询）"><a href="#relation（关联查询）" class="headerlink" title="relation（关联查询）"></a>relation（关联查询）</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43860260/article/details/96592108">mysql关联查询入门</a></li>
@@ -1131,7 +1134,9 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/g6U8W7p06dCO99fQ3/article/details/104980634">mysql索引之存储原理</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/justry_deng/article/details/81458470">mysql索引之创建索引</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010087338/article/details/126572672">mysql索引之查看索引</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013219624/article/details/89024895">mysql索引之查询时指定索引</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w17601377492/article/details/104957215">mysql索引之索引覆盖和回表查询</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39785418/article/details/116455238">mysql索引之索引下推和引擎过滤</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/molashaonian/article/details/107735359">mysql索引之索引合并和多个索引</a></li>
 </ul>
 </blockquote>
 <blockquote>
@@ -1144,7 +1149,7 @@
 <li><a target="_blank" rel="noopener" href="https://yetao.blog.csdn.net/article/details/127374739">mysql索引之主键还需要添加索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sd4015700/article/details/21180881">mysql索引之外键会自动添加索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_48419914/article/details/122152325">mysql索引之外键为什么要添加索引</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/llzd626/article/details/120073597">mysql索引之唯一键约束会自动添加索引吗</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/llzd626/article/details/120073597">mysql索引之唯一键会自动添加索引吗</a></li>
 </ul>
 </blockquote>
 <h3 id="Category"><a href="#Category" class="headerlink" title="Category"></a>Category</h3><blockquote>
@@ -1153,10 +1158,8 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43841693/article/details/107301253">mysql索引之hash索引和B树索引</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014453898/article/details/113439560">mysql索引之聚簇索引和非聚簇索引</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_45406092/article/details/111994896">mysql索引之单列索引和联合索引</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34083066/article/details/107736478">mysql索引之前缀索引和后缀索引</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/justlpf/article/details/79681341">mysql索引之数值索引和字符串索引</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_37968613/article/details/114652178">mysql索引访问方式入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45065975/article/details/107906523">mysql索引访问方式进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44027397/article/details/114298593">mysql索引访问方式详解</a></li>
 </ul>
 </blockquote>
 <ul>
@@ -1182,9 +1185,10 @@
 <li>联合索引（也叫复合索引、组合索引）</li>
 </ul>
 </li>
-<li>按查找特性分<ul>
-<li>键值索引</li>
-<li>全文索引</li>
+<li>按字段长度分<ul>
+<li>前缀索引</li>
+<li>后缀索引</li>
+<li>全键索引</li>
 </ul>
 </li>
 </ul>
@@ -1197,16 +1201,46 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Leon_Jinhai_Sun/article/details/113954571">mysql索引之散列性入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43935927/article/details/109491334">mysql索引之散列性详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Sunmeok/article/details/82965805">mysql索引之重复数据多的列不适合建索引</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wodeguozili/article/details/104184064">mysql索引之有序性入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39316839/article/details/82690271">mysql索引之有序性详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kuaileshifu/article/details/49558599">mysql索引之索引排序和文件排序</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hello_sgw/article/details/78601762">mysql索引之时间字段适合建索引吗</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiangweiqiang/article/details/126604763">mysql索引之枚举字段适合建索引吗</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/java123456111/article/details/123868235">mysql索引之枚举字段之性别字段适合建索引吗</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sywangnaiqing/article/details/116064924">mysql索引之枚举字段之状态字段适合建索引吗</a></li>
 </ul>
+</blockquote>
+<ul>
+<li>从表的角度考虑<ul>
+<li>数据量超过300的表适合建索引</li>
+<li>经常更新的表不适合建索引</li>
+</ul>
+</li>
+<li>从字段的角度考虑<ul>
+<li><code>主键</code>和<code>外键</code>必须建索引</li>
+<li>经常要<code>查询</code>的字段适合建索引</li>
+<li>经常要<code>去重</code>的字段适合建索引</li>
+<li>经常要<code>分组</code>的字段适合建索引</li>
+<li>经常要<code>排序</code>的字段适合建索引</li>
+<li>多字段查询时尽量用<code>联合索引</code>代替<code>单列索引</code></li>
+<li>多字段查询时使用频繁的字段应该放在<code>联合索引</code>的左边</li>
+</ul>
+</li>
+<li>从数据的角度考虑<ul>
+<li><code>散列性</code>高的字段适合建索引</li>
+<li><code>大文本字段</code>不适合建索引</li>
+<li>包含<code>NULL</code>值的字段不适合建<code>联合索引</code></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>ps：还应该删除无用的索引，避免对执行计划造成负面影响</p>
 </blockquote>
 <h3 id="Invalid"><a href="#Invalid" class="headerlink" title="Invalid"></a>Invalid</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_63815371/article/details/124337932">mysql索引失效入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/feiying0canglang/article/details/121239921">mysql索引失效进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42039228/article/details/123255722">mysql索引失效详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/whl8614john/article/details/108562060">mysql索引之联合索引失效的场景</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDN_LGY_Java/article/details/111594640">mysql索引之时间字段索引失效之函数使用</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDNcircular/article/details/107253747">mysql索引之时间字段索引失效之全表扫描</a></li>
 </ul>
 </blockquote>
 <ul>
@@ -1216,11 +1250,13 @@
 <li>or前后的某个字段没有索引</li>
 </ul>
 </li>
-<li>查询时使用了函数导致失效</li>
-<li>查询时进行了计算导致失效</li>
-<li>查询时触发了隐式转换导致失效</li>
-<li>联合索引时没遵循最左前缀原则导致失效</li>
-<li>联合索引时左边使用了范围查询导致右边的索引失效</li>
+<li>查询时使用了<code>函数</code>导致失效</li>
+<li>查询时进行了<code>计算</code>导致失效</li>
+<li>查询时触发了<code>隐式转换</code>导致失效</li>
+<li>联合索引时没遵循<code>最左前缀</code>原则导致失效</li>
+<li>联合索引时左边使用了<code>范围查询</code>导致右边的索引失效</li>
+<li>联合索引时左边使用了<code>模糊查询</code>导致右边的索引失效</li>
+<li>联合索引时左边使用了<code>否定查询</code>导致右边的索引失效</li>
 <li>排序时排序字段和查询字段不一致导致无法使用索引排序</li>
 <li>优化器认为全表扫描比较快导致失效（数据少或者需要回表）</li>
 </ul>
@@ -1231,24 +1267,29 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33312725/article/details/129348629">mysql索引之等值查询not equals能使用索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LJFPHP/article/details/89156326">mysql索引之多值查询in能使用索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Wu_Shang001/article/details/107607627">mysql索引之多值查询not in能使用索引吗</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiao_qing_ge/article/details/103702113">mysql索引之范围查询大小比较能使用索引吗</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yuruixin_china/article/details/105145049">mysql索引之范围查询between能使用索引吗</a></li>
-<li><a href="">mysql索引之范围查询not between能使用索引吗</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40641900/article/details/122124945">mysql索引之范围查询range能使用索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38192427/article/details/122641828">mysql索引之模糊查询like能使用索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wjxbj/article/details/84812361">mysql索引之组合查询or能使用索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shanwu1/article/details/122695384">mysql索引之关联查询join能使用索引吗</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Jiangbohao_/article/details/120075859">mysql索引之orderBy能使用索引吗</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_14869093/article/details/85694897">mysql索引之orderBy如何使用索引</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lan12334321234/article/details/70048830">mysql索引之orderBy为何不走索引</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lan12334321234/article/details/70048830">mysql索引之orderBy能使用索引吗</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Jiangbohao_/article/details/120075859">mysql索引之orderBy能使用联合索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42768234/article/details/117019465">mysql索引之orderBy desc能使用索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/h2604396739/article/details/80535546">mysql索引之orderBy limit能使用索引吗</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sywangnaiqing/article/details/116064924">mysql索引之状态列可不可以加索引</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hello_sgw/article/details/78601762">mysql索引之时间字段适合建立索引吗</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDN_LGY_Java/article/details/111594640">mysql索引之时间字段如何使用索引</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDNcircular/article/details/107253747">mysql索引之时间字段为何不走索引</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_14869093/article/details/85694897">mysql索引之orderBy如何使用指定的索引</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/molashaonian/article/details/107735359">mysql索引之每次只能使用一个索引吗</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qingdujun/article/details/80149056">mysql索引之范围查找原理</a></li>
 </ul>
 </blockquote>
+<ul>
+<li><code>is null</code>：可以使用索引</li>
+<li><code>in</code>：可以使用索引</li>
+<li><code>range</code>：可以使用索引</li>
+<li><code>like</code>：前缀模糊匹配可以使用索引，中缀和后缀模糊匹配不可以使用索引</li>
+<li><code>or</code>：or前后的字段都有索引可以使用索引，or前后的某个索引字段都有索引则不可以使用索引</li>
+<li><code>not</code>：不可以使用索引</li>
+<li><code>join</code>：可以使用索引</li>
+<li><code>orderBy</code>：orderBy的字段出现在where条件中时可以使用索引</li>
+</ul>
 <h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jcmj123456/article/details/115393666">索引长度超出问题入门</a></li>
@@ -1258,14 +1299,31 @@
 </blockquote>
 <h3 id="Optimize"><a href="#Optimize" class="headerlink" title="Optimize"></a>Optimize</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w17601377492/article/details/104957215">mysql索引覆盖和回表查询</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40099908/article/details/114484195">mysql索引下推和引擎过滤</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/molashaonian/article/details/107735359">mysql索引合并和多个索引</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/An1090239782/article/details/100927224">mysql索引之不等于优化为范围查询</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wenniuwuren/article/details/89472136">mysql索引之or优化入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangweiwei2020/article/details/80005590">mysql索引之or优化详解</a></li>
 </ul>
 </blockquote>
+<h3 id="Query"><a href="#Query" class="headerlink" title="Query"></a>Query</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013219624/article/details/89024895">mysql索引之查询时指定索引</a></li>
+</ul>
+</blockquote>
+<h3 id="Access"><a href="#Access" class="headerlink" title="Access"></a>Access</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_37968613/article/details/114652178">mysql索引之访问方式入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45065975/article/details/107906523">mysql索引之访问方式进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44027397/article/details/114298593">mysql索引之访问方式详解</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>system：只有一条数据的表</li>
+<li>const：主键索引，根据键直接查询到记录（常量级别）</li>
+<li>eq_ref：唯一索引，查出关联的一个主键后，根据主键回表查询记录</li>
+<li>ref：普通索引，查出关联的多个主键后，根据主键回表查询记录</li>
+<li>range：范围查找</li>
+<li>index：索引覆盖（select的字段在索引里就有）</li>
+<li>all：全表扫描</li>
+</ul>
 <h1 id="Transaction"><a href="#Transaction" class="headerlink" title="Transaction"></a>Transaction</h1><h2 id="Basic-1"><a href="#Basic-1" class="headerlink" title="Basic"></a>Basic</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wang_luwei/article/details/119619105">mysql事务详解</a></li>
@@ -1316,7 +1374,7 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kking_edc/article/details/110848986">mysql是如何保证隔离性的</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/saygood999/article/details/119416311">mysql事务隔离级别入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Tah_001/article/details/107494269">mysql事务隔离级别进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/justlpf/article/details/106835122">mysql事务隔离级别进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/AI_STUDENT_QYB/article/details/121113991">mysql事务隔离级别详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42144277/article/details/106916092">mysql事务隔离级别RC和RR选择比较</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/NoviceZ/article/details/124627347">mysql事务隔离级别为什么选择RC</a></li>
@@ -1347,7 +1405,16 @@
 </ul>
 </blockquote>
 <ul>
-<li>读取到了脏数据（读到的数据在其他事务回滚后数据就不存在了）</li>
+<li>读取到了脏数据（脏数据是指还未提交的数据，如果使用了然后其他回滚后容易导致逻辑错误）</li>
+</ul>
+<h6 id="脏读的案例"><a href="#脏读的案例" class="headerlink" title="脏读的案例"></a>脏读的案例</h6><ul>
+<li>A事务读取账户还剩2000</li>
+<li>A事务扣除1000后还剩1000</li>
+<li>B事务读取账户还剩1000</li>
+<li>B事务增加1000后写入2000</li>
+<li>A事务遇见异常回滚后账户为2000</li>
+<li>B事务正常写入后账户为2000</li>
+<li>此时就出现了逻辑错误（A事务回滚了不扣除，再加上B事务增加的1000，正常应该是3000）</li>
 </ul>
 <h5 id="Unrepeatable-Read（不可重复读）"><a href="#Unrepeatable-Read（不可重复读）" class="headerlink" title="Unrepeatable Read（不可重复读）"></a>Unrepeatable Read（不可重复读）</h5><blockquote>
 <ul>
@@ -1369,6 +1436,9 @@
 <ul>
 <li>看具体业务场景的要求</li>
 </ul>
+<h6 id="不可重复读的案例"><a href="#不可重复读的案例" class="headerlink" title="不可重复读的案例"></a>不可重复读的案例</h6><ul>
+<li>看具体业务场景的要求</li>
+</ul>
 <h5 id="Phantom-Read（幻读）"><a href="#Phantom-Read（幻读）" class="headerlink" title="Phantom Read（幻读）"></a>Phantom Read（幻读）</h5><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43207025/article/details/115412974">mysql幻读入门</a></li>
@@ -1388,6 +1458,7 @@
 </ul>
 </blockquote>
 <ul>
+<li>检查后写入失败</li>
 <li>检查后插入冲突</li>
 </ul>
 <h4 id="Durability"><a href="#Durability" class="headerlink" title="Durability"></a>Durability</h4><blockquote>
@@ -1503,9 +1574,9 @@
 </blockquote>
 <h1 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h1><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33946174/article/details/113320549">mysql查询优化入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liuerchong/article/details/123746558">mysql性能优化进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37723088/article/details/129160111">mysql性能优化详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/An1090239782/article/details/100927224">mysql查询优化入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liuerchong/article/details/123746558">mysql查询优化进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37723088/article/details/129160111">mysql查询优化详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41942838/article/details/111244411">mysql性能优化入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mifffy_java/article/details/106404202">mysql性能优化进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zxp2624161989/article/details/106019863">mysql性能优化详解</a></li>
@@ -1513,10 +1584,41 @@
 </blockquote>
 <h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42039228/article/details/123253246">mysql之explain入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jiadajing267/article/details/81269067">mysql之explain入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42039228/article/details/123253246">mysql之explain进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Park33/article/details/130015540">mysql之explain详解</a></li>
 </ul>
 </blockquote>
+<h3 id="explain的输出说明"><a href="#explain的输出说明" class="headerlink" title="explain的输出说明"></a>explain的输出说明</h3><ul>
+<li>id：每个select子句的标识id（值越大越先被执行）</li>
+<li>select_type：查询类型</li>
+<li>table：当前表名（有时不是真实的表名）</li>
+<li>type：查询方式</li>
+<li>possible_keys：可能使用的索引</li>
+<li>key：实际使用的索引</li>
+<li>key_length：使用的索引长度</li>
+<li>ref：索引的哪一列被使用了</li>
+<li>rows：可能需要扫描的行数</li>
+<li>Extra：额外的信息说明</li>
+</ul>
+<h3 id="explain的Type说明"><a href="#explain的Type说明" class="headerlink" title="explain的Type说明"></a>explain的Type说明</h3><ul>
+<li>system：只有一条数据的表</li>
+<li>const：主键索引，根据键直接查询到记录（常量级别）</li>
+<li>eq_ref：唯一索引，查出关联的一个主键后，根据主键回表查询记录</li>
+<li>ref：普通索引，查出关联的多个主键后，根据主键回表查询记录</li>
+<li>range：范围查找</li>
+<li>index：索引覆盖（select的字段在索引里就有）</li>
+<li>all：全表扫描</li>
+</ul>
+<h3 id="explain的Extra说明"><a href="#explain的Extra说明" class="headerlink" title="explain的Extra说明"></a>explain的Extra说明</h3><ul>
+<li>Using temporary：使用了临时表</li>
+<li>Using filesort：使用了文件排序</li>
+<li>Using index：使用了索引覆盖</li>
+<li>Using index condition: 使用了索引下推（Index Condition Pushdown）</li>
+<li>Using where: 使用了引擎过滤</li>
+<li>Using join buffer：使用了连接缓冲（连接时没有使用索引）</li>
+<li>Using MRR：使用了MRR优化（先将主键排序后再回表，因为相近的索引可能在相同的页上）</li>
+</ul>
 <h2 id="Diagnosis"><a href="#Diagnosis" class="headerlink" title="Diagnosis"></a>Diagnosis</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/vnjohn/article/details/128813814">mysql之诊断详解</a></li>
@@ -1745,7 +1847,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Concept"><span class="nav-number">1.1.</span> <span class="nav-text">Concept</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Design"><span class="nav-number">1.1.1.</span> <span class="nav-text">Design</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">数据库设计范式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">数据库设计模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Engine"><span class="nav-number">1.1.2.</span> <span class="nav-text">Engine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Database"><span class="nav-number">1.1.3.</span> <span class="nav-text">Database</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Table"><span class="nav-number">1.1.4.</span> <span class="nav-text">Table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Charset"><span class="nav-number">1.1.5.</span> <span class="nav-text">Charset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Collation"><span class="nav-number">1.1.6.</span> <span class="nav-text">Collation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config"><span class="nav-number">1.2.</span> <span class="nav-text">Config</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Engine-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">Engine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Charset-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">Charset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Collation-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">Collation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TimeZone"><span class="nav-number">1.2.4.</span> <span class="nav-text">TimeZone</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Auth"><span class="nav-number">1.2.5.</span> <span class="nav-text">Auth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Log"><span class="nav-number">1.2.6.</span> <span class="nav-text">Log</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Usage"><span class="nav-number">2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DDL%EF%BC%88Data-Definition-Language%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">DDL（Data Definition Language）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#create"><span class="nav-number">2.1.1.</span> <span class="nav-text">create</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#type"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">type</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#string"><span class="nav-number">2.1.1.1.1.</span> <span class="nav-text">string</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#char%E5%92%8Cvarchar%E5%AF%B9%E6%AF%94%E5%92%8C%E9%80%89%E6%8B%A9"><span class="nav-number">2.1.1.1.1.1.</span> <span class="nav-text">char和varchar对比和选择</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#varchar%E5%92%8Ctext%E5%AF%B9%E6%AF%94%E5%92%8C%E9%80%89%E6%8B%A9"><span class="nav-number">2.1.1.1.1.2.</span> <span class="nav-text">varchar和text对比和选择</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#char%E5%92%8Cvarchar%E7%9A%84%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">2.1.1.1.1.3.</span> <span class="nav-text">char和varchar的默认值</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#char%E5%92%8Cvarchar%E7%9A%84%E7%A9%BA%E6%A0%BC%E5%A4%84%E7%90%86"><span class="nav-number">2.1.1.1.1.4.</span> <span class="nav-text">char和varchar的空格处理</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#char%E5%92%8Cvarchar%E7%9A%84%E9%95%BF%E5%BA%A6%E9%80%89%E6%8B%A9"><span class="nav-number">2.1.1.1.1.5.</span> <span class="nav-text">char和varchar的长度选择</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#number"><span class="nav-number">2.1.1.1.2.</span> <span class="nav-text">number</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#boolean"><span class="nav-number">2.1.1.1.3.</span> <span class="nav-text">boolean</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#datetime"><span class="nav-number">2.1.1.1.4.</span> <span class="nav-text">datetime</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#datetime-1"><span class="nav-number">2.1.1.1.4.1.</span> <span class="nav-text">datetime</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#format"><span class="nav-number">2.1.1.1.4.2.</span> <span class="nav-text">format</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#timezone"><span class="nav-number">2.1.1.1.4.3.</span> <span class="nav-text">timezone</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#enum"><span class="nav-number">2.1.1.1.5.</span> <span class="nav-text">enum</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">2.1.1.1.6.</span> <span class="nav-text">null</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ip"><span class="nav-number">2.1.1.1.7.</span> <span class="nav-text">ip</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#url"><span class="nav-number">2.1.1.1.8.</span> <span class="nav-text">url</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#geo"><span class="nav-number">2.1.1.1.9.</span> <span class="nav-text">geo</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#constraint"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">constraint</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%8E%A8%E8%8D%90%E5%A4%96%E9%94%AE"><span class="nav-number">2.1.1.2.1.</span> <span class="nav-text">为什么不推荐外键</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#id"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">id</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%8E%A8%E8%8D%90uuid%E5%92%8C%E9%9B%AA%E8%8A%B1id"><span class="nav-number">2.1.1.3.1.</span> <span class="nav-text">为什么不推荐uuid和雪花id</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88id%E8%A6%81%E6%B1%82%E6%9C%89%E5%BA%8F%E9%80%92%E5%A2%9E"><span class="nav-number">2.1.1.3.2.</span> <span class="nav-text">为什么id要求有序递增</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#alter"><span class="nav-number">2.1.2.</span> <span class="nav-text">alter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#drop"><span class="nav-number">2.1.3.</span> <span class="nav-text">drop</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DML%EF%BC%88Data-Manipulation-Language%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">DML（Data Manipulation Language）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#insert"><span class="nav-number">2.2.1.</span> <span class="nav-text">insert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#update"><span class="nav-number">2.2.2.</span> <span class="nav-text">update</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#replace"><span class="nav-number">2.2.3.</span> <span class="nav-text">replace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#delete"><span class="nav-number">2.2.4.</span> <span class="nav-text">delete</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DQL%EF%BC%88Data-Query-Language%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">DQL（Data Query Language）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#general%EF%BC%88%E5%B8%B8%E8%A7%84%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.1.</span> <span class="nav-text">general（常规查询）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#select"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">select</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#sql%E8%AF%AD%E5%8F%A5%E4%B9%A6%E5%86%99%E9%A1%BA%E5%BA%8F"><span class="nav-number">2.3.1.1.1.</span> <span class="nav-text">sql语句书写顺序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sql%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-number">2.3.1.1.2.</span> <span class="nav-text">sql语句执行顺序</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#distinct"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">distinct</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#where"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">where</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#groupBy"><span class="nav-number">2.3.1.4.</span> <span class="nav-text">groupBy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#orderBy"><span class="nav-number">2.3.1.5.</span> <span class="nav-text">orderBy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#limit"><span class="nav-number">2.3.1.6.</span> <span class="nav-text">limit</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equal%EF%BC%88%E7%AD%89%E5%80%BC%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.2.</span> <span class="nav-text">equal（等值查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#multi%EF%BC%88%E5%A4%9A%E5%80%BC%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.3.</span> <span class="nav-text">multi（多值查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#range%EF%BC%88%E8%8C%83%E5%9B%B4%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.4.</span> <span class="nav-text">range（范围查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fuzzy%EF%BC%88%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.5.</span> <span class="nav-text">fuzzy（模糊查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#aggregation%EF%BC%88%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.6.</span> <span class="nav-text">aggregation（聚合查询）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#count-1-%E5%92%8Ccount-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.3.6.1.</span> <span class="nav-text">count(1)和count(*)的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#combination%EF%BC%88%E7%BB%84%E5%90%88%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.7.</span> <span class="nav-text">combination（组合查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#relation%EF%BC%88%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.8.</span> <span class="nav-text">relation（关联查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sub%EF%BC%88%E5%AD%90%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.9.</span> <span class="nav-text">sub（子查询）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DCL%EF%BC%88Data-Control-Language%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">DCL（Data Control Language）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Function"><span class="nav-number">2.5.</span> <span class="nav-text">Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Variable"><span class="nav-number">2.6.</span> <span class="nav-text">Variable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Index"><span class="nav-number">2.7.</span> <span class="nav-text">Index</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Key"><span class="nav-number">2.7.1.</span> <span class="nav-text">Key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Category"><span class="nav-number">2.7.2.</span> <span class="nav-text">Category</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Principle"><span class="nav-number">2.7.3.</span> <span class="nav-text">Principle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Invalid"><span class="nav-number">2.7.4.</span> <span class="nav-text">Invalid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question"><span class="nav-number">2.7.5.</span> <span class="nav-text">Question</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem"><span class="nav-number">2.7.6.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimize"><span class="nav-number">2.7.7.</span> <span class="nav-text">Optimize</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transaction"><span class="nav-number">3.</span> <span class="nav-text">Transaction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-1"><span class="nav-number">3.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ACID"><span class="nav-number">3.1.1.</span> <span class="nav-text">ACID</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Atomicity"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">Atomicity</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Consistency"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">Consistency</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Isolation"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">Isolation</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Dirty-Read%EF%BC%88%E8%84%8F%E8%AF%BB%EF%BC%89"><span class="nav-number">3.1.1.3.1.</span> <span class="nav-text">Dirty Read（脏读）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%84%8F%E8%AF%BB%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">3.1.1.3.1.1.</span> <span class="nav-text">脏读的场景</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%84%8F%E8%AF%BB%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.1.3.1.2.</span> <span class="nav-text">脏读的问题</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Unrepeatable-Read%EF%BC%88%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%EF%BC%89"><span class="nav-number">3.1.1.3.2.</span> <span class="nav-text">Unrepeatable Read（不可重复读）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">3.1.1.3.2.1.</span> <span class="nav-text">不可重复读的场景</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.1.3.2.2.</span> <span class="nav-text">不可重复读的问题</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Phantom-Read%EF%BC%88%E5%B9%BB%E8%AF%BB%EF%BC%89"><span class="nav-number">3.1.1.3.3.</span> <span class="nav-text">Phantom Read（幻读）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B9%BB%E8%AF%BB%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">3.1.1.3.3.1.</span> <span class="nav-text">幻读的场景</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B9%BB%E8%AF%BB%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.1.3.3.2.</span> <span class="nav-text">幻读的问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Durability"><span class="nav-number">3.1.1.4.</span> <span class="nav-text">Durability</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVCC"><span class="nav-number">3.1.2.</span> <span class="nav-text">MVCC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lock"><span class="nav-number">3.1.3.</span> <span class="nav-text">Lock</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">3.1.3.1.</span> <span class="nav-text">锁的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%88%86%E7%B1%BB"><span class="nav-number">3.1.3.1.1.</span> <span class="nav-text">锁的类型分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%88%86%E7%B1%BB"><span class="nav-number">3.1.3.1.2.</span> <span class="nav-text">锁的实现分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E8%8C%83%E5%9B%B4%E5%88%86%E7%B1%BB"><span class="nav-number">3.1.3.1.3.</span> <span class="nav-text">锁的范围分类</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.3.2.</span> <span class="nav-text">锁的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#DeadLock%EF%BC%88%E6%AD%BB%E9%94%81%EF%BC%89"><span class="nav-number">3.1.3.2.1.</span> <span class="nav-text">DeadLock（死锁）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question-1"><span class="nav-number">3.2.</span> <span class="nav-text">Question</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-1"><span class="nav-number">3.3.</span> <span class="nav-text">Problem</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem-2"><span class="nav-number">4.</span> <span class="nav-text">Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%93%8D%E4%BD%9C"><span class="nav-number">4.1.</span> <span class="nav-text">并发操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="nav-number">4.2.</span> <span class="nav-text">读写分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1"><span class="nav-number">4.3.</span> <span class="nav-text">数据丢失</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Performance"><span class="nav-number">5.</span> <span class="nav-text">Performance</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis"><span class="nav-number">5.1.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Diagnosis"><span class="nav-number">5.2.</span> <span class="nav-text">Diagnosis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Architecture"><span class="nav-number">6.</span> <span class="nav-text">Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Replication"><span class="nav-number">6.1.</span> <span class="nav-text">Replication</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster"><span class="nav-number">6.2.</span> <span class="nav-text">Cluster</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84"><span class="nav-number">6.2.1.</span> <span class="nav-text">主从架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%B8%BB%E6%9E%B6%E6%9E%84"><span class="nav-number">6.2.2.</span> <span class="nav-text">主主架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB-1"><span class="nav-number">6.2.3.</span> <span class="nav-text">读写分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%EF%BC%88Sharding%EF%BC%89"><span class="nav-number">6.2.4.</span> <span class="nav-text">分库分表（Sharding）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E5%8C%BA%EF%BC%88Partition%EF%BC%89"><span class="nav-number">6.2.5.</span> <span class="nav-text">数据分区（Partition）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Distributed"><span class="nav-number">6.3.</span> <span class="nav-text">Distributed</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Application"><span class="nav-number">7.</span> <span class="nav-text">Application</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theory"><span class="nav-number">8.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Management"><span class="nav-number">9.1.</span> <span class="nav-text">Management</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual"><span class="nav-number">9.1.1.</span> <span class="nav-text">Visual</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monitor"><span class="nav-number">9.1.2.</span> <span class="nav-text">Monitor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tools"><span class="nav-number">9.1.3.</span> <span class="nav-text">Tools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Permission"><span class="nav-number">9.1.4.</span> <span class="nav-text">Permission</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Audit"><span class="nav-number">9.1.5.</span> <span class="nav-text">Audit</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Concept"><span class="nav-number">1.1.</span> <span class="nav-text">Concept</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Design"><span class="nav-number">1.1.1.</span> <span class="nav-text">Design</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">数据库设计范式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">数据库设计模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Engine"><span class="nav-number">1.1.2.</span> <span class="nav-text">Engine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Database"><span class="nav-number">1.1.3.</span> <span class="nav-text">Database</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Table"><span class="nav-number">1.1.4.</span> <span class="nav-text">Table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Charset"><span class="nav-number">1.1.5.</span> <span class="nav-text">Charset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Collation"><span class="nav-number">1.1.6.</span> <span class="nav-text">Collation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config"><span class="nav-number">1.2.</span> <span class="nav-text">Config</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Engine-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">Engine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Charset-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">Charset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Collation-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">Collation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TimeZone"><span class="nav-number">1.2.4.</span> <span class="nav-text">TimeZone</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Auth"><span class="nav-number">1.2.5.</span> <span class="nav-text">Auth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Log"><span class="nav-number">1.2.6.</span> <span class="nav-text">Log</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Usage"><span class="nav-number">2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DDL%EF%BC%88Data-Definition-Language%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">DDL（Data Definition Language）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#create"><span class="nav-number">2.1.1.</span> <span class="nav-text">create</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#type"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">type</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#string"><span class="nav-number">2.1.1.1.1.</span> <span class="nav-text">string</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#char%E5%92%8Cvarchar%E5%AF%B9%E6%AF%94%E5%92%8C%E9%80%89%E6%8B%A9"><span class="nav-number">2.1.1.1.1.1.</span> <span class="nav-text">char和varchar对比和选择</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#varchar%E5%92%8Ctext%E5%AF%B9%E6%AF%94%E5%92%8C%E9%80%89%E6%8B%A9"><span class="nav-number">2.1.1.1.1.2.</span> <span class="nav-text">varchar和text对比和选择</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#char%E5%92%8Cvarchar%E7%9A%84%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">2.1.1.1.1.3.</span> <span class="nav-text">char和varchar的默认值</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#char%E5%92%8Cvarchar%E7%9A%84%E7%A9%BA%E6%A0%BC%E5%A4%84%E7%90%86"><span class="nav-number">2.1.1.1.1.4.</span> <span class="nav-text">char和varchar的空格处理</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#char%E5%92%8Cvarchar%E7%9A%84%E9%95%BF%E5%BA%A6%E9%80%89%E6%8B%A9"><span class="nav-number">2.1.1.1.1.5.</span> <span class="nav-text">char和varchar的长度选择</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#number"><span class="nav-number">2.1.1.1.2.</span> <span class="nav-text">number</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#boolean"><span class="nav-number">2.1.1.1.3.</span> <span class="nav-text">boolean</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#datetime"><span class="nav-number">2.1.1.1.4.</span> <span class="nav-text">datetime</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#datetime-1"><span class="nav-number">2.1.1.1.4.1.</span> <span class="nav-text">datetime</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#format"><span class="nav-number">2.1.1.1.4.2.</span> <span class="nav-text">format</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#timezone"><span class="nav-number">2.1.1.1.4.3.</span> <span class="nav-text">timezone</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#enum"><span class="nav-number">2.1.1.1.5.</span> <span class="nav-text">enum</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">2.1.1.1.6.</span> <span class="nav-text">null</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ip"><span class="nav-number">2.1.1.1.7.</span> <span class="nav-text">ip</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#url"><span class="nav-number">2.1.1.1.8.</span> <span class="nav-text">url</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#geo"><span class="nav-number">2.1.1.1.9.</span> <span class="nav-text">geo</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#constraint"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">constraint</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%8E%A8%E8%8D%90%E5%A4%96%E9%94%AE"><span class="nav-number">2.1.1.2.1.</span> <span class="nav-text">为什么不推荐外键</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#id"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">id</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%8E%A8%E8%8D%90uuid%E5%92%8C%E9%9B%AA%E8%8A%B1id"><span class="nav-number">2.1.1.3.1.</span> <span class="nav-text">为什么不推荐uuid和雪花id</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88id%E8%A6%81%E6%B1%82%E6%9C%89%E5%BA%8F%E9%80%92%E5%A2%9E"><span class="nav-number">2.1.1.3.2.</span> <span class="nav-text">为什么id要求有序递增</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#alter"><span class="nav-number">2.1.2.</span> <span class="nav-text">alter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#drop"><span class="nav-number">2.1.3.</span> <span class="nav-text">drop</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DML%EF%BC%88Data-Manipulation-Language%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">DML（Data Manipulation Language）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#insert"><span class="nav-number">2.2.1.</span> <span class="nav-text">insert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#update"><span class="nav-number">2.2.2.</span> <span class="nav-text">update</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#replace"><span class="nav-number">2.2.3.</span> <span class="nav-text">replace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#delete"><span class="nav-number">2.2.4.</span> <span class="nav-text">delete</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DQL%EF%BC%88Data-Query-Language%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">DQL（Data Query Language）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#general%EF%BC%88%E5%B8%B8%E8%A7%84%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.1.</span> <span class="nav-text">general（常规查询）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#select"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">select</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#sql%E8%AF%AD%E5%8F%A5%E4%B9%A6%E5%86%99%E9%A1%BA%E5%BA%8F"><span class="nav-number">2.3.1.1.1.</span> <span class="nav-text">sql语句书写顺序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sql%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-number">2.3.1.1.2.</span> <span class="nav-text">sql语句执行顺序</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#distinct"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">distinct</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#where"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">where</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#groupBy"><span class="nav-number">2.3.1.4.</span> <span class="nav-text">groupBy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#orderBy"><span class="nav-number">2.3.1.5.</span> <span class="nav-text">orderBy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#limit"><span class="nav-number">2.3.1.6.</span> <span class="nav-text">limit</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equal%EF%BC%88%E7%AD%89%E5%80%BC%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.2.</span> <span class="nav-text">equal（等值查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#multi%EF%BC%88%E5%A4%9A%E5%80%BC%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.3.</span> <span class="nav-text">multi（多值查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#range%EF%BC%88%E8%8C%83%E5%9B%B4%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.4.</span> <span class="nav-text">range（范围查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fuzzy%EF%BC%88%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.5.</span> <span class="nav-text">fuzzy（模糊查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#combination%EF%BC%88%E7%BB%84%E5%90%88%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.6.</span> <span class="nav-text">combination（组合查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#aggregation%EF%BC%88%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.7.</span> <span class="nav-text">aggregation（聚合查询）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#count-1-%E5%92%8Ccount-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.3.7.1.</span> <span class="nav-text">count(1)和count(*)的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#relation%EF%BC%88%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.8.</span> <span class="nav-text">relation（关联查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sub%EF%BC%88%E5%AD%90%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.9.</span> <span class="nav-text">sub（子查询）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DCL%EF%BC%88Data-Control-Language%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">DCL（Data Control Language）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Function"><span class="nav-number">2.5.</span> <span class="nav-text">Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Variable"><span class="nav-number">2.6.</span> <span class="nav-text">Variable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Index"><span class="nav-number">2.7.</span> <span class="nav-text">Index</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Key"><span class="nav-number">2.7.1.</span> <span class="nav-text">Key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Category"><span class="nav-number">2.7.2.</span> <span class="nav-text">Category</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Principle"><span class="nav-number">2.7.3.</span> <span class="nav-text">Principle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Invalid"><span class="nav-number">2.7.4.</span> <span class="nav-text">Invalid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question"><span class="nav-number">2.7.5.</span> <span class="nav-text">Question</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem"><span class="nav-number">2.7.6.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimize"><span class="nav-number">2.7.7.</span> <span class="nav-text">Optimize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Query"><span class="nav-number">2.7.8.</span> <span class="nav-text">Query</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Access"><span class="nav-number">2.7.9.</span> <span class="nav-text">Access</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transaction"><span class="nav-number">3.</span> <span class="nav-text">Transaction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-1"><span class="nav-number">3.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ACID"><span class="nav-number">3.1.1.</span> <span class="nav-text">ACID</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Atomicity"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">Atomicity</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Consistency"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">Consistency</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Isolation"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">Isolation</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Dirty-Read%EF%BC%88%E8%84%8F%E8%AF%BB%EF%BC%89"><span class="nav-number">3.1.1.3.1.</span> <span class="nav-text">Dirty Read（脏读）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%84%8F%E8%AF%BB%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">3.1.1.3.1.1.</span> <span class="nav-text">脏读的场景</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%84%8F%E8%AF%BB%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.1.3.1.2.</span> <span class="nav-text">脏读的问题</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%84%8F%E8%AF%BB%E7%9A%84%E6%A1%88%E4%BE%8B"><span class="nav-number">3.1.1.3.1.3.</span> <span class="nav-text">脏读的案例</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Unrepeatable-Read%EF%BC%88%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%EF%BC%89"><span class="nav-number">3.1.1.3.2.</span> <span class="nav-text">Unrepeatable Read（不可重复读）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">3.1.1.3.2.1.</span> <span class="nav-text">不可重复读的场景</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.1.3.2.2.</span> <span class="nav-text">不可重复读的问题</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E7%9A%84%E6%A1%88%E4%BE%8B"><span class="nav-number">3.1.1.3.2.3.</span> <span class="nav-text">不可重复读的案例</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Phantom-Read%EF%BC%88%E5%B9%BB%E8%AF%BB%EF%BC%89"><span class="nav-number">3.1.1.3.3.</span> <span class="nav-text">Phantom Read（幻读）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B9%BB%E8%AF%BB%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">3.1.1.3.3.1.</span> <span class="nav-text">幻读的场景</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B9%BB%E8%AF%BB%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.1.3.3.2.</span> <span class="nav-text">幻读的问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Durability"><span class="nav-number">3.1.1.4.</span> <span class="nav-text">Durability</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVCC"><span class="nav-number">3.1.2.</span> <span class="nav-text">MVCC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lock"><span class="nav-number">3.1.3.</span> <span class="nav-text">Lock</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">3.1.3.1.</span> <span class="nav-text">锁的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%88%86%E7%B1%BB"><span class="nav-number">3.1.3.1.1.</span> <span class="nav-text">锁的类型分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%88%86%E7%B1%BB"><span class="nav-number">3.1.3.1.2.</span> <span class="nav-text">锁的实现分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E8%8C%83%E5%9B%B4%E5%88%86%E7%B1%BB"><span class="nav-number">3.1.3.1.3.</span> <span class="nav-text">锁的范围分类</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.3.2.</span> <span class="nav-text">锁的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#DeadLock%EF%BC%88%E6%AD%BB%E9%94%81%EF%BC%89"><span class="nav-number">3.1.3.2.1.</span> <span class="nav-text">DeadLock（死锁）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question-1"><span class="nav-number">3.2.</span> <span class="nav-text">Question</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-1"><span class="nav-number">3.3.</span> <span class="nav-text">Problem</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem-2"><span class="nav-number">4.</span> <span class="nav-text">Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%93%8D%E4%BD%9C"><span class="nav-number">4.1.</span> <span class="nav-text">并发操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="nav-number">4.2.</span> <span class="nav-text">读写分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1"><span class="nav-number">4.3.</span> <span class="nav-text">数据丢失</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Performance"><span class="nav-number">5.</span> <span class="nav-text">Performance</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis"><span class="nav-number">5.1.</span> <span class="nav-text">Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#explain%E7%9A%84%E8%BE%93%E5%87%BA%E8%AF%B4%E6%98%8E"><span class="nav-number">5.1.1.</span> <span class="nav-text">explain的输出说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#explain%E7%9A%84Type%E8%AF%B4%E6%98%8E"><span class="nav-number">5.1.2.</span> <span class="nav-text">explain的Type说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#explain%E7%9A%84Extra%E8%AF%B4%E6%98%8E"><span class="nav-number">5.1.3.</span> <span class="nav-text">explain的Extra说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Diagnosis"><span class="nav-number">5.2.</span> <span class="nav-text">Diagnosis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Architecture"><span class="nav-number">6.</span> <span class="nav-text">Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Replication"><span class="nav-number">6.1.</span> <span class="nav-text">Replication</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster"><span class="nav-number">6.2.</span> <span class="nav-text">Cluster</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84"><span class="nav-number">6.2.1.</span> <span class="nav-text">主从架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%B8%BB%E6%9E%B6%E6%9E%84"><span class="nav-number">6.2.2.</span> <span class="nav-text">主主架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB-1"><span class="nav-number">6.2.3.</span> <span class="nav-text">读写分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%EF%BC%88Sharding%EF%BC%89"><span class="nav-number">6.2.4.</span> <span class="nav-text">分库分表（Sharding）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E5%8C%BA%EF%BC%88Partition%EF%BC%89"><span class="nav-number">6.2.5.</span> <span class="nav-text">数据分区（Partition）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Distributed"><span class="nav-number">6.3.</span> <span class="nav-text">Distributed</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Application"><span class="nav-number">7.</span> <span class="nav-text">Application</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theory"><span class="nav-number">8.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Management"><span class="nav-number">9.1.</span> <span class="nav-text">Management</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual"><span class="nav-number">9.1.1.</span> <span class="nav-text">Visual</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monitor"><span class="nav-number">9.1.2.</span> <span class="nav-text">Monitor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tools"><span class="nav-number">9.1.3.</span> <span class="nav-text">Tools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Permission"><span class="nav-number">9.1.4.</span> <span class="nav-text">Permission</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Audit"><span class="nav-number">9.1.5.</span> <span class="nav-text">Audit</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
