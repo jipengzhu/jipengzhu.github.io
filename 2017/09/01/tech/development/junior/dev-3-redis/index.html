@@ -28,7 +28,7 @@
 <meta property="og:description" content="redis">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-31T17:03:00.000Z">
-<meta property="article:modified_time" content="2023-08-15T07:17:37.153Z">
+<meta property="article:modified_time" content="2023-08-18T07:17:44.319Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-15 15:17:37" itemprop="dateModified" datetime="2023-08-15T15:17:37+08:00">2023-08-15</time>
+                <time title="修改时间：2023-08-18 15:17:44" itemprop="dateModified" datetime="2023-08-18T15:17:44+08:00">2023-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -295,7 +295,7 @@
 </ul>
 </blockquote>
 <ul>
-<li>String<ul>
+<li>String：对应java的String<ul>
 <li>Structure：sds</li>
 <li>Encoding<ul>
 <li>REDIS_ENCODING_INT：当数据是整数时</li>
@@ -305,7 +305,7 @@
 </li>
 </ul>
 </li>
-<li>List<ul>
+<li>List：对应java的List<ul>
 <li>Structure：ziplist、linkedlist、quicklist</li>
 <li>Encoding<ul>
 <li>REDIS_ENCODING_ZIPLIST：redis3.2之前，默认的编码</li>
@@ -315,7 +315,7 @@
 </li>
 </ul>
 </li>
-<li>Hash<ul>
+<li>Hash：对应java的Map<ul>
 <li>Structure：ziplist、hashtable</li>
 <li>Encoding<ul>
 <li>REDIS_ENCODING_ZIPLIST：默认的编码</li>
@@ -324,7 +324,7 @@
 </li>
 </ul>
 </li>
-<li>Set<ul>
+<li>Set：对应java的Set<ul>
 <li>Structure：intset、hashtable</li>
 <li>Encoding<ul>
 <li>REDIS_ENCODING_INTSET：当元素类型是整数时</li>
@@ -333,7 +333,7 @@
 </li>
 </ul>
 </li>
-<li>Zset<ul>
+<li>Zset：对应java的SortedSet<ul>
 <li>Structure：</li>
 <li>Encoding：<ul>
 <li>REDIS_ENCODING_ZIPLIST：默认的编码</li>
@@ -419,6 +419,13 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chinesesoftware/article/details/122562887">redis过期策略详解</a></li>
 </ul>
 </blockquote>
+<ul>
+<li>惰性删除</li>
+<li>定期删除</li>
+</ul>
+<blockquote>
+<p>ps：过期的key会放在过期表里面</p>
+</blockquote>
 <h2 id="Eliminate"><a href="#Eliminate" class="headerlink" title="Eliminate"></a>Eliminate</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37286668/article/details/110631680">redis淘汰策略入门</a></li>
@@ -483,17 +490,56 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44129618/article/details/122358133">redis缓存一致性进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010180738/article/details/105786711">redis缓存一致性详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_70651612/article/details/125522473">redis缓存一致性精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42405666/article/details/107671099">redis缓存一致性之先更新数据还是先删缓存</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yytree123/article/details/131732440">redis缓存一致性之延时双删</a></li>
 </ul>
 </blockquote>
-<h3 id="脏数据问题"><a href="#脏数据问题" class="headerlink" title="脏数据问题"></a>脏数据问题</h3><ol>
-<li>先删除缓存再更新数据库：A del cache &#x3D;&gt; A update db &#x3D;&gt; B read db &#x3D;&gt; B update cache</li>
-<li>先删除缓存再更新数据库：A del cache &#x3D;&gt; B read db &#x3D;&gt; B update cache &#x3D;&gt; A update db</li>
-<li>先删除缓存再更新数据库：A del cache &#x3D;&gt; B read db &#x3D;&gt; A update db &#x3D;&gt; B update cache</li>
-<li>先更新数据库再删除缓存：B read db &#x3D;&gt; B update cache &#x3D;&gt; A update db &#x3D;&gt; A del cache</li>
-<li>先更新数据库再删除缓存：B read db &#x3D;&gt; A update db &#x3D;&gt; B update cache &#x3D;&gt; A del cache</li>
-<li>先更新数据库再删除缓存：B read db &#x3D;&gt; A update db &#x3D;&gt; A del cache &#x3D;&gt; B update cache</li>
-</ol>
-<p>总结：情况2、3、6会产生缓存脏数据，只要 B read db 发生在 A update db 之前，且B update cache 发生在 A del cache之后就会产生缓存脏数据，但是情况6的发生概率比较低（因为B update cache比A update db快，B update cache一般不会晚于A update db完成，所以先更新数据库再删除缓存出现情况4的概率比较高）</p>
+<p>缓存一致性方案</p>
+<ul>
+<li>写缓存：读多写少时前面的缓存写入被后面的覆盖从而浪费cpu资源，而且高并发写入会导致更新丢失的问题<ul>
+<li>先写数据库再写缓存</li>
+<li>先写缓存再写数据库</li>
+</ul>
+</li>
+<li>删缓存：使用删除和懒加载的方式效率更高，而且删除比更新更快速和安全<ul>
+<li>先写数据库再删缓存</li>
+<li>先删缓存再写数据库</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>ps：关键字：写浪费，写丢失，删除更快速和安全</p>
+</blockquote>
+<p>综上所述应该选择 <code>删缓存</code> 的方案</p>
+<p>由于 <code>先删缓存</code> 比 <code>后删缓存</code> 更容易导致 <code>脏数据</code> 的问题（因为缓存已失效的概率比缓存已删除低）</p>
+<p>所以最终的方案是 <code>先写数据库再删缓存</code></p>
+<h3 id="脏数据问题"><a href="#脏数据问题" class="headerlink" title="脏数据问题"></a>脏数据问题</h3><p>主要的操作如下</p>
+<ul>
+<li><code>写数据库 + 删缓存</code> 或 <code>删缓存 + 写数据库</code></li>
+<li><code>读数据库 + 写缓存</code></li>
+</ul>
+<blockquote>
+<p>ps：读缓存读不到时（缓存已 <code>删除</code> 或缓存已 <code>失效</code> ）会 <code>读数据库</code> 和 <code>写缓存</code></p>
+</blockquote>
+<p>方案1：先写数据库再删缓存</p>
+<ul>
+<li>场景1：B读数据库（缓存已失效），A写数据库，A删缓存，B写缓存</li>
+</ul>
+<blockquote>
+<p>ps：B读数据库要在A写数据库之前（读脏数据）<br>ps：B读数据库要在B写缓存之前（操作要求）<br>ps：B写缓存要在A删缓存之后（写脏数据）<br>ps：A写数据库要在A删缓存之前（方案要求）</p>
+</blockquote>
+<p>方案2：先删缓存再写数据库</p>
+<ul>
+<li>场景2：B读数据库（缓存已失效），A删缓存，A写数据库，B写缓存</li>
+<li>场景3：B读数据库（缓存已失效），A删缓存，B写缓存，A写数据库</li>
+<li>场景4：A删缓存，B读数据库（缓存已删除），A写数据库，B写缓存</li>
+<li>场景5：A删缓存，B读数据库（缓存已删除），B写缓存，A写数据库</li>
+</ul>
+<blockquote>
+<p>ps：B读数据库要在A写数据库之前（读脏数据）<br>ps：B读数据库要在B写缓存之前（操作要求）<br>ps：B写缓存要在A删缓存之后（写脏数据）<br>ps：A删缓存要在A写数据库之前（方案要求）</p>
+</blockquote>
+<p>综合以上5种场景可知，只要 <code>B写缓存</code> 在 <code>A删缓存</code> 之后就会产生脏数据</p>
+<p>其中 <code>先删缓存</code> 比 <code>后删缓存</code> 更容易导致 <code>脏数据</code> 的问题（因为缓存已失效的概率比缓存已删除低）</p>
 <h2 id="数据丢失"><a href="#数据丢失" class="headerlink" title="数据丢失"></a>数据丢失</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/real_myth/article/details/52582739">redis数据丢失详解</a></li>
@@ -525,6 +571,8 @@
 <h2 id="Redis为什么要引入多线程"><a href="#Redis为什么要引入多线程" class="headerlink" title="Redis为什么要引入多线程"></a>Redis为什么要引入多线程</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shijinghan1126/article/details/117329849">Redis为什么要引入多线程</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDN2497242041/article/details/122659705">Redis多线程详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MyronCham/article/details/105979731">Redis多线程疑问</a></li>
 </ul>
 </blockquote>
 <h2 id="Redis键名长度和性能"><a href="#Redis键名长度和性能" class="headerlink" title="Redis键名长度和性能"></a>Redis键名长度和性能</h2><blockquote>

@@ -28,7 +28,7 @@
 <meta property="og:description" content="spring-web">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T19:02:00.000Z">
-<meta property="article:modified_time" content="2023-08-15T07:17:37.134Z">
+<meta property="article:modified_time" content="2023-08-18T07:17:44.240Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-15 15:17:37" itemprop="dateModified" datetime="2023-08-15T15:17:37+08:00">2023-08-15</time>
+                <time title="修改时间：2023-08-18 15:17:44" itemprop="dateModified" datetime="2023-08-18T15:17:44+08:00">2023-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -852,9 +852,32 @@
 </blockquote>
 <h3 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h3><blockquote>
 <ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xqtesting/article/details/103260565">性能指标入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/songjuntao8/article/details/128752593">性能指标进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40488936/article/details/107995408">性能指标详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_17231297/article/details/129787384">接口性能优化方案总结</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/china_coding/article/details/128895749">用了这些方案，接口性能提高了100倍</a></li>
 </ul>
+</blockquote>
+<p>系统三高参数</p>
+<ul>
+<li>高性能：每次请求的处理时间越短越好</li>
+<li>高并发：能够支持的请求数量越多越好</li>
+<li>高可用：集群或分布式系统中部分服务节点故障也不影响整体服务</li>
+</ul>
+<p>性能指标参数</p>
+<ul>
+<li>RTT：往返时间（Round-Trip Time），表示从发送端发送数据开始，到发送端收到来自接收端的确认（接收端收到数据后便立即发送确认，不包含数据传输时间）</li>
+<li>RT：响应时间（Response Time），实际包含请求时间（Request Time）、处理时间（Handle Time）、响应时间（Response Time）</li>
+<li>HPS：每秒点击量（Hit Per Second），描述的客户端并发量</li>
+<li>QPS：每秒查询量（Hit Per Query），描述的是查询系统</li>
+<li>RPS：每秒请求量（Hit Per Request），描述的是业务系统</li>
+<li>TPS：每秒事务量（Hit Per Transaction），描述的是业务系统（包含多个请求或者请求链）</li>
+<li>PV：单个页面访问量</li>
+<li>UV：独立用户访问量</li>
+</ul>
+<blockquote>
+<p>ps：口语中一般用QPS代指RPS</p>
 </blockquote>
 <h1 id="Logging"><a href="#Logging" class="headerlink" title="Logging"></a>Logging</h1><blockquote>
 <ul>
