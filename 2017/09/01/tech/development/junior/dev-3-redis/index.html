@@ -28,7 +28,7 @@
 <meta property="og:description" content="redis">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-31T17:03:00.000Z">
-<meta property="article:modified_time" content="2023-08-18T11:27:45.206Z">
+<meta property="article:modified_time" content="2023-08-19T11:19:41.717Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-18 19:27:45" itemprop="dateModified" datetime="2023-08-18T19:27:45+08:00">2023-08-18</time>
+                <time title="修改时间：2023-08-19 19:19:41" itemprop="dateModified" datetime="2023-08-19T19:19:41+08:00">2023-08-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -377,10 +377,19 @@
 </blockquote>
 <h3 id="Bitmap"><a href="#Bitmap" class="headerlink" title="Bitmap"></a>Bitmap</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46794373/article/details/109199618">redis数据类型之Bitmap详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/truelove12358/article/details/106698085">Bitmap详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Qgf_666/article/details/88580919">Bitmap应用</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/machial/article/details/127666920">redis数据类型之Bitmap详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Dengrz/article/details/116144628">Bitmap入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Tyler93/article/details/119273573">Bitmap进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012060033/article/details/129349546">Bitmap详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_29119581/article/details/115270409">Bitmap使用</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28203321/article/details/125135925">Bitmap场景</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Qgf_666/article/details/88580919">Bitmap场景之大数据量中快速查找判断数字是否存在</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51955470/article/details/122860418">Bitmap和Set的区别</a></li>
 </ul>
+</blockquote>
+<p>Bitmap：按位存储元素（又叫BitSet），不存储元素本身，比Set省空间</p>
+<blockquote>
+<p>ps：Bitmap中数据如果稀疏的话，会比Set更浪费空间<br>ps：Bitmap支持的是不重复的数值，如果是字符串需要自己hash（因为会存在hash冲突所以会导致误判断）</p>
 </blockquote>
 <h3 id="BloomFilter"><a href="#BloomFilter" class="headerlink" title="BloomFilter"></a>BloomFilter</h3><blockquote>
 <ul>
@@ -389,30 +398,50 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42393929/article/details/112438183">BloomFilter进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38571892/article/details/123503418">BloomFilter详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41125219/article/details/119982158">BloomFilter使用</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ttaannkkee/article/details/102502921">BloomFilter长度</a></li>
 <li><a target="_blank" rel="noopener" href="https://tianyalei.blog.csdn.net/article/details/74721877">BloomFilter误判</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42425970/article/details/102532185">BloomFilter之url去重的几种方式入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38759383/article/details/125283029">BloomFilter之url去重的几种方式详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31362537/article/details/90645392">BloomFilter场景</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42425970/article/details/102532185">BloomFilter场景之url去重的几种方式入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38759383/article/details/125283029">BloomFilter场景之url去重的几种方式详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43896829/article/details/108924791">BloomFilter和Bitmap的区别</a></li>
 </ul>
 </blockquote>
-<p>布隆过滤器使用场景和问题</p>
+<p>BloomFilter：底层是Bitmap，通过多个hash函数设置多个bit位，可以解决Bitmap稀疏数据造成的空间浪费问题</p>
+<blockquote>
+<p>ps：BloomFilter解决了Bitmap稀疏造成的空间浪费问题，但引入了误判的问题<br>ps：BloomFilter由于不同的数据可能落在相同的位置，导致了删除困难的问题</p>
+</blockquote>
+<p>BloomFilter的操作</p>
 <ul>
-<li>过滤场景（黑名单）：由于（黑名单）布隆过滤器存在性判断会误判的原因，会导致部分正常的被丢弃<ul>
-<li>垃圾邮件过滤：由于误判会将一小部分正常邮件判定为垃圾邮件，从而导致用户的正常邮件被丢弃或进入垃圾箱</li>
-<li>爬虫地址去重：由于误判会将一小部分没有抓取过的网页判断为抓取过，从而导致这部分网页不能被抓取到系统</li>
-<li>新闻推荐去重：由于误判会将一小部分没有推送过的新闻判断为推送过，从而导致这部分新闻不能被推送到用户</li>
+<li>可能在：是不是真的在还需要进一步检查</li>
+<li>一定不在：肯定不会在</li>
+</ul>
+<p>BloomFilter的场景</p>
+<ul>
+<li>黑名单场景（对<code>黑名单</code>里的执行<code>拒绝</code>操作）：好人可能会被误抓<ul>
+<li>垃圾邮件过滤：如果在黑名单里就放入垃圾箱，会误判，可能导致正常邮件被放到了垃圾箱</li>
+<li>非法攻击过滤：如果在黑名单里就不允许访问，会误判，可能导致正常请求被拒绝访问了</li>
+<li>爬虫地址去重：如果在已抓取名单里就不抓取，会误判，可能导致未抓取过的链接不能被抓取</li>
+<li>新闻推荐去重：如果在已推荐名单里就不推荐，会误判，可能导致未推送过的新闻不能被推送</li>
 </ul>
 </li>
-<li>筛选场景（白名单）：由于（白名单）布隆过滤器存在性判断会误判的原因，会导致部分异常的被通过<ul>
-<li>缓存穿透解决：由于误判会将一小部分不存在的key判定为存在，从而穿透缓存</li>
-<li>非法攻击防御：HBase\RocksDB\LevelDB等数据库内置布隆过滤器，用于判断数据是否存在，可以减少数据库的IO请求</li>
+<li>白名单场景（对<code>白名单</code>里的执行<code>允许</code>操作）：坏人可能会被误放<ul>
+<li>缓存穿透解决：如果在数据集合里就允许通过，会误判，可能会导致不存在的key穿透缓存</li>
 </ul>
 </li>
 </ul>
+<blockquote>
+<p>ps：爬虫如果想抓所有链接，还需要进一步去数据库里面检查（布隆过滤器则起到了减少数据库访问的作用）<br>ps：HBase\RocksDB\LevelDB等数据库内置布隆过滤器，可以提前过滤掉无效请求（key不存在的请求）</p>
+</blockquote>
 <h3 id="HyperLogLog"><a href="#HyperLogLog" class="headerlink" title="HyperLogLog"></a>HyperLogLog</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/maoyuanming0806/article/details/81814610">redis数据类型之HyperLogLog详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/quietsmell/article/details/131092835">HyperLogLog和基数统计</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chongfa2008/article/details/120222254">HyperLogLog场景</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lilizhou2008/article/details/109610186">HyperLogLog场景之UV统计</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/z1766042975/article/details/128726573">HyperLogLog和Set的区别</a></li>
 </ul>
 </blockquote>
+<p>HyperLogLog：进行基数统计，存在误差，比Set省空间</p>
 <h2 id="Expire"><a href="#Expire" class="headerlink" title="Expire"></a>Expire</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://dongshao.blog.csdn.net/article/details/106022331">redis过期命令详解</a></li>
