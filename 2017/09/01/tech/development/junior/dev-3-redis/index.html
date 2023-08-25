@@ -28,7 +28,7 @@
 <meta property="og:description" content="redis">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-31T17:03:00.000Z">
-<meta property="article:modified_time" content="2023-08-23T11:32:42.666Z">
+<meta property="article:modified_time" content="2023-08-25T07:27:53.147Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-23 19:32:42" itemprop="dateModified" datetime="2023-08-23T19:32:42+08:00">2023-08-23</time>
+                <time title="修改时间：2023-08-25 15:27:53" itemprop="dateModified" datetime="2023-08-25T15:27:53+08:00">2023-08-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -279,12 +279,20 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zzhongcy/article/details/123903799">redis版本变更</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/luna_a/article/details/107292994">redis命令入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44794280/article/details/123557566">redis命令详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/li237/article/details/118048892">redis之为什么要用缓存入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ChineseSoftware/article/details/122488855">redis之为什么要用缓存详解</a></li>
 </ul>
 </blockquote>
 <h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wuyujin1997/article/details/106267676">redis之key命名规范</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_59212867/article/details/127892871">redis之key的通用命令</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42575020/article/details/113996309">redis之key命名规范入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wuyujin1997/article/details/106267676">redis之key命名规范详解</a></li>
 </ul>
+</blockquote>
+<p>key命名规范： <code>set [namespace:]table:id:field value</code></p>
+<blockquote>
+<p>ps：namespace可选，一般为appId</p>
 </blockquote>
 <h2 id="Type"><a href="#Type" class="headerlink" title="Type"></a>Type</h2><blockquote>
 <ul>
@@ -395,7 +403,10 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://dongshao.blog.csdn.net/article/details/106022331">redis过期命令详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chinesesoftware/article/details/122562887">redis过期策略入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ldw201510803006/article/details/126093439">redis过期策略详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44766883/article/details/126203553">redis过期策略详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ldw201510803006/article/details/126093439">redis过期策略之惰性删除详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cainiao1412/article/details/122182762">redis过期策略之定时删除详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/HuffmanTree_J/article/details/119423385">redis之string元素过期方案</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_48826531/article/details/125717224">redis之set元素过期方案</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43944305/article/details/124446227">redis之hash元素过期方案</a></li>
 </ul>
@@ -405,7 +416,7 @@
 <li>定期删除</li>
 </ul>
 <blockquote>
-<p>ps：过期的key会放在过期表里面</p>
+<p>ps：字符串的 <code>SET</code> 和 <code>SETEX</code> 也可以设置过期时间，过期的key会放在过期表里面</p>
 </blockquote>
 <h2 id="Eliminate"><a href="#Eliminate" class="headerlink" title="Eliminate"></a>Eliminate</h2><blockquote>
 <ul>
@@ -414,6 +425,55 @@
 </ul>
 </blockquote>
 <p>FIFO（First In First Out）：先进先出算法，基于位置，淘汰最前面的数据<br>LRU（Least Recently Used）：最近最少使用算法，基于时间，淘汰闲置时间最长的数据<br>LFU（Least Frequently Used）：最不经常使用算法，基于频率，淘汰使用频率最低的数据</p>
+<blockquote>
+<p>ps：LFU保留的是热点数据</p>
+</blockquote>
+<h2 id="Batch"><a href="#Batch" class="headerlink" title="Batch"></a>Batch</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shenziheng1/article/details/103938378">redis批量操作入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Jinlu_npu/article/details/79984127">redis批量操作详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32907195/article/details/108990603">redis批量操作和集群的支持关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zc19921215/article/details/128824445">redis如何在集群中使用批量操作入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhaohongfei_358/article/details/100573769">redis如何在集群中使用批量操作详解</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>批量命令：MGET、MSET、HMSET、HMGET、MGETNX、MSETNX、HMGETNX、HMSETNX</li>
+<li>管道（pipeline）</li>
+<li>事务（transaction）</li>
+<li>脚本（script）</li>
+</ul>
+<h2 id="Iterate"><a href="#Iterate" class="headerlink" title="Iterate"></a>Iterate</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liulili1991/article/details/124448737">redis遍历命令入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhang197093/article/details/74615717">redis遍历命令详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sicnu_team1/article/details/119355558">redis遍历之keys详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w1673492580/article/details/52237911">redis遍历之scan详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/peterleee/p/10701376.html">redis耗时命令</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_23564667/article/details/110917900">redis各种命令的复杂度</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>KEYS</li>
+<li>SCAN、SSCAN、ZCAN、HSCAN</li>
+<li>LRANGE、SMEMBERS、ZRANGE、HGETALL</li>
+</ul>
+<h2 id="Monitor"><a href="#Monitor" class="headerlink" title="Monitor"></a>Monitor</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lushuaiyin/article/details/106151431">redis监控命令入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46405589/article/details/109689056">redis监控命令详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Strategy"><a href="#Strategy" class="headerlink" title="Strategy"></a>Strategy</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41306043/article/details/119951718">redis缓存策略详解</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>旁路缓存（Cache Aside Pattern）：以数据库为主，数据写到数据库，使用者负责<code>同步</code>数据到缓存</li>
+<li>读写穿透（Write Through Pattern）：以缓存为主，数据写到缓存，缓存服务负责<code>立即同步</code>数据到数据库</li>
+<li>异步缓存（Write Behind Pattern）：以缓存为主，数据写到缓存，缓存服务负责<code>延后同步</code>数据到数据库</li>
+</ul>
 <h2 id="Structure"><a href="#Structure" class="headerlink" title="Structure"></a>Structure</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yongbutingxide/article/details/122608661">redis数据结构入门</a></li>
@@ -593,42 +653,89 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/guotianqing/article/details/114398036">redis性能优化3</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wf_feng/article/details/121046703">redis性能优化4</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44259720/article/details/127620232">redis性能优化5</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45987569/article/details/128190536">redis性能优化6</a></li>
 </ul>
 </blockquote>
-<h2 id="Redis为什么这么快"><a href="#Redis为什么这么快" class="headerlink" title="Redis为什么这么快"></a>Redis为什么这么快</h2><blockquote>
+<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chenssy/article/details/118280041">redis查询分析之slowlog入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/heihaozi/article/details/104972778">redis查询分析之slowlog进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/feiying0canglang/article/details/126220815">redis查询分析之slowlog详解</a></li>
+</ul>
+</blockquote>
+<p>查询分析方法</p>
+<ul>
+<li>explain（查询分析命令）</li>
+<li>slowlog（慢查询日志）</li>
+</ul>
+<h2 id="Diagnosis"><a href="#Diagnosis" class="headerlink" title="Diagnosis"></a>Diagnosis</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wf_feng/article/details/121046703">redis性能诊断详解</a></li>
+</ul>
+</blockquote>
+<h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><h3 id="Redis为什么这么快"><a href="#Redis为什么这么快" class="headerlink" title="Redis为什么这么快"></a>Redis为什么这么快</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hollis_chuang/article/details/118865058">redis为什么这么快入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDN2497242041/article/details/120755188">redis为什么这么快进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35190492/article/details/122293594">redis为什么这么快详解</a></li>
 </ul>
 </blockquote>
-<h2 id="Redis为什么QPS这么高"><a href="#Redis为什么QPS这么高" class="headerlink" title="Redis为什么QPS这么高"></a>Redis为什么QPS这么高</h2><blockquote>
+<ul>
+<li><code>数据读写</code>部分基于内存访问，速度快</li>
+<li><code>数据存取</code>部分基于优化后的数据结构，效率高</li>
+<li><code>网络请求</code>部分基于多路复用，性能高</li>
+<li><code>命令处理</code>部分基于单线程来避免上下文切换，效率高</li>
+</ul>
+<blockquote>
+<p>ps：redis是IO密集型，因此cpu不是瓶颈而网络IO是瓶颈，所以命令处理部分使用单线程更好</p>
+</blockquote>
+<h3 id="Redis为什么QPS这么高"><a href="#Redis为什么QPS这么高" class="headerlink" title="Redis为什么QPS这么高"></a>Redis为什么QPS这么高</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38461724/article/details/107205416">Redis为什么QPS这么高入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/singwhatiwanna/article/details/108543949">Redis为什么QPS这么高进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zzti_erlie/article/details/113429308">Redis为什么QPS这么高详解</a></li>
 </ul>
 </blockquote>
-<h2 id="Redis为什么要引入多线程"><a href="#Redis为什么要引入多线程" class="headerlink" title="Redis为什么要引入多线程"></a>Redis为什么要引入多线程</h2><blockquote>
+<p>因为redis快，耗时短，所以QPS高</p>
+<blockquote>
+<p>ps：redis的QPS是10w+（50000~300000）级别的，mysql的QPS是1k+（5000左右）级别的</p>
+</blockquote>
+<h3 id="Redis6-0之前真的是单线程吗"><a href="#Redis6-0之前真的是单线程吗" class="headerlink" title="Redis6.0之前真的是单线程吗"></a>Redis6.0之前真的是单线程吗</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46388795/article/details/125029800">Redis6.0之前真的是单线程吗</a></li>
+</ul>
+</blockquote>
+<p>网络请求部分和命令处理部分是单线程，还存在其他线程</p>
+<ul>
+<li>close_file：负责关闭文件描述符</li>
+<li>aof_fsync：负责aof文件刷盘</li>
+<li>lazy_free：负责异步释放大对象空间</li>
+</ul>
+<h3 id="Redis6-0为什么要引入多线程"><a href="#Redis6-0为什么要引入多线程" class="headerlink" title="Redis6.0为什么要引入多线程"></a>Redis6.0为什么要引入多线程</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shijinghan1126/article/details/117329849">Redis为什么要引入多线程</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDN2497242041/article/details/122659705">Redis多线程详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MyronCham/article/details/105979731">Redis多线程疑问</a></li>
 </ul>
 </blockquote>
-<h2 id="Redis键名长度和性能"><a href="#Redis键名长度和性能" class="headerlink" title="Redis键名长度和性能"></a>Redis键名长度和性能</h2><blockquote>
+<p>为了提高网络请求部分的性能，支持更高的并发量</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_17231297/article/details/106622060">Redis键名长度和性能</a></li>
+<li>网络请求部分（IO读写和协议解析）变成多线程了</li>
+<li>命令处理部分还是单线程的（所以不存在线程安全的问题）</li>
+</ul>
+<h3 id="Redis键名长度会影响性能吗"><a href="#Redis键名长度会影响性能吗" class="headerlink" title="Redis键名长度会影响性能吗"></a>Redis键名长度会影响性能吗</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_17231297/article/details/106622060">Redis键名长度会影响性能吗</a></li>
 </ul>
 </blockquote>
-<h2 id="Redis大key（BigKey）问题"><a href="#Redis大key（BigKey）问题" class="headerlink" title="Redis大key（BigKey）问题"></a>Redis大key（BigKey）问题</h2><blockquote>
+<h3 id="Redis大key（BigKey）问题如何优化"><a href="#Redis大key（BigKey）问题如何优化" class="headerlink" title="Redis大key（BigKey）问题如何优化"></a>Redis大key（BigKey）问题如何优化</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36642528/article/details/111238496">Redis大key（BigKey）问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36642528/article/details/111238496">Redis大key（BigKey）问题如何优化</a></li>
 </ul>
 </blockquote>
-<h2 id="Redis热key（HotKey）问题"><a href="#Redis热key（HotKey）问题" class="headerlink" title="Redis热key（HotKey）问题"></a>Redis热key（HotKey）问题</h2><blockquote>
+<h3 id="Redis热key（HotKey）问题如何优化"><a href="#Redis热key（HotKey）问题如何优化" class="headerlink" title="Redis热key（HotKey）问题如何优化"></a>Redis热key（HotKey）问题如何优化</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hellozhxy/article/details/119773333">Redis热key（HotKey）问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hellozhxy/article/details/119773333">Redis热key（HotKey）问题如何优化</a></li>
 </ul>
 </blockquote>
 <h1 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h1><h2 id="Replication"><a href="#Replication" class="headerlink" title="Replication"></a>Replication</h2><blockquote>
@@ -698,7 +805,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/afreon/article/details/123815203">redis可视化客户端推荐3</a></li>
 </ul>
 </blockquote>
-<h3 id="Monitor"><a href="#Monitor" class="headerlink" title="Monitor"></a>Monitor</h3><blockquote>
+<h3 id="Monitor-1"><a href="#Monitor-1" class="headerlink" title="Monitor"></a>Monitor</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wyouwd1/article/details/124719811">redis监控指标</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_38039437/article/details/96479174">redis监控命令</a></li>
@@ -811,7 +918,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Concept"><span class="nav-number">1.1.</span> <span class="nav-text">Concept</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config"><span class="nav-number">1.2.</span> <span class="nav-text">Config</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Usage"><span class="nav-number">2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Key"><span class="nav-number">2.1.</span> <span class="nav-text">Key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Type"><span class="nav-number">2.2.</span> <span class="nav-text">Type</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String"><span class="nav-number">2.2.1.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#List"><span class="nav-number">2.2.2.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set"><span class="nav-number">2.2.3.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zset"><span class="nav-number">2.2.4.</span> <span class="nav-text">Zset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash"><span class="nav-number">2.2.5.</span> <span class="nav-text">Hash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Geo"><span class="nav-number">2.2.6.</span> <span class="nav-text">Geo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bitmap"><span class="nav-number">2.2.7.</span> <span class="nav-text">Bitmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BloomFilter"><span class="nav-number">2.2.8.</span> <span class="nav-text">BloomFilter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HyperLogLog"><span class="nav-number">2.2.9.</span> <span class="nav-text">HyperLogLog</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Expire"><span class="nav-number">2.3.</span> <span class="nav-text">Expire</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eliminate"><span class="nav-number">2.4.</span> <span class="nav-text">Eliminate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Structure"><span class="nav-number">2.5.</span> <span class="nav-text">Structure</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transaction"><span class="nav-number">3.</span> <span class="nav-text">Transaction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Atomicity"><span class="nav-number">3.1.</span> <span class="nav-text">Atomicity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Isolation"><span class="nav-number">3.2.</span> <span class="nav-text">Isolation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Durability"><span class="nav-number">3.3.</span> <span class="nav-text">Durability</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RDB"><span class="nav-number">3.3.1.</span> <span class="nav-text">RDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOF"><span class="nav-number">3.3.2.</span> <span class="nav-text">AOF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem"><span class="nav-number">4.</span> <span class="nav-text">Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%A4%B1%E6%95%88"><span class="nav-number">4.1.</span> <span class="nav-text">缓存失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">4.2.</span> <span class="nav-text">缓存一致性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%8F%E6%95%B0%E6%8D%AE%E9%97%AE%E9%A2%98"><span class="nav-number">4.2.1.</span> <span class="nav-text">脏数据问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1"><span class="nav-number">4.3.</span> <span class="nav-text">数据丢失</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Performance"><span class="nav-number">5.</span> <span class="nav-text">Performance</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E5%BF%AB"><span class="nav-number">5.1.</span> <span class="nav-text">Redis为什么这么快</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E4%B8%BA%E4%BB%80%E4%B9%88QPS%E8%BF%99%E4%B9%88%E9%AB%98"><span class="nav-number">5.2.</span> <span class="nav-text">Redis为什么QPS这么高</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BC%95%E5%85%A5%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">5.3.</span> <span class="nav-text">Redis为什么要引入多线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E9%94%AE%E5%90%8D%E9%95%BF%E5%BA%A6%E5%92%8C%E6%80%A7%E8%83%BD"><span class="nav-number">5.4.</span> <span class="nav-text">Redis键名长度和性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E5%A4%A7key%EF%BC%88BigKey%EF%BC%89%E9%97%AE%E9%A2%98"><span class="nav-number">5.5.</span> <span class="nav-text">Redis大key（BigKey）问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E7%83%ADkey%EF%BC%88HotKey%EF%BC%89%E9%97%AE%E9%A2%98"><span class="nav-number">5.6.</span> <span class="nav-text">Redis热key（HotKey）问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Architecture"><span class="nav-number">6.</span> <span class="nav-text">Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Replication"><span class="nav-number">6.1.</span> <span class="nav-text">Replication</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster"><span class="nav-number">6.2.</span> <span class="nav-text">Cluster</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Distributed"><span class="nav-number">6.3.</span> <span class="nav-text">Distributed</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Application"><span class="nav-number">7.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lock"><span class="nav-number">7.1.</span> <span class="nav-text">Lock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Publish-Subscribe"><span class="nav-number">7.2.</span> <span class="nav-text">Publish-Subscribe</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Producer-Consumer"><span class="nav-number">7.3.</span> <span class="nav-text">Producer-Consumer</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theory"><span class="nav-number">8.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Management"><span class="nav-number">9.1.</span> <span class="nav-text">Management</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual"><span class="nav-number">9.1.1.</span> <span class="nav-text">Visual</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monitor"><span class="nav-number">9.1.2.</span> <span class="nav-text">Monitor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tools"><span class="nav-number">9.1.3.</span> <span class="nav-text">Tools</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Concept"><span class="nav-number">1.1.</span> <span class="nav-text">Concept</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config"><span class="nav-number">1.2.</span> <span class="nav-text">Config</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Usage"><span class="nav-number">2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Key"><span class="nav-number">2.1.</span> <span class="nav-text">Key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Type"><span class="nav-number">2.2.</span> <span class="nav-text">Type</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String"><span class="nav-number">2.2.1.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#List"><span class="nav-number">2.2.2.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set"><span class="nav-number">2.2.3.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zset"><span class="nav-number">2.2.4.</span> <span class="nav-text">Zset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash"><span class="nav-number">2.2.5.</span> <span class="nav-text">Hash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Geo"><span class="nav-number">2.2.6.</span> <span class="nav-text">Geo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bitmap"><span class="nav-number">2.2.7.</span> <span class="nav-text">Bitmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BloomFilter"><span class="nav-number">2.2.8.</span> <span class="nav-text">BloomFilter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HyperLogLog"><span class="nav-number">2.2.9.</span> <span class="nav-text">HyperLogLog</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Expire"><span class="nav-number">2.3.</span> <span class="nav-text">Expire</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eliminate"><span class="nav-number">2.4.</span> <span class="nav-text">Eliminate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Batch"><span class="nav-number">2.5.</span> <span class="nav-text">Batch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterate"><span class="nav-number">2.6.</span> <span class="nav-text">Iterate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Monitor"><span class="nav-number">2.7.</span> <span class="nav-text">Monitor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Strategy"><span class="nav-number">2.8.</span> <span class="nav-text">Strategy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Structure"><span class="nav-number">2.9.</span> <span class="nav-text">Structure</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transaction"><span class="nav-number">3.</span> <span class="nav-text">Transaction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Atomicity"><span class="nav-number">3.1.</span> <span class="nav-text">Atomicity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Isolation"><span class="nav-number">3.2.</span> <span class="nav-text">Isolation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Durability"><span class="nav-number">3.3.</span> <span class="nav-text">Durability</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RDB"><span class="nav-number">3.3.1.</span> <span class="nav-text">RDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOF"><span class="nav-number">3.3.2.</span> <span class="nav-text">AOF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem"><span class="nav-number">4.</span> <span class="nav-text">Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%A4%B1%E6%95%88"><span class="nav-number">4.1.</span> <span class="nav-text">缓存失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">4.2.</span> <span class="nav-text">缓存一致性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%8F%E6%95%B0%E6%8D%AE%E9%97%AE%E9%A2%98"><span class="nav-number">4.2.1.</span> <span class="nav-text">脏数据问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1"><span class="nav-number">4.3.</span> <span class="nav-text">数据丢失</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Performance"><span class="nav-number">5.</span> <span class="nav-text">Performance</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis"><span class="nav-number">5.1.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Diagnosis"><span class="nav-number">5.2.</span> <span class="nav-text">Diagnosis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question"><span class="nav-number">5.3.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E5%BF%AB"><span class="nav-number">5.3.1.</span> <span class="nav-text">Redis为什么这么快</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E4%B8%BA%E4%BB%80%E4%B9%88QPS%E8%BF%99%E4%B9%88%E9%AB%98"><span class="nav-number">5.3.2.</span> <span class="nav-text">Redis为什么QPS这么高</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis6-0%E4%B9%8B%E5%89%8D%E7%9C%9F%E7%9A%84%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B%E5%90%97"><span class="nav-number">5.3.3.</span> <span class="nav-text">Redis6.0之前真的是单线程吗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis6-0%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BC%95%E5%85%A5%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">5.3.4.</span> <span class="nav-text">Redis6.0为什么要引入多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E9%94%AE%E5%90%8D%E9%95%BF%E5%BA%A6%E4%BC%9A%E5%BD%B1%E5%93%8D%E6%80%A7%E8%83%BD%E5%90%97"><span class="nav-number">5.3.5.</span> <span class="nav-text">Redis键名长度会影响性能吗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E5%A4%A7key%EF%BC%88BigKey%EF%BC%89%E9%97%AE%E9%A2%98%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96"><span class="nav-number">5.3.6.</span> <span class="nav-text">Redis大key（BigKey）问题如何优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E7%83%ADkey%EF%BC%88HotKey%EF%BC%89%E9%97%AE%E9%A2%98%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96"><span class="nav-number">5.3.7.</span> <span class="nav-text">Redis热key（HotKey）问题如何优化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Architecture"><span class="nav-number">6.</span> <span class="nav-text">Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Replication"><span class="nav-number">6.1.</span> <span class="nav-text">Replication</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster"><span class="nav-number">6.2.</span> <span class="nav-text">Cluster</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Distributed"><span class="nav-number">6.3.</span> <span class="nav-text">Distributed</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Application"><span class="nav-number">7.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lock"><span class="nav-number">7.1.</span> <span class="nav-text">Lock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Publish-Subscribe"><span class="nav-number">7.2.</span> <span class="nav-text">Publish-Subscribe</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Producer-Consumer"><span class="nav-number">7.3.</span> <span class="nav-text">Producer-Consumer</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theory"><span class="nav-number">8.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Management"><span class="nav-number">9.1.</span> <span class="nav-text">Management</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual"><span class="nav-number">9.1.1.</span> <span class="nav-text">Visual</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monitor-1"><span class="nav-number">9.1.2.</span> <span class="nav-text">Monitor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tools"><span class="nav-number">9.1.3.</span> <span class="nav-text">Tools</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
