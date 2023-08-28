@@ -28,7 +28,7 @@
 <meta property="og:description" content="java容器篇">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T17:03:00.000Z">
-<meta property="article:modified_time" content="2023-08-27T09:32:36.589Z">
+<meta property="article:modified_time" content="2023-08-28T07:25:43.064Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-27 17:32:36" itemprop="dateModified" datetime="2023-08-27T17:32:36+08:00">2023-08-27</time>
+                <time title="修改时间：2023-08-28 15:25:43" itemprop="dateModified" datetime="2023-08-28T15:25:43+08:00">2023-08-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1025,7 +1025,7 @@
 </ul>
 </li>
 <li>store<ul>
-<li>update：用equals判断是否存在相同的元素，存在则覆盖，不存在则创建并插入</li>
+<li>update：遍历链表并用key的equals方法判断Node是否已存在，存在则更新value，不存在则创建并插入</li>
 <li>create：创建并插入（头插法和尾插法）</li>
 </ul>
 </li>
@@ -1091,16 +1091,33 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45427600/article/details/113484445">为什么重写equals要重写hashCode</a></li>
 </ul>
 </blockquote>
+<ul>
+<li>equals相等，hashCode一定相等</li>
+<li>equals不相等，hashCode不一定不相等</li>
+<li>hashCode相等，equals不一定相等</li>
+<li>hashCode不相等，equals一定不相等</li>
+</ul>
 <h5 id="hash冲突如何解决"><a href="#hash冲突如何解决" class="headerlink" title="hash冲突如何解决"></a>hash冲突如何解决</h5><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_48241564/article/details/118613312">hash冲突如何解决</a></li>
 </ul>
 </blockquote>
+<ul>
+<li>开放定址法：冲突后寻找下一个空位置插入，查找时会顺着冲突位置往下查找<ul>
+<li>线性探测法</li>
+<li>平方探测法</li>
+<li>再哈希探测法</li>
+</ul>
+</li>
+<li>链地址法：冲突的部分在同一个位置用链表链接起来，查找时会在链表中查找</li>
+<li>公共溢出区：冲突的部分都放到另一个列表中，找不到时会在溢出表中查找</li>
+</ul>
 <h5 id="hash方法为何要进行异或和位移"><a href="#hash方法为何要进行异或和位移" class="headerlink" title="hash方法为何要进行异或和位移"></a>hash方法为何要进行异或和位移</h5><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jx520/article/details/127948707">hash方法为何要进行异或和位移</a></li>
 </ul>
 </blockquote>
+<p>是为了让hash值更加分散，减少hash冲突</p>
 <h5 id="Map的容量大小为什么必须是2的幂次方"><a href="#Map的容量大小为什么必须是2的幂次方" class="headerlink" title="Map的容量大小为什么必须是2的幂次方"></a>Map的容量大小为什么必须是2的幂次方</h5><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39380192/article/details/104588207">Map的容量大小为什么必须是2的幂次方入门</a></li>
