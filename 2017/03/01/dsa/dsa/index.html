@@ -28,7 +28,7 @@
 <meta property="og:description" content="数据结构和算法">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-02-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-09-01T07:19:35.381Z">
+<meta property="article:modified_time" content="2023-09-01T09:17:38.261Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dsa">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-01 15:19:35" itemprop="dateModified" datetime="2023-09-01T15:19:35+08:00">2023-09-01</time>
+                <time title="修改时间：2023-09-01 17:17:38" itemprop="dateModified" datetime="2023-09-01T17:17:38+08:00">2023-09-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -316,6 +316,9 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Real_Fool_/article/details/113463997">数据结构和算法之线性表详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Real_Fool_/article/details/113852222">数据结构和算法之队列和栈列详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zag666/article/details/105587005">数据结构和算法之双端队列</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cainv89/article/details/51398148">数据结构和算法之双栈</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/l688899886/article/details/126335628">数据结构和算法之用两个栈实现一个队列</a></li>
 </ul>
 </blockquote>
 <p>零个或多个数据元素的有序合集（collection），俗称为 <code>线性表</code> （sequence table）</p>
@@ -349,11 +352,9 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45302622/article/details/103973286">二叉树的深度和高度的区别</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/My_Jobs/article/details/43451187">二叉树遍历详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zzy_yy/article/details/120374157">二叉树构建详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_48033173/article/details/116211447">二叉树范围查找入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wildand/article/details/116194206">二叉树范围查找详解</a></li>
 </ul>
 </blockquote>
-<p>二叉树遍历：前序、中序、后序、层次遍历、深度优先、广度优先</p>
+<p>二叉树遍历：深度优先遍历（前序、中序、后序）、广度优先遍历（层次遍历）</p>
 <h5 id="满二叉树"><a href="#满二叉树" class="headerlink" title="满二叉树"></a>满二叉树</h5><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jalja365/article/details/110947051">满二叉树详解</a></li>
@@ -372,8 +373,12 @@
 <h5 id="查找二叉树"><a href="#查找二叉树" class="headerlink" title="查找二叉树"></a>查找二叉树</h5><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_57180439/article/details/123035613">查找二叉树详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_48033173/article/details/116211447">二叉树范围查找入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wildand/article/details/116194206">二叉树范围查找详解</a></li>
 </ul>
 </blockquote>
+<p>BST树：二叉查找树（Binary Search Tree）</p>
+<p>二叉树查找：等值查找、范围查找</p>
 <h5 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h5><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_38036210/article/details/100517125">平衡二叉树详解</a></li>
@@ -400,11 +405,24 @@
 <h6 id="B-树"><a href="#B-树" class="headerlink" title="B-树"></a>B-树</h6><h6 id="B-树-1"><a href="#B-树-1" class="headerlink" title="B+树"></a>B+树</h6><h6 id="B-树-2"><a href="#B-树-2" class="headerlink" title="B*树"></a>B*树</h6><h4 id="二叉堆"><a href="#二叉堆" class="headerlink" title="二叉堆"></a>二叉堆</h4><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaomucgwlmx/article/details/103522410">二叉堆详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/YUBANGSHUANGYUER/article/details/106008341">二叉堆（Heap）与二叉查找树（Binary Search Tree）的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/YUBANGSHUANGYUER/article/details/106008341">二叉堆与二叉查找树的区别</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/it_lihongmin/article/details/114528779">二叉堆的使用场景</a></li>
 </ul>
 </blockquote>
-<h4 id="多叉堆"><a href="#多叉堆" class="headerlink" title="多叉堆"></a>多叉堆</h4><h4 id="跳表"><a href="#跳表" class="headerlink" title="跳表"></a>跳表</h4><blockquote>
+<p>Heap：堆</p>
+<ul>
+<li>优先级队列</li>
+<li>延时队列</li>
+<li>定时器</li>
+<li>堆排序</li>
+<li>TopK</li>
+</ul>
+<h4 id="多叉堆"><a href="#多叉堆" class="headerlink" title="多叉堆"></a>多叉堆</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangeil007/article/details/107654028">多叉堆详解</a></li>
+</ul>
+</blockquote>
+<h4 id="跳表"><a href="#跳表" class="headerlink" title="跳表"></a>跳表</h4><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_49834705/article/details/112465244">跳表详解</a></li>
 </ul>
@@ -423,6 +441,9 @@
 </blockquote>
 <h1 id="数据算法（algorithm）"><a href="#数据算法（algorithm）" class="headerlink" title="数据算法（algorithm）"></a>数据算法（algorithm）</h1><blockquote>
 <ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46190471/article/details/121106728">算法评价标准详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/f553762019/article/details/107939161">算法评价指标之时间复杂度和空间复杂度</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/whatday/article/details/126388964">算法评价指标之对数和指数</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yeahPeng11/article/details/118367012">常见的算法思想入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/juno3550/p/14528980.html">常见的算法思想进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/h21396577548/article/details/109481334">常见的算法思想详解</a></li>
