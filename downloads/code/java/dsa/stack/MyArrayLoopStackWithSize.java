@@ -1,6 +1,6 @@
 package dsa.stack;
 
-public class MyArrayStack {
+public class MyArrayLoopStackWithSize {
     public static void main(String[] args) {
 
     }
