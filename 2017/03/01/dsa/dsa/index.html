@@ -28,7 +28,7 @@
 <meta property="og:description" content="数据结构和算法">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-02-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-09-02T11:07:33.653Z">
+<meta property="article:modified_time" content="2023-09-05T11:32:37.071Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dsa">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-02 19:07:33" itemprop="dateModified" datetime="2023-09-02T19:07:33+08:00">2023-09-02</time>
+                <time title="修改时间：2023-09-05 19:32:37" itemprop="dateModified" datetime="2023-09-05T19:32:37+08:00">2023-09-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -324,6 +324,8 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zag666/article/details/105587005">数据结构和算法之双端队列</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cainv89/article/details/51398148">数据结构和算法之双栈</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/l688899886/article/details/126335628">数据结构和算法之用两个栈实现一个队列</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Solo95/article/details/111085058">数据结构和算法之单调队列</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lucky52529/article/details/89155694">数据结构和算法之单调栈列</a></li>
 </ul>
 </blockquote>
 <p>零个或多个数据元素的有序合集（collection），俗称为 <code>线性表</code> （sequence table）</p>
@@ -514,8 +516,8 @@
 <li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/266888066?utm_id=0">如何在LeetCode上刷题</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37310036/article/details/116331029">LeetCode刷题路线</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/399875325?utm_id=0">LeetCode刷题手册1</a></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/469500016?utm_id=0">LeetCode刷题手册2</a></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/297648394?utm_id=0">LeetCode刷题手册3</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/297648394?utm_id=0">LeetCode刷题手册2</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/469500016?utm_id=0">LeetCode刷题手册3</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wuzhongqiang/article/details/119710121">LeetCode高频题目1</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41605114/article/details/114452074">LeetCode高频题目2</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_16933601/article/details/108913658">LeetCode高频题目3</a></li>
@@ -563,31 +565,55 @@
 <h3 id="按照算法用途分"><a href="#按照算法用途分" class="headerlink" title="按照算法用途分"></a>按照算法用途分</h3><h4 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h4><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Real_Fool_/article/details/114692744">数据结构和算法之排序算法详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaomucgwlmx/article/details/82589626">java版排序算法</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zxzxzx0119/article/details/79826380">java版排序算法</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hq942845204/article/details/80303762">排序算法之内部排序和外部排序</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xushiyu1996818/article/details/84936832">排序算法之外部排序详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a574780196/article/details/122646309">排序算法之多路归并排序详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/nyist_yangguang/article/details/113618219">排序算法之不稳定排序会有什么问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45795744/article/details/121353099">排序算法之选择排序为什么不稳定</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dengdun6257/article/details/102283176">排序算法之希尔排序为什么不稳定</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_62940685/article/details/131711927">排序算法之快速排序为什么不稳定</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_62940685/article/details/131737425">排序算法之堆排序为什么不稳定</a></li>
 </ul>
 </blockquote>
 <ul>
-<li>插入排序：将<code>未排序部分</code>里的元素挨个和已排序的元素<code>比较并插入</code>到<code>已排序部分</code>里的合适位置上<ul>
-<li>直接插入排序</li>
-<li>希尔排序</li>
-</ul>
-</li>
 <li>选择排序：在<code>未排序部分</code>挨个和<code>最小</code>的元素<code>比较并选择</code>从而将最小的元素放到<code>未排序部分</code>的<code>首位</code><ul>
-<li>简单选择排序</li>
-<li>堆排序</li>
+<li>简单选择排序：不稳定排序</li>
+<li>堆排序：不稳定排序</li>
 </ul>
 </li>
-<li>交换排序：在<code>未排序部分</code>挨个和<code>后面</code>的元素<code>比较并交换</code>从而将最大的元素放到<code>未排序部分</code>的<code>末位</code><ul>
-<li>冒泡排序</li>
-<li>快速排序</li>
+<li>插入排序：将<code>未排序部分</code>里的元素挨个和已排序的元素<code>比较并插入</code>到<code>已排序部分</code>里的合适位置上<ul>
+<li>直接插入排序：稳定排序</li>
+<li>希尔排序：不稳定排序</li>
 </ul>
 </li>
-<li>归并排序：将数组分为两个子数组分别排序后进行归并，子数组又递归继续分为两个子数组直到只包含一个元素</li>
+<li>换位排序：在<code>未排序部分</code>挨个和<code>后面</code>的元素<code>比较并换位</code>从而将最大的元素放到<code>未排序部分</code>的<code>末位</code><ul>
+<li>冒泡排序：稳定排序</li>
+<li>快速排序：不稳定排序</li>
+</ul>
+</li>
+<li>归并排序：将数组分为两个子数组分别排序后进行归并，子数组又递归继续分为两个子数组直到只包含一个元素<ul>
+<li>归并排序：稳定排序</li>
+</ul>
+</li>
+<li>计数排序<ul>
+<li>计数排序</li>
+</ul>
+</li>
+<li>基数排序<ul>
 <li>基数排序</li>
+</ul>
+</li>
+<li>桶排序<ul>
+<li>桶排序</li>
+</ul>
+</li>
 </ul>
 <blockquote>
 <p>ps：打麻将用的是 <code>插入排序</code> ，学生排队用的是 <code>交换排序</code></p>
+</blockquote>
+<blockquote>
+<p>ps：排序过程中有交换操作的，如果不是相邻交换，就有可能不是稳定排序</p>
 </blockquote>
 <h4 id="查找算法"><a href="#查找算法" class="headerlink" title="查找算法"></a>查找算法</h4><blockquote>
 <ul>
@@ -651,6 +677,7 @@
 </blockquote>
 <ul>
 <li>字符串相关的算法（字符串匹配、大数相加）</li>
+<li>栈相关的算法（基本计算器、最小栈）</li>
 </ul>
 <h4 id="树"><a href="#树" class="headerlink" title="树"></a>树</h4><blockquote>
 <ul>
@@ -779,7 +806,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-count">87</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
