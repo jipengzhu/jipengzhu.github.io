@@ -18,9 +18,10 @@ public class ShellSort {
         while (gap > 0) {
             // gap是分组数，也是步长，只对第一个分组排序
             for (int i = 0; i + gap < len; i = i + gap) {
+
                 int v = array[i + gap];
 
-                int j = i;
+                int j = i; // j + gap < len
                 // 比插入元素大，则后退一步，让出位置
                 while (j >= 0 && array[j] > v) {
                     array[j + gap] = array[j];
@@ -43,6 +44,7 @@ public class ShellSort {
             // gap是分组数，也是步长，k是第K组的起始偏移量
             for (int k = 0; k < gap; k++) {
                 for (int i = k; i + gap < len; i = i + gap) {
+
                     int v = array[i + gap];
 
                     int j = i;

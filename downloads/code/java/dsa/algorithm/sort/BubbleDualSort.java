@@ -27,7 +27,6 @@ public class BubbleDualSort {
                 if (array[i] < array[i - 1]) {
                     swap(array, i, i - 1);
                 }
-
             }
             L++;
         }
