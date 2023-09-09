@@ -9,7 +9,6 @@ public class QuickSort3 {
         int[] array = random(10);
         // for debug
         // array = new int[]{310, 78, 237, 773, 96, 165, 70, 757, 665, 508};
-        array = new int[]{522, 516, 880, 362, 8, 825, 881, 311, 150, 912};
 
         int[] bak = Arrays.copyOf(array, array.length);
 
@@ -45,19 +44,43 @@ public class QuickSort3 {
             while (i < j && array[j] >= v)
                 j--;
 
-            if (i >= j)
+            // 此时i左边的已经处理完毕，都小于p
+            // 此时j右边的已经处理完毕，都大于p
+            // 所以还需要处理i,j,p三者的位置
+            if (i >= j) {
+                // 先处理i和j的位置
+                if (i > j && array[j] > array[i]) {
+                    swap(array, j, i);
+                }
+
+                // 再处理p与i,j的位置
+                // 当p = i或者p = j时，p不需要移动
+                if (p < j) {
+                    for (int q = j; q <= i; q++) {
+                        if (v > array[q]) {
+                            swap(array, p, q);
+                            p = q;
+                        } else if (q == j) {
+                            swap(array, p, q - 1);
+                            p = q - 1;
+                        }
+                    }
+                } else if (p > i) {
+                    for (int q = i; q >= j; q--) {
+                        if (v < array[q]) {
+                            swap(array, p, q);
+                            p = q;
+                        } else if (q == i) {
+                            swap(array, p, q + 1);
+                            p = q + 1;
+                        }
+                    }
+                }
+
                 break;
+            }
 
             swap(array, i++, j--);
-        }
-
-        // 对结束位和基点位的元素进行比较，此时i = j，可以任选一个
-        if (i < p && array[i] > v) {
-            swap(array, i, p);
-            p = i;
-        } else if (i > p && array[i] < v) {
-            swap(array, i, p);
-            p = i;
         }
 
         quickSort(array, L, p - 1);
