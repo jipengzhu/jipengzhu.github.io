@@ -1,40 +1,33 @@
 public class Solution {
-    public boolean canJump(int[] nums) {
-        return canJump(nums, 0, nums.length - 1);
-    }
+    public int hIndex(int[] citations) {
+        java.util.Arrays.sort(citations);
 
-    public boolean canJump(int[] nums, int i, int j) {
-        int x = i + nums[i];
-        if (x >= j) {
-            return true;
+        int h = 0;
+        int i = citations.length - 1;
+        while (i >= 0 && citations[i] > h) {
+            h++;
+            i--;
         }
 
-        int k = i;
-        while (++k <= x) {
-            if (canJump(nums, k, j)) {
-                return true;
-            }
-        }
-
-        return false;
+        return h;
     }
 
     public static void main(String[] args) {
-        testCanJump1();
-        testCanJump2();
+        testHIndex1();
+        testHIndex2();
     }
 
-    public static void testCanJump1() {
-        int[] nums = { 2, 3, 1, 1, 4 };
+    public static void testHIndex1() {
+        int[] nums = { 3, 0, 6, 1, 5 };
 
-        boolean canJump = new Solution().canJump(nums);
-        System.out.println(canJump);
+        int h = new Solution().hIndex(nums);
+        System.out.println(h);
     }
 
-    public static void testCanJump2() {
-        int[] nums = { 3, 2, 1, 0, 4 };
+    public static void testHIndex2() {
+        int[] nums = { 1, 3, 1 };
 
-        boolean canJump = new Solution().canJump(nums);
-        System.out.println(canJump);
+        int h = new Solution().hIndex(nums);
+        System.out.println(h);
     }
 }
