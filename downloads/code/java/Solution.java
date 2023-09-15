@@ -1,33 +1,50 @@
-public class Solution {
-    public int hIndex(int[] citations) {
-        java.util.Arrays.sort(citations);
+class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        int i = 0;
+        int j = numbers.length - 1;
 
-        int h = 0;
-        int i = citations.length - 1;
-        while (i >= 0 && citations[i] > h) {
-            h++;
-            i--;
+        while (i < j) {
+            if (numbers[i] + numbers[j] < target) {
+                i++;
+            } else if (numbers[i] + numbers[j] > target) {
+                j--;
+            } else {
+                return new int[] { i + 1, j + 1 };
+            }
         }
 
-        return h;
+        return new int[] { -1, -1 };
+    }
+
+    public static void printArray(int[] array) {
+        System.out.println(java.util.Arrays.toString(array));
+    }
+
+    public static void printArray(int[] array, int len) {
+        System.out.println(java.util.Arrays.toString(java.util.Arrays.copyOf(array, len)));
     }
 
     public static void main(String[] args) {
-        testHIndex1();
-        testHIndex2();
+        testTwoSum1();
+        testTwoSum2();
+        testTwoSum3();
     }
 
-    public static void testHIndex1() {
-        int[] nums = { 3, 0, 6, 1, 5 };
-
-        int h = new Solution().hIndex(nums);
-        System.out.println(h);
+    public static void testTwoSum1() {
+        int[] numbers = { 2, 7, 11, 15 };
+        int target = 9;
+        printArray(new Solution().twoSum(numbers, target));
     }
 
-    public static void testHIndex2() {
-        int[] nums = { 1, 3, 1 };
+    public static void testTwoSum2() {
+        int[] numbers = { 2, 3, 4 };
+        int target = 6;
+        printArray(new Solution().twoSum(numbers, target));
+    }
 
-        int h = new Solution().hIndex(nums);
-        System.out.println(h);
+    public static void testTwoSum3() {
+        int[] numbers = { -1, 0 };
+        int target = -1;
+        printArray(new Solution().twoSum(numbers, target));
     }
 }
