@@ -4,42 +4,110 @@ import java.util.List;
 
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
-        int n = nums.length;
         Arrays.sort(nums);
-        List<List<Integer>> ans = new ArrayList<List<Integer>>();
-        // 枚举 a
-        for (int first = 0; first < n; ++first) {
-            // 需要和上一次枚举的数不相同
-            if (first > 0 && nums[first] == nums[first - 1]) {
-                continue;
-            }
-            // c 对应的指针初始指向数组的最右端
-            int third = n - 1;
-            int target = -nums[first];
-            // 枚举 b
-            for (int second = first + 1; second < n; ++second) {
-                // 需要和上一次枚举的数不相同
-                if (second > first + 1 && nums[second] == nums[second - 1]) {
-                    continue;
-                }
-                // 需要保证 b 的指针在 c 的指针的左侧
-                while (second < third && nums[second] + nums[third] > target) {
-                    --third;
-                }
-                // 如果指针重合，随着 b 后续的增加
-                // 就不会有满足 a+b+c=0 并且 b<c 的 c 了，可以退出循环
-                if (second == third) {
-                    break;
-                }
-                if (nums[second] + nums[third] == target) {
+
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+
+        int k = 0;
+        while (k < nums.length) {
+
+            int target = -nums[k];
+            int i = k + 1;
+            int j = nums.length - 1;
+
+            while (i < j) {
+                if (nums[i] + nums[j] > target) {
+                    j--;
+                    // 跳过重复元素
+                    while (nums[j] == nums[j + 1] && i < j) {
+                        j--;
+                    }
+                } else if (nums[i] + nums[j] < target) {
+                    i++;
+                    // 跳过重复元素
+                    while (nums[i] == nums[i - 1] && i < j) {
+                        i++;
+                    }
+                } else {
                     List<Integer> list = new ArrayList<Integer>();
-                    list.add(nums[first]);
-                    list.add(nums[second]);
-                    list.add(nums[third]);
-                    ans.add(list);
+
+                    list.add(nums[k]);
+                    list.add(nums[i]);
+                    list.add(nums[j]);
+
+                    result.add(list);
+
+                    i++;
+                    // 跳过重复元素
+                    while (nums[i] == nums[i - 1] && i < j) {
+                        i++;
+                    }
+
+                    j--;
+                    // 跳过重复元素
+                    while (nums[j] == nums[j + 1] && i < j) {
+                        j--;
+                    }
                 }
+            }
+
+            k++;
+            // 跳过重复元素
+            while (k < nums.length && nums[k] == nums[k - 1]) {
+                k++;
             }
         }
-        return ans;
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        testThreeSum1();
+        testThreeSum2();
+        testThreeSum3();
+    }
+
+    public static void printArray(int[] array) {
+        System.out.println(java.util.Arrays.toString(array));
+    }
+
+    public static void printArray(int[] array, int len) {
+        System.out.println(java.util.Arrays.toString(java.util.Arrays.copyOf(array, len)));
+    }
+
+    public static void printArrays(int[][] arrays) {
+        System.out.println(java.util.Arrays.deepToString(arrays));
+    }
+
+    public static int[][] listToArray(List<List<Integer>> lists) {
+        if (lists == null || lists.isEmpty()) {
+            return new int[0][0];
+        }
+
+        int row = lists.size();
+        int col = lists.get(0).size();
+        int[][] arrays = new int[row][col];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                arrays[i][j] = lists.get(i).get(j);
+            }
+        }
+
+        return arrays;
+    }
+
+    public static void testThreeSum1() {
+        int[] nums = { -1, 0, 1, 2, -1, -4 };
+        printArrays(listToArray(new Solution().threeSum(nums)));
+    }
+
+    public static void testThreeSum2() {
+        int[] nums = { 0, 1, 1 };
+        printArrays(listToArray(new Solution().threeSum(nums)));
+    }
+
+    public static void testThreeSum3() {
+        int[] nums = { 0, 0, 0 };
+        printArrays(listToArray(new Solution().threeSum(nums)));
     }
 }
