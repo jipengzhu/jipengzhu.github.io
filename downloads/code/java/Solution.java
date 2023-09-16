@@ -1,50 +1,45 @@
-class Solution {
-    public int[] twoSum(int[] numbers, int target) {
-        int i = 0;
-        int j = numbers.length - 1;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-        while (i < j) {
-            if (numbers[i] + numbers[j] < target) {
-                i++;
-            } else if (numbers[i] + numbers[j] > target) {
-                j--;
-            } else {
-                return new int[] { i + 1, j + 1 };
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        // 枚举 a
+        for (int first = 0; first < n; ++first) {
+            // 需要和上一次枚举的数不相同
+            if (first > 0 && nums[first] == nums[first - 1]) {
+                continue;
+            }
+            // c 对应的指针初始指向数组的最右端
+            int third = n - 1;
+            int target = -nums[first];
+            // 枚举 b
+            for (int second = first + 1; second < n; ++second) {
+                // 需要和上一次枚举的数不相同
+                if (second > first + 1 && nums[second] == nums[second - 1]) {
+                    continue;
+                }
+                // 需要保证 b 的指针在 c 的指针的左侧
+                while (second < third && nums[second] + nums[third] > target) {
+                    --third;
+                }
+                // 如果指针重合，随着 b 后续的增加
+                // 就不会有满足 a+b+c=0 并且 b<c 的 c 了，可以退出循环
+                if (second == third) {
+                    break;
+                }
+                if (nums[second] + nums[third] == target) {
+                    List<Integer> list = new ArrayList<Integer>();
+                    list.add(nums[first]);
+                    list.add(nums[second]);
+                    list.add(nums[third]);
+                    ans.add(list);
+                }
             }
         }
-
-        return new int[] { -1, -1 };
-    }
-
-    public static void printArray(int[] array) {
-        System.out.println(java.util.Arrays.toString(array));
-    }
-
-    public static void printArray(int[] array, int len) {
-        System.out.println(java.util.Arrays.toString(java.util.Arrays.copyOf(array, len)));
-    }
-
-    public static void main(String[] args) {
-        testTwoSum1();
-        testTwoSum2();
-        testTwoSum3();
-    }
-
-    public static void testTwoSum1() {
-        int[] numbers = { 2, 7, 11, 15 };
-        int target = 9;
-        printArray(new Solution().twoSum(numbers, target));
-    }
-
-    public static void testTwoSum2() {
-        int[] numbers = { 2, 3, 4 };
-        int target = 6;
-        printArray(new Solution().twoSum(numbers, target));
-    }
-
-    public static void testTwoSum3() {
-        int[] numbers = { -1, 0 };
-        int target = -1;
-        printArray(new Solution().twoSum(numbers, target));
+        return ans;
     }
 }
