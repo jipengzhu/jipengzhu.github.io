@@ -1,70 +1,75 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 class Solution {
-    public List<List<Integer>> threeSum(int[] nums) {
-        Arrays.sort(nums);
+    public List<Integer> spiralOrder(int[][] matrix) {
+        int d = 0; // 移动方向 0：向右 1：向下 2：向左 3：向上
+        int[] b = new int[4];// 方向边界 0：右边界 1：下边界 2：左边界 3：上边界
+        b[0] = matrix[0].length - 1;
+        b[1] = matrix.length - 1;
+        b[2] = 0;
+        b[3] = 0;
 
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        List<Integer> list = new ArrayList<>();
+        int count = matrix.length * matrix[0].length;
+        int i = 0;
+        int j = 0;
+        while (list.size() < count) {
+            int k = b[d];
+            if (d == 0) {
+                while (j <= k) {
+                    list.add(matrix[i][j]);
+                    j++;
 
-        int k = 0;
-        while (k < nums.length) {
-
-            int target = -nums[k];
-            int i = k + 1;
-            int j = nums.length - 1;
-
-            while (i < j) {
-                if (nums[i] + nums[j] > target) {
-                    j--;
-                    // 跳过重复元素
-                    while (nums[j] == nums[j + 1] && i < j) {
-                        j--;
-                    }
-                } else if (nums[i] + nums[j] < target) {
-                    i++;
-                    // 跳过重复元素
-                    while (nums[i] == nums[i - 1] && i < j) {
-                        i++;
-                    }
-                } else {
-                    List<Integer> list = new ArrayList<Integer>();
-
-                    list.add(nums[k]);
-                    list.add(nums[i]);
-                    list.add(nums[j]);
-
-                    result.add(list);
-
-                    i++;
-                    // 跳过重复元素
-                    while (nums[i] == nums[i - 1] && i < j) {
-                        i++;
-                    }
-
-                    j--;
-                    // 跳过重复元素
-                    while (nums[j] == nums[j + 1] && i < j) {
-                        j--;
-                    }
                 }
-            }
 
-            k++;
-            // 跳过重复元素
-            while (k < nums.length && nums[k] == nums[k - 1]) {
-                k++;
+                j--;
+                i++;
+
+                d = (d + 1) % 4;
+                b[3] = b[3] + 1;
+            } else if (d == 1) {
+                while (i <= k) {
+                    list.add(matrix[i][j]);
+                    i++;
+                }
+
+                i--;
+                j--;
+
+                d = (d + 1) % 4;
+                b[0] = b[0] - 1;
+            } else if (d == 2) {
+                while (j >= k) {
+                    list.add(matrix[i][j]);
+                    j--;
+                }
+
+                j++;
+                i--;
+
+                d = (d + 1) % 4;
+                b[1] = b[1] - 1;
+            } else if (d == 3) {
+                while (i >= k) {
+                    list.add(matrix[i][j]);
+                    i--;
+                }
+
+                i++;
+                j++;
+
+                d = (d + 1) % 4;
+                b[2] = b[2] + 1;
             }
         }
 
-        return result;
+        return list;
     }
 
     public static void main(String[] args) {
-        testThreeSum1();
-        testThreeSum2();
-        testThreeSum3();
+        testSpiralOrder1();
+        testSpiralOrder2();
     }
 
     public static void printArray(int[] array) {
@@ -75,39 +80,34 @@ class Solution {
         System.out.println(java.util.Arrays.toString(java.util.Arrays.copyOf(array, len)));
     }
 
-    public static void printArrays(int[][] arrays) {
-        System.out.println(java.util.Arrays.deepToString(arrays));
-    }
-
-    public static int[][] listToArray(List<List<Integer>> lists) {
-        if (lists == null || lists.isEmpty()) {
-            return new int[0][0];
+    public static int[] listToArray(List<Integer> list) {
+        if (list == null || list.isEmpty()) {
+            return new int[0];
         }
 
-        int row = lists.size();
-        int col = lists.get(0).size();
-        int[][] arrays = new int[row][col];
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                arrays[i][j] = lists.get(i).get(j);
-            }
+        int[] array = new int[list.size()];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = list.get(i);
         }
 
-        return arrays;
+        return array;
     }
 
-    public static void testThreeSum1() {
-        int[] nums = { -1, 0, 1, 2, -1, -4 };
-        printArrays(listToArray(new Solution().threeSum(nums)));
+    public static void testSpiralOrder1() {
+        int[][] matrix = {
+                { 1, 2, 3 },
+                { 4, 5, 6 },
+                { 7, 8, 9 }
+        };
+        printArray(listToArray(new Solution().spiralOrder(matrix)));
     }
 
-    public static void testThreeSum2() {
-        int[] nums = { 0, 1, 1 };
-        printArrays(listToArray(new Solution().threeSum(nums)));
-    }
-
-    public static void testThreeSum3() {
-        int[] nums = { 0, 0, 0 };
-        printArrays(listToArray(new Solution().threeSum(nums)));
+    public static void testSpiralOrder2() {
+        int[][] matrix = {
+                { 1, 2, 3, 4 },
+                { 5, 6, 7, 8 },
+                { 9, 10, 11, 12 }
+        };
+        printArray(listToArray(new Solution().spiralOrder(matrix)));
     }
 }
