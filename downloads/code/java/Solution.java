@@ -1,75 +1,49 @@
-import java.util.ArrayList;
-import java.util.List;
+public class Solution {
+    public void rotate(int[] nums, int k) {
+        k = k % nums.length;
 
-class Solution {
-    public List<Integer> spiralOrder(int[][] matrix) {
-        int d = 0; // 移动方向 0：向右 1：向下 2：向左 3：向上
-        int[] b = new int[4];// 方向边界 0：右边界 1：下边界 2：左边界 3：上边界
-        b[0] = matrix[0].length - 1;
-        b[1] = matrix.length - 1;
-        b[2] = 0;
-        b[3] = 0;
-
-        List<Integer> list = new ArrayList<>();
-        int count = matrix.length * matrix[0].length;
+        int c = 0;
         int i = 0;
-        int j = 0;
-        while (list.size() < count) {
-            int k = b[d];
-            if (d == 0) {
-                while (j <= k) {
-                    list.add(matrix[i][j]);
-                    j++;
+        while (c < nums.length) {
 
+            int j = i;
+            int x = nums[i]; // 保存当前元素
+            int y = -1; // 保存下一个元素
+
+            while (true) {
+                // 计算下一个元素的位置
+                j = (j + k) % nums.length;
+
+                // 保存下一个元素
+                y = nums[j];
+
+                // 用当前元素占领下一个元素的位置
+                nums[j] = x;
+
+                // 处理完的个数加1
+                c++;
+
+                // 个数达标了，全部处理完毕，结束
+                if (c == nums.length) {
+                    break;
                 }
 
-                j--;
-                i++;
-
-                d = (d + 1) % 4;
-                b[3] = b[3] + 1;
-            } else if (d == 1) {
-                while (i <= k) {
-                    list.add(matrix[i][j]);
-                    i++;
+                // 回到起点了，不能重复处理，结束
+                if (j == i) {
+                    break;
                 }
 
-                i--;
-                j--;
-
-                d = (d + 1) % 4;
-                b[0] = b[0] - 1;
-            } else if (d == 2) {
-                while (j >= k) {
-                    list.add(matrix[i][j]);
-                    j--;
-                }
-
-                j++;
-                i--;
-
-                d = (d + 1) % 4;
-                b[1] = b[1] - 1;
-            } else if (d == 3) {
-                while (i >= k) {
-                    list.add(matrix[i][j]);
-                    i--;
-                }
-
-                i++;
-                j++;
-
-                d = (d + 1) % 4;
-                b[2] = b[2] + 1;
+                // 更新当前元素
+                x = y;
             }
-        }
 
-        return list;
+            i = i + 1;
+        }
     }
 
     public static void main(String[] args) {
-        testSpiralOrder1();
-        testSpiralOrder2();
+        testRotate1();
+        testRotate2();
     }
 
     public static void printArray(int[] array) {
@@ -80,34 +54,19 @@ class Solution {
         System.out.println(java.util.Arrays.toString(java.util.Arrays.copyOf(array, len)));
     }
 
-    public static int[] listToArray(List<Integer> list) {
-        if (list == null || list.isEmpty()) {
-            return new int[0];
-        }
+    public static void testRotate1() {
+        int[] nums = { 1, 2, 3, 4, 5, 6, 7 };
+        int k = 3;
 
-        int[] array = new int[list.size()];
-        for (int i = 0; i < array.length; i++) {
-            array[i] = list.get(i);
-        }
-
-        return array;
+        new Solution().rotate(nums, k);
+        printArray(nums);
     }
 
-    public static void testSpiralOrder1() {
-        int[][] matrix = {
-                { 1, 2, 3 },
-                { 4, 5, 6 },
-                { 7, 8, 9 }
-        };
-        printArray(listToArray(new Solution().spiralOrder(matrix)));
-    }
+    public static void testRotate2() {
+        int[] nums = { -1, -100, 3, 99 };
+        int k = 2;
 
-    public static void testSpiralOrder2() {
-        int[][] matrix = {
-                { 1, 2, 3, 4 },
-                { 5, 6, 7, 8 },
-                { 9, 10, 11, 12 }
-        };
-        printArray(listToArray(new Solution().spiralOrder(matrix)));
+        new Solution().rotate(nums, k);
+        printArray(nums);
     }
 }
