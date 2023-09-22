@@ -1,49 +1,57 @@
-public class Solution {
-    public void rotate(int[] nums, int k) {
-        k = k % nums.length;
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int m = matrix.length; // 行数
+        int n = matrix[0].length;// 列数
+        int[] rows = new int[m]; // 存储每一行中第一个遇到的0点的列坐标
+        int[] cols = new int[n]; // 存储每一列中第一个遇到的0点的行坐标
+        for (int i = 0; i < rows.length; i++) {
+            rows[i] = -1;
+        }
+        for (int j = 0; j < cols.length; j++) {
+            cols[j] = -1;
+        }
 
-        int c = 0;
-        int i = 0;
-        while (c < nums.length) {
-
-            int j = i;
-            int x = nums[i]; // 保存当前元素
-            int y = -1; // 保存下一个元素
-
-            while (true) {
-                // 计算下一个元素的位置
-                j = (j + k) % nums.length;
-
-                // 保存下一个元素
-                y = nums[j];
-
-                // 用当前元素占领下一个元素的位置
-                nums[j] = x;
-
-                // 处理完的个数加1
-                c++;
-
-                // 个数达标了，全部处理完毕，结束
-                if (c == nums.length) {
-                    break;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    if (rows[i] == -1) {
+                        rows[i] = j;
+                    }
+                    if (cols[j] == -1) {
+                        cols[j] = i;
+                    }
                 }
 
-                // 回到起点了，不能重复处理，结束
-                if (j == i) {
-                    break;
+                if (rows[i] != -1 || cols[j] != -1) {
+                    matrix[i][j] = 0;
                 }
-
-                // 更新当前元素
-                x = y;
             }
+        }
 
-            i = i + 1;
+        for (int i = 0; i < rows.length; i++) {
+            int v = rows[i];
+            if (v != -1) {
+                // 补齐行数组中每一行的左边部分
+                for (int j = 0; j < v; j++) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+
+        for (int j = 0; j < cols.length; j++) {
+            int v = cols[j];
+            if (v != -1) {
+                // 补齐列数组中每一列的上边部分
+                for (int i = 0; i < v; i++) {
+                    matrix[i][j] = 0;
+                }
+            }
         }
     }
 
     public static void main(String[] args) {
-        testRotate1();
-        testRotate2();
+        testSetZeroes1();
+        testSetZeroes2();
     }
 
     public static void printArray(int[] array) {
@@ -54,19 +62,27 @@ public class Solution {
         System.out.println(java.util.Arrays.toString(java.util.Arrays.copyOf(array, len)));
     }
 
-    public static void testRotate1() {
-        int[] nums = { 1, 2, 3, 4, 5, 6, 7 };
-        int k = 3;
-
-        new Solution().rotate(nums, k);
-        printArray(nums);
+    public static void printArrays(int[][] arrays) {
+        System.out.println(java.util.Arrays.deepToString(arrays));
     }
 
-    public static void testRotate2() {
-        int[] nums = { -1, -100, 3, 99 };
-        int k = 2;
+    public static void testSetZeroes1() {
+        int[][] matrix = {
+                { 1, 1, 1 },
+                { 1, 0, 1 },
+                { 1, 1, 1 }
+        };
+        new Solution().setZeroes(matrix);
+        printArrays(matrix);
+    }
 
-        new Solution().rotate(nums, k);
-        printArray(nums);
+    public static void testSetZeroes2() {
+        int[][] matrix = {
+                { 0, 1, 2, 0 },
+                { 3, 4, 5, 2 },
+                { 1, 3, 1, 5 }
+        };
+        new Solution().setZeroes(matrix);
+        printArrays(matrix);
     }
 }

@@ -28,6 +28,8 @@ public class InsertBinarySort {
 
             int v = array[i + 1];
             int pos = search(array, 0, i, v);
+            // int pos = search1(array, 0, i, v);
+            // int pos = search2(array, 0, i, v);
 
             int j = i; // j + 1 < len
             while (j >= pos) {
@@ -44,19 +46,33 @@ public class InsertBinarySort {
         int m = (L + R) / 2;
 
         if (v < array[m]) {
-            if (m - 1 < L) {
-                return m;
+            R = m - 1;
+            if (L > R) {
+                // return m;
+                return L; // 此时 L = R + 1 = (m - 1) + 1 = m
             } else {
-                return search(array, L, m - 1, v);
+                return search(array, L, R, v);
             }
         } else if (v > array[m]) {
-            if (m + 1 > R) {
-                return m + 1;
+            L = m + 1;
+            if (L > R) {
+                // return m + 1;
+                return L; // 此时 L = m + 1
             } else {
-                return search(array, m + 1, R, v);
+                return search(array, L, R, v);
             }
         } else {
-            return m + 1;
+            if (L == R) {
+                L = m + 1;
+
+                // return m + 1;
+                return L; // 此时 L = m + 1
+            } else {
+                // 等于的话还得往右边看看还有没有等于的
+                L = m + 1;
+
+                return search(array, L, R, v);
+            }
         }
     }
 
@@ -68,7 +84,13 @@ public class InsertBinarySort {
             } else if (v > array[m]) {
                 L = m + 1;
             } else {
-                return m + 1;
+                if (L == R) {
+                    L = m + 1;
+
+                    return L;
+                } else {
+                    L = m + 1;
+                }
             }
         }
 

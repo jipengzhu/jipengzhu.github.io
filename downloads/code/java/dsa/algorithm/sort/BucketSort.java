@@ -1,6 +1,8 @@
 package dsa.algorithm.sort;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class BucketSort {
 
@@ -20,7 +22,38 @@ public class BucketSort {
     }
 
     public static void sort(int[] array) {
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < array.length; i++) {
+            int v = array[i];
+            if (v < min) {
+                min = v;
+            }
+            if (v > max) {
+                max = v;
+            }
+        }
+        float dis = max - min + 1;
 
+        int bucketCount = 6;// 桶数量
+        List<List<Integer>> lists = new ArrayList<>();
+        for (int i = 0; i < bucketCount; i++) {
+            lists.add(new ArrayList<>());
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            int v = array[i];
+            int bucketIndex = (int) ((v - min) / dis * bucketCount);
+            lists.get(bucketIndex).add(v);
+        }
+
+        int k = 0;
+        for (List<Integer> list : lists) {
+            list.sort(null);
+            for (Integer v : list) {
+                array[k++] = v;
+            }
+        }
     }
 
     private static void swap(int[] array, int i, int j) {
