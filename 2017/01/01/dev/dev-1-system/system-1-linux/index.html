@@ -28,7 +28,7 @@
 <meta property="og:description" content="linux">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2016-12-31T17:00:00.000Z">
-<meta property="article:modified_time" content="2023-09-22T11:07:39.889Z">
+<meta property="article:modified_time" content="2023-09-29T12:17:34.232Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-22 19:07:39" itemprop="dateModified" datetime="2023-09-22T19:07:39+08:00">2023-09-22</time>
+                <time title="修改时间：2023-09-29 20:17:34" itemprop="dateModified" datetime="2023-09-29T20:17:34+08:00">2023-09-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -609,28 +609,77 @@
 <li><code>kill -15</code>产生<code>SIGTERM</code>信号（终止信号）</li>
 </ul>
 <p>process thread pipe</p>
-<p>process ps pstree pgrep<br>process pidstat pidof lsof<br>process kill killall pkill</p>
+<p>process ps pstree<br>process pgrep pidof lsof<br>process kill killall pkill<br>process pstack<br>process strace ltrace</p>
 <p>ps 进程 线程</p>
 <p>pipe xargs -I {} -0 -exec</p>
 <h1 id="Resource"><a href="#Resource" class="headerlink" title="Resource"></a>Resource</h1><h2 id="Concept-3"><a href="#Concept-3" class="headerlink" title="Concept"></a>Concept</h2><h2 id="Command-3"><a href="#Command-3" class="headerlink" title="Command"></a>Command</h2><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/bandaoyu/article/details/103195128">linux监控工具之sysstat包</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43072797/article/details/105552803">linux监控工具之stat系列</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/bandaoyu/article/details/95407670">linux监控工具之top系列</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jake_tian/article/details/122817591">linux监控工具之top替代品入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jake_tian/article/details/122781166">linux监控工具之top替代品详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45465395/article/details/115728520">linux命令之top入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/WUFUSHANLI/article/details/124286077">linux命令之top进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43991475/article/details/124401289">linux命令之top详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/inuyashaw/article/details/55095545">linux命令之top和ps查看线程</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MyySophia/article/details/104736742">linux问题故障定位详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MyySophia/article/details/104736742">linux问题诊断详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/bandaoyu/article/details/103195128">linux诊断工具之sysstat包</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43072797/article/details/105552803">linux诊断工具之stat系列</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/bandaoyu/article/details/95407670">linux诊断工具之top系列</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jake_tian/article/details/122817591">linux诊断工具之top替代品入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jake_tian/article/details/122781166">linux诊断工具之top替代品详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45465395/article/details/115728520">linux诊断命令之top入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/WUFUSHANLI/article/details/124286077">linux诊断命令之top进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43991475/article/details/124401289">linux诊断命令之top详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/inuyashaw/article/details/55095545">linux诊断命令之top和ps查看线程</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_38110132/article/details/84190319">linux诊断命令之vmstat详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/supahero/article/details/107546269">linux诊断命令之pidstat详解</a></li>
 </ul>
 </blockquote>
-<p>top（cpu mem）<br>htop<br>nmon</p>
-<h3 id="Cpu"><a href="#Cpu" class="headerlink" title="Cpu"></a>Cpu</h3><p>cpu &#x2F;proc&#x2F;cpu（core）<br>cpu mpstat top</p>
-<h3 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h3><p>mem free<br>mem vmstat top</p>
-<h3 id="Disk"><a href="#Disk" class="headerlink" title="Disk"></a>Disk</h3><p>disk df du dd mount umount check<br>disk iostat iotop</p>
-<h3 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h3><p>net ping ifconfig ip route arp<br>net host hostid hostname nslookup dig etc&#x2F;host etc&#x2F;resolve<br>net netstat ifstat iftop tcpdump netcat nc</p>
+<ul>
+<li>summary<ul>
+<li>top：可以查看cpu负载、进程的cpu和mem占用</li>
+<li>vmstat：可以查看系统的cpu、mem、disk的使用情况</li>
+<li>pidstat：可以查看进程的cpu、mem、disk的使用情况</li>
+</ul>
+</li>
+<li>cpu<ul>
+<li>mpstat：可以查看系统的cpu的使用情况</li>
+</ul>
+</li>
+<li>mem<ul>
+<li>free：可以查看系统的mem的使用情况</li>
+</ul>
+</li>
+<li>disk<ul>
+<li>iostat：可以查看系统的disk的读写情况</li>
+</ul>
+</li>
+<li>net<ul>
+<li>netstat：可以查看系统的net的连接情况</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>ps：top可以使用更好的替代者htop或者nmon</p>
+</blockquote>
+<h3 id="Cpu"><a href="#Cpu" class="headerlink" title="Cpu"></a>Cpu</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/KW__jiaoq/article/details/123012089">linux主卡命令之mpstat</a></li>
+</ul>
+</blockquote>
+<p>cpu &#x2F;proc&#x2F;cpuinfo<br>cpu mpstat top</p>
+<h3 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ichen820/article/details/100828259">linux内存命令之free</a></li>
+</ul>
+</blockquote>
+<p>mem &#x2F;proc&#x2F;meminfo<br>mem free top</p>
+<h3 id="Disk"><a href="#Disk" class="headerlink" title="Disk"></a>Disk</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yiyeguzhou100/article/details/88019509">linux磁盘命令之iostat</a></li>
+</ul>
+</blockquote>
+<p>disk df（disk free） du（disk usage） dd<br>disk iostat iotop<br>disk mount umount check</p>
+<h3 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LL845876425/article/details/92801460">linux网络命令之netstat</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lyshark_lyshark/article/details/125846809">linux网络命令之netcat</a></li>
+</ul>
+</blockquote>
+<p>net ping ifconfig ip route arp<br>net host hostid hostname nslookup dig etc&#x2F;host etc&#x2F;resolve<br>net netstat ifstat iftop<br>net telnet ssh<br>net tcpdump netcat（nc ncat）</p>
 <h3 id="Kernel"><a href="#Kernel" class="headerlink" title="Kernel"></a>Kernel</h3><p>sysctl ulimit</p>
 <h1 id="User"><a href="#User" class="headerlink" title="User"></a>User</h1><blockquote>
 <ul>
@@ -835,7 +884,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-count">93</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

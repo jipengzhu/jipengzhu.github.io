@@ -28,7 +28,7 @@
 <meta property="og:description" content="git">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-01-06T17:00:00.000Z">
-<meta property="article:modified_time" content="2023-09-22T11:07:40.011Z">
+<meta property="article:modified_time" content="2023-09-29T12:17:34.244Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-22 19:07:40" itemprop="dateModified" datetime="2023-09-22T19:07:40+08:00">2023-09-22</time>
+                <time title="修改时间：2023-09-29 20:17:34" itemprop="dateModified" datetime="2023-09-29T20:17:34+08:00">2023-09-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -267,10 +267,11 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44781409/article/details/107560533">git reset、revert、rebase有什么区别</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51971452/article/details/113871247">git restore、reset、revert有什么区别</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/heart_mine/article/details/79424591">git中working tree, index, commit详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/taiyangdao/article/details/52766424">git refspec详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/boyzzy1995/article/details/128733516">git pathspec详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cnzhaocc/article/details/39438059">git revision详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/aitazhixin/article/details/54089447">git tree-ish详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Activity_Time/article/details/90550656">git commit-id详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/aitazhixin/article/details/54089447">git tree-ish详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cnzhaocc/article/details/39438059">git revision详解</a></li>
 </ul>
 </blockquote>
 <h3 id="Area"><a href="#Area" class="headerlink" title="Area"></a>Area</h3><p>git分为三个区</p>
@@ -371,7 +372,46 @@
 <blockquote>
 <p>注意：如果提交已经推送到仓库并被别人同步了，就不能使用git reset，否则会造成代码丢失</p>
 </blockquote>
-<h1 id="Sync"><a href="#Sync" class="headerlink" title="Sync"></a>Sync</h1><h2 id="Fetch"><a href="#Fetch" class="headerlink" title="Fetch"></a>Fetch</h2><blockquote>
+<h1 id="Sync"><a href="#Sync" class="headerlink" title="Sync"></a>Sync</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jiajia4336/article/details/87855235">git merge和rebase的区别入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xishining/article/details/115152823">git merge和rebase的区别详解</a></li>
+</ul>
+</blockquote>
+<p><code>git pull</code> &#x3D; <code>git fetch + merge</code></p>
+<p><code>git pull --rebase</code> &#x3D; <code>git fetch + rebase</code></p>
+<p><code>git merge</code> 和 <code>git rebase</code> 都是同步变更的方式</p>
+<ul>
+<li>merge：<code>合并同步</code><ul>
+<li>第一个参数参数是合并源分支</li>
+<li>第二个是合并目标分支（省略的话默认是当前分支）</li>
+</ul>
+</li>
+<li>rebase：<code>变基合并</code><ul>
+<li>第一个参数参数是变基源分支</li>
+<li>第二个是变基目标分支（省略的话默认是当前分支）</li>
+</ul>
+</li>
+</ul>
+<h2 id="Pull"><a href="#Pull" class="headerlink" title="Pull"></a>Pull</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/BUCTOJ/article/details/89879619">git pull入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/riddle1981/article/details/74938111">git pull进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yao_hou/article/details/108178717">git pull详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34246965/article/details/107553644">git pull冲突</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/festone000/article/details/127005711">git pull全部</a></li>
+</ul>
+</blockquote>
+<h2 id="Push"><a href="#Push" class="headerlink" title="Push"></a>Push</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhs260133172/article/details/113882525">git push入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yzpbright/article/details/115574130">git push进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40816738/article/details/105109944">git push详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/goxingman/article/details/103695979">git push冲突</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/bingyu9875/article/details/84841521">git push全部</a></li>
+</ul>
+</blockquote>
+<h2 id="Fetch"><a href="#Fetch" class="headerlink" title="Fetch"></a>Fetch</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42780289/article/details/98049574">git fetch详解</a></li>
 </ul>
@@ -381,25 +421,21 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42780289/article/details/97945300">git merge入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chaiyu2002/article/details/81020370">git merge进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28107929/article/details/104555680">git merge详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42310154/article/details/119004977">git rebase入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42780289/article/details/98078717">git rebase进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/small_white_123/article/details/121563248">git rebase详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/muzidigbig/article/details/122321393">git cherry-pick详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43201350/article/details/125757531">git显示冲突的文件</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zengjianze/article/details/105627349">git查找冲突的文件</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44297716/article/details/116117492">git查看未合并的分支</a></li>
 </ul>
 </blockquote>
-<h2 id="Pull"><a href="#Pull" class="headerlink" title="Pull"></a>Pull</h2><blockquote>
+<h2 id="Rebase"><a href="#Rebase" class="headerlink" title="Rebase"></a>Rebase</h2><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/BUCTOJ/article/details/89879619">git pull详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42310154/article/details/119004977">git rebase入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42780289/article/details/98078717">git rebase进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/small_white_123/article/details/121563248">git rebase详解</a></li>
 </ul>
 </blockquote>
-<h2 id="Push"><a href="#Push" class="headerlink" title="Push"></a>Push</h2><blockquote>
+<h2 id="Pick"><a href="#Pick" class="headerlink" title="Pick"></a>Pick</h2><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhs260133172/article/details/113882525">git push入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yzpbright/article/details/115574130">git push进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40816738/article/details/105109944">git push详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/muzidigbig/article/details/122321393">git cherry-pick详解</a></li>
 </ul>
 </blockquote>
 <h2 id="Upstream"><a href="#Upstream" class="headerlink" title="Upstream"></a>Upstream</h2><blockquote>
@@ -537,7 +573,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Concept"><span class="nav-number">1.1.</span> <span class="nav-text">Concept</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Area"><span class="nav-number">1.1.1.</span> <span class="nav-text">Area</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Name"><span class="nav-number">1.1.2.</span> <span class="nav-text">Name</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object"><span class="nav-number">1.1.3.</span> <span class="nav-text">Object</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config"><span class="nav-number">1.2.</span> <span class="nav-text">Config</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Repository"><span class="nav-number">2.</span> <span class="nav-text">Repository</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Clone"><span class="nav-number">2.1.</span> <span class="nav-text">Clone</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remote"><span class="nav-number">2.2.</span> <span class="nav-text">Remote</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Submodule"><span class="nav-number">2.3.</span> <span class="nav-text">Submodule</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Branch"><span class="nav-number">3.</span> <span class="nav-text">Branch</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tag"><span class="nav-number">4.</span> <span class="nav-text">Tag</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Change"><span class="nav-number">5.</span> <span class="nav-text">Change</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Commit"><span class="nav-number">6.</span> <span class="nav-text">Commit</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sync"><span class="nav-number">7.</span> <span class="nav-text">Sync</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fetch"><span class="nav-number">7.1.</span> <span class="nav-text">Fetch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Merge"><span class="nav-number">7.2.</span> <span class="nav-text">Merge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pull"><span class="nav-number">7.3.</span> <span class="nav-text">Pull</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Push"><span class="nav-number">7.4.</span> <span class="nav-text">Push</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Upstream"><span class="nav-number">7.5.</span> <span class="nav-text">Upstream</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fork"><span class="nav-number">7.6.</span> <span class="nav-text">Fork</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Log"><span class="nav-number">8.</span> <span class="nav-text">Log</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Concept"><span class="nav-number">1.1.</span> <span class="nav-text">Concept</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Area"><span class="nav-number">1.1.1.</span> <span class="nav-text">Area</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Name"><span class="nav-number">1.1.2.</span> <span class="nav-text">Name</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object"><span class="nav-number">1.1.3.</span> <span class="nav-text">Object</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config"><span class="nav-number">1.2.</span> <span class="nav-text">Config</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Repository"><span class="nav-number">2.</span> <span class="nav-text">Repository</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Clone"><span class="nav-number">2.1.</span> <span class="nav-text">Clone</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remote"><span class="nav-number">2.2.</span> <span class="nav-text">Remote</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Submodule"><span class="nav-number">2.3.</span> <span class="nav-text">Submodule</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Branch"><span class="nav-number">3.</span> <span class="nav-text">Branch</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tag"><span class="nav-number">4.</span> <span class="nav-text">Tag</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Change"><span class="nav-number">5.</span> <span class="nav-text">Change</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Commit"><span class="nav-number">6.</span> <span class="nav-text">Commit</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sync"><span class="nav-number">7.</span> <span class="nav-text">Sync</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pull"><span class="nav-number">7.1.</span> <span class="nav-text">Pull</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Push"><span class="nav-number">7.2.</span> <span class="nav-text">Push</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fetch"><span class="nav-number">7.3.</span> <span class="nav-text">Fetch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Merge"><span class="nav-number">7.4.</span> <span class="nav-text">Merge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rebase"><span class="nav-number">7.5.</span> <span class="nav-text">Rebase</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pick"><span class="nav-number">7.6.</span> <span class="nav-text">Pick</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Upstream"><span class="nav-number">7.7.</span> <span class="nav-text">Upstream</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fork"><span class="nav-number">7.8.</span> <span class="nav-text">Fork</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Log"><span class="nav-number">8.</span> <span class="nav-text">Log</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -553,7 +589,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-count">93</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

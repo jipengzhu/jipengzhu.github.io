@@ -28,7 +28,7 @@
 <meta property="og:description" content="spring-data">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T19:03:00.000Z">
-<meta property="article:modified_time" content="2023-09-22T11:07:44.702Z">
+<meta property="article:modified_time" content="2023-09-29T12:17:34.344Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-22 19:07:44" itemprop="dateModified" datetime="2023-09-22T19:07:44+08:00">2023-09-22</time>
+                <time title="修改时间：2023-09-29 20:17:34" itemprop="dateModified" datetime="2023-09-29T20:17:34+08:00">2023-09-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -449,8 +449,11 @@
 </blockquote>
 <h6 id="mapping"><a href="#mapping" class="headerlink" title="mapping"></a>mapping</h6><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37040929/article/details/120615716">Mybatis映射之bean属性名和数据库列名的匹配规则</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wuzhenwei0419/article/details/90643798">Mybatis映射之类的属性名和表的字段名不一样怎么办</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37040929/article/details/120615716">Mybatis映射之bean属性名和表的字段名匹配规则</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wuzhenwei0419/article/details/90643798">Mybatis映射之bean属性名和表的字段名不一样怎么办</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43318840/article/details/122000043">Mybatis映射失败之bean缺少Getter-Setter方法</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37307255/article/details/79942007">Mybatis映射失败之bean属性名拼写错误</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010498323/article/details/95868487">Mybatis映射失败之bean属性名是is开头</a></li>
 </ul>
 </blockquote>
 <p>类的属性名和表的字段名不一样的解决办法</p>
@@ -596,6 +599,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/donggua3694857/article/details/69858827">Spring事务入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_58761900/article/details/129032525">Spring事务进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kangkang12221222/article/details/123482521">Spring事务详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38526573/article/details/87898730">Spring事务之隔离级别详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wei_gg/article/details/115575391">Spring事务之线程安全详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/crazestone0614/article/details/127619563">Spring事务之线程隔离详解</a></li>
 </ul>
@@ -618,11 +622,12 @@
 <h3 id="Invalid"><a href="#Invalid" class="headerlink" title="Invalid"></a>Invalid</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hanjiaqian/article/details/120501741">Spring事务失效的场景</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/QGhurt/article/details/109117355">Spring事务失效的场景之不支持protected和private方法</a></li>
 </ul>
 </blockquote>
 <p>事务不生效的场景</p>
 <ul>
-<li>所有AOP失效的场景</li>
+<li>所有AOP失效的场景（例外是事务对protected也不生效）</li>
 <li>多线程或者异步调用（事务是线程隔离的）</li>
 <li>事务传播方式使用不当</li>
 </ul>
@@ -634,11 +639,6 @@
 </ul>
 <blockquote>
 <p>ps：@Transactional是通过AOP实现的，所以失效的场景包含AOP失效的场景</p>
-</blockquote>
-<h3 id="Isolation"><a href="#Isolation" class="headerlink" title="Isolation"></a>Isolation</h3><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38526573/article/details/87898730">Spring事务隔离级别详解</a></li>
-</ul>
 </blockquote>
 <h3 id="Propagation"><a href="#Propagation" class="headerlink" title="Propagation"></a>Propagation</h3><blockquote>
 <ul>
@@ -675,19 +675,6 @@
 <blockquote>
 <p>ps：传播方式为PROPAGATION_REQUIRES_NEW和PROPAGATION_NOT_SUPPORTED时如果存在当前事务，当前事务会被挂起<br>ps：传播方式为PROPAGATION_NESTED时嵌套事务回滚不会影响主事务，但主事务回滚会将嵌套事务一起回滚了</p>
 </blockquote>
-<h3 id="Asynchronous"><a href="#Asynchronous" class="headerlink" title="Asynchronous"></a>Asynchronous</h3><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_36454672/article/details/106937905">Spring事务之@Async和插入后查询入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LOVE_sel/article/details/89715198">Spring事务之@Async和更新后查询详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40085888/article/details/107664805">Spring事务和@Async混合使用入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_34540951/article/details/114251004">Spring事务之@Async混合使用详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/f641385712/article/details/98642777">Spring事务和@Async混合之线程隔离</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37044995/article/details/118857239">Spring事务之提交成功后再进行异步操作入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32495261/article/details/108275743">Spring事务之提交成功后再进行异步操作进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32519415/article/details/113850117">Spring事务之提交成功后再进行异步操作详解</a></li>
-</ul>
-</blockquote>
-<p>事务方法A调用异步方法B会启动另一个事务B（因为事务是线程隔离的），因为事务A和B之间存在隔离性，所以异步方法B执行时，如果事务方法A未结束时是查不到变更的数据的（因为此时事务A还未提交），如果事务方法A已结束是可以查到变更的数据的（因为此时事务A已提交）</p>
 <h3 id="MultipleThread"><a href="#MultipleThread" class="headerlink" title="MultipleThread"></a>MultipleThread</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41070914/article/details/107211146">Spring事务之多线程回滚入门</a></li>
@@ -719,8 +706,33 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/BigBull111/article/details/115506713">Spring事务之同一事务中更新后查询入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shy_1762538422/article/details/111949987">Spring事务之同一事务中更新后查询详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2297112">Spring事务之@Transactional和其他AOP注解混合使用的问题</a></li>
 </ul>
 </blockquote>
+<ul>
+<li><code>@Transactional + @Async</code>：异步方法会启动一个新的事务（因为事务是线程隔离的）</li>
+<li><code>@Transactional + @Retryable</code>：重试如果在事务开始之后可能会不起作用（隔离级别为可重复读时只在事务启动时生成快照）</li>
+<li><code>@Transactional + Lock</code>：解锁如果在事务提交之前可能会导致业务逻辑错误</li>
+</ul>
+<h4 id="Async"><a href="#Async" class="headerlink" title="Async"></a>Async</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_53157173/article/details/127435336">Spring事务和@Async混合使用的问题详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/f641385712/article/details/98642777">Spring事务和@Async混合使用之线程隔离</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_36454672/article/details/106937905">Spring事务之@Async和插入后查询入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LOVE_sel/article/details/89715198">Spring事务之@Async和更新后查询详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40085888/article/details/107664805">Spring事务之提交成功后再进行异步操作入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_34540951/article/details/114251004">Spring事务之提交成功后再进行异步操作进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32519415/article/details/113850117">Spring事务之提交成功后再进行异步操作详解</a></li>
+</ul>
+</blockquote>
+<p>事务方法A调用异步方法B会启动另一个事务B（因为事务是线程隔离的），因为事务A和B之间存在隔离性，所以异步方法B执行时，如果事务方法A未结束时是查不到变更的数据的（因为此时事务A还未提交），如果事务方法A已结束是可以查到变更的数据的（因为此时事务A已提交）</p>
+<h4 id="Retry"><a href="#Retry" class="headerlink" title="Retry"></a>Retry</h4><p>重试如果在事务开始之后可能会不起作用（隔离级别为可重复读时只在事务启动时生成快照）</p>
+<h4 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30321449/article/details/99791582">Spring事务和Lock混合使用的问题</a></li>
+</ul>
+</blockquote>
+<p>解锁如果在事务提交之前可能会导致业务逻辑错误</p>
 <h2 id="Exception"><a href="#Exception" class="headerlink" title="Exception"></a>Exception</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/caoweixiong/p/11181188.html">数据库异常处理之Spring</a></li>
@@ -748,16 +760,16 @@
 </blockquote>
 <h3 id="Jedis"><a href="#Jedis" class="headerlink" title="Jedis"></a>Jedis</h3><blockquote>
 <ul>
-<li><a href=""></a></li>
-<li><a href=""></a></li>
-<li><a href=""></a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45481821/article/details/125009912">Jedis入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43888891/article/details/130948322">Jedis进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fanbaodan/article/details/89047909">Jedis详解</a></li>
 </ul>
 </blockquote>
 <h3 id="Redisson"><a href="#Redisson" class="headerlink" title="Redisson"></a>Redisson</h3><blockquote>
 <ul>
-<li><a href=""></a></li>
-<li><a href=""></a></li>
-<li><a href=""></a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/A_art_xiang/article/details/125525864">Redisson入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/A_art_xiang/article/details/125536050">Redisson进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/A_art_xiang/article/details/125538972">Redisson详解</a></li>
 </ul>
 </blockquote>
 <h3 id="RedisTemplate"><a href="#RedisTemplate" class="headerlink" title="RedisTemplate"></a>RedisTemplate</h3><blockquote>
@@ -879,7 +891,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringData"><span class="nav-number">1.</span> <span class="nav-text">SpringData</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringMysql"><span class="nav-number">2.</span> <span class="nav-text">SpringMysql</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Framework"><span class="nav-number">2.1.</span> <span class="nav-text">Framework</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Jdbc"><span class="nav-number">2.1.1.</span> <span class="nav-text">Jdbc</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JdbcUtils"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">JdbcUtils</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JdbcTemplate"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">JdbcTemplate</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jpa"><span class="nav-number">2.1.2.</span> <span class="nav-text">Jpa</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hibernate"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">Hibernate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JpaTemplate"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">JpaTemplate</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mybatis"><span class="nav-number">2.1.3.</span> <span class="nav-text">Mybatis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Basic"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#SqlSession"><span class="nav-number">2.1.3.1.1.</span> <span class="nav-text">SqlSession</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Mapper"><span class="nav-number">2.1.3.1.2.</span> <span class="nav-text">Mapper</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Usage"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Field"><span class="nav-number">2.1.3.2.1.</span> <span class="nav-text">Field</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#id"><span class="nav-number">2.1.3.2.1.1.</span> <span class="nav-text">id</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#type"><span class="nav-number">2.1.3.2.1.2.</span> <span class="nav-text">type</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#mapping"><span class="nav-number">2.1.3.2.1.3.</span> <span class="nav-text">mapping</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Param"><span class="nav-number">2.1.3.2.2.</span> <span class="nav-text">Param</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Query"><span class="nav-number">2.1.3.2.3.</span> <span class="nav-text">Query</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#fuzzy%EF%BC%88%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.1.3.2.3.1.</span> <span class="nav-text">fuzzy（模糊查询）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#pagenation%EF%BC%88%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.1.3.2.3.2.</span> <span class="nav-text">pagenation（分页查询）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#reference%EF%BC%88%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.1.3.2.3.3.</span> <span class="nav-text">reference（关联查询）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Extend"><span class="nav-number">2.1.3.3.</span> <span class="nav-text">Extend</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#tkMybatis"><span class="nav-number">2.1.3.3.1.</span> <span class="nav-text">tkMybatis</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MybatisPlus"><span class="nav-number">2.1.3.3.2.</span> <span class="nav-text">MybatisPlus</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MyBatisFlex"><span class="nav-number">2.1.3.3.3.</span> <span class="nav-text">MyBatisFlex</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Question"><span class="nav-number">2.1.3.4.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%92%8C-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.3.4.1.</span> <span class="nav-text">${}和#{}的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#where%E4%B8%AD%E7%9A%841-x3D-1%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">2.1.3.4.2.</span> <span class="nav-text">where中的1&#x3D;1的作用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Problem"><span class="nav-number">2.1.3.5.</span> <span class="nav-text">Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Cache"><span class="nav-number">2.1.3.5.1.</span> <span class="nav-text">Cache</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98"><span class="nav-number">2.1.3.5.1.1.</span> <span class="nav-text">一级缓存</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98"><span class="nav-number">2.1.3.5.1.2.</span> <span class="nav-text">二级缓存</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transaction"><span class="nav-number">2.2.</span> <span class="nav-text">Transaction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usage-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Invalid"><span class="nav-number">2.2.3.</span> <span class="nav-text">Invalid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Isolation"><span class="nav-number">2.2.4.</span> <span class="nav-text">Isolation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Propagation"><span class="nav-number">2.2.5.</span> <span class="nav-text">Propagation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Asynchronous"><span class="nav-number">2.2.6.</span> <span class="nav-text">Asynchronous</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MultipleThread"><span class="nav-number">2.2.7.</span> <span class="nav-text">MultipleThread</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-1"><span class="nav-number">2.2.8.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring%E4%BA%8B%E5%8A%A1%E4%B9%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%8A%A0%E5%9C%A8Service%E5%B1%82"><span class="nav-number">2.2.8.1.</span> <span class="nav-text">Spring事务之为什么要加在Service层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring%E4%BA%8B%E5%8A%A1%E4%B9%8B%E5%88%B0%E5%BA%95%E8%83%BD%E4%B8%8D%E8%83%BD%E5%8A%A0%E5%88%B0Controller%E5%B1%82"><span class="nav-number">2.2.8.2.</span> <span class="nav-text">Spring事务之到底能不能加到Controller层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring%E4%BA%8B%E5%8A%A1%E5%AE%9E%E7%8E%B0%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%8E%A8%E8%8D%90-Transactional%E6%B3%A8%E8%A7%A3"><span class="nav-number">2.2.8.3.</span> <span class="nav-text">Spring事务实现为什么不推荐@Transactional注解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem-1"><span class="nav-number">2.2.9.</span> <span class="nav-text">Problem</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exception"><span class="nav-number">2.3.</span> <span class="nav-text">Exception</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringCache"><span class="nav-number">3.</span> <span class="nav-text">SpringCache</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Framework-1"><span class="nav-number">3.1.</span> <span class="nav-text">Framework</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Jedis"><span class="nav-number">3.1.1.</span> <span class="nav-text">Jedis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redisson"><span class="nav-number">3.1.2.</span> <span class="nav-text">Redisson</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RedisTemplate"><span class="nav-number">3.1.3.</span> <span class="nav-text">RedisTemplate</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringMongoDB"><span class="nav-number">4.</span> <span class="nav-text">SpringMongoDB</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringElasticsearch"><span class="nav-number">5.</span> <span class="nav-text">SpringElasticsearch</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringData"><span class="nav-number">1.</span> <span class="nav-text">SpringData</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringMysql"><span class="nav-number">2.</span> <span class="nav-text">SpringMysql</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Framework"><span class="nav-number">2.1.</span> <span class="nav-text">Framework</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Jdbc"><span class="nav-number">2.1.1.</span> <span class="nav-text">Jdbc</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JdbcUtils"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">JdbcUtils</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JdbcTemplate"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">JdbcTemplate</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jpa"><span class="nav-number">2.1.2.</span> <span class="nav-text">Jpa</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hibernate"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">Hibernate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JpaTemplate"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">JpaTemplate</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mybatis"><span class="nav-number">2.1.3.</span> <span class="nav-text">Mybatis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Basic"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#SqlSession"><span class="nav-number">2.1.3.1.1.</span> <span class="nav-text">SqlSession</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Mapper"><span class="nav-number">2.1.3.1.2.</span> <span class="nav-text">Mapper</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Usage"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Field"><span class="nav-number">2.1.3.2.1.</span> <span class="nav-text">Field</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#id"><span class="nav-number">2.1.3.2.1.1.</span> <span class="nav-text">id</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#type"><span class="nav-number">2.1.3.2.1.2.</span> <span class="nav-text">type</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#mapping"><span class="nav-number">2.1.3.2.1.3.</span> <span class="nav-text">mapping</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Param"><span class="nav-number">2.1.3.2.2.</span> <span class="nav-text">Param</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Query"><span class="nav-number">2.1.3.2.3.</span> <span class="nav-text">Query</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#fuzzy%EF%BC%88%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.1.3.2.3.1.</span> <span class="nav-text">fuzzy（模糊查询）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#pagenation%EF%BC%88%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.1.3.2.3.2.</span> <span class="nav-text">pagenation（分页查询）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#reference%EF%BC%88%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.1.3.2.3.3.</span> <span class="nav-text">reference（关联查询）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Extend"><span class="nav-number">2.1.3.3.</span> <span class="nav-text">Extend</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#tkMybatis"><span class="nav-number">2.1.3.3.1.</span> <span class="nav-text">tkMybatis</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MybatisPlus"><span class="nav-number">2.1.3.3.2.</span> <span class="nav-text">MybatisPlus</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MyBatisFlex"><span class="nav-number">2.1.3.3.3.</span> <span class="nav-text">MyBatisFlex</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Question"><span class="nav-number">2.1.3.4.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%92%8C-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.3.4.1.</span> <span class="nav-text">${}和#{}的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#where%E4%B8%AD%E7%9A%841-x3D-1%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">2.1.3.4.2.</span> <span class="nav-text">where中的1&#x3D;1的作用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Problem"><span class="nav-number">2.1.3.5.</span> <span class="nav-text">Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Cache"><span class="nav-number">2.1.3.5.1.</span> <span class="nav-text">Cache</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98"><span class="nav-number">2.1.3.5.1.1.</span> <span class="nav-text">一级缓存</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98"><span class="nav-number">2.1.3.5.1.2.</span> <span class="nav-text">二级缓存</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transaction"><span class="nav-number">2.2.</span> <span class="nav-text">Transaction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usage-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Invalid"><span class="nav-number">2.2.3.</span> <span class="nav-text">Invalid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Propagation"><span class="nav-number">2.2.4.</span> <span class="nav-text">Propagation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MultipleThread"><span class="nav-number">2.2.5.</span> <span class="nav-text">MultipleThread</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-1"><span class="nav-number">2.2.6.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring%E4%BA%8B%E5%8A%A1%E4%B9%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%8A%A0%E5%9C%A8Service%E5%B1%82"><span class="nav-number">2.2.6.1.</span> <span class="nav-text">Spring事务之为什么要加在Service层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring%E4%BA%8B%E5%8A%A1%E4%B9%8B%E5%88%B0%E5%BA%95%E8%83%BD%E4%B8%8D%E8%83%BD%E5%8A%A0%E5%88%B0Controller%E5%B1%82"><span class="nav-number">2.2.6.2.</span> <span class="nav-text">Spring事务之到底能不能加到Controller层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring%E4%BA%8B%E5%8A%A1%E5%AE%9E%E7%8E%B0%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%8E%A8%E8%8D%90-Transactional%E6%B3%A8%E8%A7%A3"><span class="nav-number">2.2.6.3.</span> <span class="nav-text">Spring事务实现为什么不推荐@Transactional注解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem-1"><span class="nav-number">2.2.7.</span> <span class="nav-text">Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Async"><span class="nav-number">2.2.7.1.</span> <span class="nav-text">Async</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Retry"><span class="nav-number">2.2.7.2.</span> <span class="nav-text">Retry</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lock"><span class="nav-number">2.2.7.3.</span> <span class="nav-text">Lock</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exception"><span class="nav-number">2.3.</span> <span class="nav-text">Exception</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringCache"><span class="nav-number">3.</span> <span class="nav-text">SpringCache</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Framework-1"><span class="nav-number">3.1.</span> <span class="nav-text">Framework</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Jedis"><span class="nav-number">3.1.1.</span> <span class="nav-text">Jedis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redisson"><span class="nav-number">3.1.2.</span> <span class="nav-text">Redisson</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RedisTemplate"><span class="nav-number">3.1.3.</span> <span class="nav-text">RedisTemplate</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringMongoDB"><span class="nav-number">4.</span> <span class="nav-text">SpringMongoDB</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringElasticsearch"><span class="nav-number">5.</span> <span class="nav-text">SpringElasticsearch</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -895,7 +907,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-count">93</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

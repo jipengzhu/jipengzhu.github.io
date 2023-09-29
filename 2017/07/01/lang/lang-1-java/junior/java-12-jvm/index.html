@@ -28,7 +28,7 @@
 <meta property="og:description" content="java虚拟机篇">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T17:12:00.000Z">
-<meta property="article:modified_time" content="2023-09-22T11:07:43.245Z">
+<meta property="article:modified_time" content="2023-09-29T12:17:34.329Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-22 19:07:43" itemprop="dateModified" datetime="2023-09-22T19:07:43+08:00">2023-09-22</time>
+                <time title="修改时间：2023-09-29 20:17:34" itemprop="dateModified" datetime="2023-09-29T20:17:34+08:00">2023-09-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -303,21 +303,134 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LYQ20010417/article/details/124138635">JMM入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51431003/article/details/127702972">JMM进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/c15158032319/article/details/117361782">JMM详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012723673/article/details/80682208">JMM之volatile入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/JMW1407/article/details/122302803">JMM之volatile详解</a></li>
 </ul>
 </blockquote>
+<p>JVM运行分区：定义了JVM在运行时如何分区存储数据<br>JMM内存模型：定义了线程和主内存之间的操作和关系</p>
 <h2 id="Advanced-1"><a href="#Advanced-1" class="headerlink" title="Advanced"></a>Advanced</h2><h3 id="Feature"><a href="#Feature" class="headerlink" title="Feature"></a>Feature</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cy973071263/article/details/104318355">JMM三大特性入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/gd_yuzhe/article/details/119031820">JMM三大特性详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wyttRain/article/details/114520547">JMM三大特性之可见性和内存屏障</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42092787/article/details/108102891">JMM三大特性之有序性和指令重排</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhujiangtaotaise/article/details/122493682">JMM三大特性之volatile入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mashaokang1314/article/details/96571818">JMM三大特性之volatile详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cy973071263/article/details/104318355">JMM三大特性详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43767015/article/details/105515536">JMM三大特性原理</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wyttRain/article/details/114520547">JMM三大特性原理之内存屏障</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_37841366/article/details/113086438">JMM三大特性原理之指令重排</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46097842/article/details/125049047">JMM三大特性原理之MESI缓存一致性协议</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhujiangtaotaise/article/details/122493682">JMM三大特性之volatile和内存屏障</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43290318/article/details/115588218">JMM三大特性之volatile和指令重排</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mashaokang1314/article/details/96571818">JMM三大特性之volatile和MESI缓存一致性协议</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_72088858/article/details/127275149">JMM三大特性之cpu有了缓存一致性协议为什么还需要volatile关键字</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Leon_Jinhai_Sun/article/details/111568687">JMM三大特性之总线锁和缓存锁</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35642036/article/details/82801708">JMM三大特性之总线锁和MESI</a></li>
 </ul>
 </blockquote>
+<ul>
+<li>原子性<ul>
+<li>加锁实现（利用了<code>monitorenter</code>和<code>monitorexit</code>指令）</li>
+</ul>
+</li>
+<li>可见性<ul>
+<li>不使用cpu缓存（每次读写主存）</li>
+</ul>
+</li>
+<li>有序性<ul>
+<li>禁止指令重排（volatile利用了内存屏障，synchronized利用了lock指令）</li>
+</ul>
+</li>
+</ul>
+<h3 id="Operation"><a href="#Operation" class="headerlink" title="Operation"></a>Operation</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/NewBeeMu/article/details/106991173">JMM之8种原子操作入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/starbxx/article/details/98742858">JMM之8种原子操作详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wyd_333/article/details/130350402">JMM之主内存和工作内存</a></li>
+</ul>
+</blockquote>
+<p>JMM的8种原子操作</p>
+<ul>
+<li>lock(锁定)：<ul>
+<li>对象：作用于<code>主内存</code></li>
+<li>作用：<code>锁定</code>变量的值</li>
+</ul>
+</li>
+<li>read(读取)：<ul>
+<li>对象：作用于<code>主内存</code></li>
+<li>作用：从<code>主内存</code>中<code>读取</code>变量的值</li>
+</ul>
+</li>
+<li>load(载入)：<ul>
+<li>对象：作用于<code>工作内存</code></li>
+<li>作用：将变量的值<code>加载</code>到<code>工作内存</code>中的变量副本中</li>
+</ul>
+</li>
+<li>use(使用)：<ul>
+<li>对象：作用于<code>工作内存</code></li>
+<li>作用：执行引擎<code>使用</code>变量的值</li>
+</ul>
+</li>
+<li>assign(赋值)：<ul>
+<li>对象：作用于<code>工作内存</code></li>
+<li>作用：执行引擎<code>设置</code>变量的值</li>
+</ul>
+</li>
+<li>store(存储)：<ul>
+<li>对象：作用于<code>工作内存</code></li>
+<li>作用：将变量的值<code>存储</code>到<code>工作内存</code>中的变量副本中</li>
+</ul>
+</li>
+<li>write(写入)：<ul>
+<li>对象：作用于<code>主内存</code></li>
+<li>作用：将变量的值<code>写入</code>到<code>主内存</code></li>
+</ul>
+</li>
+<li>unlock(解锁)：<ul>
+<li>对象：作用于<code>主内存</code></li>
+<li>作用：<code>解锁</code>变量的值</li>
+</ul>
+</li>
+</ul>
+<p>JMM的原子操作规则</p>
+<ul>
+<li>操作有要求：<ul>
+<li>read和load操作必须同时出现且必须顺序执行（不是连续执行），store和write同理</li>
+<li>即不允许变量从主存读取时工作内存却不接受或者从工作内存写入时主存却不接受的情况</li>
+</ul>
+</li>
+<li>变更必须同步：<ul>
+<li>不允许线程丢弃它的最近的assign操作</li>
+<li>即变量在工作内存中改变了就必须同步回主内存</li>
+</ul>
+</li>
+<li>未变更不允许同步：<ul>
+<li>不允许线程无原因地（比如没有发生过assign操作）将数据从工作内存同步回主内存中</li>
+<li>即变量在工作内存中未改变就不能同步回主内存</li>
+</ul>
+</li>
+<li>未被初始化变量使用有要求<ul>
+<li>不允许在工作内存中直接使用一个未被初始化（load或assign）的变量</li>
+<li>即对一个变量实施use和store操作之前必须先执行过了load和assign操作</li>
+</ul>
+</li>
+<li>lock需要支持可重入<ul>
+<li>一个变量在同一个时刻只允许一条线程对其执行lock操作，但lock操作可以被同一个条线程重复执行多次，多次执行lock后，只有执行相同次数的unlock操作，变量才会被解锁</li>
+</ul>
+</li>
+<li>lock时需要将工作内存中的变量副本清空<ul>
+<li>如果对一个变量执行lock操作，将会清空工作内存中此变量的值，在执行引擎使用这个变量前，需要重新执行load或assign操作初始化变量的值</li>
+</ul>
+</li>
+<li>unlock之前得先执行过lock<ul>
+<li>如果一个变量实现没有被lock操作锁定，则不允许对它执行unlock操作，也不允许去unlock一个被其他线程锁定的变量</li>
+</ul>
+</li>
+<li>unlock时需要将工作内存中的变量副本同步回主内存中<ul>
+<li>对一个变量执行unlock操作之前，必须先把此变量同步回主内存（执行store和write操作）</li>
+</ul>
+</li>
+</ul>
 <h3 id="Principle"><a href="#Principle" class="headerlink" title="Principle"></a>Principle</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ThinkWon/article/details/102074107">JMM之as-if-serial详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ThinkWon/article/details/102074107">JMM之as-if-serial和happens-before的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/JingLisen/article/details/114645372">JMM之as-if-serial入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/HNUST_LIZEMING/article/details/88371178">JMM之as-if-serial详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yuanchangliang/article/details/108036886">JMM之happens-before入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/A_art_xiang/article/details/126266711">JMM之happens-before详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangnanwlw/article/details/86476189">JMM之happens-before的8大原则入门</a></li>
@@ -325,7 +438,18 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/huyongl1989/article/details/91636049">JMM之happens-before的8大原则详解</a></li>
 </ul>
 </blockquote>
-<p>as-if-serial：不管怎么重排序，排序后的执行的结果必须和顺序执行时的结果一样<br>happens-before：不管怎么重排序，前一个操作的结果在后续操作中必须是已完成并可见的</p>
+<p>as-if-serial：单线程原则，无论如何重排序，程序执行的结果都应该与代码顺序执行的结果一致<br>happens-before：多线程原则，在发生操作B之前，操作A产生的影响都能被操作B观察到</p>
+<p>happens-before的8大原则</p>
+<ul>
+<li>单线程happen-before原则：在同一个线程中，书写在前面的操作happen-before后面的操作</li>
+<li>lock的happen-before原则：同一个锁的unlock操作happen-before此锁的lock操作</li>
+<li>volatile的happen-before原则： 对一个volatile变量的写操作happen-before对此变量的任意操作</li>
+<li>线程启动的happen-before原则：同一个线程的start方法happen-before此线程的其它方法</li>
+<li>线程中断的happen-before原则：对线程interrupt方法的调用happen-before被中断线程的检测到中断的代码</li>
+<li>线程终结的happen-before原则：线程中的所有操作都happen-before线程的终止检测</li>
+<li>对象创建的happen-before原则：一个对象的初始化完成先于他的finalize方法调用</li>
+<li>happen-before的传递性原则： 如果A操作 happen-before B操作，B操作happen-before C操作，那么A操作happen-before C操作</li>
+</ul>
 <h1 id="Garbage"><a href="#Garbage" class="headerlink" title="Garbage"></a>Garbage</h1><h2 id="Basic-2"><a href="#Basic-2" class="headerlink" title="Basic"></a>Basic</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/itcast_cn/article/details/124747346">JVM垃圾回收入门</a></li>
@@ -516,6 +640,7 @@
 <li>实例化（Instantiation）</li>
 <li>初始化（Initialization）</li>
 <li>构造（Constrction）</li>
+<li>使用（Usage）</li>
 <li>析构（Destruction）</li>
 </ul>
 <blockquote>
@@ -525,16 +650,23 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44299027/article/details/127954385">JVM双亲委派机制入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Ecilipse/article/details/122256795">JVM双亲委派机制详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43884884/article/details/107719529">JVM双亲委派机制打破</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Handsome_Le_le/article/details/109272646">JVM双亲委派机制的作用入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/BThinker/article/details/105293706">JVM双亲委派机制的作用详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Mr_YanMingXin/article/details/119633526">JVM双亲委派机制打破入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dl962454/article/details/109981969">JVM双亲委派机制打破进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39724194/article/details/124156898">JVM双亲委派机制打破详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/P19777/article/details/100829154">JVM双亲委派机制打破之JDBC</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43884884/article/details/107719529">JVM双亲委派机制打破之Tomcat</a></li>
 </ul>
 </blockquote>
 <h3 id="双亲委派机制的作用"><a href="#双亲委派机制的作用" class="headerlink" title="双亲委派机制的作用"></a>双亲委派机制的作用</h3><ul>
 <li>保证系统类先加载，避免攻击者替换系统类进行破坏活动</li>
-<li>避免重复加载，双亲加载后就不需要自己加载了</li>
+<li>避免重复加载，前面的加载器加载后自己就不需要加载了</li>
 </ul>
 <h3 id="如何打破双亲委派机制"><a href="#如何打破双亲委派机制" class="headerlink" title="如何打破双亲委派机制"></a>如何打破双亲委派机制</h3><ul>
+<li>重写ClassLoader的loadClass或者findClass方法自定义加载过程</li>
 <li>利用Thread.currentThread().getContextClassLoader()返回的ClassLoader加载</li>
-<li>重写ClassLoader的loadClass方法自定义加载过程</li>
+<li>利用java的SPI机制</li>
 </ul>
 <h1 id="Compile"><a href="#Compile" class="headerlink" title="Compile"></a>Compile</h1><blockquote>
 <ul>
@@ -549,8 +681,33 @@
 <h1 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h1><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wdays83892469/article/details/127151239">JVM问题排查思路</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq359605040/article/details/119954127">JVM服务调试工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a718515028/article/details/86703186">JVM之OOM自动dump</a></li>
 </ul>
 </blockquote>
+<p>jmap：排查内存问题（OOM）<br>jstack：排查线程问题（CPU负载高和死锁）<br>jhsdb：服务调试工具</p>
+<ul>
+<li>OOM问题排查<ul>
+<li>查看内存占用情况：<code>jmap -histo 进程号</code></li>
+<li>查看堆空间情况：<code>jhsdb jmap --heap --pid 进程号</code></li>
+<li>分析内存问题：<code>jmap -dump:file=a.dump 进程号</code>后导入到<code>jvisualvm</code>中进行分析</li>
+</ul>
+</li>
+<li>CPU负载高问题排查<ul>
+<li>查看cpu占用情况：<code>top</code></li>
+<li>查看cpu飚高进程：<code>top -p 进程号</code></li>
+<li>查看cpu飚高线程：<code>top -p 进程号</code>后按<code>H</code></li>
+<li>将线程tid转化为十六进制：使用python的<code>hex</code>函数</li>
+<li>查看飚高线程的堆栈信息：<code>jstack 进程号 | grep -A 10 十六进制的线程tid</code></li>
+<li>堆栈信息中会显示线程停留在代码的哪一行</li>
+</ul>
+</li>
+<li>死锁问题排查<ul>
+<li>用jstack查看是否有deadlock字样</li>
+<li>用jvisualvm查看是否有死锁</li>
+</ul>
+</li>
+</ul>
 <h1 id="Diagnosis"><a href="#Diagnosis" class="headerlink" title="Diagnosis"></a>Diagnosis</h1><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41822345/article/details/105523832">JDK自带诊断工具</a></li>
@@ -558,27 +715,67 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/asd136912/article/details/103224757">JDK线程诊断工具</a></li>
 </ul>
 </blockquote>
+<ul>
+<li>jps：java进程查看工具</li>
+<li>jmap：java内存诊断工具</li>
+<li>jstack：java线程诊断工具</li>
+<li>jstat：JVM状态查看工具</li>
+<li>jinfo：JVM参数查看和调整工具</li>
+<li>jhat：java内存分析工具（网页版）</li>
+</ul>
+<blockquote>
+<p>ps：jhat不常用（因为分析工作比较耗性能，一般不在应用服务器上用jhat分析，而是在其他机器上用jvisualvm分析）</p>
+</blockquote>
 <h1 id="Monitor"><a href="#Monitor" class="headerlink" title="Monitor"></a>Monitor</h1><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhaofuqiangmycomm/article/details/114919403">JDK自带监控工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shixiaoling123/article/details/106630623">JDK自带监控工具之jconsole和jvisualvm详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangsir001/article/details/118069165">JDK自带监控工具之jconsole和jvisualvm的区别</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39387856/article/details/108513440">Arthas入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_14996421/article/details/115982546">Arthas详解</a></li>
 </ul>
 </blockquote>
+<ul>
+<li>jvisualvm：java自带的监控工具（老版）</li>
+<li>jconsole：java自带的监控工具（新版）</li>
+<li>jprofile：商业监控工具（可以在idea中使用）</li>
+</ul>
 <h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://linux.cn/article-4481-1.html">Linux系统相关工具</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ArtAndLife/article/details/120637502">Linux系统工具大全</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Moo_Lavender/article/details/106104401">Linux系统诊断工具</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jack1liu/article/details/95101723">Linux系统负载工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://linux.cn/article-4481-1.html">Linux系统性能工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ArtAndLife/article/details/120637502">Linux系统诊断工具</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43072797/article/details/105552803">Linux系统状态工具</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhizhengguan/article/details/120874936">Linux系统性能工具</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaochong0302/article/details/127205969">Linux系统监控工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jack1liu/article/details/95101723">Linux系统负载工具</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39983912/article/details/111801137">Linux进程查找工具</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qiu_zhi_world/article/details/106204736">Linux进程分析工具</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/bandaoyu/article/details/113697346">Linux线程分析工具</a></li>
 </ul>
 </blockquote>
+<ul>
+<li>summary<ul>
+<li>top：可以查看cpu负载、进程的cpu和mem占用</li>
+<li>vmstat：可以查看系统的cpu、mem、disk的使用情况</li>
+<li>pidstat：可以查看进程的cpu、mem、disk的使用情况</li>
+</ul>
+</li>
+<li>cpu<ul>
+<li>mpstat：可以查看系统的cpu的使用情况</li>
+</ul>
+</li>
+<li>mem<ul>
+<li>free：可以查看系统的mem的使用情况</li>
+</ul>
+</li>
+<li>disk<ul>
+<li>iostat：可以查看系统的disk的读写情况</li>
+</ul>
+</li>
+<li>net<ul>
+<li>netstat：可以查看系统的net的连接情况</li>
+</ul>
+</li>
+</ul>
 
     </div>
 
@@ -677,7 +874,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM"><span class="nav-number">1.</span> <span class="nav-text">JVM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">1.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced"><span class="nav-number">1.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Region"><span class="nav-number">1.2.1.</span> <span class="nav-text">Region</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Allocate"><span class="nav-number">1.2.2.</span> <span class="nav-text">Allocate</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JMM"><span class="nav-number">2.</span> <span class="nav-text">JMM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-1"><span class="nav-number">2.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced-1"><span class="nav-number">2.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature"><span class="nav-number">2.2.1.</span> <span class="nav-text">Feature</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Principle"><span class="nav-number">2.2.2.</span> <span class="nav-text">Principle</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Garbage"><span class="nav-number">3.</span> <span class="nav-text">Garbage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-2"><span class="nav-number">3.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%88%86%E4%BB%A3%E6%8A%80%E6%9C%AF"><span class="nav-number">3.1.1.</span> <span class="nav-text">垃圾分代技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%88%A4%E6%96%AD%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.2.</span> <span class="nav-text">垃圾判断算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.3.</span> <span class="nav-text">垃圾回收算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%97%B6%E6%9C%BA"><span class="nav-number">3.1.4.</span> <span class="nav-text">垃圾回收时机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E8%BF%87%E7%A8%8B"><span class="nav-number">3.1.5.</span> <span class="nav-text">垃圾回收过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%88%86%E7%B1%BB"><span class="nav-number">3.1.6.</span> <span class="nav-text">垃圾回收器分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E6%90%AD%E9%85%8D"><span class="nav-number">3.1.7.</span> <span class="nav-text">垃圾回收器搭配</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced-2"><span class="nav-number">3.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Serial"><span class="nav-number">3.2.1.</span> <span class="nav-text">Serial</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ParNew"><span class="nav-number">3.2.2.</span> <span class="nav-text">ParNew</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Scavenge"><span class="nav-number">3.2.3.</span> <span class="nav-text">Parallel Scavenge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Serial-Old"><span class="nav-number">3.2.4.</span> <span class="nav-text">Serial Old</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Old"><span class="nav-number">3.2.5.</span> <span class="nav-text">Parallel Old</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMS"><span class="nav-number">3.2.6.</span> <span class="nav-text">CMS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G1"><span class="nav-number">3.2.7.</span> <span class="nav-text">G1</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Class"><span class="nav-number">4.</span> <span class="nav-text">Class</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ClassLoader"><span class="nav-number">4.1.</span> <span class="nav-text">ClassLoader</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%88%86%E7%B1%BB"><span class="nav-number">4.1.1.</span> <span class="nav-text">加载器分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="nav-number">4.1.2.</span> <span class="nav-text">类加载过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="nav-number">4.1.3.</span> <span class="nav-text">对象创建过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delegate"><span class="nav-number">4.2.</span> <span class="nav-text">Delegate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">4.2.1.</span> <span class="nav-text">双亲委派机制的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%89%93%E7%A0%B4%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6"><span class="nav-number">4.2.2.</span> <span class="nav-text">如何打破双亲委派机制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Compile"><span class="nav-number">5.</span> <span class="nav-text">Compile</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Analysis"><span class="nav-number">6.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Diagnosis"><span class="nav-number">7.</span> <span class="nav-text">Diagnosis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Monitor"><span class="nav-number">8.</span> <span class="nav-text">Monitor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">9.1.</span> <span class="nav-text">Linux</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM"><span class="nav-number">1.</span> <span class="nav-text">JVM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">1.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced"><span class="nav-number">1.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Region"><span class="nav-number">1.2.1.</span> <span class="nav-text">Region</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Allocate"><span class="nav-number">1.2.2.</span> <span class="nav-text">Allocate</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JMM"><span class="nav-number">2.</span> <span class="nav-text">JMM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-1"><span class="nav-number">2.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced-1"><span class="nav-number">2.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature"><span class="nav-number">2.2.1.</span> <span class="nav-text">Feature</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Operation"><span class="nav-number">2.2.2.</span> <span class="nav-text">Operation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Principle"><span class="nav-number">2.2.3.</span> <span class="nav-text">Principle</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Garbage"><span class="nav-number">3.</span> <span class="nav-text">Garbage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-2"><span class="nav-number">3.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%88%86%E4%BB%A3%E6%8A%80%E6%9C%AF"><span class="nav-number">3.1.1.</span> <span class="nav-text">垃圾分代技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%88%A4%E6%96%AD%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.2.</span> <span class="nav-text">垃圾判断算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.3.</span> <span class="nav-text">垃圾回收算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%97%B6%E6%9C%BA"><span class="nav-number">3.1.4.</span> <span class="nav-text">垃圾回收时机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E8%BF%87%E7%A8%8B"><span class="nav-number">3.1.5.</span> <span class="nav-text">垃圾回收过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%88%86%E7%B1%BB"><span class="nav-number">3.1.6.</span> <span class="nav-text">垃圾回收器分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E6%90%AD%E9%85%8D"><span class="nav-number">3.1.7.</span> <span class="nav-text">垃圾回收器搭配</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced-2"><span class="nav-number">3.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Serial"><span class="nav-number">3.2.1.</span> <span class="nav-text">Serial</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ParNew"><span class="nav-number">3.2.2.</span> <span class="nav-text">ParNew</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Scavenge"><span class="nav-number">3.2.3.</span> <span class="nav-text">Parallel Scavenge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Serial-Old"><span class="nav-number">3.2.4.</span> <span class="nav-text">Serial Old</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Old"><span class="nav-number">3.2.5.</span> <span class="nav-text">Parallel Old</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMS"><span class="nav-number">3.2.6.</span> <span class="nav-text">CMS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G1"><span class="nav-number">3.2.7.</span> <span class="nav-text">G1</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Class"><span class="nav-number">4.</span> <span class="nav-text">Class</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ClassLoader"><span class="nav-number">4.1.</span> <span class="nav-text">ClassLoader</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%88%86%E7%B1%BB"><span class="nav-number">4.1.1.</span> <span class="nav-text">加载器分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="nav-number">4.1.2.</span> <span class="nav-text">类加载过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="nav-number">4.1.3.</span> <span class="nav-text">对象创建过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delegate"><span class="nav-number">4.2.</span> <span class="nav-text">Delegate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">4.2.1.</span> <span class="nav-text">双亲委派机制的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%89%93%E7%A0%B4%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6"><span class="nav-number">4.2.2.</span> <span class="nav-text">如何打破双亲委派机制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Compile"><span class="nav-number">5.</span> <span class="nav-text">Compile</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Analysis"><span class="nav-number">6.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Diagnosis"><span class="nav-number">7.</span> <span class="nav-text">Diagnosis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Monitor"><span class="nav-number">8.</span> <span class="nav-text">Monitor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">9.1.</span> <span class="nav-text">Linux</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -693,7 +890,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-count">93</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
