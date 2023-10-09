@@ -1,56 +1,64 @@
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 class Solution {
-    public int longestConsecutive(int[] nums) {
-        int max = 0;
+    public List<String> summaryRanges(int[] nums) {
+        List<String> list = new ArrayList<>();
 
-        Set<Integer> set = new HashSet<>();
-        for (int num : nums) {
-            set.add(num);
-        }
+        int i = 0;
+        int j = i + 1;
+        int e = nums.length - 1;
+        while (i <= e && j <= e) {
+            while (j <= e) {
+                if (nums[j] == nums[j - 1] + 1) {
+                    j++;
+                } else {
+                    if (i == j - 1) {
+                        list.add(nums[i] + "");
+                    } else {
+                        list.add(nums[i] + "->" + nums[j - 1]);
+                    }
 
-        for (Integer num : set) {
-            if (!set.contains(num - 1)) {
-                int end = num + 1;
-                while (set.contains(end)) {
-                    end++;
-                }
-
-                int tmp = end - num;
-                if (tmp > max) {
-                    max = tmp;
+                    i = j;
+                    j = i + 1;
                 }
             }
         }
 
-        return max;
+        if (i <= e) {
+            j = e;
+
+            if (i == j) {
+                list.add(nums[i] + "");
+            } else {
+                list.add(nums[i] + "->" + nums[j]);
+            }
+        }
+
+        return list;
     }
 
     public static void main(String[] args) {
-        testLongestConsecutive1();
-        testLongestConsecutive2();
+        testSummaryRanges1();
+        testSummaryRanges2();
     }
 
-    public static void printArray(int[] array) {
-        System.out.println(java.util.Arrays.toString(array));
+    public static void testSummaryRanges1() {
+        int[] nums = { 0, 1, 2, 4, 5, 7 };
+        List<String> list = new Solution().summaryRanges(nums);
+        for (String s : list) {
+            System.out.println(s);
+        }
+        System.out.println();
     }
 
-    public static void printArray(int[] array, int len) {
-        System.out.println(java.util.Arrays.toString(java.util.Arrays.copyOf(array, len)));
+    public static void testSummaryRanges2() {
+        int[] nums = { 0, 2, 3, 4, 6, 8, 9 };
+        List<String> list = new Solution().summaryRanges(nums);
+        for (String s : list) {
+            System.out.println(s);
+        }
+        System.out.println();
     }
 
-    public static void printArrays(int[][] arrays) {
-        System.out.println(java.util.Arrays.deepToString(arrays));
-    }
-
-    public static void testLongestConsecutive1() {
-        int[] nums = { 100, 4, 200, 1, 3, 2 };
-        System.out.println(new Solution().longestConsecutive(nums));
-    }
-
-    public static void testLongestConsecutive2() {
-        int[] nums = { 0, 3, 7, 2, 5, 8, 4, 6, 0, 1 };
-        System.out.println(new Solution().longestConsecutive(nums));
-    }
 }
