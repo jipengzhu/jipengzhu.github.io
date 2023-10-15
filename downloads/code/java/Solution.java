@@ -1,139 +1,136 @@
+import java.util.LinkedList;
+
 class Solution {
-    public int[][] insert(int[][] intervals, int[] newInterval) {
-        int e = intervals.length - 1;
+    public String simplifyPath(String path) {
+        int dotCount = 0;
+        LinkedList<Character> stack = new LinkedList<>();
+        char[] charArray = path.toCharArray();
+        for (char c : charArray) {
+            if (c == '.') {
+                dotCount++;
+            } else {
+                if (dotCount > 0) {
+                    if (dotCount == 1 && stack.peek() == '/' && c == '/') {
+                        // do nothing
+                    } else if (dotCount == 2 && stack.peek() == '/' && c == '/') {
+                        if (stack.size() > 1) {
+                            stack.pop();
 
-        int i = 0;
-        while (i <= e && newInterval[0] > intervals[i][1]) {
-            i++;
+                            while (stack.size() > 1 && stack.peek() != '/') {
+                                stack.pop();
+                            }
+                        }
+                    } else {
+                        for (int i = 0; i < dotCount; i++) {
+                            stack.push('.');
+                        }
+                    }
+
+                    dotCount = 0;
+                }
+
+                if (c == '/') {
+                    if (stack.isEmpty() || stack.peek() != c) {
+                        stack.push(c);
+                    }
+                } else {
+                    stack.push(c);
+                }
+            }
         }
-        if (i > e) {
-            int[][] result = new int[intervals.length + 1][2];
-            int k = 0;
-            while (k < intervals.length) {
-                result[k][0] = intervals[k][0];
-                result[k][1] = intervals[k][1];
 
-                k++;
+        if (dotCount > 0) {
+            if (dotCount == 1 && stack.peek() == '/') {
+                // do nothing
+            } else if (dotCount == 2 && stack.peek() == '/') {
+                if (stack.size() > 1) {
+                    stack.pop();
+
+                    while (stack.size() > 1 && stack.peek() != '/') {
+                        stack.pop();
+                    }
+                }
+            } else {
+                for (int i = 0; i < dotCount; i++) {
+                    stack.push('.');
+                }
             }
 
-            result[k][0] = newInterval[0];
-            result[k][1] = newInterval[1];
-
-            return result;
+            dotCount = 0;
         }
 
-        int j = e;
-        while (j >= 0 && newInterval[1] < intervals[j][0]) {
-            j--;
-        }
-        if (j < 0) {
-            int[][] result = new int[intervals.length + 1][2];
-            int k = 0;
-
-            result[k][0] = newInterval[0];
-            result[k][1] = newInterval[1];
-
-            while (k < intervals.length) {
-                result[k + 1][0] = intervals[k][0];
-                result[k + 1][1] = intervals[k][1];
-
-                k++;
-            }
-
-            return result;
+        while (stack.size() > 1 && stack.peek() == '/') {
+            stack.pop();
         }
 
-        int[][] result = new int[i + e - j + 1][2];
-        int p = 0;
-        for (int k = 0; k < i; k++) {
-            result[p][0] = intervals[k][0];
-            result[p][1] = intervals[k][1];
-            p++;
+        StringBuilder sb = new StringBuilder();
+        while (!stack.isEmpty()) {
+            sb.insert(0, stack.pop());
         }
 
-        int L = newInterval[0];
-        if (intervals[i][0] < L) {
-            L = intervals[i][0];
-        }
-        int R = newInterval[1];
-        if (intervals[j][1] > R) {
-            R = intervals[j][1];
-        }
-        result[p][0] = L;
-        result[p][1] = R;
-        p++;
-        
-        for (int k = j + 1; k <= e; k++) {
-            result[p][0] = intervals[k][0];
-            result[p][1] = intervals[k][1];
-            p++;
-        }
-
-        return result;
+        return sb.toString();
     }
 
     public static void main(String[] args) {
-        testInsert1();
-        testInsert2();
-        testInsert3();
-        testInsert4();
-        testInsert5();
+        testSimplifyPath1();
+        testSimplifyPath2();
+        testSimplifyPath3();
+        testSimplifyPath4();
+        testSimplifyPath5();
+        testSimplifyPath6();
+        testSimplifyPath7();
+        testSimplifyPath8();
+        testSimplifyPath9();
+        testSimplifyPath10();
     }
 
-    public static void printArray(int[] array) {
-        System.out.println(java.util.Arrays.toString(array));
+    public static void testSimplifyPath1() {
+        String s = "/home/";
+        System.out.println((new Solution().simplifyPath(s)));
     }
 
-    public static void printArray(int[] array, int len) {
-        System.out.println(java.util.Arrays.toString(java.util.Arrays.copyOf(array, len)));
+    public static void testSimplifyPath2() {
+        String s = "/../";
+        System.out.println((new Solution().simplifyPath(s)));
     }
 
-    public static void printArrays(int[][] arrays) {
-        System.out.println(java.util.Arrays.deepToString(arrays));
+    public static void testSimplifyPath3() {
+        String s = "/home//foo/";
+        System.out.println((new Solution().simplifyPath(s)));
     }
 
-    public static void testInsert1() {
-        int[][] intervals = {
-                { 1, 3 },
-                { 6, 9 }
-        };
-        int[] newInterval = { 2, 5 };
-        printArrays(new Solution().insert(intervals, newInterval));
+    public static void testSimplifyPath4() {
+        String s = "/a/./b/../../c/";
+        System.out.println((new Solution().simplifyPath(s)));
     }
 
-    public static void testInsert2() {
-        int[][] intervals = {
-                { 1, 2 },
-                { 3, 5 },
-                { 6, 7 },
-                { 8, 10 },
-                { 12, 16 }
-        };
-        int[] newInterval = { 4, 8 };
-        printArrays(new Solution().insert(intervals, newInterval));
+    public static void testSimplifyPath5() {
+        String s = "/...";
+        System.out.println((new Solution().simplifyPath(s)));
     }
 
-    public static void testInsert3() {
-        int[][] intervals = {
-
-        };
-        int[] newInterval = { 5, 7 };
-        printArrays(new Solution().insert(intervals, newInterval));
+    public static void testSimplifyPath6() {
+        String s = "/..";
+        System.out.println((new Solution().simplifyPath(s)));
     }
 
-    public static void testInsert4() {
-        int[][] intervals = {
-                { 1, 5 }
-        };
-        int[] newInterval = { 2, 3 };
-        printArrays(new Solution().insert(intervals, newInterval));
+    public static void testSimplifyPath7() {
+        String s = "/..hidden";
+        System.out.println((new Solution().simplifyPath(s)));
     }
 
-    public static void testInsert5() {
-        int[][] intervals = {
-                { 1, 5 }
-        };
-        int[] newInterval = { 2, 7 };
-        printArrays(new Solution().insert(intervals, newInterval));
+    public static void testSimplifyPath8() {
+        String s = "/.hidden";
+        System.out.println((new Solution().simplifyPath(s)));
+    }
+
+    public static void testSimplifyPath9() {
+        String s = "/hello../world";
+        System.out.println((new Solution().simplifyPath(s)));
+    }
+
+    public static void testSimplifyPath10() {
+        String s = "/hello./world";
+        System.out.println((new Solution().simplifyPath(s)));
     }
 }
