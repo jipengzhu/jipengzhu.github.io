@@ -62,6 +62,94 @@ public class Test {
         }
     }
 
+    static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+            next = null;
+        }
+
+        public static ListNode genLinkedList(int[] nums, boolean withHead, int loopPos) {
+            int val = withHead ? Integer.MIN_VALUE : nums[0];
+            ListNode head = new ListNode(val);
+
+            ListNode loop = withHead ? null : loopPos == 0 ? head : null;
+
+            int b = withHead ? 0 : 1;
+            ListNode p = head;
+            for (int i = b; i < nums.length; i++) {
+                ListNode node = new ListNode(nums[i]);
+                p.next = node;
+                p = node;
+
+                if (loopPos == i) {
+                    loop = node;
+                }
+            }
+
+            if (loop != null) {
+                p.next = loop;
+            }
+
+            return head;
+        }
+
+        public static ListNode genLinkedListWithHeadNode(int[] nums) {
+            return genLinkedList(nums, true, -1);
+        }
+
+        public static ListNode genLinkedListWithoutHeadNode(int[] nums) {
+            return genLinkedList(nums, false, -1);
+        }
+
+        public static ListNode genLoopedLinkedListWithHeadNode(int[] nums, int pos) {
+            return genLinkedList(nums, true, pos);
+        }
+
+        public static ListNode genLoopedLinkedListWithoutHeadNode(int[] nums, int pos) {
+            return genLinkedList(nums, false, pos);
+        }
+
+        public static int getCount(ListNode head, boolean withHead) {
+            ListNode p = withHead ? head.next : head;
+
+            int c = 0;
+            while (p != null) {
+                c++;
+                p = p.next;
+            }
+
+            return c;
+        }
+
+        public static int[] toArray(ListNode head, boolean withHead) {
+            int c = getCount(head, withHead);
+            int[] nums = new int[c];
+
+            ListNode p = withHead ? head.next : head;
+
+            int k = 0;
+            while (p != null) {
+                nums[k] = p.val;
+
+                k++;
+                p = p.next;
+            }
+
+            return nums;
+        }
+
+        public static int[] toArrayWithHeadNode(ListNode head) {
+            return toArray(head, true);
+        }
+
+        public static int[] toArrayWithoutHeadNode(ListNode head) {
+            return toArray(head, false);
+        }
+    }
+
     int result;
     int expect;
 
@@ -69,6 +157,8 @@ public class Test {
     // String sp2 = "ArrayUtils.print.*\((?!(expect|result))|System.out.println\((?!(java.util|expect|result))";
     // String sp3 = "public.*To[al].*\(";
     // String sc = "ArrayUtils.print|System.out.println\((?!java.util)";
+
+    // String cp1 = "new Solution\(\).*\)(?!;)";
 
     // String tp1 = "test(?!Case).*\d\("
     // String tc = "testCase\d\("
