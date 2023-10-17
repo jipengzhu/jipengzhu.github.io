@@ -72,6 +72,10 @@ public class Test {
         }
 
         public static ListNode genLinkedList(int[] nums, boolean withHead, int loopPos) {
+            if (nums.length == 0) {
+                return null;
+            }
+
             int val = withHead ? Integer.MIN_VALUE : nums[0];
             ListNode head = new ListNode(val);
 
@@ -80,12 +84,11 @@ public class Test {
             int b = withHead ? 0 : 1;
             ListNode p = head;
             for (int i = b; i < nums.length; i++) {
-                ListNode node = new ListNode(nums[i]);
-                p.next = node;
-                p = node;
+                p.next = new ListNode(nums[i]);
+                p = p.next;
 
                 if (loopPos == i) {
-                    loop = node;
+                    loop = p;
                 }
             }
 

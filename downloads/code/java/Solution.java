@@ -1,44 +1,41 @@
 public class Solution {
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode p = l1;
-        ListNode q = l2;
-        int carry = 0;
-
-        int x = p == null ? 0 : p.val;
-        int y = q == null ? 0 : q.val;
-        int value = x + y + carry;
-        carry = value > 9 ? 1 : 0;
-        value = value > 9 ? value - 10 : value;
-
-        ListNode head = new ListNode(value);
-        p = p == null ? p : p.next;
-        q = q == null ? q : q.next;
-
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        ListNode p = list1;
+        ListNode q = list2;
+        ListNode head = new ListNode(Integer.MIN_VALUE);
         ListNode r = head;
-        while (p != null || q != null) {
-            x = p == null ? 0 : p.val;
-            y = q == null ? 0 : q.val;
-            value = x + y + carry;
-            carry = value > 9 ? 1 : 0;
-            value = value > 9 ? value - 10 : value;
 
-            ListNode node = new ListNode(value);
-            r.next = node;
-            r = node;
+        while (p != null && q != null) {
+            while (p != null && q != null && p.val <= q.val) {
+                r.next = new ListNode(p.val);
+                r = r.next;
 
-            p = p == null ? p : p.next;
-            q = q == null ? q : q.next;
+                p = p.next;
+            }
+
+            while (p != null && q != null && q.val <= p.val) {
+                r.next = new ListNode(q.val);
+                r = r.next;
+
+                q = q.next;
+            }
         }
 
-        if (carry > 0) {
-            value = carry;
+        while (p != null) {
+            r.next = new ListNode(p.val);
+            r = r.next;
 
-            ListNode node = new ListNode(value);
-            r.next = node;
-            r = node;
+            p = p.next;
         }
 
-        return head;
+        while (q != null) {
+            r.next = new ListNode(q.val);
+            r = r.next;
+
+            q = q.next;
+        }
+
+        return head.next;
     }
 
     static class ListNode {
@@ -51,6 +48,10 @@ public class Solution {
         }
 
         public static ListNode genLinkedList(int[] nums, boolean withHead, int loopPos) {
+            if (nums.length == 0) {
+                return null;
+            }
+
             int val = withHead ? Integer.MIN_VALUE : nums[0];
             ListNode head = new ListNode(val);
 
@@ -59,12 +60,11 @@ public class Solution {
             int b = withHead ? 0 : 1;
             ListNode p = head;
             for (int i = b; i < nums.length; i++) {
-                ListNode node = new ListNode(nums[i]);
-                p.next = node;
-                p = node;
+                p.next = new ListNode(nums[i]);
+                p = p.next;
 
                 if (loopPos == i) {
-                    loop = node;
+                    loop = p;
                 }
             }
 
@@ -150,32 +150,32 @@ public class Solution {
     }
 
     public static void testCase1() {
-        int[] nums1 = { 2, 4, 3 };
-        int[] nums2 = { 5, 6, 4 };
+        int[] nums1 = { 1, 2, 4 };
+        int[] nums2 = { 1, 3, 4 };
 
         ListNode l1 = ListNode.genLinkedListWithoutHeadNode(nums1);
         ListNode l2 = ListNode.genLinkedListWithoutHeadNode(nums2);
-        ListNode result = new Solution().addTwoNumbers(l1, l2);
+        ListNode result = new Solution().mergeTwoLists(l1, l2);
         ArrayUtils.printArray(ListNode.toArrayWithoutHeadNode(result));
     }
 
     public static void testCase2() {
-        int[] nums1 = { 0 };
-        int[] nums2 = { 0 };
+        int[] nums1 = {};
+        int[] nums2 = {};
 
         ListNode l1 = ListNode.genLinkedListWithoutHeadNode(nums1);
         ListNode l2 = ListNode.genLinkedListWithoutHeadNode(nums2);
-        ListNode result = new Solution().addTwoNumbers(l1, l2);
+        ListNode result = new Solution().mergeTwoLists(l1, l2);
         ArrayUtils.printArray(ListNode.toArrayWithoutHeadNode(result));
     }
 
     public static void testCase3() {
-        int[] nums1 = { 9, 9, 9, 9, 9, 9, 9 };
-        int[] nums2 = { 9, 9, 9, 9 };
+        int[] nums1 = {};
+        int[] nums2 = { 0 };
 
         ListNode l1 = ListNode.genLinkedListWithoutHeadNode(nums1);
         ListNode l2 = ListNode.genLinkedListWithoutHeadNode(nums2);
-        ListNode result = new Solution().addTwoNumbers(l1, l2);
+        ListNode result = new Solution().mergeTwoLists(l1, l2);
         ArrayUtils.printArray(ListNode.toArrayWithoutHeadNode(result));
     }
 }
