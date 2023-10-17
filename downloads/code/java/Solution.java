@@ -1,41 +1,56 @@
 public class Solution {
-    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        ListNode p = list1;
-        ListNode q = list2;
-        ListNode head = new ListNode(Integer.MIN_VALUE);
-        ListNode r = head;
-
-        while (p != null && q != null) {
-            while (p != null && q != null && p.val <= q.val) {
-                r.next = new ListNode(p.val);
-                r = r.next;
-
-                p = p.next;
-            }
-
-            while (p != null && q != null && q.val <= p.val) {
-                r.next = new ListNode(q.val);
-                r = r.next;
-
-                q = q.next;
-            }
-        }
-
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode p = head;
+        ListNode m = null;
         while (p != null) {
-            r.next = new ListNode(p.val);
-            r = r.next;
+            ListNode r = p;
+            for (int i = 0; i < k; i++) {
+                if (r == null) {
+                    ListNode l = p;
+                    if (m != null) {
+                        m.next = l;
+                    } else {
+                        head = l;
+                    }
 
-            p = p.next;
+                    return head;
+                }
+
+                r = r.next;
+            }
+
+            ListNode l = null;
+            ListNode t = null;
+            for (int i = 0; i < k; i++) {
+                if (p == null) {
+                    break;
+                }
+
+                if (i == 0) {
+                    t = p;
+                }
+
+                // 先保存旧链表的剩余部分
+                ListNode q = p.next;
+
+                // 在新链表的头部插入
+                p.next = l;
+                l = p;
+
+                // 继续处理旧链表的剩余部分
+                p = q;
+            }
+
+            if (m != null) {
+                m.next = l;
+            } else {
+                head = l;
+            }
+
+            m = t;
         }
 
-        while (q != null) {
-            r.next = new ListNode(q.val);
-            r = r.next;
-
-            q = q.next;
-        }
-
-        return head.next;
+        return head;
     }
 
     static class ListNode {
@@ -146,36 +161,23 @@ public class Solution {
     public static void main(String[] args) {
         testCase1();
         testCase2();
-        testCase3();
     }
 
     public static void testCase1() {
-        int[] nums1 = { 1, 2, 4 };
-        int[] nums2 = { 1, 3, 4 };
+        int[] nums = { 1, 2, 3, 4, 5 };
+        int k = 2;
 
-        ListNode l1 = ListNode.genLinkedListWithoutHeadNode(nums1);
-        ListNode l2 = ListNode.genLinkedListWithoutHeadNode(nums2);
-        ListNode result = new Solution().mergeTwoLists(l1, l2);
+        ListNode link = ListNode.genLinkedListWithoutHeadNode(nums);
+        ListNode result = new Solution().reverseKGroup(link, k);
         ArrayUtils.printArray(ListNode.toArrayWithoutHeadNode(result));
     }
 
     public static void testCase2() {
-        int[] nums1 = {};
-        int[] nums2 = {};
+        int[] nums = { 1, 2, 3, 4, 5 };
+        int k = 3;
 
-        ListNode l1 = ListNode.genLinkedListWithoutHeadNode(nums1);
-        ListNode l2 = ListNode.genLinkedListWithoutHeadNode(nums2);
-        ListNode result = new Solution().mergeTwoLists(l1, l2);
-        ArrayUtils.printArray(ListNode.toArrayWithoutHeadNode(result));
-    }
-
-    public static void testCase3() {
-        int[] nums1 = {};
-        int[] nums2 = { 0 };
-
-        ListNode l1 = ListNode.genLinkedListWithoutHeadNode(nums1);
-        ListNode l2 = ListNode.genLinkedListWithoutHeadNode(nums2);
-        ListNode result = new Solution().mergeTwoLists(l1, l2);
+        ListNode link = ListNode.genLinkedListWithoutHeadNode(nums);
+        ListNode result = new Solution().reverseKGroup(link, k);
         ArrayUtils.printArray(ListNode.toArrayWithoutHeadNode(result));
     }
 }

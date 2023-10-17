@@ -7,7 +7,7 @@ public class Test {
     }
 
     private static void jsArrayLiteral2JavaArrayLiteral() {
-        String s = "[[1,2],[2,3],[3,4],[4,5]]";
+        String s = "[[1,2],[2,3]]";
         s = s.replace('[', '{');
         s = s.replace(']', '}');
         s = s.replace("{{", "{\n{");
