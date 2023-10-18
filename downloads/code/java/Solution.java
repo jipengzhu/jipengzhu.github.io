@@ -1,103 +1,137 @@
-import java.util.HashMap;
-import java.util.Map;
-
 public class Solution {
-    public Node copyRandomList(Node head) {
-        Map<Node, Node> caches = new HashMap<>();
+    public ListNode deleteDuplicates(ListNode head) {
+        ListNode dummy = new ListNode(0);
 
-        Node p = head;
+        ListNode t1 = dummy; // 保存合并时第1个链表的末尾
+        ListNode t2 = null; // 保存合并时第2个链表的末尾
+
+        ListNode p = head;
         while (p != null) {
-            Node node = new Node(p.val);
-            caches.put(p, node);
+            int c = 0;
+            int first = p.val;
+            while (p != null && p.val == first) {
+                c++;
 
-            p = p.next;
-        }
-
-        p = head;
-        while (p != null) {
-            Node node = caches.get(p);
-            if (p.next != null) {
-                node.next = caches.get(p.next);
-            }
-            if (p.random != null) {
-                node.random = caches.get(p.random);
+                t2 = p;
+                p = p.next;
             }
 
-            p = p.next;
+            if (c != 1) {
+                continue;
+            }
+
+            // 只取一个结点
+            t2.next = null;
+
+            t1.next = t2;
+            t1 = t2;
         }
 
-        return caches.get(head);
+        return dummy.next;
     }
 
-    static class Node {
+    static class ListNode {
         int val;
-        Node next;
-        Node random;
+        ListNode next;
 
-        public Node(int val) {
-            this.val = val;
-            this.next = null;
-            this.random = null;
+        ListNode(int x) {
+            val = x;
+            next = null;
         }
 
-        public static Node genLinkedList(int[][] arrays) {
-            if (arrays.length == 0) {
+        public static ListNode genLinkedList(int[] nums, boolean withHead, int loopPos) {
+            if (nums.length == 0) {
                 return null;
             }
 
-            Node[] caches = new Node[arrays.length];
+            int val = withHead ? Integer.MIN_VALUE : nums[0];
+            ListNode head = new ListNode(val);
 
-            for (int i = 0; i < arrays.length; i++) {
-                int v = arrays[i][0];
-                caches[i] = new Node(v);
-            }
+            ListNode loop = withHead ? null : loopPos == 0 ? head : null;
 
-            for (int i = 0; i < arrays.length; i++) {
-                Node node = caches[i];
+            int b = withHead ? 0 : 1;
+            ListNode p = head;
+            for (int i = b; i < nums.length; i++) {
+                p.next = new ListNode(nums[i]);
+                p = p.next;
 
-                int j = i + 1;
-                if (j < arrays.length) {
-                    node.next = caches[j];
-                }
-
-                int k = arrays[i][1];
-                if (k >= 0) {
-                    node.random = caches[k];
+                if (loopPos == i) {
+                    loop = p;
                 }
             }
 
-            return caches[0];
+            if (loop != null) {
+                p.next = loop;
+            }
+
+            return head;
         }
 
-        public static Map<Node, Integer> getIndexMap(Node head) {
-            Map<Node, Integer> map = new HashMap<>();
+        public static ListNode genLinkedListWithHeadNode(int[] nums) {
+            return genLinkedList(nums, true, -1);
+        }
 
-            int index = 0;
+        public static ListNode genLinkedListWithoutHeadNode(int[] nums) {
+            return genLinkedList(nums, false, -1);
+        }
 
-            Node p = head;
+        public static ListNode genLoopedLinkedListWithHeadNode(int[] nums, int pos) {
+            return genLinkedList(nums, true, pos);
+        }
+
+        public static ListNode genLoopedLinkedListWithoutHeadNode(int[] nums, int pos) {
+            return genLinkedList(nums, false, pos);
+        }
+
+        public static int getCount(ListNode head, boolean withHead) {
+            ListNode p = withHead ? head.next : head;
+
+            int c = 0;
             while (p != null) {
-                map.put(p, index++);
+                c++;
                 p = p.next;
             }
 
-            return map;
+            return c;
         }
 
-        public static void printLinkedList(Node head) {
-            Map<Node, Integer> indexMap = getIndexMap(head);
+        public static int[] toArray(ListNode head, boolean withHead) {
+            int c = getCount(head, withHead);
+            int[] nums = new int[c];
 
-            Node p = head;
+            ListNode p = withHead ? head.next : head;
+
+            int k = 0;
             while (p != null) {
-                String nodeValue = p.val + "";
-                String randomValue = p.random != null ? p.random.val + "" : "null";
-                String randomIndex = p.random != null ? indexMap.get(p.random) + "" : "-1";
+                nums[k] = p.val;
 
-                String s = String.format("node: %25s => [%5s], random: %25s => [%5s], randomIndex: %s",
-                        p, nodeValue, p.random, randomValue, randomIndex);
-                System.out.println(s);
-
+                k++;
                 p = p.next;
             }
+
+            return nums;
+        }
+
+        public static int[] toArrayWithHeadNode(ListNode head) {
+            return toArray(head, true);
+        }
+
+        public static int[] toArrayWithoutHeadNode(ListNode head) {
+            return toArray(head, false);
+        }
+    }
+
+    public static class ArrayUtils {
+        public static void printArray(int[] array) {
+            System.out.println(java.util.Arrays.toString(array));
+        }
+
+        public static void printArray(int[] array, int len) {
+            System.out.println(java.util.Arrays.toString(java.util.Arrays.copyOf(array, len)));
+        }
+
+        public static void printArrays(int[][] arrays) {
+            System.out.println(java.util.Arrays.deepToString(arrays));
         }
     }
 
@@ -105,57 +139,47 @@ public class Solution {
         testCase1();
         testCase2();
         testCase3();
+        testCase4();
+        testCase5();
     }
 
     public static void testCase1() {
-        int[][] arrays = {
-                { 7, -1 },
-                { 13, 0 },
-                { 11, 4 },
-                { 10, 2 },
-                { 1, 0 }
-        };
+        int[] nums = { 1, 2, 3, 3, 4, 4, 5 };
 
-        Node head = Node.genLinkedList(arrays);
-        Node result = new Solution().copyRandomList(head);
-
-        System.out.println();
-        Node.printLinkedList(head);
-        System.out.println();
-        Node.printLinkedList(result);
-        System.out.println();
+        ListNode link = ListNode.genLinkedListWithoutHeadNode(nums);
+        ListNode result = new Solution().deleteDuplicates(link);
+        ArrayUtils.printArray(ListNode.toArrayWithoutHeadNode(result));
     }
 
     public static void testCase2() {
-        int[][] arrays = {
-                { 1, 1 },
-                { 2, 1 }
-        };
+        int[] nums = { 1, 1, 1, 2, 3 };
 
-        Node head = Node.genLinkedList(arrays);
-        Node result = new Solution().copyRandomList(head);
-
-        System.out.println();
-        Node.printLinkedList(head);
-        System.out.println();
-        Node.printLinkedList(result);
-        System.out.println();
+        ListNode link = ListNode.genLinkedListWithoutHeadNode(nums);
+        ListNode result = new Solution().deleteDuplicates(link);
+        ArrayUtils.printArray(ListNode.toArrayWithoutHeadNode(result));
     }
 
     public static void testCase3() {
-        int[][] arrays = {
-                { 3, -1 },
-                { 3, 0 },
-                { 3, -1 }
-        };
+        int[] nums = { 1, 1 };
 
-        Node head = Node.genLinkedList(arrays);
-        Node result = new Solution().copyRandomList(head);
+        ListNode link = ListNode.genLinkedListWithoutHeadNode(nums);
+        ListNode result = new Solution().deleteDuplicates(link);
+        ArrayUtils.printArray(ListNode.toArrayWithoutHeadNode(result));
+    }
 
-        System.out.println();
-        Node.printLinkedList(head);
-        System.out.println();
-        Node.printLinkedList(result);
-        System.out.println();
+    public static void testCase4() {
+        int[] nums = { 1, 1, 2 };
+
+        ListNode link = ListNode.genLinkedListWithoutHeadNode(nums);
+        ListNode result = new Solution().deleteDuplicates(link);
+        ArrayUtils.printArray(ListNode.toArrayWithoutHeadNode(result));
+    }
+
+    public static void testCase5() {
+        int[] nums = { 1, 2, 2 };
+
+        ListNode link = ListNode.genLinkedListWithoutHeadNode(nums);
+        ListNode result = new Solution().deleteDuplicates(link);
+        ArrayUtils.printArray(ListNode.toArrayWithoutHeadNode(result));
     }
 }
