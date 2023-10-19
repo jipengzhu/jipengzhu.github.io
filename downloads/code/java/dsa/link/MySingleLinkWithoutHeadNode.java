@@ -17,7 +17,7 @@ public class MySingleLinkWithoutHeadNode {
         }
     }
 
-    private MyNode head;
+    private MyNode head = null;
 
     public MySingleLinkWithoutHeadNode() {
 
