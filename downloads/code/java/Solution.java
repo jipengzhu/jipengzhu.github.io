@@ -1,33 +1,32 @@
 public class Solution {
-    public ListNode deleteDuplicates(ListNode head) {
-        ListNode dummy = new ListNode(0);
+    public ListNode partition(ListNode head, int x) {
+        ListNode l1 = new ListNode(0);
+        ListNode l2 = new ListNode(0);
 
-        ListNode t1 = dummy; // 保存合并时第1个链表的末尾
-        ListNode t2 = null; // 保存合并时第2个链表的末尾
+        ListNode t1 = l1;
+        ListNode t2 = l2;
 
         ListNode p = head;
         while (p != null) {
-            int c = 0;
-            int first = p.val;
-            while (p != null && p.val == first) {
-                c++;
-
-                t2 = p;
-                p = p.next;
+            if (p.val < x) {
+                t1.next = p;
+                t1 = t1.next;
+            } else {
+                t2.next = p;
+                t2 = t2.next;
             }
 
-            if (c != 1) {
-                continue;
-            }
-
-            // 只取一个结点
-            t2.next = null;
-
-            t1.next = t2;
-            t1 = t2;
+            p = p.next;
         }
 
-        return dummy.next;
+        // 清空原有的关系
+        t1.next = null;
+        t2.next = null;
+
+        t1.next = l2.next;
+        head = l1.next;
+
+        return head;
     }
 
     static class ListNode {
@@ -138,48 +137,23 @@ public class Solution {
     public static void main(String[] args) {
         testCase1();
         testCase2();
-        testCase3();
-        testCase4();
-        testCase5();
     }
 
     public static void testCase1() {
-        int[] nums = { 1, 2, 3, 3, 4, 4, 5 };
+        int[] nums = { 1, 4, 3, 2, 5, 2 };
+        int x = 3;
 
         ListNode link = ListNode.genLinkedListWithoutHeadNode(nums);
-        ListNode result = new Solution().deleteDuplicates(link);
+        ListNode result = new Solution().partition(link, x);
         ArrayUtils.printArray(ListNode.toArrayWithoutHeadNode(result));
     }
 
     public static void testCase2() {
-        int[] nums = { 1, 1, 1, 2, 3 };
+        int[] nums = { 2, 1 };
+        int x = 2;
 
         ListNode link = ListNode.genLinkedListWithoutHeadNode(nums);
-        ListNode result = new Solution().deleteDuplicates(link);
-        ArrayUtils.printArray(ListNode.toArrayWithoutHeadNode(result));
-    }
-
-    public static void testCase3() {
-        int[] nums = { 1, 1 };
-
-        ListNode link = ListNode.genLinkedListWithoutHeadNode(nums);
-        ListNode result = new Solution().deleteDuplicates(link);
-        ArrayUtils.printArray(ListNode.toArrayWithoutHeadNode(result));
-    }
-
-    public static void testCase4() {
-        int[] nums = { 1, 1, 2 };
-
-        ListNode link = ListNode.genLinkedListWithoutHeadNode(nums);
-        ListNode result = new Solution().deleteDuplicates(link);
-        ArrayUtils.printArray(ListNode.toArrayWithoutHeadNode(result));
-    }
-
-    public static void testCase5() {
-        int[] nums = { 1, 2, 2 };
-
-        ListNode link = ListNode.genLinkedListWithoutHeadNode(nums);
-        ListNode result = new Solution().deleteDuplicates(link);
+        ListNode result = new Solution().partition(link, x);
         ArrayUtils.printArray(ListNode.toArrayWithoutHeadNode(result));
     }
 }
