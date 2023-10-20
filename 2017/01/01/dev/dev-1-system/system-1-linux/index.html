@@ -28,7 +28,7 @@
 <meta property="og:description" content="linux">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2016-12-31T17:00:00.000Z">
-<meta property="article:modified_time" content="2023-10-20T05:36:49.351Z">
+<meta property="article:modified_time" content="2023-10-20T09:36:29.914Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-20 13:36:49" itemprop="dateModified" datetime="2023-10-20T13:36:49+08:00">2023-10-20</time>
+                <time title="修改时间：2023-10-20 17:36:29" itemprop="dateModified" datetime="2023-10-20T17:36:29+08:00">2023-10-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -418,14 +418,42 @@
 </blockquote>
 <h3 id="Script"><a href="#Script" class="headerlink" title="Script"></a>Script</h3><blockquote>
 <ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42711381/article/details/121665260">shell变量之双引号</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/asdfgh0077/article/details/103842503">shell变量之花括号</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MakerCloud/article/details/103942191">shell引号入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43958105/article/details/118728964">shell引号详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhang_referee/article/details/83511123">shell字符串操作详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36417677/article/details/104395917">shell判断操作详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xhaimail/article/details/103208901">shell函数使用详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41551450/article/details/92803686">shell各种括号的用法</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010921682/article/details/83308031">shell输入之自定义结束符（EOF）</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yy_diego/article/details/122479600">shell获取脚本的所在目录</a></li>
 </ul>
 </blockquote>
+<ul>
+<li>单引号：单引号里面都视为普通字符</li>
+<li>双引号：双引号里面除了美元符<code>（$）</code>、反引号（`）、反斜线<code>（\）</code>都视为普通字符</li>
+</ul>
+<hr>
+<p>— 变量取值无引号时 —</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello=&quot;hello world&quot;;for arg in $hello;do echo $arg;done</span><br></pre></td></tr></table></figure>
+
+<p>等价于</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for arg in hello world;do echo $arg;done</span><br></pre></td></tr></table></figure>
+
+<p>会输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hello</span><br><span class="line">world</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>— 变量取值有引号时 —</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello=&quot;hello world&quot;;for arg in &quot;$hello&quot;;do echo $arg;done</span><br></pre></td></tr></table></figure>
+
+<p>等价于</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for arg in &quot;hello world&quot;;do echo $arg;done</span><br></pre></td></tr></table></figure>
+
+<p>会输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello world</span><br></pre></td></tr></table></figure>
+
 <h2 id="Terminal"><a href="#Terminal" class="headerlink" title="Terminal"></a>Terminal</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/unicorn_mitnick/article/details/89785893">shell分类之交互、非交互、登录、非登录入门</a></li>
@@ -884,7 +912,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
