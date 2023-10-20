@@ -2,23 +2,24 @@ package dsa.structure.queue;
 
 import java.util.Arrays;
 
-public class MyArrayLoopQueueWithWaste {
+public class MyArrayCircularQueueWithSize {
     private int capacity;
     private int front = 0;
     private int rear = 0;
+    private int size = 0;
     private String[] table;
 
-    public MyArrayLoopQueueWithWaste(int capacity) {
+    public MyArrayCircularQueueWithSize(int capacity) {
         this.capacity = capacity;
         this.table = new String[capacity];
     }
 
     public boolean isEmpty() {
-        return front == rear;
+        return size == 0 && front == rear;
     }
 
     public boolean isFull() {
-        return (rear + 1) % capacity == front;
+        return size > 0 && front == rear;
     }
 
     public boolean enqueue(String s) {
@@ -28,6 +29,8 @@ public class MyArrayLoopQueueWithWaste {
 
         table[rear] = s;
         rear = (rear + 1) % capacity;
+
+        size++;
 
         return true;
     }
@@ -41,6 +44,8 @@ public class MyArrayLoopQueueWithWaste {
         table[front] = null;
         front = (front + 1) % capacity;
 
+        size--;
+
         return v;
     }
 
@@ -51,7 +56,7 @@ public class MyArrayLoopQueueWithWaste {
 
     public static void main(String[] args) {
         int capacity = 7;
-        MyArrayLoopQueueWithWaste queue = new MyArrayLoopQueueWithWaste(capacity);
+        MyArrayCircularQueueWithSize queue = new MyArrayCircularQueueWithSize(capacity);
 
         // test for enqueue
         System.out.println("\n---test enqueue---\n");

@@ -6,7 +6,7 @@ import java.util.Arrays;
  * 1. 插入操作不需要考虑空链表
  * 2. 删除操作需要考虑空链表
  */
-public class MyDoubleCirculaLink {
+public class MyDoubleLoopLink {
     private static class MyNode {
         public String value;
         public MyNode next;
@@ -19,7 +19,7 @@ public class MyDoubleCirculaLink {
 
     private MyNode head = new MyNode(null);
 
-    public MyDoubleCirculaLink() {
+    public MyDoubleLoopLink() {
         head.next = head;
         head.prev = head;
     }
@@ -116,7 +116,7 @@ public class MyDoubleCirculaLink {
 
     public static void main(String[] args) {
         int capacity = 7;
-        MyDoubleCirculaLink link = new MyDoubleCirculaLink();
+        MyDoubleLoopLink link = new MyDoubleLoopLink();
 
         // test ops for k times
         for (int k = 0; k < 3; k++) {
@@ -125,7 +125,7 @@ public class MyDoubleCirculaLink {
         }
     }
 
-    public static void test1(MyDoubleCirculaLink link, int capacity) {
+    public static void test1(MyDoubleLoopLink link, int capacity) {
         // test for addLast and removeFirst
         System.out.println("\n---test for addLast and removeFirst---\n");
 
@@ -153,7 +153,7 @@ public class MyDoubleCirculaLink {
         }
     }
 
-    public static void test2(MyDoubleCirculaLink link, int capacity) {
+    public static void test2(MyDoubleLoopLink link, int capacity) {
         // test for addFirst and removeLast
         System.out.println("\n---test for addFirst and removeLast---\n");
 

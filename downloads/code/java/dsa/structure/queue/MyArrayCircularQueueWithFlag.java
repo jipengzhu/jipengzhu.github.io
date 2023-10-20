@@ -2,14 +2,14 @@ package dsa.structure.queue;
 
 import java.util.Arrays;
 
-public class MyArrayLoopQueueWithFlag {
+public class MyArrayCircularQueueWithFlag {
     private int capacity;
     private int front = 0;
     private int rear = 0;
     private boolean flag = false; // false is empty, true is full
     private String[] table;
 
-    public MyArrayLoopQueueWithFlag(int capacity) {
+    public MyArrayCircularQueueWithFlag(int capacity) {
         this.capacity = capacity;
         this.table = new String[capacity];
     }
@@ -56,7 +56,7 @@ public class MyArrayLoopQueueWithFlag {
 
     public static void main(String[] args) {
         int capacity = 7;
-        MyArrayLoopQueueWithFlag queue = new MyArrayLoopQueueWithFlag(capacity);
+        MyArrayCircularQueueWithFlag queue = new MyArrayCircularQueueWithFlag(capacity);
 
         // test for enqueue
         System.out.println("\n---test enqueue---\n");

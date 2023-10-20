@@ -1,6 +1,6 @@
 package dsa.structure.stack;
 
-public class MyArrayLoopStackWithWaste {
+public class MyArrayCircularStackWithFlag {
     public static void main(String[] args) {
 
     }
