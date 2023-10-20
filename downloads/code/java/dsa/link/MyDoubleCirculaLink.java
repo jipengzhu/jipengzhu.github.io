@@ -53,12 +53,7 @@ public class MyDoubleCirculaLink {
     public boolean addLast(String s) {
         MyNode node = new MyNode(s);
 
-        MyNode p = head;
-
-        // use p.next to find the last node
-        while (p.next != head) {
-            p = p.next;
-        }
+        MyNode p = head.prev;
 
         node.next = p.next;
         node.prev = p;
@@ -75,14 +70,7 @@ public class MyDoubleCirculaLink {
             return null;
         }
 
-        MyNode p = head;
-
-        // use p.next to find the last node
-        while (p.next != head) {
-            p = p.next;
-        }
-
-        MyNode node = p;
+        MyNode node = head.prev;
 
         node.next.prev = node.prev;
         node.prev.next = node.next;
