@@ -1,25 +1,10 @@
 public class Solution {
-    private int totalSum = 0;
-
-    public int sumNumbers(TreeNode root) {
-        sumNumbers(root, 0);
-
-        return totalSum;
-    }
-
-    private void sumNumbers(TreeNode node, int parentSum) {
-        if (node == null) {
-            return;
+    public int countNodes(TreeNode root) {
+        if (root == null) {
+            return 0;
         }
 
-        node.val = parentSum * 10 + node.val;
-
-        if (node.left == null && node.right == null) {
-            totalSum = totalSum + node.val;
-        }
-
-        sumNumbers(node.left, node.val);
-        sumNumbers(node.right, node.val);
+        return 1 + countNodes(root.left) + countNodes(root.right);
     }
 
     static public class TreeNode {
@@ -116,26 +101,26 @@ public class Solution {
     }
 
     public static void testCase1() {
-        Integer[] nums = { 1, 2, 3 };
+        Integer[] nums = { 1, 2, 3, 4, 5, 6 };
 
         TreeNode tree = TreeNode.genTree(nums);
-        int result = new Solution().sumNumbers(tree);
+        int result = new Solution().countNodes(tree);
         System.out.println(result);
     }
 
     public static void testCase2() {
-        Integer[] nums = { 4, 9, 0, 5, 1 };
+        Integer[] nums = {};
 
         TreeNode tree = TreeNode.genTree(nums);
-        int result = new Solution().sumNumbers(tree);
+        int result = new Solution().countNodes(tree);
         System.out.println(result);
     }
 
     public static void testCase3() {
-        Integer[] nums = { 1, 0 };
+        Integer[] nums = { 1 };
 
         TreeNode tree = TreeNode.genTree(nums);
-        int result = new Solution().sumNumbers(tree);
+        int result = new Solution().countNodes(tree);
         System.out.println(result);
     }
 }
