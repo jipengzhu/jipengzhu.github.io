@@ -1,18 +1,25 @@
 public class Solution {
-    public int maxDepth(TreeNode root) {
-        if (root == null) {
-            return 0;
+    private int totalSum = 0;
+
+    public int sumNumbers(TreeNode root) {
+        sumNumbers(root, 0);
+
+        return totalSum;
+    }
+
+    private void sumNumbers(TreeNode node, int parentSum) {
+        if (node == null) {
+            return;
         }
 
-        int l = maxDepth(root.left);
-        int r = maxDepth(root.right);
+        node.val = parentSum * 10 + node.val;
 
-        int k = l;
-        if (r > l) {
-            k = r;
+        if (node.left == null && node.right == null) {
+            totalSum = totalSum + node.val;
         }
 
-        return k + 1;
+        sumNumbers(node.left, node.val);
+        sumNumbers(node.right, node.val);
     }
 
     static public class TreeNode {
@@ -46,7 +53,7 @@ public class Solution {
             while (i < nums.length) {
                 TreeNode node = queue.poll();
 
-                Integer leftVal = nums[i++];
+                Integer leftVal = i < nums.length ? nums[i++] : null;
                 if (leftVal != null) {
                     TreeNode leftNode = new TreeNode(leftVal);
                     node.left = leftNode;
@@ -54,7 +61,7 @@ public class Solution {
                     queue.offer(leftNode);
                 }
 
-                Integer rightVal = nums[i++];
+                Integer rightVal = i < nums.length ? nums[i++] : null;
                 if (rightVal != null) {
                     TreeNode rightNode = new TreeNode(rightVal);
                     node.right = rightNode;
@@ -65,26 +72,70 @@ public class Solution {
 
             return root;
         }
+
+        public static Integer[] toArray(TreeNode root) {
+            if (root == null) {
+                return new Integer[0];
+            }
+
+            java.util.LinkedList<Integer> list = new java.util.LinkedList<>();
+            list.add(root.val);
+
+            java.util.Queue<TreeNode> queue = new java.util.LinkedList<>();
+            queue.offer(root);
+
+            while (!queue.isEmpty()) {
+                TreeNode node = queue.poll();
+                TreeNode left = node.left;
+                TreeNode right = node.right;
+
+                list.add(left != null ? left.val : null);
+                list.add(right != null ? right.val : null);
+
+                if (left != null) {
+                    queue.offer(left);
+                }
+
+                if (right != null) {
+                    queue.offer(right);
+                }
+            }
+
+            while (!list.isEmpty() && list.peekLast() == null) {
+                list.pollLast();
+            }
+
+            return list.toArray(new Integer[0]);
+        }
     }
 
     public static void main(String[] args) {
         testCase1();
         testCase2();
+        testCase3();
     }
 
     public static void testCase1() {
-        Integer[] nums = { 3, 9, 20, null, null, 15, 7 };
+        Integer[] nums = { 1, 2, 3 };
 
         TreeNode tree = TreeNode.genTree(nums);
-        int result = new Solution().maxDepth(tree);
+        int result = new Solution().sumNumbers(tree);
         System.out.println(result);
     }
 
     public static void testCase2() {
-        Integer[] nums = { 1, null, 2 };
+        Integer[] nums = { 4, 9, 0, 5, 1 };
 
         TreeNode tree = TreeNode.genTree(nums);
-        int result = new Solution().maxDepth(tree);
+        int result = new Solution().sumNumbers(tree);
+        System.out.println(result);
+    }
+
+    public static void testCase3() {
+        Integer[] nums = { 1, 0 };
+
+        TreeNode tree = TreeNode.genTree(nums);
+        int result = new Solution().sumNumbers(tree);
         System.out.println(result);
     }
 }

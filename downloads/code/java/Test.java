@@ -28,6 +28,30 @@ public class Test {
         public static void printArrays(int[][] arrays) {
             System.out.println(java.util.Arrays.deepToString(arrays));
         }
+
+        public static void printArray(Integer[] array) {
+            System.out.println(java.util.Arrays.toString(array));
+        }
+
+        public static void printArray(Integer[] array, int len) {
+            System.out.println(java.util.Arrays.toString(java.util.Arrays.copyOf(array, len)));
+        }
+
+        public static void printArrays(Integer[][] arrays) {
+            System.out.println(java.util.Arrays.deepToString(arrays));
+        }
+
+        public static void printArray(String[] array) {
+            System.out.println(java.util.Arrays.toString(array));
+        }
+
+        public static void printArray(String[] array, int len) {
+            System.out.println(java.util.Arrays.toString(java.util.Arrays.copyOf(array, len)));
+        }
+
+        public static void printArrays(String[][] arrays) {
+            System.out.println(java.util.Arrays.deepToString(arrays));
+        }
     }
 
     public static class ListUtils {
