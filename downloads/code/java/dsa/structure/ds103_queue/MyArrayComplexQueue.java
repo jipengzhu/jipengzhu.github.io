@@ -80,7 +80,7 @@ public class MyArrayComplexQueue {
 
         // test for dequeue and enqueue
         System.out.println("\n---test dequeue and enqueue---\n");
-        for (int i = 0; i < capacity + 1; i++) {
+        for (int i = 0; i < capacity + 2; i++) {
             String s = "" + (i + capacity);
 
             if (i < capacity / 2) {

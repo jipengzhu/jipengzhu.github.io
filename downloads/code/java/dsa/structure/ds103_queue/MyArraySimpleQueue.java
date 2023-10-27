@@ -67,6 +67,25 @@ public class MyArraySimpleQueue {
             }
         }
 
+        // test for dequeue and enqueue
+        System.out.println("\n---test dequeue and enqueue---\n");
+        for (int i = 0; i < capacity + 2; i++) {
+            String s = "" + (i + capacity);
+
+            if (i < capacity / 2) {
+                s = queue.dequeue();
+                System.out.println(String.format("dequeue value %2s , queue is %s", s, queue.toString()));
+            } else {
+                boolean ok = queue.enqueue(s);
+                if (ok) {
+                    System.out.println(String.format("enqueue value %2s , queue is %s", s, queue.toString()));
+                } else {
+                    System.out.println("queue is full");
+                    break;
+                }
+            }
+        }
+
         // test for dequeue
         System.out.println("\n---test dequeue---\n");
         while (true) {

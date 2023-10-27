@@ -2,11 +2,11 @@ package dsa.structure.ds103_queue;
 
 import java.util.Arrays;
 
-import dsa.link.MySingleLink;
+import dsa.link.MyDoubleLinkWithTailPointer;
 
 public class MyLinkedQueue {
 
-    private MySingleLink link = new MySingleLink();
+    private MyDoubleLinkWithTailPointer link = new MyDoubleLinkWithTailPointer();
 
     public MyLinkedQueue() {
 
@@ -45,7 +45,7 @@ public class MyLinkedQueue {
 
         // test for dequeue and enqueue
         System.out.println("\n---test dequeue and enqueue---\n");
-        for (int i = 0; i < capacity + 1; i++) {
+        for (int i = 0; i < capacity + 2; i++) {
             String s = "" + (i + capacity);
 
             if (i < capacity / 2) {

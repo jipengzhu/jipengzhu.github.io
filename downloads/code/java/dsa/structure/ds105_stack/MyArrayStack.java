@@ -2,32 +2,55 @@ package dsa.structure.ds105_stack;
 
 import java.util.Arrays;
 
-import dsa.link.MyDoubleLinkWithTailPointer;
+public class MyArrayStack {
+    private int capacity;
+    private int top = 0;
+    private String[] table;
 
-public class MyLinkedStack {
+    public MyArrayStack(int capacity) {
+        this.capacity = capacity;
+        this.table = new String[capacity];
+    }
 
-    private MyDoubleLinkWithTailPointer link = new MyDoubleLinkWithTailPointer();
+    public boolean isEmpty() {
+        return top == 0;
+    }
 
-    public MyLinkedStack() {
-
+    public boolean isFull() {
+        return top == capacity;
     }
 
     public boolean push(String s) {
-        return link.addLast(s);
+        if (isFull()) {
+            return false;
+        }
+
+        table[top] = s;
+        top++;
+
+        return true;
     }
 
     public String pop() {
-        return link.removeLast();
+        if (isEmpty()) {
+            return null;
+        }
+
+        String v = table[top - 1];
+        table[top - 1] = null;
+        top--;
+
+        return v;
     }
 
     // for test print
     public String toString() {
-        return Arrays.toString(link.toArray());
+        return Arrays.toString(table);
     }
 
     public static void main(String[] args) {
         int capacity = 7;
-        MyLinkedStack stack = new MyLinkedStack();
+        MyArrayStack stack = new MyArrayStack(capacity);
 
         // test for push
         System.out.println("\n---test push---\n");
