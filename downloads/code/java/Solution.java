@@ -1,10 +1,57 @@
+import java.util.Deque;
+import java.util.LinkedList;
+
 public class Solution {
     public int countNodes(TreeNode root) {
         if (root == null) {
             return 0;
         }
 
-        return 1 + countNodes(root.left) + countNodes(root.right);
+        int k = 0;
+        TreeNode p = root;
+        while (p != null) {
+            k++;
+
+            p = p.left;
+        }
+
+        Deque<TreeNode> stack = new LinkedList<>();
+
+        p = root;
+        while (p != null) {
+            stack.push(p);
+
+            p = p.right;
+        }
+
+        int totalMissedCount = countMissedNodes(stack.peek().right, k, stack.size() + 1);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            int missedCount = countMissedNodes(node.left, k, stack.size() + 2);
+            if (missedCount == 0) {
+                break;
+            } else {
+                totalMissedCount = totalMissedCount + missedCount;
+            }
+        }
+
+        return (int) (Math.pow(2, k) - 1 - totalMissedCount);
+    }
+
+    private int countMissedNodes(TreeNode node, int tk, int nk) {
+        if (nk == tk) {
+            if (node == null) {
+                return 1;
+            } else {
+                return 0;
+            }
+        } else {
+            if (node == null) {
+                return 0;
+            } else {
+                return countMissedNodes(node.left, tk, nk + 1) + countMissedNodes(node.right, tk, nk + 1);
+            }
+        }
     }
 
     static public class TreeNode {
