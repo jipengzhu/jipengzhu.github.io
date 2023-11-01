@@ -1,57 +1,57 @@
-import java.util.Deque;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 
 public class Solution {
-    public int countNodes(TreeNode root) {
+    public List<List<Integer>> levelOrder(TreeNode root) {
         if (root == null) {
-            return 0;
+            return new LinkedList<>();
         }
 
-        int k = 0;
-        TreeNode p = root;
-        while (p != null) {
-            k++;
+        List<List<Integer>> list = new LinkedList<>();
 
-            p = p.left;
-        }
+        int curLevel = 1;
+        List<Integer> values = new LinkedList<>();
 
-        Deque<TreeNode> stack = new LinkedList<>();
+        Map<TreeNode, Integer> map = new HashMap<>(); // 存储每个结点的层次
+        map.put(root, 1);
 
-        p = root;
-        while (p != null) {
-            stack.push(p);
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
 
-            p = p.right;
-        }
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
 
-        int totalMissedCount = countMissedNodes(stack.peek().right, k, stack.size() + 1);
-        while (!stack.isEmpty()) {
-            TreeNode node = stack.pop();
-            int missedCount = countMissedNodes(node.left, k, stack.size() + 2);
-            if (missedCount == 0) {
-                break;
-            } else {
-                totalMissedCount = totalMissedCount + missedCount;
+            if (node.left != null) {
+                queue.offer(node.left);
+
+                map.put(node.left, map.get(node) + 1);
             }
+
+            if (node.right != null) {
+                queue.offer(node.right);
+
+                map.put(node.right, map.get(node) + 1);
+            }
+
+            if (map.get(node) == curLevel) {
+                values.add(node.val);
+            } else {
+                list.add(values);
+
+                values = new ArrayList<>();
+                values.add(node.val);
+            }
+
+            curLevel = map.get(node);
         }
 
-        return (int) (Math.pow(2, k) - 1 - totalMissedCount);
-    }
+        list.add(values);
 
-    private int countMissedNodes(TreeNode node, int tk, int nk) {
-        if (nk == tk) {
-            if (node == null) {
-                return 1;
-            } else {
-                return 0;
-            }
-        } else {
-            if (node == null) {
-                return 0;
-            } else {
-                return countMissedNodes(node.left, tk, nk + 1) + countMissedNodes(node.right, tk, nk + 1);
-            }
-        }
+        return list;
     }
 
     static public class TreeNode {
@@ -141,6 +141,36 @@ public class Solution {
         }
     }
 
+    public static class ListUtils {
+        public static void printList(List<Object> list) {
+            System.out.println(java.util.Arrays.toString(list.toArray(new Object[0])));
+        }
+
+        public static void printLists1(List<List<Integer>> lists) {
+            Object[] arrays = new Object[lists.size()];
+            for (int i = 0; i < lists.size(); i++) {
+
+                List<Integer> list = lists.get(i);
+                arrays[i] = list.toArray(new Object[0]);
+
+            }
+
+            System.out.println(java.util.Arrays.deepToString(arrays));
+        }
+
+        public static void printLists2(List<List<Double>> lists) {
+            Object[] arrays = new Object[lists.size()];
+            for (int i = 0; i < lists.size(); i++) {
+
+                List<Double> list = lists.get(i);
+                arrays[i] = list.toArray(new Object[0]);
+
+            }
+
+            System.out.println(java.util.Arrays.deepToString(arrays));
+        }
+    }
+
     public static void main(String[] args) {
         testCase1();
         testCase2();
@@ -148,26 +178,26 @@ public class Solution {
     }
 
     public static void testCase1() {
-        Integer[] nums = { 1, 2, 3, 4, 5, 6 };
+        Integer[] nums = { 3, 9, 20, null, null, 15, 7 };
 
         TreeNode tree = TreeNode.genTree(nums);
-        int result = new Solution().countNodes(tree);
-        System.out.println(result);
+        List<List<Integer>> result = new Solution().levelOrder(tree);
+        ListUtils.printLists1(result);
     }
 
     public static void testCase2() {
-        Integer[] nums = {};
-
-        TreeNode tree = TreeNode.genTree(nums);
-        int result = new Solution().countNodes(tree);
-        System.out.println(result);
-    }
-
-    public static void testCase3() {
         Integer[] nums = { 1 };
 
         TreeNode tree = TreeNode.genTree(nums);
-        int result = new Solution().countNodes(tree);
-        System.out.println(result);
+        List<List<Integer>> result = new Solution().levelOrder(tree);
+        ListUtils.printLists1(result);
+    }
+
+    public static void testCase3() {
+        Integer[] nums = {};
+
+        TreeNode tree = TreeNode.genTree(nums);
+        List<List<Integer>> result = new Solution().levelOrder(tree);
+        ListUtils.printLists1(result);
     }
 }

@@ -55,34 +55,46 @@ public class Test {
     }
 
     public static class ListUtils {
-        public static int[] listToArray(List<Integer> list) {
-            if (list == null || list.isEmpty()) {
-                return new int[0];
-            }
-
-            int[] array = new int[list.size()];
-            for (int i = 0; i < array.length; i++) {
-                array[i] = list.get(i);
-            }
-
-            return array;
+        public static void printList(java.util.List<? extends Object> list) {
+            System.out.println(java.util.Arrays.toString(list.toArray(new Object[0])));
         }
 
-        public static int[][] listsToArrays(List<List<Integer>> lists) {
-            if (lists == null || lists.isEmpty()) {
-                return new int[0][0];
+        public static void printLines(java.util.List<? extends Object> list) {
+            if (list == null) {
+                return;
             }
 
-            int row = lists.size();
-            int col = lists.get(0).size();
-            int[][] arrays = new int[row][col];
-            for (int i = 0; i < row; i++) {
-                for (int j = 0; j < col; j++) {
-                    arrays[i][j] = lists.get(i).get(j);
-                }
+            for (Object o : list) {
+                System.out.println(o);
+            }
+            System.out.println();
+        }
+
+        public static void printLists1(java.util.List<java.util.List<Integer>> lists) {
+            Object[] arrays = new Object[lists.size()];
+            for (int i = 0; i < lists.size(); i++) {
+                arrays[i] = lists.get(i).toArray(new Object[0]);
             }
 
-            return arrays;
+            System.out.println(java.util.Arrays.deepToString(arrays));
+        }
+
+        public static void printLists2(java.util.List<java.util.List<Double>> lists) {
+            Object[] arrays = new Object[lists.size()];
+            for (int i = 0; i < lists.size(); i++) {
+                arrays[i] = lists.get(i).toArray(new Object[0]);
+            }
+
+            System.out.println(java.util.Arrays.deepToString(arrays));
+        }
+
+        public static void printLists3(java.util.List<java.util.List<String>> lists) {
+            Object[] arrays = new Object[lists.size()];
+            for (int i = 0; i < lists.size(); i++) {
+                arrays[i] = lists.get(i).toArray(new Object[0]);
+            }
+
+            System.out.println(java.util.Arrays.deepToString(arrays));
         }
     }
 
@@ -177,16 +189,103 @@ public class Test {
         }
     }
 
+    static public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+
+        public static TreeNode genTree(Integer[] nums) {
+            if (nums.length == 0) {
+                return null;
+            }
+
+            java.util.Queue<TreeNode> queue = new java.util.LinkedList<>();
+            TreeNode root = new TreeNode(nums[0]);
+            queue.offer(root);
+
+            int i = 1;
+            while (i < nums.length) {
+                TreeNode node = queue.poll();
+
+                Integer leftVal = i < nums.length ? nums[i++] : null;
+                if (leftVal != null) {
+                    TreeNode leftNode = new TreeNode(leftVal);
+                    node.left = leftNode;
+
+                    queue.offer(leftNode);
+                }
+
+                Integer rightVal = i < nums.length ? nums[i++] : null;
+                if (rightVal != null) {
+                    TreeNode rightNode = new TreeNode(rightVal);
+                    node.right = rightNode;
+
+                    queue.offer(rightNode);
+                }
+            }
+
+            return root;
+        }
+
+        public static Integer[] toArray(TreeNode root) {
+            if (root == null) {
+                return new Integer[0];
+            }
+
+            java.util.LinkedList<Integer> list = new java.util.LinkedList<>();
+            list.add(root.val);
+
+            java.util.Queue<TreeNode> queue = new java.util.LinkedList<>();
+            queue.offer(root);
+
+            while (!queue.isEmpty()) {
+                TreeNode node = queue.poll();
+                TreeNode left = node.left;
+                TreeNode right = node.right;
+
+                list.add(left != null ? left.val : null);
+                list.add(right != null ? right.val : null);
+
+                if (left != null) {
+                    queue.offer(left);
+                }
+
+                if (right != null) {
+                    queue.offer(right);
+                }
+            }
+
+            while (!list.isEmpty() && list.peekLast() == null) {
+                list.pollLast();
+            }
+
+            return list.toArray(new Integer[0]);
+        }
+    }
+
     int result;
     int expect;
 
-    // String sp1 = "^\s{1,}print.*|System.out.println\((?!(java.util|expect|result))";
-    // String sp2 = "ArrayUtils.print.*\((?!(expect|result))|System.out.println\((?!(java.util|expect|result))";
-    // String sp3 = "public.*To[al].*\(";
-    // String sc = "ArrayUtils.print|System.out.println\((?!java.util)";
+    // String sp1 =
+    // "^\s{1,}print.*|System.out.println\((?!("|java.util|expect|result|o\)|s\))).+\)";
+    // String sp2 = "ToArr.{1,5}\((?!(new|result|tree|ListNode|head))";
+    // String sc1 = "(?<!out)\.print"
+    // String sc2 = "\..*?ToArr.*\("
 
-    // String cp1 = "new Solution\(\).*\)(?!;)";
-
-    // String tp1 = "test(?!Case).*\d\("
+    // String tp1 = "new Solution\(\).*\)(?!;)";
+    // String tp2 = "test(?!Case).*\d\("
     // String tc = "testCase\d\("
 }
