@@ -1,19 +1,38 @@
+import java.util.Deque;
 import java.util.LinkedList;
-import java.util.List;
 
 public class Solution {
-    public List<Integer> postorderTraversal(TreeNode root) {
+    public int getMinimumDifference(TreeNode root) {
         if (root == null) {
-            return new LinkedList<>();
+            return 0;
         }
 
-        List<Integer> list = new LinkedList<>();
+        int min = Integer.MAX_VALUE;
+        Integer pre = null;
 
-        list.addAll(postorderTraversal(root.left));
-        list.addAll(postorderTraversal(root.right));
-        list.add(root.val);
+        Deque<TreeNode> stack = new LinkedList<>();
 
-        return list;
+        TreeNode p = root;
+        while (p != null || !stack.isEmpty()) {
+            if (p != null) {
+
+                stack.push(p);
+
+                p = p.left;
+            } else {
+                p = stack.pop();
+
+                if (pre != null && p.val - pre < min) {
+                    min = p.val - pre;
+                }
+
+                pre = p.val;
+
+                p = p.right;
+            }
+        }
+
+        return min;
     }
 
     static public class TreeNode {
@@ -150,30 +169,21 @@ public class Solution {
     public static void main(String[] args) {
         testCase1();
         testCase2();
-        testCase3();
     }
 
     public static void testCase1() {
-        Integer[] nums = { 1, null, 2, 3 };
+        Integer[] nums = { 4, 2, 6, 1, 3 };
 
         TreeNode tree = TreeNode.genTree(nums);
-        List<Integer> result = new Solution().postorderTraversal(tree);
-        ListUtils.printList(result);
+        int result = new Solution().getMinimumDifference(tree);
+        System.out.println(result);
     }
 
     public static void testCase2() {
-        Integer[] nums = {};
+        Integer[] nums = { 1, 0, 48, null, null, 12, 49 };
 
         TreeNode tree = TreeNode.genTree(nums);
-        List<Integer> result = new Solution().postorderTraversal(tree);
-        ListUtils.printList(result);
-    }
-
-    public static void testCase3() {
-        Integer[] nums = { 1 };
-
-        TreeNode tree = TreeNode.genTree(nums);
-        List<Integer> result = new Solution().postorderTraversal(tree);
-        ListUtils.printList(result);
+        int result = new Solution().getMinimumDifference(tree);
+        System.out.println(result);
     }
 }
