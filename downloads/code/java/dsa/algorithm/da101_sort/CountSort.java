@@ -7,24 +7,41 @@ public class CountSort {
     public static void sort(int[] array) {
         int len = array.length;
 
+        int min = array[0];
         int max = array[0];
         for (int i = 1; i < len; i++) {
+            if (array[i] < min) {
+                min = array[i];
+            }
+
             if (array[i] > max) {
                 max = array[i];
             }
         }
 
+        // 修正数组的数据到正数（包含0）的区间
+        // 如果最小值是负数，可以解决负数不能做下标的问题
+        // 如果最小值是正数，可以减少统计数组的空间
+        int offset = max - min;
+        for (int i = 0; i < len; i++) {
+            array[i] = array[i] + offset;
+        }
+        // min = min + offset;
+        max = max + offset;
+
         int count[] = new int[max + 1];
+
+        // 计算某个值的数量
         for (int i = 0; i < len; i++) {
             count[array[i]] = count[array[i]] + 1;
         }
 
-        // 用累加法计算某个值在排序后的结束位置（位置从1开始）
+        // 用累加法计算某个值在排序后的最高排位（排位从1开始）
         for (int i = 1; i < count.length; i++) {
             count[i] = count[i] + count[i - 1];
         }
 
-        int tmp[] = new int[len];
+        int[] tmp = new int[len];
         for (int i = len - 1; i >= 0; i--) {
             int v = array[i];
 
@@ -45,8 +62,14 @@ public class CountSort {
             // count[array[i]] = count[array[i]] - 1;
         }
 
+        // 拷贝回原数组
         for (int i = 0; i < tmp.length; i++) {
             array[i] = tmp[i];
+        }
+
+        // 恢复数组的数据到原来的数据
+        for (int i = 0; i < len; i++) {
+            array[i] = array[i] - offset;
         }
     }
 

@@ -7,26 +7,34 @@ public class RadixSort {
     public static void sort(int[] array) {
         int len = array.length;
 
-        // 求取最大数
+        int min = array[0];
         int max = array[0];
         for (int i = 1; i < len; i++) {
+            if (array[i] < min) {
+                min = array[i];
+            }
+
             if (array[i] > max) {
                 max = array[i];
             }
         }
 
-        // 求取最大位数
-        int t = 0;
-        while (max > 0) {
-            max = max / 10;
-            t++;
+        // 修正数组的数据到正数（包含0）的区间
+        // 如果最小值是负数，可以解决负数不能做下标的问题
+        // 如果最小值是正数，可以减少统计数组的空间
+        int offset = max - min;
+        for (int i = 0; i < len; i++) {
+            array[i] = array[i] + offset;
         }
+        // min = min + offset;
+        max = max + offset;
 
-        for (int k = 1; k <= t; k++) {
-
-            // 对每个分量使用其他稳定性排序算法
-            // 推荐选择计数排序（其他稳定性排序算法的得建立数组并排序）
+        // 对每个分量使用其他稳定性排序算法
+        // 推荐用计数排序（其他稳定性排序算法的得建立数组并排序）
+        int c = getFigure(max);
+        for (int k = 1; k <= c; k++) {
             int[] count = new int[10];
+
             for (int i = 0; i < len; i++) {
                 int d = getDigit(array[i], k);
                 count[d] = count[d] + 1;
@@ -51,24 +59,56 @@ public class RadixSort {
 
                 // 更新可用的排位
                 count[d] = count[d] - 1;
-                
+
                 // 下面是简洁写法
                 // int d = getDigit(array[i], k);
                 // tmp[count[d] - 1] = array[i];
                 // count[d] = count[d] - 1;
             }
 
+            // 只能拷贝回原数组，不能改变引用
+            // 因为改变引用的话方法外部的数组引用和方法内部的数组引用就不是同一个数组了
+            // if (k < c) {
+            // array = tmp;
+            // continue;
+            // }
+
+            // 拷贝回原数组
             for (int i = 0; i < tmp.length; i++) {
                 array[i] = tmp[i];
             }
         }
+
+        // 恢复数组的数据到原来的数据
+        for (int i = 0; i < len; i++) {
+            array[i] = array[i] - offset;
+        }
+    }
+
+    private static int getFigure(int v) {
+        if (v < 0) {
+            v = -v;
+        }
+
+        // 求取最大位数
+        int c = 0;
+        while (v > 0) {
+            v = v / 10;
+            c++;
+        }
+
+        return c;
     }
 
     private static int getDigit(int v, int k) {
-        if (k > 1) {
-            while (k-- > 1) {
-                v = v / 10;
-            }
+        if (v < 0) {
+            v = -v;
+        }
+
+        while (v > 0 && k > 1) {
+            v = v / 10;
+
+            k--;
         }
 
         return v % 10;
