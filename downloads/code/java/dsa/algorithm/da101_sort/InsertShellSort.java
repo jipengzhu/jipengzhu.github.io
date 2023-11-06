@@ -2,51 +2,57 @@ package dsa.algorithm.da101_sort;
 
 import java.util.Arrays;
 
-public class CountSort {
+public class InsertShellSort {
 
     public static void sort(int[] array) {
         int len = array.length;
 
-        int max = array[0];
-        for (int i = 1; i < len; i++) {
-            if (array[i] > max) {
-                max = array[i];
+        int gap = len / 2;
+        while (gap > 0) {
+            // gap是分组数，也是步长，只对第一个分组排序
+            for (int i = 0; i + gap < len; i = i + gap) {
+
+                int v = array[i + gap];
+
+                int j = i; // j + gap < len
+                // 比插入元素大，则后退一步，让出位置
+                while (j >= 0 && array[j] > v) {
+                    array[j + gap] = array[j];
+                    j = j - gap;
+                }
+
+                // 插入元素排到当前元素（不大于插入元素）的后面
+                array[j + gap] = v;
             }
+
+            gap = gap / 2;
         }
+    }
 
-        int count[] = new int[max + 1];
-        for (int i = 0; i < len; i++) {
-            count[array[i]] = count[array[i]] + 1;
-        }
+    public static void sortAllGroup(int[] array) {
+        int len = array.length;
 
-        // 用累加法计算某个值在排序后的结束位置（位置从1开始）
-        for (int i = 1; i < count.length; i++) {
-            count[i] = count[i] + count[i - 1];
-        }
+        int gap = len / 2;
+        while (gap > 0) {
+            // gap是分组数，也是步长，k是第K组的起始偏移量
+            for (int k = 0; k < gap; k++) {
+                for (int i = k; i + gap < len; i = i + gap) {
 
-        int tmp[] = new int[len];
-        for (int i = len - 1; i >= 0; i--) {
-            int v = array[i];
+                    int v = array[i + gap];
 
-            // 获取当前数的排位
-            int j = count[v];
+                    int j = i;
+                    // 比插入元素大，则后退一步，让出位置
+                    while (j >= 0 && array[j] > v) {
+                        array[j + gap] = array[j];
+                        j = j - gap;
+                    }
 
-            // 计算当前数在新数组中的下标（排位数减去1）
-            j = j - 1;
+                    // 插入元素排到当前元素（不大于插入元素）的后面
+                    array[j + gap] = v;
+                }
+            }
 
-            // 将当前数放到新数组的正确位置上
-            tmp[j] = v;
-
-            // 更新可用的排位
-            count[v] = count[v] - 1;
-
-            // 下面是简洁写法
-            // tmp[count[array[i]] - 1] = array[i];
-            // count[array[i]] = count[array[i]] - 1;
-        }
-
-        for (int i = 0; i < tmp.length; i++) {
-            array[i] = tmp[i];
+            gap = gap / 2;
         }
     }
 

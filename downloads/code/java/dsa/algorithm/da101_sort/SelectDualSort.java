@@ -2,51 +2,43 @@ package dsa.algorithm.da101_sort;
 
 import java.util.Arrays;
 
-public class CountSort {
+public class SelectDualSort {
 
     public static void sort(int[] array) {
         int len = array.length;
 
-        int max = array[0];
-        for (int i = 1; i < len; i++) {
-            if (array[i] > max) {
-                max = array[i];
+        int L = 0, R = len - 1;
+        while (L < R) {
+            int min = L;
+            int max = R;
+            for (int i = L; i <= R; i++) {
+                if (array[i] < array[min]) {
+                    min = i;
+                }
+
+                if (array[i] > array[max]) {
+                    max = i;
+                }
             }
-        }
 
-        int count[] = new int[max + 1];
-        for (int i = 0; i < len; i++) {
-            count[array[i]] = count[array[i]] + 1;
-        }
+            // max等于L时先将L换位后的位置记下来
+            if (max == L) {
+                max = min;
+            }
 
-        // 用累加法计算某个值在排序后的结束位置（位置从1开始）
-        for (int i = 1; i < count.length; i++) {
-            count[i] = count[i] + count[i - 1];
-        }
+            swap(array, L, min);
+            swap(array, R, max);
 
-        int tmp[] = new int[len];
-        for (int i = len - 1; i >= 0; i--) {
-            int v = array[i];
+            // // min等于R时先将R换位后的位置记下来
+            // if (min == R) {
+            // min = max;
+            // }
 
-            // 获取当前数的排位
-            int j = count[v];
+            // swap(array, R, max);
+            // swap(array, L, min);
 
-            // 计算当前数在新数组中的下标（排位数减去1）
-            j = j - 1;
-
-            // 将当前数放到新数组的正确位置上
-            tmp[j] = v;
-
-            // 更新可用的排位
-            count[v] = count[v] - 1;
-
-            // 下面是简洁写法
-            // tmp[count[array[i]] - 1] = array[i];
-            // count[array[i]] = count[array[i]] - 1;
-        }
-
-        for (int i = 0; i < tmp.length; i++) {
-            array[i] = tmp[i];
+            L++;
+            R--;
         }
     }
 
