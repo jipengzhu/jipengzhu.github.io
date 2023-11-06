@@ -41,6 +41,7 @@ public class CountSort {
             count[i] = count[i] + count[i - 1];
         }
 
+        // 从后向前处理保证计数排序算法的稳定性
         int[] tmp = new int[len];
         for (int i = len - 1; i >= 0; i--) {
             int v = array[i];
