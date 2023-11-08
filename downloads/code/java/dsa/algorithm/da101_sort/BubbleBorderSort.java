@@ -7,33 +7,28 @@ public class BubbleBorderSort {
     public static void sort(int[] array) {
         int len = array.length;
 
-        int border = len - 1;
+        int border = len;
 
         // 外层的边界是循环次数的范围：[0，len - 1)
         // 内层的边界是未排序部分的范围：[0, len - i)
         for (int i = 0; i < len - 1; i++) {
-            boolean flag = true;
-            int last = 0;
+            int last = -1;
 
-            for (int j = 0; j + 1 < len - i; j++) {
-                // border是最后发生交换的位置，border之后已经有序了
-                if (j > border) {
-                    break;
-                }
-
+            // 从border开始（包含border）往后都是排好序的了
+            for (int j = 0; j + 1 < border; j++) {
                 // 比自己后面的元素大，则交换位置，排到后面去
                 if (array[j] > array[j + 1]) {
                     swap(array, j, j + 1);
 
-                    flag = false;
-                    last = j + 1;
+                    last = j;
                 }
             }
 
-            border = last;
+            border = last + 1;
 
+            // 用last < 0来代替flag
             // flag为true时代表没有发生过交换，说明已经有序了
-            if (flag) {
+            if (last < 0) {
                 break;
             }
         }
@@ -109,16 +104,16 @@ public class BubbleBorderSort {
         }
 
         private static boolean check(int[] array, int[] bak) {
-            System.out.println();
-            if (Arrays.equals(array, bak)) {
-                System.out.println("排序结果为: 正确(right)");
+            boolean ok = Arrays.equals(array, bak);
 
-                return true;
+            System.out.println();
+            if (ok) {
+                System.out.println("排序结果为: 正确(right)");
             } else {
                 System.out.println("排序结果为: 错误(error)");
-
-                return false;
             }
+
+            return ok;
         }
 
         private static void print(int[] array, String tip) {

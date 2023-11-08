@@ -95,16 +95,16 @@ public class InsertSort {
         }
 
         private static boolean check(int[] array, int[] bak) {
-            System.out.println();
-            if (Arrays.equals(array, bak)) {
-                System.out.println("排序结果为: 正确(right)");
+            boolean ok = Arrays.equals(array, bak);
 
-                return true;
+            System.out.println();
+            if (ok) {
+                System.out.println("排序结果为: 正确(right)");
             } else {
                 System.out.println("排序结果为: 错误(error)");
-
-                return false;
             }
+
+            return ok;
         }
 
         private static void print(int[] array, String tip) {

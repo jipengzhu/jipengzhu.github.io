@@ -1,18 +1,17 @@
 public class Solution {
-    public boolean isValidBST(TreeNode root) {
+    public boolean hasPathSum(TreeNode root, int targetSum) {
         if (root == null) {
-            return true;
-        }
-
-        if (root.left != null && root.left.val >= root.val) {
             return false;
         }
 
-        if (root.right != null && root.right.val <= root.val) {
-            return false;
+        if (root.left == null && root.right == null) {
+            if (targetSum == root.val) {
+                return true;
+            }
         }
 
-        return isValidBST(root.left) && isValidBST(root.right);
+        return hasPathSum(root.left, targetSum - root.val) &&
+                hasPathSum(root.right, targetSum - root.val);
     }
 
     static public class TreeNode {
@@ -102,50 +101,6 @@ public class Solution {
         }
     }
 
-    public static class ListUtils {
-        public static void printList(java.util.List<? extends Object> list) {
-            System.out.println(java.util.Arrays.toString(list.toArray(new Object[0])));
-        }
-
-        public static void printLines(java.util.List<? extends Object> list) {
-            if (list == null) {
-                return;
-            }
-
-            for (Object o : list) {
-                System.out.println(o);
-            }
-            System.out.println();
-        }
-
-        public static void printLists1(java.util.List<java.util.List<Integer>> lists) {
-            Object[] arrays = new Object[lists.size()];
-            for (int i = 0; i < lists.size(); i++) {
-                arrays[i] = lists.get(i).toArray(new Object[0]);
-            }
-
-            System.out.println(java.util.Arrays.deepToString(arrays));
-        }
-
-        public static void printLists2(java.util.List<java.util.List<Double>> lists) {
-            Object[] arrays = new Object[lists.size()];
-            for (int i = 0; i < lists.size(); i++) {
-                arrays[i] = lists.get(i).toArray(new Object[0]);
-            }
-
-            System.out.println(java.util.Arrays.deepToString(arrays));
-        }
-
-        public static void printLists3(java.util.List<java.util.List<String>> lists) {
-            Object[] arrays = new Object[lists.size()];
-            for (int i = 0; i < lists.size(); i++) {
-                arrays[i] = lists.get(i).toArray(new Object[0]);
-            }
-
-            System.out.println(java.util.Arrays.deepToString(arrays));
-        }
-    }
-
     public static void main(String[] args) {
         testCase1();
         testCase2();
@@ -153,26 +108,29 @@ public class Solution {
     }
 
     public static void testCase1() {
-        Integer[] nums = { 2, 1, 3 };
+        Integer[] nums = { 5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1 };
+        int sum = 22;
 
         TreeNode tree = TreeNode.genTree(nums);
-        boolean result = new Solution().isValidBST(tree);
+        boolean result = new Solution().hasPathSum(tree, sum);
         System.out.println(result);
     }
 
     public static void testCase2() {
-        Integer[] nums = { 5, 1, 4, null, null, 3, 6 };
+        Integer[] nums = { 1, 2, 3 };
+        int sum = 5;
 
         TreeNode tree = TreeNode.genTree(nums);
-        boolean result = new Solution().isValidBST(tree);
+        boolean result = new Solution().hasPathSum(tree, sum);
         System.out.println(result);
     }
 
     public static void testCase3() {
-        Integer[] nums = { 5, 4, 6, null, null, 3, 7 };
+        Integer[] nums = {};
+        int sum = 0;
 
         TreeNode tree = TreeNode.genTree(nums);
-        boolean result = new Solution().isValidBST(tree);
+        boolean result = new Solution().hasPathSum(tree, sum);
         System.out.println(result);
     }
 }

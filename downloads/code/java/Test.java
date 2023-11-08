@@ -2,6 +2,8 @@ public class Test {
 
     public static void main(String[] args) {
         jsArrayLiteral2JavaArrayLiteral();
+
+        // testStringUtils();
     }
 
     private static void jsArrayLiteral2JavaArrayLiteral() {
@@ -12,6 +14,58 @@ public class Test {
         s = s.replace("},", "},\n");
         s = s.replace("}}", "}\n}");
         System.out.println(s);
+    }
+
+    private static void testStringUtils() {
+        System.out.println("");
+
+        Integer[] a11 = { 1, 2, 3 };
+        System.out.println(StringUtils.toString(a11));
+
+        Double[] a12 = { 7d, 8d, 9d };
+        System.out.println(StringUtils.toString(a12));
+
+        String[] a13 = { "a", "b", "c" };
+        System.out.println(StringUtils.toString(a13));
+
+        int[] a2 = { 1, 2, 3 };
+        System.out.println(StringUtils.toString(a2));
+
+        double[] a3 = { 7d, 8d, 9d };
+        System.out.println(StringUtils.toString(a3));
+
+        System.out.println("");
+
+        java.util.List<java.util.List<Integer>> lists1 = new java.util.LinkedList<>();
+        java.util.List<Integer> list1 = new java.util.LinkedList<>();
+        list1.add(1);
+        list1.add(2);
+        list1.add(3);
+        lists1.add(list1);
+
+        java.util.List<java.util.List<Double>> lists2 = new java.util.LinkedList<>();
+        java.util.List<Double> list2 = new java.util.LinkedList<>();
+        list2.add(7d);
+        list2.add(8d);
+        list2.add(9d);
+        lists2.add(list2);
+
+        java.util.List<java.util.List<String>> lists3 = new java.util.LinkedList<>();
+        java.util.List<String> list3 = new java.util.LinkedList<>();
+        list3.add("a");
+        list3.add("b");
+        list3.add("c");
+        lists3.add(list3);
+
+        System.out.println(StringUtils.toString(list1));
+        System.out.println(StringUtils.toString(list2));
+        System.out.println(StringUtils.toString(list3));
+        System.out.println(StringUtils.toLines(list1));
+        System.out.println(StringUtils.toLines(list2));
+        System.out.println(StringUtils.toLines(list3));
+        System.out.println(StringUtils.toStringDeep(lists1));
+        System.out.println(StringUtils.toStringDeep(lists2));
+        System.out.println(StringUtils.toStringDeep(lists3));
     }
 
     public static class ArrayUtils {
@@ -93,6 +147,124 @@ public class Test {
             }
 
             System.out.println(java.util.Arrays.deepToString(arrays));
+        }
+    }
+
+    public static class StringUtils {
+        public static String toString(Object[] array) {
+            return java.util.Arrays.toString(array);
+        }
+
+        public static String toString(Object[] array, int len) {
+            return toString(java.util.Arrays.copyOf(array, len));
+        }
+
+        public static String toString(Object[][] arrays) {
+            return java.util.Arrays.deepToString(arrays);
+        }
+
+        public static String toString(int[] array) {
+            return java.util.Arrays.toString(array);
+        }
+
+        public static String toString(int[] array, int len) {
+            return toString(java.util.Arrays.copyOf(array, len));
+        }
+
+        public static String toString(int[][] arrays) {
+            return java.util.Arrays.deepToString(arrays);
+        }
+
+        public static String toString(double[] array) {
+            return java.util.Arrays.toString(array);
+        }
+
+        public static String toString(double[] array, int len) {
+            return toString(java.util.Arrays.copyOf(array, len));
+        }
+
+        public static String toString(double[][] arrays) {
+            return java.util.Arrays.deepToString(arrays);
+        }
+
+        public static String toString(java.util.List<? extends Object> list) {
+            return java.util.Arrays.toString(list.toArray(new Object[0]));
+        }
+
+        public static String toLines(java.util.List<? extends Object> list) {
+            if (list == null) {
+                return "\n";
+            }
+
+            java.util.List<String> strings = new java.util.ArrayList<>(list.size());
+            for (Object object : list) {
+                strings.add(object.toString());
+            }
+
+            return String.join("\n", strings) + "\n";
+        }
+
+        public static String toStringDeep(java.util.List<? extends java.util.List<?>> lists) {
+            Object[] arrays = new Object[lists.size()];
+            for (int i = 0; i < lists.size(); i++) {
+                arrays[i] = lists.get(i).toArray(new Object[0]);
+            }
+
+            return java.util.Arrays.deepToString(arrays);
+        }
+    }
+
+    public static class TestUtils {
+        public static boolean check(Object result, Object expect) {
+            boolean ok = java.util.Objects.equals(result, expect);
+            printCheck(result, expect, ok);
+            return ok;
+        }
+
+        private static void printCheck(Object result, Object expect, boolean ok) {
+            // System.out.println();
+            // System.out.println("--->");
+
+            System.out.println("result: " + result);
+            System.out.println("expect: " + expect);
+
+            System.out.println();
+            if (ok) {
+                System.out.println("比较结果为: 正确(right)");
+            } else {
+                System.out.println("比较结果为: 错误(error)");
+            }
+
+            // System.out.println();
+            // System.out.println("<---");
+        }
+
+        public static void runTestCases(Class<?> clazz) {
+            java.lang.reflect.Method[] methods = clazz.getDeclaredMethods();
+            java.util.Arrays.sort(methods, (o1, o2) -> {
+                return o1.getName().compareTo(o2.getName());
+            });
+            for (java.lang.reflect.Method method : methods) {
+                if (method.getName().startsWith("test")) {
+                    System.out.println(String.format("--- %s --->", method.getName()));
+
+                    Object object = null;
+                    try {
+                        object = method.invoke(null);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    System.out.println(String.format("<--- %s ---", method.getName()));
+
+                    if (object instanceof Boolean) {
+                        Boolean ok = (Boolean) object;
+                        if (!ok) {
+                            break;
+                        }
+                    }
+                }
+            }
         }
     }
 

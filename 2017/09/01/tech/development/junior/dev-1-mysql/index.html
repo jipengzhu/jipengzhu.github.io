@@ -28,7 +28,7 @@
 <meta property="og:description" content="mysql">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-31T17:01:00.000Z">
-<meta property="article:modified_time" content="2023-11-06T11:19:30.022Z">
+<meta property="article:modified_time" content="2023-11-08T09:36:40.899Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-06 19:19:30" itemprop="dateModified" datetime="2023-11-06T19:19:30+08:00">2023-11-06</time>
+                <time title="修改时间：2023-11-08 17:36:40" itemprop="dateModified" datetime="2023-11-08T17:36:40+08:00">2023-11-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1024,12 +1024,12 @@
 </ul>
 </blockquote>
 <ul>
-<li>prefix（startsWith）</li>
-<li>suffix（endsWith）</li>
-<li>infix（contains）</li>
-<li>glob</li>
-<li>regexp</li>
-<li>fuzzy</li>
+<li>前缀匹配：prefix（startsWith）</li>
+<li>后缀匹配：suffix（endsWith）</li>
+<li>中缀匹配：infix（contains）</li>
+<li>路径匹配：glob</li>
+<li>正则匹配：regex</li>
+<li>模糊匹配：fuzzy</li>
 </ul>
 <h3 id="combination（组合查询）"><a href="#combination（组合查询）" class="headerlink" title="combination（组合查询）"></a>combination（组合查询）</h3><blockquote>
 <ul>
@@ -1312,19 +1312,21 @@
 </blockquote>
 <ul>
 <li>查询时条件有问题导致索引失效<ul>
-<li>不等和not查询</li>
-<li>like查询使用百分号开头</li>
-<li>or查询前后的某个字段没有索引</li>
+<li>不等查询（!&#x3D;）</li>
+<li>取反查询（not）</li>
+<li>like查询时使用百分号开头</li>
+<li>or查询时前后的某个字段没有索引</li>
 </ul>
 </li>
 <li>查询时使用了<code>函数</code>导致索引失效</li>
 <li>查询时进行了<code>计算</code>导致索引失效</li>
 <li>查询时触发了<code>隐式转换</code>导致索引失效</li>
-<li>联合索引时字段使用没遵循<code>最左前缀</code>原则导致索引失效</li>
+<li>联合索引时字段组合没遵循<code>最左前缀</code>原则导致索引失效</li>
 <li>联合索引时查询条件破坏了<code>最左前缀</code>原则导致索引失效<ul>
-<li>联合索引时左边使用了<code>不等和not查询</code>导致右边的索引失效</li>
-<li>联合索引时左边使用了<code>like查询</code>导致右边的索引失效</li>
-<li>联合索引时左边使用了<code>or查询</code>导致右边的索引失效</li>
+<li>联合索引时左边使用了<code>不等查询（!=）</code>导致右边的索引失效</li>
+<li>联合索引时左边使用了<code>取反查询</code>导致右边的索引失效</li>
+<li>联合索引时左边使用了<code>like查询时使用百分号开头</code>导致右边的索引失效</li>
+<li>联合索引时左边使用了<code>or查询时前后的某个字段没有索引</code>导致右边的索引失效</li>
 <li>联合索引时左边使用了<code>范围查询</code>导致右边的索引失效</li>
 </ul>
 </li>
@@ -1836,16 +1838,24 @@
 <li>索引<ul>
 <li>常用的查询条件要添加索引</li>
 <li>避免查询时条件有问题导致索引失效<ul>
-<li>避免不等和not查询</li>
-<li>避免like查询使用百分号开头</li>
-<li>避免or查询前后的某个字段没有索引</li>
+<li>避免不等查询（!&#x3D;）</li>
+<li>避免取反查询（not）</li>
+<li>避免like查询时使用百分号开头</li>
+<li>避免or查询时前后的某个字段没有索引</li>
 </ul>
 </li>
 <li>避免查询时使用了<code>函数</code>导致索引失效</li>
 <li>避免查询时进行了<code>计算</code>导致索引失效</li>
 <li>避免查询时触发了<code>隐式转换</code>导致索引失效</li>
-<li>避免联合索引时字段使用没遵循<code>最左前缀</code>原则导致索引失效</li>
-<li>避免联合索引时查询条件破坏了<code>最左前缀</code>原则导致索引失效</li>
+<li>避免联合索引时字段组合没遵循<code>最左前缀</code>原则导致索引失效</li>
+<li>避免联合索引时查询条件破坏了<code>最左前缀</code>原则导致索引失效<ul>
+<li>避免联合索引时左边使用了<code>不等查询（!=）</code>导致右边的索引失效</li>
+<li>避免联合索引时左边使用了<code>取反查询</code>导致右边的索引失效</li>
+<li>避免联合索引时左边使用了<code>like查询时使用百分号开头</code>导致右边的索引失效</li>
+<li>避免联合索引时左边使用了<code>or查询时前后的某个字段没有索引</code>导致右边的索引失效</li>
+<li>避免联合索引时左边使用了<code>范围查询</code>导致右边的索引失效</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>查询<ul>

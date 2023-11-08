@@ -26,13 +26,13 @@ public class QuickSort3 {
         while (i <= j) {
             // 向右找到第一个等于或者大于分割数的元素
             // 等于时也要交换是为了避免没有发生交换时也能交换一次
-            // 从而能够分成两部分而不是一部分来避免重复递归（参考quickSort1）
+            // 从而能够分成两部分而不是一部分来避免重复递归（参考下面的quickSort1方法）
             while (i <= j && array[i] < v)
                 i++;
 
             // 向左找到第一个等于或者小于分割数的元素
             // 等于时也要交换是为了避免没有发生交换时也能交换一次
-            // 从而能够分成两部分而不是一部分来避免重复递归（参考quickSort1）
+            // 从而能够分成两部分而不是一部分来避免重复递归（参考下面的quickSort1方法）
             while (i <= j && array[j] > v)
                 j--;
 
@@ -215,16 +215,16 @@ public class QuickSort3 {
         }
 
         private static boolean check(int[] array, int[] bak) {
-            System.out.println();
-            if (Arrays.equals(array, bak)) {
-                System.out.println("排序结果为: 正确(right)");
+            boolean ok = Arrays.equals(array, bak);
 
-                return true;
+            System.out.println();
+            if (ok) {
+                System.out.println("排序结果为: 正确(right)");
             } else {
                 System.out.println("排序结果为: 错误(error)");
-
-                return false;
             }
+
+            return ok;
         }
 
         private static void print(int[] array, String tip) {
