@@ -4,54 +4,34 @@ import java.util.List;
 import java.util.Map;
 
 public class Solution {
-    private Map<String, Integer> paths = new HashMap<>();
+    private List<String> list = new LinkedList<>();
     private Map<TreeNode, TreeNode> map = new HashMap<>(); // 存储每个结点到双亲结点的映射
 
-    public int pathSum(TreeNode root, int targetSum) {
+    public List<String> binaryTreePaths(TreeNode root) {
         if (root == null) {
-            return paths.size();
+            return list;
         }
 
         if (root.left == null && root.right == null) {
-            List<TreeNode> list = new LinkedList<>();
+            List<String> tmp = new LinkedList<>();
 
             TreeNode p = root;
             while (p != null) {
-                list.add(0, p);
+                tmp.add(0, "" + p.val);
 
                 p = map.get(p);
             }
 
-            for (int i = 0; i < list.size(); i++) {
-                int sum = 0;
-                for (int j = i; j < list.size(); j++) {
-                    sum = sum + list.get(j).val;
-                    if (sum == targetSum) {
-                        List<String> tmp = new LinkedList<>();
-                        for (int k = i; k <= j; k++) {
-                            TreeNode node = list.get(k);
-
-                            tmp.add(node.val + "@" + node);
-                        }
-
-                        String path = String.join("->", tmp);
-
-                        // System.out.println(list);
-                        // System.out.println(path);
-
-                        paths.put(path, j - i + 1);
-                    }
-                }
-            }
+            list.add(String.join("->", tmp));
         }
 
         map.put(root.left, root);
         map.put(root.right, root);
 
-        pathSum(root.left, targetSum);
-        pathSum(root.right, targetSum);
+        binaryTreePaths(root.left);
+        binaryTreePaths(root.right);
 
-        return paths.size();
+        return list;
     }
 
     static public class TreeNode {
@@ -280,35 +260,22 @@ public class Solution {
     }
 
     public static boolean testCase1() {
-        Integer[] nums = { 10, 5, -3, 3, 2, null, 11, 3, -2, null, 1 };
-        int sum = 8;
+        Integer[] nums = { 1, 2, 3, null, 5 };
 
         TreeNode tree = TreeNode.genTree(nums);
-        int result = new Solution().pathSum(tree, sum);
-        int expect = 3;
+        List<String> result = new Solution().binaryTreePaths(tree);
+        String expect = "[\"1->2->5\",\"1->3\"]";
 
-        return TestUtils.check(result, expect);
+        return TestUtils.check(StringUtils.toString(result), expect);
     }
 
     public static boolean testCase2() {
-        Integer[] nums = { 5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1 };
-        int sum = 22;
+        Integer[] nums = { 1 };
 
         TreeNode tree = TreeNode.genTree(nums);
-        int result = new Solution().pathSum(tree, sum);
-        int expect = 3;
+        List<String> result = new Solution().binaryTreePaths(tree);
+        String expect = "[\"1\"]";
 
-        return TestUtils.check(result, expect);
-    }
-
-    public static boolean testCase3() {
-        Integer[] nums = { 0, 1, 1 };
-        int sum = 1;
-
-        TreeNode tree = TreeNode.genTree(nums);
-        int result = new Solution().pathSum(tree, sum);
-        int expect = 4;
-
-        return TestUtils.check(result, expect);
+        return TestUtils.check(StringUtils.toString(result), expect);
     }
 }
