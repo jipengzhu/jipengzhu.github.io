@@ -216,6 +216,18 @@ public class Test {
 
     public static class TestUtils {
         public static boolean check(Object result, Object expect) {
+            if (result instanceof String && expect instanceof String) {
+                String s1 = (String) result;
+                if (s1.startsWith("[") && s1.endsWith("]")) {
+                    result = s1.replace(" ", "");
+                }
+
+                String s2 = (String) expect;
+                if (s2.startsWith("[") && s2.endsWith("]")) {
+                    expect = s2.replace(" ", "");
+                }
+            }
+
             boolean ok = java.util.Objects.equals(result, expect);
             printCheck(result, expect, ok);
             return ok;
@@ -262,6 +274,8 @@ public class Test {
                         if (!ok) {
                             break;
                         }
+                    } else {
+                        throw new RuntimeException(String.format("测试用例方法%s的返回值需要为布尔类型", method.getName()));
                     }
                 }
             }

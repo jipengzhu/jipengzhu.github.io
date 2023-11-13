@@ -58,11 +58,20 @@ public class MySingleLinkWithoutHeadNode {
         return node.value;
     }
 
+    /**
+     * 在尾部添加时需要找到倒数第一个
+     * 使用p.next != null为循环条件和p.next == null为结束条件
+     * 当链表为空时为了防止开始的时候p为null时导致空指针异常
+     * 无头结点时需要特殊处理
+     * 有头结点时任何时候p不可能为null
+     */
     public boolean addLast(String s) {
         MyNode node = new MyNode(s);
 
-        // no one node, handle as add first node
-        if (head == null) {
+        MyNode p = head;
+
+        // no one node, specifically handle as add first node
+        if (p == null) {
             // return addFirst(s);
 
             node.next = head;
@@ -72,8 +81,6 @@ public class MySingleLinkWithoutHeadNode {
 
             return true;
         }
-
-        MyNode p = head;
 
         // use p.next to find the last node
         while (p.next != null) {
@@ -87,14 +94,26 @@ public class MySingleLinkWithoutHeadNode {
         return true;
     }
 
+    /**
+     * 在尾部删除时需要找到倒数第二个
+     * 使用p.next.next != null为循环条件和p.next.next == null为结束条件
+     * 因为当链表为空时无法执行删除操作
+     * 所以在头部和尾部删除时空链表需要特殊处理
+     * 即需要判断链表为空时就不进行后续处理并返回
+     * 当链表元素只有一个时为了防止开始的时候p.next为null时导致空指针异常
+     * 无头结点时链表时需要特殊处理
+     * 有头结点时任何时候p.next不可能为null
+     */
     public String removeLast() {
         // empty link
         if (head == null) {
             return null;
         }
 
-        // only one node, handle as remove first node
-        if (head.next == null) {
+        MyNode p = head;
+
+        // only one node, specifically handle as remove first node
+        if (p.next == null) {
             // return removeFirst();
 
             MyNode node = head;
@@ -104,8 +123,6 @@ public class MySingleLinkWithoutHeadNode {
 
             return node.value;
         }
-
-        MyNode p = head;
 
         // use p.next.next to find the penult node
         while (p.next.next != null) {

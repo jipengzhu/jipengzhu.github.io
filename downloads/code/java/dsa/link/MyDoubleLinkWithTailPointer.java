@@ -39,7 +39,7 @@ public class MyDoubleLinkWithTailPointer {
 
     public String removeFirst() {
         // empty link
-        if (head.next.next == null) {
+        if (head.next == tail) {
             return null;
         }
 
@@ -67,7 +67,7 @@ public class MyDoubleLinkWithTailPointer {
 
     public String removeLast() {
         // empty link
-        if (head.next.next == null) {
+        if (head.next == tail) {
             return null;
         }
 
@@ -83,7 +83,7 @@ public class MyDoubleLinkWithTailPointer {
         int size = 0;
 
         MyNode p = head.next;
-        while (p.next != null) {
+        while (p != tail) {
             size++;
 
             p = p.next;
@@ -100,7 +100,7 @@ public class MyDoubleLinkWithTailPointer {
         MyNode p = head.next;
 
         int i = 0;
-        while (p.next != null) {
+        while (p != tail) {
             array[i] = p.value;
 
             i++;
