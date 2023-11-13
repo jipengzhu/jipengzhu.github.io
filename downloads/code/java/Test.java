@@ -188,7 +188,7 @@ public class Test {
         }
 
         public static String toString(java.util.List<? extends Object> list) {
-            return java.util.Arrays.toString(list.toArray(new Object[0]));
+            return toString(list.toArray(new Object[0]));
         }
 
         public static String toLines(java.util.List<? extends Object> list) {
@@ -217,20 +217,22 @@ public class Test {
     public static class TestUtils {
         public static boolean check(Object result, Object expect) {
             if (result instanceof String && expect instanceof String) {
-                String s1 = (String) result;
-                if (s1.startsWith("[") && s1.endsWith("]")) {
-                    result = s1.replace(" ", "");
-                }
-
-                String s2 = (String) expect;
-                if (s2.startsWith("[") && s2.endsWith("]")) {
-                    expect = s2.replace(" ", "");
-                }
+                result = normalizeString((String) result);
+                expect = normalizeString((String) expect);
             }
 
             boolean ok = java.util.Objects.equals(result, expect);
             printCheck(result, expect, ok);
             return ok;
+        }
+
+        private static String normalizeString(String s) {
+            if (s.startsWith("[") && s.endsWith("]")) {
+                s = s.replace(" ", "")
+                        .replace("\"", "");
+            }
+
+            return s;
         }
 
         private static void printCheck(Object result, Object expect, boolean ok) {

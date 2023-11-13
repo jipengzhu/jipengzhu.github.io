@@ -1,17 +1,57 @@
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
 public class Solution {
-    public boolean hasPathSum(TreeNode root, int targetSum) {
+    private Map<String, Integer> paths = new HashMap<>();
+    private Map<TreeNode, TreeNode> map = new HashMap<>(); // 存储每个结点到双亲结点的映射
+
+    public int pathSum(TreeNode root, int targetSum) {
         if (root == null) {
-            return false;
+            return paths.size();
         }
 
         if (root.left == null && root.right == null) {
-            if (root.val == targetSum) {
-                return true;
+            List<TreeNode> list = new LinkedList<>();
+
+            TreeNode p = root;
+            while (p != null) {
+                list.add(0, p);
+
+                p = map.get(p);
+            }
+
+            for (int i = 0; i < list.size(); i++) {
+                int sum = 0;
+                for (int j = i; j < list.size(); j++) {
+                    sum = sum + list.get(j).val;
+                    if (sum == targetSum) {
+                        List<String> tmp = new LinkedList<>();
+                        for (int k = i; k <= j; k++) {
+                            TreeNode node = list.get(k);
+
+                            tmp.add(node.val + "@" + node);
+                        }
+
+                        String path = String.join("->", tmp);
+
+                        // System.out.println(list);
+                        // System.out.println(path);
+
+                        paths.put(path, j - i + 1);
+                    }
+                }
             }
         }
 
-        return hasPathSum(root.left, targetSum - root.val) ||
-                hasPathSum(root.right, targetSum - root.val);
+        map.put(root.left, root);
+        map.put(root.right, root);
+
+        pathSum(root.left, targetSum);
+        pathSum(root.right, targetSum);
+
+        return paths.size();
     }
 
     static public class TreeNode {
@@ -101,23 +141,89 @@ public class Solution {
         }
     }
 
+    public static class StringUtils {
+        public static String toString(Object[] array) {
+            return java.util.Arrays.toString(array);
+        }
+
+        public static String toString(Object[] array, int len) {
+            return toString(java.util.Arrays.copyOf(array, len));
+        }
+
+        public static String toString(Object[][] arrays) {
+            return java.util.Arrays.deepToString(arrays);
+        }
+
+        public static String toString(int[] array) {
+            return java.util.Arrays.toString(array);
+        }
+
+        public static String toString(int[] array, int len) {
+            return toString(java.util.Arrays.copyOf(array, len));
+        }
+
+        public static String toString(int[][] arrays) {
+            return java.util.Arrays.deepToString(arrays);
+        }
+
+        public static String toString(double[] array) {
+            return java.util.Arrays.toString(array);
+        }
+
+        public static String toString(double[] array, int len) {
+            return toString(java.util.Arrays.copyOf(array, len));
+        }
+
+        public static String toString(double[][] arrays) {
+            return java.util.Arrays.deepToString(arrays);
+        }
+
+        public static String toString(java.util.List<? extends Object> list) {
+            return toString(list.toArray(new Object[0]));
+        }
+
+        public static String toLines(java.util.List<? extends Object> list) {
+            if (list == null) {
+                return "\n";
+            }
+
+            java.util.List<String> strings = new java.util.ArrayList<>(list.size());
+            for (Object object : list) {
+                strings.add(object.toString());
+            }
+
+            return String.join("\n", strings) + "\n";
+        }
+
+        public static String toStringDeep(java.util.List<? extends java.util.List<?>> lists) {
+            Object[] arrays = new Object[lists.size()];
+            for (int i = 0; i < lists.size(); i++) {
+                arrays[i] = lists.get(i).toArray(new Object[0]);
+            }
+
+            return java.util.Arrays.deepToString(arrays);
+        }
+    }
+
     public static class TestUtils {
         public static boolean check(Object result, Object expect) {
             if (result instanceof String && expect instanceof String) {
-                String s1 = (String) result;
-                if (s1.startsWith("[") && s1.endsWith("]")) {
-                    result = s1.replace(" ", "");
-                }
-
-                String s2 = (String) expect;
-                if (s2.startsWith("[") && s2.endsWith("]")) {
-                    expect = s2.replace(" ", "");
-                }
+                result = normalizeString((String) result);
+                expect = normalizeString((String) expect);
             }
 
             boolean ok = java.util.Objects.equals(result, expect);
             printCheck(result, expect, ok);
             return ok;
+        }
+
+        private static String normalizeString(String s) {
+            if (s.startsWith("[") && s.endsWith("]")) {
+                s = s.replace(" ", "")
+                        .replace("\"", "");
+            }
+
+            return s;
         }
 
         private static void printCheck(Object result, Object expect, boolean ok) {
@@ -174,34 +280,34 @@ public class Solution {
     }
 
     public static boolean testCase1() {
-        Integer[] nums = { 5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1 };
-        int sum = 22;
+        Integer[] nums = { 10, 5, -3, 3, 2, null, 11, 3, -2, null, 1 };
+        int sum = 8;
 
         TreeNode tree = TreeNode.genTree(nums);
-        boolean result = new Solution().hasPathSum(tree, sum);
-        boolean expect = true;
+        int result = new Solution().pathSum(tree, sum);
+        int expect = 3;
 
         return TestUtils.check(result, expect);
     }
 
     public static boolean testCase2() {
-        Integer[] nums = { 1, 2, 3 };
-        int sum = 5;
+        Integer[] nums = { 5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1 };
+        int sum = 22;
 
         TreeNode tree = TreeNode.genTree(nums);
-        boolean result = new Solution().hasPathSum(tree, sum);
-        boolean expect = false;
+        int result = new Solution().pathSum(tree, sum);
+        int expect = 3;
 
         return TestUtils.check(result, expect);
     }
 
     public static boolean testCase3() {
-        Integer[] nums = {};
-        int sum = 0;
+        Integer[] nums = { 0, 1, 1 };
+        int sum = 1;
 
         TreeNode tree = TreeNode.genTree(nums);
-        boolean result = new Solution().hasPathSum(tree, sum);
-        boolean expect = false;
+        int result = new Solution().pathSum(tree, sum);
+        int expect = 4;
 
         return TestUtils.check(result, expect);
     }
