@@ -1,38 +1,71 @@
 public class Test {
 
     public static void main(String[] args) {
-        jsArrayLiteral2JavaArrayLiteral();
+
+        transformArrayLiteral();
 
         // testStringUtils();
+
+        // testToString();
     }
 
-    private static void jsArrayLiteral2JavaArrayLiteral() {
-        String s = "[[1,2],[2,3]]";
+    private static void transformArrayLiteral() {
+        String s = "[[\"x1\",\"x5\"],[\"x5\",\"x2\"],[\"x2\",\"x4\"],[\"x2\",\"x2\"],[\"x2\",\"x9\"],[\"x9\",\"x9\"]]";
+        boolean isChar = false;
+
+        jsArrayLiteral2JavaArrayLiteral(s, true, isChar);
+        jsArrayLiteral2JavaArrayLiteral(s, false, isChar);
+    }
+
+    private static void jsArrayLiteral2JavaArrayLiteral(String s, boolean pretty, boolean isChar) {
         s = s.replace('[', '{');
         s = s.replace(']', '}');
-        s = s.replace("{{", "{\n{");
-        s = s.replace("},", "},\n");
-        s = s.replace("}}", "}\n}");
+
+        if (pretty) {
+            s = s.replace("{{", "{\n{");
+            s = s.replace("},", "},\n");
+            s = s.replace("}}", "}\n}");
+        }
+
+        if (isChar) {
+            s = s.replace("\"", "'");
+        }
+
+        System.out.println();
         System.out.println(s);
+    }
+
+    private static void testToString() {
+        int[] a = new int[] { 1 };
+        int[][] b = new int[][] { { 1 }, { 2 } };
+        Object[] c = b;
+        int[][] d = new int[][] { { 1 }, { 2 } };
+        Object[] e = d;
+        System.out.println(a.getClass().isArray());
+        System.out.println(b.getClass().isArray());
+        System.out.println(b instanceof Object[]);
+        System.out.println(java.util.Arrays.deepToString(c));
+        System.out.println(java.util.Arrays.equals(c, e));
+        System.out.println(java.util.Arrays.deepEquals(c, e));
     }
 
     private static void testStringUtils() {
         System.out.println("");
 
         Integer[] a11 = { 1, 2, 3 };
-        System.out.println(StringUtils.toString(a11));
+        System.out.println(TestConverter.toString(a11));
 
         Double[] a12 = { 7d, 8d, 9d };
-        System.out.println(StringUtils.toString(a12));
+        System.out.println(TestConverter.toString(a12));
 
         String[] a13 = { "a", "b", "c" };
-        System.out.println(StringUtils.toString(a13));
+        System.out.println(TestConverter.toString(a13));
 
         int[] a2 = { 1, 2, 3 };
-        System.out.println(StringUtils.toString(a2));
+        System.out.println(TestConverter.toString(a2));
 
         double[] a3 = { 7d, 8d, 9d };
-        System.out.println(StringUtils.toString(a3));
+        System.out.println(TestConverter.toString(a3));
 
         System.out.println("");
 
@@ -57,15 +90,17 @@ public class Test {
         list3.add("c");
         lists3.add(list3);
 
-        System.out.println(StringUtils.toString(list1));
-        System.out.println(StringUtils.toString(list2));
-        System.out.println(StringUtils.toString(list3));
-        System.out.println(StringUtils.toLines(list1));
-        System.out.println(StringUtils.toLines(list2));
-        System.out.println(StringUtils.toLines(list3));
-        System.out.println(StringUtils.toStringDeep(lists1));
-        System.out.println(StringUtils.toStringDeep(lists2));
-        System.out.println(StringUtils.toStringDeep(lists3));
+        System.out.println(TestConverter.toString(list1));
+        System.out.println(TestConverter.toString(list2));
+        System.out.println(TestConverter.toString(list3));
+
+        System.out.println(TestConverter.toString(lists1));
+        System.out.println(TestConverter.toString(lists2));
+        System.out.println(TestConverter.toString(lists3));
+
+        // System.out.println(TestConverter.toLines(list1));
+        // System.out.println(TestConverter.toLines(list2));
+        // System.out.println(TestConverter.toLines(list3));
     }
 
     public static class ArrayUtils {
@@ -150,13 +185,9 @@ public class Test {
         }
     }
 
-    public static class StringUtils {
+    public static class TestConverter {
         public static String toString(Object[] array) {
             return java.util.Arrays.toString(array);
-        }
-
-        public static String toString(Object[] array, int len) {
-            return toString(java.util.Arrays.copyOf(array, len));
         }
 
         public static String toString(Object[][] arrays) {
@@ -167,10 +198,6 @@ public class Test {
             return java.util.Arrays.toString(array);
         }
 
-        public static String toString(int[] array, int len) {
-            return toString(java.util.Arrays.copyOf(array, len));
-        }
-
         public static String toString(int[][] arrays) {
             return java.util.Arrays.deepToString(arrays);
         }
@@ -179,16 +206,20 @@ public class Test {
             return java.util.Arrays.toString(array);
         }
 
-        public static String toString(double[] array, int len) {
-            return toString(java.util.Arrays.copyOf(array, len));
-        }
-
         public static String toString(double[][] arrays) {
             return java.util.Arrays.deepToString(arrays);
         }
 
+        public static String toString(char[] array) {
+            return java.util.Arrays.toString(array);
+        }
+
+        public static String toString(char[][] arrays) {
+            return java.util.Arrays.deepToString(arrays);
+        }
+
         public static String toString(java.util.List<? extends Object> list) {
-            return toString(list.toArray(new Object[0]));
+            return list.toString();
         }
 
         public static String toLines(java.util.List<? extends Object> list) {
@@ -202,15 +233,6 @@ public class Test {
             }
 
             return String.join("\n", strings) + "\n";
-        }
-
-        public static String toStringDeep(java.util.List<? extends java.util.List<?>> lists) {
-            Object[] arrays = new Object[lists.size()];
-            for (int i = 0; i < lists.size(); i++) {
-                arrays[i] = lists.get(i).toArray(new Object[0]);
-            }
-
-            return java.util.Arrays.deepToString(arrays);
         }
     }
 
@@ -227,8 +249,12 @@ public class Test {
         }
 
         private static String normalizeString(String s) {
+            s = s.replace("{", "[");
+            s = s.replace("}", "]");
+
             if (s.startsWith("[") && s.endsWith("]")) {
                 s = s.replace(" ", "")
+                        .replace("'", "")
                         .replace("\"", "");
             }
 
