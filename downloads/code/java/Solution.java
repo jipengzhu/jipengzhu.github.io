@@ -1,52 +1,114 @@
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
 public class Solution {
-    public void solve(char[][] board) {
-        int rows = board.length;
-        int cols = board[0].length;
 
-        // 从左上角往右下角扫描
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (board[i][j] == 'X') {
-                    continue;
+    public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
+        Map<String, List<String>> adjMap = new HashMap<>();
+        Map<String, Double> valMap = new HashMap<>();
+
+        for (int i = 0; i < equations.size(); i++) {
+            List<String> equation = equations.get(i);
+            Double value = values[i];
+
+            String s1 = equation.get(0);
+            String s2 = equation.get(1);
+
+            adjMap.computeIfAbsent(s1, s -> new LinkedList<>()).add(s2);
+            adjMap.computeIfAbsent(s2, s -> new LinkedList<>()).add(s1);
+
+            valMap.put(String.format("%s/%s", s1, s2), value);
+            valMap.put(String.format("%s/%s", s2, s1), 1 / value);
+        }
+
+        double[] array = new double[queries.size()];
+        for (int i = 0; i < array.length; i++) {
+            List<String> query = queries.get(i);
+
+            String x = query.get(0);
+            String y = query.get(1);
+
+            if (!adjMap.containsKey(x) || !adjMap.containsKey(y)) {
+                array[i] = -1.0d;
+            } else if (x.equals(y)) {
+                array[i] = 1.0d;
+            } else {
+                Map<String, List<String>> unvisitedMap = new HashMap<>();
+                Deque<String> stack = new LinkedList<>();
+
+                String p = x;
+                while (p != null || !stack.isEmpty()) {
+                    if (p != null) {
+                        if (p.equals(y)) {
+                            stack.push(p);
+
+                            break;
+                        }
+
+                        List<String> unvisitedList = unvisitedMap.computeIfAbsent(p, k -> {
+                            List<String> list = new LinkedList<>();
+
+                            for (String s : adjMap.get(k)) {
+                                // 不能走回头路
+                                // if (s.equals(stack.peek())) {
+                                // continue;
+                                // }
+
+                                list.add(s);
+                            }
+
+                            return list;
+                        });
+
+                        if (!unvisitedList.isEmpty()) {
+                            // 注意判断用到了stack.peek的值，要在stack.push之前使用或者保存起来，否则值就会被改变了
+                            String q = stack.peek();
+
+                            stack.push(p); // 保存回退点
+
+                            p = unvisitedList.remove(0); // 前进
+
+                            if (p.equals(q)) {
+                                // 不能走回头路，换一条路
+                                if (!unvisitedList.isEmpty()) {
+                                    p = unvisitedList.remove(0);
+                                } else {
+                                    p = null;
+                                }
+                            }
+                        } else {
+                            p = null;
+                        }
+                    } else {
+                        p = stack.pop(); // 回溯
+                    }
                 }
 
-                if (j == 0 || board[i][j - 1] == 'O') {
-                    // 左边有出路，什么都不做
-                    // do nothing
-                } else if (i == 0 || board[i - 1][j] == 'O') {
-                    // 上边有出路，什么都不做
-                    // do nothing
+                if (stack.isEmpty()) {
+                    array[i] = -1.0d;
                 } else {
-                    // 左边和上边都没有出路，先标记为待处理
-                    board[i][j] = 'A';
+                    List<String> path = new LinkedList<>();
+                    while (!stack.isEmpty()) {
+                        path.add(0, stack.pop());
+                    }
+
+                    double value = 1.0d;
+                    for (int j = 0; j < path.size() - 1; j++) {
+                        String s1 = path.get(j);
+                        String s2 = path.get(j + 1);
+
+                        value = value * valMap.get(String.format("%s/%s", s1, s2));
+                    }
+
+                    array[i] = value;
                 }
             }
         }
 
-        // 从右下角往左上角扫描
-        for (int i = rows - 1; i >= 0; i--) {
-            for (int j = cols - 1; j >= 0; j--) {
-                if (board[i][j] == 'X') {
-                    continue;
-                }
-
-                // 左边或者上边有出路，可跳过
-                else if (board[i][j] == 'O') {
-                    continue;
-                }
-
-                if (j == cols - 1 || board[i][j + 1] == 'O') {
-                    // 右边有出路，复原
-                    board[i][j] = 'O';
-                } else if (i == rows - 1 || board[i + 1][j] == 'O') {
-                    // 下边有出路，复原
-                    board[i][j] = 'O';
-                } else {
-                    // 每个方向都没有出路，标记为可吃掉
-                    board[i][j] = 'X';
-                }
-            }
-        }
+        return array;
     }
 
     public static class TestUtils {
@@ -182,71 +244,111 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        // TestUtils.runTestCases(Solution.class);
-
-        testCase3();
+        TestUtils.runTestCases(Solution.class);
     }
 
     public static boolean testCase1() {
-        char[][] grid = {
-                { 'X', 'X', 'X', 'X' },
-                { 'X', 'O', 'O', 'X' },
-                { 'X', 'X', 'O', 'X' },
-                { 'X', 'O', 'X', 'X' }
+        String[][] equations = {
+                { "a", "b" },
+                { "b", "c" }
+        };
+        double[] values = { 2.0, 3.0 };
+        String[][] queries = {
+                { "a", "c" },
+                { "b", "a" },
+                { "a", "e" },
+                { "a", "a" },
+                { "x", "x" }
         };
 
-        new Solution().solve(grid);
-        char[][] result = grid;
-        char[][] expect = {
-                { 'X', 'X', 'X', 'X' },
-                { 'X', 'X', 'X', 'X' },
-                { 'X', 'X', 'X', 'X' },
-                { 'X', 'O', 'X', 'X' }
-        };
+        double[] result = new Solution().calcEquation(TestUtils.toLists(equations), values,
+                TestUtils.toLists(queries));
+        double[] expect = { 6.00000, 0.50000, -1.00000, 1.00000, -1.00000 };
 
         return TestUtils.check(result, expect);
     }
 
     public static boolean testCase2() {
-        char[][] grid = { { 'X' } };
+        String[][] equations = {
+                { "a", "b" },
+                { "b", "c" },
+                { "bc", "cd" }
+        };
+        double[] values = { 1.5, 2.5, 5.0 };
+        String[][] queries = {
+                { "a", "c" },
+                { "c", "b" },
+                { "bc", "cd" },
+                { "cd", "bc" }
+        };
 
-        new Solution().solve(grid);
-        char[][] result = grid;
-        char[][] expect = { { 'X' } };
+        double[] result = new Solution().calcEquation(TestUtils.toLists(equations), values,
+                TestUtils.toLists(queries));
+        double[] expect = { 3.75000, 0.40000, 5.00000, 0.20000 };
 
         return TestUtils.check(result, expect);
     }
 
     public static boolean testCase3() {
-        char[][] grid = {
-                { 'X', 'O', 'X', 'O', 'X', 'O', 'O', 'O', 'X', 'O' },
-                { 'X', 'O', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'X' },
-                { 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'X', 'X' },
-                { 'O', 'O', 'O', 'O', 'O', 'O', 'X', 'O', 'O', 'X' },
-                { 'O', 'O', 'X', 'X', 'O', 'X', 'X', 'O', 'O', 'O' },
-                { 'X', 'O', 'O', 'X', 'X', 'X', 'O', 'X', 'X', 'O' },
-                { 'X', 'O', 'X', 'O', 'O', 'X', 'X', 'O', 'X', 'O' },
-                { 'X', 'X', 'O', 'X', 'X', 'O', 'X', 'O', 'O', 'X' },
-                { 'O', 'O', 'O', 'O', 'X', 'O', 'X', 'O', 'X', 'O' },
-                { 'X', 'X', 'O', 'X', 'X', 'X', 'X', 'O', 'O', 'O' }
+        String[][] equations = {
+                { "a", "b" },
+        };
+        double[] values = { 0.5 };
+        String[][] queries = {
+                { "a", "b" },
+                { "b", "a" },
+                { "a", "c" },
+                { "x", "y" }
         };
 
-        new Solution().solve(grid);
-        char[][] result = grid;
-        char[][] expect = {
-                { 'X', 'O', 'X', 'O', 'X', 'O', 'O', 'O', 'X', 'O' },
-                { 'X', 'O', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'X' },
-                { 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'X', 'X' },
-                { 'O', 'O', 'O', 'O', 'O', 'O', 'X', 'O', 'O', 'X' },
-                { 'O', 'O', 'X', 'X', 'O', 'X', 'X', 'O', 'O', 'O' },
-                { 'X', 'O', 'O', 'X', 'X', 'X', 'X', 'X', 'X', 'O' },
-                { 'X', 'O', 'X', 'X', 'X', 'X', 'X', 'O', 'X', 'O' },
-                { 'X', 'X', 'O', 'X', 'X', 'X', 'X', 'O', 'O', 'X' },
-                { 'O', 'O', 'O', 'O', 'X', 'X', 'X', 'O', 'X', 'O' },
-                { 'X', 'X', 'O', 'X', 'X', 'X', 'X', 'O', 'O', 'O' }
+        double[] result = new Solution().calcEquation(TestUtils.toLists(equations), values,
+                TestUtils.toLists(queries));
+        double[] expect = { 0.50000, 2.00000, -1.00000, -1.00000 };
+
+        return TestUtils.check(result, expect);
+    }
+
+    public static boolean testCase4() {
+        String[][] equations = {
+                { "a", "b" },
+        };
+        double[] values = { 0.5 };
+        String[][] queries = {
+                { "a", "b" },
+                { "b", "a" },
+                { "a", "c" },
+                { "c", "a" },
+                { "x", "y" }
         };
 
-        // 倒数第3行，倒数第二列的那个O可以左走一步，再向下可以出去
+        double[] result = new Solution().calcEquation(TestUtils.toLists(equations), values,
+                TestUtils.toLists(queries));
+        double[] expect = { 0.50000, 2.00000, -1.00000, -1.00000, -1.00000 };
+
+        return TestUtils.check(result, expect);
+    }
+
+    public static boolean testCase5() {
+        String[][] equations = {
+                { "x1", "x2" },
+                { "x2", "x3" },
+                { "x3", "x4" },
+                { "x4", "x5" }
+        };
+        double[] values = { 3.0, 4.0, 5.0, 6.0 };
+        String[][] queries = {
+                { "x1", "x5" },
+                { "x5", "x2" },
+                { "x2", "x4" },
+                { "x2", "x2" },
+                { "x2", "x9" },
+                { "x9", "x9" }
+        };
+
+        double[] result = new Solution().calcEquation(TestUtils.toLists(equations), values,
+                TestUtils.toLists(queries));
+        double[] expect = { 360.0, 0.008333333333333333, 20.0, 1.0, -1.0, -1.0 };
+
         return TestUtils.check(result, expect);
     }
 }
