@@ -28,7 +28,7 @@
 <meta property="og:description" content="待做事项">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2015-07-06T16:01:00.000Z">
-<meta property="article:modified_time" content="2023-11-16T07:07:29.667Z">
+<meta property="article:modified_time" content="2023-11-16T09:19:30.927Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ todo">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-16 15:07:29" itemprop="dateModified" datetime="2023-11-16T15:07:29+08:00">2023-11-16</time>
+                <time title="修改时间：2023-11-16 17:19:30" itemprop="dateModified" datetime="2023-11-16T17:19:30+08:00">2023-11-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -249,8 +249,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Todo"><a href="#Todo" class="headerlink" title="Todo"></a>Todo</h1><p>TestConverter 不需要了，可以被TestUtils的check替代</p>
-<p>检查对称二叉树 题目解答 进阶解法<br>检查二叉树展开为链表 题目解答 进阶解法 其他解法</p>
+        <h1 id="Todo"><a href="#Todo" class="headerlink" title="Todo"></a>Todo</h1><p>检查对称二叉树 题目解答 进阶解法<br>检查二叉树展开为链表 题目解答 进阶解法 其他解法</p>
 <p>检查二叉树的所有路径 题目解答<br>检查路径总和 题目解答<br>检查路径总和II 题目解答<br>检查路径总和III 题目解答</p>
 <p>检查求根节点到叶节点数字之和 题目解答 进阶解法<br>kthSmallest 题目解答 进阶解法<br>isValidBST 题目解答 进阶解法</p>
 <p>将树有关的路径的算法 都用求路径之后的操作再优化过滤一遍</p>
@@ -293,7 +292,7 @@
 <p>将数组 链表的常用操作 写个ops class<br>数组 轮转 左转和右转 k次轮转回到起点证明 抢位置时需要用空位来存放被挤出的元素，可以是新的空位，也可以是数组的开头和末尾<br>链表 生成 头插法 尾插法<br>链表 合并 尾插法<br>数组链表 轮转 反转 合并<br>树 堆 图 操作</p>
 <p>最短路径算法的核心是上一跳<br>贪心算法 每一步都选择当当前到下一步的最优解<br>动态规划 每一步都选择子问题里的最优解或者合并子问题的结果<br>先以起点为上一跳求得最短距离为起点到上一跳的距离加上上一跳到目标点的距离，此时起点为上一跳，则距离为起点到目标点的距离<br>开始无限循环<br>再遍历起点以外的点作为上一跳比较和更新最短距离<br>因为比较时起点到上一跳的距离可能还不是最短的，所以不能一次循环就结束<br>直到最短距离没有变更时退出无限循环<br>计算1到3的距离时<br>1到3的距离为10<br>1到7的距离为5 7到3的距离为2<br>1到7到3的距离为7 更新<br>计算1到7的距离时<br>1到7的距离为6<br>1到5的距离为2 5到7的距离为1<br>1到5到7的距离为3 更新<br>此时1到7有了更短的距离，因为比较更新只循环一次，则1到3没法更新更短的距离了</p>
 <h2 id="算法整理"><a href="#算法整理" class="headerlink" title="算法整理"></a>算法整理</h2><p>所有的困难题目用TODO先记录下来，统计个数时可以统计非TODO的题目描述</p>
-<p>ArrayUtils和ListUtils删除并改为StringUtils，同时使用TestUtils</p>
+<p>ArrayUtils和ListUtils删除并可以被TestUtils的check替代</p>
 <p>添加 ### 进阶解法 只有一个其他解法移到进阶解法</p>
 <p>算法进一步分类，比如树的建立 树的遍历</p>
 <p>添加dsa summary文件记录还没理解的数据结构和算法</p>

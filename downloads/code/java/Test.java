@@ -4,14 +4,13 @@ public class Test {
 
         transformArrayLiteral();
 
-        // testStringUtils();
-
         // testToString();
     }
 
     private static void transformArrayLiteral() {
-        String s = "[[\"x1\",\"x5\"],[\"x5\",\"x2\"],[\"x2\",\"x4\"],[\"x2\",\"x2\"],[\"x2\",\"x9\"],[\"x9\",\"x9\"]]";
-        boolean isChar = false;
+        String s = "[[\"X\",\"O\",\"X\",\"O\",\"X\",\"O\",\"O\",\"O\",\"X\",\"O\"],[\"X\",\"O\",\"O\",\"X\",\"X\",\"X\",\"O\",\"O\",\"O\",\"X\"],[\"O\",\"O\",\"O\",\"O\",\"O\",\"O\",\"O\",\"O\",\"X\",\"X\"],[\"O\",\"O\",\"O\",\"O\",\"O\",\"O\",\"X\",\"O\",\"O\",\"X\"],[\"O\",\"O\",\"X\",\"X\",\"O\",\"X\",\"X\",\"O\",\"O\",\"O\"],[\"X\",\"O\",\"O\",\"X\",\"X\",\"X\",\"O\",\"X\",\"X\",\"O\"],[\"X\",\"O\",\"X\",\"O\",\"O\",\"X\",\"X\",\"O\",\"X\",\"O\"],[\"X\",\"X\",\"O\",\"X\",\"X\",\"O\",\"X\",\"O\",\"O\",\"X\"],[\"O\",\"O\",\"O\",\"O\",\"X\",\"O\",\"X\",\"O\",\"X\",\"O\"],[\"X\",\"X\",\"O\",\"X\",\"X\",\"X\",\"X\",\"O\",\"O\",\"O\"]]";
+        // boolean isChar = false;
+        boolean isChar = true;
 
         jsArrayLiteral2JavaArrayLiteral(s, true, isChar);
         jsArrayLiteral2JavaArrayLiteral(s, false, isChar);
@@ -49,202 +48,64 @@ public class Test {
         System.out.println(java.util.Arrays.deepEquals(c, e));
     }
 
-    private static void testStringUtils() {
-        System.out.println("");
-
-        Integer[] a11 = { 1, 2, 3 };
-        System.out.println(TestConverter.toString(a11));
-
-        Double[] a12 = { 7d, 8d, 9d };
-        System.out.println(TestConverter.toString(a12));
-
-        String[] a13 = { "a", "b", "c" };
-        System.out.println(TestConverter.toString(a13));
-
-        int[] a2 = { 1, 2, 3 };
-        System.out.println(TestConverter.toString(a2));
-
-        double[] a3 = { 7d, 8d, 9d };
-        System.out.println(TestConverter.toString(a3));
-
-        System.out.println("");
-
-        java.util.List<java.util.List<Integer>> lists1 = new java.util.LinkedList<>();
-        java.util.List<Integer> list1 = new java.util.LinkedList<>();
-        list1.add(1);
-        list1.add(2);
-        list1.add(3);
-        lists1.add(list1);
-
-        java.util.List<java.util.List<Double>> lists2 = new java.util.LinkedList<>();
-        java.util.List<Double> list2 = new java.util.LinkedList<>();
-        list2.add(7d);
-        list2.add(8d);
-        list2.add(9d);
-        lists2.add(list2);
-
-        java.util.List<java.util.List<String>> lists3 = new java.util.LinkedList<>();
-        java.util.List<String> list3 = new java.util.LinkedList<>();
-        list3.add("a");
-        list3.add("b");
-        list3.add("c");
-        lists3.add(list3);
-
-        System.out.println(TestConverter.toString(list1));
-        System.out.println(TestConverter.toString(list2));
-        System.out.println(TestConverter.toString(list3));
-
-        System.out.println(TestConverter.toString(lists1));
-        System.out.println(TestConverter.toString(lists2));
-        System.out.println(TestConverter.toString(lists3));
-
-        // System.out.println(TestConverter.toLines(list1));
-        // System.out.println(TestConverter.toLines(list2));
-        // System.out.println(TestConverter.toLines(list3));
-    }
-
-    public static class ArrayUtils {
-        public static void printArray(int[] array) {
-            System.out.println(java.util.Arrays.toString(array));
-        }
-
-        public static void printArray(int[] array, int len) {
-            System.out.println(java.util.Arrays.toString(java.util.Arrays.copyOf(array, len)));
-        }
-
-        public static void printArrays(int[][] arrays) {
-            System.out.println(java.util.Arrays.deepToString(arrays));
-        }
-
-        public static void printArray(Integer[] array) {
-            System.out.println(java.util.Arrays.toString(array));
-        }
-
-        public static void printArray(Integer[] array, int len) {
-            System.out.println(java.util.Arrays.toString(java.util.Arrays.copyOf(array, len)));
-        }
-
-        public static void printArrays(Integer[][] arrays) {
-            System.out.println(java.util.Arrays.deepToString(arrays));
-        }
-
-        public static void printArray(String[] array) {
-            System.out.println(java.util.Arrays.toString(array));
-        }
-
-        public static void printArray(String[] array, int len) {
-            System.out.println(java.util.Arrays.toString(java.util.Arrays.copyOf(array, len)));
-        }
-
-        public static void printArrays(String[][] arrays) {
-            System.out.println(java.util.Arrays.deepToString(arrays));
-        }
-    }
-
-    public static class ListUtils {
-        public static void printList(java.util.List<? extends Object> list) {
-            System.out.println(java.util.Arrays.toString(list.toArray(new Object[0])));
-        }
-
-        public static void printLines(java.util.List<? extends Object> list) {
-            if (list == null) {
-                return;
-            }
-
-            for (Object o : list) {
-                System.out.println(o);
-            }
-            System.out.println();
-        }
-
-        public static void printLists1(java.util.List<java.util.List<Integer>> lists) {
-            Object[] arrays = new Object[lists.size()];
-            for (int i = 0; i < lists.size(); i++) {
-                arrays[i] = lists.get(i).toArray(new Object[0]);
-            }
-
-            System.out.println(java.util.Arrays.deepToString(arrays));
-        }
-
-        public static void printLists2(java.util.List<java.util.List<Double>> lists) {
-            Object[] arrays = new Object[lists.size()];
-            for (int i = 0; i < lists.size(); i++) {
-                arrays[i] = lists.get(i).toArray(new Object[0]);
-            }
-
-            System.out.println(java.util.Arrays.deepToString(arrays));
-        }
-
-        public static void printLists3(java.util.List<java.util.List<String>> lists) {
-            Object[] arrays = new Object[lists.size()];
-            for (int i = 0; i < lists.size(); i++) {
-                arrays[i] = lists.get(i).toArray(new Object[0]);
-            }
-
-            System.out.println(java.util.Arrays.deepToString(arrays));
-        }
-    }
-
-    public static class TestConverter {
-        public static String toString(Object[] array) {
-            return java.util.Arrays.toString(array);
-        }
-
-        public static String toString(Object[][] arrays) {
-            return java.util.Arrays.deepToString(arrays);
-        }
-
-        public static String toString(int[] array) {
-            return java.util.Arrays.toString(array);
-        }
-
-        public static String toString(int[][] arrays) {
-            return java.util.Arrays.deepToString(arrays);
-        }
-
-        public static String toString(double[] array) {
-            return java.util.Arrays.toString(array);
-        }
-
-        public static String toString(double[][] arrays) {
-            return java.util.Arrays.deepToString(arrays);
-        }
-
-        public static String toString(char[] array) {
-            return java.util.Arrays.toString(array);
-        }
-
-        public static String toString(char[][] arrays) {
-            return java.util.Arrays.deepToString(arrays);
-        }
-
-        public static String toString(java.util.List<? extends Object> list) {
-            return list.toString();
-        }
-
-        public static String toLines(java.util.List<? extends Object> list) {
-            if (list == null) {
-                return "\n";
-            }
-
-            java.util.List<String> strings = new java.util.ArrayList<>(list.size());
-            for (Object object : list) {
-                strings.add(object.toString());
-            }
-
-            return String.join("\n", strings) + "\n";
-        }
-    }
-
     public static class TestUtils {
         public static boolean check(Object result, Object expect) {
-            if (result instanceof String && expect instanceof String) {
-                result = normalizeString((String) result);
-                expect = normalizeString((String) expect);
+
+            String resultString;
+            String expectString;
+            boolean ok;
+
+            if (result instanceof int[] && expect instanceof int[]) {
+                resultString = java.util.Arrays.toString((int[]) result);
+                expectString = java.util.Arrays.toString((int[]) expect);
+
+                ok = java.util.Arrays.equals((int[]) result, (int[]) expect);
+            } else if (result instanceof float[] && expect instanceof float[]) {
+                resultString = java.util.Arrays.toString((float[]) result);
+                expectString = java.util.Arrays.toString((float[]) expect);
+
+                ok = java.util.Arrays.equals((float[]) result, (float[]) expect);
+            } else if (result instanceof double[] && expect instanceof double[]) {
+                resultString = java.util.Arrays.toString((double[]) result);
+                expectString = java.util.Arrays.toString((double[]) expect);
+
+                ok = java.util.Arrays.equals((double[]) result, (double[]) expect);
+            } else if (result instanceof char[] && expect instanceof char[]) {
+                resultString = java.util.Arrays.toString((char[]) result);
+                expectString = java.util.Arrays.toString((char[]) expect);
+
+                ok = java.util.Arrays.equals((char[]) result, (char[]) expect);
+            } else if (result instanceof boolean[] && expect instanceof boolean[]) {
+                resultString = java.util.Arrays.toString((boolean[]) result);
+                expectString = java.util.Arrays.toString((boolean[]) expect);
+
+                ok = java.util.Arrays.equals((boolean[]) result, (boolean[]) expect);
+            } else if (result instanceof Object[] && expect instanceof Object[]) {
+                resultString = java.util.Arrays.deepToString((Object[]) result);
+                expectString = java.util.Arrays.deepToString((Object[]) expect);
+
+                ok = java.util.Arrays.deepEquals((Object[]) result, (Object[]) expect);
+            } else {
+                if (result instanceof Object[]) {
+                    resultString = java.util.Arrays.deepToString((Object[]) result);
+                } else {
+                    resultString = result.toString();
+                }
+
+                if (expect instanceof Object[]) {
+                    expectString = java.util.Arrays.deepToString((Object[]) expect);
+                } else {
+                    expectString = expect.toString();
+                }
+
+                resultString = normalizeString(resultString);
+                expectString = normalizeString(expectString);
+
+                ok = java.util.Objects.equals(resultString, expectString);
             }
 
-            boolean ok = java.util.Objects.equals(result, expect);
-            printCheck(result, expect, ok);
+            printCheck(resultString, expectString, ok);
+
             return ok;
         }
 
@@ -261,7 +122,7 @@ public class Test {
             return s;
         }
 
-        private static void printCheck(Object result, Object expect, boolean ok) {
+        private static void printCheck(String result, String expect, boolean ok) {
             // System.out.println();
             // System.out.println("--->");
 
@@ -307,6 +168,15 @@ public class Test {
                     }
                 }
             }
+        }
+
+        public static java.util.List<java.util.List<String>> toLists(String[][] arrays) {
+            java.util.List<java.util.List<String>> lists = new java.util.ArrayList<>();
+            for (String[] array : arrays) {
+                lists.add(java.util.Arrays.asList(array));
+            }
+
+            return lists;
         }
     }
 
