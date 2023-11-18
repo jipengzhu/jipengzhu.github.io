@@ -1,188 +1,347 @@
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
 
 public class Solution {
+    private int count = 0;
+    private Map<TreeNode, Map<TreeNode, String>> paths = new HashMap<>();
+    private Map<TreeNode, TreeNode> map = new HashMap<>(); // 存储每个结点到双亲结点的映射
 
-    public Node cloneGraph(Node node) {
-        if (node == null) {
-            return null;
+    public int pathSum(TreeNode root, int targetSum) {
+        if (root == null) {
+            return count;
         }
 
-        Set<Node> visited = new HashSet<>();
-        Map<Node, Node> caches = new HashMap<>();
-        Queue<Node> queue = new LinkedList<>();
+        if (root.left == null && root.right == null) {
+            List<TreeNode> list = new LinkedList<>();
 
-        caches.put(node, new Node(node.val));
-        queue.offer(node);
-        visited.add(node);
+            TreeNode p = root;
+            while (p != null) {
+                list.add(0, p);
 
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                Node curNode = queue.poll();
-                Node newNode = caches.get(curNode);
+                p = map.get(p);
+            }
 
-                for (Node neighbor : curNode.neighbors) {
-                    Node newNeighbor = caches.get(neighbor);
-                    if (newNeighbor == null) {
-                        newNeighbor = new Node(neighbor.val);
-                        caches.put(neighbor, newNeighbor);
+            for (int i = 0; i < list.size(); i++) {
+                int sum = 0;
+                for (int j = i; j < list.size(); j++) {
+                    sum = sum + list.get(j).val;
+                    if (sum == targetSum) {
+                        // List<String> tmp = new LinkedList<>();
+                        // for (int k = i; k <= j; k++) {
+                        // TreeNode node = list.get(k);
+
+                        // tmp.add(node.val + "");
+                        // // tmp.add(node.val + "@" + node);
+                        // }
+
+                        // String path = String.join("->", tmp);
+
+                        // // System.out.println(list);
+                        // // System.out.println(path);
+
+                        TreeNode x = list.get(i);
+                        TreeNode y = list.get(j);
+
+                        Map<TreeNode, String> nodes = paths.computeIfAbsent(x, k -> new HashMap<>());
+                        if (nodes.containsKey(y)) {
+                            continue;
+                        } else {
+                            // paths.put(y, path);
+                            nodes.put(y, null);
+                            count++;
+                        }
                     }
-
-                    newNode.neighbors.add(newNeighbor);
-
-                    if (visited.contains(neighbor)) {
-                        continue;
-                    }
-
-                    queue.offer(neighbor);
-                    visited.add(neighbor);
                 }
-
-                visited.add(curNode);
             }
         }
 
-        return caches.get(node);
+        map.put(root.left, root);
+        map.put(root.right, root);
+
+        pathSum(root.left, targetSum);
+        pathSum(root.right, targetSum);
+
+        return count;
     }
 
-    static class Node {
-        public int val;
-        public java.util.List<Node> neighbors;
+    static public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
 
-        public Node(int val) {
-            this.val = val;
-            this.neighbors = new java.util.ArrayList<Node>();
+        TreeNode() {
         }
 
-        public static Node genGraph(int[][] adjList) {
-            if (adjList.length == 0) {
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+
+        public static TreeNode genTree(Integer[] nums) {
+            if (nums.length == 0) {
                 return null;
             }
 
-            java.util.Map<Integer, Node> map = new java.util.HashMap<>();
-            java.util.List<Node> list = new java.util.ArrayList<>();
+            java.util.Queue<TreeNode> queue = new java.util.LinkedList<>();
+            TreeNode root = new TreeNode(nums[0]);
+            queue.offer(root);
 
-            int v;
+            int i = 1;
+            while (i < nums.length) {
+                TreeNode node = queue.poll();
 
-            for (int i = 0; i < adjList.length; i++) {
-                v = i + 1;
+                Integer leftVal = i < nums.length ? nums[i++] : null;
+                if (leftVal != null) {
+                    TreeNode leftNode = new TreeNode(leftVal);
+                    node.left = leftNode;
 
-                Node node = map.get(v);
-                if (node == null) {
-                    node = new Node(v);
-                    map.put(v, node);
+                    queue.offer(leftNode);
                 }
 
-                list.add(node);
+                Integer rightVal = i < nums.length ? nums[i++] : null;
+                if (rightVal != null) {
+                    TreeNode rightNode = new TreeNode(rightVal);
+                    node.right = rightNode;
 
-                int[] array = adjList[i];
-
-                for (int j = 0; j < array.length; j++) {
-                    v = array[j];
-
-                    Node neighbor = map.get(v);
-                    if (neighbor == null) {
-                        neighbor = new Node(v);
-                        map.put(v, neighbor);
-                    }
-
-                    node.neighbors.add(neighbor);
+                    queue.offer(rightNode);
                 }
             }
 
-            return list.get(0);
+            return root;
         }
 
-        public static void printNode(Node node) {
-            if (node == null) {
-                System.out.println(node);
-
-                return;
+        public static Integer[] toArray(TreeNode root) {
+            if (root == null) {
+                return new Integer[0];
             }
 
-            java.util.List<String> list = new java.util.ArrayList<>();
+            java.util.LinkedList<Integer> list = new java.util.LinkedList<>();
+            list.add(root.val);
 
-            java.util.Set<Node> visited = new java.util.HashSet<>();
-            java.util.Queue<Node> queue = new java.util.LinkedList<>();
-
-            queue.offer(node);
-            visited.add(node);
+            java.util.Queue<TreeNode> queue = new java.util.LinkedList<>();
+            queue.offer(root);
 
             while (!queue.isEmpty()) {
-                int size = queue.size();
-                for (int i = 0; i < size; i++) {
-                    Node curNode = queue.poll();
+                TreeNode node = queue.poll();
+                TreeNode left = node.left;
+                TreeNode right = node.right;
 
-                    java.util.List<String> tmp = new java.util.ArrayList<>();
+                list.add(left != null ? left.val : null);
+                list.add(right != null ? right.val : null);
 
-                    for (Node neighbor : curNode.neighbors) {
-                        String s = String.format("%2s@%25s", neighbor.val, neighbor);
-                        tmp.add(s);
+                if (left != null) {
+                    queue.offer(left);
+                }
 
-                        if (visited.contains(neighbor)) {
-                            continue;
-                        }
-
-                        queue.offer(neighbor);
-                        visited.add(neighbor);
-                    }
-
-                    list.add("[" + String.join(",", tmp) + "]");
+                if (right != null) {
+                    queue.offer(right);
                 }
             }
 
-            System.out.println("[" + String.join(",", list) + "]");
+            while (!list.isEmpty() && list.peekLast() == null) {
+                list.pollLast();
+            }
+
+            return list.toArray(new Integer[0]);
+        }
+    }
+
+    public static class TestUtils {
+        public static boolean check(Object result, Object expect) {
+
+            String resultString;
+            String expectString;
+            boolean ok;
+
+            if (result instanceof int[] && expect instanceof int[]) {
+                resultString = java.util.Arrays.toString((int[]) result);
+                expectString = java.util.Arrays.toString((int[]) expect);
+
+                ok = java.util.Arrays.equals((int[]) result, (int[]) expect);
+            } else if (result instanceof float[] && expect instanceof float[]) {
+                resultString = java.util.Arrays.toString((float[]) result);
+                expectString = java.util.Arrays.toString((float[]) expect);
+
+                ok = java.util.Arrays.equals((float[]) result, (float[]) expect);
+            } else if (result instanceof double[] && expect instanceof double[]) {
+                resultString = java.util.Arrays.toString((double[]) result);
+                expectString = java.util.Arrays.toString((double[]) expect);
+
+                ok = java.util.Arrays.equals((double[]) result, (double[]) expect);
+            } else if (result instanceof char[] && expect instanceof char[]) {
+                resultString = java.util.Arrays.toString((char[]) result);
+                expectString = java.util.Arrays.toString((char[]) expect);
+
+                ok = java.util.Arrays.equals((char[]) result, (char[]) expect);
+            } else if (result instanceof boolean[] && expect instanceof boolean[]) {
+                resultString = java.util.Arrays.toString((boolean[]) result);
+                expectString = java.util.Arrays.toString((boolean[]) expect);
+
+                ok = java.util.Arrays.equals((boolean[]) result, (boolean[]) expect);
+            } else if (result instanceof Object[] && expect instanceof Object[]) {
+                resultString = java.util.Arrays.deepToString((Object[]) result);
+                expectString = java.util.Arrays.deepToString((Object[]) expect);
+
+                ok = java.util.Arrays.deepEquals((Object[]) result, (Object[]) expect);
+            } else {
+                if (result instanceof Object[]) {
+                    resultString = java.util.Arrays.deepToString((Object[]) result);
+                } else {
+                    resultString = result.toString();
+                }
+
+                if (expect instanceof Object[]) {
+                    expectString = java.util.Arrays.deepToString((Object[]) expect);
+                } else {
+                    expectString = expect.toString();
+                }
+
+                resultString = normalizeString(resultString);
+                expectString = normalizeString(expectString);
+
+                ok = java.util.Objects.equals(resultString, expectString);
+            }
+
+            printCheck(resultString, expectString, ok);
+
+            return ok;
         }
 
-        public static void printResult(Node node, Node result) {
-            System.out.println("--->");
-            Node.printNode(node);
+        private static String normalizeString(String s) {
+            s = s.replace("{", "[");
+            s = s.replace("}", "]");
+
+            if (s.startsWith("[") && s.endsWith("]")) {
+                s = s.replace(" ", "")
+                        .replace("'", "")
+                        .replace("\"", "");
+            }
+
+            return s;
+        }
+
+        private static void printCheck(String result, String expect, boolean ok) {
+            // System.out.println();
+            // System.out.println("--->");
+
+            System.out.println("result: " + result);
+            System.out.println("expect: " + expect);
+
             System.out.println();
-            Node.printNode(result);
-            System.out.println("<---");
+            if (ok) {
+                System.out.println("比较结果为: 正确(right)");
+            } else {
+                System.out.println("比较结果为: 错误(error)");
+            }
+
+            // System.out.println();
+            // System.out.println("<---");
+        }
+
+        public static void runTestCases(Class<?> clazz) {
+            java.lang.reflect.Method[] methods = clazz.getDeclaredMethods();
+            java.util.Arrays.sort(methods, (o1, o2) -> {
+                return o1.getName().compareTo(o2.getName());
+            });
+            for (java.lang.reflect.Method method : methods) {
+                if (method.getName().startsWith("test")) {
+                    System.out.println(String.format("--- %s --->", method.getName()));
+
+                    Object object = null;
+                    try {
+                        object = method.invoke(null);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    System.out.println(String.format("<--- %s ---", method.getName()));
+
+                    if (object instanceof Boolean) {
+                        Boolean ok = (Boolean) object;
+                        if (!ok) {
+                            break;
+                        }
+                    } else {
+                        throw new RuntimeException(String.format("测试用例方法%s的返回值需要为布尔类型", method.getName()));
+                    }
+                }
+            }
+        }
+
+        public static java.util.List<java.util.List<String>> toLists(String[][] arrays) {
+            java.util.List<java.util.List<String>> lists = new java.util.ArrayList<>();
+            for (String[] array : arrays) {
+                lists.add(java.util.Arrays.asList(array));
+            }
+
+            return lists;
         }
     }
 
     public static void main(String[] args) {
-        testCase1();
-        testCase2();
-        testCase3();
+        TestUtils.runTestCases(Solution.class);
     }
 
-    public static void testCase1() {
-        int[][] adjList = {
-                { 2, 4 },
-                { 1, 3 },
-                { 2, 4 },
-                { 1, 3 }
-        };
+    public static boolean testCase1() {
+        Integer[] nums = { 10, 5, -3, 3, 2, null, 11, 3, -2, null, 1 };
+        int sum = 8;
 
-        Node node = Node.genGraph(adjList);
-        Node result = new Solution().cloneGraph(node);
+        TreeNode tree = TreeNode.genTree(nums);
+        int result = new Solution().pathSum(tree, sum);
+        int expect = 3;
 
-        Node.printResult(node, result);
+        return TestUtils.check(result, expect);
     }
 
-    public static void testCase2() {
-        int[][] adjList = { {} };
+    public static boolean testCase2() {
+        Integer[] nums = { 5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1 };
+        int sum = 22;
 
-        Node node = Node.genGraph(adjList);
-        Node result = new Solution().cloneGraph(node);
+        TreeNode tree = TreeNode.genTree(nums);
+        int result = new Solution().pathSum(tree, sum);
+        int expect = 3;
 
-        Node.printResult(node, result);
+        return TestUtils.check(result, expect);
     }
 
-    public static void testCase3() {
-        int[][] adjList = {};
+    public static boolean testCase3() {
+        Integer[] nums = { 0, 1, 1 };
+        int sum = 1;
 
-        Node node = Node.genGraph(adjList);
-        Node result = new Solution().cloneGraph(node);
+        TreeNode tree = TreeNode.genTree(nums);
+        int result = new Solution().pathSum(tree, sum);
+        int expect = 4;
 
-        Node.printResult(node, result);
+        return TestUtils.check(result, expect);
+    }
+
+    public static boolean testCase4() {
+        Integer[] nums = { 0, 0, 0 };
+        int sum = 0;
+
+        TreeNode tree = TreeNode.genTree(nums);
+        int result = new Solution().pathSum(tree, sum);
+        int expect = 5;
+
+        return TestUtils.check(result, expect);
+    }
+
+    public static boolean testCase5() {
+        Integer[] nums = { 1000000000, 1000000000, null, 294967296, null, 1000000000, null, 1000000000, null,
+                1000000000 };
+        int sum = 0;
+
+        TreeNode tree = TreeNode.genTree(nums);
+        int result = new Solution().pathSum(tree, sum);
+        int expect = 0;
+
+        return TestUtils.check(result, expect);
     }
 }
