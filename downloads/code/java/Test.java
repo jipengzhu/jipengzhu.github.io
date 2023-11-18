@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class Test {
 
     public static void main(String[] args) {
@@ -8,7 +12,7 @@ public class Test {
     }
 
     private static void transformArrayLiteral() {
-        String s = "[[\"X\",\"O\",\"X\",\"O\",\"X\",\"O\",\"O\",\"O\",\"X\",\"O\"],[\"X\",\"O\",\"O\",\"X\",\"X\",\"X\",\"O\",\"O\",\"O\",\"X\"],[\"O\",\"O\",\"O\",\"O\",\"O\",\"O\",\"O\",\"O\",\"X\",\"X\"],[\"O\",\"O\",\"O\",\"O\",\"O\",\"O\",\"X\",\"O\",\"O\",\"X\"],[\"O\",\"O\",\"X\",\"X\",\"O\",\"X\",\"X\",\"O\",\"O\",\"O\"],[\"X\",\"O\",\"O\",\"X\",\"X\",\"X\",\"O\",\"X\",\"X\",\"O\"],[\"X\",\"O\",\"X\",\"O\",\"O\",\"X\",\"X\",\"O\",\"X\",\"O\"],[\"X\",\"X\",\"O\",\"X\",\"X\",\"O\",\"X\",\"O\",\"O\",\"X\"],[\"O\",\"O\",\"O\",\"O\",\"X\",\"O\",\"X\",\"O\",\"X\",\"O\"],[\"X\",\"X\",\"O\",\"X\",\"X\",\"X\",\"X\",\"O\",\"O\",\"O\"]]";
+        String s = "[[\"X\",\"X\",\"X\",\"X\",\"O\",\"O\",\"X\",\"X\",\"O\"],[\"O\",\"O\",\"O\",\"O\",\"X\",\"X\",\"O\",\"O\",\"X\"],[\"X\",\"O\",\"X\",\"O\",\"O\",\"X\",\"X\",\"O\",\"X\"],[\"O\",\"O\",\"X\",\"X\",\"X\",\"O\",\"O\",\"O\",\"O\"],[\"X\",\"O\",\"O\",\"X\",\"X\",\"X\",\"X\",\"X\",\"O\"],[\"O\",\"O\",\"X\",\"O\",\"X\",\"O\",\"X\",\"O\",\"X\"],[\"O\",\"O\",\"O\",\"X\",\"X\",\"O\",\"X\",\"O\",\"X\"],[\"O\",\"O\",\"O\",\"X\",\"O\",\"O\",\"O\",\"X\",\"O\"],[\"O\",\"X\",\"O\",\"O\",\"O\",\"X\",\"O\",\"X\",\"O\"]]";
         // boolean isChar = false;
         boolean isChar = true;
 
@@ -32,6 +36,15 @@ public class Test {
 
         System.out.println();
         System.out.println(s);
+
+        // if (pretty) {
+        //     File file = new File("tmp_pretty_array.txt");
+        //     try (FileOutputStream fo = new FileOutputStream(file)) {
+        //         fo.write(s.getBytes());
+        //     } catch (IOException e) {
+        //         e.printStackTrace();
+        //     }
+        // }
     }
 
     private static void testToString() {
