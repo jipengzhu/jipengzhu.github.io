@@ -38,12 +38,12 @@ public class Test {
         System.out.println(s);
 
         // if (pretty) {
-        //     File file = new File("tmp_pretty_array.txt");
-        //     try (FileOutputStream fo = new FileOutputStream(file)) {
-        //         fo.write(s.getBytes());
-        //     } catch (IOException e) {
-        //         e.printStackTrace();
-        //     }
+        // File file = new File("tmp_pretty_array.txt");
+        // try (FileOutputStream fo = new FileOutputStream(file)) {
+        // fo.write(s.getBytes());
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
         // }
     }
 
@@ -315,20 +315,27 @@ public class Test {
             while (i < nums.length) {
                 TreeNode node = queue.poll();
 
-                Integer leftVal = i < nums.length ? nums[i++] : null;
-                if (leftVal != null) {
-                    TreeNode leftNode = new TreeNode(leftVal);
-                    node.left = leftNode;
+                if (node != null) {
+                    if (i < nums.length) {
+                        Integer v = nums[i++];
 
-                    queue.offer(leftNode);
-                }
+                        node.left = v == null ? null : new TreeNode(v);
 
-                Integer rightVal = i < nums.length ? nums[i++] : null;
-                if (rightVal != null) {
-                    TreeNode rightNode = new TreeNode(rightVal);
-                    node.right = rightNode;
+                        queue.offer(node.left);
+                    }
 
-                    queue.offer(rightNode);
+                    if (i < nums.length) {
+                        Integer v = nums[i++];
+
+                        node.right = v == null ? null : new TreeNode(v);
+
+                        queue.offer(node.right);
+                    }
+                } else {
+                    i = i + 2;
+
+                    queue.offer(null);
+                    queue.offer(null);
                 }
             }
 
@@ -341,30 +348,51 @@ public class Test {
             }
 
             java.util.LinkedList<Integer> list = new java.util.LinkedList<>();
-            list.add(root.val);
 
             java.util.Queue<TreeNode> queue = new java.util.LinkedList<>();
             queue.offer(root);
 
             while (!queue.isEmpty()) {
-                TreeNode node = queue.poll();
-                TreeNode left = node.left;
-                TreeNode right = node.right;
+                boolean hasValidNode = false;
 
-                list.add(left != null ? left.val : null);
-                list.add(right != null ? right.val : null);
+                int size = queue.size();
+                for (int i = 0; i < size; i++) {
+                    TreeNode node = queue.poll();
 
-                if (left != null) {
-                    queue.offer(left);
+                    if (node != null) {
+                        list.add(node.val);
+                    } else {
+                        list.add(null);
+                    }
+
+                    if (node != null && node.left != null) {
+                        queue.offer(node.left);
+
+                        hasValidNode = true;
+                    } else {
+                        queue.offer(null);
+                    }
+
+                    if (node != null && node.right != null) {
+                        queue.offer(node.right);
+
+                        hasValidNode = true;
+                    } else {
+                        queue.offer(null);
+                    }
                 }
 
-                if (right != null) {
-                    queue.offer(right);
+                if (!hasValidNode) {
+                    // while (!queue.isEmpty()) {
+                    // queue.poll();
+                    // }
+
+                    break;
                 }
             }
 
-            while (!list.isEmpty() && list.peekLast() == null) {
-                list.pollLast();
+            while (!list.isEmpty() && list.get(list.size() - 1) == null) {
+                list.remove(list.size() - 1);
             }
 
             return list.toArray(new Integer[0]);

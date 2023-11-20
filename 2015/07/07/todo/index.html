@@ -28,7 +28,7 @@
 <meta property="og:description" content="待做事项">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2015-07-06T16:01:00.000Z">
-<meta property="article:modified_time" content="2023-11-18T11:19:45.637Z">
+<meta property="article:modified_time" content="2023-11-20T09:36:29.758Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ todo">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-18 19:19:45" itemprop="dateModified" datetime="2023-11-18T19:19:45+08:00">2023-11-18</time>
+                <time title="修改时间：2023-11-20 17:36:29" itemprop="dateModified" datetime="2023-11-20T17:36:29+08:00">2023-11-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -249,7 +249,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Todo"><a href="#Todo" class="headerlink" title="Todo"></a>Todo</h1><p>路径总和III 的解答错误（加法溢出后结果为0导致的）解决一下</p>
+        <h1 id="Todo"><a href="#Todo" class="headerlink" title="Todo"></a>Todo</h1><p>用test.java里面的treenode更新所有treenode</p>
+<p>排序算法里面的 main和SortUtils更新 改为 heap里面的 SortTest</p>
+<p>棋子visited 二维数组改成两级 map 并在leetcode 中测试<br>层次遍历 新加的版本在leetcode 中测试</p>
+<p>树结构和算法的层次遍历添加2个递归版本<br>while拿那个叫loop版本<br>loop版本改递归版本1 结果list放到第二个方法的参数里面，并递归调用第二个方法<br>loop版本改递归版本1 结果list放到实例变量里面，并递归调用第二个方法</p>
+<p>tree的遍历改为 visittreeofpreorderbystack这种格式<br>toarray 改为of full level order</p>
+<p>树的层次遍历带null的有问题<br>tree和treenode的toarray<br>查一下treenode的toarray用在哪些地方了<br>用treenode的gentree找一个更复杂的例子给tree测试<br>先用list将下一层的结点收集起来，并且用变量hasValidNode初始为false，有一个不为null就变true，为true的话则都加进队列</p>
+<p>PriorityQueue的淘汰算法优化<br>priorityqueue<br>indexOfObselete<br>小顶堆时最大的结点肯定在叶子结点里面<br>找到完全二叉树的第一个叶子结点<br> while i &lt; size i &#x3D; 2 * i + 1<br> 结束后 i &#x3D; (i - 1) &#x2F; 2<br>collect 用dequeue实现</p>
+<p>完成stack的代码<br>完成tree、heap、PriorityQueue 的代码<br>完成graph的代码</p>
+<p>单向链表 添加带头结点和尾指针的</p>
+<p>开始时，尾指针指向头结点</p>
+<p>头部添加前链表为空<br> head.next &#x3D;&#x3D; null  tail &#x3D; node<br>头部删除后链表为空<br>head.next &#x3D;&#x3D; null  tail &#x3D; head<br>尾部添加时 tail.next &#x3D; node tail &#x3D; tail.next<br>尾部删除时 tail &#x3D; p</p>
+<p>双向链表整理为</p>
+<p>有尾结点有尾指针<br>有尾结点无尾指针<br>无尾结点有尾指针<br>无尾结点无尾指针</p>
+<p>路径总和III 的解答错误（加法溢出后结果为0导致的）解决一下</p>
 <p>检查对称二叉树 题目解答 进阶解法<br>检查二叉树展开为链表 题目解答 进阶解法 其他解法</p>
 <p>检查二叉树的所有路径 题目解答<br>检查路径总和 题目解答<br>检查路径总和II 题目解答<br>检查路径总和III 题目解答</p>
 <p>检查求根节点到叶节点数字之和 题目解答 进阶解法<br>kthSmallest 题目解答 进阶解法<br>isValidBST 题目解答 进阶解法</p>
@@ -286,7 +299,6 @@
 <p>排序总结加上平均时间复杂度</p>
 <p>时间复杂度计算时循环内部的非循环代码耗时都是常量，不受循环次数n的影响<br>两层循环时间复杂度为<br>选择和冒泡为<br>n-1+n-2+…+2+1 &#x3D; n*(n-1) &#x2F; 2<br>插入为<br>1+2+…+n-2+n-2 &#x3D; n*(n-1) &#x2F; 2</p>
 <h2 id="算法相关"><a href="#算法相关" class="headerlink" title="算法相关"></a>算法相关</h2><p>最优解的三种思路<br>遍历比较求最优解<br>贪心算法求最优解<br>动态规划求最优解</p>
-<p>完成stack的代码<br>完成tree和heap的代码</p>
 <p>二叉树展开为链表<br>扩展 用左指针指向前一个结点展开成双向链表<br>扩展 用中序遍历和后序遍历的方式展开成链表</p>
 <p>leetcode 遍历生成线索树</p>
 <p>按数组 链表 通用 分变量<br>i 下标 左指针<br>j 下标 右指针<br>k 循环辅助变量<br>v 值 value<br>x 值辅助变量<br>y 值辅助变量<br>t 临时变量<br>L 左边界 left l<br>M 中间点 middle m<br>R 右边界 right r<br>b 范围起点 begin<br>e 范围终点 end<br>c 计数<br>n 个数<br>m 个数辅助变量<br>len 长度<br>char 字符 c ch<br>word 单词 w<br>str 字符串 s<br>array 数组 a<br>link 链表 l<br>p 链表的当前结点指针<br>q 链表的下一个结点指针<br>r 指针辅助变量<br>node 结点<br>head 头指针</p>
@@ -299,11 +311,6 @@
 <p>添加dsa summary文件记录还没理解的数据结构和算法</p>
 <p>建立 TestUtils<br>test utils 添加各种 check方法 result expect<br>test utils 反射调用testCase 参数是 class&lt;?&gt;<br>test utils 测试方法返回值不为布尔类型的时候抛异常</p>
 <p>testCase方法返回值改为boolean<br>建立 StringUtils 替换 array list utils</p>
-<p>单向链表 添加带头结点和尾指针的</p>
-<p>开始时，尾指针指向头结点</p>
-<p>头部添加前链表为空<br> head.next &#x3D;&#x3D; null  tail &#x3D; node<br>头部删除后链表为空<br>head.next &#x3D;&#x3D; null  tail &#x3D; head<br>尾部添加时 tail.next &#x3D; node tail &#x3D; tail.next<br>尾部删除时 tail &#x3D; p</p>
-<p>双向链表整理为</p>
-<p>有尾结点有尾指针<br>有尾结点无尾指针<br>无尾结点有尾指针<br>无尾结点无尾指针</p>
 <h2 id="后端整理"><a href="#后端整理" class="headerlink" title="后端整理"></a>后端整理</h2><p>jvm三色标记<br>单点登录流程（SSO）<br>扫码登录流程<br>redis大key<br>redis热key<br>幂等方案 前后端</p>
 <p>java getter setter 规则<br>idea getter setter 规则<br>lombok getter setter 规则 和java有差异<br>mybatis 字段映射用的是getter setter 还是字段反射<br>json 字段映射用的是getter setter 还是字段反射<br>json 序列化 is丢失</p>
 <p>bean创建重点<br>延迟加载 循环依赖 切面增强（代理对象）<br>bean factory<br>object factory<br>factory bean<br>proxy factory<br>proxy factory bean</p>

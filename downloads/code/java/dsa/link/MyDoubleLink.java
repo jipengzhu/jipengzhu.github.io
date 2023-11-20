@@ -18,9 +18,11 @@ public class MyDoubleLink {
     }
 
     private MyNode head = new MyNode(null);
+    private MyNode tail = new MyNode(null);
 
     public MyDoubleLink() {
-
+        head.next = tail;
+        tail.prev = head;
     }
 
     public boolean addFirst(String s) {
@@ -29,10 +31,7 @@ public class MyDoubleLink {
         node.next = head.next;
         node.prev = head;
 
-        if (node.next != null) {
-            node.next.prev = node;
-        }
-
+        node.next.prev = node;
         node.prev.next = node;
 
         return true;
@@ -40,16 +39,13 @@ public class MyDoubleLink {
 
     public String removeFirst() {
         // empty link
-        if (head.next == null) {
+        if (head.next == tail) {
             return null;
         }
 
         MyNode node = head.next;
 
-        if (node.next != null) {
-            node.next.prev = node.prev;
-        }
-
+        node.next.prev = node.prev;
         node.prev.next = node.next;
 
         return node.value;
@@ -58,20 +54,12 @@ public class MyDoubleLink {
     public boolean addLast(String s) {
         MyNode node = new MyNode(s);
 
-        MyNode p = head;
-
-        // use p.next to find the last node
-        while (p.next != null) {
-            p = p.next;
-        }
+        MyNode p = tail.prev;
 
         node.next = p.next;
         node.prev = p;
 
-        if (node.next != null) {
-            node.next.prev = node;
-        }
-
+        node.next.prev = node;
         node.prev.next = node;
 
         return true;
@@ -79,23 +67,13 @@ public class MyDoubleLink {
 
     public String removeLast() {
         // empty link
-        if (head.next == null) {
+        if (head.next == tail) {
             return null;
         }
 
-        MyNode p = head;
+        MyNode node = tail.prev;
 
-        // use p.next to find the last node
-        while (p.next != null) {
-            p = p.next;
-        }
-
-        MyNode node = p;
-
-        if (node.next != null) {
-            node.next.prev = node.prev;
-        }
-
+        node.next.prev = node.prev;
         node.prev.next = node.next;
 
         return node.value;
@@ -105,7 +83,7 @@ public class MyDoubleLink {
         int size = 0;
 
         MyNode p = head.next;
-        while (p != null) {
+        while (p != tail) {
             size++;
 
             p = p.next;
@@ -122,7 +100,7 @@ public class MyDoubleLink {
         MyNode p = head.next;
 
         int i = 0;
-        while (p != null) {
+        while (p != tail) {
             array[i] = p.value;
 
             i++;

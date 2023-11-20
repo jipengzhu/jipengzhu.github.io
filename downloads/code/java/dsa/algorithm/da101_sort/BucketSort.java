@@ -53,12 +53,16 @@ public class BucketSort {
     }
 
     public static void main(String[] args) {
-        // SortUtils.testFixedExample();
-        SortUtils.testRandomExample();
+        // SortTest.testFixedExample(array -> sort(array));
+        SortTest.testRandomExample(t -> sort(t));
     }
 
-    public static class SortUtils {
-        private static boolean testSort(int[] array) {
+    public static class SortTest {
+        public static interface SortFunc {
+            void sort(int[] array);
+        }
+
+        private static boolean testSort(int[] array, SortFunc sf) {
             System.out.println();
             System.out.println("--->");
 
@@ -69,7 +73,7 @@ public class BucketSort {
             Arrays.sort(mybak);
             print(mybak, "正确结果为");
 
-            sort(array);
+            sf.sort(array);
             print(array, "数组排序后");
 
             boolean ret = check(array, mybak);
@@ -80,25 +84,25 @@ public class BucketSort {
             return ret;
         }
 
-        private static void testRandomExample() {
+        private static void testRandomExample(SortFunc sf) {
             boolean ret;
             for (int i = 0; i < 36; i++) {
-                ret = testSort(random(9));
+                ret = testSort(random(9), sf);
                 if (!ret) {
                     break;
                 }
 
-                ret = testSort(random(10));
+                ret = testSort(random(10), sf);
                 if (!ret) {
                     break;
                 }
             }
         }
 
-        private static void testFixedExample() {
+        private static void testFixedExample(SortFunc sf) {
             int[] array = new int[] { 310, 78, 237, 773, 96, 165, 70, 757, 665, 508 };
 
-            testSort(array);
+            testSort(array, sf);
         }
 
         private static int[] random(int n) {

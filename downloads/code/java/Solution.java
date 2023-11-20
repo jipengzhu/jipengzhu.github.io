@@ -1,155 +1,129 @@
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 public class Solution {
-    private int count = 0;
-    private Map<TreeNode, Map<TreeNode, String>> paths = new HashMap<>();
-    private Map<TreeNode, TreeNode> map = new HashMap<>(); // 存储每个结点到双亲结点的映射
 
-    public int pathSum(TreeNode root, int targetSum) {
-        if (root == null) {
-            return count;
+    public void solve(char[][] board) {
+        if (board.length == 0) {
+            return;
         }
 
-        if (root.left == null && root.right == null) {
-            List<TreeNode> list = new LinkedList<>();
+        int rows = board.length;
+        int cols = board[0].length;
 
-            TreeNode p = root;
-            while (p != null) {
-                list.add(0, p);
+        boolean[][] hasOuts = new boolean[rows][cols];
 
-                p = map.get(p);
-            }
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (board[i][j] == 'X') {
+                    continue;
+                }
 
-            for (int i = 0; i < list.size(); i++) {
-                int sum = 0;
-                for (int j = i; j < list.size(); j++) {
-                    sum = sum + list.get(j).val;
-                    if (sum == targetSum) {
-                        // List<String> tmp = new LinkedList<>();
-                        // for (int k = i; k <= j; k++) {
-                        // TreeNode node = list.get(k);
+                if (hasOuts[i][j]) {
+                    // 有出路，跳过
+                    continue;
+                }
 
-                        // tmp.add(node.val + "");
-                        // // tmp.add(node.val + "@" + node);
-                        // }
+                boolean hasOut = false;
+                if (i == 0 || i == rows - 1 || j == 0 || j == cols - 1) {
+                    hasOut = true;
+                } else {
+                    int[][] points = {
+                            { i, j - 1 }, { i - 1, j }, { i, j + 1 }, { i + 1, j }
+                    };
 
-                        // String path = String.join("->", tmp);
+                    for (int[] point : points) {
+                        // 如果某个相邻点有出路，可以通过相邻点出去
+                        if (hasOuts[point[0]][point[1]]) {
+                            hasOut = true;
 
-                        // // System.out.println(list);
-                        // // System.out.println(path);
-
-                        TreeNode x = list.get(i);
-                        TreeNode y = list.get(j);
-
-                        Map<TreeNode, String> nodes = paths.computeIfAbsent(x, k -> new HashMap<>());
-                        if (nodes.containsKey(y)) {
-                            continue;
-                        } else {
-                            // paths.put(y, path);
-                            nodes.put(y, null);
-                            count++;
+                            break;
                         }
                     }
                 }
-            }
-        }
 
-        map.put(root.left, root);
-        map.put(root.right, root);
+                if (hasOut) {
+                    hasOuts[i][j] = true;
 
-        pathSum(root.left, targetSum);
-        pathSum(root.right, targetSum);
-
-        return count;
-    }
-
-    static public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode() {
-        }
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-
-        public static TreeNode genTree(Integer[] nums) {
-            if (nums.length == 0) {
-                return null;
-            }
-
-            java.util.Queue<TreeNode> queue = new java.util.LinkedList<>();
-            TreeNode root = new TreeNode(nums[0]);
-            queue.offer(root);
-
-            int i = 1;
-            while (i < nums.length) {
-                TreeNode node = queue.poll();
-
-                Integer leftVal = i < nums.length ? nums[i++] : null;
-                if (leftVal != null) {
-                    TreeNode leftNode = new TreeNode(leftVal);
-                    node.left = leftNode;
-
-                    queue.offer(leftNode);
+                    continue;
                 }
 
-                Integer rightVal = i < nums.length ? nums[i++] : null;
-                if (rightVal != null) {
-                    TreeNode rightNode = new TreeNode(rightVal);
-                    node.right = rightNode;
+                Map<Integer, Map<Integer, Integer>> visited = new HashMap<>();
+                Deque<int[]> stack = new LinkedList<>();
 
-                    queue.offer(rightNode);
+                int[] p = new int[] { i, j };
+                while (p != null || !stack.isEmpty()) {
+                    if (p != null) {
+                        int x = p[0];
+                        int y = p[1];
+
+                        // 标记为已访问
+                        visited.computeIfAbsent(x, k -> new HashMap<>()).put(y, null);
+
+                        // 找到出路了
+                        if (x == 0 || x == rows - 1 || y == 0 || y == cols - 1) {
+                            stack.push(p);
+
+                            break;
+                        }
+
+                        int[][] points = new int[][] {
+                                { x, y - 1 }, { x - 1, y }, { x, y + 1 }, { x + 1, y }
+                        };
+
+                        int[] q = null;
+                        for (int[] point : points) {
+                            x = point[0];
+                            y = point[1];
+
+                            if (x < 0 || x >= rows || y < 0 || y >= cols) {
+                                // 无效点，跳过
+                                continue;
+                            }
+
+                            if (visited.computeIfAbsent(x, k -> new HashMap<>()).containsKey(y)) {
+                                // 已访问，跳过
+                                continue;
+                            }
+
+                            if (board[x][y] == 'O') {
+                                q = point;
+
+                                break;
+                            }
+                        }
+
+                        if (q != null) {
+                            stack.push(p); // 保存回退点
+
+                            p = q; // 前进
+                        } else {
+                            // p = stack.isEmpty() ? null : stack.pop(); // 回溯
+                            p = null; // 在下一次循环时跳转到回溯分支
+                        }
+                    } else {
+                        p = stack.pop(); // 回溯
+                    }
+                }
+
+                if (p != null || !stack.isEmpty()) {
+                    // 找到了出路
+                    while (!stack.isEmpty()) {
+                        int[] point = stack.pop();
+                        hasOuts[point[0]][point[1]] = true;
+                    }
+                } else {
+                    // 没有找到出路
+                    for (Integer x : visited.keySet()) {
+                        for (Integer y : visited.get(x).keySet()) {
+                            board[x][y] = 'X';
+                        }
+
+                    }
                 }
             }
-
-            return root;
-        }
-
-        public static Integer[] toArray(TreeNode root) {
-            if (root == null) {
-                return new Integer[0];
-            }
-
-            java.util.LinkedList<Integer> list = new java.util.LinkedList<>();
-            list.add(root.val);
-
-            java.util.Queue<TreeNode> queue = new java.util.LinkedList<>();
-            queue.offer(root);
-
-            while (!queue.isEmpty()) {
-                TreeNode node = queue.poll();
-                TreeNode left = node.left;
-                TreeNode right = node.right;
-
-                list.add(left != null ? left.val : null);
-                list.add(right != null ? right.val : null);
-
-                if (left != null) {
-                    queue.offer(left);
-                }
-
-                if (right != null) {
-                    queue.offer(right);
-                }
-            }
-
-            while (!list.isEmpty() && list.peekLast() == null) {
-                list.pollLast();
-            }
-
-            return list.toArray(new Integer[0]);
         }
     }
 
@@ -290,57 +264,137 @@ public class Solution {
     }
 
     public static boolean testCase1() {
-        Integer[] nums = { 10, 5, -3, 3, 2, null, 11, 3, -2, null, 1 };
-        int sum = 8;
+        char[][] grid = {
+                { 'X', 'X', 'X', 'X' },
+                { 'X', 'O', 'O', 'X' },
+                { 'X', 'X', 'O', 'X' },
+                { 'X', 'O', 'X', 'X' }
+        };
 
-        TreeNode tree = TreeNode.genTree(nums);
-        int result = new Solution().pathSum(tree, sum);
-        int expect = 3;
+        new Solution().solve(grid);
+        char[][] result = grid;
+        char[][] expect = {
+                { 'X', 'X', 'X', 'X' },
+                { 'X', 'X', 'X', 'X' },
+                { 'X', 'X', 'X', 'X' },
+                { 'X', 'O', 'X', 'X' }
+        };
 
         return TestUtils.check(result, expect);
     }
 
     public static boolean testCase2() {
-        Integer[] nums = { 5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1 };
-        int sum = 22;
+        char[][] grid = { { 'X' } };
 
-        TreeNode tree = TreeNode.genTree(nums);
-        int result = new Solution().pathSum(tree, sum);
-        int expect = 3;
+        new Solution().solve(grid);
+        char[][] result = grid;
+        char[][] expect = { { 'X' } };
 
         return TestUtils.check(result, expect);
     }
 
     public static boolean testCase3() {
-        Integer[] nums = { 0, 1, 1 };
-        int sum = 1;
+        char[][] grid = {
+                { 'X', 'O', 'X', 'O', 'X', 'O', 'O', 'O', 'X', 'O' },
+                { 'X', 'O', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'X' },
+                { 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'X', 'X' },
+                { 'O', 'O', 'O', 'O', 'O', 'O', 'X', 'O', 'O', 'X' },
+                { 'O', 'O', 'X', 'X', 'O', 'X', 'X', 'O', 'O', 'O' },
+                { 'X', 'O', 'O', 'X', 'X', 'X', 'O', 'X', 'X', 'O' },
+                { 'X', 'O', 'X', 'O', 'O', 'X', 'X', 'O', 'X', 'O' },
+                { 'X', 'X', 'O', 'X', 'X', 'O', 'X', 'O', 'O', 'X' },
+                { 'O', 'O', 'O', 'O', 'X', 'O', 'X', 'O', 'X', 'O' },
+                { 'X', 'X', 'O', 'X', 'X', 'X', 'X', 'O', 'O', 'O' }
+        };
 
-        TreeNode tree = TreeNode.genTree(nums);
-        int result = new Solution().pathSum(tree, sum);
-        int expect = 4;
+        new Solution().solve(grid);
+        char[][] result = grid;
+        char[][] expect = {
+                { 'X', 'O', 'X', 'O', 'X', 'O', 'O', 'O', 'X', 'O' },
+                { 'X', 'O', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'X' },
+                { 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'X', 'X' },
+                { 'O', 'O', 'O', 'O', 'O', 'O', 'X', 'O', 'O', 'X' },
+                { 'O', 'O', 'X', 'X', 'O', 'X', 'X', 'O', 'O', 'O' },
+                { 'X', 'O', 'O', 'X', 'X', 'X', 'X', 'X', 'X', 'O' },
+                { 'X', 'O', 'X', 'X', 'X', 'X', 'X', 'O', 'X', 'O' },
+                { 'X', 'X', 'O', 'X', 'X', 'X', 'X', 'O', 'O', 'X' },
+                { 'O', 'O', 'O', 'O', 'X', 'X', 'X', 'O', 'X', 'O' },
+                { 'X', 'X', 'O', 'X', 'X', 'X', 'X', 'O', 'O', 'O' }
+        };
 
         return TestUtils.check(result, expect);
     }
 
     public static boolean testCase4() {
-        Integer[] nums = { 0, 0, 0 };
-        int sum = 0;
+        char[][] grid = {
+                { 'X', 'X', 'X', 'X', 'X' },
+                { 'X', 'O', 'O', 'O', 'X' },
+                { 'X', 'X', 'O', 'O', 'X' },
+                { 'X', 'X', 'X', 'O', 'X' },
+                { 'X', 'O', 'X', 'X', 'X' }
+        };
 
-        TreeNode tree = TreeNode.genTree(nums);
-        int result = new Solution().pathSum(tree, sum);
-        int expect = 5;
+        new Solution().solve(grid);
+        char[][] result = grid;
+        char[][] expect = {
+                { 'X', 'X', 'X', 'X', 'X' },
+                { 'X', 'X', 'X', 'X', 'X' },
+                { 'X', 'X', 'X', 'X', 'X' },
+                { 'X', 'X', 'X', 'X', 'X' },
+                { 'X', 'O', 'X', 'X', 'X' }
+        };
 
         return TestUtils.check(result, expect);
     }
 
     public static boolean testCase5() {
-        Integer[] nums = { 1000000000, 1000000000, null, 294967296, null, 1000000000, null, 1000000000, null,
-                1000000000 };
-        int sum = 0;
+        char[][] grid = {
+                { 'X', 'X', 'X', 'X', 'X' },
+                { 'X', 'O', 'O', 'O', 'X' },
+                { 'X', 'X', 'O', 'O', 'X' },
+                { 'X', 'O', 'O', 'O', 'X' },
+                { 'X', 'O', 'X', 'X', 'X' }
+        };
 
-        TreeNode tree = TreeNode.genTree(nums);
-        int result = new Solution().pathSum(tree, sum);
-        int expect = 0;
+        new Solution().solve(grid);
+        char[][] result = grid;
+        char[][] expect = {
+                { 'X', 'X', 'X', 'X', 'X' },
+                { 'X', 'O', 'O', 'O', 'X' },
+                { 'X', 'X', 'O', 'O', 'X' },
+                { 'X', 'O', 'O', 'O', 'X' },
+                { 'X', 'O', 'X', 'X', 'X' }
+        };
+
+        return TestUtils.check(result, expect);
+    }
+
+    public static boolean testCase6() {
+        char[][] grid = {
+                { 'X', 'X', 'X', 'X', 'O', 'O', 'X', 'X', 'O' },
+                { 'O', 'O', 'O', 'O', 'X', 'X', 'O', 'O', 'X' },
+                { 'X', 'O', 'X', 'O', 'O', 'X', 'X', 'O', 'X' },
+                { 'O', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'O' },
+                { 'X', 'O', 'O', 'X', 'X', 'X', 'X', 'X', 'O' },
+                { 'O', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X' },
+                { 'O', 'O', 'O', 'X', 'X', 'O', 'X', 'O', 'X' },
+                { 'O', 'O', 'O', 'X', 'O', 'O', 'O', 'X', 'O' },
+                { 'O', 'X', 'O', 'O', 'O', 'X', 'O', 'X', 'O' }
+        };
+
+        new Solution().solve(grid);
+        char[][] result = grid;
+        char[][] expect = {
+                { 'X', 'X', 'X', 'X', 'O', 'O', 'X', 'X', 'O' },
+                { 'O', 'O', 'O', 'O', 'X', 'X', 'O', 'O', 'X' },
+                { 'X', 'O', 'X', 'O', 'O', 'X', 'X', 'O', 'X' },
+                { 'O', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'O' },
+                { 'X', 'O', 'O', 'X', 'X', 'X', 'X', 'X', 'O' },
+                { 'O', 'O', 'X', 'X', 'X', 'O', 'X', 'X', 'X' },
+                { 'O', 'O', 'O', 'X', 'X', 'O', 'X', 'X', 'X' },
+                { 'O', 'O', 'O', 'X', 'O', 'O', 'O', 'X', 'O' },
+                { 'O', 'X', 'O', 'O', 'O', 'X', 'O', 'X', 'O' }
+        };
 
         return TestUtils.check(result, expect);
     }

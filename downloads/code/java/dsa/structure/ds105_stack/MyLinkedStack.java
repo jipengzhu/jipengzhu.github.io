@@ -2,11 +2,11 @@ package dsa.structure.ds105_stack;
 
 import java.util.Arrays;
 
-import dsa.link.MyDoubleLinkWithTailPointer;
+import dsa.link.MyDoubleLink;
 
 public class MyLinkedStack {
 
-    private MyDoubleLinkWithTailPointer link = new MyDoubleLinkWithTailPointer();
+    private MyDoubleLink link = new MyDoubleLink();
 
     public MyLinkedStack() {
 

@@ -2,11 +2,11 @@ package dsa.structure.ds103_queue;
 
 import java.util.Arrays;
 
-import dsa.link.MyDoubleLinkWithTailPointer;
+import dsa.link.MyDoubleLink;
 
 public class MyLinkedQueue {
 
-    private MyDoubleLinkWithTailPointer link = new MyDoubleLinkWithTailPointer();
+    private MyDoubleLink link = new MyDoubleLink();
 
     public MyLinkedQueue() {
 
