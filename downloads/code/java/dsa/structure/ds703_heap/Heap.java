@@ -3,7 +3,7 @@ package dsa.structure.ds703_heap;
 import java.util.Arrays;
 
 public class Heap {
-    public void heapSort1(int[] array) {
+    public int[] heapSort1(int[] array) {
         genHeapByShiftUp(array);
 
         int len = array.length;
@@ -13,9 +13,11 @@ public class Heap {
             shiftDown(array, 0, len);
             swap(array, 0, --len);
         }
+
+        return array;
     }
 
-    public void heapSort2(int[] array) {
+    public int[] heapSort2(int[] array) {
         genHeapByShiftDown(array);
 
         int len = array.length;
@@ -25,6 +27,8 @@ public class Heap {
             shiftDown(array, 0, len);
             swap(array, 0, --len);
         }
+
+        return array;
     }
 
     private void genHeapByShiftUp(int[] arr) {
@@ -92,44 +96,44 @@ public class Heap {
     }
 
     public static void main(String[] args) {
-        // HeapTest.testFixedExample(array -> new Heap().heapSort1(array));
+        // HeapTest.testFixedExample(t -> new Heap().heapSort1(t));
         HeapTest.testRandomExample(t -> new Heap().heapSort1(t));
 
-        // HeapTest.testFixedExample(array -> new Heap().heapSort2(array));
+        // HeapTest.testFixedExample(t -> new Heap().heapSort2(t));
         HeapTest.testRandomExample(t -> new Heap().heapSort2(t));
     }
 
     public static class HeapTest {
-        public static interface SortFunc {
-            void sort(int[] array);
+        public static interface HeapFunc {
+            int[] apply(int[] array);
         }
 
-        private static void testHeap(int[] array, SortFunc sf) {
+        private static void testHeap(int[] array, HeapFunc f) {
             int[] mybak = Arrays.copyOf(array, array.length);
             Arrays.sort(mybak);
 
-            sf.sort(array);
-
-            int[] result = array;
+            int[] result = f.apply(array);
             int[] expect = Arrays.copyOf(mybak, mybak.length);
 
-            check(result, expect);
+            TestUtils.check("树", result, expect);
         }
 
-        private static void testRandomExample(SortFunc sf) {
+        private static void testRandomExample(HeapFunc f) {
             for (int i = 0; i < 36; i++) {
-                testHeap(random(9), sf);
-                testHeap(random(10), sf);
+                testHeap(TestUtils.random(9), f);
+                testHeap(TestUtils.random(10), f);
             }
         }
 
-        private static void testFixedExample(SortFunc sf) {
+        private static void testFixedExample(HeapFunc f) {
             int[] array = new int[] { 310, 78, 237, 773, 96, 165, 70, 757, 665, 508 };
 
-            testHeap(array, sf);
+            testHeap(array, f);
         }
+    }
 
-        private static int[] random(int n) {
+    public static class TestUtils {
+        public static int[] random(int n) {
             int[] array = new int[n];
             for (int i = 0; i < array.length; i++) {
                 array[i] = (int) (Math.random() * 1000) + 1;
@@ -138,7 +142,7 @@ public class Heap {
             return array;
         }
 
-        private static void check(int[] result, int[] expect) {
+        public static void check(String name, int[] result, int[] expect) {
             System.out.println();
             System.out.println("--->");
 
@@ -158,7 +162,7 @@ public class Heap {
             System.out.println();
 
             if (!ok) {
-                throw new RuntimeException("ERROR: 堆的测试失败");
+                throw new RuntimeException(String.format("ERROR: [%s]的测试失败", name));
             }
         }
     }

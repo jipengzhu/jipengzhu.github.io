@@ -1,96 +1,59 @@
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Solution {
 
-    public void solve(char[][] board) {
-        if (board.length == 0) {
-            return;
+    public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
+        Map<String, Map<String, Double>> graph = new HashMap<>();
+
+        for (int i = 0; i < equations.size(); i++) {
+            List<String> equation = equations.get(i);
+            Double value = values[i];
+
+            String s1 = equation.get(0);
+            String s2 = equation.get(1);
+
+            graph.computeIfAbsent(s1, s -> new HashMap<>()).put(s2, value);
+            graph.computeIfAbsent(s2, s -> new HashMap<>()).put(s1, 1 / value);
         }
 
-        int rows = board.length;
-        int cols = board[0].length;
+        double[] array = new double[queries.size()];
+        for (int i = 0; i < array.length; i++) {
+            List<String> query = queries.get(i);
 
-        boolean[][] hasOuts = new boolean[rows][cols];
+            String x = query.get(0);
+            String y = query.get(1);
 
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (board[i][j] == 'X') {
-                    continue;
-                }
+            if (!graph.containsKey(x) || !graph.containsKey(y)) {
+                array[i] = -1.0d;
+            } else if (x.equals(y)) {
+                array[i] = 1.0d;
+            } else {
+                Set<String> visited = new HashSet<>();
+                Deque<String> stack = new LinkedList<>();
 
-                if (hasOuts[i][j]) {
-                    // 有出路，跳过
-                    continue;
-                }
-
-                boolean hasOut = false;
-                if (i == 0 || i == rows - 1 || j == 0 || j == cols - 1) {
-                    hasOut = true;
-                } else {
-                    int[][] points = {
-                            { i, j - 1 }, { i - 1, j }, { i, j + 1 }, { i + 1, j }
-                    };
-
-                    for (int[] point : points) {
-                        // 如果某个相邻点有出路，可以通过相邻点出去
-                        if (hasOuts[point[0]][point[1]]) {
-                            hasOut = true;
-
-                            break;
-                        }
-                    }
-                }
-
-                if (hasOut) {
-                    hasOuts[i][j] = true;
-
-                    continue;
-                }
-
-                Map<Integer, Map<Integer, Integer>> visited = new HashMap<>();
-                Deque<int[]> stack = new LinkedList<>();
-
-                int[] p = new int[] { i, j };
+                String p = x;
                 while (p != null || !stack.isEmpty()) {
                     if (p != null) {
-                        int x = p[0];
-                        int y = p[1];
-
                         // 标记为已访问
-                        visited.computeIfAbsent(x, k -> new HashMap<>()).put(y, null);
+                        visited.add(p);
 
-                        // 找到出路了
-                        if (x == 0 || x == rows - 1 || y == 0 || y == cols - 1) {
+                        // 找到除数了
+                        if (p.equals(y)) {
                             stack.push(p);
 
                             break;
                         }
 
-                        int[][] points = new int[][] {
-                                { x, y - 1 }, { x - 1, y }, { x, y + 1 }, { x + 1, y }
-                        };
-
-                        int[] q = null;
-                        for (int[] point : points) {
-                            x = point[0];
-                            y = point[1];
-
-                            if (x < 0 || x >= rows || y < 0 || y >= cols) {
-                                // 无效点，跳过
-                                continue;
-                            }
-
-                            if (visited.computeIfAbsent(x, k -> new HashMap<>()).containsKey(y)) {
-                                // 已访问，跳过
-                                continue;
-                            }
-
-                            if (board[x][y] == 'O') {
-                                q = point;
-
+                        String q = null;
+                        for (String s : graph.get(p).keySet()) {
+                            if (!visited.contains(s)) {
+                                q = s;
                                 break;
                             }
                         }
@@ -109,22 +72,37 @@ public class Solution {
                 }
 
                 if (p != null || !stack.isEmpty()) {
-                    // 找到了出路
-                    while (!stack.isEmpty()) {
-                        int[] point = stack.pop();
-                        hasOuts[point[0]][point[1]] = true;
-                    }
-                } else {
-                    // 没有找到出路
-                    for (Integer x : visited.keySet()) {
-                        for (Integer y : visited.get(x).keySet()) {
-                            board[x][y] = 'X';
-                        }
+                    // List<String> path = new LinkedList<>();
+                    // while (!stack.isEmpty()) {
+                    // path.add(0, stack.pop());
+                    // }
 
+                    // double value = 1.0d;
+                    // for (int j = 0; j < path.size() - 1; j++) {
+                    // String s1 = path.get(j);
+                    // String s2 = path.get(j + 1);
+
+                    // value = value * graph.get(s1).get(s2);
+                    // }
+
+                    double value = 1.0d;
+                    String s2 = stack.pop();
+                    while (!stack.isEmpty()) {
+                        String s1 = stack.pop();
+
+                        value = value * graph.get(s1).get(s2);
+
+                        s2 = s1;
                     }
+
+                    array[i] = value;
+                } else {
+                    array[i] = -1.0d;
                 }
             }
         }
+
+        return array;
     }
 
     public static class TestUtils {
@@ -264,137 +242,106 @@ public class Solution {
     }
 
     public static boolean testCase1() {
-        char[][] grid = {
-                { 'X', 'X', 'X', 'X' },
-                { 'X', 'O', 'O', 'X' },
-                { 'X', 'X', 'O', 'X' },
-                { 'X', 'O', 'X', 'X' }
+        String[][] equations = {
+                { "a", "b" },
+                { "b", "c" }
+        };
+        double[] values = { 2.0, 3.0 };
+        String[][] queries = {
+                { "a", "c" },
+                { "b", "a" },
+                { "a", "e" },
+                { "a", "a" },
+                { "x", "x" }
         };
 
-        new Solution().solve(grid);
-        char[][] result = grid;
-        char[][] expect = {
-                { 'X', 'X', 'X', 'X' },
-                { 'X', 'X', 'X', 'X' },
-                { 'X', 'X', 'X', 'X' },
-                { 'X', 'O', 'X', 'X' }
-        };
+        double[] result = new Solution().calcEquation(TestUtils.toLists(equations), values,
+                TestUtils.toLists(queries));
+        double[] expect = { 6.00000, 0.50000, -1.00000, 1.00000, -1.00000 };
 
         return TestUtils.check(result, expect);
     }
 
     public static boolean testCase2() {
-        char[][] grid = { { 'X' } };
+        String[][] equations = {
+                { "a", "b" },
+                { "b", "c" },
+                { "bc", "cd" }
+        };
+        double[] values = { 1.5, 2.5, 5.0 };
+        String[][] queries = {
+                { "a", "c" },
+                { "c", "b" },
+                { "bc", "cd" },
+                { "cd", "bc" }
+        };
 
-        new Solution().solve(grid);
-        char[][] result = grid;
-        char[][] expect = { { 'X' } };
+        double[] result = new Solution().calcEquation(TestUtils.toLists(equations), values,
+                TestUtils.toLists(queries));
+        double[] expect = { 3.75000, 0.40000, 5.00000, 0.20000 };
 
         return TestUtils.check(result, expect);
     }
 
     public static boolean testCase3() {
-        char[][] grid = {
-                { 'X', 'O', 'X', 'O', 'X', 'O', 'O', 'O', 'X', 'O' },
-                { 'X', 'O', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'X' },
-                { 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'X', 'X' },
-                { 'O', 'O', 'O', 'O', 'O', 'O', 'X', 'O', 'O', 'X' },
-                { 'O', 'O', 'X', 'X', 'O', 'X', 'X', 'O', 'O', 'O' },
-                { 'X', 'O', 'O', 'X', 'X', 'X', 'O', 'X', 'X', 'O' },
-                { 'X', 'O', 'X', 'O', 'O', 'X', 'X', 'O', 'X', 'O' },
-                { 'X', 'X', 'O', 'X', 'X', 'O', 'X', 'O', 'O', 'X' },
-                { 'O', 'O', 'O', 'O', 'X', 'O', 'X', 'O', 'X', 'O' },
-                { 'X', 'X', 'O', 'X', 'X', 'X', 'X', 'O', 'O', 'O' }
+        String[][] equations = {
+                { "a", "b" },
+        };
+        double[] values = { 0.5 };
+        String[][] queries = {
+                { "a", "b" },
+                { "b", "a" },
+                { "a", "c" },
+                { "x", "y" }
         };
 
-        new Solution().solve(grid);
-        char[][] result = grid;
-        char[][] expect = {
-                { 'X', 'O', 'X', 'O', 'X', 'O', 'O', 'O', 'X', 'O' },
-                { 'X', 'O', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'X' },
-                { 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'X', 'X' },
-                { 'O', 'O', 'O', 'O', 'O', 'O', 'X', 'O', 'O', 'X' },
-                { 'O', 'O', 'X', 'X', 'O', 'X', 'X', 'O', 'O', 'O' },
-                { 'X', 'O', 'O', 'X', 'X', 'X', 'X', 'X', 'X', 'O' },
-                { 'X', 'O', 'X', 'X', 'X', 'X', 'X', 'O', 'X', 'O' },
-                { 'X', 'X', 'O', 'X', 'X', 'X', 'X', 'O', 'O', 'X' },
-                { 'O', 'O', 'O', 'O', 'X', 'X', 'X', 'O', 'X', 'O' },
-                { 'X', 'X', 'O', 'X', 'X', 'X', 'X', 'O', 'O', 'O' }
-        };
+        double[] result = new Solution().calcEquation(TestUtils.toLists(equations), values,
+                TestUtils.toLists(queries));
+        double[] expect = { 0.50000, 2.00000, -1.00000, -1.00000 };
 
         return TestUtils.check(result, expect);
     }
 
     public static boolean testCase4() {
-        char[][] grid = {
-                { 'X', 'X', 'X', 'X', 'X' },
-                { 'X', 'O', 'O', 'O', 'X' },
-                { 'X', 'X', 'O', 'O', 'X' },
-                { 'X', 'X', 'X', 'O', 'X' },
-                { 'X', 'O', 'X', 'X', 'X' }
+        String[][] equations = {
+                { "a", "b" },
+        };
+        double[] values = { 0.5 };
+        String[][] queries = {
+                { "a", "b" },
+                { "b", "a" },
+                { "a", "c" },
+                { "c", "a" },
+                { "x", "y" }
         };
 
-        new Solution().solve(grid);
-        char[][] result = grid;
-        char[][] expect = {
-                { 'X', 'X', 'X', 'X', 'X' },
-                { 'X', 'X', 'X', 'X', 'X' },
-                { 'X', 'X', 'X', 'X', 'X' },
-                { 'X', 'X', 'X', 'X', 'X' },
-                { 'X', 'O', 'X', 'X', 'X' }
-        };
+        double[] result = new Solution().calcEquation(TestUtils.toLists(equations), values,
+                TestUtils.toLists(queries));
+        double[] expect = { 0.50000, 2.00000, -1.00000, -1.00000, -1.00000 };
 
         return TestUtils.check(result, expect);
     }
 
     public static boolean testCase5() {
-        char[][] grid = {
-                { 'X', 'X', 'X', 'X', 'X' },
-                { 'X', 'O', 'O', 'O', 'X' },
-                { 'X', 'X', 'O', 'O', 'X' },
-                { 'X', 'O', 'O', 'O', 'X' },
-                { 'X', 'O', 'X', 'X', 'X' }
+        String[][] equations = {
+                { "x1", "x2" },
+                { "x2", "x3" },
+                { "x3", "x4" },
+                { "x4", "x5" }
+        };
+        double[] values = { 3.0, 4.0, 5.0, 6.0 };
+        String[][] queries = {
+                { "x1", "x5" },
+                { "x5", "x2" },
+                { "x2", "x4" },
+                { "x2", "x2" },
+                { "x2", "x9" },
+                { "x9", "x9" }
         };
 
-        new Solution().solve(grid);
-        char[][] result = grid;
-        char[][] expect = {
-                { 'X', 'X', 'X', 'X', 'X' },
-                { 'X', 'O', 'O', 'O', 'X' },
-                { 'X', 'X', 'O', 'O', 'X' },
-                { 'X', 'O', 'O', 'O', 'X' },
-                { 'X', 'O', 'X', 'X', 'X' }
-        };
-
-        return TestUtils.check(result, expect);
-    }
-
-    public static boolean testCase6() {
-        char[][] grid = {
-                { 'X', 'X', 'X', 'X', 'O', 'O', 'X', 'X', 'O' },
-                { 'O', 'O', 'O', 'O', 'X', 'X', 'O', 'O', 'X' },
-                { 'X', 'O', 'X', 'O', 'O', 'X', 'X', 'O', 'X' },
-                { 'O', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'O' },
-                { 'X', 'O', 'O', 'X', 'X', 'X', 'X', 'X', 'O' },
-                { 'O', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X' },
-                { 'O', 'O', 'O', 'X', 'X', 'O', 'X', 'O', 'X' },
-                { 'O', 'O', 'O', 'X', 'O', 'O', 'O', 'X', 'O' },
-                { 'O', 'X', 'O', 'O', 'O', 'X', 'O', 'X', 'O' }
-        };
-
-        new Solution().solve(grid);
-        char[][] result = grid;
-        char[][] expect = {
-                { 'X', 'X', 'X', 'X', 'O', 'O', 'X', 'X', 'O' },
-                { 'O', 'O', 'O', 'O', 'X', 'X', 'O', 'O', 'X' },
-                { 'X', 'O', 'X', 'O', 'O', 'X', 'X', 'O', 'X' },
-                { 'O', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'O' },
-                { 'X', 'O', 'O', 'X', 'X', 'X', 'X', 'X', 'O' },
-                { 'O', 'O', 'X', 'X', 'X', 'O', 'X', 'X', 'X' },
-                { 'O', 'O', 'O', 'X', 'X', 'O', 'X', 'X', 'X' },
-                { 'O', 'O', 'O', 'X', 'O', 'O', 'O', 'X', 'O' },
-                { 'O', 'X', 'O', 'O', 'O', 'X', 'O', 'X', 'O' }
-        };
+        double[] result = new Solution().calcEquation(TestUtils.toLists(equations), values,
+                TestUtils.toLists(queries));
+        double[] expect = { 360.0, 0.008333333333333333, 20.0, 1.0, -1.0, -1.0 };
 
         return TestUtils.check(result, expect);
     }

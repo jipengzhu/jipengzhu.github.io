@@ -137,42 +137,52 @@ public class PriorityQueue {
     }
 
     public static void main(String[] args) {
-        // PriorityQueueTest.testFixedExample();
-        PriorityQueueTest.testRandomExample();
+        // PriorityQueueTest.testFixedExample(t -> testPriorityQueue(t));
+        PriorityQueueTest.testRandomExample(t -> testPriorityQueue(t));
+    }
+
+    private static int[] testPriorityQueue(int[] array) {
+        // int capacity = array.length * 2;
+        int capacity = array.length / 2;
+        PriorityQueue queue = new PriorityQueue(capacity);
+        for (int v : array) {
+            queue.enqueue(v);
+        }
+
+        return queue.toArray();
     }
 
     public static class PriorityQueueTest {
-        private static void testPriorityQueue(int[] array) {
+        public static interface PriorityQueueFunc {
+            int[] apply(int[] array);
+        }
+
+        private static void testPriorityQueue(int[] array, PriorityQueueFunc f) {
             int[] mybak = Arrays.copyOf(array, array.length);
             Arrays.sort(mybak);
 
-            // int capacity = array.length * 2;
-            int capacity = array.length / 2;
-            PriorityQueue queue = new PriorityQueue(capacity);
-            for (int v : array) {
-                queue.enqueue(v);
-            }
-
-            int[] result = queue.toArray();
+            int[] result = f.apply(array);
             int[] expect = Arrays.copyOf(mybak, result.length);
 
-            check(result, expect);
+            TestUtils.check("优先级队列", result, expect);
         }
 
-        private static void testRandomExample() {
+        private static void testRandomExample(PriorityQueueFunc f) {
             for (int i = 0; i < 36; i++) {
-                testPriorityQueue(random(19));
-                testPriorityQueue(random(20));
+                testPriorityQueue(TestUtils.random(19), f);
+                testPriorityQueue(TestUtils.random(20), f);
             }
         }
 
-        private static void testFixedExample() {
+        private static void testFixedExample(PriorityQueueFunc f) {
             int[] array = new int[] { 310, 78, 237, 773, 96, 165, 70, 757, 665, 508 };
 
-            testPriorityQueue(array);
+            testPriorityQueue(array, f);
         }
+    }
 
-        private static int[] random(int n) {
+    public static class TestUtils {
+        public static int[] random(int n) {
             int[] array = new int[n];
             for (int i = 0; i < array.length; i++) {
                 array[i] = (int) (Math.random() * 1000) + 1;
@@ -181,7 +191,7 @@ public class PriorityQueue {
             return array;
         }
 
-        private static void check(int[] result, int[] expect) {
+        public static void check(String name, int[] result, int[] expect) {
             System.out.println();
             System.out.println("--->");
 
@@ -201,7 +211,7 @@ public class PriorityQueue {
             System.out.println();
 
             if (!ok) {
-                throw new RuntimeException("ERROR: 优先级队列的测试失败");
+                throw new RuntimeException(String.format("ERROR: [%s]的测试失败", name));
             }
         }
     }

@@ -12,15 +12,17 @@ public class Test {
     }
 
     private static void transformArrayLiteral() {
-        String s = "[[\"X\",\"X\",\"X\",\"X\",\"O\",\"O\",\"X\",\"X\",\"O\"],[\"O\",\"O\",\"O\",\"O\",\"X\",\"X\",\"O\",\"O\",\"X\"],[\"X\",\"O\",\"X\",\"O\",\"O\",\"X\",\"X\",\"O\",\"X\"],[\"O\",\"O\",\"X\",\"X\",\"X\",\"O\",\"O\",\"O\",\"O\"],[\"X\",\"O\",\"O\",\"X\",\"X\",\"X\",\"X\",\"X\",\"O\"],[\"O\",\"O\",\"X\",\"O\",\"X\",\"O\",\"X\",\"O\",\"X\"],[\"O\",\"O\",\"O\",\"X\",\"X\",\"O\",\"X\",\"O\",\"X\"],[\"O\",\"O\",\"O\",\"X\",\"O\",\"O\",\"O\",\"X\",\"O\"],[\"O\",\"X\",\"O\",\"O\",\"O\",\"X\",\"O\",\"X\",\"O\"]]";
-        // boolean isChar = false;
-        boolean isChar = true;
+        String s = "";
+        boolean isChar = false;
+        // boolean isChar = true;
+        boolean toFile = false;
+        // boolean toFile = true;
 
-        jsArrayLiteral2JavaArrayLiteral(s, true, isChar);
-        jsArrayLiteral2JavaArrayLiteral(s, false, isChar);
+        jsArrayLiteral2JavaArrayLiteral(s, true, isChar, toFile);
+        jsArrayLiteral2JavaArrayLiteral(s, false, isChar, toFile);
     }
 
-    private static void jsArrayLiteral2JavaArrayLiteral(String s, boolean pretty, boolean isChar) {
+    private static void jsArrayLiteral2JavaArrayLiteral(String s, boolean pretty, boolean isChar, boolean toFile) {
         s = s.replace('[', '{');
         s = s.replace(']', '}');
 
@@ -34,17 +36,22 @@ public class Test {
             s = s.replace("\"", "'");
         }
 
-        System.out.println();
-        System.out.println(s);
+        if (toFile) {
+            String fileName = "tmp_array.txt";
+            if (pretty) {
+                fileName = "tmp_pretty_array.txt";
+            }
 
-        // if (pretty) {
-        // File file = new File("tmp_pretty_array.txt");
-        // try (FileOutputStream fo = new FileOutputStream(file)) {
-        // fo.write(s.getBytes());
-        // } catch (IOException e) {
-        // e.printStackTrace();
-        // }
-        // }
+            File file = new File(fileName);
+            try (FileOutputStream fo = new FileOutputStream(file)) {
+                fo.write(s.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println();
+            System.out.println(s);
+        }
     }
 
     private static void testToString() {
