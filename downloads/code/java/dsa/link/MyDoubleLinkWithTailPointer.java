@@ -69,8 +69,10 @@ public class MyDoubleLinkWithTailPointer {
     public boolean addLast(String s) {
         MyNode node = new MyNode(s);
 
-        node.next = tail.next;
-        node.prev = tail;
+        MyNode p = tail;
+
+        node.next = p.next;
+        node.prev = p;
 
         if (node.next != null) {
             node.next.prev = node;
@@ -78,6 +80,8 @@ public class MyDoubleLinkWithTailPointer {
 
         node.prev.next = node;
 
+        // tail = p.next;
+        // tail = tail.next;
         tail = node;
 
         return true;

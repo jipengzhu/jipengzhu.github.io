@@ -72,7 +72,12 @@ public class MySingleLinkWithTailPointer {
     public boolean addLast(String s) {
         MyNode node = new MyNode(s);
 
-        tail.next = node;
+        MyNode p = tail;
+
+        p.next = node;
+        
+        // tail = p.next;
+        // tail = tail.next;
         tail = node;
 
         return true;
