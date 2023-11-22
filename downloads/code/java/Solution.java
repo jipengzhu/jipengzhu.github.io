@@ -106,60 +106,67 @@ public class Solution {
     }
 
     public static class TestUtils {
-        public static boolean check(Object result, Object expect) {
+        public static boolean check(int[] result, int[] expect) {
+            String resultString = java.util.Arrays.toString(result);
+            String expectString = java.util.Arrays.toString(expect);
+            boolean ok = java.util.Arrays.equals(result, expect);
 
+            printCheck(resultString, expectString, ok);
+
+            return ok;
+        }
+
+        public static boolean check(double[] result, double[] expect) {
+            String resultString = java.util.Arrays.toString(result);
+            String expectString = java.util.Arrays.toString(expect);
+            boolean ok = java.util.Arrays.equals(result, expect);
+
+            printCheck(resultString, expectString, ok);
+
+            return ok;
+        }
+
+        public static boolean check(char[] result, char[] expect) {
+            String resultString = java.util.Arrays.toString(result);
+            String expectString = java.util.Arrays.toString(expect);
+            boolean ok = java.util.Arrays.equals(result, expect);
+
+            printCheck(resultString, expectString, ok);
+
+            return ok;
+        }
+
+        public static boolean check(Object[] result, Object[] expect) {
+            String resultString = java.util.Arrays.deepToString(result);
+            String expectString = java.util.Arrays.deepToString(expect);
+            boolean ok = java.util.Arrays.deepEquals(result, expect);
+
+            printCheck(resultString, expectString, ok);
+
+            return ok;
+        }
+
+        public static boolean check(Object result, Object expect) {
             String resultString;
             String expectString;
             boolean ok;
 
-            if (result instanceof int[] && expect instanceof int[]) {
-                resultString = java.util.Arrays.toString((int[]) result);
-                expectString = java.util.Arrays.toString((int[]) expect);
-
-                ok = java.util.Arrays.equals((int[]) result, (int[]) expect);
-            } else if (result instanceof float[] && expect instanceof float[]) {
-                resultString = java.util.Arrays.toString((float[]) result);
-                expectString = java.util.Arrays.toString((float[]) expect);
-
-                ok = java.util.Arrays.equals((float[]) result, (float[]) expect);
-            } else if (result instanceof double[] && expect instanceof double[]) {
-                resultString = java.util.Arrays.toString((double[]) result);
-                expectString = java.util.Arrays.toString((double[]) expect);
-
-                ok = java.util.Arrays.equals((double[]) result, (double[]) expect);
-            } else if (result instanceof char[] && expect instanceof char[]) {
-                resultString = java.util.Arrays.toString((char[]) result);
-                expectString = java.util.Arrays.toString((char[]) expect);
-
-                ok = java.util.Arrays.equals((char[]) result, (char[]) expect);
-            } else if (result instanceof boolean[] && expect instanceof boolean[]) {
-                resultString = java.util.Arrays.toString((boolean[]) result);
-                expectString = java.util.Arrays.toString((boolean[]) expect);
-
-                ok = java.util.Arrays.equals((boolean[]) result, (boolean[]) expect);
-            } else if (result instanceof Object[] && expect instanceof Object[]) {
+            if (result instanceof Object[]) {
                 resultString = java.util.Arrays.deepToString((Object[]) result);
-                expectString = java.util.Arrays.deepToString((Object[]) expect);
-
-                ok = java.util.Arrays.deepEquals((Object[]) result, (Object[]) expect);
             } else {
-                if (result instanceof Object[]) {
-                    resultString = java.util.Arrays.deepToString((Object[]) result);
-                } else {
-                    resultString = result.toString();
-                }
-
-                if (expect instanceof Object[]) {
-                    expectString = java.util.Arrays.deepToString((Object[]) expect);
-                } else {
-                    expectString = expect.toString();
-                }
-
-                resultString = normalizeString(resultString);
-                expectString = normalizeString(expectString);
-
-                ok = java.util.Objects.equals(resultString, expectString);
+                resultString = result.toString();
             }
+
+            if (expect instanceof Object[]) {
+                expectString = java.util.Arrays.deepToString((Object[]) expect);
+            } else {
+                expectString = expect.toString();
+            }
+
+            resultString = normalizeString(resultString);
+            expectString = normalizeString(expectString);
+
+            ok = java.util.Objects.equals(resultString, expectString);
 
             printCheck(resultString, expectString, ok);
 
@@ -167,13 +174,13 @@ public class Solution {
         }
 
         private static String normalizeString(String s) {
-            s = s.replace("{", "[");
-            s = s.replace("}", "]");
-
-            if (s.startsWith("[") && s.endsWith("]")) {
+            boolean isArray = (s.startsWith("{") && s.endsWith("}")) || (s.startsWith("[") && s.endsWith("]"));
+            if (isArray) {
                 s = s.replace(" ", "")
                         .replace("'", "")
-                        .replace("\"", "");
+                        .replace("\"", "")
+                        .replace("{", "[")
+                        .replace("}", "]");
             }
 
             return s;
@@ -227,9 +234,9 @@ public class Solution {
             }
         }
 
-        public static java.util.List<java.util.List<String>> toLists(String[][] arrays) {
-            java.util.List<java.util.List<String>> lists = new java.util.ArrayList<>();
-            for (String[] array : arrays) {
+        public static <T> java.util.List<java.util.List<T>> toLists(T[][] arrays) {
+            java.util.List<java.util.List<T>> lists = new java.util.ArrayList<>();
+            for (T[] array : arrays) {
                 lists.add(java.util.Arrays.asList(array));
             }
 

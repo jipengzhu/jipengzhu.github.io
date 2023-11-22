@@ -8,7 +8,7 @@ public class Test {
 
         transformArrayLiteral();
 
-        // testToString();
+        // testCheck();
     }
 
     private static void transformArrayLiteral() {
@@ -54,75 +54,124 @@ public class Test {
         }
     }
 
-    private static void testToString() {
-        int[] a = new int[] { 1 };
-        int[][] b = new int[][] { { 1 }, { 2 } };
-        Object[] c = b;
-        int[][] d = new int[][] { { 1 }, { 2 } };
-        Object[] e = d;
-        System.out.println(a.getClass().isArray());
-        System.out.println(b.getClass().isArray());
-        System.out.println(b instanceof Object[]);
-        System.out.println(java.util.Arrays.deepToString(c));
-        System.out.println(java.util.Arrays.equals(c, e));
-        System.out.println(java.util.Arrays.deepEquals(c, e));
+    private static void testCheck() {
+        int[] a11 = { 1, 2, 3 };
+        int[] b11 = { 1, 2, 3 };
+        TestUtils.check(a11, b11);
+
+        double[] a13 = { 1.0d, 2.0d, 3.0d };
+        double[] b13 = { 1.0d, 2.0d, 3.0d };
+        TestUtils.check(a13, b13);
+
+        char[] a15 = { '1', '2', '3' };
+        char[] b15 = { '1', '2', '3' };
+        TestUtils.check(a15, b15);
+
+        Integer[] a31 = { 1, 2, 3 };
+        Integer[] b31 = { 1, 2, 3 };
+        TestUtils.check(a31, b31);
+
+        Double[] a33 = { 1.0d, 2.0d, 3.0d };
+        Double[] b33 = { 1.0d, 2.0d, 3.0d };
+        TestUtils.check(a33, b33);
+
+        Character[] a35 = { '1', '2', '3' };
+        Character[] b35 = { '1', '2', '3' };
+        TestUtils.check(a35, b35);
+
+        String[] a37 = { "1", "2", "3" };
+        String[] b37 = { "1", "2", "3" };
+        TestUtils.check(a37, b37);
+
+        int[][] a51 = { { 1, 2, 3 }, { 7, 8, 9 } };
+        int[][] b51 = { { 1, 2, 3 }, { 7, 8, 9 } };
+        TestUtils.check(a51, b51);
+
+        double[][] a53 = { { 1.0d, 2.0d, 3.0d }, { 7.0d, 8.0d, 9.0d } };
+        double[][] b53 = { { 1.0d, 2.0d, 3.0d }, { 7.0d, 8.0d, 9.0d } };
+        TestUtils.check(a53, b53);
+
+        char[][] a55 = { { '1', '2', '3' }, { '7', '8', '9' } };
+        char[][] b55 = { { '1', '2', '3' }, { '7', '8', '9' } };
+        TestUtils.check(a55, b55);
+
+        Character[][] a57 = { { '1', '2', '3' }, { '7', '8', '9' } };
+        Character[][] b57 = { { '1', '2', '3' }, { '7', '8', '9' } };
+        TestUtils.check(a57, b57);
+
+        String[][] a59 = { { "1", "2", "3" }, { "7", "8", "9" } };
+        String[][] b59 = { { "1", "2", "3" }, { "7", "8", "9" } };
+        TestUtils.check(a59, b59);
+
+        Character[][] a71 = { { '1', '2', '3' }, { '7', '8', '9' } };
+        String b71 = "[ [ '1', '2', '3' ], [ '7', '8', '9' ] ]";
+        TestUtils.check(a71, b71);
+
+        TestUtils.toLists(a71);
     }
 
     public static class TestUtils {
-        public static boolean check(Object result, Object expect) {
+        public static boolean check(int[] result, int[] expect) {
+            String resultString = java.util.Arrays.toString(result);
+            String expectString = java.util.Arrays.toString(expect);
+            boolean ok = java.util.Arrays.equals(result, expect);
 
+            printCheck(resultString, expectString, ok);
+
+            return ok;
+        }
+
+        public static boolean check(double[] result, double[] expect) {
+            String resultString = java.util.Arrays.toString(result);
+            String expectString = java.util.Arrays.toString(expect);
+            boolean ok = java.util.Arrays.equals(result, expect);
+
+            printCheck(resultString, expectString, ok);
+
+            return ok;
+        }
+
+        public static boolean check(char[] result, char[] expect) {
+            String resultString = java.util.Arrays.toString(result);
+            String expectString = java.util.Arrays.toString(expect);
+            boolean ok = java.util.Arrays.equals(result, expect);
+
+            printCheck(resultString, expectString, ok);
+
+            return ok;
+        }
+
+        public static boolean check(Object[] result, Object[] expect) {
+            String resultString = java.util.Arrays.deepToString(result);
+            String expectString = java.util.Arrays.deepToString(expect);
+            boolean ok = java.util.Arrays.deepEquals(result, expect);
+
+            printCheck(resultString, expectString, ok);
+
+            return ok;
+        }
+
+        public static boolean check(Object result, Object expect) {
             String resultString;
             String expectString;
             boolean ok;
 
-            if (result instanceof int[] && expect instanceof int[]) {
-                resultString = java.util.Arrays.toString((int[]) result);
-                expectString = java.util.Arrays.toString((int[]) expect);
-
-                ok = java.util.Arrays.equals((int[]) result, (int[]) expect);
-            } else if (result instanceof float[] && expect instanceof float[]) {
-                resultString = java.util.Arrays.toString((float[]) result);
-                expectString = java.util.Arrays.toString((float[]) expect);
-
-                ok = java.util.Arrays.equals((float[]) result, (float[]) expect);
-            } else if (result instanceof double[] && expect instanceof double[]) {
-                resultString = java.util.Arrays.toString((double[]) result);
-                expectString = java.util.Arrays.toString((double[]) expect);
-
-                ok = java.util.Arrays.equals((double[]) result, (double[]) expect);
-            } else if (result instanceof char[] && expect instanceof char[]) {
-                resultString = java.util.Arrays.toString((char[]) result);
-                expectString = java.util.Arrays.toString((char[]) expect);
-
-                ok = java.util.Arrays.equals((char[]) result, (char[]) expect);
-            } else if (result instanceof boolean[] && expect instanceof boolean[]) {
-                resultString = java.util.Arrays.toString((boolean[]) result);
-                expectString = java.util.Arrays.toString((boolean[]) expect);
-
-                ok = java.util.Arrays.equals((boolean[]) result, (boolean[]) expect);
-            } else if (result instanceof Object[] && expect instanceof Object[]) {
+            if (result instanceof Object[]) {
                 resultString = java.util.Arrays.deepToString((Object[]) result);
-                expectString = java.util.Arrays.deepToString((Object[]) expect);
-
-                ok = java.util.Arrays.deepEquals((Object[]) result, (Object[]) expect);
             } else {
-                if (result instanceof Object[]) {
-                    resultString = java.util.Arrays.deepToString((Object[]) result);
-                } else {
-                    resultString = result.toString();
-                }
-
-                if (expect instanceof Object[]) {
-                    expectString = java.util.Arrays.deepToString((Object[]) expect);
-                } else {
-                    expectString = expect.toString();
-                }
-
-                resultString = normalizeString(resultString);
-                expectString = normalizeString(expectString);
-
-                ok = java.util.Objects.equals(resultString, expectString);
+                resultString = result.toString();
             }
+
+            if (expect instanceof Object[]) {
+                expectString = java.util.Arrays.deepToString((Object[]) expect);
+            } else {
+                expectString = expect.toString();
+            }
+
+            resultString = normalizeString(resultString);
+            expectString = normalizeString(expectString);
+
+            ok = java.util.Objects.equals(resultString, expectString);
 
             printCheck(resultString, expectString, ok);
 
@@ -130,13 +179,13 @@ public class Test {
         }
 
         private static String normalizeString(String s) {
-            s = s.replace("{", "[");
-            s = s.replace("}", "]");
-
-            if (s.startsWith("[") && s.endsWith("]")) {
+            boolean isArray = (s.startsWith("{") && s.endsWith("}")) || (s.startsWith("[") && s.endsWith("]"));
+            if (isArray) {
                 s = s.replace(" ", "")
                         .replace("'", "")
-                        .replace("\"", "");
+                        .replace("\"", "")
+                        .replace("{", "[")
+                        .replace("}", "]");
             }
 
             return s;
@@ -190,9 +239,9 @@ public class Test {
             }
         }
 
-        public static java.util.List<java.util.List<String>> toLists(String[][] arrays) {
-            java.util.List<java.util.List<String>> lists = new java.util.ArrayList<>();
-            for (String[] array : arrays) {
+        public static <T> java.util.List<java.util.List<T>> toLists(T[][] arrays) {
+            java.util.List<java.util.List<T>> lists = new java.util.ArrayList<>();
+            for (T[] array : arrays) {
                 lists.add(java.util.Arrays.asList(array));
             }
 
