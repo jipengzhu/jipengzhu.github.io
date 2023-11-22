@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Queue;
 
 public class Tree {
@@ -346,7 +347,35 @@ public class Tree {
         return list;
     }
 
-    public static List<List<Integer>> visitTreeOfLevelOrderByQueue(TreeNode root) {
+    public static List<Integer> visitTreeOfLevelOrderByQueue1(TreeNode root) {
+        if (root == null) {
+            return new LinkedList<>();
+        }
+
+        List<Integer> list = new LinkedList<>();
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+
+            if (node.left != null) {
+                queue.offer(node.left);
+            }
+
+            if (node.right != null) {
+                queue.offer(node.right);
+            }
+
+            list.add(node.val);
+
+        }
+
+        return list;
+    }
+
+    public static List<List<Integer>> visitTreeOfLevelOrderByQueue2(TreeNode root) {
         if (root == null) {
             return new LinkedList<>();
         }
@@ -506,43 +535,47 @@ public class Tree {
 
             result = Tree.visitTreeOfLevelOrderWithEmpty(tree);
             tip = "层次遍历+空结点";
-            check(tip, result, levelarray);
+            TestUtils.check(tip, result, levelarray);
 
             result = listsToArray(Tree.visitTreeOfLevelOrderByLoop(tree));
             tip = "层次遍历+循环版";
-            check(tip, result, levelorder);
+            TestUtils.check(tip, result, levelorder);
 
             result = listsToArray(Tree.visitTreeOfLevelOrderByRecursive(tree));
             tip = "层次遍历+递归版";
-            check(tip, result, levelorder);
+            TestUtils.check(tip, result, levelorder);
 
-            result = listsToArray(Tree.visitTreeOfLevelOrderByQueue(tree));
-            tip = "层次遍历+队列版";
-            check(tip, result, levelorder);
+            result = listToArray(Tree.visitTreeOfLevelOrderByQueue1(tree));
+            tip = "层次遍历+队列版1";
+            TestUtils.check(tip, result, levelorder);
+
+            result = listsToArray(Tree.visitTreeOfLevelOrderByQueue2(tree));
+            tip = "层次遍历+队列版2";
+            TestUtils.check(tip, result, levelorder);
 
             result = listToArray(Tree.visitTreeOfPreOrderByRecursive(tree));
             tip = "先序遍历+递归版";
-            check(tip, result, preorder);
+            TestUtils.check(tip, result, preorder);
 
             result = listToArray(Tree.visitTreeOfPreOrderByStack(tree));
             tip = "先序遍历+栈列版";
-            check(tip, result, preorder);
+            TestUtils.check(tip, result, preorder);
 
             result = listToArray(Tree.visitTreeOfInOrderByRecursive(tree));
             tip = "中序遍历+递归版";
-            check(tip, result, inorder);
+            TestUtils.check(tip, result, inorder);
 
             result = listToArray(Tree.visitTreeOfInOrderByStack(tree));
             tip = "中序遍历+栈列版";
-            check(tip, result, inorder);
+            TestUtils.check(tip, result, inorder);
 
             result = listToArray(Tree.visitTreeOfPostOrderByRecursive(tree));
             tip = "后序遍历+递归版";
-            check(tip, result, postorder);
+            TestUtils.check(tip, result, postorder);
 
             result = listToArray(Tree.visitTreeOfPostOrderByStack(tree));
             tip = "后序遍历+栈列版";
-            check(tip, result, postorder);
+            TestUtils.check(tip, result, postorder);
         }
 
         public static void test() {
@@ -565,16 +598,48 @@ public class Tree {
             TreeNode tree = Tree.buildTreeByInOrderAndPostOrder(inorder, postorder);
             testTree(tree);
         }
+    }
 
-        private static void check(String tip, Integer[] result, Integer[] expect) {
+    public static class TestUtils {
+        public static int[] random(int n) {
+            int[] array = new int[n];
+            for (int i = 0; i < array.length; i++) {
+                array[i] = (int) (Math.random() * 1000) + 1;
+            }
+
+            return array;
+        }
+
+        public static void check(String name, int[] result, int[] expect) {
+            String resultString = Arrays.toString(result);
+            String expectString = Arrays.toString(expect);
+            boolean ok = Arrays.equals(result, expect);
+
+            printCheck(name, resultString, expectString, ok);
+        }
+
+        public static void check(String name, Object[] result, Object[] expect) {
+            String resultString = Arrays.deepToString(result);
+            String expectString = Arrays.deepToString(expect);
+            boolean ok = Arrays.deepEquals(result, expect);
+
+            printCheck(name, resultString, expectString, ok);
+        }
+
+        public static void check(String name, Object result, Object expect) {
+            String resultString = result.toString();
+            String expectString = expect.toString();
+            boolean ok = Objects.equals(result, expect);
+
+            printCheck(name, resultString, expectString, ok);
+        }
+
+        public static void printCheck(String name, String result, String expect, boolean ok) {
             System.out.println();
             System.out.println("--->");
 
-            System.out.println(tip);
-            System.out.println("result: " + Arrays.toString(result));
-            System.out.println("expect: " + Arrays.toString(expect));
-
-            boolean ok = Arrays.equals(result, expect);
+            System.out.println("result: " + result);
+            System.out.println("expect: " + expect);
 
             System.out.println();
             if (ok) {
@@ -587,7 +652,7 @@ public class Tree {
             System.out.println();
 
             if (!ok) {
-                throw new RuntimeException("ERROR: 树的测试失败");
+                throw new RuntimeException(String.format("ERROR: [%s]的测试失败", name));
             }
         }
     }

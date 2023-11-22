@@ -1,6 +1,7 @@
 package dsa.structure.ds703_heap;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class PriorityQueue {
     private int size = 0;
@@ -192,13 +193,35 @@ public class PriorityQueue {
         }
 
         public static void check(String name, int[] result, int[] expect) {
+            String resultString = Arrays.toString(result);
+            String expectString = Arrays.toString(expect);
+            boolean ok = Arrays.equals(result, expect);
+
+            printCheck(name, resultString, expectString, ok);
+        }
+
+        public static void check(String name, Object[] result, Object[] expect) {
+            String resultString = Arrays.deepToString(result);
+            String expectString = Arrays.deepToString(expect);
+            boolean ok = Arrays.deepEquals(result, expect);
+
+            printCheck(name, resultString, expectString, ok);
+        }
+
+        public static void check(String name, Object result, Object expect) {
+            String resultString = result.toString();
+            String expectString = expect.toString();
+            boolean ok = Objects.equals(result, expect);
+
+            printCheck(name, resultString, expectString, ok);
+        }
+
+        public static void printCheck(String name, String result, String expect, boolean ok) {
             System.out.println();
             System.out.println("--->");
 
-            System.out.println("result: " + Arrays.toString(result));
-            System.out.println("expect: " + Arrays.toString(expect));
-
-            boolean ok = Arrays.equals(result, expect);
+            System.out.println("result: " + result);
+            System.out.println("expect: " + expect);
 
             System.out.println();
             if (ok) {

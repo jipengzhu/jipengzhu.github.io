@@ -7,500 +7,556 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.Set;
 
 public class Graph {
-    public static int[] visitArraysGraphByBFS(int[][] graph) {
+    public static List<List<Integer>> visitArraysGraphByBFS(int[][] graph) {
         if (graph.length == 0) {
-            return new int[0];
+            return new LinkedList<>();
         }
 
-        List<Integer> list = new LinkedList<>();
+        List<List<Integer>> lists = new LinkedList<>();
 
         int rows = graph.length;
         int cols = graph[0].length;
 
         boolean[][] visited = new boolean[rows][cols];
 
-        Queue<int[]> queue = new LinkedList<>();
-
-        int[] p = new int[] { 0, 0 };
-        int x = p[0];
-        int y = p[1];
-
-        queue.offer(p);
-        // 标记为已访问
-        visited[x][y] = true;
-
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                p = queue.poll();
-                x = p[0];
-                y = p[1];
-
-                list.add(graph[x][y]);
-
-                int[][] points = new int[][] {
-                        { x, y - 1 }, { x - 1, y }, { x, y + 1 }, { x + 1, y }
-                };
-
-                for (int[] point : points) {
-                    x = point[0];
-                    y = point[1];
-
-                    if (x < 0 || x >= rows || y < 0 || y >= cols) {
-                        // 无效点，跳过
-                        continue;
-                    }
-
-                    if (visited[x][y]) {
-                        // 已访问，跳过
-                        continue;
-                    }
-
-                    if (graph[x][y] > 0) {
-                        queue.offer(point);
-
-                        // 标记为已访问
-                        visited[x][y] = true;
-                    }
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (graph[i][j] == 0) {
+                    continue;
                 }
-            }
-        }
 
-        int[] array = new int[list.size()];
-        int i = 0;
-        for (int v : list) {
-            array[i++] = v;
-        }
+                if (visited[i][j]) {
+                    continue;
+                }
 
-        return array;
-    }
+                List<Integer> list = new LinkedList<>();
 
-    public static int[] visitArraysGraphByDFS(int[][] graph) {
-        if (graph.length == 0) {
-            return new int[0];
-        }
+                Queue<int[]> queue = new LinkedList<>();
 
-        List<Integer> list = new LinkedList<>();
-
-        int rows = graph.length;
-        int cols = graph[0].length;
-
-        boolean[][] visited = new boolean[rows][cols];
-
-        Deque<int[]> stack = new LinkedList<>();
-
-        int[] p = new int[] { 0, 0 };
-        while (p != null || !stack.isEmpty()) {
-            if (p != null) {
+                int[] p = new int[] { i, j };
                 int x = p[0];
                 int y = p[1];
 
-                if (!visited[x][y]) {
-                    list.add(graph[x][y]);
-                }
-
+                queue.offer(p);
                 // 标记为已访问
                 visited[x][y] = true;
 
-                int[][] points = new int[][] {
-                        { x, y - 1 }, { x - 1, y }, { x, y + 1 }, { x + 1, y }
-                };
+                while (!queue.isEmpty()) {
+                    int size = queue.size();
+                    for (int t = 0; t < size; t++) {
+                        p = queue.poll();
+                        x = p[0];
+                        y = p[1];
 
-                int[] q = null;
-                for (int[] point : points) {
-                    x = point[0];
-                    y = point[1];
+                        list.add(graph[x][y]);
 
-                    if (x < 0 || x >= rows || y < 0 || y >= cols) {
-                        // 无效点，跳过
-                        continue;
-                    }
+                        int[][] points = new int[][] {
+                                { x, y - 1 }, { x - 1, y }, { x, y + 1 }, { x + 1, y }
+                        };
 
-                    if (visited[x][y]) {
-                        // 已访问，跳过
-                        continue;
-                    }
+                        for (int[] point : points) {
+                            x = point[0];
+                            y = point[1];
 
-                    if (graph[x][y] > 0) {
-                        q = point;
+                            if (x < 0 || x >= rows || y < 0 || y >= cols) {
+                                // 无效点，跳过
+                                continue;
+                            }
 
-                        break;
+                            if (visited[x][y]) {
+                                // 已访问，跳过
+                                continue;
+                            }
+
+                            if (graph[x][y] > 0) {
+                                queue.offer(point);
+
+                                // 标记为已访问
+                                visited[x][y] = true;
+                            }
+                        }
                     }
                 }
 
-                if (q != null) {
-                    stack.push(p); // 保存回退点
-
-                    p = q; // 前进
-                } else {
-                    // p = stack.isEmpty() ? null : stack.pop(); // 回溯
-                    p = null; // 在下一次循环时跳转到回溯分支
-                }
-            } else {
-                p = stack.pop(); // 回溯
+                lists.add(list);
             }
         }
 
-        int[] array = new int[list.size()];
-        int i = 0;
-        for (int v : list) {
-            array[i++] = v;
-        }
-
-        return array;
+        return lists;
     }
 
-    public static int[] visitMapsGraphByBFS(Map<Integer, Map<Integer, Integer>> graph) {
-        if (graph.size() == 0) {
-            return new int[0];
+    public static List<List<Integer>> visitArraysGraphByDFS(int[][] graph) {
+        if (graph.length == 0) {
+            return new LinkedList<>();
         }
 
-        List<Integer> list = new LinkedList<>();
+        List<List<Integer>> lists = new LinkedList<>();
 
-        Map<Integer, Map<Integer, Boolean>> visited = new HashMap<>();
+        int rows = graph.length;
+        int cols = graph[0].length;
 
-        Queue<int[]> queue = new LinkedList<>();
+        boolean[][] visited = new boolean[rows][cols];
 
-        int[] p = new int[] { 0, 0 };
-        int x = p[0];
-        int y = p[1];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (graph[i][j] == 0) {
+                    continue;
+                }
 
-        queue.offer(p);
-        // 标记为已访问
-        visited.computeIfAbsent(x, k -> new HashMap<>()).put(y, null);
+                if (visited[i][j]) {
+                    continue;
+                }
 
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                p = queue.poll();
-                x = p[0];
-                y = p[1];
+                List<Integer> list = new LinkedList<>();
 
-                list.add(graph.get(x).get(y));
+                Deque<int[]> stack = new LinkedList<>();
 
-                int[][] points = new int[][] {
-                        { x, y - 1 }, { x - 1, y }, { x, y + 1 }, { x + 1, y }
-                };
+                int[] p = new int[] { i, j };
+                while (p != null || !stack.isEmpty()) {
+                    if (p != null) {
+                        int x = p[0];
+                        int y = p[1];
 
-                for (int[] point : points) {
-                    x = point[0];
-                    y = point[1];
-
-                    if (!graph.containsKey(x) || !graph.get(x).containsKey(y)) {
-                        // 无效点，跳过
-                        continue;
-                    }
-
-                    if (visited.computeIfAbsent(x, k -> new HashMap<>()).containsKey(y)) {
-                        // 已访问，跳过
-                        continue;
-                    }
-
-                    if (graph.get(x).get(y) > 0) {
-                        queue.offer(point);
+                        if (!visited[x][y]) {
+                            list.add(graph[x][y]);
+                        }
 
                         // 标记为已访问
-                        visited.computeIfAbsent(x, k -> new HashMap<>()).put(y, null);
+                        visited[x][y] = true;
+
+                        int[][] points = new int[][] {
+                                { x, y - 1 }, { x - 1, y }, { x, y + 1 }, { x + 1, y }
+                        };
+
+                        int[] q = null;
+                        for (int[] point : points) {
+                            x = point[0];
+                            y = point[1];
+
+                            if (x < 0 || x >= rows || y < 0 || y >= cols) {
+                                // 无效点，跳过
+                                continue;
+                            }
+
+                            if (visited[x][y]) {
+                                // 已访问，跳过
+                                continue;
+                            }
+
+                            if (graph[x][y] > 0) {
+                                q = point;
+
+                                break;
+                            }
+                        }
+
+                        if (q != null) {
+                            stack.push(p); // 保存回退点
+
+                            p = q; // 前进
+                        } else {
+                            // p = stack.isEmpty() ? null : stack.pop(); // 回溯
+                            p = null; // 在下一次循环时跳转到回溯分支
+                        }
+                    } else {
+                        p = stack.pop(); // 回溯
                     }
                 }
+
+                lists.add(list);
             }
         }
 
-        int[] array = new int[list.size()];
-        int i = 0;
-        for (int v : list) {
-            array[i++] = v;
-        }
-
-        return array;
+        return lists;
     }
 
-    public static int[] visitMapsGraphByDFS(Map<Integer, Map<Integer, Integer>> graph) {
+    public static List<List<Integer>> visitMapsGraphByBFS(Map<Integer, Map<Integer, Integer>> graph) {
         if (graph.size() == 0) {
-            return new int[0];
+            return new LinkedList<>();
         }
 
-        List<Integer> list = new LinkedList<>();
+        List<List<Integer>> lists = new LinkedList<>();
 
         Map<Integer, Map<Integer, Boolean>> visited = new HashMap<>();
 
-        Deque<int[]> stack = new LinkedList<>();
+        for (int i : graph.keySet()) {
+            for (int j : graph.get(i).keySet()) {
+                if (graph.get(i).get(j) == 0) {
+                    continue;
+                }
 
-        int[] p = new int[] { 0, 0 };
-        while (p != null || !stack.isEmpty()) {
-            if (p != null) {
+                if (visited.computeIfAbsent(i, k -> new HashMap<>()).containsKey(j)) {
+                    continue;
+                }
+
+                List<Integer> list = new LinkedList<>();
+
+                Queue<int[]> queue = new LinkedList<>();
+
+                int[] p = new int[] { i, j };
                 int x = p[0];
                 int y = p[1];
 
-                if (!visited.computeIfAbsent(x, k -> new HashMap<>()).containsKey(y)) {
-                    list.add(graph.get(x).get(y));
-                }
-
+                queue.offer(p);
                 // 标记为已访问
                 visited.computeIfAbsent(x, k -> new HashMap<>()).put(y, null);
 
-                int[][] points = new int[][] {
-                        { x, y - 1 }, { x - 1, y }, { x, y + 1 }, { x + 1, y }
-                };
+                while (!queue.isEmpty()) {
+                    int size = queue.size();
+                    for (int t = 0; t < size; t++) {
+                        p = queue.poll();
+                        x = p[0];
+                        y = p[1];
 
-                int[] q = null;
-                for (int[] point : points) {
-                    x = point[0];
-                    y = point[1];
+                        list.add(graph.get(x).get(y));
 
-                    if (!graph.containsKey(x) || !graph.get(x).containsKey(y)) {
-                        // 无效点，跳过
-                        continue;
+                        int[][] points = new int[][] {
+                                { x, y - 1 }, { x - 1, y }, { x, y + 1 }, { x + 1, y }
+                        };
+
+                        for (int[] point : points) {
+                            x = point[0];
+                            y = point[1];
+
+                            if (!graph.containsKey(x) || !graph.get(x).containsKey(y)) {
+                                // 无效点，跳过
+                                continue;
+                            }
+
+                            if (visited.computeIfAbsent(x, k -> new HashMap<>()).containsKey(y)) {
+                                // 已访问，跳过
+                                continue;
+                            }
+
+                            if (graph.get(x).get(y) > 0) {
+                                queue.offer(point);
+
+                                // 标记为已访问
+                                visited.computeIfAbsent(x, k -> new HashMap<>()).put(y, null);
+                            }
+                        }
+                    }
+                }
+
+                lists.add(list);
+            }
+        }
+
+        return lists;
+    }
+
+    public static List<List<Integer>> visitMapsGraphByDFS(Map<Integer, Map<Integer, Integer>> graph) {
+        if (graph.size() == 0) {
+            return new LinkedList<>();
+        }
+
+        List<List<Integer>> lists = new LinkedList<>();
+
+        Map<Integer, Map<Integer, Boolean>> visited = new HashMap<>();
+
+        for (int i : graph.keySet()) {
+            for (int j : graph.get(i).keySet()) {
+                if (graph.get(i).get(j) == 0) {
+                    continue;
+                }
+
+                if (visited.computeIfAbsent(i, k -> new HashMap<>()).containsKey(j)) {
+                    continue;
+                }
+
+                List<Integer> list = new LinkedList<>();
+
+                Deque<int[]> stack = new LinkedList<>();
+
+                int[] p = new int[] { i, j };
+                while (p != null || !stack.isEmpty()) {
+                    if (p != null) {
+                        int x = p[0];
+                        int y = p[1];
+
+                        if (!visited.computeIfAbsent(x, k -> new HashMap<>()).containsKey(y)) {
+                            list.add(graph.get(x).get(y));
+                        }
+
+                        // 标记为已访问
+                        visited.computeIfAbsent(x, k -> new HashMap<>()).put(y, null);
+
+                        int[][] points = new int[][] {
+                                { x, y - 1 }, { x - 1, y }, { x, y + 1 }, { x + 1, y }
+                        };
+
+                        int[] q = null;
+                        for (int[] point : points) {
+                            x = point[0];
+                            y = point[1];
+
+                            if (!graph.containsKey(x) || !graph.get(x).containsKey(y)) {
+                                // 无效点，跳过
+                                continue;
+                            }
+
+                            if (visited.computeIfAbsent(x, k -> new HashMap<>()).containsKey(y)) {
+                                // 已访问，跳过
+                                continue;
+                            }
+
+                            if (graph.get(x).get(y) > 0) {
+                                q = point;
+
+                                break;
+                            }
+                        }
+
+                        if (q != null) {
+                            stack.push(p); // 保存回退点
+
+                            p = q; // 前进
+                        } else {
+                            // p = stack.isEmpty() ? null : stack.pop(); // 回溯
+                            p = null; // 在下一次循环时跳转到回溯分支
+                        }
+                    } else {
+                        p = stack.pop(); // 回溯
+                    }
+                }
+
+                lists.add(list);
+            }
+        }
+
+        return lists;
+    }
+
+    public static List<List<Integer>> visitNodesGraphByBFS(Node[] graph) {
+        if (graph == null) {
+            return new LinkedList<>();
+        }
+
+        List<List<Integer>> lists = new LinkedList<>();
+
+        Set<Node> visited = new HashSet<>();
+
+        for (Node node : graph) {
+            if (visited.contains(node)) {
+                continue;
+            }
+
+            List<Integer> list = new LinkedList<>();
+
+            Queue<Node> queue = new LinkedList<>();
+
+            Node p = node;
+
+            queue.offer(p);
+            // 标记为已访问
+            visited.add(p);
+
+            while (!queue.isEmpty()) {
+                int size = queue.size();
+                for (int i = 0; i < size; i++) {
+                    p = queue.poll();
+
+                    list.add(p.val);
+
+                    for (Node neighbor : p.neighbors) {
+                        if (visited.contains(neighbor)) {
+                            // 已访问，跳过
+                            continue;
+                        }
+
+                        queue.offer(neighbor);
+
+                        // 标记为已访问
+                        visited.add(neighbor);
+                    }
+                }
+            }
+
+            lists.add(list);
+        }
+
+        return lists;
+    }
+
+    public static List<List<Integer>> visitNodesGraphByDFS(Node[] graph) {
+        if (graph == null) {
+            return new LinkedList<>();
+        }
+
+        List<List<Integer>> lists = new LinkedList<>();
+
+        Set<Node> visited = new HashSet<>();
+
+        for (Node node : graph) {
+            if (visited.contains(node)) {
+                continue;
+            }
+
+            List<Integer> list = new LinkedList<>();
+
+            Deque<Node> stack = new LinkedList<>();
+
+            Node p = node;
+            while (p != null || !stack.isEmpty()) {
+                if (p != null) {
+                    if (!visited.contains(p)) {
+                        list.add(p.val);
                     }
 
-                    if (visited.computeIfAbsent(x, k -> new HashMap<>()).containsKey(y)) {
-                        // 已访问，跳过
-                        continue;
-                    }
+                    // 标记为已访问
+                    visited.add(p);
 
-                    if (graph.get(x).get(y) > 0) {
-                        q = point;
+                    Node q = null;
+                    for (Node neighbor : p.neighbors) {
+                        if (visited.contains(neighbor)) {
+                            // 已访问，跳过
+                            continue;
+                        }
+
+                        q = neighbor;
 
                         break;
                     }
-                }
 
-                if (q != null) {
-                    stack.push(p); // 保存回退点
+                    if (q != null) {
+                        stack.push(p); // 保存回退点
 
-                    p = q; // 前进
-                } else {
-                    // p = stack.isEmpty() ? null : stack.pop(); // 回溯
-                    p = null; // 在下一次循环时跳转到回溯分支
-                }
-            } else {
-                p = stack.pop(); // 回溯
-            }
-        }
-
-        int[] array = new int[list.size()];
-        int i = 0;
-        for (int v : list) {
-            array[i++] = v;
-        }
-
-        return array;
-    }
-
-    public static int[] visitNodesGraphByBFS(Node graph) {
-        if (graph == null) {
-            return new int[0];
-        }
-
-        List<Integer> list = new LinkedList<>();
-
-        Set<Node> visited = new HashSet<>();
-
-        Queue<Node> queue = new LinkedList<>();
-
-        Node p = graph;
-
-        queue.offer(p);
-        // 标记为已访问
-        visited.add(p);
-
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                p = queue.poll();
-
-                list.add(p.val);
-
-                for (Node neighbor : p.neighbors) {
-                    if (visited.contains(neighbor)) {
-                        // 已访问，跳过
-                        continue;
+                        p = q; // 前进
+                    } else {
+                        // p = stack.isEmpty() ? null : stack.pop(); // 回溯
+                        p = null; // 在下一次循环时跳转到回溯分支
                     }
-
-                    queue.offer(neighbor);
-
-                    // 标记为已访问
-                    visited.add(neighbor);
-                }
-            }
-        }
-
-        int[] array = new int[list.size()];
-        int i = 0;
-        for (int v : list) {
-            array[i++] = v;
-        }
-
-        return array;
-    }
-
-    public static int[] visitNodesGraphByDFS(Node graph) {
-        if (graph == null) {
-            return new int[0];
-        }
-
-        List<Integer> list = new LinkedList<>();
-
-        Set<Node> visited = new HashSet<>();
-
-        Deque<Node> stack = new LinkedList<>();
-
-        Node p = graph;
-        while (p != null || !stack.isEmpty()) {
-            if (p != null) {
-                if (!visited.contains(p)) {
-                    list.add(p.val);
-                }
-
-                // 标记为已访问
-                visited.add(p);
-
-                Node q = null;
-                for (Node neighbor : p.neighbors) {
-                    if (visited.contains(neighbor)) {
-                        // 已访问，跳过
-                        continue;
-                    }
-
-                    q = neighbor;
-
-                    break;
-                }
-
-                if (q != null) {
-                    stack.push(p); // 保存回退点
-
-                    p = q; // 前进
                 } else {
-                    // p = stack.isEmpty() ? null : stack.pop(); // 回溯
-                    p = null; // 在下一次循环时跳转到回溯分支
+                    p = stack.pop(); // 回溯
                 }
-            } else {
-                p = stack.pop(); // 回溯
             }
+
+            lists.add(list);
         }
 
-        int[] array = new int[list.size()];
-        int i = 0;
-        for (int v : list) {
-            array[i++] = v;
-        }
-
-        return array;
+        return lists;
     }
 
-    public static int[] visitVertexesGraphByBFS(Vertex[] graph) {
+    public static List<List<Integer>> visitVertexesGraphByBFS(Vertex[] graph) {
         if (graph.length == 0) {
-            return new int[0];
+            return new LinkedList<>();
         }
 
-        List<Integer> list = new LinkedList<>();
+        List<List<Integer>> lists = new LinkedList<>();
 
         boolean[] visited = new boolean[graph.length];
 
-        Queue<Vertex> queue = new LinkedList<>();
+        for (int i = 0; i < graph.length; i++) {
+            if (visited[i]) {
+                continue;
+            }
 
-        Vertex p = graph[0];
+            List<Integer> list = new LinkedList<>();
 
-        queue.offer(p);
-        // 标记为已访问
-        visited[p.index] = true;
+            Queue<Integer> queue = new LinkedList<>();
 
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                p = queue.poll();
+            Integer p = i; // 用下标做指针
 
-                list.add(p.val);
+            queue.offer(p);
+            // 标记为已访问
+            visited[p] = true;
 
-                Edge r = p.dummy;
-                while (r.next != null) {
-                    r = r.next;
+            while (!queue.isEmpty()) {
+                int size = queue.size();
+                for (int t = 0; t < size; t++) {
+                    p = queue.poll();
 
-                    if (visited[r.index]) {
-                        // 已访问，跳过
-                        continue;
+                    list.add(graph[p].val);
+
+                    Edge e = graph[p].dummy;
+                    while (e.next != null) {
+                        e = e.next;
+                        p = e.index;
+
+                        if (visited[p]) {
+                            // 已访问，跳过
+                            continue;
+                        }
+
+                        queue.offer(p);
+
+                        // 标记为已访问
+                        visited[p] = true;
                     }
-
-                    p = graph[r.index];
-
-                    queue.offer(p);
-
-                    // 标记为已访问
-                    visited[p.index] = true;
                 }
             }
+
+            lists.add(list);
         }
 
-        int[] array = new int[list.size()];
-        int i = 0;
-        for (int v : list) {
-            array[i++] = v;
-        }
-
-        return array;
+        return lists;
     }
 
-    public static int[] visitVertexesGraphByDFS(Vertex[] graph) {
-        if (graph == null) {
-            return new int[0];
+    public static List<List<Integer>> visitVertexesGraphByDFS(Vertex[] graph) {
+        if (graph.length == 0) {
+            return new LinkedList<>();
         }
 
-        List<Integer> list = new LinkedList<>();
+        List<List<Integer>> lists = new LinkedList<>();
 
         boolean[] visited = new boolean[graph.length];
 
-        Deque<Vertex> stack = new LinkedList<>();
+        for (int i = 0; i < graph.length; i++) {
+            if (visited[i]) {
+                continue;
+            }
 
-        Vertex p = graph[0];
-        while (p != null || !stack.isEmpty()) {
-            if (p != null) {
-                if (!visited[p.index]) {
-                    list.add(p.val);
-                }
+            List<Integer> list = new LinkedList<>();
 
-                // 标记为已访问
-                visited[p.index] = true;
+            Deque<Integer> stack = new LinkedList<>();
 
-                Vertex q = null;
-                Edge r = p.dummy;
-                while (r.next != null) {
-                    r = r.next;
-
-                    if (visited[r.index]) {
-                        // 已访问，跳过
-                        continue;
+            Integer p = i;
+            while (p != null || !stack.isEmpty()) {
+                if (p != null) {
+                    if (!visited[p]) {
+                        list.add(graph[p].val);
                     }
 
-                    q = graph[r.index];
+                    // 标记为已访问
+                    visited[p] = true;
 
-                    break;
-                }
+                    Integer q = null;
+                    Edge e = graph[p].dummy;
+                    while (e.next != null) {
+                        e = e.next;
 
-                if (q != null) {
-                    stack.push(p); // 保存回退点
+                        if (visited[e.index]) {
+                            // 已访问，跳过
+                            continue;
+                        }
 
-                    p = q; // 前进
+                        q = e.index;
+
+                        break;
+                    }
+
+                    if (q != null) {
+                        stack.push(p); // 保存回退点
+
+                        p = q; // 前进
+                    } else {
+                        // p = stack.isEmpty() ? null : stack.pop(); // 回溯
+                        p = null; // 在下一次循环时跳转到回溯分支
+                    }
                 } else {
-                    // p = stack.isEmpty() ? null : stack.pop(); // 回溯
-                    p = null; // 在下一次循环时跳转到回溯分支
+                    p = stack.pop(); // 回溯
                 }
-            } else {
-                p = stack.pop(); // 回溯
             }
+
+            lists.add(list);
         }
 
-        int[] array = new int[list.size()];
-        int i = 0;
-        for (int v : list) {
-            array[i++] = v;
-        }
-
-        return array;
+        return lists;
     }
 
     public static Map<Integer, Map<Integer, Integer>> toMapsGraph(int[][] graph) {
@@ -524,7 +580,7 @@ public class Graph {
         return maps;
     }
 
-    public static Node toNodesGraph(int[][] graph) {
+    public static Node[] toNodesGraph(int[][] graph) {
         if (graph.length == 0) {
             return null;
         }
@@ -579,7 +635,7 @@ public class Graph {
             }
         }
 
-        return list.get(0);
+        return list.toArray(new Node[0]);
     }
 
     public static Vertex[] toVertexesGraph(int[][] graph) {
@@ -598,7 +654,6 @@ public class Graph {
             for (int j = 0; j < cols; j++) {
                 if (graph[i][j] > 0) {
                     Vertex vertex = new Vertex(graph[i][j]);
-                    vertex.index = list.size();
 
                     list.add(vertex);
 
@@ -656,7 +711,6 @@ public class Graph {
 
     static class Vertex {
         public int val;
-        public int index; // 记录顶点在顶点数组中的下标
         public Edge dummy = new Edge(-1);
 
         public Vertex(int val) {
@@ -686,7 +740,7 @@ public class Graph {
 
     public static class GraphTest {
         public static interface GraphFunc {
-            int[] apply(int[][] graph);
+            List<List<Integer>> apply(int[][] graph);
         }
 
         private static void testGraphBFS(GraphFunc gf) {
@@ -696,8 +750,10 @@ public class Graph {
                     { 9, 11, 13 }
             };
 
-            int[] result = gf.apply(graph);
-            int[] expect = { 1, 3, 5, 7, 9, 11, 13 };
+            List<List<Integer>> lists = gf.apply(graph);
+
+            Integer[] result = lists.get(0).toArray(new Integer[0]);
+            Integer[] expect = { 1, 3, 5, 7, 9, 11, 13 };
 
             Arrays.sort(result);
             Arrays.sort(expect);
@@ -717,13 +773,35 @@ public class Graph {
         }
 
         public static void check(String name, int[] result, int[] expect) {
+            String resultString = Arrays.toString(result);
+            String expectString = Arrays.toString(expect);
+            boolean ok = Arrays.equals(result, expect);
+
+            printCheck(name, resultString, expectString, ok);
+        }
+
+        public static void check(String name, Object[] result, Object[] expect) {
+            String resultString = Arrays.deepToString(result);
+            String expectString = Arrays.deepToString(expect);
+            boolean ok = Arrays.deepEquals(result, expect);
+
+            printCheck(name, resultString, expectString, ok);
+        }
+
+        public static void check(String name, Object result, Object expect) {
+            String resultString = result.toString();
+            String expectString = expect.toString();
+            boolean ok = Objects.equals(result, expect);
+
+            printCheck(name, resultString, expectString, ok);
+        }
+
+        public static void printCheck(String name, String result, String expect, boolean ok) {
             System.out.println();
             System.out.println("--->");
 
-            System.out.println("result: " + Arrays.toString(result));
-            System.out.println("expect: " + Arrays.toString(expect));
-
-            boolean ok = Arrays.equals(result, expect);
+            System.out.println("result: " + result);
+            System.out.println("expect: " + expect);
 
             System.out.println();
             if (ok) {
