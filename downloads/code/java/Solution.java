@@ -234,10 +234,24 @@ public class Solution {
             }
         }
 
+        @SuppressWarnings("unchecked")
+        public static <T> T[] toArray(java.util.List<T> list, Class<T> clazz) {
+            T[] array = (T[]) java.lang.reflect.Array.newInstance(clazz, list.size());
+            for (int i = 0; i < array.length; i++) {
+                array[i] = list.get(i);
+            }
+
+            return array;
+        }
+
+        public static <T> java.util.List<T> toList(T[] array) {
+            return java.util.Arrays.asList(array);
+        }
+
         public static <T> java.util.List<java.util.List<T>> toLists(T[][] arrays) {
             java.util.List<java.util.List<T>> lists = new java.util.ArrayList<>();
             for (T[] array : arrays) {
-                lists.add(java.util.Arrays.asList(array));
+                lists.add(toList(array));
             }
 
             return lists;

@@ -8,7 +8,7 @@ public class Test {
 
         transformArrayLiteral();
 
-        // testCheck();
+        // testTestUtils();
     }
 
     private static void transformArrayLiteral() {
@@ -54,7 +54,7 @@ public class Test {
         }
     }
 
-    private static void testCheck() {
+    private static void testTestUtils() {
         int[] a11 = { 1, 2, 3 };
         int[] b11 = { 1, 2, 3 };
         TestUtils.check(a11, b11);
@@ -108,6 +108,11 @@ public class Test {
         TestUtils.check(a71, b71);
 
         TestUtils.toLists(a71);
+
+        Integer[] a91 = { 1, 2, 3 };
+        Integer[] b91 = TestUtils.toArray(TestUtils.toList(a91), Integer.class);
+
+        TestUtils.check(a91, b91);
     }
 
     public static class TestUtils {
@@ -239,10 +244,24 @@ public class Test {
             }
         }
 
+        @SuppressWarnings("unchecked")
+        public static <T> T[] toArray(java.util.List<T> list, Class<T> clazz) {
+            T[] array = (T[]) java.lang.reflect.Array.newInstance(clazz, list.size());
+            for (int i = 0; i < array.length; i++) {
+                array[i] = list.get(i);
+            }
+
+            return array;
+        }
+
+        public static <T> java.util.List<T> toList(T[] array) {
+            return java.util.Arrays.asList(array);
+        }
+
         public static <T> java.util.List<java.util.List<T>> toLists(T[][] arrays) {
             java.util.List<java.util.List<T>> lists = new java.util.ArrayList<>();
             for (T[] array : arrays) {
-                lists.add(java.util.Arrays.asList(array));
+                lists.add(toList(array));
             }
 
             return lists;
