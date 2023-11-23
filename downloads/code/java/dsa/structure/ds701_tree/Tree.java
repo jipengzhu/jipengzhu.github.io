@@ -36,27 +36,24 @@ public class Tree {
         while (i < array.length) {
             TreeNode node = queue.poll();
 
-            if (node != null) {
-                if (i < array.length) {
-                    Integer v = array[i++];
+            if (i < array.length) {
+                Integer v = array[i++];
 
-                    node.left = v == null ? null : new TreeNode(v);
+                node.left = v == null ? null : new TreeNode(v);
 
+                if (node.left != null) {
                     queue.offer(node.left);
                 }
+            }
 
-                if (i < array.length) {
-                    Integer v = array[i++];
+            if (i < array.length) {
+                Integer v = array[i++];
 
-                    node.right = v == null ? null : new TreeNode(v);
+                node.right = v == null ? null : new TreeNode(v);
 
+                if (node.right != null) {
                     queue.offer(node.right);
                 }
-            } else {
-                i = i + 2;
-
-                queue.offer(null);
-                queue.offer(null);
             }
         }
 
@@ -189,24 +186,15 @@ public class Tree {
 
                 if (node != null) {
                     list.add(node.val);
-                } else {
-                    list.add(null);
-                }
 
-                if (node != null && node.left != null) {
                     queue.offer(node.left);
-
-                    hasValidNode = true;
-                } else {
-                    queue.offer(null);
-                }
-
-                if (node != null && node.right != null) {
                     queue.offer(node.right);
 
-                    hasValidNode = true;
+                    if (!hasValidNode) {
+                        hasValidNode = node.left != null || node.right != null;
+                    }
                 } else {
-                    queue.offer(null);
+                    list.add(null);
                 }
             }
 
@@ -525,56 +513,56 @@ public class Tree {
 
         private static Integer[] levelarray = { 1, 3, 5, 7, null, 9, 11, 13, 15, null, null, null, 17 };
         private static Integer[] levelorder = { 1, 3, 5, 7, 9, 11, 13, 15, 17 };
-        private static Integer[] preorder = { 1, 3, 7, 13, 15, 5, 9, 17, 11 };
-        private static Integer[] inorder = { 13, 7, 15, 3, 1, 9, 17, 5, 11 };
-        private static Integer[] postorder = { 13, 15, 7, 3, 17, 9, 11, 5, 1 };
+        private static Integer[] preorder = { 1, 3, 7, 13, 15, 5, 9, 11, 17 };
+        private static Integer[] inorder = { 13, 7, 15, 3, 1, 9, 5, 11, 17 };
+        private static Integer[] postorder = { 13, 15, 7, 3, 9, 17, 11, 5, 1 };
 
         private static void testTree(TreeNode tree) {
             Integer[] result = null;
             String tip = null;
 
             result = Tree.visitTreeOfLevelOrderWithEmpty(tree);
-            tip = "层次遍历+空结点";
+            tip = "树的层次遍历+空结点";
             TestUtils.check(tip, result, levelarray);
 
             result = listsToArray(Tree.visitTreeOfLevelOrderByLoop(tree));
-            tip = "层次遍历+循环版";
+            tip = "树的层次遍历+循环版";
             TestUtils.check(tip, result, levelorder);
 
             result = listsToArray(Tree.visitTreeOfLevelOrderByRecursive(tree));
-            tip = "层次遍历+递归版";
+            tip = "树的层次遍历+递归版";
             TestUtils.check(tip, result, levelorder);
 
             result = listToArray(Tree.visitTreeOfLevelOrderByQueue1(tree));
-            tip = "层次遍历+队列版1";
+            tip = "树的层次遍历+队列版1";
             TestUtils.check(tip, result, levelorder);
 
             result = listsToArray(Tree.visitTreeOfLevelOrderByQueue2(tree));
-            tip = "层次遍历+队列版2";
+            tip = "树的层次遍历+队列版2";
             TestUtils.check(tip, result, levelorder);
 
             result = listToArray(Tree.visitTreeOfPreOrderByRecursive(tree));
-            tip = "先序遍历+递归版";
+            tip = "树的先序遍历+递归版";
             TestUtils.check(tip, result, preorder);
 
             result = listToArray(Tree.visitTreeOfPreOrderByStack(tree));
-            tip = "先序遍历+栈列版";
+            tip = "树的先序遍历+栈列版";
             TestUtils.check(tip, result, preorder);
 
             result = listToArray(Tree.visitTreeOfInOrderByRecursive(tree));
-            tip = "中序遍历+递归版";
+            tip = "树的中序遍历+递归版";
             TestUtils.check(tip, result, inorder);
 
             result = listToArray(Tree.visitTreeOfInOrderByStack(tree));
-            tip = "中序遍历+栈列版";
+            tip = "树的中序遍历+栈列版";
             TestUtils.check(tip, result, inorder);
 
             result = listToArray(Tree.visitTreeOfPostOrderByRecursive(tree));
-            tip = "后序遍历+递归版";
+            tip = "树的后序遍历+递归版";
             TestUtils.check(tip, result, postorder);
 
             result = listToArray(Tree.visitTreeOfPostOrderByStack(tree));
-            tip = "后序遍历+栈列版";
+            tip = "树的后序遍历+栈列版";
             TestUtils.check(tip, result, postorder);
         }
 
@@ -632,6 +620,58 @@ public class Tree {
             boolean ok = Objects.equals(result, expect);
 
             printCheck(name, resultString, expectString, ok);
+        }
+
+        public static <T> void check(String name, java.util.List<T> result, T[] expect, Class<T> clazz) {
+            check(name, toArray(result, clazz), expect);
+        }
+
+        public static <T> void check(String name, java.util.List<java.util.List<T>> result, T[][] expect,
+                Class<T> clazz) {
+            check(name, toArrays(result, clazz), expect);
+        }
+
+        @SuppressWarnings("unchecked")
+        public static <T> T[] genArray(Class<T> clazz, int length) {
+            return (T[]) java.lang.reflect.Array.newInstance(clazz, length);
+        }
+
+        @SuppressWarnings("unchecked")
+        public static <T> T[][] genArrays(Class<T> clazz, int rows, int cols) {
+            T[] array = genArray(clazz, 0);
+
+            T[][] arrays = (T[][]) genArray(array.getClass(), rows);
+            for (int i = 0; i < arrays.length; i++) {
+                arrays[i] = genArray(clazz, cols);
+            }
+
+            return arrays;
+        }
+
+        public static <T> T[] toArray(java.util.List<T> list, Class<T> clazz) {
+            if (list == null || list.isEmpty()) {
+                return genArray(clazz, 0);
+            }
+
+            T[] array = genArray(clazz, list.size());
+            for (int i = 0; i < array.length; i++) {
+                array[i] = list.get(i);
+            }
+
+            return array;
+        }
+
+        public static <T> T[][] toArrays(java.util.List<java.util.List<T>> lists, Class<T> clazz) {
+            if (lists == null || lists.isEmpty()) {
+                return genArrays(clazz, 0, 0);
+            }
+
+            T[][] arrays = genArrays(clazz, lists.size(), 0);
+            for (int i = 0; i < lists.size(); i++) {
+                arrays[i] = toArray(lists.get(i), clazz);
+            }
+
+            return arrays;
         }
 
         public static void printCheck(String name, String result, String expect, boolean ok) {

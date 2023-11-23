@@ -5,7 +5,6 @@ import java.io.IOException;
 public class Test {
 
     public static void main(String[] args) {
-
         transformArrayLiteral();
 
         // testTestUtils();
@@ -113,6 +112,9 @@ public class Test {
         Integer[] b91 = TestUtils.toArray(TestUtils.toList(a91), Integer.class);
 
         TestUtils.check(a91, b91);
+
+        TestUtils.genArray(Integer.class, 3)[2] = 1;
+        TestUtils.genArrays(Integer.class, 3, 3)[2][2] = 1;
     }
 
     public static class TestUtils {
@@ -183,6 +185,14 @@ public class Test {
             return ok;
         }
 
+        public static <T> boolean check(java.util.List<T> result, T[] expect, Class<T> clazz) {
+            return check(toArray(result, clazz), expect);
+        }
+
+        public static <T> boolean check(java.util.List<java.util.List<T>> result, T[][] expect, Class<T> clazz) {
+            return check(toArrays(result, clazz), expect);
+        }
+
         private static String normalizeString(String s) {
             boolean isArray = (s.startsWith("{") && s.endsWith("}")) || (s.startsWith("[") && s.endsWith("]"));
             if (isArray) {
@@ -245,13 +255,46 @@ public class Test {
         }
 
         @SuppressWarnings("unchecked")
+        public static <T> T[] genArray(Class<T> clazz, int length) {
+            return (T[]) java.lang.reflect.Array.newInstance(clazz, length);
+        }
+
+        @SuppressWarnings("unchecked")
+        public static <T> T[][] genArrays(Class<T> clazz, int rows, int cols) {
+            T[] array = genArray(clazz, 0);
+
+            T[][] arrays = (T[][]) genArray(array.getClass(), rows);
+            for (int i = 0; i < arrays.length; i++) {
+                arrays[i] = genArray(clazz, cols);
+            }
+
+            return arrays;
+        }
+
         public static <T> T[] toArray(java.util.List<T> list, Class<T> clazz) {
-            T[] array = (T[]) java.lang.reflect.Array.newInstance(clazz, list.size());
+            if (list == null || list.isEmpty()) {
+                return genArray(clazz, 0);
+            }
+
+            T[] array = genArray(clazz, list.size());
             for (int i = 0; i < array.length; i++) {
                 array[i] = list.get(i);
             }
 
             return array;
+        }
+
+        public static <T> T[][] toArrays(java.util.List<java.util.List<T>> lists, Class<T> clazz) {
+            if (lists == null || lists.isEmpty()) {
+                return genArrays(clazz, 0, 0);
+            }
+
+            T[][] arrays = genArrays(clazz, lists.size(), 0);
+            for (int i = 0; i < lists.size(); i++) {
+                arrays[i] = toArray(lists.get(i), clazz);
+            }
+
+            return arrays;
         }
 
         public static <T> java.util.List<T> toList(T[] array) {
@@ -377,40 +420,37 @@ public class Test {
             this.right = right;
         }
 
-        public static TreeNode genTree(Integer[] nums) {
-            if (nums.length == 0) {
+        public static TreeNode genTree(Integer[] array) {
+            if (array.length == 0) {
                 return null;
             }
 
             java.util.Queue<TreeNode> queue = new java.util.LinkedList<>();
-            TreeNode root = new TreeNode(nums[0]);
+            TreeNode root = new TreeNode(array[0]);
             queue.offer(root);
 
             int i = 1;
-            while (i < nums.length) {
+            while (i < array.length) {
                 TreeNode node = queue.poll();
 
-                if (node != null) {
-                    if (i < nums.length) {
-                        Integer v = nums[i++];
+                if (i < array.length) {
+                    Integer v = array[i++];
 
-                        node.left = v == null ? null : new TreeNode(v);
+                    node.left = v == null ? null : new TreeNode(v);
 
+                    if (node.left != null) {
                         queue.offer(node.left);
                     }
+                }
 
-                    if (i < nums.length) {
-                        Integer v = nums[i++];
+                if (i < array.length) {
+                    Integer v = array[i++];
 
-                        node.right = v == null ? null : new TreeNode(v);
+                    node.right = v == null ? null : new TreeNode(v);
 
+                    if (node.right != null) {
                         queue.offer(node.right);
                     }
-                } else {
-                    i = i + 2;
-
-                    queue.offer(null);
-                    queue.offer(null);
                 }
             }
 
@@ -436,24 +476,15 @@ public class Test {
 
                     if (node != null) {
                         list.add(node.val);
-                    } else {
-                        list.add(null);
-                    }
 
-                    if (node != null && node.left != null) {
                         queue.offer(node.left);
-
-                        hasValidNode = true;
-                    } else {
-                        queue.offer(null);
-                    }
-
-                    if (node != null && node.right != null) {
                         queue.offer(node.right);
 
-                        hasValidNode = true;
+                        if (!hasValidNode) {
+                            hasValidNode = node.left != null || node.right != null;
+                        }
                     } else {
-                        queue.offer(null);
+                        list.add(null);
                     }
                 }
 
