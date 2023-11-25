@@ -476,12 +476,13 @@ public class Graph {
                     Edge e = graph[p].dummy;
                     while (e.next != null) {
                         e = e.next;
-                        p = e.index;
 
-                        if (visited[p]) {
+                        if (visited[e.index]) {
                             // 已访问，跳过
                             continue;
                         }
+
+                        p = e.index;
 
                         queue.offer(p);
 
