@@ -28,7 +28,7 @@
 <meta property="og:description" content="spring-web">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T19:02:00.000Z">
-<meta property="article:modified_time" content="2023-11-25T11:17:31.045Z">
+<meta property="article:modified_time" content="2023-11-29T09:07:29.335Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-25 19:17:31" itemprop="dateModified" datetime="2023-11-25T19:17:31+08:00">2023-11-25</time>
+                <time title="修改时间：2023-11-29 17:07:29" itemprop="dateModified" datetime="2023-11-29T17:07:29+08:00">2023-11-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -256,25 +256,22 @@
 </blockquote>
 <p>SpringWeb项目结构推荐</p>
 <ul>
-<li>controller</li>
-<li>service<ul>
-<li>service：业务相关主要类</li>
-<li>manager：业务相关辅助类（需要新建对象使用）</li>
-<li>helper：业务相关辅助类（不需要新建对象使用）</li>
-</ul>
-</li>
-<li>model<ul>
+<li>model：模型<ul>
 <li>po（entity）：数据库表结构类</li>
-<li>dao（mapper or orm）：数据库单表表访问类</li>
+<li>dao（mapper or orm）：数据库单表访问类</li>
 <li>dal（use multiple dao）：数据库多表访问层</li>
 <li>bo（business）：业务数据类</li>
-<li>do（data）：通用数据类</li>
-<li>vo（view）：视图数据类</li>
-<li>dto（transfer）：传输数据类（分为请求和响应）</li>
+<li>co（common）：通用数据类</li>
+<li>vo（view）：视图数据类（后端生成网页时使用）</li>
+<li>dto（transfer）：传输数据类（前后端交互时使用，分为请求和响应）</li>
 </ul>
 </li>
-<li>view</li>
-<li>utils</li>
+<li>view：视图</li>
+<li>controller：控制器</li>
+<li>service：业务逻辑实例类</li>
+<li>manager：通用逻辑实例类</li>
+<li>helper：业务逻辑静态类</li>
+<li>utils：通用逻辑静态类</li>
 </ul>
 <h2 id="请求流程描述"><a href="#请求流程描述" class="headerlink" title="请求流程描述"></a>请求流程描述</h2><blockquote>
 <ul>
@@ -674,10 +671,10 @@
 </ul>
 </blockquote>
 <ul>
-<li>Service：<code>业务</code>实例类</li>
-<li>Manager：<code>非业务</code>实例类</li>
-<li>Helper：<code>业务</code>静态类</li>
-<li>Util：<code>非业务</code>静态类</li>
+<li>Service：<code>业务</code>逻辑<code>实例类</code></li>
+<li>Manager：<code>通用</code>逻辑<code>实例类</code></li>
+<li>Helper：<code>业务</code>逻辑<code>静态类</code></li>
+<li>Utils：<code>通用</code>逻辑<code>静态类</code></li>
 </ul>
 <h1 id="Model-1"><a href="#Model-1" class="headerlink" title="Model"></a>Model</h1><h2 id="POJO"><a href="#POJO" class="headerlink" title="POJO"></a>POJO</h2><blockquote>
 <ul>
@@ -685,14 +682,15 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40610003/article/details/109007539">POJO详解</a></li>
 </ul>
 </blockquote>
+<p>*+ po（entity）：数据库表结构类</p>
 <ul>
-<li>po（entity）：数据库表结构类</li>
-<li>dao（mapper or orm）：数据库单表表访问类</li>
+<li>dao（mapper or orm）：数据库单表访问类</li>
 <li>dal（use multiple dao）：数据库多表访问层</li>
 <li>bo（business）：业务数据类</li>
-<li>do（data）：通用数据类</li>
-<li>vo（view）：视图数据类</li>
-<li>dto（transfer）：传输数据类（分为请求req和响应rsp）</li>
+<li>co（common）：通用数据类</li>
+<li>do（domain）：领域数据类</li>
+<li>vo（view）：视图数据类（后端生成网页时使用）</li>
+<li>dto（transfer）：传输数据类（前后端交互时使用，分为请求和响应）</li>
 </ul>
 <h2 id="Transform"><a href="#Transform" class="headerlink" title="Transform"></a>Transform</h2><blockquote>
 <ul>

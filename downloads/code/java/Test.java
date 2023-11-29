@@ -11,7 +11,7 @@ public class Test {
     }
 
     private static void transformArrayLiteral() {
-        String s = "";
+        String s = "[[1,0],[2,0],[3,1],[3,2]]";
         boolean isChar = false;
         // boolean isChar = true;
         boolean toFile = false;
