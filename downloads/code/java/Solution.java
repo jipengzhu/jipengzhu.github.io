@@ -1,56 +1,87 @@
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 public class Solution {
 
-    public boolean canFinish(int numCourses, int[][] prerequisites) {
-        List<List<Integer>> graph = new LinkedList<>();
-        for (int i = 0; i < numCourses; i++) {
-            graph.add(new LinkedList<>());
+    public int snakesAndLadders(int[][] board) {
+        if (board.length == 0) {
+            return 0;
         }
 
-        int[] indegs = new int[numCourses];
+        int rows = board.length;
+        int cols = board[0].length;
 
-        for (int[] prerequisite : prerequisites) {
-            int i = prerequisite[0];
-            int j = prerequisite[1];
+        int count = rows * cols;
 
-            graph.get(j).add(i);
+        // 存储关联的传送点
+        // 多用一个空间来省去值和下标的转换
+        int[] jumps = new int[count + 1];
 
-            indegs[i]++;
+        // 存储到达某个点时需要移动的最少次数
+        // 多用一个空间来省去值和下标的转换
+        int[] steps = new int[count + 1];
+
+        int v = 1;
+        boolean reversed = false;
+        for (int i = rows - 1; i >= 0; i--) {
+            if (!reversed) {
+                for (int j = 0; j < cols; j++) {
+                    jumps[v++] = board[i][j];
+                }
+            } else {
+                for (int j = cols - 1; j >= 0; j--) {
+                    jumps[v++] = board[i][j];
+                }
+            }
+
+            reversed = !reversed;
         }
 
-        Queue<Integer> path = new LinkedList<>();
+        boolean[] visited = new boolean[count + 1];
+
+        int p = 1;
 
         Queue<Integer> queue = new LinkedList<>();
 
-        // 将所有入度为0的结点放入队列中
-        for (int course = 0; course < numCourses; course++) {
-            if (indegs[course] == 0) {
-                queue.offer(course);
-            }
-        }
+        queue.offer(p);
+
+        // 标记为已访问
+        visited[p] = true;
 
         while (!queue.isEmpty()) {
-            Integer p = queue.poll();
+            p = queue.poll();
 
-            path.offer(p);
+            int step = steps[p];
 
-            for (Integer q : graph.get(p)) {
-                indegs[q]--;
+            int b = p + 1;
+            int e = p + 6;
+            if (e > count) {
+                e = count;
+            }
 
-                if (indegs[q] == 0) {
-                    queue.offer(q);
+            for (int q = b; q <= e; q++) {
+                int r;
+                if (jumps[q] == -1) {
+                    r = q;
+                } else {
+                    r = jumps[q];
+                }
+
+                if (!visited[r]) {
+                    queue.offer(r);
+
+                    // 标记为已访问
+                    visited[r] = true;
+                }
+
+                // 更新到达当前点的最少移动次数
+                if (steps[r] == 0 || steps[r] > step + 1) {
+                    steps[r] = step + 1;
                 }
             }
         }
 
-        if (path.size() != numCourses) {
-            return false;
-        }
-
-        return true;
+        return steps[count] > 0 ? steps[count] : -1;
     }
 
     public static class TestUtils {
@@ -252,33 +283,99 @@ public class Solution {
     }
 
     public static boolean testCase1() {
-        int numCourses = 2;
-        int[][] prerequisites = { { 1, 0 } };
+        int[][] board = {
+                { -1, -1, -1, -1, -1, -1 },
+                { -1, -1, -1, -1, -1, -1 },
+                { -1, -1, -1, -1, -1, -1 },
+                { -1, 35, -1, -1, 13, -1 },
+                { -1, -1, -1, -1, -1, -1 },
+                { -1, 15, -1, -1, -1, -1 }
+        };
 
-        boolean result = new Solution().canFinish(numCourses, prerequisites);
-        boolean expect = true;
+        int result = new Solution().snakesAndLadders(board);
+        int expect = 4;
 
         return TestUtils.check(result, expect);
     }
 
     public static boolean testCase2() {
-        int numCourses = 2;
-        int[][] prerequisites = { { 1, 0 }, { 0, 1 } };
+        int[][] board = {
+                { -1, -1 },
+                { -1, 3 }
+        };
 
-        boolean result = new Solution().canFinish(numCourses, prerequisites);
-        boolean expect = false;
+        int result = new Solution().snakesAndLadders(board);
+        int expect = 1;
 
         return TestUtils.check(result, expect);
     }
 
     public static boolean testCase3() {
-        int numCourses = 3;
-        int[][] prerequisites = { { 1, 0 }, { 1, 2 }, { 0, 1 } };
+        int[][] board = {
+                { -1, -1, -1 },
+                { -1, 9, -1 },
+                { -1, -1, -1 }
+        };
 
-        boolean result = new Solution().canFinish(numCourses, prerequisites);
-        boolean expect = false;
+        int result = new Solution().snakesAndLadders(board);
+        int expect = 1;
 
         return TestUtils.check(result, expect);
     }
 
+    public static boolean testCase4() {
+        int[][] board = {
+                { -1, 4, -1 },
+                { 6, 2, 6 },
+                { -1, 3, -1 }
+        };
+
+        int result = new Solution().snakesAndLadders(board);
+        int expect = 2;
+
+        return TestUtils.check(result, expect);
+    }
+
+    public static boolean testCase5() {
+        int[][] board = {
+                { 1, 1, -1 },
+                { 1, 1, 1 },
+                { -1, 1, 1 }
+        };
+
+        int result = new Solution().snakesAndLadders(board);
+        int expect = -1;
+
+        return TestUtils.check(result, expect);
+    }
+
+    public static boolean testCase6() {
+        int[][] board = {
+                { -1, -1, 30, 14, 15, -1 },
+                { 23, 9, -1, -1, -1, 9 },
+                { 12, 5, 7, 24, -1, 30 },
+                { 10, -1, -1, -1, 25, 17 },
+                { 32, -1, 28, -1, -1, 32 },
+                { -1, -1, 23, -1, 13, 19 }
+        };
+
+        int result = new Solution().snakesAndLadders(board);
+        int expect = 2;
+
+        return TestUtils.check(result, expect);
+    }
+
+    public static boolean testCase7() {
+        int[][] board = {
+                { -1, 1, 1, 1 },
+                { -1, 7, 1, 1 },
+                { 16, 1, 1, 1 },
+                { -1, 1, 9, 1 }
+        };
+
+        int result = new Solution().snakesAndLadders(board);
+        int expect = 3;
+
+        return TestUtils.check(result, expect);
+    }
 }
