@@ -659,19 +659,12 @@ public class Graph {
 
         List<List<String>> lists = new LinkedList<>();
 
-        int rows = vertexes.length;
-        int cols = vertexes.length;
-
-        boolean[][] visited = new boolean[rows][cols];
+        Map<Integer, Map<Integer, Integer>> visited = new HashMap<>();
         boolean[] added = new boolean[vertexes.length];
 
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (!graph.containsKey(i) || !graph.get(i).containsKey(j)) {
-                    continue;
-                }
-
-                if (visited[i][j]) {
+        for (int i : graph.keySet()) {
+            for (int j : graph.get(i).keySet()) {
+                if (visited.computeIfAbsent(i, k -> new HashMap<>()).containsKey(j)) {
                     continue;
                 }
 
@@ -686,7 +679,7 @@ public class Graph {
                 queue.offer(p);
 
                 // 标记为已访问
-                visited[x][y] = true;
+                visited.computeIfAbsent(x, k -> new HashMap<>()).put(y, null);
                 if (!added[x]) {
                     list.add(vertexes[x]);
                     added[x] = true;
@@ -711,21 +704,16 @@ public class Graph {
                             x = q[0];
                             y = q[1];
 
-                            if (x < 0 || x >= rows || y < 0 || y >= cols) {
-                                // 无效点，跳过
-                                continue;
-                            }
-
                             if (!graph.containsKey(x) || !graph.get(x).containsKey(y)) {
                                 // 无通路，跳过
                                 continue;
                             }
 
-                            if (!visited[x][y]) {
+                            if (!visited.computeIfAbsent(x, k -> new HashMap<>()).containsKey(y)) {
                                 queue.offer(q);
 
                                 // 标记为已访问
-                                visited[x][y] = true;
+                                visited.computeIfAbsent(x, k -> new HashMap<>()).put(y, null);
                                 if (!added[x]) {
                                     list.add(vertexes[x]);
                                     added[x] = true;
@@ -754,19 +742,12 @@ public class Graph {
 
         List<List<String>> lists = new LinkedList<>();
 
-        int rows = vertexes.length;
-        int cols = vertexes.length;
-
-        boolean[][] visited = new boolean[rows][cols];
+        Map<Integer, Map<Integer, Integer>> visited = new HashMap<>();
         boolean[] added = new boolean[vertexes.length];
 
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (!graph.containsKey(i) || !graph.get(i).containsKey(j)) {
-                    continue;
-                }
-
-                if (visited[i][j]) {
+        for (int i : graph.keySet()) {
+            for (int j : graph.get(i).keySet()) {
+                if (visited.computeIfAbsent(i, k -> new HashMap<>()).containsKey(j)) {
                     continue;
                 }
 
@@ -779,7 +760,7 @@ public class Graph {
                 int y = p[1];
 
                 // 标记为已访问
-                visited[x][y] = true;
+                visited.computeIfAbsent(x, k -> new HashMap<>()).put(y, null);
                 if (!added[x]) {
                     list.add(vertexes[x]);
                     added[x] = true;
@@ -803,21 +784,16 @@ public class Graph {
                             x = q[0];
                             y = q[1];
 
-                            if (x < 0 || x >= rows || y < 0 || y >= cols) {
-                                // 无效点，跳过
-                                continue;
-                            }
-
                             if (!graph.containsKey(x) || !graph.get(x).containsKey(y)) {
                                 // 无通路，跳过
                                 continue;
                             }
 
-                            if (!visited[x][y]) {
+                            if (!visited.computeIfAbsent(x, k -> new HashMap<>()).containsKey(y)) {
                                 r = q;
 
                                 // 标记为已访问
-                                visited[x][y] = true;
+                                visited.computeIfAbsent(x, k -> new HashMap<>()).put(y, null);
                                 if (!added[x]) {
                                     list.add(vertexes[x]);
                                     added[x] = true;

@@ -226,31 +226,25 @@ public class Tree {
 
         while (!nodes.isEmpty()) {
             List<Integer> values = new LinkedList<>();
+            List<TreeNode> newNodes = new LinkedList<>();
             for (TreeNode node : nodes) {
                 values.add(node.val);
+
+                if (node.left != null) {
+                    newNodes.add(node.left);
+                }
+
+                if (node.right != null) {
+                    newNodes.add(node.right);
+                }
             }
+
             lists.add(values);
 
-            nodes = visitTreeOfLevelOrderByLoop(nodes);
+            nodes = newNodes;
         }
 
         return lists;
-    }
-
-    private static List<TreeNode> visitTreeOfLevelOrderByLoop(List<TreeNode> nodes) {
-        List<TreeNode> newNodes = new LinkedList<>();
-
-        for (TreeNode node : nodes) {
-            if (node.left != null) {
-                newNodes.add(node.left);
-            }
-
-            if (node.right != null) {
-                newNodes.add(node.right);
-            }
-        }
-
-        return newNodes;
     }
 
     public static List<List<Integer>> visitTreeOfLevelOrderByRecursive(TreeNode root) {
@@ -274,13 +268,10 @@ public class Tree {
         }
 
         List<Integer> values = new LinkedList<>();
-        for (TreeNode node : nodes) {
-            values.add(node.val);
-        }
-        lists.add(values);
-
         List<TreeNode> newNodes = new LinkedList<>();
         for (TreeNode node : nodes) {
+            values.add(node.val);
+
             if (node.left != null) {
                 newNodes.add(node.left);
             }
@@ -289,6 +280,8 @@ public class Tree {
                 newNodes.add(node.right);
             }
         }
+
+        lists.add(values);
 
         visitTreeOfLevelOrderByRecursive(newNodes, lists);
     }
