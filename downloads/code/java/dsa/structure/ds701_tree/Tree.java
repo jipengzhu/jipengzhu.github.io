@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Queue;
 
 public class Tree {
-    static public class TreeNode {
+    public static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
@@ -476,7 +476,8 @@ public class Tree {
                 } else {
                     list.add(p.val);
 
-                    p = stack.isEmpty() ? null : stack.pop();
+                    // p = stack.isEmpty() ? null : stack.pop();
+                    p = null;
                 }
             } else {
                 p = stack.pop();

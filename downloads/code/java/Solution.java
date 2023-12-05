@@ -2,7 +2,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Solution {
-
     public int snakesAndLadders(int[][] board) {
         if (board.length == 0) {
             return 0;
@@ -82,6 +81,113 @@ public class Solution {
         }
 
         return steps[count] > 0 ? steps[count] : -1;
+    }
+}
+
+class TestMain {
+
+    public static void main(String[] args) {
+        TestUtils.runTestCases(TestCase.class);
+    }
+
+    public static class TestCase {
+
+        public static boolean testCase1() {
+            int[][] board = {
+                    { -1, -1, -1, -1, -1, -1 },
+                    { -1, -1, -1, -1, -1, -1 },
+                    { -1, -1, -1, -1, -1, -1 },
+                    { -1, 35, -1, -1, 13, -1 },
+                    { -1, -1, -1, -1, -1, -1 },
+                    { -1, 15, -1, -1, -1, -1 }
+            };
+
+            int result = new Solution().snakesAndLadders(board);
+            int expect = 4;
+
+            return TestUtils.check(result, expect);
+        }
+
+        public static boolean testCase2() {
+            int[][] board = {
+                    { -1, -1 },
+                    { -1, 3 }
+            };
+
+            int result = new Solution().snakesAndLadders(board);
+            int expect = 1;
+
+            return TestUtils.check(result, expect);
+        }
+
+        public static boolean testCase3() {
+            int[][] board = {
+                    { -1, -1, -1 },
+                    { -1, 9, -1 },
+                    { -1, -1, -1 }
+            };
+
+            int result = new Solution().snakesAndLadders(board);
+            int expect = 1;
+
+            return TestUtils.check(result, expect);
+        }
+
+        public static boolean testCase4() {
+            int[][] board = {
+                    { -1, 4, -1 },
+                    { 6, 2, 6 },
+                    { -1, 3, -1 }
+            };
+
+            int result = new Solution().snakesAndLadders(board);
+            int expect = 2;
+
+            return TestUtils.check(result, expect);
+        }
+
+        public static boolean testCase5() {
+            int[][] board = {
+                    { 1, 1, -1 },
+                    { 1, 1, 1 },
+                    { -1, 1, 1 }
+            };
+
+            int result = new Solution().snakesAndLadders(board);
+            int expect = -1;
+
+            return TestUtils.check(result, expect);
+        }
+
+        public static boolean testCase6() {
+            int[][] board = {
+                    { -1, -1, 30, 14, 15, -1 },
+                    { 23, 9, -1, -1, -1, 9 },
+                    { 12, 5, 7, 24, -1, 30 },
+                    { 10, -1, -1, -1, 25, 17 },
+                    { 32, -1, 28, -1, -1, 32 },
+                    { -1, -1, 23, -1, 13, 19 }
+            };
+
+            int result = new Solution().snakesAndLadders(board);
+            int expect = 2;
+
+            return TestUtils.check(result, expect);
+        }
+
+        public static boolean testCase7() {
+            int[][] board = {
+                    { -1, 1, 1, 1 },
+                    { -1, 7, 1, 1 },
+                    { 16, 1, 1, 1 },
+                    { -1, 1, 9, 1 }
+            };
+
+            int result = new Solution().snakesAndLadders(board);
+            int expect = 3;
+
+            return TestUtils.check(result, expect);
+        }
     }
 
     public static class TestUtils {
@@ -276,106 +382,5 @@ public class Solution {
 
             return lists;
         }
-    }
-
-    public static void main(String[] args) {
-        TestUtils.runTestCases(Solution.class);
-    }
-
-    public static boolean testCase1() {
-        int[][] board = {
-                { -1, -1, -1, -1, -1, -1 },
-                { -1, -1, -1, -1, -1, -1 },
-                { -1, -1, -1, -1, -1, -1 },
-                { -1, 35, -1, -1, 13, -1 },
-                { -1, -1, -1, -1, -1, -1 },
-                { -1, 15, -1, -1, -1, -1 }
-        };
-
-        int result = new Solution().snakesAndLadders(board);
-        int expect = 4;
-
-        return TestUtils.check(result, expect);
-    }
-
-    public static boolean testCase2() {
-        int[][] board = {
-                { -1, -1 },
-                { -1, 3 }
-        };
-
-        int result = new Solution().snakesAndLadders(board);
-        int expect = 1;
-
-        return TestUtils.check(result, expect);
-    }
-
-    public static boolean testCase3() {
-        int[][] board = {
-                { -1, -1, -1 },
-                { -1, 9, -1 },
-                { -1, -1, -1 }
-        };
-
-        int result = new Solution().snakesAndLadders(board);
-        int expect = 1;
-
-        return TestUtils.check(result, expect);
-    }
-
-    public static boolean testCase4() {
-        int[][] board = {
-                { -1, 4, -1 },
-                { 6, 2, 6 },
-                { -1, 3, -1 }
-        };
-
-        int result = new Solution().snakesAndLadders(board);
-        int expect = 2;
-
-        return TestUtils.check(result, expect);
-    }
-
-    public static boolean testCase5() {
-        int[][] board = {
-                { 1, 1, -1 },
-                { 1, 1, 1 },
-                { -1, 1, 1 }
-        };
-
-        int result = new Solution().snakesAndLadders(board);
-        int expect = -1;
-
-        return TestUtils.check(result, expect);
-    }
-
-    public static boolean testCase6() {
-        int[][] board = {
-                { -1, -1, 30, 14, 15, -1 },
-                { 23, 9, -1, -1, -1, 9 },
-                { 12, 5, 7, 24, -1, 30 },
-                { 10, -1, -1, -1, 25, 17 },
-                { 32, -1, 28, -1, -1, 32 },
-                { -1, -1, 23, -1, 13, 19 }
-        };
-
-        int result = new Solution().snakesAndLadders(board);
-        int expect = 2;
-
-        return TestUtils.check(result, expect);
-    }
-
-    public static boolean testCase7() {
-        int[][] board = {
-                { -1, 1, 1, 1 },
-                { -1, 7, 1, 1 },
-                { 16, 1, 1, 1 },
-                { -1, 1, 9, 1 }
-        };
-
-        int result = new Solution().snakesAndLadders(board);
-        int expect = 3;
-
-        return TestUtils.check(result, expect);
     }
 }
