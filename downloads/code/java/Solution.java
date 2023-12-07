@@ -1,86 +1,78 @@
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
 
 public class Solution {
-    public int snakesAndLadders(int[][] board) {
-        if (board.length == 0) {
-            return 0;
-        }
+    public int minMutation(String startGene, String endGene, String[] bank) {
+        Map<String, Map<String, Integer>> graph = new HashMap<>();
 
-        int rows = board.length;
-        int cols = board[0].length;
-
-        int count = rows * cols;
-
-        // 存储关联的传送点
-        // 多用一个空间来省去值和下标的转换
-        int[] jumps = new int[count + 1];
-
-        // 存储到达某个点时需要移动的最少次数
-        // 多用一个空间来省去值和下标的转换
-        int[] steps = new int[count + 1];
-
-        int v = 1;
-        boolean reversed = false;
-        for (int i = rows - 1; i >= 0; i--) {
-            if (!reversed) {
-                for (int j = 0; j < cols; j++) {
-                    jumps[v++] = board[i][j];
-                }
-            } else {
-                for (int j = cols - 1; j >= 0; j--) {
-                    jumps[v++] = board[i][j];
-                }
+        for (int i = 0; i < bank.length; i++) {
+            int c = getDifferenceCharCount(startGene, bank[i]);
+            if (c == 1) {
+                graph.computeIfAbsent(startGene, k -> new HashMap<>()).put(bank[i], 1);
             }
 
-            reversed = !reversed;
+            for (int j = i + 1; j < bank.length; j++) {
+                c = getDifferenceCharCount(bank[i], bank[j]);
+                if (c == 1) {
+                    graph.computeIfAbsent(bank[i], k -> new HashMap<>()).put(bank[j], 1);
+                    graph.computeIfAbsent(bank[j], k -> new HashMap<>()).put(bank[i], 1);
+                }
+            }
         }
 
-        boolean[] visited = new boolean[count + 1];
+        if (!graph.containsKey(startGene)) {
+            return -1;
+        }
 
-        int p = 1;
+        Map<String, Integer> steps = new HashMap<>();
 
-        Queue<Integer> queue = new LinkedList<>();
+        Set<String> visited = new HashSet<>();
+
+        String p = startGene;
+
+        Queue<String> queue = new LinkedList<>();
 
         queue.offer(p);
 
         // 标记为已访问
-        visited[p] = true;
+        visited.add(p);
 
         while (!queue.isEmpty()) {
             p = queue.poll();
 
-            int step = steps[p];
+            int step = steps.getOrDefault(p, 0);
 
-            int b = p + 1;
-            int e = p + 6;
-            if (e > count) {
-                e = count;
-            }
-
-            for (int q = b; q <= e; q++) {
-                int r;
-                if (jumps[q] == -1) {
-                    r = q;
-                } else {
-                    r = jumps[q];
-                }
-
-                if (!visited[r]) {
-                    queue.offer(r);
+            for (String q : graph.computeIfAbsent(p, k -> new HashMap<>()).keySet()) {
+                if (!visited.contains(q)) {
+                    queue.offer(q);
 
                     // 标记为已访问
-                    visited[r] = true;
+                    visited.add(q);
                 }
 
                 // 更新到达当前点的最少移动次数
-                if (steps[r] == 0 || steps[r] > step + 1) {
-                    steps[r] = step + 1;
+                if (!steps.containsKey(q) || steps.get(q) > step + 1) {
+                    steps.put(q, step + 1);
                 }
             }
         }
 
-        return steps[count] > 0 ? steps[count] : -1;
+        return steps.getOrDefault(endGene, -1);
+    }
+
+    private int getDifferenceCharCount(String s, String t) {
+        int c = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) != t.charAt(i)) {
+                c++;
+            }
+        }
+
+        return c;
     }
 }
 
@@ -91,99 +83,34 @@ class TestMain {
     }
 
     public static class TestCase {
-
         public static boolean testCase1() {
-            int[][] board = {
-                    { -1, -1, -1, -1, -1, -1 },
-                    { -1, -1, -1, -1, -1, -1 },
-                    { -1, -1, -1, -1, -1, -1 },
-                    { -1, 35, -1, -1, 13, -1 },
-                    { -1, -1, -1, -1, -1, -1 },
-                    { -1, 15, -1, -1, -1, -1 }
-            };
+            String start = "AACCGGTT";
+            String end = "AACCGGTA";
+            String[] bank = { "AACCGGTA" };
 
-            int result = new Solution().snakesAndLadders(board);
-            int expect = 4;
+            int result = new Solution().minMutation(start, end, bank);
+            int expect = 1;
 
             return TestUtils.check(result, expect);
         }
 
         public static boolean testCase2() {
-            int[][] board = {
-                    { -1, -1 },
-                    { -1, 3 }
-            };
+            String start = "AACCGGTT";
+            String end = "AAACGGTA";
+            String[] bank = { "AACCGGTA", "AACCGCTA", "AAACGGTA" };
 
-            int result = new Solution().snakesAndLadders(board);
-            int expect = 1;
+            int result = new Solution().minMutation(start, end, bank);
+            int expect = 2;
 
             return TestUtils.check(result, expect);
         }
 
         public static boolean testCase3() {
-            int[][] board = {
-                    { -1, -1, -1 },
-                    { -1, 9, -1 },
-                    { -1, -1, -1 }
-            };
+            String start = "AAAAACCC";
+            String end = "AACCCCCC";
+            String[] bank = { "AAAACCCC", "AAACCCCC", "AACCCCCC" };
 
-            int result = new Solution().snakesAndLadders(board);
-            int expect = 1;
-
-            return TestUtils.check(result, expect);
-        }
-
-        public static boolean testCase4() {
-            int[][] board = {
-                    { -1, 4, -1 },
-                    { 6, 2, 6 },
-                    { -1, 3, -1 }
-            };
-
-            int result = new Solution().snakesAndLadders(board);
-            int expect = 2;
-
-            return TestUtils.check(result, expect);
-        }
-
-        public static boolean testCase5() {
-            int[][] board = {
-                    { 1, 1, -1 },
-                    { 1, 1, 1 },
-                    { -1, 1, 1 }
-            };
-
-            int result = new Solution().snakesAndLadders(board);
-            int expect = -1;
-
-            return TestUtils.check(result, expect);
-        }
-
-        public static boolean testCase6() {
-            int[][] board = {
-                    { -1, -1, 30, 14, 15, -1 },
-                    { 23, 9, -1, -1, -1, 9 },
-                    { 12, 5, 7, 24, -1, 30 },
-                    { 10, -1, -1, -1, 25, 17 },
-                    { 32, -1, 28, -1, -1, 32 },
-                    { -1, -1, 23, -1, 13, 19 }
-            };
-
-            int result = new Solution().snakesAndLadders(board);
-            int expect = 2;
-
-            return TestUtils.check(result, expect);
-        }
-
-        public static boolean testCase7() {
-            int[][] board = {
-                    { -1, 1, 1, 1 },
-                    { -1, 7, 1, 1 },
-                    { 16, 1, 1, 1 },
-                    { -1, 1, 9, 1 }
-            };
-
-            int result = new Solution().snakesAndLadders(board);
+            int result = new Solution().minMutation(start, end, bank);
             int expect = 3;
 
             return TestUtils.check(result, expect);
