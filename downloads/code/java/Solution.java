@@ -1,78 +1,59 @@
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
-
 public class Solution {
-    public int minMutation(String startGene, String endGene, String[] bank) {
-        Map<String, Map<String, Integer>> graph = new HashMap<>();
-
-        for (int i = 0; i < bank.length; i++) {
-            int c = getDifferenceCharCount(startGene, bank[i]);
-            if (c == 1) {
-                graph.computeIfAbsent(startGene, k -> new HashMap<>()).put(bank[i], 1);
+    public int networkDelayTime(int[][] times, int n, int k) {
+        int[][] graph = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                graph[i][j] = Integer.MAX_VALUE;
             }
+        }
 
-            for (int j = i + 1; j < bank.length; j++) {
-                c = getDifferenceCharCount(bank[i], bank[j]);
-                if (c == 1) {
-                    graph.computeIfAbsent(bank[i], k -> new HashMap<>()).put(bank[j], 1);
-                    graph.computeIfAbsent(bank[j], k -> new HashMap<>()).put(bank[i], 1);
+        for (int[] time : times) {
+            int i = time[0] - 1;
+            int j = time[1] - 1;
+            int v = time[2];
+
+            graph[i][j] = v;
+        }
+
+        int[][] dists = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                dists[i][j] = graph[i][j];
+            }
+        }
+
+        for (int t = 0; t < n; t++) {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (dists[i][t] == Integer.MAX_VALUE || dists[t][j] == Integer.MAX_VALUE) {
+                        // 不可能变小，跳过
+                        continue;
+                    }
+
+                    if (dists[i][t] + dists[t][j] < dists[i][j]) {
+                        dists[i][j] = dists[i][t] + dists[t][j];
+                    }
                 }
             }
         }
 
-        if (!graph.containsKey(startGene)) {
-            return -1;
-        }
+        int[] dist = dists[k - 1];
+        int maxValue = Integer.MIN_VALUE;
+        for (int i = 0; i < dist.length; i++) {
+            if (i == k - 1) {
+                continue;
+            }
 
-        Map<String, Integer> steps = new HashMap<>();
+            int d = dist[i];
 
-        Set<String> visited = new HashSet<>();
-
-        String p = startGene;
-
-        Queue<String> queue = new LinkedList<>();
-
-        queue.offer(p);
-
-        // 标记为已访问
-        visited.add(p);
-
-        while (!queue.isEmpty()) {
-            p = queue.poll();
-
-            int step = steps.getOrDefault(p, 0);
-
-            for (String q : graph.computeIfAbsent(p, k -> new HashMap<>()).keySet()) {
-                if (!visited.contains(q)) {
-                    queue.offer(q);
-
-                    // 标记为已访问
-                    visited.add(q);
-                }
-
-                // 更新到达当前点的最少移动次数
-                if (!steps.containsKey(q) || steps.get(q) > step + 1) {
-                    steps.put(q, step + 1);
-                }
+            if (d == Integer.MAX_VALUE) {
+                return -1;
+            } else if (d > maxValue) {
+                maxValue = d;
             }
         }
 
-        return steps.getOrDefault(endGene, -1);
-    }
-
-    private int getDifferenceCharCount(String s, String t) {
-        int c = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) != t.charAt(i)) {
-                c++;
-            }
-        }
-
-        return c;
+        return maxValue;
     }
 }
 
@@ -83,35 +64,93 @@ class TestMain {
     }
 
     public static class TestCase {
+
         public static boolean testCase1() {
-            String start = "AACCGGTT";
-            String end = "AACCGGTA";
-            String[] bank = { "AACCGGTA" };
+            int[][] times = {
+                    { 2, 1, 1 },
+                    { 2, 3, 1 },
+                    { 3, 4, 1 }
+            };
+            int n = 4;
+            int k = 2;
 
-            int result = new Solution().minMutation(start, end, bank);
-            int expect = 1;
-
-            return TestUtils.check(result, expect);
-        }
-
-        public static boolean testCase2() {
-            String start = "AACCGGTT";
-            String end = "AAACGGTA";
-            String[] bank = { "AACCGGTA", "AACCGCTA", "AAACGGTA" };
-
-            int result = new Solution().minMutation(start, end, bank);
+            int result = new Solution().networkDelayTime(times, n, k);
             int expect = 2;
 
             return TestUtils.check(result, expect);
         }
 
-        public static boolean testCase3() {
-            String start = "AAAAACCC";
-            String end = "AACCCCCC";
-            String[] bank = { "AAAACCCC", "AAACCCCC", "AACCCCCC" };
+        public static boolean testCase2() {
+            int[][] times = {
+                    { 2, 1, 1 },
+                    { 2, 3, 1 },
+                    { 3, 4, 1 }
+            };
+            int n = 4;
+            int k = 3;
 
-            int result = new Solution().minMutation(start, end, bank);
-            int expect = 3;
+            int result = new Solution().networkDelayTime(times, n, k);
+            int expect = -1;
+
+            return TestUtils.check(result, expect);
+        }
+
+        public static boolean testCase3() {
+            int[][] times = {
+                    { 1, 2, 1 }
+            };
+            int n = 2;
+            int k = 1;
+
+            int result = new Solution().networkDelayTime(times, n, k);
+            int expect = 1;
+
+            return TestUtils.check(result, expect);
+        }
+
+        public static boolean testCase4() {
+            int[][] times = {
+                    { 1, 2, 1 }
+            };
+            int n = 2;
+            int k = 2;
+
+            int result = new Solution().networkDelayTime(times, n, k);
+            int expect = -1;
+
+            return TestUtils.check(result, expect);
+        }
+
+        public static boolean testCase5() {
+            int[][] times = {
+                    { 2, 7, 63 },
+                    { 4, 3, 60 },
+                    { 1, 3, 53 },
+                    { 5, 6, 100 },
+                    { 1, 4, 40 },
+                    { 4, 7, 95 },
+                    { 4, 6, 97 },
+                    { 3, 4, 68 },
+                    { 1, 7, 75 },
+                    { 2, 6, 84 },
+                    { 1, 6, 27 },
+                    { 5, 3, 25 },
+                    { 6, 2, 2 },
+                    { 3, 7, 57 },
+                    { 5, 4, 2 },
+                    { 7, 1, 53 },
+                    { 5, 7, 35 },
+                    { 4, 1, 60 },
+                    { 5, 2, 95 },
+                    { 3, 5, 28 },
+                    { 6, 1, 61 },
+                    { 2, 5, 28 }
+            };
+            int n = 7;
+            int k = 3;
+
+            int result = new Solution().networkDelayTime(times, n, k);
+            int expect = 119;
 
             return TestUtils.check(result, expect);
         }
