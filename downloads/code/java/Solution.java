@@ -157,70 +157,17 @@ class TestMain {
     }
 
     public static class TestUtils {
-        public static boolean check(int[] result, int[] expect) {
-            String resultString = java.util.Arrays.toString(result);
-            String expectString = java.util.Arrays.toString(expect);
-            boolean ok = java.util.Arrays.equals(result, expect);
-
-            printCheck(resultString, expectString, ok);
-
-            return ok;
-        }
-
-        public static boolean check(double[] result, double[] expect) {
-            String resultString = java.util.Arrays.toString(result);
-            String expectString = java.util.Arrays.toString(expect);
-            boolean ok = java.util.Arrays.equals(result, expect);
-
-            printCheck(resultString, expectString, ok);
-
-            return ok;
-        }
-
-        public static boolean check(char[] result, char[] expect) {
-            String resultString = java.util.Arrays.toString(result);
-            String expectString = java.util.Arrays.toString(expect);
-            boolean ok = java.util.Arrays.equals(result, expect);
-
-            printCheck(resultString, expectString, ok);
-
-            return ok;
-        }
-
-        public static boolean check(Object[] result, Object[] expect) {
-            String resultString = java.util.Arrays.deepToString(result);
-            String expectString = java.util.Arrays.deepToString(expect);
-            boolean ok = java.util.Arrays.deepEquals(result, expect);
-
-            printCheck(resultString, expectString, ok);
-
-            return ok;
-        }
 
         public static boolean check(Object result, Object expect) {
-            String resultString;
-            String expectString;
-            boolean ok;
+            boolean ok = java.util.Objects.deepEquals(result, expect);
+            printCheck(toString(result), toString(expect), ok);
+            return ok;
+        }
 
-            if (result instanceof Object[]) {
-                resultString = java.util.Arrays.deepToString((Object[]) result);
-            } else {
-                resultString = result.toString();
-            }
-
-            if (expect instanceof Object[]) {
-                expectString = java.util.Arrays.deepToString((Object[]) expect);
-            } else {
-                expectString = expect.toString();
-            }
-
-            resultString = normalizeString(resultString);
-            expectString = normalizeString(expectString);
-
-            ok = java.util.Objects.equals(resultString, expectString);
-
-            printCheck(resultString, expectString, ok);
-
+        public static boolean check(Object result, String expect) {
+            boolean ok = java.util.Objects.equals(normalizeString(toString(result)),
+                    normalizeString(toString(expect)));
+            printCheck(normalizeString(toString(result)), normalizeString(toString(expect)), ok);
             return ok;
         }
 
@@ -230,6 +177,20 @@ class TestMain {
 
         public static <T> boolean check(java.util.List<java.util.List<T>> result, T[][] expect, Class<T> clazz) {
             return check(toArrays(result, clazz), expect);
+        }
+
+        private static String toString(Object o) {
+            if (o instanceof Object[]) {
+                return java.util.Arrays.deepToString((Object[]) o);
+            } else if (o instanceof int[]) {
+                return java.util.Arrays.toString((int[]) o);
+            } else if (o instanceof double[]) {
+                return java.util.Arrays.toString((double[]) o);
+            } else if (o instanceof char[]) {
+                return java.util.Arrays.toString((char[]) o);
+            } else {
+                return java.util.Objects.toString(o);
+            }
         }
 
         private static String normalizeString(String s) {

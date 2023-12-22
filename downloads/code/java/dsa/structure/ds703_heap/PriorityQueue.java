@@ -1,7 +1,6 @@
 package dsa.structure.ds703_heap;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 public class PriorityQueue {
     private int size = 0;
@@ -37,8 +36,8 @@ public class PriorityQueue {
 
         int v = array[0];
 
-        array[0] = array[size - 1];
-        size--;
+        // swap(array, 0, --size);
+        array[0] = array[--size];
         shiftDown(array, 0, size);
 
         return v;
@@ -170,8 +169,8 @@ public class PriorityQueue {
 
         private static void testRandomExample(PriorityQueueFunc f) {
             for (int i = 0; i < 36; i++) {
-                testPriorityQueue(TestUtils.random(19), f);
-                testPriorityQueue(TestUtils.random(20), f);
+                testPriorityQueue(random(19), f);
+                testPriorityQueue(random(20), f);
             }
         }
 
@@ -180,9 +179,7 @@ public class PriorityQueue {
 
             testPriorityQueue(array, f);
         }
-    }
 
-    public static class TestUtils {
         public static int[] random(int n) {
             int[] array = new int[n];
             for (int i = 0; i < array.length; i++) {
@@ -191,81 +188,28 @@ public class PriorityQueue {
 
             return array;
         }
+    }
 
-        public static void check(String name, int[] result, int[] expect) {
-            String resultString = Arrays.toString(result);
-            String expectString = Arrays.toString(expect);
-            boolean ok = Arrays.equals(result, expect);
+    public static class TestUtils {
 
-            printCheck(name, resultString, expectString, ok);
+        public static boolean check(String name, Object result, Object expect) {
+            boolean ok = java.util.Objects.deepEquals(result, expect);
+            printCheck(name, toString(result), toString(expect), ok);
+            return ok;
         }
 
-        public static void check(String name, Object[] result, Object[] expect) {
-            String resultString = Arrays.deepToString(result);
-            String expectString = Arrays.deepToString(expect);
-            boolean ok = Arrays.deepEquals(result, expect);
-
-            printCheck(name, resultString, expectString, ok);
-        }
-
-        public static void check(String name, Object result, Object expect) {
-            String resultString = result.toString();
-            String expectString = expect.toString();
-            boolean ok = Objects.equals(result, expect);
-
-            printCheck(name, resultString, expectString, ok);
-        }
-
-        public static <T> void check(String name, java.util.List<T> result, T[] expect, Class<T> clazz) {
-            check(name, toArray(result, clazz), expect);
-        }
-
-        public static <T> void check(String name, java.util.List<java.util.List<T>> result, T[][] expect,
-                Class<T> clazz) {
-            check(name, toArrays(result, clazz), expect);
-        }
-
-        @SuppressWarnings("unchecked")
-        public static <T> T[] genArray(Class<T> clazz, int length) {
-            return (T[]) java.lang.reflect.Array.newInstance(clazz, length);
-        }
-
-        @SuppressWarnings("unchecked")
-        public static <T> T[][] genArrays(Class<T> clazz, int rows, int cols) {
-            T[] array = genArray(clazz, 0);
-
-            T[][] arrays = (T[][]) genArray(array.getClass(), rows);
-            for (int i = 0; i < arrays.length; i++) {
-                arrays[i] = genArray(clazz, cols);
+        private static String toString(Object o) {
+            if (o instanceof Object[]) {
+                return java.util.Arrays.deepToString((Object[]) o);
+            } else if (o instanceof int[]) {
+                return java.util.Arrays.toString((int[]) o);
+            } else if (o instanceof double[]) {
+                return java.util.Arrays.toString((double[]) o);
+            } else if (o instanceof char[]) {
+                return java.util.Arrays.toString((char[]) o);
+            } else {
+                return java.util.Objects.toString(o);
             }
-
-            return arrays;
-        }
-
-        public static <T> T[] toArray(java.util.List<T> list, Class<T> clazz) {
-            if (list == null || list.isEmpty()) {
-                return genArray(clazz, 0);
-            }
-
-            T[] array = genArray(clazz, list.size());
-            for (int i = 0; i < array.length; i++) {
-                array[i] = list.get(i);
-            }
-
-            return array;
-        }
-
-        public static <T> T[][] toArrays(java.util.List<java.util.List<T>> lists, Class<T> clazz) {
-            if (lists == null || lists.isEmpty()) {
-                return genArrays(clazz, 0, 0);
-            }
-
-            T[][] arrays = genArrays(clazz, lists.size(), 0);
-            for (int i = 0; i < lists.size(); i++) {
-                arrays[i] = toArray(lists.get(i), clazz);
-            }
-
-            return arrays;
         }
 
         public static void printCheck(String name, String result, String expect, boolean ok) {

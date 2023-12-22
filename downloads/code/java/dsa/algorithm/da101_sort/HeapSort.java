@@ -9,11 +9,9 @@ public class HeapSort {
         genHeapByShiftDown(array);
 
         int len = array.length;
-
-        swap(array, 0, --len);
-        while (len > 0) {
-            shiftDown(array, 0, len);
+        while (len > 1) {
             swap(array, 0, --len);
+            shiftDown(array, 0, len);
         }
     }
 
