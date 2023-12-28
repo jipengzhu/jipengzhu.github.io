@@ -1,4 +1,4 @@
-package dsa.algorithm.da101_sort;
+package dsa.algorithm.da101_sort.st91;
 
 import java.util.Arrays;
 

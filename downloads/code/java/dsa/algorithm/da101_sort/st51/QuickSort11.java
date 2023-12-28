@@ -1,8 +1,8 @@
-package dsa.algorithm.da101_sort;
+package dsa.algorithm.da101_sort.st51;
 
 import java.util.Arrays;
 
-public class QuickSort2 {
+public class QuickSort11 {
 
     public static void sort(int[] array) {
         quickSort(array, 0, array.length - 1);
@@ -21,51 +21,38 @@ public class QuickSort2 {
 
     private static int partition(int[] array, int L, int R) {
         // 分割成3个部分，左边小于等于分割数，中间只有分割数一个元素，右边大于等于分割数
-        // 分割数可以选任意位置的数
+        // 分割数选L位置的数时先从右边开始查找
+        // 分割数选R位置的数时先从左边开始查找
 
         int i = L;
         int j = R;
 
-        int p = (L + R) / 2;
-        int v = array[p];
-
-        while (i <= j) {
-            // 向右找到第一个大于分割数的元素
-            while (i <= j && array[i] <= v)
+        while (i < j) {
+            // 此时j位置的数是分割数
+            // 从左向右找到第一个大于分割数的元素
+            while (i < j && array[i] <= array[j])
                 i++;
 
-            // 向左找到第一个小于分割数的元素
-            while (i <= j && array[j] >= v)
+            if (i < j) {
+                // 通过交换操作将大于分割数的放在分割数的右边
+                // 交换后i位置的数是分割数
+                swap(array, i, j--);
+            }
+
+            // 此时i位置的数是分割数
+            // 从右向左找到第一个小于分割数的元素
+            while (i < j && array[j] >= array[i])
                 j--;
 
-            if (i <= j) {
-                // i = j 时是自我交换，不影响结果
-                swap(array, i++, j--);
+            if (i < j) {
+                // 通过交换操作将小于分割数的放在分割数的左边
+                // 交换后j位置的数是分割数
+                swap(array, i++, j);
             }
         }
 
-        // i位置左边的都小于等于分割数
-        // j位置右边的都大于等于分割数
-        // 即左边部分 L <= k < i，k位置的数都小于等于p位置的数
-        // 即中间部分 i <= k <= j，因为i > j，所以这种情况不存在
-        // 即右边部分 j < k <= R，k位置的数都大于等于p位置的数
-
-        int m;
-        if (p < i) {
-            // 分割点选择左边部分的末尾
-            m = i - 1 > L ? i - 1 : L;
-        } else if (p > j) {
-            // 分割点选择右边部分的开头
-            m = j + 1 < R ? j + 1 : R;
-        } else {
-            // 分割点不变
-            m = p;
-        }
-
-        if (m != p) {
-            swap(array, p, m);
-            p = m;
-        }
+        // 获取分割数的位置，此时i = j，可以任选一个
+        int p = i;
 
         return p;
     }

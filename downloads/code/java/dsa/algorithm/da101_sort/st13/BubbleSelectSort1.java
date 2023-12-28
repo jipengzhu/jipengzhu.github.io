@@ -1,58 +1,34 @@
-package dsa.algorithm.da101_sort;
+package dsa.algorithm.da101_sort.st13;
 
 import java.util.Arrays;
 
-public class InsertShellSort {
+public class BubbleSelectSort1 {
 
     public static void sort(int[] array) {
         int len = array.length;
 
-        int gap = len / 2;
-        while (gap > 0) {
-            // gap是分组数，也是步长，只对第一个分组排序
-            for (int i = 0; i + gap < len; i = i + gap) {
+        // 外层的边界是循环次数的范围：[0，len - 1)
+        // 内层的边界是未排序部分的范围：[0, len - i)
+        for (int i = 0; i < len - 1; i++) {
 
-                int v = array[i + gap];
+            int max = -1;
+            for (int j = 0; j < len - i - 1; j++) {
+                // 比自己后面的元素大，则交换位置，排到后面去
+                if (array[j] > array[j + 1]) {
+                    swap(array, j, j + 1);
 
-                int j = i; // j + gap < len
-                // 比插入元素大，则后退一步，让出位置
-                while (j >= 0 && array[j] > v) {
-                    array[j + gap] = array[j];
-                    j = j - gap;
-                }
-
-                // 插入元素排到当前元素（不大于插入元素）的后面
-                array[j + gap] = v;
-            }
-
-            gap = gap / 2;
-        }
-    }
-
-    public static void sortAllGroup(int[] array) {
-        int len = array.length;
-
-        int gap = len / 2;
-        while (gap > 0) {
-            // gap是分组数，也是步长，k是第K组的起始偏移量
-            for (int k = 0; k < gap; k++) {
-                for (int i = k; i + gap < len; i = i + gap) {
-
-                    int v = array[i + gap];
-
-                    int j = i;
-                    // 比插入元素大，则后退一步，让出位置
-                    while (j >= 0 && array[j] > v) {
-                        array[j + gap] = array[j];
-                        j = j - gap;
-                    }
-
-                    // 插入元素排到当前元素（不大于插入元素）的后面
-                    array[j + gap] = v;
+                    // 当前条件中较大值的下标交换前是j，交换后则是j + 1
+                    max = j + 1;
+                } else {
+                    // 当前条件中较大值的下标就是j + 1
+                    max = j + 1;
                 }
             }
 
-            gap = gap / 2;
+            // 无意义的操作，因为前面交换操作的影响使得max = (len - i) - 1
+            // 即选择出最大值并交换到未排序部分的尾部这个操作已经通过前面的交换操作完成了的
+            // 所以max指针也是多余的（去掉max指针相关的操作就是真正的冒泡排序了）
+            swap(array, max, (len - i) - 1);
         }
     }
 

@@ -3,7 +3,7 @@ package dsa.structure.ds703_heap;
 import java.util.Arrays;
 
 public class Heap {
-    public int[] heapSort1(int[] array) {
+    public void heapSort1(int[] array) {
         genHeapByShiftUp(array);
 
         int len = array.length;
@@ -11,11 +11,9 @@ public class Heap {
             swap(array, 0, --len);
             shiftDown(array, 0, len);
         }
-
-        return array;
     }
 
-    public int[] heapSort2(int[] array) {
+    public void heapSort2(int[] array) {
         genHeapByShiftDown(array);
 
         int len = array.length;
@@ -23,13 +21,12 @@ public class Heap {
             swap(array, 0, --len);
             shiftDown(array, 0, len);
         }
-
-        return array;
     }
 
     private void genHeapByShiftUp(int[] arr) {
-        // 第一层是被比较的对象，不需要调整
-        // 因为第一层只有一个根节点，所以第一个不需要调整
+        // 从上往下处理时新结点是位于堆的底部，所以新结点需要的操作是向上调整
+        // 因为不包含父结点的结点的不需要向上调整，所以第一个需要调整的结点是第一个包含父结点的结点
+        // 所以第一个需要调整的结点的下标为i=1
         int len = arr.length;
         for (int i = 1; i < len; i++) {
             shiftUp(arr, i);
@@ -37,11 +34,9 @@ public class Heap {
     }
 
     private void genHeapByShiftDown(int[] arr) {
-        // 最后一层是被比较的对象，不需要调整
-        // 所以是从倒数第二层最右边的结点开始的
-        // 设x为倒数第二层最右边的结点的下标
-        // 则 2 * x + 2 < len
-        // 则 x <= (len - 2) / 2（因为除法为整数除法，所以len为奇数时会等于整数除法的结果）
+        // 从下往上处理时新结点是位于堆的顶部，所以新结点需要的操作是向下调整
+        // 因为不包含子结点的结点的不需要向下调整，所以最后一个需要调整的结点是最后一个包含子结点的结点
+        // 所以最后一个需要调整的结点的下标为i=((len - 1) - 1)) / 2 = (len - 2) / 2
         int len = arr.length;
         for (int i = (len - 2) / 2; i >= 0; i--) {
             shiftDown(arr, i, len);
@@ -101,15 +96,17 @@ public class Heap {
 
     public static class HeapTest {
         public static interface HeapFunc {
-            int[] apply(int[] array);
+            void apply(int[] array);
         }
 
         private static void testHeap(int[] array, HeapFunc f) {
             int[] mybak = Arrays.copyOf(array, array.length);
             Arrays.sort(mybak);
 
-            int[] result = f.apply(array);
-            int[] expect = Arrays.copyOf(mybak, mybak.length);
+            f.apply(array);
+
+            int[] result = array;
+            int[] expect = mybak;
 
             TestUtils.check("堆", result, expect);
         }

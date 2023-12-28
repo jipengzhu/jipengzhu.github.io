@@ -1,21 +1,76 @@
-package dsa.algorithm.da101_sort;
+package dsa.algorithm.da101_sort.st71;
 
 import java.util.Arrays;
 
-public class BubbleSort {
+public class CountSort {
 
     public static void sort(int[] array) {
         int len = array.length;
 
-        // 外层的边界是循环次数的范围：[0，len - 1)
-        // 内层的边界是未排序部分的范围：[0, len - i)
-        for (int i = 0; i < len - 1; i++) {
-            for (int j = 0; j + 1 < len - i; j++) {
-                // 比自己后面的元素大，则交换位置，排到后面去
-                if (array[j] > array[j + 1]) {
-                    swap(array, j, j + 1);
-                }
+        int min = array[0];
+        int max = array[0];
+        for (int i = 1; i < len; i++) {
+            if (array[i] < min) {
+                min = array[i];
             }
+
+            if (array[i] > max) {
+                max = array[i];
+            }
+        }
+
+        // 修正数组的数据到正数（包含0）的区间
+        // 如果最小值是负数，可以解决负数不能做下标的问题
+        // 如果最小值是正数，可以减少统计数组的空间
+        int offset = max - min;
+        for (int i = 0; i < len; i++) {
+            array[i] = array[i] + offset;
+        }
+        // min = min + offset;
+        max = max + offset;
+
+        int count[] = new int[max + 1];
+
+        // 计算某个值的数量
+        for (int i = 0; i < len; i++) {
+            count[array[i]] = count[array[i]] + 1;
+        }
+
+        // 用累加法计算某个值在排序后的最高排位（排位从1开始）
+        for (int i = 1; i < count.length; i++) {
+            count[i] = count[i] + count[i - 1];
+        }
+
+        // 从后向前处理保证计数排序算法的稳定性
+        int[] tmp = new int[len];
+        for (int i = len - 1; i >= 0; i--) {
+            int v = array[i];
+
+            // 获取当前数的排位
+            int j = count[v];
+
+            // 计算当前数在新数组中的下标（排位数减去1）
+            j = j - 1;
+
+            // 将当前数放到新数组的正确位置上
+            tmp[j] = v;
+
+            // 更新可用的排位
+            count[v] = count[v] - 1;
+
+            // 下面是简洁写法
+            // tmp[count[array[i]] - 1] = array[i];
+            // count[array[i]] = count[array[i]] - 1;
+        }
+
+        // 拷贝回原数组
+        for (int i = 0; i < tmp.length; i++) {
+            array[i] = tmp[i];
+        }
+
+        // 恢复数组的数据到原来的数据
+        for (int i = 0; i < len; i++) {
+            array[i] = array[i] - offset;
         }
     }
 

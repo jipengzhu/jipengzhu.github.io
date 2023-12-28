@@ -1,8 +1,8 @@
-package dsa.algorithm.da101_sort;
+package dsa.algorithm.da101_sort.st53;
 
 import java.util.Arrays;
 
-public class MergeSort {
+public class MergeSort13 {
 
     public static void sort(int[] array) {
         mergeSort(array, 0, array.length - 1);
@@ -18,49 +18,19 @@ public class MergeSort {
         mergeSort(array, M + 1, R);
 
         merge(array, L, M, R);
-        // merge1(array, L, M, R);
-        // merge2(array, L, M, R);
-        // merge3(array, L, M, R);
-    }
-
-    // 单层循环 + 正向合并
-    private static void merge(int[] array, int L, int M, int R) {
-        int c = R - L + 1;
-        int[] tmp = new int[c];
-        int i = L;
-        int j = M + 1;
-        int k = 0;
-
-        while (i <= M && j <= R) {
-            if (array[i] <= array[j]) {
-                tmp[k++] = array[i++];
-            } else {
-                tmp[k++] = array[j++];
-            }
-        }
-
-        // 根据上面循环的结束条件可知两部分都有剩余数据时不会退出
-        // 即退出时最多只可能有一个部分还有剩余数据
-        // 所以下面的两个循环最多只有一个会生效而不必担心剩余数据追加后会导致数组乱序
-        while (i <= M)
-            tmp[k++] = array[i++];
-        while (j <= R)
-            tmp[k++] = array[j++];
-
-        for (int t = 0; t < c; t++) {
-            array[L + t] = tmp[t];
-        }
     }
 
     // 单层循环 + 反向合并
-    private static void merge1(int[] array, int L, int M, int R) {
+    private static void merge(int[] array, int L, int M, int R) {
         int c = R - L + 1;
         int[] tmp = new int[c];
         int i = M;
         int j = R;
+        int b1 = L;
+        int b2 = M + 1;
         int k = c - 1;
 
-        while (i >= L && j >= M + 1) {
+        while (i >= b1 && j >= b2) {
             if (array[i] >= array[j]) {
                 tmp[k--] = array[i--];
             } else {
@@ -71,71 +41,9 @@ public class MergeSort {
         // 根据上面循环的结束条件可知两部分都有剩余数据时不会退出
         // 即退出时最多只可能有一个部分还有剩余数据
         // 所以下面的两个循环最多只有一个会生效而不必担心剩余数据追加后会导致数组乱序
-        while (i >= L)
+        while (i >= b1)
             tmp[k--] = array[i--];
-        while (j >= M + 1)
-            tmp[k--] = array[j--];
-
-        for (int t = 0; t < c; t++) {
-            array[L + t] = tmp[t];
-        }
-    }
-
-    // 双层循环 + 正向合并
-    private static void merge2(int[] array, int L, int M, int R) {
-        int c = R - L + 1;
-        int[] tmp = new int[c];
-        int i = L;
-        int j = M + 1;
-        int k = 0;
-
-        while (i <= M && j <= R) {
-            while (i <= M && j <= R && array[i] <= array[j]) {
-                tmp[k++] = array[i++];
-            }
-
-            while (i <= M && j <= R && array[j] <= array[i]) {
-                tmp[k++] = array[j++];
-            }
-        }
-
-        // 根据上面循环的结束条件可知两部分都有剩余数据时不会退出
-        // 即退出时最多只可能有一个部分还有剩余数据
-        // 所以下面的两个循环最多只有一个会生效而不必担心剩余数据追加后会导致数组乱序
-        while (i <= M)
-            tmp[k++] = array[i++];
-        while (j <= R)
-            tmp[k++] = array[j++];
-
-        for (int t = 0; t < c; t++) {
-            array[L + t] = tmp[t];
-        }
-    }
-
-    // 双层循环 + 反向合并
-    private static void merge3(int[] array, int L, int M, int R) {
-        int c = R - L + 1;
-        int[] tmp = new int[c];
-        int i = M;
-        int j = R;
-        int k = c - 1;
-
-        while (i >= L && j >= M + 1) {
-            while (i >= L && j >= M + 1 && array[i] >= array[j]) {
-                tmp[k--] = array[i--];
-            }
-
-            while (i >= L && j >= M + 1 && array[j] >= array[i]) {
-                tmp[k--] = array[j--];
-            }
-        }
-
-        // 根据上面循环的结束条件可知两部分都有剩余数据时不会退出
-        // 即退出时最多只可能有一个部分还有剩余数据
-        // 所以下面的两个循环最多只有一个会生效而不必担心剩余数据追加后会导致数组乱序
-        while (i >= L)
-            tmp[k--] = array[i--];
-        while (j >= M + 1)
+        while (j >= b2)
             tmp[k--] = array[j--];
 
         for (int t = 0; t < c; t++) {

@@ -1,26 +1,32 @@
-package dsa.algorithm.da101_sort;
+package dsa.algorithm.da101_sort.st35;
 
 import java.util.Arrays;
 
-public class SelectSort {
+public class ShellSort2 {
 
     public static void sort(int[] array) {
         int len = array.length;
 
-        // 外层的边界是循环次数的范围：[0，len - 1)
-        // 内层的边界是未排序部分的范围：[i + 1, len)
-        for (int i = 0; i < len - 1; i++) {
+        int gap = len / 2;
+        while (gap > 0) {
+            // gap既是分组步长，也是分组数量
+            // 只对第一个分组排序
+            for (int i = 0; i + gap < len; i = i + gap) {
 
-            int k = i;
+                int v = array[i + gap];
 
-            // 当前元素比最小元素小，则被选为最小元素
-            for (int j = i + 1; j < len; j++) {
-                if (array[j] < array[k]) {
-                    k = j;
+                int j = i; // j + gap < len
+                // 比插入元素大，则后退一步，让出位置
+                while (j >= 0 && array[j] > v) {
+                    array[j + gap] = array[j];
+                    j = j - gap;
                 }
+
+                // 插入元素排到当前元素（不大于插入元素）的后面
+                array[j + gap] = v;
             }
 
-            swap(array, i, k);
+            gap = gap / 2;
         }
     }
 
@@ -114,5 +120,4 @@ public class SelectSort {
             System.out.println(tip + ":" + Arrays.toString(array));
         }
     }
-
 }

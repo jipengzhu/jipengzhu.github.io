@@ -1,44 +1,27 @@
-package dsa.algorithm.da101_sort;
+package dsa.algorithm.da101_sort.st31;
 
 import java.util.Arrays;
 
-public class SelectDualSort {
+public class InsertSort {
 
     public static void sort(int[] array) {
         int len = array.length;
 
-        int L = 0, R = len - 1;
-        while (L < R) {
-            int min = L;
-            int max = R;
-            for (int i = L; i <= R; i++) {
-                if (array[i] < array[min]) {
-                    min = i;
-                }
+        // 外层的边界是循环次数的范围：[0，len - 1)
+        // 内层的边界是已排序部分的范围：[0, i + 1）
+        for (int i = 0; i < len - 1; i++) {
 
-                if (array[i] > array[max]) {
-                    max = i;
-                }
+            int v = array[i + 1];
+
+            int j = i; // j + 1 < len
+            // 当前元素比插入元素大，则后退一步，让出位置
+            while (j >= 0 && array[j] > v) {
+                array[j + 1] = array[j];
+                j--;
             }
 
-            // max等于L时先将L换位后的位置记下来
-            if (max == L) {
-                max = min;
-            }
-
-            swap(array, L, min);
-            swap(array, R, max);
-
-            // // min等于R时先将R换位后的位置记下来
-            // if (min == R) {
-            // min = max;
-            // }
-
-            // swap(array, R, max);
-            // swap(array, L, min);
-
-            L++;
-            R--;
+            // 插入元素排到当前元素（不大于插入元素）的后面
+            array[j + 1] = v;
         }
     }
 

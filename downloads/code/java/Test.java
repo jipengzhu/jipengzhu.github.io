@@ -118,8 +118,6 @@ public class Test {
                 String b71 = "[['1','2','3'],['7','8','9']]";
                 TestUtils.check(a71, b71);
 
-                TestUtils.toLists(a71);
-
                 Integer[] a91 = { 1, 2, 3 };
                 Integer[] b91 = TestUtils.toArray(TestUtils.toList(a91), Integer.class);
 

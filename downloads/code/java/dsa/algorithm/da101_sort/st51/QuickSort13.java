@@ -1,28 +1,61 @@
-package dsa.algorithm.da101_sort;
+package dsa.algorithm.da101_sort.st51;
 
 import java.util.Arrays;
 
-public class BubbleDualSort {
+public class QuickSort13 {
 
     public static void sort(int[] array) {
-        int len = array.length;
+        quickSort(array, 0, array.length - 1);
+    }
 
-        int L = 0, R = len - 1;
-        while (L < R) {
-            for (int i = L; i < R; i++) {
-                if (array[i] > array[i + 1]) {
-                    swap(array, i, i + 1);
-                }
-            }
-            R--;
-
-            for (int i = R; i > L; i--) {
-                if (array[i] < array[i - 1]) {
-                    swap(array, i, i - 1);
-                }
-            }
-            L++;
+    public static void quickSort(int[] array, int L, int R) {
+        if (L >= R) {
+            return;
         }
+
+        int p = partition(array, L, R);
+
+        quickSort(array, L, p - 1);
+        quickSort(array, p + 1, R);
+    }
+
+    private static int partition(int[] array, int L, int R) {
+        // 分割成3个部分，左边小于等于分割数，中间只有分割数一个元素，右边大于等于分割数
+        // 分割数选L位置的数时先从右边开始查找
+        // 分割数选R位置的数时先从左边开始查找
+
+        int i = L;
+        int j = R;
+
+        while (i < j) {
+            // 此时i位置的数是分割数
+            // 从右向左找到第一个小于分割数的元素
+            while (i < j && array[j] >= array[i])
+                j--;
+
+            if (i < j) {
+                // 通过交换操作将小于分割数的放在分割数的左边
+                // 交换后j位置的数是分割数
+                swap(array, i++, j);
+            }
+
+            // 此时j位置的数是分割数
+            // 从左向右找到第一个大于分割数的元素
+            while (i < j && array[i] <= array[j])
+                i++;
+
+            if (i < j) {
+                // 通过交换操作将大于分割数的放在分割数的右边
+                // 交换后i位置的数是分割数
+                swap(array, i, j--);
+            }
+
+        }
+
+        // 获取分割数的位置，此时i = j，可以任选一个
+        int p = i;
+
+        return p;
     }
 
     private static void swap(int[] array, int i, int j) {

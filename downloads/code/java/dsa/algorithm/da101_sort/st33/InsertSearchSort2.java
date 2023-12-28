@@ -1,8 +1,8 @@
-package dsa.algorithm.da101_sort;
+package dsa.algorithm.da101_sort.st33;
 
 import java.util.Arrays;
 
-public class InsertSearchSort {
+public class InsertSearchSort2 {
 
     public static void sort(int[] array) {
         int len = array.length;
@@ -13,8 +13,6 @@ public class InsertSearchSort {
 
             int v = array[i + 1];
             int pos = search(array, 0, i, v);
-            // int pos = search1(array, 0, i, v);
-            // int pos = search2(array, 0, i, v);
 
             int j = i; // j + 1 < len
             while (j >= pos) {
@@ -28,71 +26,24 @@ public class InsertSearchSort {
     }
 
     private static int search(int[] array, int L, int R, int v) {
-        int m = (L + R) / 2;
-
-        if (v < array[m]) {
-            R = m - 1;
-            if (L > R) {
-                // return m;
-                return L; // 此时 L = R + 1 = (m - 1) + 1 = m
-            } else {
-                return search(array, L, R, v);
-            }
-        } else if (v > array[m]) {
-            L = m + 1;
-            if (L > R) {
-                // return m + 1;
-                return L; // 此时 L = m + 1
-            } else {
-                return search(array, L, R, v);
-            }
-        } else {
-            if (L == R) {
-                L = m + 1;
-
-                // return m + 1;
-                return L; // 此时 L = m + 1
-            } else {
-                // 等于的话还得往右边看看还有没有等于的
-                L = m + 1;
-
-                return search(array, L, R, v);
-            }
-        }
-    }
-
-    private static int search1(int[] array, int L, int R, int v) {
         while (L <= R) {
             int m = (L + R) / 2;
             if (v < array[m]) {
-                R = m - 1;
-            } else if (v > array[m]) {
-                L = m + 1;
+                if (L == R) {
+                    return m;
+                } else {
+                    R = m;
+                }
             } else {
                 if (L == R) {
-                    L = m + 1;
-
-                    return L;
+                    return m + 1;
                 } else {
                     L = m + 1;
                 }
             }
         }
 
-        return L;
-    }
-
-    private static int search2(int[] array, int L, int R, int v) {
-        while (L <= R) {
-            int m = (L + R) / 2;
-            if (v < array[m]) {
-                R = m - 1;
-            } else {
-                L = m + 1;
-            }
-        }
-
-        return L;
+        return -1;
     }
 
     private static void swap(int[] array, int i, int j) {

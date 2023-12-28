@@ -1,70 +1,24 @@
-package dsa.algorithm.da101_sort;
+package dsa.algorithm.da101_sort.st11;
 
 import java.util.Arrays;
 
-public class HeapSort {
+public class SelectSort1 {
 
     public static void sort(int[] array) {
-        // genHeapByShiftUp(array);
-        genHeapByShiftDown(array);
-
         int len = array.length;
-        while (len > 1) {
-            swap(array, 0, --len);
-            shiftDown(array, 0, len);
-        }
-    }
 
-    private static void genHeapByShiftUp(int[] arr) {
-        // 第一层是被比较的对象，不需要调整
-        // 因为第一层只有一个根节点，所以第一个不需要调整
-        int len = arr.length;
-        for (int i = 1; i < len; i++) {
-            shiftUp(arr, i);
-        }
-    }
+        // 外层的边界是循环次数的范围：[0，len - 1)
+        // 内层的边界是未排序部分的范围：[i, len)
+        for (int i = 0; i < len - 1; i++) {
 
-    private static void genHeapByShiftDown(int[] arr) {
-        // 最后一层是被比较的对象，不需要调整
-        // 所以是从倒数第二层最右边的结点开始的
-        // 设x为倒数第二层最右边的结点的下标
-        // 则 2 * x + 2 < len
-        // 则 x <= (len - 2) / 2（因为除法为整数除法，所以len为奇数时会等于整数除法的结果）
-        int len = arr.length;
-        for (int i = (len - 2) / 2; i >= 0; i--) {
-            shiftDown(arr, i, len);
-        }
-    }
-
-    public static void shiftUp(int[] arr, int i) {
-        int j = (i - 1) / 2;
-        while (j >= 0) {
-            if (arr[i] > arr[j]) {
-                // 大顶堆，谁大谁在上
-                swap(arr, i, j);
-
-                i = j;
-                j = (i - 1) / 2;
-            } else {
-                break;
+            int min = i;
+            for (int j = i + 1; j < len; j++) {
+                if (array[j] < array[min]) {
+                    min = j;
+                }
             }
-        }
-    }
 
-    public static void shiftDown(int[] arr, int i, int heapSize) {
-        int j = 2 * i + 1;
-        while (j < heapSize) {
-            // 大顶堆，选择左右结点中较大的那一个的下标
-            j = j + 1 < heapSize && arr[j + 1] > arr[j] ? j + 1 : j;
-            if (arr[j] > arr[i]) {
-                // 大顶堆，谁大谁在上
-                swap(arr, j, i);
-
-                i = j;
-                j = 2 * i + 1;
-            } else {
-                break;
-            }
+            swap(array, min, i);
         }
     }
 
@@ -158,4 +112,5 @@ public class HeapSort {
             System.out.println(tip + ":" + Arrays.toString(array));
         }
     }
+
 }

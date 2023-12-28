@@ -1,8 +1,8 @@
-package dsa.algorithm.da101_sort;
+package dsa.algorithm.da101_sort.st11;
 
 import java.util.Arrays;
 
-public class BubbleFlagSort {
+public class SelectSort2 {
 
     public static void sort(int[] array) {
         int len = array.length;
@@ -10,21 +10,15 @@ public class BubbleFlagSort {
         // 外层的边界是循环次数的范围：[0，len - 1)
         // 内层的边界是未排序部分的范围：[0, len - i)
         for (int i = 0; i < len - 1; i++) {
-            boolean flag = true;
 
-            for (int j = 0; j + 1 < len - i; j++) {
-                // 比自己后面的元素大，则交换位置，排到后面去
-                if (array[j] > array[j + 1]) {
-                    swap(array, j, j + 1);
-
-                    flag = false;
+            int max = 0;
+            for (int j = 1; j < len - i; j++) {
+                if (array[j] > array[max]) {
+                    max = j;
                 }
             }
 
-            // 没有发生过交换，代表已经有序了
-            if (flag) {
-                break;
-            }
+            swap(array, max, (len - i) - 1);
         }
     }
 
@@ -118,4 +112,5 @@ public class BubbleFlagSort {
             System.out.println(tip + ":" + Arrays.toString(array));
         }
     }
+
 }

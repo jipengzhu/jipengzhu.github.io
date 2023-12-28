@@ -24,6 +24,9 @@ public class PriorityQueue {
 
         array[i] = v;
 
+        // 如果不存在淘汰，新的值v是直接添加到堆的底部，需要向上调整
+        // 如果存在淘汰，由于是小顶堆，所以需要淘汰的最大值位于堆的底部
+        // 由于新的值v会替换淘汰的最大值的位置，所以新的值v是位于堆的底部，需要向上调整
         shiftUp(array, i);
 
         return true;
@@ -47,6 +50,24 @@ public class PriorityQueue {
         return size;
     }
 
+    public void fillin(int[] array) {
+        for (int v : array) {
+            enqueue(v);
+        }
+    }
+
+    public int[] collect() {
+        // 不能直接使用size，因为size在出队的时候会改变
+        int c = size;
+
+        int[] a = new int[c];
+        for (int i = 0; i < c; i++) {
+            a[i] = dequeue();
+        }
+
+        return a;
+    }
+
     public int[] toArray() {
         // // just for test
         // int[] a = Arrays.copyOf(array, array.length);
@@ -64,25 +85,16 @@ public class PriorityQueue {
         return ret;
     }
 
-    public int[] collect() {
-        // 不能直接使用size，因为size在出队的时候会改变
-        int c = size;
-
-        int[] a = new int[c];
-        for (int i = 0; i < c; i++) {
-            a[i] = dequeue();
-        }
-
-        return a;
-    }
-
     private int indexOfObsolete(int[] arr, int v) {
         int p = -1;
 
         // 小顶堆，淘汰最大的
         int max = v;
-        // 根据堆的特性，不能进行二分查找，即最大的不一定在叶子层
-        for (int i = 0; i < arr.length; i++) {
+        
+        // 由于最大的值没有子结点，所以查找的起始位置为第一个叶子结点
+        // 因为最后一个非叶子结点的下标为 ((size - 1) - 1) / 2 = (size - 2) / 2
+        // 所以第一个叶子结点的下标为 (size - 2) / 2 + 1
+        for (int i = (size - 2) / 2 + 1; i < size; i++) {
             if (arr[i] > max) {
                 max = arr[i];
 
@@ -145,9 +157,8 @@ public class PriorityQueue {
         // int capacity = array.length * 2;
         int capacity = array.length / 2;
         PriorityQueue queue = new PriorityQueue(capacity);
-        for (int v : array) {
-            queue.enqueue(v);
-        }
+
+        queue.fillin(array);
 
         return queue.toArray();
     }

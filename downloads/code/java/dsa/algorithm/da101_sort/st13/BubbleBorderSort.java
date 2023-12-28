@@ -1,27 +1,36 @@
-package dsa.algorithm.da101_sort;
+package dsa.algorithm.da101_sort.st13;
 
 import java.util.Arrays;
 
-public class InsertSort {
+public class BubbleBorderSort {
 
     public static void sort(int[] array) {
         int len = array.length;
 
+        int border = len;
+
         // 外层的边界是循环次数的范围：[0，len - 1)
-        // 内层的边界是已排序部分的范围：[0, i + 1）
+        // 内层的边界是未排序部分的范围：[0, len - i)
         for (int i = 0; i < len - 1; i++) {
+            int last = -1;
 
-            int v = array[i + 1];
+            // 从border开始（包含border）往后都是排好序的了
+            for (int j = 0; j + 1 < border; j++) {
+                // 比自己后面的元素大，则交换位置，排到后面去
+                if (array[j] > array[j + 1]) {
+                    swap(array, j, j + 1);
 
-            int j = i; // j + 1 < len
-            // 当前元素比插入元素大，则后退一步，让出位置
-            while (j >= 0 && array[j] > v) {
-                array[j + 1] = array[j];
-                j--;
+                    last = j;
+                }
             }
 
-            // 插入元素排到当前元素（不大于插入元素）的后面
-            array[j + 1] = v;
+            border = last + 1;
+
+            // 用last < 0来代替flag
+            // flag为true时代表没有发生过交换，说明已经有序了
+            if (last < 0) {
+                break;
+            }
         }
     }
 

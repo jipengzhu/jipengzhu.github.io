@@ -1,43 +1,35 @@
-package dsa.algorithm.da101_sort;
+package dsa.algorithm.da101_sort.st35;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-public class BucketSort {
+public class ShellSort1 {
 
     public static void sort(int[] array) {
-        int min = Integer.MAX_VALUE;
-        int max = Integer.MIN_VALUE;
-        for (int i = 0; i < array.length; i++) {
-            int v = array[i];
-            if (v < min) {
-                min = v;
-            }
-            if (v > max) {
-                max = v;
-            }
-        }
-        float dis = max - min + 1;
+        int len = array.length;
 
-        int bucketCount = 6;// 桶数量
-        List<List<Integer>> lists = new ArrayList<>();
-        for (int i = 0; i < bucketCount; i++) {
-            lists.add(new ArrayList<>());
-        }
+        int gap = len / 2;
+        while (gap > 0) {
+            // gap既是分组步长，也是分组数量
+            // 对所有的分组排序
+            for (int k = 0; k < gap; k++) {
+                // k是第K组（从0开始编号）
+                for (int i = k; i + gap < len; i = i + gap) {
 
-        for (int i = 0; i < array.length; i++) {
-            int v = array[i];
-            int bucketIndex = (int) ((v - min) / dis * bucketCount);
-            lists.get(bucketIndex).add(v);
-        }
+                    int v = array[i + gap];
 
-        int k = 0;
-        for (List<Integer> list : lists) {
-            list.sort(null);
-            for (Integer v : list) {
-                array[k++] = v;
+                    int j = i; // j + gap < len
+                    // 比插入元素大，则后退一步，让出位置
+                    while (j >= 0 && array[j] > v) {
+                        array[j + gap] = array[j];
+                        j = j - gap;
+                    }
+
+                    // 插入元素排到当前元素（不大于插入元素）的后面
+                    array[j + gap] = v;
+                }
             }
+
+            gap = gap / 2;
         }
     }
 

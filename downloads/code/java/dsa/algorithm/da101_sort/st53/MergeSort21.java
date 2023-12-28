@@ -1,36 +1,55 @@
-package dsa.algorithm.da101_sort;
+package dsa.algorithm.da101_sort.st53;
 
 import java.util.Arrays;
 
-public class BubbleBorderSort {
+public class MergeSort21 {
 
     public static void sort(int[] array) {
-        int len = array.length;
+        mergeSort(array, 0, array.length - 1);
+    }
 
-        int border = len;
+    private static void mergeSort(int[] array, int L, int R) {
+        if (L >= R) {
+            return;
+        }
 
-        // 外层的边界是循环次数的范围：[0，len - 1)
-        // 内层的边界是未排序部分的范围：[0, len - i)
-        for (int i = 0; i < len - 1; i++) {
-            int last = -1;
+        int M = L + (R - L) / 2;
+        mergeSort(array, L, M);
+        mergeSort(array, M + 1, R);
 
-            // 从border开始（包含border）往后都是排好序的了
-            for (int j = 0; j + 1 < border; j++) {
-                // 比自己后面的元素大，则交换位置，排到后面去
-                if (array[j] > array[j + 1]) {
-                    swap(array, j, j + 1);
+        merge(array, L, M, R);
+    }
 
-                    last = j;
-                }
+    // 双层循环 + 正向合并
+    private static void merge(int[] array, int L, int M, int R) {
+        int c = R - L + 1;
+        int[] tmp = new int[c];
+        int i = L;
+        int j = M + 1;
+        int e1 = M;
+        int e2 = R;
+        int k = 0;
+
+        while (i <= e1 && j <= e2) {
+            while (i <= e1 && j <= e2 && array[i] <= array[j]) {
+                tmp[k++] = array[i++];
             }
 
-            border = last + 1;
-
-            // 用last < 0来代替flag
-            // flag为true时代表没有发生过交换，说明已经有序了
-            if (last < 0) {
-                break;
+            while (i <= e1 && j <= e2 && array[j] <= array[i]) {
+                tmp[k++] = array[j++];
             }
+        }
+
+        // 根据上面循环的结束条件可知两部分都有剩余数据时不会退出
+        // 即退出时最多只可能有一个部分还有剩余数据
+        // 所以下面的两个循环最多只有一个会生效而不必担心剩余数据追加后会导致数组乱序
+        while (i <= e1)
+            tmp[k++] = array[i++];
+        while (j <= e2)
+            tmp[k++] = array[j++];
+
+        for (int t = 0; t < c; t++) {
+            array[L + t] = tmp[t];
         }
     }
 

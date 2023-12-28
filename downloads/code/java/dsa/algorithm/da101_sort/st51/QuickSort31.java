@@ -1,74 +1,14 @@
-package dsa.algorithm.da101_sort;
+package dsa.algorithm.da101_sort.st51;
 
 import java.util.Arrays;
 
-public class QuickSort3 {
+public class QuickSort31 {
 
     public static void sort(int[] array) {
         quickSort(array, 0, array.length - 1);
-        // quickSort1(array, 0, array.length - 1);
     }
 
     public static void quickSort(int[] array, int L, int R) {
-        if (L >= R) {
-            return;
-        }
-
-        // 分割成2个部分，左边小于等于分割数，右边大于等于分割数
-        // 分割数可以选任意位置的数
-
-        int i = L;
-        int j = R;
-
-        int p = (L + R) / 2;
-        int v = array[p];
-
-        while (i <= j) {
-            // 向右找到第一个等于或者大于分割数的元素
-            // 等于时也要交换是为了避免没有发生交换时也能交换一次
-            // 从而能够分成两部分而不是一部分来避免重复递归（参考下面的quickSort1方法）
-            while (i <= j && array[i] < v)
-                i++;
-
-            // 向左找到第一个等于或者小于分割数的元素
-            // 等于时也要交换是为了避免没有发生交换时也能交换一次
-            // 从而能够分成两部分而不是一部分来避免重复递归（参考下面的quickSort1方法）
-            while (i <= j && array[j] > v)
-                j--;
-
-            if (i <= j) {
-                // i = j 时是自我交换，不影响结果
-                swap(array, i++, j--);
-            }
-        }
-
-        // i位置左边的都小于等于分割数
-        // j位置右边的都大于等于分割数
-        // 结束时 i - j = 1 或者 i - j = 2
-        // --- 证明1 ---
-        // i - j = 1时，即i = j + 1 或 i - 1 = j
-        // 则左部分的右边界为 i - 1 = i - (i - j) = j
-        // 则右部分的左边界为 j + 1 = j + (i - j) = i
-        // --- 证明2 ---
-        // i - j = 2时，即i - 1 = j + 1
-        // 令 k = i - 1 = j + 1
-        // 因为i位置左边的都小于等于分割数，且k = i - 1小于i
-        // 所以k位置的数小于等于分割数
-        // 因为j位置右边的都大于等于分割数，则k = j + 1大于j
-        // 所以k位置的数大于等于分割数
-        // 由上可知k位置的数小于等于分割数且k位置的数大于等于分割数
-        // 所以k位置的数只能等于分割数
-        // 因此分割时可以不需要包含k位置的数（备注：k = i - 1 = j + 1）
-        // 则左部分的右边界为 i - 2 = i - (i - j) = j
-        // 则右部分的左边界为 j + 2 = j + (i - j) = i
-        // --- 总结 ---
-        // 综上所述，左部分的右边界为j，右部分的左边界为i
-
-        quickSort(array, L, j);
-        quickSort(array, i, R);
-    }
-
-    public static void quickSort1(int[] array, int L, int R) {
         if (L >= R) {
             return;
         }
@@ -92,6 +32,8 @@ public class QuickSort3 {
                 j--;
 
             if (i <= j) {
+                // 通过交换操作将大于等于分割数的放在分割数的右边
+                // 通过交换操作将小于等于分割数的放在分割数的左边
                 // i = j 时是自我交换，不影响结果
                 swap(array, i++, j--);
             }
@@ -119,24 +61,22 @@ public class QuickSort3 {
         // --- 总结 ---
         // 综上所述，左部分的右边界为j，右部分的左边界为i
 
-        // 需要判断一下避免重复递归
-        if (j == R) {
-            // 如果 j == R，说明j没动
-            // 因为i > j，则 i = j + 1 = R + 1，说明i没有搜索到
-            // j没动和i没搜到说明待排序的数都小于等于分割数
-            // quickSort(array, L, j); // 会重复递归
-            // quickSort(array, i, R); // 无效的边界
+        if (i > R) {
+            // 因为循环结束后i左边（不包含）的都小于等于分割数
+            // 所以只分为了一个区间且里面的数都小于等于分割数
+            // 即分割数就是最大值
+
+            // quickSort(array, L, j); // 重复的区间（会导致重复递归调用）
+            // quickSort(array, i, R); // 无效的区间
 
             swap(array, p, j--);
-        }
+        } else if (j < L) {
+            // 循环结束后j右边（不包含）的都大于等于分割数
+            // 所以只分为了一个区间且里面的数都大于等于分割数
+            // 即分割数就是最小值
 
-        // 需要判断一下避免重复递归
-        if (i == L) {
-            // 如果 i == L，说明i没动
-            // 因为 j < i，则 j = i - 1 = L - 1，说明j没有搜索到
-            // i没动和j没搜到说明待排序的数都大于等于分割数
-            // quickSort(array, L, j); // 无效的边界
-            // quickSort(array, i, R); // 会重复递归
+            // quickSort(array, L, j); // 重复的区间（会导致重复递归调用）
+            // quickSort(array, i, R); // 无效的区间
 
             swap(array, i++, p);
         }
