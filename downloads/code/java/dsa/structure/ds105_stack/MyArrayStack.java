@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class MyArrayStack {
     private int capacity;
-    private int top = 0;
+    private int top = -1;
     private String[] table;
 
     public MyArrayStack(int capacity) {
@@ -13,11 +13,11 @@ public class MyArrayStack {
     }
 
     public boolean isEmpty() {
-        return top == 0;
+        return top == -1;
     }
 
     public boolean isFull() {
-        return top == capacity;
+        return top == capacity - 1;
     }
 
     public boolean push(String s) {
@@ -25,7 +25,7 @@ public class MyArrayStack {
             return false;
         }
 
-        table[top] = s;
+        table[top + 1] = s;
         top++;
 
         return true;
@@ -36,8 +36,8 @@ public class MyArrayStack {
             return null;
         }
 
-        String v = table[top - 1];
-        table[top - 1] = null;
+        String v = table[top];
+        table[top] = null;
         top--;
 
         return v;
