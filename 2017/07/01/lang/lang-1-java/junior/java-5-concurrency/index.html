@@ -28,7 +28,7 @@
 <meta property="og:description" content="java并发篇">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T17:05:00.000Z">
-<meta property="article:modified_time" content="2024-01-02T11:35:08.358Z">
+<meta property="article:modified_time" content="2024-01-03T11:32:27.669Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-02 19:35:08" itemprop="dateModified" datetime="2024-01-02T19:35:08+08:00">2024-01-02</time>
+                <time title="修改时间：2024-01-03 19:32:27" itemprop="dateModified" datetime="2024-01-03T19:32:27+08:00">2024-01-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1293,6 +1293,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33591903/article/details/108422098">FutureTask为什么支持传递给线程</a></li>
 </ul>
 </blockquote>
+<p>因为FutureTask实现了RunnableFuture接口，而RunnableFuture接口继承了Runnable接口，所以FutureTask支持传递给线程</p>
 <h1 id="Executor"><a href="#Executor" class="headerlink" title="Executor"></a>Executor</h1><h2 id="Basic-7"><a href="#Basic-7" class="headerlink" title="Basic"></a>Basic</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tongdanping/article/details/79604637">Executor框架入门</a></li>
@@ -1402,14 +1403,19 @@
 </ul>
 </blockquote>
 <ul>
-<li>shutdown：线程池的状态变为SHUTDOWN，不再接受新任务了，但是队列里的任务会执行完毕</li>
-<li>shutdownNow：线程池的状态变为STOP，会终止当前正在运行的任务，并停止处理排队的任务，返回等待执行的任务列表</li>
+<li>shutdown：线程池的状态变为SHUTDOWN，不再接受新任务了，不会终止当前正在运行的任务，还会继续处理队列里剩余的任务</li>
+<li>shutdownNow：线程池的状态变为STOP，不再接受新任务了，会终止当前正在运行的任务，而且不会处理队列里剩余的任务并返回还未处理完成的任务列表</li>
 </ul>
 <h4 id="shutdown和shutdownNow的区别"><a href="#shutdown和shutdownNow的区别" class="headerlink" title="shutdown和shutdownNow的区别"></a>shutdown和shutdownNow的区别</h4><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaojin21cen/article/details/81778651">shutdown和shutdownNow的区别</a></li>
 </ul>
 </blockquote>
+<ul>
+<li>shutdown和shutdownNow之后都不会接收新任务了</li>
+<li>shutdown不会终止当前正在运行的任务，shutdownNow会终止当前正在运行的任务</li>
+<li>shutdown还会继续处理队列里剩余的任务，shutdownNow不会处理队列里剩余的任务</li>
+</ul>
 <h2 id="Usage-2"><a href="#Usage-2" class="headerlink" title="Usage"></a>Usage</h2><h3 id="Executors"><a href="#Executors" class="headerlink" title="Executors"></a>Executors</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u022812849/article/details/109097171">Executors入门</a></li>
@@ -1453,6 +1459,8 @@
 <li>Executors.newFixedThreadPool：队列容量无限大，容易导致内存耗尽引发OOM</li>
 <li>Executors.newCachedThreadPool：线程数量无限大，容易导致内存耗尽引发OOM</li>
 <li>Executors.newScheduledThreadPool：线程数量无限大，容易导致内存耗尽引发OOM</li>
+<li>Executors.newSingleThreadScheduledExecutor：线程数量无限大，容易导致内存耗尽引发OOM</li>
+<li>Executors.newWorkStealingPool：队列容量无限大，容易导致内存耗尽引发OOM</li>
 </ul>
 <h3 id="ExecutorService"><a href="#ExecutorService" class="headerlink" title="ExecutorService"></a>ExecutorService</h3><blockquote>
 <ul>
@@ -1472,8 +1480,8 @@
 <p>RUNNING、SHUTDOWN、STOP、TIDYING、TERMINATED</p>
 <ul>
 <li>RUNNING（运行）：创建线程池后的初始状态</li>
-<li>SHUTDOWN（关闭）：执行shutdown()后，不接收新任务，但会处理已排队的任务和当前任务</li>
-<li>STOP（停止）：执行shutdownNow()后，不接收新任务，不处理已排队的任务并中断当前任务</li>
+<li>SHUTDOWN（关闭）：执行shutdown()后，不接收新任务，但会继续处理当前任务和队列里剩余的任务</li>
+<li>STOP（停止）：执行shutdownNow()后，不接收新任务，且会中断当前任务和丢弃并返回队列里剩余的任务</li>
 <li>TIDYING（清扫）：线程池中的任务队列为空后</li>
 <li>TERMINATED（终结）：执行terminated()后</li>
 </ul>
@@ -1499,8 +1507,11 @@
 </blockquote>
 <h3 id="ForkJoinPool"><a href="#ForkJoinPool" class="headerlink" title="ForkJoinPool"></a>ForkJoinPool</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41432730/article/details/121308729">ForkJoinPool详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42039228/article/details/123206215">ForkJoinPool入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41432730/article/details/121308729">ForkJoinPool进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37542889/article/details/92640903">ForkJoinPool详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Bof_jangle/article/details/108297499">ForkJoinPool异常处理</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37173810/article/details/109635794">ForkJoinPool和ThreadPoolExecutor对比</a></li>
 </ul>
 </blockquote>
 <h3 id="Timer"><a href="#Timer" class="headerlink" title="Timer"></a>Timer</h3><blockquote>
@@ -1510,6 +1521,13 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_21539375/article/details/124049553">定时器实现方案入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42956653/article/details/126237909">定时器实现方案进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_52622200/article/details/123381196">定时器实现方案详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zalan01408980/article/details/124837321">延时任务和定时任务的区别入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42806574/article/details/102733285">延时任务和定时任务的区别进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45511733/article/details/107575264">延时任务和定时任务的区别详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/crazy_xieyi/article/details/128584144">延时任务和定时任务之优先级队列入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Aqua_yyds/article/details/133629517">延时任务和定时任务之优先级队列详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/justlpf/article/details/130205485">延时任务和定时任务之时间轮入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/crazymakercircle/article/details/128205683">延时任务和定时任务之时间轮详解</a></li>
 </ul>
 </blockquote>
 <h2 id="Question-4"><a href="#Question-4" class="headerlink" title="Question"></a>Question</h2><h3 id="线程池是如何保证核心线程不被销毁的"><a href="#线程池是如何保证核心线程不被销毁的" class="headerlink" title="线程池是如何保证核心线程不被销毁的"></a>线程池是如何保证核心线程不被销毁的</h3><blockquote>
@@ -1517,6 +1535,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/smile_from_2015/article/details/105259789">线程池是如何保证核心线程不被销毁的</a></li>
 </ul>
 </blockquote>
+<p>线程里面是无限循环，任务执行完后不会结束，而是继续去队列里面获取任务，如果没获取到任务，就会被队列阻塞阻塞直到有新的任务可以获取</p>
 <h1 id="Cooperation"><a href="#Cooperation" class="headerlink" title="Cooperation"></a>Cooperation</h1><h2 id="Communication"><a href="#Communication" class="headerlink" title="Communication"></a>Communication</h2><p>线程间通信（Communication）是线程间协作（Cooperation）的基础</p>
 <h3 id="线程通信机制详解"><a href="#线程通信机制详解" class="headerlink" title="线程通信机制详解"></a>线程通信机制详解</h3><blockquote>
 <ul>
