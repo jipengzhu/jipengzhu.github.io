@@ -4,7 +4,7 @@ public class Path {
     /**
      * 最短路径问题之Dijkstra算法（贪心算法）
      */
-    public static int Dijkstra(int[][] graph) {
+    public static int dijkstra(int[][] graph) {
         int n = graph.length;
         int s = 0;
         int t = n - 1;
@@ -50,7 +50,7 @@ public class Path {
     /**
      * 最短路径问题之Floyd算法（动态规划）
      */
-    public static int Floyd(int[][] graph) {
+    public static int floyd(int[][] graph) {
         int n = graph.length;
         int s = 0;
         int t = n - 1;
@@ -83,7 +83,7 @@ public class Path {
     /**
      * 旅行商问题（回溯算法）
      */
-    public static int[] Tps(int[][] graph) {
+    public static int[] tps(int[][] graph) {
 
         int n = graph.length;
 

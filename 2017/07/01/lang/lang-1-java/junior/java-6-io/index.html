@@ -28,7 +28,7 @@
 <meta property="og:description" content="java读写篇">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T17:06:00.000Z">
-<meta property="article:modified_time" content="2024-01-03T11:32:27.670Z">
+<meta property="article:modified_time" content="2024-01-05T07:56:42.238Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-03 19:32:27" itemprop="dateModified" datetime="2024-01-03T19:32:27+08:00">2024-01-03</time>
+                <time title="修改时间：2024-01-05 15:56:42" itemprop="dateModified" datetime="2024-01-05T15:56:42+08:00">2024-01-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -271,7 +271,14 @@
 <li>转换：InputStreamReader、OutputStreamWriter</li>
 <li>组合：SequenceInputStream</li>
 </ul>
-<h2 id="IO类的体系"><a href="#IO类的体系" class="headerlink" title="IO类的体系"></a>IO类的体系</h2><ul>
+<h2 id="IO类的体系"><a href="#IO类的体系" class="headerlink" title="IO类的体系"></a>IO类的体系</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lili13897741554/article/details/82078130">FilterInputStream和FilterOutputStream的作用之装饰器模式</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/57094582">BufferedReader为什么不继承FilterReader</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43767015/article/details/120215398">InputStreamReader和OutputStreamWriter的作用之适配器模式</a></li>
+</ul>
+</blockquote>
+<ul>
 <li>InputStream<ul>
 <li>ByteArrayInputStream：节点流，操作内存</li>
 <li>FileInputStream：节点流，操作文件</li>
@@ -369,12 +376,12 @@
 <li>AIO（Asynchronous IO）：异步非阻塞IO</li>
 </ul>
 <h4 id="BIO和NIO的区别"><a href="#BIO和NIO的区别" class="headerlink" title="BIO和NIO的区别"></a>BIO和NIO的区别</h4><ul>
-<li>BIO是面向流（Stream Oriented）的，NIO是面向缓冲区（Buffer Oriented）的</li>
 <li>BIO的操作是阻塞的，NIO的操作是非阻塞的</li>
+<li>BIO是面向流（Stream Oriented）的，NIO是面向缓冲区（Buffer Oriented）的</li>
 <li>BIO一次只能操作一个数据源，NIO一次可以操作多个数据源</li>
 </ul>
 <h4 id="Stream和Channel的区别"><a href="#Stream和Channel的区别" class="headerlink" title="Stream和Channel的区别"></a>Stream和Channel的区别</h4><ul>
-<li>Stream是单向的，Channel是双向的</li>
+<li>Stream是单向的（只能读或者写），Channel是双向的（既能读又能写）</li>
 </ul>
 <h3 id="Unix的IO模型分类"><a href="#Unix的IO模型分类" class="headerlink" title="Unix的IO模型分类"></a>Unix的IO模型分类</h3><blockquote>
 <ul>
@@ -394,9 +401,28 @@
 <h2 id="IO多路复用"><a href="#IO多路复用" class="headerlink" title="IO多路复用"></a>IO多路复用</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34827674/article/details/115619261">IO多路复用详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/daocaokafei/article/details/118282087">IO多路复用原理</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/daocaokafei/article/details/118282087">IO多路复用之select、poll和epoll详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wteruiycbqqvwt/article/details/90299610">IO多路复用之select、poll和epoll的区别</a></li>
 </ul>
 </blockquote>
+<ul>
+<li>select<ul>
+<li>文件描述符个数最多只能有1024个，数量少</li>
+<li>监听事件时每次都需要将所有的文件描述符拷贝到内核，开销大</li>
+<li>查阅事件时每次都需要遍历所有的文件描述符，开销大</li>
+</ul>
+</li>
+<li>poll<ul>
+<li>解决了文件描述符个数最多只能有1024个的限制</li>
+</ul>
+</li>
+<li>epoll<ul>
+<li>解决了文件描述符个数最多只能有1024个的限制</li>
+<li>监听事件时不需要将所有的文件描述符拷贝到内核</li>
+<li>查阅事件时不需要遍历所有的文件描述符</li>
+</ul>
+</li>
+</ul>
 <h3 id="C10K"><a href="#C10K" class="headerlink" title="C10K"></a>C10K</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chinawangfei/article/details/102780959">C10K详解</a></li>
@@ -407,7 +433,18 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lihao21/article/details/67631516">IO多路复用之epoll的水平触发与边缘触发</a></li>
 </ul>
 </blockquote>
-<p>水平触发：不断的触发epoll_wait回调，直到内核缓冲区数据被read函数读完才结束<br>边缘触发：只触发一次epoll_wait回调，需要程序自己保证将内核缓冲区的数据读取完</p>
+<ul>
+<li>epoll_create：创建一个epoll句柄</li>
+<li>epoll_ctl：注册要监听的事件</li>
+<li>epoll_wait：等待事件触发后处理</li>
+</ul>
+<blockquote>
+<p>ps：select和poll都只提供了一个函数，而epoll提供了三个函数</p>
+</blockquote>
+<ul>
+<li>水平触发：不断的触发epoll_wait回调，直到内核缓冲区数据被read函数读完才结束</li>
+<li>边缘触发：只触发一次epoll_wait回调，需要程序自己保证将内核缓冲区的数据读取完</li>
+</ul>
 <p>select和poll调用只支持水平触发，epoll默认是水平触发</p>
 <blockquote>
 <p>边缘（edge）触发类似于电平的跳变（边沿上升和边沿下降），一般和非阻塞 I&#x2F;O 搭配使用</p>
@@ -417,13 +454,31 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34827674/article/details/116175772">Reactor和Proactor详解</a></li>
 </ul>
 </blockquote>
+<ul>
+<li>Reactor：同步非阻塞IO</li>
+<li>Proactor：异步非阻塞IO</li>
+</ul>
 <p>Reactor的核心如下</p>
 <ul>
 <li>Dispatcher：事件分发器</li>
 <li>Acceptor：连接事件处理器</li>
 <li>Handler：读写事件处理器</li>
+<li>Processor：业务逻辑处理器</li>
 </ul>
-<p>IO并发模型</p>
+<blockquote>
+<p>ps：Handler和Processor可以在同一个线程里面，也可以在不同的线程里面</p>
+</blockquote>
+<p>并发IO的实现方案</p>
+<ul>
+<li>单进程单线程</li>
+<li>单进程多线程</li>
+<li>多进程单线程</li>
+<li>多进程多线程</li>
+</ul>
+<blockquote>
+<p>ps：单进程单线程需要使用 <code>IO多路复用</code> 和 <code>事件循环（EventLoop）</code> 来实现并发IO</p>
+</blockquote>
+<p>并发IO的处理流程</p>
 <ul>
 <li>流程<ul>
 <li>绑定地址 bind</li>
@@ -462,9 +517,9 @@
 </ul>
 </blockquote>
 <ul>
-<li>装饰器模式</li>
-<li>适配器模式</li>
-<li>观察者模式</li>
+<li>装饰器模式：FilterInputStream和FilterOutputStream</li>
+<li>适配器模式：InputStreamReader和OutputStreamWriter</li>
+<li>观察者模式：WatchService和Watchable</li>
 </ul>
 <h1 id="BIO"><a href="#BIO" class="headerlink" title="BIO"></a>BIO</h1><blockquote>
 <ul>
