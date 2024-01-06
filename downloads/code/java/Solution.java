@@ -1,72 +1,41 @@
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class Solution {
-    public int[] tps(int[][] graph) {
-        int n = graph.length;
+    public List<List<Integer>> permute(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return new ArrayList<>();
+        }
 
-        int[] path = new int[n + 1];
-        int[] minCost = { Integer.MAX_VALUE };
+        Set<Integer> used = new HashSet<>();
+        int[] path = new int[nums.length];
+        List<List<Integer>> result = new ArrayList<>();
 
-        boolean[] visited = new boolean[n];
-        int[] trail = new int[n];
+        backtrace(nums, 0, used, path, result);
 
-        int start = 0;
-
-        visited[start] = true;
-        trail[0] = start;
-        path[n] = start;
-
-        dfs(graph, start, 0, minCost, 1, n, visited, trail, path);
-
-        // int val = 0;
-        // for (int i = 0; i < ans.length - 1; i++) {
-        // val += graph[ans[i]][ans[i + 1]];
-        // }
-        // System.out.println(val);
-        // System.out.println(minCost[0]);
-        // System.out.println(val == minCost[0]);
-
-        return path;
+        return result;
     }
 
-    /**
-     * 
-     * @param graph
-     * @param v       当前顶点序号
-     * @param curCost 到达当前顶点时的开销
-     * @param minCost 回到起点时的最小开销
-     * @param k       当前是第几个顶点（从1开始数）
-     * @param n       总共有多少个顶点
-     * @param visited 记录结点的访问状态
-     * @param trail   记录结点的前进轨迹
-     * @param path    记录最终的结果路径
-     */
-    private void dfs(int[][] graph, int v, int curCost, int[] minCost, int k, int n, boolean[] visited,
-            int[] trail, int[] path) {
-        // 当前开销已经比最小值大了，需要进行剪枝
-        if (curCost > minCost[0]) {
-            return;
-        }
-
-        if (k == n) {
-            int start = 0;
-            if (curCost + graph[v][start] < minCost[0]) {
-                minCost[0] = curCost + graph[v][start];
-
-                int index = 0;
-                for (int t : trail) {
-                    path[index++] = t;
-                }
+    private void backtrace(int[] nums, int i, Set<Integer> used, int[] path, List<List<Integer>> result) {
+        if (i == nums.length) {
+            List<Integer> list = new ArrayList<>();
+            for (int v : path) {
+                list.add(v);
             }
+            result.add(list);
 
             return;
         }
 
-        for (int i = 0; i < n; i++) {
-            if (!visited[i]) {
-                trail[k] = i;
+        for (int v : nums) {
+            if (!used.contains(v)) {
+                path[i] = v;
 
-                visited[i] = true;
-                dfs(graph, i, curCost + graph[v][i], minCost, k + 1, n, visited, trail, path);
-                visited[i] = false; // 回溯时撤销选择
+                used.add(v);
+                backtrace(nums, i + 1, used, path, result);
+                used.remove(v);
             }
         }
     }
@@ -81,17 +50,67 @@ class TestMain {
     public static class TestCase {
 
         public static boolean testCase1() {
-            int[][] graph = {
-                    { 0, 2, 6, 5 },
-                    { 2, 0, 4, 4 },
-                    { 6, 4, 0, 2 },
-                    { 5, 4, 2, 0 }
+            int[] nums = { 1, 2, 3 };
+
+            List<List<Integer>> result = new Solution().permute(nums);
+            Integer[][] expect = {
+                    { 1, 2, 3 },
+                    { 1, 3, 2 },
+                    { 2, 1, 3 },
+                    { 2, 3, 1 },
+                    { 3, 1, 2 },
+                    { 3, 2, 1 }
             };
 
-            int[] result = new Solution().tps(graph);
-            int[] expect = { 0, 1, 2, 3, 0 };
+            return TestUtils.check(result, expect, Integer.class);
+        }
 
-            return TestUtils.check(result, expect);
+        public static boolean testCase2() {
+            int[] nums = { 0, 1 };
+
+            List<List<Integer>> result = new Solution().permute(nums);
+            Integer[][] expect = {
+                    { 0, 1 },
+                    { 1, 0 }
+            };
+
+            return TestUtils.check(result, expect, Integer.class);
+        }
+
+        public static boolean testCase3() {
+            int[] nums = { 1 };
+
+            List<List<Integer>> result = new Solution().permute(nums);
+            Integer[][] expect = {
+                    { 1 }
+            };
+
+            return TestUtils.check(result, expect, Integer.class);
+        }
+
+        public static boolean testCase4() {
+            int[] nums = {};
+
+            List<List<Integer>> result = new Solution().permute(nums);
+            Integer[][] expect = {};
+
+            return TestUtils.check(result, expect, Integer.class);
+        }
+
+        public static boolean testCase5() {
+            int[] nums = { 0, -1, 1 };
+
+            List<List<Integer>> result = new Solution().permute(nums);
+            Integer[][] expect = {
+                    { 0, -1, 1 },
+                    { 0, 1, -1 },
+                    { -1, 0, 1 },
+                    { -1, 1, 0 },
+                    { 1, 0, -1 },
+                    { 1, -1, 0 }
+            };
+
+            return TestUtils.check(result, expect, Integer.class);
         }
     }
 
