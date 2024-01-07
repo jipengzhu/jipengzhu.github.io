@@ -62,7 +62,7 @@ class TestMain {
                     { 3, 2, 1 }
             };
 
-            return TestUtils.check(result, expect, Integer.class);
+            return TestUtils.check(result, expect);
         }
 
         public static boolean testCase2() {
@@ -74,7 +74,7 @@ class TestMain {
                     { 1, 0 }
             };
 
-            return TestUtils.check(result, expect, Integer.class);
+            return TestUtils.check(result, expect);
         }
 
         public static boolean testCase3() {
@@ -85,7 +85,7 @@ class TestMain {
                     { 1 }
             };
 
-            return TestUtils.check(result, expect, Integer.class);
+            return TestUtils.check(result, expect);
         }
 
         public static boolean testCase4() {
@@ -94,7 +94,7 @@ class TestMain {
             List<List<Integer>> result = new Solution().permute(nums);
             Integer[][] expect = {};
 
-            return TestUtils.check(result, expect, Integer.class);
+            return TestUtils.check(result, expect);
         }
 
         public static boolean testCase5() {
@@ -110,13 +110,15 @@ class TestMain {
                     { 1, -1, 0 }
             };
 
-            return TestUtils.check(result, expect, Integer.class);
+            return TestUtils.check(result, expect);
         }
     }
 
     public static class TestUtils {
 
         public static boolean check(Object result, Object expect) {
+            result = normalizeObject(result);
+            expect = normalizeObject(expect);
             boolean ok = java.util.Objects.deepEquals(result, expect);
             printCheck(toString(result), toString(expect), ok);
             return ok;
@@ -129,12 +131,17 @@ class TestMain {
             return ok;
         }
 
-        public static <T> boolean check(java.util.List<T> result, T[] expect, Class<T> clazz) {
-            return check(toArray(result, clazz), expect);
-        }
+        private static Object normalizeObject(Object o) {
+            if (o instanceof java.util.List) {
+                java.util.List<?> list = (java.util.List<?>) o;
+                if (list != null && !list.isEmpty() && list.get(0) instanceof java.util.List) {
+                    o = toArrays(list);
+                } else {
+                    o = toArray(list);
+                }
+            }
 
-        public static <T> boolean check(java.util.List<java.util.List<T>> result, T[][] expect, Class<T> clazz) {
-            return check(toArrays(result, clazz), expect);
+            return o;
         }
 
         private static String toString(Object o) {
@@ -210,6 +217,29 @@ class TestMain {
                     }
                 }
             }
+        }
+
+        public static Object[] toArray(Object o) {
+            java.util.List<?> list = (java.util.List<?>) o;
+            if (list == null || list.isEmpty()) {
+                return new Object[0];
+            }
+
+            return list.toArray();
+        }
+
+        public static Object[][] toArrays(Object o) {
+            java.util.List<?> list = (java.util.List<?>) o;
+            if (list == null || list.isEmpty()) {
+                return new Object[0][0];
+            }
+
+            Object[][] arrays = new Object[list.size()][];
+            for (int i = 0; i < list.size(); i++) {
+                arrays[i] = toArray(list.get(i));
+            }
+
+            return arrays;
         }
 
         @SuppressWarnings("unchecked")
