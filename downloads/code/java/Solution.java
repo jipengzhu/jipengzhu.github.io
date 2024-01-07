@@ -1,41 +1,68 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 public class Solution {
-    public List<List<Integer>> permute(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return new ArrayList<>();
+    public boolean exist(char[][] board, String word) {
+        if (word == null || word.isEmpty()) {
+            return false;
         }
 
-        Set<Integer> used = new HashSet<>();
-        int[] path = new int[nums.length];
-        List<List<Integer>> result = new ArrayList<>();
+        int rows = board.length;
+        int cols = board[0].length;
 
-        backtrace(nums, 0, used, path, result);
+        boolean[][] visited = new boolean[rows][cols];
 
-        return result;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (board[i][j] == word.charAt(0)) {
+                    visited[i][j] = true;
+
+                    boolean[] result = { false };
+                    backtrace(board, word, 1, i, j, visited, result);
+
+                    visited[i][j] = false;
+
+                    if (result[0]) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
-    private void backtrace(int[] nums, int i, Set<Integer> used, int[] path, List<List<Integer>> result) {
-        if (i == nums.length) {
-            List<Integer> list = new ArrayList<>();
-            for (int v : path) {
-                list.add(v);
-            }
-            result.add(list);
+    private void backtrace(char[][] board, String word, int i, int x, int y, boolean[][] visited, boolean[] result) {
+        if (result[0]) {
+            return;
+        }
+
+        if (i == word.length()) {
+            result[0] = true;
 
             return;
         }
 
-        for (int v : nums) {
-            if (!used.contains(v)) {
-                path[i] = v;
+        int rows = board.length;
+        int cols = board[0].length;
 
-                used.add(v);
-                backtrace(nums, i + 1, used, path, result);
-                used.remove(v);
+        int[][] points = {
+                { x, y - 1 }, { x - 1, y }, { x, y + 1 }, { x + 1, y }
+        };
+
+        for (int[] point : points) {
+            x = point[0];
+            y = point[1];
+
+            if (x < 0 || x >= rows || y < 0 || y >= cols) {
+                continue;
+            }
+
+            if (board[x][y] != word.charAt(i)) {
+                continue;
+            }
+
+            if (!visited[x][y]) {
+                visited[x][y] = true;
+                backtrace(board, word, i + 1, x, y, visited, result);
+                visited[x][y] = false;
             }
         }
     }
@@ -50,65 +77,43 @@ class TestMain {
     public static class TestCase {
 
         public static boolean testCase1() {
-            int[] nums = { 1, 2, 3 };
-
-            List<List<Integer>> result = new Solution().permute(nums);
-            Integer[][] expect = {
-                    { 1, 2, 3 },
-                    { 1, 3, 2 },
-                    { 2, 1, 3 },
-                    { 2, 3, 1 },
-                    { 3, 1, 2 },
-                    { 3, 2, 1 }
+            char[][] board = {
+                    { 'A', 'B', 'C', 'E' },
+                    { 'S', 'F', 'C', 'S' },
+                    { 'A', 'D', 'E', 'E' }
             };
+            String word = "ABCCED";
+
+            boolean result = new Solution().exist(board, word);
+            boolean expect = true;
 
             return TestUtils.check(result, expect);
         }
 
         public static boolean testCase2() {
-            int[] nums = { 0, 1 };
-
-            List<List<Integer>> result = new Solution().permute(nums);
-            Integer[][] expect = {
-                    { 0, 1 },
-                    { 1, 0 }
+            char[][] board = {
+                    { 'A', 'B', 'C', 'E' },
+                    { 'S', 'F', 'C', 'S' },
+                    { 'A', 'D', 'E', 'E' }
             };
+            String word = "SEE";
+
+            boolean result = new Solution().exist(board, word);
+            boolean expect = true;
 
             return TestUtils.check(result, expect);
         }
 
         public static boolean testCase3() {
-            int[] nums = { 1 };
-
-            List<List<Integer>> result = new Solution().permute(nums);
-            Integer[][] expect = {
-                    { 1 }
+            char[][] board = {
+                    { 'A', 'B', 'C', 'E' },
+                    { 'S', 'F', 'C', 'S' },
+                    { 'A', 'D', 'E', 'E' }
             };
+            String word = "ABCB";
 
-            return TestUtils.check(result, expect);
-        }
-
-        public static boolean testCase4() {
-            int[] nums = {};
-
-            List<List<Integer>> result = new Solution().permute(nums);
-            Integer[][] expect = {};
-
-            return TestUtils.check(result, expect);
-        }
-
-        public static boolean testCase5() {
-            int[] nums = { 0, -1, 1 };
-
-            List<List<Integer>> result = new Solution().permute(nums);
-            Integer[][] expect = {
-                    { 0, -1, 1 },
-                    { 0, 1, -1 },
-                    { -1, 0, 1 },
-                    { -1, 1, 0 },
-                    { 1, 0, -1 },
-                    { 1, -1, 0 }
-            };
+            boolean result = new Solution().exist(board, word);
+            boolean expect = false;
 
             return TestUtils.check(result, expect);
         }

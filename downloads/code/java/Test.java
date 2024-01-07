@@ -13,9 +13,9 @@ public class Test {
     }
 
     private static void transformArrayLiteral() {
-        String s = "[[0, -1, 1], [0, 1, -1], [-1, 0, 1], [-1, 1, 0], [1, 0, -1], [1, -1, 0]]";
-        boolean isChar = false;
-        // boolean isChar = true;
+        String s = "";
+        // boolean isChar = false;
+        boolean isChar = true;
         boolean toFile = false;
         // boolean toFile = true;
 
