@@ -28,7 +28,7 @@
 <meta property="og:description" content="spring-data">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T19:03:00.000Z">
-<meta property="article:modified_time" content="2024-01-11T07:27:06.409Z">
+<meta property="article:modified_time" content="2024-01-12T11:07:33.134Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-11 15:27:06" itemprop="dateModified" datetime="2024-01-11T15:27:06+08:00">2024-01-11</time>
+                <time title="修改时间：2024-01-12 19:07:33" itemprop="dateModified" datetime="2024-01-12T19:07:33+08:00">2024-01-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -576,27 +576,30 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Z__Sheng/article/details/110049009">MyBatis查询之where中1&#x3D;1的更优替代方案</a></li>
 </ul>
 </blockquote>
+<p>为了保证没有筛选条件时sql语句的正确性</p>
 <h4 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h4><h5 id="Cache"><a href="#Cache" class="headerlink" title="Cache"></a>Cache</h5><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010953880/article/details/104412646">Mybatis缓存入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/2301_76672095/article/details/129205895">Mybatis缓存入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42100694/article/details/113729891">Mybatis缓存进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/2301_76672095/article/details/129205895">Mybatis缓存详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Lotus_dong/article/details/116334317">Mybatis缓存详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/heroqiang/article/details/85339834">Mybatis缓存之缓存一致性问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_19314763/article/details/113534304">Mybatis缓存之开启、关闭、清除</a></li>
 </ul>
 </blockquote>
 <h6 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h6><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/heroqiang/article/details/85339834">Mybatis缓存之一级缓存的缓存一致性问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38422258/article/details/106356369">Mybatis缓存之一级缓存的缓存一致性问题</a></li>
 </ul>
 </blockquote>
 <p>一级缓存是session范围的</p>
-<p>问题为BSession的更新不会使ASession的缓存失效，ASession再次查询时还会读缓存，导致BSession数据的更新读不到</p>
+<p>因为一级缓存是session范围的，所以BSession的更新不会使ASession的缓存失效，ASession再次查询时还会读缓存，导致BSession数据的更新读不到</p>
 <h6 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h6><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39312465/article/details/86624486">Mybatis缓存之二级缓存的缓存一致性问题</a></li>
 </ul>
 </blockquote>
 <p>二级缓存是mapper范围的</p>
-<p>问题为BMapper的更新不会使AMapper的缓存失效，AMapper再次查询时还会读缓存，导致BMapper数据的更新读不到</p>
+<p>因为二级缓存是mapper范围的，所以BMapper的更新不会使AMapper的缓存失效，AMapper再次查询时还会读缓存，导致BMapper数据的更新读不到</p>
 <h2 id="Transaction"><a href="#Transaction" class="headerlink" title="Transaction"></a>Transaction</h2><h3 id="Basic-1"><a href="#Basic-1" class="headerlink" title="Basic"></a>Basic</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/donggua3694857/article/details/69858827">Spring事务入门</a></li>
@@ -628,7 +631,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/QGhurt/article/details/109117355">Spring事务失效的场景之不支持protected和private方法</a></li>
 </ul>
 </blockquote>
-<p>事务不生效的场景</p>
+<p>事务的失效场景</p>
 <ul>
 <li>所有AOP失效的场景（例外是事务对protected也不生效）</li>
 <li>多线程或者异步调用（事务是线程隔离的）</li>
