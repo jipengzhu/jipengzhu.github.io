@@ -28,7 +28,7 @@
 <meta property="og:description" content="java虚拟机篇">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T17:12:00.000Z">
-<meta property="article:modified_time" content="2024-03-02T11:19:25.027Z">
+<meta property="article:modified_time" content="2024-03-05T11:07:34.896Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-02 19:19:25" itemprop="dateModified" datetime="2024-03-02T19:19:25+08:00">2024-03-02</time>
+                <time title="修改时间：2024-03-05 19:07:34" itemprop="dateModified" datetime="2024-03-05T19:07:34+08:00">2024-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -260,7 +260,7 @@
 </blockquote>
 <p>JVM主要组成</p>
 <ul>
-<li>运行时数据分区（即JVM内存区域）</li>
+<li>运行时数据区（即JVM内存区域）</li>
 <li>类加载子系统</li>
 <li>执行引擎</li>
 <li>本地库接口</li>
@@ -268,9 +268,8 @@
 </ul>
 <p>JVM核心功能</p>
 <ul>
-<li>执行指令：解释和执行字节码（解释器和执行引擎）</li>
-<li>内存管理：分配和回收内存块（内存管理器）</li>
-<li>垃圾回收：回收不再使用的内存块（垃圾回收器）</li>
+<li>执行指令：解释和执行字节码</li>
+<li>管理内存：分配和回收内存块</li>
 </ul>
 <h2 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h2><h3 id="Region"><a href="#Region" class="headerlink" title="Region"></a>Region</h3><blockquote>
 <ul>
@@ -321,124 +320,60 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/JMW1407/article/details/122302803">JMM之volatile详解</a></li>
 </ul>
 </blockquote>
-<p>JVM运行分区：定义了JVM在运行时如何分区存储数据<br>JMM内存模型：定义了线程和主内存之间的操作和关系</p>
+<p>JMM内存模型的作用：定义了线程和主内存之间的操作和关系</p>
+<ul>
+<li>三大特性是基本原则</li>
+<li>as-if-serial和happens-before是指导思想</li>
+<li>内存屏障是实现手段</li>
+</ul>
 <h2 id="Advanced-1"><a href="#Advanced-1" class="headerlink" title="Advanced"></a>Advanced</h2><h3 id="Feature"><a href="#Feature" class="headerlink" title="Feature"></a>Feature</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cy973071263/article/details/104318355">JMM三大特性详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43767015/article/details/105515536">JMM三大特性原理</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wyttRain/article/details/114520547">JMM三大特性原理之内存屏障</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_37841366/article/details/113086438">JMM三大特性原理之指令重排</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46097842/article/details/125049047">JMM三大特性原理之MESI缓存一致性协议</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/DingKG/article/details/103316423">JMM三大特性之指令重排入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_37841366/article/details/113086438">JMM三大特性之指令重排详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/py_tamir/article/details/82382709">JMM三大特性之内存可见性入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/su19921021/article/details/105858750">JMM三大特性之内存可见性入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013291050/article/details/117335477">JMM三大特性之内存屏障入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wyttRain/article/details/114520547">JMM三大特性之内存屏障详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38322527/article/details/119788064">JMM三大特性之volatile和指令重排</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fuqianming/article/details/120307352">JMM三大特性之volatile和内存可见性</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhujiangtaotaise/article/details/122493682">JMM三大特性之volatile和内存屏障</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43290318/article/details/115588218">JMM三大特性之volatile和指令重排</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mashaokang1314/article/details/96571818">JMM三大特性之volatile和MESI缓存一致性协议</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jiaoyangjy123/article/details/124639807">JMM三大特性之volatile和lock前缀指令</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mashaokang1314/article/details/96571818">JMM三大特性之MESI缓存一致性协议入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46097842/article/details/125049047">JMM三大特性之MESI缓存一致性协议详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_72088858/article/details/127275149">JMM三大特性之cpu有了缓存一致性协议为什么还需要volatile关键字</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Leon_Jinhai_Sun/article/details/111568687">JMM三大特性之总线锁和缓存锁</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35642036/article/details/82801708">JMM三大特性之总线锁和MESI</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Leon_Jinhai_Sun/article/details/111568687">JMM三大特性之总线锁和缓存锁（MESI）入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35642036/article/details/82801708">JMM三大特性之总线锁和缓存锁（MESI）详解</a></li>
 </ul>
 </blockquote>
 <ul>
-<li>原子性<ul>
-<li>加锁实现（利用了<code>monitorenter</code>和<code>monitorexit</code>指令）</li>
+<li>原子性：通过互斥机制实现，来解决资源的互斥使用问题</li>
+<li>可见性：通过内存屏障实现，解决数据的一致性问题</li>
+<li>有序性：通过内存屏障实现，解决指令的重排序问题</li>
 </ul>
-</li>
-<li>可见性<ul>
-<li>不使用cpu缓存（每次读写主存）</li>
-</ul>
-</li>
-<li>有序性<ul>
-<li>禁止指令重排（volatile利用了内存屏障，synchronized利用了lock指令）</li>
-</ul>
-</li>
-</ul>
-<h3 id="Operation"><a href="#Operation" class="headerlink" title="Operation"></a>Operation</h3><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/NewBeeMu/article/details/106991173">JMM之8种原子操作入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/starbxx/article/details/98742858">JMM之8种原子操作详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wyd_333/article/details/130350402">JMM之主内存和工作内存</a></li>
-</ul>
+<blockquote>
+<p>ps：内存屏障存在的意义就是为了解决程序在运行过程中出现的内存访问乱序的问题<br>ps：内存屏障是靠cpu的lock前缀指令实现的</p>
 </blockquote>
-<p>JMM的8种原子操作</p>
+<p>MESI缓存一致性协议</p>
 <ul>
-<li>lock(锁定)：<ul>
-<li>对象：作用于<code>主内存</code></li>
-<li>作用：<code>锁定</code>变量的值</li>
+<li>M：缓存行已修改</li>
+<li>E：缓存行是独占的且未被修改（变量只被一个处理器读取过）</li>
+<li>S：缓存行是共享的且未被修改（变量被多个处理器读取过）</li>
+<li>I：缓存行已失效</li>
 </ul>
-</li>
-<li>read(读取)：<ul>
-<li>对象：作用于<code>主内存</code></li>
-<li>作用：从<code>主内存</code>中<code>读取</code>变量的值</li>
-</ul>
-</li>
-<li>load(载入)：<ul>
-<li>对象：作用于<code>工作内存</code></li>
-<li>作用：将变量的值<code>加载</code>到<code>工作内存</code>中的变量副本中</li>
-</ul>
-</li>
-<li>use(使用)：<ul>
-<li>对象：作用于<code>工作内存</code></li>
-<li>作用：执行引擎<code>使用</code>变量的值</li>
-</ul>
-</li>
-<li>assign(赋值)：<ul>
-<li>对象：作用于<code>工作内存</code></li>
-<li>作用：执行引擎<code>设置</code>变量的值</li>
-</ul>
-</li>
-<li>store(存储)：<ul>
-<li>对象：作用于<code>工作内存</code></li>
-<li>作用：将变量的值<code>存储</code>到<code>工作内存</code>中的变量副本中</li>
-</ul>
-</li>
-<li>write(写入)：<ul>
-<li>对象：作用于<code>主内存</code></li>
-<li>作用：将变量的值<code>写入</code>到<code>主内存</code></li>
-</ul>
-</li>
-<li>unlock(解锁)：<ul>
-<li>对象：作用于<code>主内存</code></li>
-<li>作用：<code>解锁</code>变量的值</li>
-</ul>
-</li>
-</ul>
-<p>JMM的原子操作规则</p>
+<blockquote>
+<p>ps：处理器为了性能并未完全的遵守MESI缓存一致性协议，会存在弱一致的问题，需要使用volatile关键字来插入内存屏障从而保证强一致性</p>
+</blockquote>
+<p>MESI缓存一致性协议之变换过程</p>
 <ul>
-<li>操作有要求：<ul>
-<li>read和load操作必须同时出现且必须顺序执行（不是连续执行），store和write同理</li>
-<li>即不允许变量从主存读取时工作内存却不接受或者从工作内存写入时主存却不接受的情况</li>
+<li>处理器1读取了变量，此时处理器1的缓存行变为E状态</li>
+<li>处理器2读取了变量，此时处理器1和2的缓存行变为S状态</li>
+<li>处理器1修改了变量，此时处理器1的缓存行变为M状态，处理器2的缓存行变为I状态</li>
 </ul>
-</li>
-<li>变更必须同步：<ul>
-<li>不允许线程丢弃它的最近的assign操作</li>
-<li>即变量在工作内存中改变了就必须同步回主内存</li>
-</ul>
-</li>
-<li>未变更不允许同步：<ul>
-<li>不允许线程无原因地（比如没有发生过assign操作）将数据从工作内存同步回主内存中</li>
-<li>即变量在工作内存中未改变就不能同步回主内存</li>
-</ul>
-</li>
-<li>未被初始化变量使用有要求<ul>
-<li>不允许在工作内存中直接使用一个未被初始化（load或assign）的变量</li>
-<li>即对一个变量实施use和store操作之前必须先执行过了load和assign操作</li>
-</ul>
-</li>
-<li>lock需要支持可重入<ul>
-<li>一个变量在同一个时刻只允许一条线程对其执行lock操作，但lock操作可以被同一个条线程重复执行多次，多次执行lock后，只有执行相同次数的unlock操作，变量才会被解锁</li>
-</ul>
-</li>
-<li>lock时需要将工作内存中的变量副本清空<ul>
-<li>如果对一个变量执行lock操作，将会清空工作内存中此变量的值，在执行引擎使用这个变量前，需要重新执行load或assign操作初始化变量的值</li>
-</ul>
-</li>
-<li>unlock之前得先执行过lock<ul>
-<li>如果一个变量实现没有被lock操作锁定，则不允许对它执行unlock操作，也不允许去unlock一个被其他线程锁定的变量</li>
-</ul>
-</li>
-<li>unlock时需要将工作内存中的变量副本同步回主内存中<ul>
-<li>对一个变量执行unlock操作之前，必须先把此变量同步回主内存（执行store和write操作）</li>
-</ul>
-</li>
+<p>MESI缓存一致性协议之回写策略</p>
+<ul>
+<li>写通（write through）：同步更新操作，修改缓存的数据后会<code>立即</code>更新到内存中</li>
+<li>写回（write back）：异步更新操作，修改缓存的数据后会<code>稍后</code>更新的内存中</li>
 </ul>
 <h3 id="Principle"><a href="#Principle" class="headerlink" title="Principle"></a>Principle</h3><blockquote>
 <ul>
@@ -463,6 +398,95 @@
 <li>线程终结的happen-before原则：线程中的所有操作都happen-before线程的终止检测</li>
 <li>对象创建的happen-before原则：一个对象的初始化完成先于他的finalize方法调用</li>
 <li>happen-before的传递性原则： 如果A操作 happen-before B操作，B操作happen-before C操作，那么A操作happen-before C操作</li>
+</ul>
+<h3 id="Operation"><a href="#Operation" class="headerlink" title="Operation"></a>Operation</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/NewBeeMu/article/details/106991173">JMM之8种原子操作入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/starbxx/article/details/98742858">JMM之8种原子操作详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wyd_333/article/details/130350402">JMM之主内存和工作内存</a></li>
+</ul>
+</blockquote>
+<p>JMM的8种原子操作</p>
+<ul>
+<li>lock(锁定)：<ul>
+<li>对象：作用于<code>主内存</code></li>
+<li>作用：对变量进行<code>加锁</code></li>
+</ul>
+</li>
+<li>unlock(解锁)：<ul>
+<li>对象：作用于<code>主内存</code></li>
+<li>作用：对变量进行<code>解锁</code></li>
+</ul>
+</li>
+<li>read(读取)：<ul>
+<li>对象：作用于<code>主内存</code></li>
+<li>作用：将变量的值从<code>主内存</code>传输到<code>工作内存</code>中</li>
+</ul>
+</li>
+<li>load(载入)：<ul>
+<li>对象：作用于<code>工作内存</code></li>
+<li>作用：将变量的值<code>加载</code>到<code>工作内存</code>中的变量副本中</li>
+</ul>
+</li>
+<li>use(使用)：<ul>
+<li>对象：作用于<code>工作内存</code></li>
+<li>作用：执行引擎<code>使用</code>变量的值</li>
+</ul>
+</li>
+<li>assign(赋值)：<ul>
+<li>对象：作用于<code>工作内存</code></li>
+<li>作用：执行引擎<code>设置</code>变量的值</li>
+</ul>
+</li>
+<li>store(存储)：<ul>
+<li>对象：作用于<code>工作内存</code></li>
+<li>作用：将变量的值从<code>工作内存</code>传输到<code>主内存</code>中</li>
+</ul>
+</li>
+<li>write(写入)：<ul>
+<li>对象：作用于<code>主内存</code></li>
+<li>作用：将变量的值<code>写入</code>到<code>主内存</code>中的变量中</li>
+</ul>
+</li>
+</ul>
+<p>JMM的8种操作要求</p>
+<ul>
+<li>操作要完整<ul>
+<li>read和load操作必须同时出现且必须顺序执行（不是连续执行），store和write同理</li>
+<li>即不允许变量从主存读取时工作内存却不接受或者从工作内存写入时主存却不接受的情况</li>
+</ul>
+</li>
+<li>变更必须同步<ul>
+<li>不允许线程丢弃它的最近的assign操作</li>
+<li>即变量在工作内存中改变了就必须同步回主内存</li>
+</ul>
+</li>
+<li>未变更不允许同步<ul>
+<li>不允许线程无原因地（比如没有发生过assign操作）将数据从工作内存同步回主内存中</li>
+<li>即变量在工作内存中未改变就不能同步回主内存</li>
+</ul>
+</li>
+<li>不能使用未初始化的变量<ul>
+<li>不允许在工作内存中直接使用一个未被初始化（load或assign）的变量</li>
+<li>即对一个变量实施use和store操作之前必须先执行过了load和assign操作</li>
+</ul>
+</li>
+<li>lock需要支持可重入<ul>
+<li>一个变量在同一个时刻只允许一条线程对其执行lock操作，但lock操作可以被同一个条线程重复执行多次，多次执行lock后，只有执行相同次数的unlock操作，变量才会被解锁</li>
+</ul>
+</li>
+<li>lock时需要将工作内存中的变量副本清空<ul>
+<li>如果对一个变量执行lock操作，将会清空工作内存中此变量的值，在执行引擎使用这个变量前，需要重新执行load或assign操作初始化变量的值</li>
+</ul>
+</li>
+<li>unlock之前得先执行过lock<ul>
+<li>如果一个变量实现没有被lock操作锁定，则不允许对它执行unlock操作，也不允许去unlock一个被其他线程锁定的变量</li>
+</ul>
+</li>
+<li>unlock时需要将工作内存中的变量副本同步回主内存中<ul>
+<li>对一个变量执行unlock操作之前，必须先把此变量同步回主内存（执行store和write操作）</li>
+</ul>
+</li>
 </ul>
 <h1 id="Garbage"><a href="#Garbage" class="headerlink" title="Garbage"></a>Garbage</h1><h2 id="Basic-2"><a href="#Basic-2" class="headerlink" title="Basic"></a>Basic</h2><blockquote>
 <ul>
@@ -499,13 +523,13 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Searchin_R/article/details/84980843">JVM对象存活判断方法</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_50180963/article/details/119703823">JVM对象存活标记算法</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tofucai/article/details/107620720">JVM对象存活标记算法之漏标</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tian830937/article/details/131526125">JVM对象存活标记算法之多标</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45816864/article/details/133780897">JVM对象存活标记算法之深度优先遍历</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wrongyao/article/details/115495865">JVM对象存活标记之STW和并发标记</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/l2470334493/article/details/108168099">JVM对象存活标记之STW</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36389060/article/details/123988578">JVM对象存活标记之并发标记</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Yao_ziwei/article/details/117781372">JVM对象存活标记之漏标解决方案</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wrongyao/article/details/115495865">JVM对象存活标记之并发标记和STW</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tian830937/article/details/131526125">JVM对象存活标记之多标和漏标</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tofucai/article/details/107620720">JVM对象存活标记之漏标的解决方案入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Yao_ziwei/article/details/117781372">JVM对象存活标记之漏标的解决方案详解</a></li>
 </ul>
 </blockquote>
 <h4 id="对象存活判断方法"><a href="#对象存活判断方法" class="headerlink" title="对象存活判断方法"></a>对象存活判断方法</h4><ul>
@@ -519,18 +543,19 @@
 <li>初始标记</li>
 <li>并发标记</li>
 <li>重新标记</li>
+<li>并发清除</li>
 </ul>
 <h4 id="并发标记问题"><a href="#并发标记问题" class="headerlink" title="并发标记问题"></a>并发标记问题</h4><ul>
-<li>漏标：某个<code>黑色的对象A</code>，在标记某个原本可以回收的对象B的过程中<code>重新引用对象B</code>，因为A为黑色代表子结点都标记完毕，所以此时不会重新通过A去标记B不可以回收，造成了B还有引用却被回收的错误</li>
-<li>多标：某个<code>灰色的对象A</code>，在标记某个原本不可以回收的对象B的过程中<code>断开了与B的引用</code>，因为A为灰色代表子结点还没有标记完，所以此时就会继续通过A去标记B为不可以回收，造成了B没有引用了却不会回收的问题</li>
+<li>多标：某个<code>被标记为灰色的对象A</code>，在标记后<code>A的引用被断开</code>，因为A的状态已经被标记为灰色了，所以标记完成后A会被标记为<code>黑色且不可以回收</code>，然而此时A因引用被断开已变为不可达，造成了A应该回收却不会回收的问题</li>
+<li>漏标：某个<code>被标记为灰色的对象A</code>，在标记后<code>A的所有引用被断开</code>，因为A的所有引用都被断开了，所以标记完成后A会被标记为<code>白色且可以回收</code>，然后此时有一个<code>被标记为黑色的对象B</code>重新引用了A，因为B为黑色代表已经标记完成，所以不会通过B重新标记A，然而此时A因被重新引用已变为可达，造成了A不该回收却被回收了的错误</li>
 </ul>
 <blockquote>
-<p>ps：漏标会造成不能回收的被回收了，属于bug，jvm通过重新标记解决了<br>ps：多标会造成可以回收的不被回收，问题不大，可以在下一次进行回收</p>
+<p>ps：多标会造成应该回收的不被回收，问题不大，可以在下一次进行回收<br>ps：漏标会造成不该回收的被回收了，属于bug，jvm通过重新标记解决了</p>
 </blockquote>
 <h4 id="并发漏标解决"><a href="#并发漏标解决" class="headerlink" title="并发漏标解决"></a>并发漏标解决</h4><p>漏标形成条件</p>
 <ol>
-<li>某个黑色A对象到某个白色对象C新增了引用关系</li>
-<li>某个灰色B对象到某个白色对象C的直接或间接的全部引用关系被删除了</li>
+<li>至少一个有黑色对象在自己被标记之后引用了白色对象A</li>
+<li>所有的灰色对象在自己引用扫描完成之前删除了对白色对象A的引用</li>
 </ol>
 <p>漏标解决方案</p>
 <ul>
@@ -542,7 +567,8 @@
 </blockquote>
 <h3 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41286145/article/details/120801246">JVM垃圾回收算法</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40911292/article/details/105481019">JVM垃圾回收算法入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41286145/article/details/120801246">JVM垃圾回收算法详解</a></li>
 </ul>
 </blockquote>
 <ul>
@@ -600,9 +626,15 @@
 </ul>
 <h3 id="垃圾回收器分类"><a href="#垃圾回收器分类" class="headerlink" title="垃圾回收器分类"></a>垃圾回收器分类</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaoai1994/article/details/109644578">JVM垃圾回收器分类入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014571143/article/details/130191731">JVM垃圾回收器分类详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wanghao112956/article/details/102739467">JVM垃圾回收器入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaoai1994/article/details/109644578">JVM垃圾回收器详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014571143/article/details/130191731">JVM垃圾回收器分类</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/calm_encode/article/details/106621152">JVM垃圾回收器之默认的垃圾回收器</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_29569183/article/details/124732575">JVM垃圾回收器之自适应调节策略</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/luzhensmart/article/details/87902385">JVM垃圾回收器之ParNew和Parallel Scavenge的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_49131718/article/details/136419733">JVM垃圾回收器之G1和CMS的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39685066/article/details/107294318">JVM垃圾回收器之CMS垃圾回收器的优点和缺点</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chengqiuming/article/details/119270228">JVM垃圾回收器之G1垃圾回收器的优点和缺点</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/h16407/article/details/121612236">JVM垃圾回收之STW（停顿时间）和ThroughPut（吞吐量）</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yj_58585858/article/details/118567138">JVM垃圾回收之Parallel（并行）和Concurrent（并发）</a></li>
 </ul>
@@ -615,15 +647,20 @@
 </ul>
 </li>
 <li>老年代<ul>
-<li>Serial Old：<code>串行回收器</code>，Serial的老年代版本，使用<code>标记整理算法</code></li>
+<li>Serial Old：<code>串行回收器</code>，使用<code>标记整理算法</code>，Serial的<code>老年代版本</code></li>
 <li>CMS（Concurrent Mark Sweep）：<code>并发回收器</code>，使用<code>标记清除算法</code>，追求<code>最短停顿时间</code></li>
-<li>Parallel Old：<code>并行回收器</code>，PS的老年代版本，使用<code>标记整理算法</code>，Parallel Scavenge的<code>老年代版本</code></li>
+<li>Parallel Old：<code>并行回收器</code>，使用<code>标记整理算法</code>，Parallel Scavenge的<code>老年代版本</code></li>
 </ul>
 </li>
 </ul>
 <blockquote>
-<p>ps： <code>吞吐量</code> 是指用户线程时间除以总时间（用户线程时间和GC线程时间之和）的比值，因为总时间固定，则GC线程时间越少，用户线程时间越多，吞吐量越高<br>ps： <code>停顿时间</code> 是指用户线程被暂停（STW）的时间<br>ps：Parallel Scavenge通过 <code>增大内存空间</code> 和 <code>减少垃圾回收次数</code> 的方式来提高吞吐量<br>ps：Concurrent Mark Sweep通过多阶段标记（初始标记、并发标记、重新标记）的方式来减少停顿时间<br>ps：追求 <code>最短停顿时间</code> 的适合 <code>用户交互型</code> 的应用，追求 <code>最大吞吐量</code> 的适合 <code>后台计算型</code> 的应用</p>
+<p>ps： <code>吞吐量</code> 是指用户线程时间除以总时间（用户线程时间和GC线程时间之和）的比值，因为总时间固定，则GC线程时间越少，用户线程时间越多，吞吐量越高<br>ps： <code>停顿时间</code> 是指用户线程被暂停（STW）的时间<br>ps：Parallel Scavenge是通过 <code>增大内存空间</code> 和 <code>减少垃圾回收次数</code> 的方式来 <code>提高吞吐量</code> 的<br>ps：Concurrent Mark Sweep是通过 <code>并发标记</code> 的方式来 <code>减少停顿时间</code> 的<br>ps：追求 <code>最短停顿时间</code> 的适合 <code>用户交互型</code> 的应用，追求 <code>最大吞吐量</code> 的适合 <code>后台计算型</code> 的应用</p>
 </blockquote>
+<p>支持并发标记的垃圾回收器</p>
+<ul>
+<li>CMS（Concurrent Mark Sweep）</li>
+<li>G1（Garbage First）</li>
+</ul>
 <h4 id="新生代垃圾回收器对比"><a href="#新生代垃圾回收器对比" class="headerlink" title="新生代垃圾回收器对比"></a>新生代垃圾回收器对比</h4><ul>
 <li>Serial：单线程标记，单线程回收，全程STW</li>
 <li>PN（ParNew）：多线程标记，多线程回收，全程STW，Serial的<code>多线程版本</code></li>
@@ -631,12 +668,48 @@
 </ul>
 <h4 id="老生代垃圾回收器对比"><a href="#老生代垃圾回收器对比" class="headerlink" title="老生代垃圾回收器对比"></a>老生代垃圾回收器对比</h4><ul>
 <li>Serial Old：单线程标记，单线程回收，全程STW</li>
-<li>CMS（Concurrent Mark Sweep）：初始标记时单线程，并发标记时多线程，重新标记时单线程，垃圾回收时多线程，全程除了并发标记时的其他阶段会STW，追求<code>最短停顿时间</code></li>
+<li>CMS（Concurrent Mark Sweep）：初始标记时单线程，并发标记时多线程，重新标记时单线程，并发清除时多线程，初始标记和重新标记时会STW，并发标记和并发清除时不会STW，追求<code>最短停顿时间</code></li>
 <li>Parallel Old：多线程标记，多线程回收，全程STW，Parallel Scavenge的<code>老年代版本</code></li>
 </ul>
-<h4 id="支持并发标记的垃圾回收器"><a href="#支持并发标记的垃圾回收器" class="headerlink" title="支持并发标记的垃圾回收器"></a>支持并发标记的垃圾回收器</h4><ul>
-<li>CMS（Concurrent Mark Sweep）</li>
-<li>G1（Garbage First）</li>
+<h4 id="主要垃圾回收器的特点"><a href="#主要垃圾回收器的特点" class="headerlink" title="主要垃圾回收器的特点"></a>主要垃圾回收器的特点</h4><ul>
+<li>Parallel Scavenge<ul>
+<li>优点<ul>
+<li>相比于ParNew支持控制停顿时间和吞吐量</li>
+<li>相比于ParNew多了自适应调节策略</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>相比于ParNew需要消耗更多的系统资源</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>CMS<ul>
+<li>优点<ul>
+<li>相比于Parallel Scavenge的停顿时间更短</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>相比于Parallel Scavenge的吞吐量更低</li>
+<li>并发标记时多标的问题会产生浮动垃圾</li>
+<li>使用的标记清除回收算法会导致内存碎片</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>G1<ul>
+<li>优点<ul>
+<li>相比于CMS使用了分区和标记整理算法解决了内存碎片的问题</li>
+<li>相比于CMS可以更好的控制停顿时间</li>
+<li>相比于CMS可以处理更大的内存堆</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>相比于CMS需要消耗更多的系统资源</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="垃圾回收器搭配"><a href="#垃圾回收器搭配" class="headerlink" title="垃圾回收器搭配"></a>垃圾回收器搭配</h3><blockquote>
 <ul>
@@ -683,16 +756,17 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41982594/article/details/105143961">JVM垃圾回收器之G1详解</a></li>
 </ul>
 </blockquote>
-<h1 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h1><h2 id="ClassLoader"><a href="#ClassLoader" class="headerlink" title="ClassLoader"></a>ClassLoader</h2><blockquote>
+<h1 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h1><h2 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41812379/article/details/124107027">JVM类加载机制入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/promsing/article/details/126200633">JVM类加载机制详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/briblue/article/details/54973413">JVM类加载机制原理</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zxh1991811/article/details/107981268">JVM类加载之自定义类加载器</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liubenlong007/article/details/88574544">JVM类加载之能不能加载自己自定义的java.lang. String类</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cqc__c/article/details/81583877">JVM类加载之findClass与loadClass的区别</a></li>
 </ul>
 </blockquote>
-<h3 id="加载器分类"><a href="#加载器分类" class="headerlink" title="加载器分类"></a>加载器分类</h3><blockquote>
+<h3 id="类加载器分类"><a href="#类加载器分类" class="headerlink" title="类加载器分类"></a>类加载器分类</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33583322/article/details/81239508">JVM类加载器入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33626996/article/details/112847648">JVM类加载器详解</a></li>
@@ -726,37 +800,7 @@
 <li>使用（use）：使用</li>
 <li>卸载（unload）：将类文件的数据从内存中卸载</li>
 </ul>
-<h3 id="对象初始化过程"><a href="#对象初始化过程" class="headerlink" title="对象初始化过程"></a>对象初始化过程</h3><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Kern_/article/details/115673129">对象创建过程入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w1196726224/article/details/56529615">对象创建过程详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42603181/article/details/115510344">java构造函数和析构函数详解</a></li>
-</ul>
-</blockquote>
-<p>对象初始化过程</p>
-<ol>
-<li>父类静态变量和代码块</li>
-<li>子类静态变量和代码块</li>
-<li>父类非静态变量和代码块</li>
-<li>父类构造函数</li>
-<li>子类非静态变量和代码块</li>
-<li>子类构造函数</li>
-</ol>
-<p>对象的生命周期</p>
-<ul>
-<li>实例化（Instantiation）</li>
-<li>初始化（Initialization）</li>
-<li>构造（Constrction）</li>
-<li>使用（Usage）</li>
-<li>析构（Destruction）</li>
-</ul>
-<blockquote>
-<p>ps： <code>默认值（default）</code> 和 <code>初始值（initial）</code> 不是同一个概念，比如int的 <code>默认值</code> 为 <code>0</code> ， <code>初始值</code> 可以为 <code>100</code></p>
-</blockquote>
-<blockquote>
-<p>ps： <code>实例化（instantiation）</code> 和 <code>初始化（initialization）</code> 不是同一个概念，实例化会 <code>分配内存</code> 和设置 <code>默认值</code> ，初始化会设置 <code>初始值</code></p>
-</blockquote>
-<h2 id="Delegate"><a href="#Delegate" class="headerlink" title="Delegate"></a>Delegate</h2><blockquote>
+<h2 id="双亲委派机制"><a href="#双亲委派机制" class="headerlink" title="双亲委派机制"></a>双亲委派机制</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44299027/article/details/127954385">JVM双亲委派机制入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Ecilipse/article/details/122256795">JVM双亲委派机制详解</a></li>
@@ -776,15 +820,50 @@
 <li>避免重复加载，前面的加载器加载后自己就不需要加载了</li>
 </ul>
 <h3 id="为什么有时候要打破双亲委派机制"><a href="#为什么有时候要打破双亲委派机制" class="headerlink" title="为什么有时候要打破双亲委派机制"></a>为什么有时候要打破双亲委派机制</h3><ul>
-<li>jdbc的DriverManager是由自举加载器加载的，而第三方厂商的DriverManager的实现类则是由应用加载器加载的，由于应用程序类加载器加载的类对启动类加载器却是不可见的，导致找不到DriverManager的实现类，此时就需要打破双亲委派机制</li>
+<li>jdbc的DriverManager是由自举加载器加载的，而第三方厂商的DriverManager的实现类则是由应用加载器加载的，由于应用程序类加载器加载的类对启动类加载器是不可见的，导致找不到DriverManager的实现类，此时就需要打破双亲委派机制</li>
 <li>web容器中可以存放多个应用，而这些应用可能会使用版本不同的同名类，而双亲委派机制只会加载第一个同名类，所以就需要对应用的类进行隔离，此时就需要打破双亲委派机制</li>
 </ul>
 <h3 id="如何打破双亲委派机制"><a href="#如何打破双亲委派机制" class="headerlink" title="如何打破双亲委派机制"></a>如何打破双亲委派机制</h3><ul>
-<li>重写ClassLoader的loadClass或者findClass方法自定义加载过程</li>
+<li>重写ClassLoader的loadClass自定义加载过程</li>
 <li>利用Thread.currentThread().getContextClassLoader()返回的ClassLoader加载</li>
 <li>利用java的SPI机制</li>
 </ul>
-<h1 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h1><blockquote>
+<blockquote>
+<p>ps：重写findClass方法可以自定义类加载过程，但不能打破双亲委派机制</p>
+</blockquote>
+<h1 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h1><h2 id="对象生命周期"><a href="#对象生命周期" class="headerlink" title="对象生命周期"></a>对象生命周期</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42603181/article/details/115510344">java对象的构造函数和析构函数详解</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>实例化（Instantiation）</li>
+<li>初始化（Initialization）</li>
+<li>构造（Constrction）</li>
+<li>使用（Usage）</li>
+<li>析构（Destruction）</li>
+</ul>
+<blockquote>
+<p>ps： <code>实例化（instantiation）</code> 和 <code>初始化（initialization）</code> 不是同一个概念，实例化会 <code>分配内存</code> 和设置 <code>默认值</code> ，初始化会设置 <code>初始值</code></p>
+</blockquote>
+<blockquote>
+<p>ps： <code>默认值（default）</code> 和 <code>初始值（initial）</code> 不是同一个概念，比如int的 <code>默认值</code> 为 <code>0</code> ， <code>初始值</code> 可以为 <code>100</code></p>
+</blockquote>
+<h2 id="对象初始化过程"><a href="#对象初始化过程" class="headerlink" title="对象初始化过程"></a>对象初始化过程</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Kern_/article/details/115673129">java对象的初始化过程入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/w1196726224/article/details/56529615">java对象的初始化过程详解</a></li>
+</ul>
+</blockquote>
+<ol>
+<li>父类静态变量和代码块</li>
+<li>子类静态变量和代码块</li>
+<li>父类非静态变量和代码块</li>
+<li>父类构造函数</li>
+<li>子类非静态变量和代码块</li>
+<li>子类构造函数</li>
+</ol>
+<h2 id="对象内存结构"><a href="#对象内存结构" class="headerlink" title="对象内存结构"></a>对象内存结构</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zqz_zqz/article/details/70246212">java对象的内存结构</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zgz15515397650/article/details/106357299">java对象之伪共享问题</a></li>
@@ -814,8 +893,11 @@
 <h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wdays83892469/article/details/127151239">JVM问题排查思路</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/penggerhe/article/details/135217416">JVM之OOM类型详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/penggerhe/article/details/135217416">JVM之OOM排查详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_26664043/article/details/136271539">JVM之OOM场景详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaoxing598/article/details/128887598">JVM之OOM类型详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a718515028/article/details/86703186">JVM之OOM自动dump</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/golden_zhj/article/details/86574481">JVM之内存溢出和内存泄漏的区别</a></li>
 </ul>
 </blockquote>
 <p>jvm常见问题</p>
@@ -824,6 +906,9 @@
 <li>cpu占用高</li>
 <li>死锁</li>
 </ul>
+<blockquote>
+<p>ps：内存溢出（Out Of Memory）和内存泄漏（Memory Leak）不是一个概念</p>
+</blockquote>
 <p>jvm问题排查工具</p>
 <p>jmap：排查内存问题（OOM）<br>jstack：排查线程问题（CPU负载高和死锁）</p>
 <p>jvm问题排查过程</p>
@@ -1021,7 +1106,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM"><span class="nav-number">1.</span> <span class="nav-text">JVM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">1.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced"><span class="nav-number">1.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Region"><span class="nav-number">1.2.1.</span> <span class="nav-text">Region</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Allocate"><span class="nav-number">1.2.2.</span> <span class="nav-text">Allocate</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JMM"><span class="nav-number">2.</span> <span class="nav-text">JMM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-1"><span class="nav-number">2.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced-1"><span class="nav-number">2.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature"><span class="nav-number">2.2.1.</span> <span class="nav-text">Feature</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Operation"><span class="nav-number">2.2.2.</span> <span class="nav-text">Operation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Principle"><span class="nav-number">2.2.3.</span> <span class="nav-text">Principle</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Garbage"><span class="nav-number">3.</span> <span class="nav-text">Garbage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-2"><span class="nav-number">3.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%88%86%E4%BB%A3%E6%8A%80%E6%9C%AF"><span class="nav-number">3.1.1.</span> <span class="nav-text">垃圾分代技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E6%A0%87%E8%AE%B0%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.2.</span> <span class="nav-text">垃圾标记算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%AD%98%E6%B4%BB%E5%88%A4%E6%96%AD%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">对象存活判断方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%AD%98%E6%B4%BB%E6%A0%87%E8%AE%B0%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">对象存活标记算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%A0%87%E8%AE%B0%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.1.2.3.</span> <span class="nav-text">并发标记步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%A0%87%E8%AE%B0%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.2.4.</span> <span class="nav-text">并发标记问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%BC%8F%E6%A0%87%E8%A7%A3%E5%86%B3"><span class="nav-number">3.1.2.5.</span> <span class="nav-text">并发漏标解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.3.</span> <span class="nav-text">垃圾回收算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%97%B6%E6%9C%BA"><span class="nav-number">3.1.4.</span> <span class="nav-text">垃圾回收时机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E8%BF%87%E7%A8%8B"><span class="nav-number">3.1.5.</span> <span class="nav-text">垃圾回收过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%88%86%E7%B1%BB"><span class="nav-number">3.1.6.</span> <span class="nav-text">垃圾回收器分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E7%94%9F%E4%BB%A3%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%AF%B9%E6%AF%94"><span class="nav-number">3.1.6.1.</span> <span class="nav-text">新生代垃圾回收器对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%80%81%E7%94%9F%E4%BB%A3%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%AF%B9%E6%AF%94"><span class="nav-number">3.1.6.2.</span> <span class="nav-text">老生代垃圾回收器对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E5%B9%B6%E5%8F%91%E6%A0%87%E8%AE%B0%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8"><span class="nav-number">3.1.6.3.</span> <span class="nav-text">支持并发标记的垃圾回收器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E6%90%AD%E9%85%8D"><span class="nav-number">3.1.7.</span> <span class="nav-text">垃圾回收器搭配</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced-2"><span class="nav-number">3.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Serial"><span class="nav-number">3.2.1.</span> <span class="nav-text">Serial</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ParNew"><span class="nav-number">3.2.2.</span> <span class="nav-text">ParNew</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Scavenge"><span class="nav-number">3.2.3.</span> <span class="nav-text">Parallel Scavenge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Serial-Old"><span class="nav-number">3.2.4.</span> <span class="nav-text">Serial Old</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMS"><span class="nav-number">3.2.5.</span> <span class="nav-text">CMS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Old"><span class="nav-number">3.2.6.</span> <span class="nav-text">Parallel Old</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G1"><span class="nav-number">3.2.7.</span> <span class="nav-text">G1</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Class"><span class="nav-number">4.</span> <span class="nav-text">Class</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ClassLoader"><span class="nav-number">4.1.</span> <span class="nav-text">ClassLoader</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%88%86%E7%B1%BB"><span class="nav-number">4.1.1.</span> <span class="nav-text">加载器分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="nav-number">4.1.2.</span> <span class="nav-text">类加载过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%88%9D%E5%A7%8B%E5%8C%96%E8%BF%87%E7%A8%8B"><span class="nav-number">4.1.3.</span> <span class="nav-text">对象初始化过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delegate"><span class="nav-number">4.2.</span> <span class="nav-text">Delegate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">4.2.1.</span> <span class="nav-text">双亲委派机制的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E6%97%B6%E5%80%99%E8%A6%81%E6%89%93%E7%A0%B4%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6"><span class="nav-number">4.2.2.</span> <span class="nav-text">为什么有时候要打破双亲委派机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%89%93%E7%A0%B4%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6"><span class="nav-number">4.2.3.</span> <span class="nav-text">如何打破双亲委派机制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Object"><span class="nav-number">5.</span> <span class="nav-text">Object</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lifecycle"><span class="nav-number">6.</span> <span class="nav-text">Lifecycle</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile"><span class="nav-number">6.1.</span> <span class="nav-text">Compile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Runtime"><span class="nav-number">6.2.</span> <span class="nav-text">Runtime</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem"><span class="nav-number">7.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Performance"><span class="nav-number">8.</span> <span class="nav-text">Performance</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">9.1.</span> <span class="nav-text">Linux</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM"><span class="nav-number">1.</span> <span class="nav-text">JVM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">1.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced"><span class="nav-number">1.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Region"><span class="nav-number">1.2.1.</span> <span class="nav-text">Region</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Allocate"><span class="nav-number">1.2.2.</span> <span class="nav-text">Allocate</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JMM"><span class="nav-number">2.</span> <span class="nav-text">JMM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-1"><span class="nav-number">2.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced-1"><span class="nav-number">2.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature"><span class="nav-number">2.2.1.</span> <span class="nav-text">Feature</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Principle"><span class="nav-number">2.2.2.</span> <span class="nav-text">Principle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Operation"><span class="nav-number">2.2.3.</span> <span class="nav-text">Operation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Garbage"><span class="nav-number">3.</span> <span class="nav-text">Garbage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-2"><span class="nav-number">3.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%88%86%E4%BB%A3%E6%8A%80%E6%9C%AF"><span class="nav-number">3.1.1.</span> <span class="nav-text">垃圾分代技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E6%A0%87%E8%AE%B0%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.2.</span> <span class="nav-text">垃圾标记算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%AD%98%E6%B4%BB%E5%88%A4%E6%96%AD%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">对象存活判断方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%AD%98%E6%B4%BB%E6%A0%87%E8%AE%B0%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">对象存活标记算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%A0%87%E8%AE%B0%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.1.2.3.</span> <span class="nav-text">并发标记步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%A0%87%E8%AE%B0%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.2.4.</span> <span class="nav-text">并发标记问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%BC%8F%E6%A0%87%E8%A7%A3%E5%86%B3"><span class="nav-number">3.1.2.5.</span> <span class="nav-text">并发漏标解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.3.</span> <span class="nav-text">垃圾回收算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%97%B6%E6%9C%BA"><span class="nav-number">3.1.4.</span> <span class="nav-text">垃圾回收时机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E8%BF%87%E7%A8%8B"><span class="nav-number">3.1.5.</span> <span class="nav-text">垃圾回收过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%88%86%E7%B1%BB"><span class="nav-number">3.1.6.</span> <span class="nav-text">垃圾回收器分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E7%94%9F%E4%BB%A3%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%AF%B9%E6%AF%94"><span class="nav-number">3.1.6.1.</span> <span class="nav-text">新生代垃圾回收器对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%80%81%E7%94%9F%E4%BB%A3%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%AF%B9%E6%AF%94"><span class="nav-number">3.1.6.2.</span> <span class="nav-text">老生代垃圾回收器对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">3.1.6.3.</span> <span class="nav-text">主要垃圾回收器的特点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E6%90%AD%E9%85%8D"><span class="nav-number">3.1.7.</span> <span class="nav-text">垃圾回收器搭配</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced-2"><span class="nav-number">3.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Serial"><span class="nav-number">3.2.1.</span> <span class="nav-text">Serial</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ParNew"><span class="nav-number">3.2.2.</span> <span class="nav-text">ParNew</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Scavenge"><span class="nav-number">3.2.3.</span> <span class="nav-text">Parallel Scavenge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Serial-Old"><span class="nav-number">3.2.4.</span> <span class="nav-text">Serial Old</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMS"><span class="nav-number">3.2.5.</span> <span class="nav-text">CMS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Old"><span class="nav-number">3.2.6.</span> <span class="nav-text">Parallel Old</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G1"><span class="nav-number">3.2.7.</span> <span class="nav-text">G1</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Class"><span class="nav-number">4.</span> <span class="nav-text">Class</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6"><span class="nav-number">4.1.</span> <span class="nav-text">类加载机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%88%86%E7%B1%BB"><span class="nav-number">4.1.1.</span> <span class="nav-text">类加载器分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="nav-number">4.1.2.</span> <span class="nav-text">类加载过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6"><span class="nav-number">4.2.</span> <span class="nav-text">双亲委派机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">4.2.1.</span> <span class="nav-text">双亲委派机制的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E6%97%B6%E5%80%99%E8%A6%81%E6%89%93%E7%A0%B4%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6"><span class="nav-number">4.2.2.</span> <span class="nav-text">为什么有时候要打破双亲委派机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%89%93%E7%A0%B4%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6"><span class="nav-number">4.2.3.</span> <span class="nav-text">如何打破双亲委派机制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Object"><span class="nav-number">5.</span> <span class="nav-text">Object</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">5.1.</span> <span class="nav-text">对象生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%88%9D%E5%A7%8B%E5%8C%96%E8%BF%87%E7%A8%8B"><span class="nav-number">5.2.</span> <span class="nav-text">对象初始化过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="nav-number">5.3.</span> <span class="nav-text">对象内存结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lifecycle"><span class="nav-number">6.</span> <span class="nav-text">Lifecycle</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile"><span class="nav-number">6.1.</span> <span class="nav-text">Compile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Runtime"><span class="nav-number">6.2.</span> <span class="nav-text">Runtime</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem"><span class="nav-number">7.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Performance"><span class="nav-number">8.</span> <span class="nav-text">Performance</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">9.1.</span> <span class="nav-text">Linux</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
