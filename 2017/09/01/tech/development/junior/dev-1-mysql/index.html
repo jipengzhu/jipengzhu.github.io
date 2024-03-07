@@ -28,7 +28,7 @@
 <meta property="og:description" content="mysql">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-31T17:01:00.000Z">
-<meta property="article:modified_time" content="2024-03-05T11:07:34.953Z">
+<meta property="article:modified_time" content="2024-03-07T11:30:27.379Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-05 19:07:34" itemprop="dateModified" datetime="2024-03-05T19:07:34+08:00">2024-03-05</time>
+                <time title="修改时间：2024-03-07 19:30:27" itemprop="dateModified" datetime="2024-03-07T19:30:27+08:00">2024-03-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1009,7 +1009,6 @@
 <ul>
 <li><code>&lt;（lt）、&lt;=（le、lte）、&gt;（gt）、&gt;=（ge、gte）</code></li>
 <li><code>between and</code></li>
-<li><code>range</code></li>
 </ul>
 <p>范围查询：左闭右闭（数据库用的多）、左闭右开（编程语言用的多）、左开右闭、左开右开</p>
 <h3 id="fuzzy（模糊查询）"><a href="#fuzzy（模糊查询）" class="headerlink" title="fuzzy（模糊查询）"></a>fuzzy（模糊查询）</h3><blockquote>
@@ -1309,17 +1308,17 @@
 <ul>
 <li>单列索引时查询条件有问题导致索引失效<ul>
 <li>不等查询（!&#x3D;）</li>
-<li>取反查询（not in、not between）</li>
+<li>取反查询（not in）</li>
 <li>like查询时使用百分号开头</li>
 </ul>
 </li>
 <li>联合索引时字段组合没遵循<code>最左前缀</code>原则导致索引失效</li>
 <li>联合索引时查询条件有问题导致右边的索引失效<ul>
 <li>联合索引时左边使用了<code>不等查询（!=）</code>导致右边的索引失效</li>
-<li>联合索引时左边使用了<code>取反查询（not in、not between）</code>导致右边的索引失效</li>
+<li>联合索引时左边使用了<code>取反查询（not in）</code>导致右边的索引失效</li>
 <li>联合索引时左边使用了<code>like查询时使用百分号开头</code>导致右边的索引失效</li>
-<li>联合索引时左边使用了<code>or查询</code>导致右边的索引失效</li>
 <li>联合索引时左边使用了<code>范围查询</code>导致右边的索引失效</li>
+<li>联合索引时左边使用了<code>or查询</code>导致右边的索引失效</li>
 </ul>
 </li>
 <li>查询时使用了<code>函数</code>导致索引失效</li>
@@ -1328,6 +1327,9 @@
 <li>排序时排序字段和查询字段不一致导致无法使用索引排序</li>
 <li>优化器认为全表扫描比较快导致索引失效（数据少或者需要回表）</li>
 </ul>
+<blockquote>
+<p>ps：not between会分成两个范围，本质上还是范围操作</p>
+</blockquote>
 <h3 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/nizhongli37/article/details/117607722">mysql索引之常规查询where条件顺序会影响索引吗</a></li>
@@ -1335,8 +1337,8 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33312725/article/details/129348629">mysql索引之等值查询not equals能使用索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LJFPHP/article/details/89156326">mysql索引之多值查询in能使用索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Wu_Shang001/article/details/107607627">mysql索引之多值查询not in能使用索引吗</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40641900/article/details/122124945">mysql索引之范围查询range能使用索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38192427/article/details/122641828">mysql索引之模糊查询like能使用索引吗</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40641900/article/details/122124945">mysql索引之范围查询range能使用索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wjxbj/article/details/84812361">mysql索引之组合查询or能使用索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shanwu1/article/details/122695384">mysql索引之关联查询join能使用索引吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lan12334321234/article/details/70048830">mysql索引之orderBy能使用索引吗</a></li>
@@ -1349,11 +1351,12 @@
 </blockquote>
 <ul>
 <li><code>is null</code>：可以使用索引</li>
+<li><code>!=</code>：不可以使用索引</li>
 <li><code>in</code>：可以使用索引</li>
-<li><code>range</code>：可以使用索引</li>
+<li><code>not in</code>：不可以使用索引</li>
 <li><code>like</code>：前缀模糊匹配可以使用索引，中缀和后缀模糊匹配不可以使用索引</li>
+<li><code>range</code>：可以使用索引</li>
 <li><code>or</code>：or前后的字段都有索引可以使用索引，or前后的某个索引字段都有索引则不可以使用索引</li>
-<li><code>not</code>：不可以使用索引</li>
 <li><code>join</code>：可以使用索引</li>
 <li><code>orderBy</code>：orderBy的字段出现在where条件中时可以使用索引</li>
 </ul>
@@ -1864,17 +1867,17 @@
 <li>常用的查询条件要添加索引</li>
 <li>避免单列索引时查询条件有问题导致索引失效<ul>
 <li>避免不等查询（!&#x3D;）</li>
-<li>避免取反查询（not in、not between）</li>
+<li>避免取反查询（not in）</li>
 <li>避免like查询时使用百分号开头</li>
 </ul>
 </li>
 <li>避免联合索引时字段组合没遵循<code>最左前缀</code>原则导致索引失效</li>
 <li>避免联合索引时查询条件有问题导致右边的索引失效<ul>
 <li>避免联合索引时左边使用了<code>不等查询（!=）</code>导致右边的索引失效</li>
-<li>避免联合索引时左边使用了<code>取反查询（not in、not between）</code>导致右边的索引失效</li>
+<li>避免联合索引时左边使用了<code>取反查询（not in）</code>导致右边的索引失效</li>
 <li>避免联合索引时左边使用了<code>like查询时使用百分号开头</code>导致右边的索引失效</li>
-<li>避免联合索引时左边使用了<code>or查询</code>导致右边的索引失效</li>
 <li>避免联合索引时左边使用了<code>范围查询</code>导致右边的索引失效</li>
+<li>避免联合索引时左边使用了<code>or查询</code>导致右边的索引失效</li>
 </ul>
 </li>
 <li>避免查询时使用了<code>函数</code>导致索引失效</li>
@@ -2100,11 +2103,15 @@
 </ul>
 <h1 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h1><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dl962454/article/details/115800802">mysql为什么用B+树而不是红黑树详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_29373285/article/details/88610662">mysql之B+树和红黑树对比</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a519640026/article/details/106940115">mysql之B+树和B树对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dl962454/article/details/115800802">mysql为什么用B+树而不是红黑树、B-树详解</a></li>
 </ul>
 </blockquote>
+<p>mysql的耗时点为磁盘IO，这就要求IO的次数尽可能少，即结点的层级尽可能得少</p>
+<ul>
+<li>红黑树是二叉树，结点的层级很高，排除</li>
+<li>B树是多叉树，结点的层级较低，但是B树的结点既包含索引所以又包含数据，导致结点的层级比B+树高，也排除</li>
+<li>红黑树和B树的范围查找比B+树复杂（B+树的叶子结点通过指针连接起来）</li>
+</ul>
 <h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><h2 id="Management"><a href="#Management" class="headerlink" title="Management"></a>Management</h2><h3 id="Visual"><a href="#Visual" class="headerlink" title="Visual"></a>Visual</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/angellee1988/article/details/123121036">mysql可视化客户端推荐1</a></li>

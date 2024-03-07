@@ -28,7 +28,7 @@
 <meta property="og:description" content="spring">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T19:01:00.000Z">
-<meta property="article:modified_time" content="2024-03-05T11:07:34.923Z">
+<meta property="article:modified_time" content="2024-03-07T11:30:27.338Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-05 19:07:34" itemprop="dateModified" datetime="2024-03-05T19:07:34+08:00">2024-03-05</time>
+                <time title="修改时间：2024-03-07 19:30:27" itemprop="dateModified" datetime="2024-03-07T19:30:27+08:00">2024-03-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -559,15 +559,16 @@
 </blockquote>
 <h5 id="bean的生命周期概览"><a href="#bean的生命周期概览" class="headerlink" title="bean的生命周期概览"></a>bean的生命周期概览</h5><ol>
 <li>bean实例化</li>
-<li>bean依赖注入</li>
 <li>bean属性填充</li>
 <li>bean初始化</li>
 <li>bean使用</li>
 <li>bean销毁</li>
 </ol>
+<blockquote>
+<p>ps：bean实例化后会放入到（三级）缓存中</p>
+</blockquote>
 <h5 id="bean的生命周期详述"><a href="#bean的生命周期详述" class="headerlink" title="bean的生命周期详述"></a>bean的生命周期详述</h5><ol>
 <li>instantiateBean：bean实例化</li>
-<li>injectBean：bean依赖注入</li>
 <li>populateBean：bean属性填充</li>
 </ol>
 <ul>
@@ -575,7 +576,7 @@
 <li>调用BeanFactoryAware.setBeanFactory</li>
 <li>调用ApplicationContextAware.setApplicationContext</li>
 </ul>
-<ol start="4">
+<ol start="3">
 <li>initializeBean：bean初始化</li>
 </ol>
 <ul>
@@ -585,7 +586,7 @@
 <li>调用bean的init-method</li>
 <li>调用BeanPostProcessor.postProcessAfterInitialization</li>
 </ul>
-<ol start="5">
+<ol start="4">
 <li>useBean：bean使用</li>
 <li>destoryBean：bean销毁</li>
 </ol>
@@ -594,6 +595,9 @@
 <li>调用DisposableBean.destory</li>
 <li>调用bean的destory-method</li>
 </ul>
+<blockquote>
+<p>ps：bean实例化后会放入到（三级）缓存中</p>
+</blockquote>
 <h3 id="Factory"><a href="#Factory" class="headerlink" title="Factory"></a>Factory</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/v123411739/article/details/99308642">IOC容器的初始化流程入门</a></li>
@@ -634,24 +638,22 @@
 </ul>
 <h4 id="IOC容器的初始化过程"><a href="#IOC容器的初始化过程" class="headerlink" title="IOC容器的初始化过程"></a>IOC容器的初始化过程</h4><h5 id="IOC容器的初始化概览"><a href="#IOC容器的初始化概览" class="headerlink" title="IOC容器的初始化概览"></a>IOC容器的初始化概览</h5><ul>
 <li>将bean的配置信息解析成BeanDefinition并放到BeanDefinitionMap中</li>
-<li>根据BeanDefinition实例化bean</li>
-<li>根据BeanDefinition对bean进行依赖注入</li>
-<li>根据BeanDefinition对bean进行属性填充</li>
-<li>根据BeanDefinition初始化bean</li>
+<li>根据BeanDefinition创建bean对象并进行依赖注入</li>
 </ul>
 <h5 id="IOC容器的初始化详述"><a href="#IOC容器的初始化详述" class="headerlink" title="IOC容器的初始化详述"></a>IOC容器的初始化详述</h5><ul>
-<li>刷新前的预处理</li>
-<li>加载BeanFactory(实例化工厂)，默认实现是DefaultListableBeanFactory</li>
-<li>BeanFactory的预准备工作(BeanFactory进行一些设置，比如context的类加载器等)</li>
-<li>BeanFactory的准备工作完成后进行后置处理工作</li>
-<li>实例化实现了BeanFactoryPostProcessor接口的Bean，并调用接口方法</li>
-<li>注册BeanPostProcessor(Bean的后置处理器，在创建Bean的前后等执行)</li>
-<li>初始化MessageSource组件（做国际化功能：消息绑定，消息解析）</li>
-<li>初始化时间派发器</li>
-<li>子类重写这个方法，在容器刷新的时候可以自定义逻辑</li>
-<li>注册应用的监听器，就是注册实现了ApplicationListener接口的监听器Bean</li>
-<li>初始化所有的剩下的非懒加载的单例bean，并填充属性</li>
-<li>完成context的刷新</li>
+<li>prepareRefresh：context刷新前的预处理</li>
+<li>obtainFreshBeanFactory：加载BeanFactory（默认实现是DefaultListableBeanFactory）</li>
+<li>refreshBeanFactory：刷新BeanFactory</li>
+<li>prepareBeanFactory：BeanFactory的预处理工作</li>
+<li>postProcessBeanFactory：BeanFactory的后处理工作</li>
+<li>invokeBeanFactoryPostProcessors：实例化实现了BeanFactoryPostProcessor接口的Bean并调用接口方法</li>
+<li>registerBeanPostProcessors：注册BeanPostProcessor(Bean的后置处理器，在创建Bean的前后等执行)</li>
+<li>initMessageSource：初始化MessageSource组件（做国际化功能：消息绑定，消息解析）</li>
+<li>initApplicationEventMulticaster：初始化事件派发器</li>
+<li>onRefresh：context的刷新回调，子类可以重写这个方法在容器刷新的时候可以自定义逻辑</li>
+<li>registerListeners：注册应用的监听器，就是注册实现了ApplicationListener接口的监听器Bean</li>
+<li>finishBeanFactoryInitialization：初始化所有的剩下的非懒加载的单例bean，并填充属性</li>
+<li>finishRefresh：完成context的刷新</li>
 </ul>
 <h4 id="BeanFactory和FactoryBean的区别"><a href="#BeanFactory和FactoryBean的区别" class="headerlink" title="BeanFactory和FactoryBean的区别"></a>BeanFactory和FactoryBean的区别</h4><ul>
 <li>BeanFactory：IOC容器的底层接口</li>
@@ -734,8 +736,9 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_59244784/article/details/126795072">AOP失效场景入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43790613/article/details/113091496">AOP失效场景详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39552268/article/details/123472726">AOP失效场景之方法权限</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xxxxxwwwwww/article/details/112863482">AOP为什么不支持protected了</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mojinchuan/article/details/79863002">AOP可以支持protected方法了</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Mutou_ren/article/details/105018052">AOP失效场景之为什么不支持protected方法入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xxxxxwwwwww/article/details/112863482">AOP失效场景之为什么不支持protected方法详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mojinchuan/article/details/79863002">AOP失效场景之可以支持protected方法了</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013151053/article/details/106124048">AOP同类方法调用失效解决方案入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014365523/article/details/119849844">AOP同类方法调用失效解决方案进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hellozhxy/article/details/109753711">AOP同类方法调用失效解决方案详解</a></li>
@@ -744,7 +747,7 @@
 <p>AOP的失效场景</p>
 <ul>
 <li>代理的方法被同类的方法调用</li>
-<li>代理的方法不能被外部访问（private和protected方法，即使被同类的方法调用也不生效）</li>
+<li>代理的方法不能被外部访问（private方法、protected方法）</li>
 <li>代理的方法不能被重写（final方法、static方法）</li>
 <li>代理的类不能被继承（final类）</li>
 <li>代理的类没有被Spring管理</li>
@@ -753,14 +756,14 @@
 <blockquote>
 <p>ps：JDK动态代理和CGLIB动态代理不能够代理 <code>不能继承的类</code> 和 <code>不能重写的方法</code> ，因为是通过生成子类并重写方法来实现的<br>ps：JDK动态代理和CGLIB动态代理不支持代理private方法，但AspectJ静态代理支持代理private方法<br>ps：JDK动态代理和CGLIB动态代理支持代理protected方法，但SpringAOP只会拦截public方法（因为AopUtils.canApply方法中使用的Class.getMethods只能获取public方法）</p>
 </blockquote>
-<h4 id="AOP同类方法调用时失效的原因分析"><a href="#AOP同类方法调用时失效的原因分析" class="headerlink" title="AOP同类方法调用时失效的原因分析"></a>AOP同类方法调用时失效的原因分析</h4><p>因为方法A调用B不是通过AOP代理对象调用的，而是通过java的this引用调用的</p>
+<h4 id="AOP同类方法调用时失效的原因分析"><a href="#AOP同类方法调用时失效的原因分析" class="headerlink" title="AOP同类方法调用时失效的原因分析"></a>AOP同类方法调用时失效的原因分析</h4><p>因为同类方法调用时方法A调用B不是通过AOP代理对象调用的，而是通过java的this引用调用的</p>
 <h4 id="AOP同类方法调用时失效的解决方案"><a href="#AOP同类方法调用时失效的解决方案" class="headerlink" title="AOP同类方法调用时失效的解决方案"></a>AOP同类方法调用时失效的解决方案</h4><ul>
 <li>通过AopContext.currentProxy代替this调用从而可以使用代理对象</li>
 <li>通过ApplicationContext.getBean代替this调用从而可以使用代理对象</li>
 <li>通过在A类中注入A类型的字段a并使用对象a代替this调用从而可以使用代理对象</li>
 </ul>
 <blockquote>
-<p>ps：推荐使用ApplicationContext这种方式<br>ps：AopContext.currentProxy需要添加 <code>@EnableAspectJAutoProxy(exposeProxy=true)</code> 注解</p>
+<p>ps：AopContext.currentProxy需要添加 <code>@EnableAspectJAutoProxy(exposeProxy=true)</code> 注解</p>
 </blockquote>
 <h1 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h1><h2 id="Basic-2"><a href="#Basic-2" class="headerlink" title="Basic"></a>Basic</h2><blockquote>
 <ul>
@@ -800,8 +803,8 @@
 </ul>
 </blockquote>
 <ul>
-<li>提前生成代理对象：存在循环依赖时，在依赖注入（injectBean）的时候生成</li>
-<li>非提前生成代理对象：不存在循环依赖时，初始化（initializeBean）的时候生成</li>
+<li>提前生成代理对象：存在循环依赖时，在实例化（instantiateBean）的时候生成</li>
+<li>非提前生成代理对象：不存在循环依赖时，在初始化（initializeBean）的时候生成</li>
 </ul>
 <blockquote>
 <p>ps：代码入口为 <code>AbstractAutowireCapableBeanFactory.doCreateBean</code></p>
