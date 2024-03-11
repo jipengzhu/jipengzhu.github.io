@@ -28,7 +28,7 @@
 <meta property="og:description" content="mysql">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-31T17:01:00.000Z">
-<meta property="article:modified_time" content="2024-03-07T11:30:27.379Z">
+<meta property="article:modified_time" content="2024-03-11T11:32:23.491Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-07 19:30:27" itemprop="dateModified" datetime="2024-03-07T19:30:27+08:00">2024-03-07</time>
+                <time title="修改时间：2024-03-11 19:32:23" itemprop="dateModified" datetime="2024-03-11T19:32:23+08:00">2024-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -695,11 +695,11 @@
 </blockquote>
 <ul>
 <li>外键需要额外的检查，影响性能</li>
-<li>外键需要锁住父记录，影响性能</li>
+<li>外键需要锁住主记录，影响性能</li>
 <li>外键不利于分库分表，影响扩展</li>
 </ul>
 <blockquote>
-<p>ps：不使用外键是为了牺牲一致性来保证可用性（类似于CAP中C和A不能同时满足）</p>
+<p>ps：不使用外键是为了牺牲一致性来保证可用性（类似于CAP中C和A不能同时满足）<br>ps：不使用外键的话则需要在应用层面来做约束检查</p>
 </blockquote>
 <h4 id="id"><a href="#id" class="headerlink" title="id"></a>id</h4><blockquote>
 <ul>
@@ -720,9 +720,12 @@
 </ul>
 </blockquote>
 <ul>
-<li>uuid是无序的，无法插入到页中最大id的后面，需要寻找合适位置插入，性能较差</li>
-<li>uuid是无序的，会分散插入到多个页中，不利于页的缓存和批量操作，性能较差</li>
+<li>uuid和雪花id不是大致连续递增的，无法插入到页中最大id的后面，需要寻找合适位置插入，性能较差</li>
+<li>uuid是雪花id不是大致连续递增递增的，会分散插入到多个页中，会导致页分裂和频繁的换入换出，性能较差</li>
 </ul>
+<blockquote>
+<p>ps：雪花id是单调递增的，单机时是大致连续递增，分布式时则步长较大</p>
+</blockquote>
 <h5 id="为什么id要求单调递增"><a href="#为什么id要求单调递增" class="headerlink" title="为什么id要求单调递增"></a>为什么id要求单调递增</h5><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/itworld123/article/details/103004407">id之为什么要求单调递增</a></li>
@@ -1042,6 +1045,11 @@
 <li>union</li>
 <li>union all</li>
 </ul>
+<p>union和union all的区别</p>
+<ul>
+<li>union会对重复记录进行去重，union all不会</li>
+<li>union会按照主键进行排序，union all不会</li>
+</ul>
 <h3 id="aggregation（聚合查询）"><a href="#aggregation（聚合查询）" class="headerlink" title="aggregation（聚合查询）"></a>aggregation（聚合查询）</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Tester_muller/article/details/132215209">mysql聚合查询入门</a></li>
@@ -1100,6 +1108,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/huxiaodong1994/article/details/91668304">mysql关联查询优化之小表驱动大表详解</a></li>
 </ul>
 </blockquote>
+<p>on是join之前过滤，where是join之后过滤，on比where先执行</p>
 <h3 id="sub（子查询）"><a href="#sub（子查询）" class="headerlink" title="sub（子查询）"></a>sub（子查询）</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jesseyoung/article/details/40108781">mysql子查询入门</a></li>
@@ -1142,6 +1151,11 @@
 <li>exists子查询：相关子查询 + 任意子查询</li>
 </ul>
 </li>
+</ul>
+<p>in和exists的区别</p>
+<ul>
+<li>in是非相关子查询，会将条件带入主表中进行查询，适用于次表数据量小的场景</li>
+<li>exists相关子查询，会扫描主表的每行并去次表中匹配，适用于主表数据量小的场景</li>
 </ul>
 <h2 id="DCL（Data-Control-Language）"><a href="#DCL（Data-Control-Language）" class="headerlink" title="DCL（Data Control Language）"></a>DCL（Data Control Language）</h2><blockquote>
 <ul>
@@ -1413,7 +1427,7 @@
 <ul>
 <li>原子性（atomicity）：事务里的所有操作要么全部生效，要么全部不生效</li>
 <li>一致性（consistency）：事务的操作不会影响数据的正确性</li>
-<li>隔离性（isolation）：解决不同事务之间的读写冲突</li>
+<li>隔离性（isolation）：事务里的数据修改何时对其他事务可见</li>
 <li>持久性（durability）：事务对数据的更改会永久的保存到磁盘</li>
 </ul>
 <blockquote>
@@ -1454,12 +1468,58 @@
 <li><a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2/topics/db/transactions/">django数据库事务详解</a></li>
 </ul>
 </blockquote>
+<p>事务的隔离级别</p>
 <ul>
 <li>读未提交（RU -&gt; Read Uncommitted）：问题为脏读（一个事务读到另一个事务未提交的更新数据）</li>
 <li>读已提交（RC -&gt; Read Committed）：问题为不可重复读（同一条记录前后发生了变化）</li>
-<li>可重复读（RR -&gt; Repeatable Read）：问题为幻读（记录数量前后发生了变化或者部分记录删除了）</li>
+<li>可重复读（RR -&gt; Repeatable Read）：问题为幻读（记录的数量前后发生了变化）</li>
 <li>串行化（Serializable）：没有问题，但性能差</li>
 </ul>
+<blockquote>
+<p>ps：是为了解决binlog为STATEMENT时主从执行的SQL顺序不一致导致主从数据不一致的问题，RC级不能解决，RR级别通过加锁解决了</p>
+</blockquote>
+<h5 id="Read-Write（读写）"><a href="#Read-Write（读写）" class="headerlink" title="Read-Write（读写）"></a>Read-Write（读写）</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/en_joker/article/details/131020585">mysql事务隔离之读写控制</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/h2517956473/article/details/118727878">mysql事务隔离之快照读和当前读</a></li>
+</ul>
+</blockquote>
+<p>隔离性解决的是数据库事务并发的读写问题，是通过MVCC（快照读）和Lock（当前读）来实现的</p>
+<ul>
+<li>写后读：不一致性（脏读、不可重复读、幻读）</li>
+<li>读后写：写入偏差</li>
+<li>并发写：更新丢失</li>
+</ul>
+<blockquote>
+<p>ps：并发读不会存在问题</p>
+</blockquote>
+<p>快照读：写写冲突， <code>读写不冲突</code> （通过MVCC的写时复制机制实现），读读不冲突<br>当前读：写写冲突， <code>读写冲突</code> （通过读写锁的读写互斥机制实现） ，读读不冲突</p>
+<ul>
+<li>快照读（不加锁）<ul>
+<li><code>select</code>（MVCC）</li>
+</ul>
+</li>
+<li>当前读（加锁）<ul>
+<li><code>select for update</code>（写锁）</li>
+<li><code>select lock in share mode</code>（读锁）</li>
+<li><code>insert</code>（写锁）</li>
+<li><code>delete</code>（写锁）</li>
+<li><code>update</code>（写锁）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>ps：当前读只影响其他事务的当前读，不会影响其他事务的快照读，因为快照读不加锁</p>
+</blockquote>
+<p>各种select的区别</p>
+<ul>
+<li>读快照的数据时用<code>select</code></li>
+<li>读最新的数据但不修改时用<code>select lock in share mode</code></li>
+<li>读最新的数据且要修改时用<code>select for update</code></li>
+</ul>
+<blockquote>
+<p>ps： <code>select for update</code> 可以用来解决并发写入时的脏写问题</p>
+</blockquote>
 <h5 id="Dirty-Read（脏读）"><a href="#Dirty-Read（脏读）" class="headerlink" title="Dirty Read（脏读）"></a>Dirty Read（脏读）</h5><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33591903/article/details/81672260">脏读入门</a></li>
@@ -1468,24 +1528,29 @@
 </ul>
 </blockquote>
 <h6 id="脏读的场景"><a href="#脏读的场景" class="headerlink" title="脏读的场景"></a>脏读的场景</h6><ul>
-<li>读取到了其他事务还未提交的变更</li>
+<li>读取到了其他事务还未提交的数据</li>
 </ul>
+<blockquote>
+<p>ps：脏数据指的就是还未提交的数据</p>
+</blockquote>
 <h6 id="脏读的问题"><a href="#脏读的问题" class="headerlink" title="脏读的问题"></a>脏读的问题</h6><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sun8112133/article/details/89670009">脏读有什么问题</a></li>
 </ul>
 </blockquote>
 <ul>
-<li>读取到了脏数据（脏数据是指还未提交的数据，如果使用了然后其他回滚后容易导致逻辑错误）</li>
+<li>会读到脏数据并导致逻辑错误（脏数据被使用后如果数据被回滚后了会导致逻辑错误）</li>
 </ul>
 <h6 id="脏读的案例"><a href="#脏读的案例" class="headerlink" title="脏读的案例"></a>脏读的案例</h6><ul>
-<li>A事务读取账户还剩2000</li>
-<li>A事务扣除1000后还剩1000</li>
-<li>B事务读取账户还剩1000</li>
-<li>B事务增加1000后写入2000</li>
-<li>A事务遇见异常回滚后账户为2000</li>
-<li>B事务正常写入后账户为2000</li>
-<li>此时就出现了逻辑错误（A事务回滚了不扣除，再加上B事务增加的1000，正常应该是3000）</li>
+<li>A事务读取计数为0</li>
+<li>A事务增加后更新计数为1</li>
+<li>B事务读取计数为1</li>
+<li>B事务增加后更新计数为2</li>
+<li>A事务遇见异常回滚后更新计数为0</li>
+<li>B事务提交后计数为2</li>
+<li>此时就出现了逻辑错误</li>
+<li>因为只有一个计数操作成功了</li>
+<li>所以计数正确的值应该为1而不是2</li>
 </ul>
 <h5 id="Unrepeatable-Read（不可重复读）"><a href="#Unrepeatable-Read（不可重复读）" class="headerlink" title="Unrepeatable Read（不可重复读）"></a>Unrepeatable Read（不可重复读）</h5><blockquote>
 <ul>
@@ -1518,9 +1583,9 @@
 </ul>
 </blockquote>
 <h6 id="幻读的场景"><a href="#幻读的场景" class="headerlink" title="幻读的场景"></a>幻读的场景</h6><ul>
-<li>前后查询时记录数量发生了变化</li>
+<li>前后查询时记录数量发生了变化（新增或者删除了记录）</li>
+<li>刚才不存在的记录现在存在了（检测到不存在后去插入时却提示存在了） </li>
 <li>刚才存在的记录现在不存在了（检测到存在后去查询、更新、删除却提示不存在了）</li>
-<li>刚才不存在的记录现在存在了（检测到不存在后去插入时却提示存在了）</li>
 </ul>
 <h6 id="幻读的问题"><a href="#幻读的问题" class="headerlink" title="幻读的问题"></a>幻读的问题</h6><blockquote>
 <ul>
@@ -1529,8 +1594,10 @@
 </ul>
 </blockquote>
 <ul>
-<li>检查后写入失败</li>
-<li>检查后插入冲突</li>
+<li>检查没问题后却出现了插入冲突</li>
+<li>检查没问题后却出现了更新异常</li>
+<li>检查没问题后却出现了删除异常</li>
+<li>检查没问题后却出现了查询异常</li>
 </ul>
 <h6 id="幻读的案例"><a href="#幻读的案例" class="headerlink" title="幻读的案例"></a>幻读的案例</h6><ul>
 <li>A事务检查记录不存在</li>
@@ -1547,11 +1614,31 @@
 </ul>
 </blockquote>
 <h6 id="脏写的场景"><a href="#脏写的场景" class="headerlink" title="脏写的场景"></a>脏写的场景</h6><ul>
-<li>更新丢失（先写的数据覆盖了后写的数据）</li>
-<li>回滚丢失（回滚的数据覆盖了写入的数据）</li>
-<li>写入偏差（检查时没问题，但插入时违背了约束，比如插入冲突）</li>
+<li>读后写：读完数据后修改并写入</li>
+<li>并发写：同时写入数据</li>
 </ul>
-<h6 id="脏写的问题"><a href="#脏写的问题" class="headerlink" title="脏写的问题"></a>脏写的问题</h6><h6 id="脏写的案例"><a href="#脏写的案例" class="headerlink" title="脏写的案例"></a>脏写的案例</h6><h4 id="Durability"><a href="#Durability" class="headerlink" title="Durability"></a>Durability</h4><blockquote>
+<h6 id="脏写的问题"><a href="#脏写的问题" class="headerlink" title="脏写的问题"></a>脏写的问题</h6><ul>
+<li>写入偏差（读后写问题）<ul>
+<li>检查时没问题，但插入时出现了问题，比如插入冲突</li>
+<li>检查时没问题，但更新后违背了约束，比如更新为负值</li>
+</ul>
+</li>
+<li>更新丢失（并发写问题）<ul>
+<li>先写的数据覆盖了后写的数据</li>
+<li>回滚的数据覆盖了写入的数据</li>
+</ul>
+</li>
+</ul>
+<h6 id="脏写的案例"><a href="#脏写的案例" class="headerlink" title="脏写的案例"></a>脏写的案例</h6><ul>
+<li>A事务读取库存为1</li>
+<li>A事务扣减后更新库存为0</li>
+<li>B事务读取库存为1</li>
+<li>B事务扣减后更新库存为-1</li>
+<li>A事务提交修改后库存为0</li>
+<li>B事务提交修改后库存为-1</li>
+<li>此时就出现了库存为负数的问题</li>
+</ul>
+<h4 id="Durability"><a href="#Durability" class="headerlink" title="Durability"></a>Durability</h4><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_25448409/article/details/105376450">mysql是如何保证持久性的</a></li>
 </ul>
@@ -1563,6 +1650,36 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34980601/article/details/114680258">mysql事务之某个事务能读到其他事务修改后的数据吗</a></li>
 </ul>
 </blockquote>
+<ul>
+<li>当前事务可以读到当前事务还未提交的修改</li>
+<li>其他事务可不可以读到当前事务已提交的修改则需要看情况<ul>
+<li>事务A最先开始</li>
+<li>事务B在事务A提交之前开始</li>
+<li>事务C在事务A提交之后开始</li>
+<li>则如果隔离级别为读已提交，则B可以读到A的修改</li>
+<li>则如果隔离级别为可重复读，则B不可以读到A的修改</li>
+<li>C可以读到A的修改</li>
+</ul>
+</li>
+</ul>
+<h4 id="mysql事务隔离级别为什么默认是RR"><a href="#mysql事务隔离级别为什么默认是RR" class="headerlink" title="mysql事务隔离级别为什么默认是RR"></a>mysql事务隔离级别为什么默认是RR</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/QGhurt/article/details/118280010">mysql事务隔离级别为什么默认是RR</a></li>
+</ul>
+</blockquote>
+<p>是为了解决binlog为STATEMENT时主从执行的SQL顺序不一致导致主从数据不一致的问题，RC级不能解决，RR级别通过加锁解决了</p>
+<ul>
+<li>事务A删除id为1的数据</li>
+<li>事务B插入id为1的数据</li>
+<li>事务B先提交</li>
+<li>事务A后提交</li>
+<li>此时主库会存在id为1的数据</li>
+<li>此时从库不存在id为1的数据</li>
+<li>因为binlog是按照提交顺序记录的，会记录成先插入后删除</li>
+</ul>
+<blockquote>
+<p>ps：binlog是提交的时候按照提交顺序记录的，不是按照事务的执行顺序记录的</p>
+</blockquote>
 <h3 id="Problem-1"><a href="#Problem-1" class="headerlink" title="Problem"></a>Problem</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_55890191/article/details/123640259">mysql事务之并发事务中删除的数据为什么还能查到</a></li>
@@ -1572,85 +1689,56 @@
 <h2 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h2><h3 id="Basic-2"><a href="#Basic-2" class="headerlink" title="Basic"></a>Basic</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/huaishu/article/details/89924250">MVCC入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/DILIGENT203/article/details/100751755">MVCC进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/SnailMann/article/details/94724197">MVCC详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/WuLex/article/details/129481504">MVCC实现原理之版本控制</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_53456849/article/details/132722921">MVCC详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDN_WYL2016/article/details/119793289">MVCC实现原理之写时复制（CopyOnWrite）</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42651904/article/details/110622818">MVCC实现原理之快照读（ReadView）</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41750142/article/details/104970531">MVCC实现原理之版本链（UndoLog）</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangh571354026/article/details/124501658">MVCC实现原理之隐藏字段</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_62436868/article/details/127202062">MVCC实现原理之ReadView</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lzb348110175/article/details/106788351">MVCC实现原理之UndoLog</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CoderTnT/article/details/105557264">MVCC实现原理之版本链</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_48333563/article/details/107348767">MVCC实现原理之删除标记</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/li1325169021/article/details/121228920">MVCC实现原理之INSERT</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/li1325169021/article/details/121310364">MVCC实现原理之UPDATE</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/li1325169021/article/details/121309733">MVCC实现原理之DELETE</a></li>
 </ul>
 </blockquote>
-<p>MVCC实现原理：隐式字段 + ReadView + UndoLog</p>
-<h4 id="MVCC实现原理之隐藏字段"><a href="#MVCC实现原理之隐藏字段" class="headerlink" title="MVCC实现原理之隐藏字段"></a>MVCC实现原理之隐藏字段</h4><p>DB_ROW_ID：6字节，隐藏的自增ID，没有主键时会自动用DB_ROW_ID生成一个聚簇索引<br>DB_TRX_ID：6字节，变更版本号，记录的是插入或者更新时（新纪录）当前事务的版本号<br>DB_ROLL_PTR：7字节，回滚指针，记录的是更新（旧记录）或者删除时当前事务的版本号</p>
-<blockquote>
-<p>ps：DB_ROLL_PTR代表的是删除版本号，更新时会复制新纪录进行修改并将旧记录标记为删除<br>ps：更新时采用逆向思维，旧记录的DB_ROLL_PTR存储了新纪录的版本而不是新纪录里面存了旧记录的版本<br>ps：更新后如果想要回滚，id相等且DB_ROLL_PTR等于当前记录的DB_TRX_ID的记录就是可以回滚的上一个版本</p>
-</blockquote>
-<h4 id="MVCC实现原理之ReadView"><a href="#MVCC实现原理之ReadView" class="headerlink" title="MVCC实现原理之ReadView"></a>MVCC实现原理之ReadView</h4><p>隔离级别</p>
-<ul>
-<li>读已提交：每次查询都生成新的ReadView</li>
-<li>可重复读：事务开始时只生成一次ReadView</li>
+<h4 id="MVCC实现原理"><a href="#MVCC实现原理" class="headerlink" title="MVCC实现原理"></a>MVCC实现原理</h4><ul>
+<li>写时复制（CopyOnWrite） </li>
+<li>快照读（ReadView）</li>
+<li>版本链（UndoLog）</li>
 </ul>
-<p>核心概念</p>
+<h4 id="MVCC实现原理之隐藏字段"><a href="#MVCC实现原理之隐藏字段" class="headerlink" title="MVCC实现原理之隐藏字段"></a>MVCC实现原理之隐藏字段</h4><p>DB_ROW_ID：6字节，记录ID，没有主键时会自动用DB_ROW_ID生成一个聚簇索引<br>DB_TRX_ID：6字节，版本号，记录的是修改这条记录的事务的版本号<br>DB_ROLL_PTR：7字节，回滚指针，指向记录的上一个版本</p>
+<h4 id="MVCC实现原理之ReadView"><a href="#MVCC实现原理之ReadView" class="headerlink" title="MVCC实现原理之ReadView"></a>MVCC实现原理之ReadView</h4><p>核心概念</p>
 <ul>
-<li>当前事务：creator_trx_id，创建ReadView时的当前事务ID</li>
-<li>已提交事务：事务版本号小于低水位</li>
-<li>低水位：up_limit_id，创建ReadView时的活跃事务中最小的事务ID</li>
-<li>未提交事务：trx_ids，创建ReadView时的活跃事务ID集合</li>
-<li>高水位：low_limit_id，创建ReadView时的下一个事务ID</li>
-<li>未开始事务：事务版本号大于或等于高水位</li>
+<li>当前事务id：creator_trx_id，创建ReadView的事务id</li>
+<li>活跃事务id：m_ids，创建ReadView时未提交的事务id集合</li>
+<li>最小事务id：min_trx_id，m_ids里的最小id</li>
+<li>最大事务id：max_trx_id，系统分配给下一个事务的事务id</li>
+<li>记录事务id：trx_id，修改记录时的事务的事务id</li>
 </ul>
-<p>查询过程</p>
+<p>查找过程</p>
 <ul>
-<li>依据修改标志进行查询<ul>
-<li>db_trx_id等于creator_trx_id，当前事务修改过的数据，可访问</li>
-<li>db_trx_id小于up_limit_id，已提交的数据，可访问</li>
-<li>db_trx_id大于或者等于low_limit_id，未来事务修改过的数据，不可访问</li>
-<li>db_trx_id在trx_ids中，未提交的数据，不可访问</li>
-<li>db_trx_id不在trx_ids中，已提交的数据，可访问</li>
+<li>判断记录是否可见<ul>
+<li>trx_id等于creator_trx_id，当前事务修改过的数据，对于当前事务可见</li>
+<li>trx_id小于min_trx_id，当前事务开启前修改的数据，对于当前事务可见</li>
+<li>trx_id大于等于max_trx_id，当前事务开启后修改的数据，对于当前事务不可见</li>
+<li>trx_id在m_ids中，当前事务开启时未提交的数据，对于当前事务不可见</li>
+<li>trx_id不在m_ids中，当前事务开启时已提交的数据，对于当前事务可见</li>
 </ul>
 </li>
-<li>依据删除标志进行查询<ul>
-<li>db_roll_ptr存在且等于当前事务版本的数据，不可访问 </li>
-<li>db_roll_ptr存在且小于当前事务版本的数据，不可访问</li>
-<li>db_roll_ptr不存在或者大于当前事务版本的数据，可访问</li>
-</ul>
-</li>
+<li>如果记录可见，就接受当前记录</li>
+<li>如果记录不可见，则通过记录的roll_ptr找到上一个版本的记录继续判断，直到所有版本的记录都判断过</li>
 </ul>
 <blockquote>
-<p>ps：删除标志的版本 <code>等于</code> 当前事务版本的数据代表数据是 <code>自己删除</code> 的，不可以访问<br>ps：删除标志的版本 <code>小于</code> 当前事务版本的数据代表数据是 <code>已经删除</code> 的，不可以访问<br>ps：删除标志的版本 <code>大于</code> 当前事务版本的数据代表数据是 <code>未来删除</code> 的，现在可以访问</p>
+<p>ps：删除的记录会有删除标记（delete_mark），会被过滤掉</p>
 </blockquote>
-<h3 id="Question-2"><a href="#Question-2" class="headerlink" title="Question"></a>Question</h3><h4 id="MVCC和读写机制的关系"><a href="#MVCC和读写机制的关系" class="headerlink" title="MVCC和读写机制的关系"></a>MVCC和读写机制的关系</h4><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/h2517956473/article/details/118727878">MVCC读写机制之快照读和当前读入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/MarkusZhang/article/details/107335259">MVCC读写机制之快照读和当前读进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44844089/article/details/115532014">MVCC读写机制之快照读和当前读详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDN_WYL2016/article/details/119793289">MVCC读写机制之快照读和写时复制</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/en_joker/article/details/131020585">MVCC读写机制之快照读和读写关系</a></li>
-</ul>
-</blockquote>
-<p>快照读：写写冲突， <code>读写不冲突</code> （通过写时复制机制实现），读读不冲突<br>当前读：写写冲突， <code>读写冲突</code> ，读读不冲突</p>
-<ul>
-<li>快照读（不加锁）<ul>
-<li><code>select</code></li>
-</ul>
-</li>
-<li>当前读（加锁）<ul>
-<li><code>select for update</code></li>
-<li><code>select lock in share mode</code></li>
-<li><code>insert</code></li>
-<li><code>delete</code></li>
-<li><code>update</code></li>
-</ul>
-</li>
-</ul>
-<h4 id="MVCC和隔离级别的关系"><a href="#MVCC和隔离级别的关系" class="headerlink" title="MVCC和隔离级别的关系"></a>MVCC和隔离级别的关系</h4><blockquote>
+<h3 id="Question-2"><a href="#Question-2" class="headerlink" title="Question"></a>Question</h3><h4 id="MVCC和隔离级别的关系"><a href="#MVCC和隔离级别的关系" class="headerlink" title="MVCC和隔离级别的关系"></a>MVCC和隔离级别的关系</h4><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46146718/article/details/121404423">MVCC和隔离级别的关系</a></li>
 </ul>
 </blockquote>
 <p>隔离级别为 <code>读已提交</code> 和 <code>可重复读</code> 时会启用MVCC机制</p>
+<ul>
+<li>读已提交：事务中的每次查询都生成新的ReadView</li>
+<li>可重复读：事务开始时只生成一次ReadView</li>
+</ul>
 <h3 id="Problem-2"><a href="#Problem-2" class="headerlink" title="Problem"></a>Problem</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hnhygkx/article/details/118025809">MVCC之可重复读是怎么实现的入门</a></li>
@@ -1661,9 +1749,13 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liyunlong819/article/details/126556223">MVCC之不能完全解决幻读的问题详解</a></li>
 </ul>
 </blockquote>
-<blockquote>
-<p>ps：MVCC可以解决 <code>不可重复读</code> 的问题<br>ps：MVCC只能解决 <code>快照读</code> 时 <code>记录数量变化</code> 导致的 <code>幻读</code> 问题， <code>当前读</code> 时 <code>新增和删除记录</code> 导致的 <code>幻读</code> 问题是通过 <code>Next-key锁</code> 解决的</p>
-</blockquote>
+<ul>
+<li>MVCC可以解决 <code>不可重复读</code> 的问题</li>
+<li>不可重复读是通过MVCC中的快照（ReadView）和版本链（UndoLog）解决的</li>
+<li>MVCC只能解决 <code>幻读</code> 的部分问题， <code>当前读</code> 时的幻读问题</li>
+<li>幻读中的 <code>记录数量变化</code> 问题可以通过MVCC（快照读）来解决</li>
+<li>幻读中的 <code>记录新增和删除</code> 问题需要通过LOCK（当前读）来解决</li>
+</ul>
 <h2 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h2><h3 id="Basic-3"><a href="#Basic-3" class="headerlink" title="Basic"></a>Basic</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010841296/article/details/84204701">mysql的锁入门</a></li>
@@ -1712,83 +1804,59 @@
 </li>
 </ul>
 <blockquote>
-<p>ps：Next-key锁是record锁和gap锁的组合</p>
+<p>ps：查询时如果有索引会使用 <code>行锁</code> ，没有索引时则会使用 <code>表锁</code></p>
 </blockquote>
-<h3 id="Question-3"><a href="#Question-3" class="headerlink" title="Question"></a>Question</h3><h4 id="锁和事务的关系"><a href="#锁和事务的关系" class="headerlink" title="锁和事务的关系"></a>锁和事务的关系</h4><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kang389110772/article/details/115667363">mysql之锁和事务的关系</a></li>
-</ul>
+<blockquote>
+<p>ps：Next-key锁是record锁和gap锁的组合，是左开右闭的</p>
 </blockquote>
-<h4 id="锁和读写机制的关系"><a href="#锁和读写机制的关系" class="headerlink" title="锁和读写机制的关系"></a>锁和读写机制的关系</h4><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ldw1986hf123/article/details/119723951">mysql之锁和读写机制的关系</a></li>
-</ul>
-</blockquote>
-<p>快照读不加锁，当前读（写）加锁</p>
-<ul>
-<li>快照读（不加锁）<ul>
-<li><code>select</code></li>
-</ul>
-</li>
-<li>当前读（加锁）<ul>
-<li><code>select for update</code></li>
-<li><code>select lock in share mode</code></li>
-<li><code>insert</code></li>
-<li><code>delete</code></li>
-<li><code>update</code></li>
-</ul>
-</li>
-</ul>
-<h4 id="锁和隔离级别的关系"><a href="#锁和隔离级别的关系" class="headerlink" title="锁和隔离级别的关系"></a>锁和隔离级别的关系</h4><blockquote>
+<h3 id="Question-3"><a href="#Question-3" class="headerlink" title="Question"></a>Question</h3><h4 id="锁和隔离级别的关系"><a href="#锁和隔离级别的关系" class="headerlink" title="锁和隔离级别的关系"></a>锁和隔离级别的关系</h4><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/feichitianxia/article/details/112506680">mysql之锁和隔离级别的关系</a></li>
 </ul>
 </blockquote>
-<p>快照读 不加锁，当前读（写）加锁</p>
 <p>读未提交：只加record锁，操作完记录就释放锁<br>读已提交：只加record锁，事务提交时才释放锁<br>可重复读：加record锁或者gap锁或者Next-key锁，事务提交时才释放锁</p>
-<blockquote>
-<p>ps：可重复读时如果命中索引会使用 <code>行锁</code> ，没有命中索引则会使用为 <code>表锁</code></p>
+<h4 id="锁和查询索引的关系"><a href="#锁和查询索引的关系" class="headerlink" title="锁和查询索引的关系"></a>锁和查询索引的关系</h4><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43901882/article/details/126335771">mysql之锁和查询索引的关系</a></li>
+</ul>
 </blockquote>
+<ul>
+<li>有索引：行锁</li>
+<li>无索引：表锁</li>
+</ul>
 <h4 id="锁和查询类型的关系"><a href="#锁和查询类型的关系" class="headerlink" title="锁和查询类型的关系"></a>锁和查询类型的关系</h4><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34827674/article/details/123447916">mysql之锁和查询类型的关系</a></li>
 </ul>
 </blockquote>
 <ul>
-<li>等值查询：会先加<code>临键锁</code><ul>
-<li>有唯一索引：<ul>
-<li>命中索引时<code>临键锁</code>会退化成<code>记录锁</code></li>
-<li>没有命中索引时<code>临键锁</code>会退化成<code>间隙锁</code></li>
+<li>有唯一索引：会先加 <code>临键锁</code><ul>
+<li>等值查询：<ul>
+<li>命中索引时 <code>临键锁</code> 会退化成 <code>记录锁</code></li>
+<li>没有命中索引时 <code>临键锁</code> 会退化成 <code>间隙锁</code></li>
 </ul>
 </li>
-<li>有非唯一索引：<ul>
-<li>命中索引时除了<code>临键锁</code>还会添加<code>间隙锁</code>（会加2把锁）</li>
-<li>没有命中索引时除了<code>临键锁</code>会退化成<code>间隙锁</code></li>
+<li>范围查询：<ul>
+<li>命中索引时 <code>临键锁</code> 会退化成 <code>间隙锁</code></li>
+<li>没有命中索引时加<code>临键锁</code>，不退化</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>有非唯一索引：两端都会先加 <code>临键锁</code><ul>
+<li>等值查询：<ul>
+<li>命中索引时除了 <code>临键锁</code> 还会额外添加一把 <code>间隙锁</code> （会加2把锁）</li>
+<li>没有命中索引时除了 <code>临键锁</code> 会退化成 <code>间隙锁</code></li>
+</ul>
+</li>
+<li>范围查询：<ul>
+<li>有没有命中索引都加<code>临键锁</code>，不退化</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>无索引：会导致全表扫描，行锁会升级为表锁</li>
 </ul>
-</li>
-<li>范围查询：两端都会先加<code>临键锁</code><ul>
-<li>有唯一索引：<ul>
-<li>命中索引时<code>临键锁</code>会退化成<code>间隙锁</code></li>
-<li>没有命中索引时不退化</li>
-</ul>
-</li>
-<li>有非唯一索引：<ul>
-<li>不管有没有命中索引都不退化</li>
-</ul>
-</li>
-<li>无索引：会导致全表扫描，行锁会升级为表锁</li>
-</ul>
-</li>
-</ul>
-<h4 id="锁和索引类型的关系"><a href="#锁和索引类型的关系" class="headerlink" title="锁和索引类型的关系"></a>锁和索引类型的关系</h4><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43901882/article/details/126335771">mysql之锁和索引类型的关系</a></li>
-</ul>
-</blockquote>
-<p>隔离级别为可重复读时，如果没有命中索引会导致全表扫描，行锁会升级为表锁</p>
 <h3 id="Problem-3"><a href="#Problem-3" class="headerlink" title="Problem"></a>Problem</h3><h4 id="DeadLock（死锁）"><a href="#DeadLock（死锁）" class="headerlink" title="DeadLock（死锁）"></a>DeadLock（死锁）</h4><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/AlbenXie/article/details/118613349">mysql死锁详解</a></li>
@@ -1796,11 +1864,17 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/varyall/article/details/80219459">mysql死锁之insert死锁</a></li>
 </ul>
 </blockquote>
-<h2 id="Log-1"><a href="#Log-1" class="headerlink" title="Log"></a>Log</h2><blockquote>
+<h2 id="Log-1"><a href="#Log-1" class="headerlink" title="Log"></a>Log</h2><h3 id="Basic-4"><a href="#Basic-4" class="headerlink" title="Basic"></a>Basic</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/OYMNCHR/article/details/124375843">mysql事务日志入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44233929/article/details/111471280">mysql事务日志进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xgb2018/article/details/122907900">mysql事务日志详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_24854607/article/details/114639318">mysql事务日志之redolog什么时候删除</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43743711/article/details/126338014">mysql事务日志之undolog什么时候删除</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dajun_x/article/details/132315578">mysql事务日志之binlog如何删除</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liys0811/article/details/132753675">mysql事务日志之redolog和binlog的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/huangjw_806/article/details/100927097">mysql事务日志之redolog和binlog的一致性问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43698257/article/details/110676515">mysql事务日志之为什么binlog不能crash-safe</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xushiyu1996818/article/details/104210732">mysql事务日志之写入时机</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xuwc/p/14037750.html">mysql日志之预写日志（WAL）入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Androidlushangderen/article/details/91061456">mysql日志之预写日志（WAL）详解</a></li>
@@ -1808,41 +1882,106 @@
 </blockquote>
 <p>mysql事务日志</p>
 <ul>
-<li>undo日志：事务回滚数据时需要的日志</li>
-<li>redo日志：宕机修复数据时需要的日志</li>
+<li>undolog：事务回滚数据时需要的日志</li>
+<li>redolog：宕机修复数据时需要的日志</li>
+<li>binlog：主从数据同步时需要的日志</li>
 </ul>
 <blockquote>
 <p>ps：WAL（Write-Ahead Log）：预写日志（顺序写磁盘，速度快），undo和redo都是预写日志</p>
 </blockquote>
-<h2 id="Scope"><a href="#Scope" class="headerlink" title="Scope"></a>Scope</h2><blockquote>
+<h3 id="Question-4"><a href="#Question-4" class="headerlink" title="Question"></a>Question</h3><h4 id="为什么需要undolog"><a href="#为什么需要undolog" class="headerlink" title="为什么需要undolog"></a>为什么需要undolog</h4><p>undolog记录了数据的历史版本，事务回滚时可以通过undolog日志来找到历史数据进行恢复</p>
+<h4 id="为什么需要redolog"><a href="#为什么需要redolog" class="headerlink" title="为什么需要redolog"></a>为什么需要redolog</h4><ul>
+<li>redolog是顺序写操作，比直接将记录写入磁盘更快</li>
+<li>redolog的占用空间比记录小，写入磁盘的耗时更短</li>
+</ul>
+<h4 id="为什么需要binlog"><a href="#为什么需要binlog" class="headerlink" title="为什么需要binlog"></a>为什么需要binlog</h4><p>binlog记录了操作的日志，主要用于主从复制时的数据同步</p>
+<h4 id="undolog、redolog、binlog的区别"><a href="#undolog、redolog、binlog的区别" class="headerlink" title="undolog、redolog、binlog的区别"></a>undolog、redolog、binlog的区别</h4><ul>
+<li>undolog、redolog是引擎层面的日志（InnoDB有而MyISAM没有），binlog是服务层面的日志（InnoDB和MyISAM都有）</li>
+<li>undolog是物理日志（记录的是数据行的修改），redolog是物理日志（记录的是数据页的修改），binlog是逻辑日志（记录的是SQL语句）</li>
+</ul>
+<h4 id="undolog、redolog、binlog的产生"><a href="#undolog、redolog、binlog的产生" class="headerlink" title="undolog、redolog、binlog的产生"></a>undolog、redolog、binlog的产生</h4><ul>
+<li>undolog：<ul>
+<li>事务执行前生成</li>
+</ul>
+</li>
+<li>redolog：可以通过<code>innodb_flush_log_at_trx_commit</code>控制写入策略<ul>
+<li>0：事务执行时写到redolog buffer，每隔1秒刷新到redolog file后立即调用fsync刷盘</li>
+<li>1：事务执行时写到redolog buffer，事务提交时刷新到redolog file后立即调用fsync刷盘</li>
+<li>2：事务执行时写到redolog buffer，事务提交时刷新到redolog file，每隔1秒调用fsync刷盘</li>
+</ul>
+</li>
+<li>binlog：可以通过<code>sync_binlog</code>控制写入策略<ul>
+<li>0：事务执行时写到binlog cache，事务提交时刷新到binlog file，何时刷盘由操作系统决定</li>
+<li>1：事务执行时写到binlog cache，事务提交时刷新到binlog file，每次提交时刷盘</li>
+<li>N：事务执行时写到binlog cache，事务提交时刷新到binlog file，每N个事务提交后刷盘</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>ps：innodb_flush_log_at_trx_commit默认为1，sync_binlog默认为0<br>ps：undolog也会生成对应的redolog来保证undolog的日志数据的持久化</p>
+</blockquote>
+<h4 id="undolog、redolog、binlog的释放"><a href="#undolog、redolog、binlog的释放" class="headerlink" title="undolog、redolog、binlog的释放"></a>undolog、redolog、binlog的释放</h4><ul>
+<li>undolog：事务提交后不会立即释放，要等到没用的时候释放</li>
+<li>redolog：刷盘后就释放</li>
+<li>binlog：需要手动释放或者配置过期时间</li>
+</ul>
+<h4 id="redolog和binlog的区别"><a href="#redolog和binlog的区别" class="headerlink" title="redolog和binlog的区别"></a>redolog和binlog的区别</h4><ul>
+<li>redolog属于InnoDB引擎的功能，binlog属于MySQL Server的功能，并且是以二进制文件记录</li>
+<li>redolog属于物理日志，记录是数据页的修改，binlog是逻辑日志，记录的记录的更改</li>
+<li>redolog日志是循环写，日志空间大小是固定，binlog是追加写入，写完一个写下一个，不会覆盖使用</li>
+<li>redolog是作为服务器异常宕机后事务数据自动恢复使用的，binlog是作为主从复制和备份恢复使用的</li>
+<li>redolog有crash-safe能力的能力，binlog没有自动crash-safe能力</li>
+</ul>
+<h4 id="redolog和binlog的主从一致性"><a href="#redolog和binlog的主从一致性" class="headerlink" title="redolog和binlog的主从一致性"></a>redolog和binlog的主从一致性</h4><p>redolog和binlog其中有一个写盘失败，会导致主（redolog）从（binlog）数据不一致的问题</p>
+<p>事务提交时先写redolog在写binlog</p>
+<ul>
+<li>阶段1：redolog写盘后，事务处于处于prepare状态</li>
+<li>阶段2：binlog写盘后，事务处于commit状态</li>
+</ul>
+<h3 id="Problem-4"><a href="#Problem-4" class="headerlink" title="Problem"></a>Problem</h3><h2 id="Scope"><a href="#Scope" class="headerlink" title="Scope"></a>Scope</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_45406092/article/details/109624425">mysql事务之作用域</a></li>
 </ul>
 </blockquote>
-<p>mysql事务的作用域</p>
+<p>session和global控制的是新的设置生效的范围</p>
 <ul>
-<li>session</li>
-<li>global</li>
+<li>session：会话，也就是当前连接立即生效</li>
+<li>global：全局，不包含当前连接，之后新获取的连接都会生效</li>
 </ul>
-<h1 id="Problem-4"><a href="#Problem-4" class="headerlink" title="Problem"></a>Problem</h1><h2 id="并发操作"><a href="#并发操作" class="headerlink" title="并发操作"></a>并发操作</h2><blockquote>
+<h1 id="Problem-5"><a href="#Problem-5" class="headerlink" title="Problem"></a>Problem</h1><h2 id="并发操作"><a href="#并发操作" class="headerlink" title="并发操作"></a>并发操作</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_71777195/article/details/126968432">mysql并发操作之幻读问题</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yueguangmuyu/article/details/118929189">mysql并发操作之死锁问题</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/java_zhangshuai/article/details/83273520">mysql并发操作之插入冲突</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39445473/article/details/90488673">mysql并发操作之更新丢失</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yueguangmuyu/article/details/118929189">mysql并发操作之死锁问题</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41775852/article/details/111916026">mysql并发操作之写入偏差</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39445473/article/details/90488673">mysql并发操作之更新丢失</a></li>
 </ul>
+</blockquote>
+<ul>
+<li>写后读：不一致性（脏读、不可重复读、幻读）</li>
+<li>读后写：写入偏差</li>
+<li>并发写：更新丢失</li>
+</ul>
+<blockquote>
+<p>ps：并发读不会存在问题</p>
 </blockquote>
 <h2 id="读写分离"><a href="#读写分离" class="headerlink" title="读写分离"></a>读写分离</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/keets1992/article/details/114826672">mysql读写分离之读不到刚插入的数据问题</a></li>
 </ul>
 </blockquote>
+<p>主从延时会导致读写分离时不能立马读到最新的数据</p>
 <h2 id="数据丢失"><a href="#数据丢失" class="headerlink" title="数据丢失"></a>数据丢失</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013870094/article/details/78267971">mysql数据丢失之主从同步详解</a></li>
 </ul>
 </blockquote>
+<ul>
+<li>持久化时innodb_flush_log_at_trx_commit设置为0或2会丢数据（未刷盘的数据在宕机的时候会丢数据）</li>
+<li>主从切换时主从同步不完整时会丢数据</li>
+<li>程序有bug误操作删除数据</li>
+<li>人为误操作删除数据</li>
+</ul>
 <h1 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h1><ul>
 <li>optimize（查询和性能优化）</li>
 <li>explain（查询分析工具）</li>
@@ -1898,8 +2037,13 @@
 <p>性能优化</p>
 <ul>
 <li>使用更好的服务器</li>
-<li>使用批量操作</li>
-<li>使用分批处理（插入或者删除时间较长时可以分批处理）</li>
+<li>增大缓冲池</li>
+<li>增大连接数</li>
+</ul>
+<p>操作优化</p>
+<ul>
+<li>多次的操作优化为批量处理</li>
+<li>长时间操作优化为分批处理</li>
 </ul>
 <h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><blockquote>
 <ul>
@@ -1964,14 +2108,36 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Ailubby/article/details/107012488">mysql主从复制入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liupeifeng3514/article/details/78998248">mysql主从复制进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sanylove/article/details/127575487">mysql主从复制详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42773863/article/details/120989351">mysql主从复制之binlog详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35165000/article/details/115036692">mysql主从复制之半同步详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/HD243608836/article/details/109578131">mysql主从复制之全局事务ID详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/aixls80424/article/details/101835145">mysql主从复制之binlog格式和隔离级别的关系入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_63437643/article/details/123526671">mysql主从复制之binlog格式和隔离级别的关系详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42773863/article/details/120989351">mysql主从复制之binlog详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_63437643/article/details/123526671">mysql主从复制之binlog格式和隔离级别的关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_53467514/article/details/135222811">mysql主从复制之延时的解决办法</a></li>
 </ul>
 </blockquote>
-<p>半同步：semi-sync<br>全局事务ID：GTID</p>
+<h3 id="主从复制过程"><a href="#主从复制过程" class="headerlink" title="主从复制过程"></a>主从复制过程</h3><ul>
+<li>master将DDL和DML操作记录到binlog文件中</li>
+<li>slave的IO线程负责从master的logdump线程那里接收binlog并写入relaylog文件中</li>
+<li>slave的SQL线程负责执行relaylog文件的sql语句</li>
+</ul>
+<blockquote>
+<p>ps：主从同步是从库去主库拉取，而不是主库推给从库</p>
+</blockquote>
+<h3 id="主从复制模式"><a href="#主从复制模式" class="headerlink" title="主从复制模式"></a>主从复制模式</h3><ul>
+<li>异步复制模式：主库写完binlog后不管binlog是否同步到了从库就返回</li>
+<li>同步复制模式：主库写完binlog后等待binlog同步到了所有的从库才返回</li>
+<li>半同步复制模式：主库写完binlog后等待binlog同步到了至少一个从库就返回</li>
+<li>全局事务ID步复制模式：半同步复制并用全局事务ID来改善主从同步的一致性问题</li>
+</ul>
+<blockquote>
+<p>ps：半同步：semi-sync<br>ps：全局事务ID：GTID<br>ps：半同步复制时master如果没有收到slave的ack，会降级为异步复制</p>
+</blockquote>
+<h3 id="主从复制文件"><a href="#主从复制文件" class="headerlink" title="主从复制文件"></a>主从复制文件</h3><ul>
+<li>binlog：master的日志文件</li>
+<li>relaylog：slave的日志文件</li>
+<li>master.info：master的信息文件，保存了slave读取binlog文件和位置信息</li>
+<li>relaylog.info：slave的信息文件，保存了slave应用relaylog的执行点信息</li>
+</ul>
 <p>binlog的格式</p>
 <ul>
 <li>STATMENT（statement-based replication, SBR）：记录sql语句</li>
@@ -1986,25 +2152,9 @@
 <li>RC：只支持row格式的binlog（如果指定了mixed格式也会自动使用row格式）</li>
 <li>RR：支持statement、row和mixed格式</li>
 </ul>
-<h3 id="主从复制过程"><a href="#主从复制过程" class="headerlink" title="主从复制过程"></a>主从复制过程</h3><ul>
-<li>master将DDL和DML操作记录到binlog文件中</li>
-<li>slave的IO线程负责从master的logdump线程那里接收binlog并写入relaylog文件中</li>
-<li>slave的SQL线程负责执行relaylog文件的sql语句</li>
-</ul>
-<h3 id="主从复制模式"><a href="#主从复制模式" class="headerlink" title="主从复制模式"></a>主从复制模式</h3><ul>
-<li>异步复制：master等到binlog写成功就返回</li>
-<li>同步复制：master等到binlog同步到了所有的slave才返回</li>
-<li>半同步复制：master等到binlog同步到了至少一个slave才返回</li>
-</ul>
 <blockquote>
-<p>ps：半同步复制时master如果没有收到slave的ack，会降级为异步复制</p>
+<p>ps：statement和mixed格式可能会存在主从数据不一致的问题</p>
 </blockquote>
-<h3 id="主从复制文件"><a href="#主从复制文件" class="headerlink" title="主从复制文件"></a>主从复制文件</h3><ul>
-<li>binlog：master的日志文件</li>
-<li>relaylog：slave的日志文件</li>
-<li>master.info：master的信息文件，保存了slave读取binlog的位置信息</li>
-<li>relaylog.info：slave的信息文件，保存了slave应用relaylog的执行点信息</li>
-</ul>
 <h2 id="Cluster"><a href="#Cluster" class="headerlink" title="Cluster"></a>Cluster</h2><p>HA（High Availability）：高可用</p>
 <h3 id="主从架构"><a href="#主从架构" class="headerlink" title="主从架构"></a>主从架构</h3><blockquote>
 <ul>
@@ -2041,24 +2191,53 @@
 </ul>
 <h3 id="数据分片（Sharding）"><a href="#数据分片（Sharding）" class="headerlink" title="数据分片（Sharding）"></a>数据分片（Sharding）</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/g6U8W7p06dCO99fQ3/article/details/128179735">数据库分库和分表简介</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/azhuyangjun/article/details/86976514">数据库分库和分表入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/FMC_WBL/article/details/128748726">数据库分库和分表进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/agonie201218/article/details/110823552">数据库分库和分表详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaowanzi_zj/article/details/122270389">数据库分库和分表精进</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41668084/article/details/113356941">数据库分库和分表后问题入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaowanzi_zj/article/details/122270389">数据库分库和分表后问题详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jianzhang11/article/details/128141089">数据库分库和分表后非Sharding Key查询的三种方案</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42874635/article/details/127102146">数据库分库和分表条件（2000w）简介</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Edwin_Hu/article/details/124897224">数据库分库和分表条件（2000w）入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kwinH/article/details/114583497">数据库分库和分表条件（2000w）进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_74931226/article/details/128328857">数据库分库和分表条件（2000w）详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/flynetcn/article/details/126494361">数据库分库和分表条件（2000w）精进</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ABestRookie/article/details/124160714">数据库分库和分表策略之基因算法入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_52346300/article/details/113104964">数据库分库和分表策略之基因算法详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sD7O95O/article/details/122097746">数据库分库和分表之一致性hash</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/agonie201218/article/details/110823552">数据库分库和分表入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/g6U8W7p06dCO99fQ3/article/details/128179735">数据库分库和分表详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41668084/article/details/113356941">数据库分库和分表后的常见问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46033586/article/details/129129484">数据库分库和分表之分区策略</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kimva/article/details/78875173">数据库分库和分表之分区策略之一致性hash</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jianzhang11/article/details/128141089">数据库分库和分表之非分区键查询的三种方案</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ABestRookie/article/details/124160714">数据库分库和分表之非分区键查询之基因法</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/flynetcn/article/details/126494361">数据库分库和分表条件之为什么是2000w</a></li>
 </ul>
 </blockquote>
+<p>分库分表的实现方案</p>
+<ul>
+<li>垂直拆分（简单）<ul>
+<li>垂直分表：将字段拆分成多个表中</li>
+<li>垂直分库：将表拆分到多个库中</li>
+</ul>
+</li>
+<li>水平拆分（复杂）<ul>
+<li>水平分表：将记录拆分成多个表中</li>
+<li>水平分库：将记录拆分到多个库中</li>
+</ul>
+</li>
+</ul>
+<p>分库分表的查询问题</p>
+<ul>
+<li>join</li>
+<li>group by</li>
+<li>order by</li>
+<li>事务问题</li>
+<li>非分区键查询</li>
+</ul>
+<p>分库分表的分区策略</p>
+<ul>
+<li>按照范围分</li>
+<li>使用hash算法分</li>
+</ul>
+<p>分库分表的查询过程</p>
+<ul>
+<li>基于分区键的查询会直接找到对应的分区进行查询</li>
+<li>不基于分区键的查询会在所有的分区中查询并合并结果</li>
+</ul>
+<p>非分区间的查询优化</p>
+<ul>
+<li>冗余法：根据user_id和order_id各做一个分库分表的实现，查询order_id时直接去order_id的分库分表中查</li>
+<li>索引法：建立order_id和user_id的全量数据关联表，查询order_id时先去关联表里面查出user_id</li>
+<li>基因法：order_id的低n位设置为user_id的低n位，这样order_id和user_id的hash取模结果就一样</li>
+</ul>
 <h3 id="数据分区（Partition）"><a href="#数据分区（Partition）" class="headerlink" title="数据分区（Partition）"></a>数据分区（Partition）</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/NewxCJY/article/details/92772086">数据库分区入门</a></li>
@@ -2252,7 +2431,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Concept"><span class="nav-number">1.1.</span> <span class="nav-text">Concept</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Design"><span class="nav-number">1.1.1.</span> <span class="nav-text">Design</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">数据库设计范式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">数据库设计模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Engine"><span class="nav-number">1.1.2.</span> <span class="nav-text">Engine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Database"><span class="nav-number">1.1.3.</span> <span class="nav-text">Database</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Table"><span class="nav-number">1.1.4.</span> <span class="nav-text">Table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Charset"><span class="nav-number">1.1.5.</span> <span class="nav-text">Charset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Collation"><span class="nav-number">1.1.6.</span> <span class="nav-text">Collation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config"><span class="nav-number">1.2.</span> <span class="nav-text">Config</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Engine-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">Engine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Charset-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">Charset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Collation-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">Collation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TimeZone"><span class="nav-number">1.2.4.</span> <span class="nav-text">TimeZone</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Auth"><span class="nav-number">1.2.5.</span> <span class="nav-text">Auth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Log"><span class="nav-number">1.2.6.</span> <span class="nav-text">Log</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Usage"><span class="nav-number">2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DDL%EF%BC%88Data-Definition-Language%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">DDL（Data Definition Language）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#create"><span class="nav-number">2.1.1.</span> <span class="nav-text">create</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#type"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">type</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#string"><span class="nav-number">2.1.1.1.1.</span> <span class="nav-text">string</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#char%E5%92%8Cvarchar%E5%AF%B9%E6%AF%94%E5%92%8C%E9%80%89%E6%8B%A9"><span class="nav-number">2.1.1.1.1.1.</span> <span class="nav-text">char和varchar对比和选择</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#varchar%E5%92%8Ctext%E5%AF%B9%E6%AF%94%E5%92%8C%E9%80%89%E6%8B%A9"><span class="nav-number">2.1.1.1.1.2.</span> <span class="nav-text">varchar和text对比和选择</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#char%E5%92%8Cvarchar%E7%9A%84%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">2.1.1.1.1.3.</span> <span class="nav-text">char和varchar的默认值</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#char%E5%92%8Cvarchar%E7%9A%84%E7%A9%BA%E6%A0%BC%E5%A4%84%E7%90%86"><span class="nav-number">2.1.1.1.1.4.</span> <span class="nav-text">char和varchar的空格处理</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#char%E5%92%8Cvarchar%E7%9A%84%E9%95%BF%E5%BA%A6%E9%80%89%E6%8B%A9"><span class="nav-number">2.1.1.1.1.5.</span> <span class="nav-text">char和varchar的长度选择</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#number"><span class="nav-number">2.1.1.1.2.</span> <span class="nav-text">number</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#boolean"><span class="nav-number">2.1.1.1.3.</span> <span class="nav-text">boolean</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#datetime"><span class="nav-number">2.1.1.1.4.</span> <span class="nav-text">datetime</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#datetime-1"><span class="nav-number">2.1.1.1.4.1.</span> <span class="nav-text">datetime</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#format"><span class="nav-number">2.1.1.1.4.2.</span> <span class="nav-text">format</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#timezone"><span class="nav-number">2.1.1.1.4.3.</span> <span class="nav-text">timezone</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#enum"><span class="nav-number">2.1.1.1.5.</span> <span class="nav-text">enum</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">2.1.1.1.6.</span> <span class="nav-text">null</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ip"><span class="nav-number">2.1.1.1.7.</span> <span class="nav-text">ip</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#url"><span class="nav-number">2.1.1.1.8.</span> <span class="nav-text">url</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#geo"><span class="nav-number">2.1.1.1.9.</span> <span class="nav-text">geo</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#constraint"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">constraint</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%8E%A8%E8%8D%90%E5%A4%96%E9%94%AE"><span class="nav-number">2.1.1.2.1.</span> <span class="nav-text">为什么不推荐外键</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#id"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">id</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%8E%A8%E8%8D%90uuid%E5%92%8C%E9%9B%AA%E8%8A%B1id"><span class="nav-number">2.1.1.3.1.</span> <span class="nav-text">为什么不推荐uuid和雪花id</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88id%E8%A6%81%E6%B1%82%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E"><span class="nav-number">2.1.1.3.2.</span> <span class="nav-text">为什么id要求单调递增</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#alter"><span class="nav-number">2.1.2.</span> <span class="nav-text">alter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#drop"><span class="nav-number">2.1.3.</span> <span class="nav-text">drop</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DML%EF%BC%88Data-Manipulation-Language%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">DML（Data Manipulation Language）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#insert"><span class="nav-number">2.2.1.</span> <span class="nav-text">insert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#update"><span class="nav-number">2.2.2.</span> <span class="nav-text">update</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#delete"><span class="nav-number">2.2.3.</span> <span class="nav-text">delete</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DQL%EF%BC%88Data-Query-Language%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">DQL（Data Query Language）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#general%EF%BC%88%E5%B8%B8%E8%A7%84%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.1.</span> <span class="nav-text">general（常规查询）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#select"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">select</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#sql%E8%AF%AD%E5%8F%A5%E4%B9%A6%E5%86%99%E9%A1%BA%E5%BA%8F"><span class="nav-number">2.3.1.1.1.</span> <span class="nav-text">sql语句书写顺序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sql%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-number">2.3.1.1.2.</span> <span class="nav-text">sql语句执行顺序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sql%E8%AF%AD%E5%8F%A5%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="nav-number">2.3.1.1.3.</span> <span class="nav-text">sql语句处理流程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#distinct"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">distinct</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#where"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">where</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#groupBy"><span class="nav-number">2.3.1.4.</span> <span class="nav-text">groupBy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#orderBy"><span class="nav-number">2.3.1.5.</span> <span class="nav-text">orderBy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#limit"><span class="nav-number">2.3.1.6.</span> <span class="nav-text">limit</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equal%EF%BC%88%E7%AD%89%E5%80%BC%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.2.</span> <span class="nav-text">equal（等值查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#multi%EF%BC%88%E5%A4%9A%E5%80%BC%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.3.</span> <span class="nav-text">multi（多值查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#range%EF%BC%88%E8%8C%83%E5%9B%B4%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.4.</span> <span class="nav-text">range（范围查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fuzzy%EF%BC%88%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.5.</span> <span class="nav-text">fuzzy（模糊查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#combination%EF%BC%88%E7%BB%84%E5%90%88%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.6.</span> <span class="nav-text">combination（组合查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#aggregation%EF%BC%88%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.7.</span> <span class="nav-text">aggregation（聚合查询）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#count-%E5%92%8Ccount-1-%E4%B8%8Ecount-column-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.3.7.1.</span> <span class="nav-text">count(*)和count(1)与count(column)的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#96-count-%E5%92%8Ccount-column-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.3.7.1.1.</span> <span class="nav-text">&#96;count(*)和count(column)的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#count-1-%E5%92%8Ccount-column-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.3.7.1.2.</span> <span class="nav-text">count(1)和count(column)的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#count-%E5%92%8Ccount-1-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.3.7.1.3.</span> <span class="nav-text">count(*)和count(1)的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#relation%EF%BC%88%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.8.</span> <span class="nav-text">relation（关联查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sub%EF%BC%88%E5%AD%90%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.9.</span> <span class="nav-text">sub（子查询）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DCL%EF%BC%88Data-Control-Language%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">DCL（Data Control Language）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Function"><span class="nav-number">2.5.</span> <span class="nav-text">Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Variable"><span class="nav-number">2.6.</span> <span class="nav-text">Variable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Index"><span class="nav-number">2.7.</span> <span class="nav-text">Index</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Key"><span class="nav-number">2.7.1.</span> <span class="nav-text">Key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Category"><span class="nav-number">2.7.2.</span> <span class="nav-text">Category</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Principle"><span class="nav-number">2.7.3.</span> <span class="nav-text">Principle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Invalid"><span class="nav-number">2.7.4.</span> <span class="nav-text">Invalid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question"><span class="nav-number">2.7.5.</span> <span class="nav-text">Question</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem"><span class="nav-number">2.7.6.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimize"><span class="nav-number">2.7.7.</span> <span class="nav-text">Optimize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Query"><span class="nav-number">2.7.8.</span> <span class="nav-text">Query</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Access"><span class="nav-number">2.7.9.</span> <span class="nav-text">Access</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transaction"><span class="nav-number">3.</span> <span class="nav-text">Transaction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ACID"><span class="nav-number">3.1.</span> <span class="nav-text">ACID</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-1"><span class="nav-number">3.1.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Atomicity"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">Atomicity</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Consistency"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">Consistency</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Isolation"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">Isolation</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Dirty-Read%EF%BC%88%E8%84%8F%E8%AF%BB%EF%BC%89"><span class="nav-number">3.1.1.3.1.</span> <span class="nav-text">Dirty Read（脏读）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%84%8F%E8%AF%BB%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">3.1.1.3.1.1.</span> <span class="nav-text">脏读的场景</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%84%8F%E8%AF%BB%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.1.3.1.2.</span> <span class="nav-text">脏读的问题</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%84%8F%E8%AF%BB%E7%9A%84%E6%A1%88%E4%BE%8B"><span class="nav-number">3.1.1.3.1.3.</span> <span class="nav-text">脏读的案例</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Unrepeatable-Read%EF%BC%88%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%EF%BC%89"><span class="nav-number">3.1.1.3.2.</span> <span class="nav-text">Unrepeatable Read（不可重复读）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">3.1.1.3.2.1.</span> <span class="nav-text">不可重复读的场景</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.1.3.2.2.</span> <span class="nav-text">不可重复读的问题</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E7%9A%84%E6%A1%88%E4%BE%8B"><span class="nav-number">3.1.1.3.2.3.</span> <span class="nav-text">不可重复读的案例</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Phantom-Read%EF%BC%88%E5%B9%BB%E8%AF%BB%EF%BC%89"><span class="nav-number">3.1.1.3.3.</span> <span class="nav-text">Phantom Read（幻读）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B9%BB%E8%AF%BB%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">3.1.1.3.3.1.</span> <span class="nav-text">幻读的场景</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B9%BB%E8%AF%BB%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.1.3.3.2.</span> <span class="nav-text">幻读的问题</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B9%BB%E8%AF%BB%E7%9A%84%E6%A1%88%E4%BE%8B"><span class="nav-number">3.1.1.3.3.3.</span> <span class="nav-text">幻读的案例</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Dirty-Write%EF%BC%88%E8%84%8F%E5%86%99%EF%BC%89"><span class="nav-number">3.1.1.3.4.</span> <span class="nav-text">Dirty Write（脏写）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%84%8F%E5%86%99%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">3.1.1.3.4.1.</span> <span class="nav-text">脏写的场景</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%84%8F%E5%86%99%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.1.3.4.2.</span> <span class="nav-text">脏写的问题</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%84%8F%E5%86%99%E7%9A%84%E6%A1%88%E4%BE%8B"><span class="nav-number">3.1.1.3.4.3.</span> <span class="nav-text">脏写的案例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Durability"><span class="nav-number">3.1.1.4.</span> <span class="nav-text">Durability</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-1"><span class="nav-number">3.1.2.</span> <span class="nav-text">Question</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem-1"><span class="nav-number">3.1.3.</span> <span class="nav-text">Problem</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVCC"><span class="nav-number">3.2.</span> <span class="nav-text">MVCC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-2"><span class="nav-number">3.2.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MVCC%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E4%B9%8B%E9%9A%90%E8%97%8F%E5%AD%97%E6%AE%B5"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">MVCC实现原理之隐藏字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MVCC%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E4%B9%8BReadView"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">MVCC实现原理之ReadView</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-2"><span class="nav-number">3.2.2.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MVCC%E5%92%8C%E8%AF%BB%E5%86%99%E6%9C%BA%E5%88%B6%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">MVCC和读写机制的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MVCC%E5%92%8C%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">MVCC和隔离级别的关系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem-2"><span class="nav-number">3.2.3.</span> <span class="nav-text">Problem</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lock"><span class="nav-number">3.3.</span> <span class="nav-text">Lock</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-3"><span class="nav-number">3.3.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">锁的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%88%86%E7%B1%BB"><span class="nav-number">3.3.1.1.1.</span> <span class="nav-text">锁的类型分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%88%86%E7%B1%BB"><span class="nav-number">3.3.1.1.2.</span> <span class="nav-text">锁的实现分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E8%8C%83%E5%9B%B4%E5%88%86%E7%B1%BB"><span class="nav-number">3.3.1.1.3.</span> <span class="nav-text">锁的范围分类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-3"><span class="nav-number">3.3.2.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%81%E5%92%8C%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.3.2.1.</span> <span class="nav-text">锁和事务的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%81%E5%92%8C%E8%AF%BB%E5%86%99%E6%9C%BA%E5%88%B6%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.3.2.2.</span> <span class="nav-text">锁和读写机制的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%81%E5%92%8C%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.3.2.3.</span> <span class="nav-text">锁和隔离级别的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%81%E5%92%8C%E6%9F%A5%E8%AF%A2%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.3.2.4.</span> <span class="nav-text">锁和查询类型的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%81%E5%92%8C%E7%B4%A2%E5%BC%95%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.3.2.5.</span> <span class="nav-text">锁和索引类型的关系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem-3"><span class="nav-number">3.3.3.</span> <span class="nav-text">Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DeadLock%EF%BC%88%E6%AD%BB%E9%94%81%EF%BC%89"><span class="nav-number">3.3.3.1.</span> <span class="nav-text">DeadLock（死锁）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Log-1"><span class="nav-number">3.4.</span> <span class="nav-text">Log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scope"><span class="nav-number">3.5.</span> <span class="nav-text">Scope</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem-4"><span class="nav-number">4.</span> <span class="nav-text">Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%93%8D%E4%BD%9C"><span class="nav-number">4.1.</span> <span class="nav-text">并发操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="nav-number">4.2.</span> <span class="nav-text">读写分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1"><span class="nav-number">4.3.</span> <span class="nav-text">数据丢失</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Performance"><span class="nav-number">5.</span> <span class="nav-text">Performance</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimize-1"><span class="nav-number">5.1.</span> <span class="nav-text">Optimize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis"><span class="nav-number">5.2.</span> <span class="nav-text">Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#explain%E7%9A%84%E8%BE%93%E5%87%BA%E8%AF%B4%E6%98%8E"><span class="nav-number">5.2.1.</span> <span class="nav-text">explain的输出说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#explain%E7%9A%84Type%E8%AF%B4%E6%98%8E"><span class="nav-number">5.2.2.</span> <span class="nav-text">explain的Type说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#explain%E7%9A%84Extra%E8%AF%B4%E6%98%8E"><span class="nav-number">5.2.3.</span> <span class="nav-text">explain的Extra说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Diagnosis"><span class="nav-number">5.3.</span> <span class="nav-text">Diagnosis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SlowLog"><span class="nav-number">5.4.</span> <span class="nav-text">SlowLog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Monitor"><span class="nav-number">5.5.</span> <span class="nav-text">Monitor</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Architecture"><span class="nav-number">6.</span> <span class="nav-text">Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Replication"><span class="nav-number">6.1.</span> <span class="nav-text">Replication</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E8%BF%87%E7%A8%8B"><span class="nav-number">6.1.1.</span> <span class="nav-text">主从复制过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.1.2.</span> <span class="nav-text">主从复制模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6"><span class="nav-number">6.1.3.</span> <span class="nav-text">主从复制文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster"><span class="nav-number">6.2.</span> <span class="nav-text">Cluster</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84"><span class="nav-number">6.2.1.</span> <span class="nav-text">主从架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%B8%BB%E6%9E%B6%E6%9E%84"><span class="nav-number">6.2.2.</span> <span class="nav-text">主主架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB-1"><span class="nav-number">6.2.3.</span> <span class="nav-text">读写分离</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Distributed"><span class="nav-number">6.3.</span> <span class="nav-text">Distributed</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E7%89%87%EF%BC%88Sharding%EF%BC%89"><span class="nav-number">6.3.1.</span> <span class="nav-text">数据分片（Sharding）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E5%8C%BA%EF%BC%88Partition%EF%BC%89"><span class="nav-number">6.3.2.</span> <span class="nav-text">数据分区（Partition）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Application"><span class="nav-number">7.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Counter"><span class="nav-number">7.1.</span> <span class="nav-text">Counter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config-1"><span class="nav-number">7.2.</span> <span class="nav-text">Config</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theory"><span class="nav-number">8.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Management"><span class="nav-number">9.1.</span> <span class="nav-text">Management</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual"><span class="nav-number">9.1.1.</span> <span class="nav-text">Visual</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tools"><span class="nav-number">9.1.2.</span> <span class="nav-text">Tools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Permission"><span class="nav-number">9.1.3.</span> <span class="nav-text">Permission</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Audit"><span class="nav-number">9.1.4.</span> <span class="nav-text">Audit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dump"><span class="nav-number">9.1.5.</span> <span class="nav-text">Dump</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Concept"><span class="nav-number">1.1.</span> <span class="nav-text">Concept</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Design"><span class="nav-number">1.1.1.</span> <span class="nav-text">Design</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">数据库设计范式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">数据库设计模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Engine"><span class="nav-number">1.1.2.</span> <span class="nav-text">Engine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Database"><span class="nav-number">1.1.3.</span> <span class="nav-text">Database</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Table"><span class="nav-number">1.1.4.</span> <span class="nav-text">Table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Charset"><span class="nav-number">1.1.5.</span> <span class="nav-text">Charset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Collation"><span class="nav-number">1.1.6.</span> <span class="nav-text">Collation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config"><span class="nav-number">1.2.</span> <span class="nav-text">Config</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Engine-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">Engine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Charset-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">Charset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Collation-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">Collation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TimeZone"><span class="nav-number">1.2.4.</span> <span class="nav-text">TimeZone</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Auth"><span class="nav-number">1.2.5.</span> <span class="nav-text">Auth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Log"><span class="nav-number">1.2.6.</span> <span class="nav-text">Log</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Usage"><span class="nav-number">2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DDL%EF%BC%88Data-Definition-Language%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">DDL（Data Definition Language）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#create"><span class="nav-number">2.1.1.</span> <span class="nav-text">create</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#type"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">type</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#string"><span class="nav-number">2.1.1.1.1.</span> <span class="nav-text">string</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#char%E5%92%8Cvarchar%E5%AF%B9%E6%AF%94%E5%92%8C%E9%80%89%E6%8B%A9"><span class="nav-number">2.1.1.1.1.1.</span> <span class="nav-text">char和varchar对比和选择</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#varchar%E5%92%8Ctext%E5%AF%B9%E6%AF%94%E5%92%8C%E9%80%89%E6%8B%A9"><span class="nav-number">2.1.1.1.1.2.</span> <span class="nav-text">varchar和text对比和选择</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#char%E5%92%8Cvarchar%E7%9A%84%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">2.1.1.1.1.3.</span> <span class="nav-text">char和varchar的默认值</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#char%E5%92%8Cvarchar%E7%9A%84%E7%A9%BA%E6%A0%BC%E5%A4%84%E7%90%86"><span class="nav-number">2.1.1.1.1.4.</span> <span class="nav-text">char和varchar的空格处理</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#char%E5%92%8Cvarchar%E7%9A%84%E9%95%BF%E5%BA%A6%E9%80%89%E6%8B%A9"><span class="nav-number">2.1.1.1.1.5.</span> <span class="nav-text">char和varchar的长度选择</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#number"><span class="nav-number">2.1.1.1.2.</span> <span class="nav-text">number</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#boolean"><span class="nav-number">2.1.1.1.3.</span> <span class="nav-text">boolean</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#datetime"><span class="nav-number">2.1.1.1.4.</span> <span class="nav-text">datetime</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#datetime-1"><span class="nav-number">2.1.1.1.4.1.</span> <span class="nav-text">datetime</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#format"><span class="nav-number">2.1.1.1.4.2.</span> <span class="nav-text">format</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#timezone"><span class="nav-number">2.1.1.1.4.3.</span> <span class="nav-text">timezone</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#enum"><span class="nav-number">2.1.1.1.5.</span> <span class="nav-text">enum</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">2.1.1.1.6.</span> <span class="nav-text">null</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ip"><span class="nav-number">2.1.1.1.7.</span> <span class="nav-text">ip</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#url"><span class="nav-number">2.1.1.1.8.</span> <span class="nav-text">url</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#geo"><span class="nav-number">2.1.1.1.9.</span> <span class="nav-text">geo</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#constraint"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">constraint</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%8E%A8%E8%8D%90%E5%A4%96%E9%94%AE"><span class="nav-number">2.1.1.2.1.</span> <span class="nav-text">为什么不推荐外键</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#id"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">id</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%8E%A8%E8%8D%90uuid%E5%92%8C%E9%9B%AA%E8%8A%B1id"><span class="nav-number">2.1.1.3.1.</span> <span class="nav-text">为什么不推荐uuid和雪花id</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88id%E8%A6%81%E6%B1%82%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E"><span class="nav-number">2.1.1.3.2.</span> <span class="nav-text">为什么id要求单调递增</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#alter"><span class="nav-number">2.1.2.</span> <span class="nav-text">alter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#drop"><span class="nav-number">2.1.3.</span> <span class="nav-text">drop</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DML%EF%BC%88Data-Manipulation-Language%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">DML（Data Manipulation Language）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#insert"><span class="nav-number">2.2.1.</span> <span class="nav-text">insert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#update"><span class="nav-number">2.2.2.</span> <span class="nav-text">update</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#delete"><span class="nav-number">2.2.3.</span> <span class="nav-text">delete</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DQL%EF%BC%88Data-Query-Language%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">DQL（Data Query Language）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#general%EF%BC%88%E5%B8%B8%E8%A7%84%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.1.</span> <span class="nav-text">general（常规查询）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#select"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">select</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#sql%E8%AF%AD%E5%8F%A5%E4%B9%A6%E5%86%99%E9%A1%BA%E5%BA%8F"><span class="nav-number">2.3.1.1.1.</span> <span class="nav-text">sql语句书写顺序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sql%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-number">2.3.1.1.2.</span> <span class="nav-text">sql语句执行顺序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sql%E8%AF%AD%E5%8F%A5%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="nav-number">2.3.1.1.3.</span> <span class="nav-text">sql语句处理流程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#distinct"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">distinct</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#where"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">where</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#groupBy"><span class="nav-number">2.3.1.4.</span> <span class="nav-text">groupBy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#orderBy"><span class="nav-number">2.3.1.5.</span> <span class="nav-text">orderBy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#limit"><span class="nav-number">2.3.1.6.</span> <span class="nav-text">limit</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equal%EF%BC%88%E7%AD%89%E5%80%BC%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.2.</span> <span class="nav-text">equal（等值查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#multi%EF%BC%88%E5%A4%9A%E5%80%BC%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.3.</span> <span class="nav-text">multi（多值查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#range%EF%BC%88%E8%8C%83%E5%9B%B4%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.4.</span> <span class="nav-text">range（范围查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fuzzy%EF%BC%88%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.5.</span> <span class="nav-text">fuzzy（模糊查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#combination%EF%BC%88%E7%BB%84%E5%90%88%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.6.</span> <span class="nav-text">combination（组合查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#aggregation%EF%BC%88%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.7.</span> <span class="nav-text">aggregation（聚合查询）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#count-%E5%92%8Ccount-1-%E4%B8%8Ecount-column-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.3.7.1.</span> <span class="nav-text">count(*)和count(1)与count(column)的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#96-count-%E5%92%8Ccount-column-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.3.7.1.1.</span> <span class="nav-text">&#96;count(*)和count(column)的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#count-1-%E5%92%8Ccount-column-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.3.7.1.2.</span> <span class="nav-text">count(1)和count(column)的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#count-%E5%92%8Ccount-1-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.3.7.1.3.</span> <span class="nav-text">count(*)和count(1)的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#relation%EF%BC%88%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.8.</span> <span class="nav-text">relation（关联查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sub%EF%BC%88%E5%AD%90%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">2.3.9.</span> <span class="nav-text">sub（子查询）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DCL%EF%BC%88Data-Control-Language%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">DCL（Data Control Language）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Function"><span class="nav-number">2.5.</span> <span class="nav-text">Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Variable"><span class="nav-number">2.6.</span> <span class="nav-text">Variable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Index"><span class="nav-number">2.7.</span> <span class="nav-text">Index</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Key"><span class="nav-number">2.7.1.</span> <span class="nav-text">Key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Category"><span class="nav-number">2.7.2.</span> <span class="nav-text">Category</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Principle"><span class="nav-number">2.7.3.</span> <span class="nav-text">Principle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Invalid"><span class="nav-number">2.7.4.</span> <span class="nav-text">Invalid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question"><span class="nav-number">2.7.5.</span> <span class="nav-text">Question</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem"><span class="nav-number">2.7.6.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimize"><span class="nav-number">2.7.7.</span> <span class="nav-text">Optimize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Query"><span class="nav-number">2.7.8.</span> <span class="nav-text">Query</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Access"><span class="nav-number">2.7.9.</span> <span class="nav-text">Access</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transaction"><span class="nav-number">3.</span> <span class="nav-text">Transaction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ACID"><span class="nav-number">3.1.</span> <span class="nav-text">ACID</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-1"><span class="nav-number">3.1.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Atomicity"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">Atomicity</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Consistency"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">Consistency</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Isolation"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">Isolation</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Read-Write%EF%BC%88%E8%AF%BB%E5%86%99%EF%BC%89"><span class="nav-number">3.1.1.3.1.</span> <span class="nav-text">Read-Write（读写）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Dirty-Read%EF%BC%88%E8%84%8F%E8%AF%BB%EF%BC%89"><span class="nav-number">3.1.1.3.2.</span> <span class="nav-text">Dirty Read（脏读）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%84%8F%E8%AF%BB%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">3.1.1.3.2.1.</span> <span class="nav-text">脏读的场景</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%84%8F%E8%AF%BB%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.1.3.2.2.</span> <span class="nav-text">脏读的问题</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%84%8F%E8%AF%BB%E7%9A%84%E6%A1%88%E4%BE%8B"><span class="nav-number">3.1.1.3.2.3.</span> <span class="nav-text">脏读的案例</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Unrepeatable-Read%EF%BC%88%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%EF%BC%89"><span class="nav-number">3.1.1.3.3.</span> <span class="nav-text">Unrepeatable Read（不可重复读）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">3.1.1.3.3.1.</span> <span class="nav-text">不可重复读的场景</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.1.3.3.2.</span> <span class="nav-text">不可重复读的问题</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E7%9A%84%E6%A1%88%E4%BE%8B"><span class="nav-number">3.1.1.3.3.3.</span> <span class="nav-text">不可重复读的案例</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Phantom-Read%EF%BC%88%E5%B9%BB%E8%AF%BB%EF%BC%89"><span class="nav-number">3.1.1.3.4.</span> <span class="nav-text">Phantom Read（幻读）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B9%BB%E8%AF%BB%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">3.1.1.3.4.1.</span> <span class="nav-text">幻读的场景</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B9%BB%E8%AF%BB%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.1.3.4.2.</span> <span class="nav-text">幻读的问题</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B9%BB%E8%AF%BB%E7%9A%84%E6%A1%88%E4%BE%8B"><span class="nav-number">3.1.1.3.4.3.</span> <span class="nav-text">幻读的案例</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Dirty-Write%EF%BC%88%E8%84%8F%E5%86%99%EF%BC%89"><span class="nav-number">3.1.1.3.5.</span> <span class="nav-text">Dirty Write（脏写）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%84%8F%E5%86%99%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">3.1.1.3.5.1.</span> <span class="nav-text">脏写的场景</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%84%8F%E5%86%99%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.1.3.5.2.</span> <span class="nav-text">脏写的问题</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%84%8F%E5%86%99%E7%9A%84%E6%A1%88%E4%BE%8B"><span class="nav-number">3.1.1.3.5.3.</span> <span class="nav-text">脏写的案例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Durability"><span class="nav-number">3.1.1.4.</span> <span class="nav-text">Durability</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-1"><span class="nav-number">3.1.2.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%B8%BA%E4%BB%80%E4%B9%88%E9%BB%98%E8%AE%A4%E6%98%AFRR"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">mysql事务隔离级别为什么默认是RR</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem-1"><span class="nav-number">3.1.3.</span> <span class="nav-text">Problem</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVCC"><span class="nav-number">3.2.</span> <span class="nav-text">MVCC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-2"><span class="nav-number">3.2.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MVCC%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">MVCC实现原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MVCC%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E4%B9%8B%E9%9A%90%E8%97%8F%E5%AD%97%E6%AE%B5"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">MVCC实现原理之隐藏字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MVCC%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E4%B9%8BReadView"><span class="nav-number">3.2.1.3.</span> <span class="nav-text">MVCC实现原理之ReadView</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-2"><span class="nav-number">3.2.2.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MVCC%E5%92%8C%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">MVCC和隔离级别的关系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem-2"><span class="nav-number">3.2.3.</span> <span class="nav-text">Problem</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lock"><span class="nav-number">3.3.</span> <span class="nav-text">Lock</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-3"><span class="nav-number">3.3.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">锁的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%88%86%E7%B1%BB"><span class="nav-number">3.3.1.1.1.</span> <span class="nav-text">锁的类型分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%88%86%E7%B1%BB"><span class="nav-number">3.3.1.1.2.</span> <span class="nav-text">锁的实现分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E8%8C%83%E5%9B%B4%E5%88%86%E7%B1%BB"><span class="nav-number">3.3.1.1.3.</span> <span class="nav-text">锁的范围分类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-3"><span class="nav-number">3.3.2.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%81%E5%92%8C%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.3.2.1.</span> <span class="nav-text">锁和隔离级别的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%81%E5%92%8C%E6%9F%A5%E8%AF%A2%E7%B4%A2%E5%BC%95%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.3.2.2.</span> <span class="nav-text">锁和查询索引的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%81%E5%92%8C%E6%9F%A5%E8%AF%A2%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.3.2.3.</span> <span class="nav-text">锁和查询类型的关系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem-3"><span class="nav-number">3.3.3.</span> <span class="nav-text">Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DeadLock%EF%BC%88%E6%AD%BB%E9%94%81%EF%BC%89"><span class="nav-number">3.3.3.1.</span> <span class="nav-text">DeadLock（死锁）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Log-1"><span class="nav-number">3.4.</span> <span class="nav-text">Log</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-4"><span class="nav-number">3.4.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-4"><span class="nav-number">3.4.2.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81undolog"><span class="nav-number">3.4.2.1.</span> <span class="nav-text">为什么需要undolog</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81redolog"><span class="nav-number">3.4.2.2.</span> <span class="nav-text">为什么需要redolog</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81binlog"><span class="nav-number">3.4.2.3.</span> <span class="nav-text">为什么需要binlog</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undolog%E3%80%81redolog%E3%80%81binlog%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.4.2.4.</span> <span class="nav-text">undolog、redolog、binlog的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undolog%E3%80%81redolog%E3%80%81binlog%E7%9A%84%E4%BA%A7%E7%94%9F"><span class="nav-number">3.4.2.5.</span> <span class="nav-text">undolog、redolog、binlog的产生</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undolog%E3%80%81redolog%E3%80%81binlog%E7%9A%84%E9%87%8A%E6%94%BE"><span class="nav-number">3.4.2.6.</span> <span class="nav-text">undolog、redolog、binlog的释放</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redolog%E5%92%8Cbinlog%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.4.2.7.</span> <span class="nav-text">redolog和binlog的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redolog%E5%92%8Cbinlog%E7%9A%84%E4%B8%BB%E4%BB%8E%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">3.4.2.8.</span> <span class="nav-text">redolog和binlog的主从一致性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem-4"><span class="nav-number">3.4.3.</span> <span class="nav-text">Problem</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scope"><span class="nav-number">3.5.</span> <span class="nav-text">Scope</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem-5"><span class="nav-number">4.</span> <span class="nav-text">Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%93%8D%E4%BD%9C"><span class="nav-number">4.1.</span> <span class="nav-text">并发操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="nav-number">4.2.</span> <span class="nav-text">读写分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1"><span class="nav-number">4.3.</span> <span class="nav-text">数据丢失</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Performance"><span class="nav-number">5.</span> <span class="nav-text">Performance</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimize-1"><span class="nav-number">5.1.</span> <span class="nav-text">Optimize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis"><span class="nav-number">5.2.</span> <span class="nav-text">Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#explain%E7%9A%84%E8%BE%93%E5%87%BA%E8%AF%B4%E6%98%8E"><span class="nav-number">5.2.1.</span> <span class="nav-text">explain的输出说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#explain%E7%9A%84Type%E8%AF%B4%E6%98%8E"><span class="nav-number">5.2.2.</span> <span class="nav-text">explain的Type说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#explain%E7%9A%84Extra%E8%AF%B4%E6%98%8E"><span class="nav-number">5.2.3.</span> <span class="nav-text">explain的Extra说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Diagnosis"><span class="nav-number">5.3.</span> <span class="nav-text">Diagnosis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SlowLog"><span class="nav-number">5.4.</span> <span class="nav-text">SlowLog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Monitor"><span class="nav-number">5.5.</span> <span class="nav-text">Monitor</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Architecture"><span class="nav-number">6.</span> <span class="nav-text">Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Replication"><span class="nav-number">6.1.</span> <span class="nav-text">Replication</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E8%BF%87%E7%A8%8B"><span class="nav-number">6.1.1.</span> <span class="nav-text">主从复制过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.1.2.</span> <span class="nav-text">主从复制模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6"><span class="nav-number">6.1.3.</span> <span class="nav-text">主从复制文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster"><span class="nav-number">6.2.</span> <span class="nav-text">Cluster</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84"><span class="nav-number">6.2.1.</span> <span class="nav-text">主从架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%B8%BB%E6%9E%B6%E6%9E%84"><span class="nav-number">6.2.2.</span> <span class="nav-text">主主架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB-1"><span class="nav-number">6.2.3.</span> <span class="nav-text">读写分离</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Distributed"><span class="nav-number">6.3.</span> <span class="nav-text">Distributed</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E7%89%87%EF%BC%88Sharding%EF%BC%89"><span class="nav-number">6.3.1.</span> <span class="nav-text">数据分片（Sharding）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E5%8C%BA%EF%BC%88Partition%EF%BC%89"><span class="nav-number">6.3.2.</span> <span class="nav-text">数据分区（Partition）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Application"><span class="nav-number">7.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Counter"><span class="nav-number">7.1.</span> <span class="nav-text">Counter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config-1"><span class="nav-number">7.2.</span> <span class="nav-text">Config</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theory"><span class="nav-number">8.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Management"><span class="nav-number">9.1.</span> <span class="nav-text">Management</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual"><span class="nav-number">9.1.1.</span> <span class="nav-text">Visual</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tools"><span class="nav-number">9.1.2.</span> <span class="nav-text">Tools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Permission"><span class="nav-number">9.1.3.</span> <span class="nav-text">Permission</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Audit"><span class="nav-number">9.1.4.</span> <span class="nav-text">Audit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dump"><span class="nav-number">9.1.5.</span> <span class="nav-text">Dump</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
