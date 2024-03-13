@@ -28,7 +28,7 @@
 <meta property="og:description" content="distributed">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-31T19:04:00.000Z">
-<meta property="article:modified_time" content="2024-03-11T11:32:23.665Z">
+<meta property="article:modified_time" content="2024-03-13T07:07:33.341Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-11 19:32:23" itemprop="dateModified" datetime="2024-03-11T19:32:23+08:00">2024-03-11</time>
+                <time title="修改时间：2024-03-13 15:07:33" itemprop="dateModified" datetime="2024-03-13T15:07:33+08:00">2024-03-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -280,6 +280,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mInfoDavid/article/details/115426018">CAP进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lixinkuan328/article/details/95535691">CAP详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40321119/article/details/106569498">CAP之P（分区容错性）是指什么</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41523716/article/details/119925001">CAP为什么不能同时满足入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yeyazhishang/article/details/80758354">CAP为什么不能同时满足详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/267019831">CAP之可以不保证P（分区容错性）吗</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lpw_cn/article/details/131320421">CAP之CP和AP对比入门</a></li>
@@ -295,7 +296,7 @@
 </li>
 </ul>
 <blockquote>
-<p>ps：在分布式系统中，因为网络的复杂性，所以一定会出现因为网络故障导致分区的情况，如果此时不保证分区容错性，即系统暂停服务去等待网络恢复，这就违背了分布式系统中即使部分节点故障依然可以对外提供服务的设计初衷，所以分布式系统中一定要保证分区容错性</p>
+<p>ps：在分布式系统中，因为网络的复杂性，所以一定会出现因为网络故障导致分区的情况，如果此时不保证分区容错性，就意味着允许部分节点不可用导致服务不能提供完整的服务，但是大部分得场景是不能忍受不完整的服务的，所以分布式系统中一般会保证分区容错性</p>
 </blockquote>
 <h2 id="BASE理论"><a href="#BASE理论" class="headerlink" title="BASE理论"></a>BASE理论</h2><blockquote>
 <ul>
@@ -320,7 +321,7 @@
 </li>
 </ul>
 <blockquote>
-<p>ps：BASE理论的一致性是最终一致性，而ACID的一致性是强一致性</p>
+<p>ps：BASE理论的一致性是最终一致性，而CAP和ACID的一致性是强一致性</p>
 </blockquote>
 <h1 id="分布式算法"><a href="#分布式算法" class="headerlink" title="分布式算法"></a>分布式算法</h1><blockquote>
 <ul>
@@ -355,7 +356,11 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014571143/article/details/130098151">一致性哈希算法详解</a></li>
 </ul>
 </blockquote>
-<p>一致性hash hash槽</p>
+<ul>
+<li>hash</li>
+<li>一致性hash</li>
+<li>hash槽</li>
+</ul>
 <h1 id="分布式通信"><a href="#分布式通信" class="headerlink" title="分布式通信"></a>分布式通信</h1><ul>
 <li>元信息同步<ul>
 <li>加入集群通知</li>
@@ -369,7 +374,11 @@
 <li>fork-join</li>
 <li>partition-merge</li>
 </ul>
-<h2 id="分布式计算框架"><a href="#分布式计算框架" class="headerlink" title="分布式计算框架"></a>分布式计算框架</h2><h1 id="分布式存储"><a href="#分布式存储" class="headerlink" title="分布式存储"></a>分布式存储</h1><p>replication（复制） shard（分片）</p>
+<h2 id="分布式计算框架"><a href="#分布式计算框架" class="headerlink" title="分布式计算框架"></a>分布式计算框架</h2><h1 id="分布式存储"><a href="#分布式存储" class="headerlink" title="分布式存储"></a>分布式存储</h1><ul>
+<li>replication（复制）</li>
+<li>shard（分片）</li>
+<li>replica（副本）</li>
+</ul>
 <h1 id="分布式应用"><a href="#分布式应用" class="headerlink" title="分布式应用"></a>分布式应用</h1><h2 id="分布式ID"><a href="#分布式ID" class="headerlink" title="分布式ID"></a>分布式ID</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44146379/article/details/109220528">生成唯一id的方案入门</a></li>
@@ -484,38 +493,33 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/crazymakercircle/article/details/109459593">分布式事务详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a745233700/article/details/122402303">分布式事务方案</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ibigboy/article/details/118994071">分布式事务补偿</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jia970426/article/details/132220505">分布式事务之原子性</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/thekenofDIS/article/details/121687495">分布式事务之隔离性</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41775852/article/details/105049471">分布式事务之一致性</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42332821/article/details/104301165">分布式事务之DTP模型</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/feiying0canglang/article/details/106785902">分布式事务之2PC和3PC</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/flynetcn/article/details/124179663">分布式事务之2PC和3PC</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37967783/article/details/131075787">分布式事务之TCC</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lisheng5218/article/details/112316401">分布式事务之TCC和2PC的区别入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/flynetcn/article/details/124179663">分布式事务之TCC和2PC的区别详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42163058/article/details/123192169">分布式事务之通知型事务</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lsblsb/article/details/89451745">分布式事务之本地消息表和MQ事务消息 </a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/feiying0canglang/article/details/106785902">分布式事务之3PC和2PC的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lisheng5218/article/details/112316401">分布式事务之TCC和2PC</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_48052161/article/details/135005271">分布式事务之常见问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ibigboy/article/details/118994071">分布式事务之补偿机制</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/vnjohn/article/details/134443109">分布式事务之事务消息</a></li>
 </ul>
 </blockquote>
 <p>事务的分类</p>
 <ul>
-<li>本地事务（ACID）<ul>
-<li>2PC</li>
+<li>本地事务（ACID理论）<ul>
+<li>2PC和3PC</li>
 </ul>
 </li>
-<li>分布式事务（CAP）<ul>
-<li>CP（刚性事务、强一致性，DTP模型）<ul>
+<li>分布式事务<ul>
+<li>刚性事务（CAP理论、强一致性）<ul>
 <li>2PC和3PC（Seata-XA&#x2F;AT）</li>
-<li>JTA和JTS（Java-API）</li>
 </ul>
 </li>
-<li>AP（柔性事务，最终一致性、BASE模型）<ul>
-<li>补偿型（同步）<ul>
+<li>柔性事务（BASE理论，最终一致性）<ul>
+<li>补偿型<ul>
 <li>TCC（Seata-TCC）</li>
 <li>SAGA（Seata-SAGA）</li>
 </ul>
 </li>
-<li>通知型（异步）<ul>
+<li>通知型<ul>
 <li>确保通知型（本地消息表、MQ事务消息）</li>
 <li>尽力通知型（本地消息表、MQ事务消息）</li>
 </ul>
@@ -526,7 +530,7 @@
 </li>
 </ul>
 <blockquote>
-<p>ps：TCC和2PC的流程相似，TCC适用于应用接口，2PC适用于存储系统<br>ps：确保通知型需要保证接受者一定能收到通知消息，尽力通知型不保证但提供消息查询接口</p>
+<p>ps：XA&#x2F;AT是通用的事务协议（AT是高性能版的XA），JTA和JTS是Java的事务协议<br>ps：TCC和2PC的流程相似，TCC适用于业务系统，2PC适用于存储系统<br>ps：确保通知型适用于内部系统，尽力通知型适用于外部系统</p>
 </blockquote>
 <p>事务的概念</p>
 <ul>
@@ -535,14 +539,50 @@
 <li>AP：应用程序</li>
 <li>RM：资源管理器</li>
 <li>TM：事务管理器</li>
-<li>2PC：两阶段提交（Two-Phrase-Commit）</li>
-<li>3PC：三阶段提交（Three-Phrase-Commit）</li>
-<li>TCC：Try、Confirm、Commit</li>
+<li>2PC：Prepare、Commit、Rollback，两阶段提交（Two-Phrase-Commit）</li>
+<li>3PC：Can、Prepare、Commit、Rollback，三阶段提交（Three-Phrase-Commit）</li>
+<li>TCC：Try、Confirm、Cancel，两阶段提交（Two-Phrase-Commit）</li>
+</ul>
+<blockquote>
+<p>ps：XA规范是X&#x2F;Open组织定义的分布式事务处理（DTP，Distributed Transaction Processing）标准</p>
+</blockquote>
+<p>事务的问题</p>
+<ul>
+<li>空回滚：Try请求丢失了（网络丢包），只收到了Cancel请求，这时Cancel请求需要执行空回滚操作</li>
+<li>悬挂：Try请求比Cancel请求后到达（网络延迟），Try比Cancel后执行占用的资源则无法释放</li>
+<li>幂等：重复Commit或Rollback需要支持幂等</li>
 </ul>
 <p>事务的补偿</p>
 <ul>
-<li>重试</li>
 <li>回滚</li>
+<li>重试</li>
+</ul>
+<p>事务的确保</p>
+<ul>
+<li>事务执行前发送半消息（半消息对消费者不可见）</li>
+<li>事务执行成功发送全消息（全消息对消费者可见）</li>
+<li>事务执行失败删除半消息</li>
+</ul>
+<p>2PC的问题</p>
+<ul>
+<li>性能问题：操作阻塞，锁定资源失败时会被阻塞</li>
+<li>可靠性问题：协调故障，协调者挂掉后节点不会释放占用的资源</li>
+<li>一致性问题：网络异常，只有部分节点提交或者回滚了数据</li>
+</ul>
+<blockquote>
+<p>ps：问题的关键字：阻塞、协调、网络<br>ps：协调者有超时机制，节点没有超时机制</p>
+</blockquote>
+<p>3PC的问题</p>
+<ul>
+<li>一致性问题：网络异常，部分节点收到会滚请求后执行了回滚，部分节点超时后执行了提交</li>
+</ul>
+<blockquote>
+<p>ps：3PC新增了can阶段来判断是否能够执行事务从而缩小了所阻塞范围<br>ps：3PC新增了节点超时机制来避免协调者挂掉后节点不会释放占用的资源的问题</p>
+</blockquote>
+<p>TCC的问题</p>
+<ul>
+<li>每个操作都需要支持额外的确认和取消操作</li>
+<li>操作需要支持幂等</li>
 </ul>
 <h1 id="分布式问题"><a href="#分布式问题" class="headerlink" title="分布式问题"></a>分布式问题</h1><h2 id="网络问题"><a href="#网络问题" class="headerlink" title="网络问题"></a>网络问题</h2><h3 id="脑裂问题"><a href="#脑裂问题" class="headerlink" title="脑裂问题"></a>脑裂问题</h3><blockquote>
 <ul>
