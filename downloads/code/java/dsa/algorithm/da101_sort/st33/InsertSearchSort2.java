@@ -28,16 +28,20 @@ public class InsertSearchSort2 {
     private static int search(int[] array, int L, int R, int v) {
         while (L <= R) {
             int m = (L + R) / 2;
-            if (v < array[m]) {
-                if (L == R) {
+            if (L == R) {
+                if (v < array[m]) {
+                    // 插入元素小于当前元素，则插入位置为当前元素的位置
                     return m;
                 } else {
-                    R = m;
+                    // 插入元素大于等于当前元素，则插入位置为当前元素的右边
+                    return m + 1;
                 }
             } else {
-                if (L == R) {
-                    return m + 1;
+                if (v < array[m]) {
+                    // 插入元素小于当前元素，则插入位置所在的区间在当前元素的位置或者当前元素的左边，即区间的右边界R = m
+                    R = m;
                 } else {
+                    // 插入元素大于等于当前元素，则插入位置所在的区间在当前元素的右边，即区间的左边界L = m + 1
                     L = m + 1;
                 }
             }

@@ -28,7 +28,7 @@
 <meta property="og:description" content="java面试总结">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-09-02T17:03:00.000Z">
-<meta property="article:modified_time" content="2024-03-13T07:07:33.352Z">
+<meta property="article:modified_time" content="2024-03-13T09:15:07.281Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ interview">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-13 15:07:33" itemprop="dateModified" datetime="2024-03-13T15:07:33+08:00">2024-03-13</time>
+                <time title="修改时间：2024-03-13 17:15:07" itemprop="dateModified" datetime="2024-03-13T17:15:07+08:00">2024-03-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -2683,7 +2683,12 @@
 <li>基于分区键的查询会直接找到对应的分区进行查询</li>
 <li>不基于分区键的查询会在所有的分区中查询并合并结果</li>
 </ul>
-<p>非分区间的查询优化</p>
+<p>分区键的分区方式</p>
+<ul>
+<li>单键分区：比如user_id</li>
+<li>多键分区：比如user_id和event_type合成一个单键user_id:event_type后再分区</li>
+</ul>
+<p>非分区键的查询优化</p>
 <ul>
 <li>冗余法：根据user_id和order_id各做一个分库分表的实现，查询order_id时直接去order_id的分库分表中查</li>
 <li>索引法：建立order_id和user_id的全量数据关联表，查询order_id时先去关联表里面查出user_id</li>
