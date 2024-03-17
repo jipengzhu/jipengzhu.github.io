@@ -55,13 +55,13 @@ public class Test {
         }
     }
 
-    private static void testTestUtils() {
-        TestMain.TestCase.testTestUtils();
-    }
+    // private static void testTestUtils() {
+    // TestMain.TestCase.testTestUtils();
+    // }
 
-    private static void testToString() {
-        TestMain.TestCase.testToString();
-    }
+    // private static void testToString() {
+    // TestMain.TestCase.testToString();
+    // }
 
     public static class TestMain {
         public static class TestCase {
@@ -437,29 +437,31 @@ public class Test {
                 TreeNode root = new TreeNode(array[0]);
                 queue.offer(root);
 
+                Integer v = null;
                 int i = 1;
                 while (i < array.length) {
                     TreeNode node = queue.poll();
 
-                    if (i < array.length) {
-                        Integer v = array[i++];
+                    TreeNode left = i < array.length && (v = array[i++]) != null ? new TreeNode(v) : null;
+                    TreeNode right = i < array.length && (v = array[i++]) != null ? new TreeNode(v) : null;
 
-                        node.left = v == null ? null : new TreeNode(v);
-
-                        if (node.left != null) {
-                            queue.offer(node.left);
-                        }
+                    // 数组中不包含空节点的子节点的写法（不标准的完全二叉树含空节点的层次遍历）
+                    node.left = left;
+                    node.right = right;
+                    if (left != null) {
+                        queue.offer(left);
+                    }
+                    if (right != null) {
+                        queue.offer(right);
                     }
 
-                    if (i < array.length) {
-                        Integer v = array[i++];
-
-                        node.right = v == null ? null : new TreeNode(v);
-
-                        if (node.right != null) {
-                            queue.offer(node.right);
-                        }
-                    }
+                    // 数组中包含空节点的子节点的写法（标准的完全二叉树含空节点的层次遍历）
+                    // if (node != null) {
+                    // node.left = left;
+                    // node.right = right;
+                    // }
+                    // queue.offer(left);
+                    // queue.offer(right);
                 }
 
                 return root;

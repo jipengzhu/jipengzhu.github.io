@@ -58,7 +58,11 @@ public class Path {
         int[][] dists = new int[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                dists[i][j] = graph[i][j];
+                if (i == j) {
+                    dists[i][j] = 0;
+                } else {
+                    dists[i][j] = graph[i][j];
+                }
             }
         }
 
@@ -66,7 +70,7 @@ public class Path {
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
                     if (dists[i][k] == Integer.MAX_VALUE || dists[k][j] == Integer.MAX_VALUE) {
-                        // 不可能变小，跳过
+                        // 无通路，跳过
                         continue;
                     }
 
