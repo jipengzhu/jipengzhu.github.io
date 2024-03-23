@@ -1,70 +1,54 @@
 public class Solution {
-    public boolean exist(char[][] board, String word) {
-        if (word == null || word.isEmpty()) {
-            return false;
-        }
+    public int maximalSquare(char[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
 
-        int rows = board.length;
-        int cols = board[0].length;
+        int[][] dp = new int[m][n]; // 存储正方形的边长
 
-        boolean[][] visited = new boolean[rows][cols];
+        int max = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 || j == 0) {
+                    dp[i][j] = matrix[i][j] == '1' ? 1 : 0;
 
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (board[i][j] == word.charAt(0)) {
-                    visited[i][j] = true;
+                } else {
+                    int x = i - dp[i - 1][j - 1];
+                    int y = j - dp[i - 1][j - 1];
 
-                    boolean[] result = { false };
-                    backtrace(board, word, 1, i, j, visited, result);
+                    boolean hasZero = false;
 
-                    visited[i][j] = false;
+                    if (!hasZero) {
+                        for (int k = x; k <= i; k++) {
+                            if (matrix[k][j] == '0') {
+                                hasZero = true;
 
-                    if (result[0]) {
-                        return true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!hasZero) {
+                        for (int k = y; k <= j; k++) {
+                            if (matrix[i][k] == '0') {
+                                hasZero = true;
+
+                                break;
+                            }
+                        }
+                    }
+
+                    if (hasZero) {
+                        dp[i][j] = matrix[i][j] == '1' ? 1 : 0;
+                    } else {
+                        dp[i][j] = dp[i - 1][j - 1] + 1;
                     }
                 }
+
+                max = Math.max(max, dp[i][j]);
             }
         }
 
-        return false;
-    }
-
-    private void backtrace(char[][] board, String word, int i, int x, int y, boolean[][] visited, boolean[] result) {
-        if (result[0]) {
-            return;
-        }
-
-        if (i == word.length()) {
-            result[0] = true;
-
-            return;
-        }
-
-        int rows = board.length;
-        int cols = board[0].length;
-
-        int[][] points = {
-                { x, y - 1 }, { x - 1, y }, { x, y + 1 }, { x + 1, y }
-        };
-
-        for (int[] point : points) {
-            x = point[0];
-            y = point[1];
-
-            if (x < 0 || x >= rows || y < 0 || y >= cols) {
-                continue;
-            }
-
-            if (board[x][y] != word.charAt(i)) {
-                continue;
-            }
-
-            if (!visited[x][y]) {
-                visited[x][y] = true;
-                backtrace(board, word, i + 1, x, y, visited, result);
-                visited[x][y] = false;
-            }
-        }
+        return max * max;
     }
 }
 
@@ -77,43 +61,38 @@ class TestMain {
     public static class TestCase {
 
         public static boolean testCase1() {
-            char[][] board = {
-                    { 'A', 'B', 'C', 'E' },
-                    { 'S', 'F', 'C', 'S' },
-                    { 'A', 'D', 'E', 'E' }
+            char[][] matrix = {
+                    { '1', '0', '1', '0', '0' },
+                    { '1', '0', '1', '1', '1' },
+                    { '1', '1', '1', '1', '1' },
+                    { '1', '0', '0', '1', '0' }
             };
-            String word = "ABCCED";
 
-            boolean result = new Solution().exist(board, word);
-            boolean expect = true;
+            int result = new Solution().maximalSquare(matrix);
+            int expect = 4;
 
             return TestUtils.check(result, expect);
         }
 
         public static boolean testCase2() {
-            char[][] board = {
-                    { 'A', 'B', 'C', 'E' },
-                    { 'S', 'F', 'C', 'S' },
-                    { 'A', 'D', 'E', 'E' }
+            char[][] matrix = {
+                    { '0', '1' },
+                    { '1', '0' },
             };
-            String word = "SEE";
 
-            boolean result = new Solution().exist(board, word);
-            boolean expect = true;
+            int result = new Solution().maximalSquare(matrix);
+            int expect = 1;
 
             return TestUtils.check(result, expect);
         }
 
         public static boolean testCase3() {
-            char[][] board = {
-                    { 'A', 'B', 'C', 'E' },
-                    { 'S', 'F', 'C', 'S' },
-                    { 'A', 'D', 'E', 'E' }
+            char[][] matrix = {
+                    { '0' },
             };
-            String word = "ABCB";
 
-            boolean result = new Solution().exist(board, word);
-            boolean expect = false;
+            int result = new Solution().maximalSquare(matrix);
+            int expect = 0;
 
             return TestUtils.check(result, expect);
         }
