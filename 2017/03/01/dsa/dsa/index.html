@@ -28,7 +28,7 @@
 <meta property="og:description" content="数据结构和算法">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-02-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-25T07:26:00.584Z">
+<meta property="article:modified_time" content="2024-03-25T12:01:29.938Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dsa">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-25 15:26:00" itemprop="dateModified" datetime="2024-03-25T15:26:00+08:00">2024-03-25</time>
+                <time title="修改时间：2024-03-25 20:01:29" itemprop="dateModified" datetime="2024-03-25T20:01:29+08:00">2024-03-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -636,6 +636,8 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Shao_yihao/article/details/119957992">图的遍历之辅助标记数组</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37609579/article/details/100110115">图的应用之最短路径</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/SkillWeak/article/details/105812602">图的应用之最小生成树</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43409401/article/details/129947577">图的应用之拓扑排序</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45445598/article/details/122499260">图的应用之并查集</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/DolphinScheduler/article/details/109984260">图的应用之拓扑排序和任务调度</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dutmathjc/article/details/105888831">图的应用之Prim算法和Dijkstra算法区别</a></li>
 </ul>
@@ -757,6 +759,9 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41283356/article/details/108681615">常见的算法思想之动态规划和回溯对比</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/youhuakongzhi/article/details/100518166">常见的算法思想之动态规划和贪心对比</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/QilanAllen/article/details/100806257">常见的算法思想之自底向上和自顶向下</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/youngyangyang04/article/details/109804162">常见的算法思想之回溯算法总结</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37085158/article/details/125215367">常见的算法思想之贪心算法总结</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/pl0321/article/details/115507286">常见的算法思想之动态规划算法总结</a></li>
 </ul>
 </blockquote>
 <ul>
@@ -776,7 +781,7 @@
 <li>最优答案问题：先用贪心，不行的话再用动态规划，还是不行的话就用回溯</li>
 </ul>
 <blockquote>
-<p>ps：回溯是万能的解法（但会重复求解子问题，所以性能最差），动态规划是回溯的优化，贪心则是动态规划的进一步优化<br>ps：回溯求组合问题时，保证后面的选项大于前面的选项，即所有的选项是有序的就可以保证不会重复<br>ps：在状态转移树中，若后一状态仅仅取决于上一个状态，就用贪心算法，若后一状态取决于之前的多个状态，就用动态规划算法</p>
+<p>ps：回溯是万能解法（但会重复求解子问题，所以性能最差），动态规划则是回溯的优化，贪心则是动态规划的进一步优化<br>ps：回溯求组合问题时，保证后面的选项大于前面的选项，即所有的选项是有序的就可以保证不会重复<br>ps：在状态转移树中，若后一状态仅仅取决于上一个状态，就用贪心算法，若后一状态取决于之前的多个状态，就用动态规划算法</p>
 </blockquote>
 <h2 id="算法分类"><a href="#算法分类" class="headerlink" title="算法分类"></a>算法分类</h2><blockquote>
 <ul>
@@ -835,29 +840,14 @@
 <ul>
 <li>堆相关的算法（堆排序、TopK）</li>
 </ul>
-<h4 id="图形结构-1"><a href="#图形结构-1" class="headerlink" title="图形结构"></a>图形结构</h4><h5 id="图"><a href="#图" class="headerlink" title="图"></a>图</h5><blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lisonglisonglisong/article/details/45543451">拓扑排序</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45445598/article/details/122499260">并查集</a></li>
-</ul>
-</blockquote>
-<ul>
+<h4 id="图形结构-1"><a href="#图形结构-1" class="headerlink" title="图形结构"></a>图形结构</h4><h5 id="图"><a href="#图" class="headerlink" title="图"></a>图</h5><ul>
 <li>图相关的算法（遍历、查找）</li>
 <li>图相关的算法（生成树、拓扑排序、并查集）</li>
 </ul>
 <h4 id="散列结构-1"><a href="#散列结构-1" class="headerlink" title="散列结构"></a>散列结构</h4><h5 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h5><ul>
 <li>哈希表相关的算法</li>
 </ul>
-<h3 id="按照算法思想分"><a href="#按照算法思想分" class="headerlink" title="按照算法思想分"></a>按照算法思想分</h3><p>经典的相关问题</p>
-<ul>
-<li>最短路径</li>
-<li>旅行家问题</li>
-<li>找零钱</li>
-<li>货币兑换</li>
-<li>背包问题</li>
-<li>跳台阶</li>
-</ul>
-<h4 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h4><blockquote>
+<h3 id="按照算法思想分"><a href="#按照算法思想分" class="headerlink" title="按照算法思想分"></a>按照算法思想分</h3><h4 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h4><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zy_dreamer/article/details/131069533">枚举算法入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45434953/article/details/129472855">枚举算法详解</a></li>
