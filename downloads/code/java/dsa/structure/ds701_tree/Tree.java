@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Queue;
 
 public class Tree {
-    public static class TreeNode {
+    static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;

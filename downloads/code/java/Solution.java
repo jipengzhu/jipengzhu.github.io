@@ -1,54 +1,158 @@
 public class Solution {
-    public int maximalSquare(char[][] matrix) {
-        int m = matrix.length;
-        int n = matrix[0].length;
+    public ListNode sortList(ListNode head) {
+        return mergeSort(head);
+    }
 
-        int[][] dp = new int[m][n]; // 存储正方形的边长
+    public ListNode mergeSort(ListNode head) {
+        if (head == null) {
+            return null;
+        }
 
-        int max = 0;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (i == 0 || j == 0) {
-                    dp[i][j] = matrix[i][j] == '1' ? 1 : 0;
+        if (head.next == null) {
+            return head;
+        }
 
+        ListNode l1 = head;
+        ListNode l2 = head.next;
+        l1.next = null;
+
+        ListNode p = mergeSort(l1);
+        ListNode q = mergeSort(l2);
+
+        ListNode h = null;
+        ListNode t = null;
+
+        while (p != null && q != null) {
+            while (p != null && q != null && p.val <= q.val) {
+                if (t == null) {
+                    t = p;
+                    h = t;
                 } else {
-                    int x = i - dp[i - 1][j - 1];
-                    int y = j - dp[i - 1][j - 1];
-
-                    boolean hasZero = false;
-
-                    if (!hasZero) {
-                        for (int k = x; k <= i; k++) {
-                            if (matrix[k][j] == '0') {
-                                hasZero = true;
-
-                                break;
-                            }
-                        }
-                    }
-
-                    if (!hasZero) {
-                        for (int k = y; k <= j; k++) {
-                            if (matrix[i][k] == '0') {
-                                hasZero = true;
-
-                                break;
-                            }
-                        }
-                    }
-
-                    if (hasZero) {
-                        dp[i][j] = matrix[i][j] == '1' ? 1 : 0;
-                    } else {
-                        dp[i][j] = dp[i - 1][j - 1] + 1;
-                    }
+                    t.next = p;
+                    t = p;
                 }
 
-                max = Math.max(max, dp[i][j]);
+                p = p.next;
+            }
+
+            while (p != null && q != null && q.val <= p.val) {
+                if (t == null) {
+                    t = q;
+                    h = t;
+                } else {
+                    t.next = q;
+                    t = q;
+                }
+
+                q = q.next;
             }
         }
 
-        return max * max;
+        while (p != null) {
+            t.next = p;
+            t = p;
+
+            p = p.next;
+        }
+        while (q != null) {
+            t.next = q;
+            t = q;
+
+            q = q.next;
+        }
+
+        return h;
+    }
+
+    static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+            next = null;
+        }
+
+        public static ListNode genLinkedList(int[] nums, boolean withHead, int loopPos) {
+            if (nums.length == 0) {
+                return null;
+            }
+
+            int val = withHead ? Integer.MIN_VALUE : nums[0];
+            ListNode head = new ListNode(val);
+
+            ListNode loop = withHead ? null : loopPos == 0 ? head : null;
+
+            int b = withHead ? 0 : 1;
+            ListNode p = head;
+            for (int i = b; i < nums.length; i++) {
+                p.next = new ListNode(nums[i]);
+                p = p.next;
+
+                if (loopPos == i) {
+                    loop = p;
+                }
+            }
+
+            if (loop != null) {
+                p.next = loop;
+            }
+
+            return head;
+        }
+
+        public static ListNode genLinkedListWithHeadNode(int[] nums) {
+            return genLinkedList(nums, true, -1);
+        }
+
+        public static ListNode genLinkedListWithoutHeadNode(int[] nums) {
+            return genLinkedList(nums, false, -1);
+        }
+
+        public static ListNode genLoopedLinkedListWithHeadNode(int[] nums, int pos) {
+            return genLinkedList(nums, true, pos);
+        }
+
+        public static ListNode genLoopedLinkedListWithoutHeadNode(int[] nums, int pos) {
+            return genLinkedList(nums, false, pos);
+        }
+
+        public static int getCount(ListNode head, boolean withHead) {
+            ListNode p = withHead ? head.next : head;
+
+            int c = 0;
+            while (p != null) {
+                c++;
+                p = p.next;
+            }
+
+            return c;
+        }
+
+        public static int[] toArray(ListNode head, boolean withHead) {
+            int c = getCount(head, withHead);
+            int[] nums = new int[c];
+
+            ListNode p = withHead ? head.next : head;
+
+            int k = 0;
+            while (p != null) {
+                nums[k] = p.val;
+
+                k++;
+                p = p.next;
+            }
+
+            return nums;
+        }
+
+        public static int[] toArrayWithHeadNode(ListNode head) {
+            return toArray(head, true);
+        }
+
+        public static int[] toArrayWithoutHeadNode(ListNode head) {
+            return toArray(head, false);
+        }
     }
 }
 
@@ -61,38 +165,37 @@ class TestMain {
     public static class TestCase {
 
         public static boolean testCase1() {
-            char[][] matrix = {
-                    { '1', '0', '1', '0', '0' },
-                    { '1', '0', '1', '1', '1' },
-                    { '1', '1', '1', '1', '1' },
-                    { '1', '0', '0', '1', '0' }
-            };
+            int[] nums = { 4, 2, 1, 3 };
 
-            int result = new Solution().maximalSquare(matrix);
-            int expect = 4;
+            Solution.ListNode head = Solution.ListNode.genLinkedListWithoutHeadNode(nums);
+
+            head = new Solution().sortList(head);
+            int[] result = Solution.ListNode.toArrayWithoutHeadNode(head);
+            int[] expect = { 1, 2, 3, 4 };
 
             return TestUtils.check(result, expect);
         }
 
         public static boolean testCase2() {
-            char[][] matrix = {
-                    { '0', '1' },
-                    { '1', '0' },
-            };
+            int[] nums = { -1, 5, 3, 4, 0 };
 
-            int result = new Solution().maximalSquare(matrix);
-            int expect = 1;
+            Solution.ListNode head = Solution.ListNode.genLinkedListWithoutHeadNode(nums);
+
+            head = new Solution().sortList(head);
+            int[] result = Solution.ListNode.toArrayWithoutHeadNode(head);
+            int[] expect = { -1, 0, 3, 4, 5 };
 
             return TestUtils.check(result, expect);
         }
 
         public static boolean testCase3() {
-            char[][] matrix = {
-                    { '0' },
-            };
+            int[] nums = {};
 
-            int result = new Solution().maximalSquare(matrix);
-            int expect = 0;
+            Solution.ListNode head = Solution.ListNode.genLinkedListWithoutHeadNode(nums);
+
+            head = new Solution().sortList(head);
+            int[] result = Solution.ListNode.toArrayWithoutHeadNode(head);
+            int[] expect = {};
 
             return TestUtils.check(result, expect);
         }
