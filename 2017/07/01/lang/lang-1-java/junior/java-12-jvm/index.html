@@ -28,7 +28,7 @@
 <meta property="og:description" content="java虚拟机篇">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T17:12:00.000Z">
-<meta property="article:modified_time" content="2024-03-30T12:29:23.857Z">
+<meta property="article:modified_time" content="2024-03-31T12:28:31.945Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-30 20:29:23" itemprop="dateModified" datetime="2024-03-30T20:29:23+08:00">2024-03-30</time>
+                <time title="修改时间：2024-03-31 20:28:31" itemprop="dateModified" datetime="2024-03-31T20:28:31+08:00">2024-03-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -393,9 +393,9 @@
 <li>单线程happen-before原则：在同一个线程中，书写在前面的操作happen-before后面的操作</li>
 <li>lock的happen-before原则：同一个锁的unlock操作happen-before此锁的lock操作</li>
 <li>volatile的happen-before原则： 对一个volatile变量的写操作happen-before对此变量的任意操作</li>
-<li>线程启动的happen-before原则：同一个线程的start方法happen-before此线程的其它方法</li>
+<li>线程启动的happen-before原则：线程的start操作happen-before此线程的其它操作</li>
 <li>线程中断的happen-before原则：对线程interrupt方法的调用happen-before被中断线程的检测到中断的代码</li>
-<li>线程终结的happen-before原则：线程中的所有操作都happen-before线程的终止检测</li>
+<li>线程终止的happen-before原则：线程中的所有操作都happen-before线程的终止操作</li>
 <li>对象创建的happen-before原则：一个对象的初始化完成先于他的finalize方法调用</li>
 <li>happen-before的传递性原则： 如果A操作 happen-before B操作，B操作happen-before C操作，那么A操作happen-before C操作</li>
 </ul>
