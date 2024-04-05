@@ -28,7 +28,7 @@
 <meta property="og:description" content="redis">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-31T17:03:00.000Z">
-<meta property="article:modified_time" content="2024-04-03T11:09:23.313Z">
+<meta property="article:modified_time" content="2024-04-05T10:07:17.811Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-03 19:09:23" itemprop="dateModified" datetime="2024-04-03T19:09:23+08:00">2024-04-03</time>
+                <time title="修改时间：2024-04-05 18:07:17" itemprop="dateModified" datetime="2024-04-05T18:07:17+08:00">2024-04-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -368,20 +368,28 @@
 </blockquote>
 <p>BloomFilter的操作</p>
 <ul>
-<li>可能在：是不是真的在还需要进一步检查</li>
-<li>一定不在：肯定不会在</li>
+<li>可能在过滤器中：可能会误判（是不是真的在还需要去原始数据里面去进一步检查）</li>
+<li>肯定不在过滤器中：肯定不会误判</li>
 </ul>
 <p>BloomFilter的场景</p>
 <ul>
-<li>黑名单场景（对<code>黑名单</code>里的执行<code>拒绝</code>操作）：好人可能会被误抓<ul>
+<li>可能在过滤器中：可能会误判（是不是真的在还需要去原始数据里面去进一步检查）<ul>
+<li>在白名单中：通过</li>
+<li>在黑名单中：拒绝<ul>
 <li>垃圾邮件过滤：如果在黑名单里就放入垃圾箱，会误判，可能导致正常邮件被放到了垃圾箱</li>
-<li>非法攻击过滤：如果在黑名单里就不允许访问，会误判，可能导致正常请求被拒绝访问了</li>
+<li>非法攻击过滤：如果在黑名单里就不允许访问，会误判，可能导致正常请求被错误的拒绝了</li>
 <li>爬虫地址去重：如果在已抓取名单里就不抓取，会误判，可能导致未抓取过的链接不能被抓取</li>
 <li>新闻推荐去重：如果在已推荐名单里就不推荐，会误判，可能导致未推送过的新闻不能被推送</li>
 </ul>
 </li>
-<li>白名单场景（对<code>白名单</code>里的执行<code>允许</code>操作）：坏人可能会被误放<ul>
-<li>缓存穿透解决：如果在数据集合里就允许通过，会误判，可能会导致不存在的key穿透缓存</li>
+</ul>
+</li>
+<li>肯定不在过滤器中：肯定不会误判<ul>
+<li>不在白名单中：拒绝<ul>
+<li>缓存穿透解决：如果不在数据集合里就拒绝掉，不会误判</li>
+</ul>
+</li>
+<li>不在黑名单中：通过</li>
 </ul>
 </li>
 </ul>
@@ -462,10 +470,13 @@
 <p>ps：旁路缓存会先删除缓存，等到下次读取缓存时发现不存在就会从数据库同步到缓存中<br>ps：写入操作会先更新缓存，然后将数据立即或者稍后同步到数据库<br>ps：穿透写入类似于cpu缓存的写通策略，异步回写类似于cpu缓存的写回策略</p>
 </blockquote>
 <ul>
-<li>旁路缓存适用于常规读写的场景</li>
-<li>穿透写入适用于读多写少的场景</li>
-<li>异步回写适用于读少写多的场景</li>
+<li>旁路缓存是以数据为主，缓存为辅的策略，追求数据的完整</li>
+<li>穿透写入是以缓存为主，数据为辅的策略，追求系统的性能</li>
+<li>异步回写是以缓存为主，数据为辅的策略，追求系统的性能</li>
 </ul>
+<blockquote>
+<p>ps： <code>穿透写入</code> 适合 <code>写少</code> 的场景， <code>异步回写</code> 适合 <code>写多</code> 的场景</p>
+</blockquote>
 <h2 id="Operation"><a href="#Operation" class="headerlink" title="Operation"></a>Operation</h2><h3 id="Command"><a href="#Command" class="headerlink" title="Command"></a>Command</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44794280/article/details/123557566">redis命令入门</a></li>
@@ -520,21 +531,41 @@
 </ul>
 </blockquote>
 <ul>
+<li>Normal<ul>
 <li>缓存</li>
 <li>分布式锁</li>
+</ul>
+</li>
+<li>Number <ul>
 <li>计数器</li>
 <li>限流器</li>
-<li>全局序列号</li>
-<li>时间轴：使用list类型</li>
-<li>消息列表：使用list类型</li>
-<li>随机抽奖：使用set类型</li>
-<li>点赞信息：使用set类型</li>
-<li>签到信息：使用set类型</li>
-<li>打卡信息：使用set类型</li>
-<li>商品标签：使用set类型</li>
-<li>社交关系：使用set类型</li>
-<li>热搜榜和排行榜（TopK）：使用SortedSet类型</li>
-<li>购物车：使用hash类型</li>
+<li>发号器（生成全局序列号）</li>
+</ul>
+</li>
+<li>List<ul>
+<li>时间轴</li>
+<li>消息列表</li>
+</ul>
+</li>
+<li>Set<ul>
+<li>随机抽奖</li>
+<li>点赞信息</li>
+<li>签到信息</li>
+<li>打卡信息</li>
+<li>商品标签</li>
+<li>社交关系</li>
+</ul>
+</li>
+<li>SortedSet<ul>
+<li>热搜榜（TopK）</li>
+<li>排行榜（TopK）</li>
+<li>延时队列</li>
+</ul>
+</li>
+<li>Hash<ul>
+<li>购物车</li>
+</ul>
+</li>
 </ul>
 <h3 id="社交关系"><a href="#社交关系" class="headerlink" title="社交关系"></a>社交关系</h3><p>存储设计</p>
 <ul>
@@ -739,7 +770,7 @@
 </blockquote>
 <p>缓存一致性方案</p>
 <ul>
-<li>写缓存：读多写少时前面的缓存写入被后面的覆盖从而浪费cpu资源，而且高并发写入会导致更新丢失的问题<ul>
+<li>写缓存：写多时前面写入的缓存会被后面的覆盖从而浪费cpu资源，而且高并发写入会导致更新丢失的问题<ul>
 <li>先写数据库再写缓存</li>
 <li>先写缓存再写数据库</li>
 </ul>
@@ -769,25 +800,28 @@
 </ul>
 <p>方案1：先写数据库再删缓存</p>
 <ul>
-<li>场景1：B读数据库（缓存已失效），A写数据库，A删缓存，B写缓存</li>
+<li>场景1：写数据库成功，删缓存失败（会出现缓存不一致的情况，需要重试删除缓存操作）</li>
+<li>场景2：B读数据库（缓存已失效），A写数据库，A删缓存，B写缓存</li>
 </ul>
 <blockquote>
 <p>ps：A写数据库要在A删缓存之前（方案要求）<br>ps：B读数据库要在A写数据库之前（读脏数据）<br>ps：B写缓存要在A删缓存之后（写脏数据）</p>
 </blockquote>
 <p>方案2：先删缓存再写数据库</p>
 <ul>
-<li>场景2：B读数据库（缓存已失效），A删缓存，A写数据库，B写缓存</li>
-<li>场景3：B读数据库（缓存已失效），A删缓存，B写缓存，A写数据库</li>
-<li>场景4：A删缓存，B读数据库（缓存已删除），A写数据库，B写缓存</li>
-<li>场景5：A删缓存，B读数据库（缓存已删除），B写缓存，A写数据库</li>
+<li>场景3：删缓存成功，写数据库成功（不会出现缓存不一致的情况，缓存后面会被重新加载）</li>
+<li>场景4：B读数据库（缓存已失效），A删缓存，A写数据库，B写缓存</li>
+<li>场景5：B读数据库（缓存已失效），A删缓存，B写缓存，A写数据库</li>
+<li>场景6：A删缓存，B读数据库（缓存已删除），A写数据库，B写缓存</li>
+<li>场景7：A删缓存，B读数据库（缓存已删除），B写缓存，A写数据库</li>
 </ul>
 <blockquote>
 <p>ps：A删缓存要在A写数据库之前（方案要求）<br>ps：B读数据库要在A写数据库之前（读脏数据）<br>ps：B写缓存要在A删缓存之后（写脏数据）</p>
 </blockquote>
-<p>对比发现 <code>先写数据库再删缓存</code> 这种方案更有</p>
+<p>对比发现 <code>先写数据库再删缓存</code> 这种方案更优</p>
 <ul>
-<li>因为缓存已失效比缓存已删除低的出现概率第</li>
-<li>B读数据库之后B写缓存出现在A写数据库之后的概率低</li>
+<li>因为方案1出现缓存一致性的场景比方案2更少</li>
+<li>因为缓存已失效比缓存已删除低的出现概率低</li>
+<li>因为B读数据库之后B写缓存出现在A写数据库之后的概率低</li>
 </ul>
 <blockquote>
 <p>ps：一般来说B读数据库之后B写缓存的速度比A写数据库快</p>
@@ -1165,6 +1199,17 @@
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> redis.call(<span class="string">&quot;get&quot;</span>, KEYS[<span class="number">1</span>]) == ARGV[<span class="number">1</span>] <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">return</span> redis.call(<span class="string">&quot;del&quot;</span>, KEYS[<span class="number">1</span>])</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="check-set（看门狗）"><a href="#check-set（看门狗）" class="headerlink" title="check + set（看门狗）"></a>check + set（看门狗）</h3><p>脚本版 + 看门狗 就可以实现redis单机版的分布式锁了，redis的集群版分布式锁要用红锁</p>
+<h2 id="Counter"><a href="#Counter" class="headerlink" title="Counter"></a>Counter</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_64948664/article/details/136658958">redis计数器详解</a></li>
+</ul>
+</blockquote>
+<p>基于 <code>incr count</code> 实现</p>
+<blockquote>
+<p>ps：发号器也可以通过计数器来实现</p>
+</blockquote>
+<h2 id="Limiter"><a href="#Limiter" class="headerlink" title="Limiter"></a>Limiter</h2><p>TODO：redis限流器</p>
+<h2 id="DelayQueue"><a href="#DelayQueue" class="headerlink" title="DelayQueue"></a>DelayQueue</h2><p>TODO：redis延时队列</p>
 <h2 id="Publish-Subscribe"><a href="#Publish-Subscribe" class="headerlink" title="Publish-Subscribe"></a>Publish-Subscribe</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41125219/article/details/120299819">redis发布和订阅详解</a></li>
@@ -1315,7 +1360,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Concept"><span class="nav-number">1.1.</span> <span class="nav-text">Concept</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config"><span class="nav-number">1.2.</span> <span class="nav-text">Config</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Usage"><span class="nav-number">2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Key"><span class="nav-number">2.1.</span> <span class="nav-text">Key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Type"><span class="nav-number">2.2.</span> <span class="nav-text">Type</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String"><span class="nav-number">2.2.1.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#List"><span class="nav-number">2.2.2.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set"><span class="nav-number">2.2.3.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SortedSet"><span class="nav-number">2.2.4.</span> <span class="nav-text">SortedSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash"><span class="nav-number">2.2.5.</span> <span class="nav-text">Hash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Geo"><span class="nav-number">2.2.6.</span> <span class="nav-text">Geo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bitmap"><span class="nav-number">2.2.7.</span> <span class="nav-text">Bitmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BloomFilter"><span class="nav-number">2.2.8.</span> <span class="nav-text">BloomFilter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HyperLogLog"><span class="nav-number">2.2.9.</span> <span class="nav-text">HyperLogLog</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Expire"><span class="nav-number">2.3.</span> <span class="nav-text">Expire</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eliminate"><span class="nav-number">2.4.</span> <span class="nav-text">Eliminate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Update"><span class="nav-number">2.5.</span> <span class="nav-text">Update</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Operation"><span class="nav-number">2.6.</span> <span class="nav-text">Operation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Command"><span class="nav-number">2.6.1.</span> <span class="nav-text">Command</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Batch"><span class="nav-number">2.6.2.</span> <span class="nav-text">Batch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iterate"><span class="nav-number">2.6.3.</span> <span class="nav-text">Iterate</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Monitor"><span class="nav-number">2.7.</span> <span class="nav-text">Monitor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scene"><span class="nav-number">2.8.</span> <span class="nav-text">Scene</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BE%E4%BA%A4%E5%85%B3%E7%B3%BB"><span class="nav-number">2.8.1.</span> <span class="nav-text">社交关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Structure"><span class="nav-number">2.9.</span> <span class="nav-text">Structure</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B%E7%89%88"><span class="nav-number">2.9.1.</span> <span class="nav-text">简介版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%A6%E7%BB%86%E7%89%88"><span class="nav-number">2.9.2.</span> <span class="nav-text">详细版</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transaction"><span class="nav-number">3.</span> <span class="nav-text">Transaction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Atomicity"><span class="nav-number">3.1.</span> <span class="nav-text">Atomicity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Isolation"><span class="nav-number">3.2.</span> <span class="nav-text">Isolation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Durability"><span class="nav-number">3.3.</span> <span class="nav-text">Durability</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RDB"><span class="nav-number">3.3.1.</span> <span class="nav-text">RDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOF"><span class="nav-number">3.3.2.</span> <span class="nav-text">AOF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RDB%E5%92%8CAOF%E6%B7%B7%E5%90%88"><span class="nav-number">3.3.3.</span> <span class="nav-text">RDB和AOF混合</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem"><span class="nav-number">4.</span> <span class="nav-text">Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%A4%B1%E6%95%88"><span class="nav-number">4.1.</span> <span class="nav-text">缓存失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">4.2.</span> <span class="nav-text">缓存一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1"><span class="nav-number">4.3.</span> <span class="nav-text">数据丢失</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Performance"><span class="nav-number">5.</span> <span class="nav-text">Performance</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimize"><span class="nav-number">5.1.</span> <span class="nav-text">Optimize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis"><span class="nav-number">5.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Diagnosis"><span class="nav-number">5.3.</span> <span class="nav-text">Diagnosis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SlowLog"><span class="nav-number">5.4.</span> <span class="nav-text">SlowLog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Monitor-1"><span class="nav-number">5.5.</span> <span class="nav-text">Monitor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question"><span class="nav-number">5.6.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8redis"><span class="nav-number">5.6.1.</span> <span class="nav-text">为什么要使用redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E5%BF%AB"><span class="nav-number">5.6.2.</span> <span class="nav-text">redis为什么这么快</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis%E4%B8%BA%E4%BB%80%E4%B9%88QPS%E8%BF%99%E4%B9%88%E9%AB%98"><span class="nav-number">5.6.3.</span> <span class="nav-text">redis为什么QPS这么高</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis6-0%E4%B9%8B%E5%89%8D%E7%9C%9F%E7%9A%84%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B%E5%90%97"><span class="nav-number">5.6.4.</span> <span class="nav-text">redis6.0之前真的是单线程吗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis6-0%E4%B9%8B%E5%89%8D%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">5.6.5.</span> <span class="nav-text">redis6.0之前为什么不使用多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis6-0%E4%B9%8B%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BC%95%E5%85%A5%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">5.6.6.</span> <span class="nav-text">redis6.0之后为什么要引入多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis%E9%94%AE%E5%90%8D%E9%95%BF%E5%BA%A6%E4%BC%9A%E5%BD%B1%E5%93%8D%E6%80%A7%E8%83%BD%E5%90%97"><span class="nav-number">5.6.7.</span> <span class="nav-text">redis键名长度会影响性能吗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis%E5%A4%A7key%EF%BC%88BigKey%EF%BC%89%E9%97%AE%E9%A2%98%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96"><span class="nav-number">5.6.8.</span> <span class="nav-text">redis大key（BigKey）问题如何优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis%E7%83%ADkey%EF%BC%88HotKey%EF%BC%89%E9%97%AE%E9%A2%98%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96"><span class="nav-number">5.6.9.</span> <span class="nav-text">redis热key（HotKey）问题如何优化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Architecture"><span class="nav-number">6.</span> <span class="nav-text">Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Replication"><span class="nav-number">6.1.</span> <span class="nav-text">Replication</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E8%BF%87%E7%A8%8B"><span class="nav-number">6.1.1.</span> <span class="nav-text">主从复制过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.1.2.</span> <span class="nav-text">主从复制模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster"><span class="nav-number">6.2.</span> <span class="nav-text">Cluster</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.2.1.</span> <span class="nav-text">主从模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.2.2.</span> <span class="nav-text">哨兵模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="nav-number">6.2.3.</span> <span class="nav-text">读写分离</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Distributed"><span class="nav-number">6.3.</span> <span class="nav-text">Distributed</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E7%89%87%EF%BC%88Sharding%EF%BC%89"><span class="nav-number">6.3.1.</span> <span class="nav-text">数据分片（Sharding）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E5%8C%BA%EF%BC%88Partition%EF%BC%89"><span class="nav-number">6.3.2.</span> <span class="nav-text">数据分区（Partition）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Application"><span class="nav-number">7.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lock"><span class="nav-number">7.1.</span> <span class="nav-text">Lock</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setnx"><span class="nav-number">7.1.1.</span> <span class="nav-text">setnx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setnx-expire"><span class="nav-number">7.1.2.</span> <span class="nav-text">setnx + expire</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#set-ex-nx"><span class="nav-number">7.1.3.</span> <span class="nav-text">set + ex + nx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#check-set%EF%BC%88%E5%91%BD%E4%BB%A4%E7%89%88%EF%BC%89"><span class="nav-number">7.1.4.</span> <span class="nav-text">check + set（命令版）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#check-set%EF%BC%88%E8%84%9A%E6%9C%AC%E7%89%88%EF%BC%89"><span class="nav-number">7.1.5.</span> <span class="nav-text">check + set（脚本版）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#check-set%EF%BC%88%E7%9C%8B%E9%97%A8%E7%8B%97%EF%BC%89"><span class="nav-number">7.1.6.</span> <span class="nav-text">check + set（看门狗）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Publish-Subscribe"><span class="nav-number">7.2.</span> <span class="nav-text">Publish-Subscribe</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Producer-Consumer"><span class="nav-number">7.3.</span> <span class="nav-text">Producer-Consumer</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theory"><span class="nav-number">8.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Management"><span class="nav-number">9.1.</span> <span class="nav-text">Management</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual"><span class="nav-number">9.1.1.</span> <span class="nav-text">Visual</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tools"><span class="nav-number">9.1.2.</span> <span class="nav-text">Tools</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Concept"><span class="nav-number">1.1.</span> <span class="nav-text">Concept</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config"><span class="nav-number">1.2.</span> <span class="nav-text">Config</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Usage"><span class="nav-number">2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Key"><span class="nav-number">2.1.</span> <span class="nav-text">Key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Type"><span class="nav-number">2.2.</span> <span class="nav-text">Type</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String"><span class="nav-number">2.2.1.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#List"><span class="nav-number">2.2.2.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set"><span class="nav-number">2.2.3.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SortedSet"><span class="nav-number">2.2.4.</span> <span class="nav-text">SortedSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash"><span class="nav-number">2.2.5.</span> <span class="nav-text">Hash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Geo"><span class="nav-number">2.2.6.</span> <span class="nav-text">Geo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bitmap"><span class="nav-number">2.2.7.</span> <span class="nav-text">Bitmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BloomFilter"><span class="nav-number">2.2.8.</span> <span class="nav-text">BloomFilter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HyperLogLog"><span class="nav-number">2.2.9.</span> <span class="nav-text">HyperLogLog</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Expire"><span class="nav-number">2.3.</span> <span class="nav-text">Expire</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eliminate"><span class="nav-number">2.4.</span> <span class="nav-text">Eliminate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Update"><span class="nav-number">2.5.</span> <span class="nav-text">Update</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Operation"><span class="nav-number">2.6.</span> <span class="nav-text">Operation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Command"><span class="nav-number">2.6.1.</span> <span class="nav-text">Command</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Batch"><span class="nav-number">2.6.2.</span> <span class="nav-text">Batch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iterate"><span class="nav-number">2.6.3.</span> <span class="nav-text">Iterate</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Monitor"><span class="nav-number">2.7.</span> <span class="nav-text">Monitor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scene"><span class="nav-number">2.8.</span> <span class="nav-text">Scene</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BE%E4%BA%A4%E5%85%B3%E7%B3%BB"><span class="nav-number">2.8.1.</span> <span class="nav-text">社交关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Structure"><span class="nav-number">2.9.</span> <span class="nav-text">Structure</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B%E7%89%88"><span class="nav-number">2.9.1.</span> <span class="nav-text">简介版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%A6%E7%BB%86%E7%89%88"><span class="nav-number">2.9.2.</span> <span class="nav-text">详细版</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transaction"><span class="nav-number">3.</span> <span class="nav-text">Transaction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Atomicity"><span class="nav-number">3.1.</span> <span class="nav-text">Atomicity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Isolation"><span class="nav-number">3.2.</span> <span class="nav-text">Isolation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Durability"><span class="nav-number">3.3.</span> <span class="nav-text">Durability</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RDB"><span class="nav-number">3.3.1.</span> <span class="nav-text">RDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOF"><span class="nav-number">3.3.2.</span> <span class="nav-text">AOF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RDB%E5%92%8CAOF%E6%B7%B7%E5%90%88"><span class="nav-number">3.3.3.</span> <span class="nav-text">RDB和AOF混合</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem"><span class="nav-number">4.</span> <span class="nav-text">Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%A4%B1%E6%95%88"><span class="nav-number">4.1.</span> <span class="nav-text">缓存失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">4.2.</span> <span class="nav-text">缓存一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1"><span class="nav-number">4.3.</span> <span class="nav-text">数据丢失</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Performance"><span class="nav-number">5.</span> <span class="nav-text">Performance</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimize"><span class="nav-number">5.1.</span> <span class="nav-text">Optimize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis"><span class="nav-number">5.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Diagnosis"><span class="nav-number">5.3.</span> <span class="nav-text">Diagnosis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SlowLog"><span class="nav-number">5.4.</span> <span class="nav-text">SlowLog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Monitor-1"><span class="nav-number">5.5.</span> <span class="nav-text">Monitor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question"><span class="nav-number">5.6.</span> <span class="nav-text">Question</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8redis"><span class="nav-number">5.6.1.</span> <span class="nav-text">为什么要使用redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E5%BF%AB"><span class="nav-number">5.6.2.</span> <span class="nav-text">redis为什么这么快</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis%E4%B8%BA%E4%BB%80%E4%B9%88QPS%E8%BF%99%E4%B9%88%E9%AB%98"><span class="nav-number">5.6.3.</span> <span class="nav-text">redis为什么QPS这么高</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis6-0%E4%B9%8B%E5%89%8D%E7%9C%9F%E7%9A%84%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B%E5%90%97"><span class="nav-number">5.6.4.</span> <span class="nav-text">redis6.0之前真的是单线程吗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis6-0%E4%B9%8B%E5%89%8D%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">5.6.5.</span> <span class="nav-text">redis6.0之前为什么不使用多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis6-0%E4%B9%8B%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BC%95%E5%85%A5%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">5.6.6.</span> <span class="nav-text">redis6.0之后为什么要引入多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis%E9%94%AE%E5%90%8D%E9%95%BF%E5%BA%A6%E4%BC%9A%E5%BD%B1%E5%93%8D%E6%80%A7%E8%83%BD%E5%90%97"><span class="nav-number">5.6.7.</span> <span class="nav-text">redis键名长度会影响性能吗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis%E5%A4%A7key%EF%BC%88BigKey%EF%BC%89%E9%97%AE%E9%A2%98%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96"><span class="nav-number">5.6.8.</span> <span class="nav-text">redis大key（BigKey）问题如何优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis%E7%83%ADkey%EF%BC%88HotKey%EF%BC%89%E9%97%AE%E9%A2%98%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96"><span class="nav-number">5.6.9.</span> <span class="nav-text">redis热key（HotKey）问题如何优化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Architecture"><span class="nav-number">6.</span> <span class="nav-text">Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Replication"><span class="nav-number">6.1.</span> <span class="nav-text">Replication</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E8%BF%87%E7%A8%8B"><span class="nav-number">6.1.1.</span> <span class="nav-text">主从复制过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.1.2.</span> <span class="nav-text">主从复制模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster"><span class="nav-number">6.2.</span> <span class="nav-text">Cluster</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.2.1.</span> <span class="nav-text">主从模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.2.2.</span> <span class="nav-text">哨兵模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="nav-number">6.2.3.</span> <span class="nav-text">读写分离</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Distributed"><span class="nav-number">6.3.</span> <span class="nav-text">Distributed</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E7%89%87%EF%BC%88Sharding%EF%BC%89"><span class="nav-number">6.3.1.</span> <span class="nav-text">数据分片（Sharding）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E5%8C%BA%EF%BC%88Partition%EF%BC%89"><span class="nav-number">6.3.2.</span> <span class="nav-text">数据分区（Partition）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Application"><span class="nav-number">7.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lock"><span class="nav-number">7.1.</span> <span class="nav-text">Lock</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setnx"><span class="nav-number">7.1.1.</span> <span class="nav-text">setnx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setnx-expire"><span class="nav-number">7.1.2.</span> <span class="nav-text">setnx + expire</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#set-ex-nx"><span class="nav-number">7.1.3.</span> <span class="nav-text">set + ex + nx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#check-set%EF%BC%88%E5%91%BD%E4%BB%A4%E7%89%88%EF%BC%89"><span class="nav-number">7.1.4.</span> <span class="nav-text">check + set（命令版）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#check-set%EF%BC%88%E8%84%9A%E6%9C%AC%E7%89%88%EF%BC%89"><span class="nav-number">7.1.5.</span> <span class="nav-text">check + set（脚本版）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#check-set%EF%BC%88%E7%9C%8B%E9%97%A8%E7%8B%97%EF%BC%89"><span class="nav-number">7.1.6.</span> <span class="nav-text">check + set（看门狗）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Counter"><span class="nav-number">7.2.</span> <span class="nav-text">Counter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Limiter"><span class="nav-number">7.3.</span> <span class="nav-text">Limiter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DelayQueue"><span class="nav-number">7.4.</span> <span class="nav-text">DelayQueue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Publish-Subscribe"><span class="nav-number">7.5.</span> <span class="nav-text">Publish-Subscribe</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Producer-Consumer"><span class="nav-number">7.6.</span> <span class="nav-text">Producer-Consumer</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theory"><span class="nav-number">8.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Management"><span class="nav-number">9.1.</span> <span class="nav-text">Management</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual"><span class="nav-number">9.1.1.</span> <span class="nav-text">Visual</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tools"><span class="nav-number">9.1.2.</span> <span class="nav-text">Tools</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

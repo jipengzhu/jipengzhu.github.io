@@ -28,7 +28,7 @@
 <meta property="og:description" content="distributed">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-31T19:04:00.000Z">
-<meta property="article:modified_time" content="2024-04-03T11:09:23.325Z">
+<meta property="article:modified_time" content="2024-04-05T10:07:17.823Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-03 19:09:23" itemprop="dateModified" datetime="2024-04-03T19:09:23+08:00">2024-04-03</time>
+                <time title="修改时间：2024-04-05 18:07:17" itemprop="dateModified" datetime="2024-04-05T18:07:17+08:00">2024-04-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -263,6 +263,7 @@
 </ul>
 </blockquote>
 <ul>
+<li>单机（Standalone）：一个人干所有的事</li>
 <li>集群（Cluster）：多个人<code>轮流</code>干一件事</li>
 <li>分布式（Distributed）：多个人<code>分工</code>干一件事</li>
 </ul>
@@ -364,7 +365,15 @@
 <blockquote>
 <p>ps：hash类算法是用来解决节点路由（node route）问题的，其中一致性hash支持动态扩容缩容（增加和删除节点），节点故障（node failure）问题则需要主从架构来解决</p>
 </blockquote>
-<h1 id="分布式通信"><a href="#分布式通信" class="headerlink" title="分布式通信"></a>分布式通信</h1><ul>
+<h1 id="分布式协同"><a href="#分布式协同" class="headerlink" title="分布式协同"></a>分布式协同</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_25385555/article/details/93386485">分布式协调服务详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wszcy199503/article/details/105427929">zookeeper入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lixufei12138/article/details/122289285">zookeeper详解</a></li>
+</ul>
+</blockquote>
+<p>分布式协同又叫分布式协调</p>
+<h2 id="主从选举"><a href="#主从选举" class="headerlink" title="主从选举"></a>主从选举</h2><h2 id="数据同步"><a href="#数据同步" class="headerlink" title="数据同步"></a>数据同步</h2><ul>
 <li>元信息同步<ul>
 <li>加入集群通知</li>
 <li>离开集群通知</li>
@@ -392,12 +401,44 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/code_guo/article/details/103838891">生成唯一的long型数字id</a></li>
 </ul>
 </blockquote>
+<p>唯一标识生成器又叫发号器</p>
+<p>唯一标识来源</p>
 <ul>
+<li>业务id（身份证号、手机号、设备指纹）</li>
+<li>逻辑id（发号器生成）<ul>
+<li>顺序id</li>
+<li>随机id</li>
+</ul>
+</li>
+</ul>
+<p>唯一标识实现</p>
+<ul>
+<li>单机<ul>
+<li>顺序id<ul>
+<li>mysql自增id</li>
 <li>时间戳</li>
+</ul>
+</li>
+<li>随机id<ul>
 <li>UUID</li>
-<li>雪花id</li>
-<li>mysql自增ID </li>
-<li>redis自增ID</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分布式<ul>
+<li>顺序id<ul>
+<li>mysql发号器</li>
+<li>redis发号器</li>
+<li>SnowflakeId</li>
+</ul>
+</li>
+<li>随机id<ul>
+<li>UUID</li>
+<li>MongodbId（不是顺序id，防止数据倾斜）</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="Timestamp"><a href="#Timestamp" class="headerlink" title="Timestamp"></a>Timestamp</h3><blockquote>
 <ul>
@@ -724,7 +765,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">分布式架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.</span> <span class="nav-text">集群和分布式的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA"><span class="nav-number">2.</span> <span class="nav-text">分布式理论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CAP%E7%90%86%E8%AE%BA"><span class="nav-number">2.1.</span> <span class="nav-text">CAP理论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BASE%E7%90%86%E8%AE%BA"><span class="nav-number">2.2.</span> <span class="nav-text">BASE理论</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%AE%97%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">分布式算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">一致性算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7hash"><span class="nav-number">3.2.</span> <span class="nav-text">一致性hash</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1"><span class="nav-number">4.</span> <span class="nav-text">分布式通信</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97"><span class="nav-number">5.</span> <span class="nav-text">分布式计算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B"><span class="nav-number">5.1.</span> <span class="nav-text">分布式计算模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6"><span class="nav-number">5.2.</span> <span class="nav-text">分布式计算框架</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8"><span class="nav-number">6.</span> <span class="nav-text">分布式存储</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%BA%94%E7%94%A8"><span class="nav-number">7.</span> <span class="nav-text">分布式应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8FID"><span class="nav-number">7.1.</span> <span class="nav-text">分布式ID</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Timestamp"><span class="nav-number">7.1.1.</span> <span class="nav-text">Timestamp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UUID"><span class="nav-number">7.1.2.</span> <span class="nav-text">UUID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Snowflake"><span class="nav-number">7.1.3.</span> <span class="nav-text">Snowflake</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql"><span class="nav-number">7.1.4.</span> <span class="nav-text">Mysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis"><span class="nav-number">7.1.5.</span> <span class="nav-text">Redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MongoDB"><span class="nav-number">7.1.6.</span> <span class="nav-text">MongoDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker"><span class="nav-number">7.1.7.</span> <span class="nav-text">Docker</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="nav-number">7.2.</span> <span class="nav-text">分布式锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1"><span class="nav-number">7.3.</span> <span class="nav-text">分布式事务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%97%AE%E9%A2%98"><span class="nav-number">8.</span> <span class="nav-text">分布式问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98"><span class="nav-number">8.1.</span> <span class="nav-text">网络问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%91%E8%A3%82%E9%97%AE%E9%A2%98"><span class="nav-number">8.1.1.</span> <span class="nav-text">脑裂问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%92%9F%E9%97%AE%E9%A2%98"><span class="nav-number">8.2.</span> <span class="nav-text">时钟问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%92%9F%E5%9B%9E%E6%8B%A8"><span class="nav-number">8.2.1.</span> <span class="nav-text">时钟回拨</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%92%9F%E5%90%8C%E6%AD%A5"><span class="nav-number">8.2.2.</span> <span class="nav-text">时钟同步</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%97%AE%E9%A2%98"><span class="nav-number">8.3.</span> <span class="nav-text">数据问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C"><span class="nav-number">8.3.1.</span> <span class="nav-text">数据倾斜</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%BB%BC%E5%90%88"><span class="nav-number">9.</span> <span class="nav-text">分布式综合</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">分布式架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.</span> <span class="nav-text">集群和分布式的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA"><span class="nav-number">2.</span> <span class="nav-text">分布式理论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CAP%E7%90%86%E8%AE%BA"><span class="nav-number">2.1.</span> <span class="nav-text">CAP理论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BASE%E7%90%86%E8%AE%BA"><span class="nav-number">2.2.</span> <span class="nav-text">BASE理论</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%AE%97%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">分布式算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">一致性算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7hash"><span class="nav-number">3.2.</span> <span class="nav-text">一致性hash</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E5%90%8C"><span class="nav-number">4.</span> <span class="nav-text">分布式协同</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E9%80%89%E4%B8%BE"><span class="nav-number">4.1.</span> <span class="nav-text">主从选举</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5"><span class="nav-number">4.2.</span> <span class="nav-text">数据同步</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97"><span class="nav-number">5.</span> <span class="nav-text">分布式计算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B"><span class="nav-number">5.1.</span> <span class="nav-text">分布式计算模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6"><span class="nav-number">5.2.</span> <span class="nav-text">分布式计算框架</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8"><span class="nav-number">6.</span> <span class="nav-text">分布式存储</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%BA%94%E7%94%A8"><span class="nav-number">7.</span> <span class="nav-text">分布式应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8FID"><span class="nav-number">7.1.</span> <span class="nav-text">分布式ID</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Timestamp"><span class="nav-number">7.1.1.</span> <span class="nav-text">Timestamp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UUID"><span class="nav-number">7.1.2.</span> <span class="nav-text">UUID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Snowflake"><span class="nav-number">7.1.3.</span> <span class="nav-text">Snowflake</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql"><span class="nav-number">7.1.4.</span> <span class="nav-text">Mysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis"><span class="nav-number">7.1.5.</span> <span class="nav-text">Redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MongoDB"><span class="nav-number">7.1.6.</span> <span class="nav-text">MongoDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker"><span class="nav-number">7.1.7.</span> <span class="nav-text">Docker</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="nav-number">7.2.</span> <span class="nav-text">分布式锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1"><span class="nav-number">7.3.</span> <span class="nav-text">分布式事务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%97%AE%E9%A2%98"><span class="nav-number">8.</span> <span class="nav-text">分布式问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98"><span class="nav-number">8.1.</span> <span class="nav-text">网络问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%91%E8%A3%82%E9%97%AE%E9%A2%98"><span class="nav-number">8.1.1.</span> <span class="nav-text">脑裂问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%92%9F%E9%97%AE%E9%A2%98"><span class="nav-number">8.2.</span> <span class="nav-text">时钟问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%92%9F%E5%9B%9E%E6%8B%A8"><span class="nav-number">8.2.1.</span> <span class="nav-text">时钟回拨</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%92%9F%E5%90%8C%E6%AD%A5"><span class="nav-number">8.2.2.</span> <span class="nav-text">时钟同步</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%97%AE%E9%A2%98"><span class="nav-number">8.3.</span> <span class="nav-text">数据问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C"><span class="nav-number">8.3.1.</span> <span class="nav-text">数据倾斜</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%BB%BC%E5%90%88"><span class="nav-number">9.</span> <span class="nav-text">分布式综合</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
