@@ -28,7 +28,7 @@
 <meta property="og:description" content="mq">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-31T17:05:00.000Z">
-<meta property="article:modified_time" content="2024-04-07T11:07:31.201Z">
+<meta property="article:modified_time" content="2024-04-08T07:37:24.334Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-07 19:07:31" itemprop="dateModified" datetime="2024-04-07T19:07:31+08:00">2024-04-07</time>
+                <time title="修改时间：2024-04-08 15:37:24" itemprop="dateModified" datetime="2024-04-08T15:37:24+08:00">2024-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -764,12 +764,75 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010953880/article/details/117215937">Kafka重试机制详解</a></li>
 </ul>
 </blockquote>
-<h2 id="Quality（传输质量）"><a href="#Quality（传输质量）" class="headerlink" title="Quality（传输质量）"></a>Quality（传输质量）</h2><p>传输质量</p>
+<h2 id="Quality（传输质量）"><a href="#Quality（传输质量）" class="headerlink" title="Quality（传输质量）"></a>Quality（传输质量）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_50668851/article/details/112555171">MQTT传输质量详解</a></li>
+</ul>
+</blockquote>
+<p>MQ传输质量</p>
 <ul>
 <li>最多一次：at most once（会导致消息丢失的问题）</li>
 <li>最少一次：at least once（会导致消息重复的问题）</li>
 <li>精确一次：exactly once（需要进行幂等处理）</li>
 </ul>
+<p>MQTT传输质量</p>
+<ul>
+<li>Qos-0：最多一次<ul>
+<li>消息发送<ul>
+<li>PUBLISH：发送者</li>
+</ul>
+</li>
+<li>消息丢失<ul>
+<li>PUBLISH：丢失了发送者不会重发</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Qos-1：最少一次<ul>
+<li>消息发送<ul>
+<li>PUBLISH：发送者</li>
+<li>PUBACK：接收者</li>
+</ul>
+</li>
+<li>消息丢失<ul>
+<li>PUBLISH：丢失了发送者会重发PUBLISH</li>
+<li>PUBACK：丢失了发送者会重发PUBLISH</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Qos-2：精确一次<ul>
+<li>消息发送<ul>
+<li>PUBLISH：发送者</li>
+<li>PUBREC：接收者</li>
+<li>PUBREL：发送者</li>
+<li>PUBCOMP：接收者</li>
+</ul>
+</li>
+<li>消息丢失<ul>
+<li>PUBLISH：丢失了发送者会重发PUBLISH</li>
+<li>PUBREC：丢失了发送者会重发PUBLISH</li>
+<li>PUBREL：丢失了发送者会重发PUBREL</li>
+<li>PUBCOMP：丢失了发送者会重发PUBREL</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>ps：发送者会重发消息，接收者不会重发消息</p>
+</blockquote>
+<p>MQTT消息说明</p>
+<ul>
+<li>PUBLISH：发送者发送了数据消息</li>
+<li>PUBACK：接收者收到了数据消息</li>
+<li>PUBREC：接收者收到了数据消息，告知发送者可以删除用来重发的数据消息缓存</li>
+<li>PUBREL：发送者发送了释放消息，告知接收者可以删除用来去重的数据消息缓存</li>
+<li>PUBCOMP：接收者收到了释放消息，告知发送者可以删除用来重发的释放消息缓存</li>
+</ul>
+<blockquote>
+<p>ps：ACK -&gt; acknowledge，REC -&gt; received，REL -&gt; release，COMP -&gt; complete</p>
+</blockquote>
 <h3 id="RabbitMQ-11"><a href="#RabbitMQ-11" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mytt_10566/article/details/93492501">RabbitMQ传输质量详解</a></li>

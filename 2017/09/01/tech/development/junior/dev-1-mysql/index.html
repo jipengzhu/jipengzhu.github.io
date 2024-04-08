@@ -28,7 +28,7 @@
 <meta property="og:description" content="mysql">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-31T17:01:00.000Z">
-<meta property="article:modified_time" content="2024-04-07T11:07:31.149Z">
+<meta property="article:modified_time" content="2024-04-08T07:37:24.278Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-07 19:07:31" itemprop="dateModified" datetime="2024-04-07T19:07:31+08:00">2024-04-07</time>
+                <time title="修改时间：2024-04-08 15:37:24" itemprop="dateModified" datetime="2024-04-08T15:37:24+08:00">2024-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1821,6 +1821,15 @@
 </blockquote>
 <blockquote>
 <p>ps：Next-key锁是record锁和gap锁的组合，是左开右闭的</p>
+</blockquote>
+<p>意向锁</p>
+<ul>
+<li>意向锁和意向锁之间是兼容的</li>
+<li>意向锁和表锁之间的共享锁是兼容器的，共享锁和互斥锁以及互斥锁和互斥锁之间是不兼容的</li>
+<li>意向锁和行锁之间是兼容的</li>
+</ul>
+<blockquote>
+<p>ps：意向锁是表级别的锁，只影响表锁，不影响行锁</p>
 </blockquote>
 <h3 id="Question-3"><a href="#Question-3" class="headerlink" title="Question"></a>Question</h3><h4 id="锁和隔离级别的关系"><a href="#锁和隔离级别的关系" class="headerlink" title="锁和隔离级别的关系"></a>锁和隔离级别的关系</h4><blockquote>
 <ul>
