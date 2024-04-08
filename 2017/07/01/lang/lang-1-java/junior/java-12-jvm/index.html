@@ -28,7 +28,7 @@
 <meta property="og:description" content="java虚拟机篇">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T17:12:00.000Z">
-<meta property="article:modified_time" content="2024-04-08T11:32:22.801Z">
+<meta property="article:modified_time" content="2024-04-08T12:07:22.537Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-08 19:32:22" itemprop="dateModified" datetime="2024-04-08T19:32:22+08:00">2024-04-08</time>
+                <time title="修改时间：2024-04-08 20:07:22" itemprop="dateModified" datetime="2024-04-08T20:07:22+08:00">2024-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -349,12 +349,9 @@
 </blockquote>
 <ul>
 <li>原子性：通过互斥机制实现，来解决资源的互斥使用问题</li>
-<li>可见性：通过内存屏障实现，解决数据的一致性问题</li>
+<li>可见性：通过内存屏障实现，解决数据的不一致性问题</li>
 <li>有序性：通过内存屏障实现，解决指令的重排序问题</li>
 </ul>
-<blockquote>
-<p>ps：内存屏障存在的意义就是为了解决程序在运行过程中出现的内存访问乱序的问题<br>ps：内存屏障是靠cpu的lock前缀指令实现的</p>
-</blockquote>
 <p>MESI缓存一致性协议</p>
 <ul>
 <li>M：缓存行已修改</li>
