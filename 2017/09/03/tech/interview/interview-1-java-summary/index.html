@@ -28,7 +28,7 @@
 <meta property="og:description" content="java面试总结">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-09-02T17:03:00.000Z">
-<meta property="article:modified_time" content="2024-04-08T10:07:29.799Z">
+<meta property="article:modified_time" content="2024-04-08T11:32:22.852Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ interview">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-08 18:07:29" itemprop="dateModified" datetime="2024-04-08T18:07:29+08:00">2024-04-08</time>
+                <time title="修改时间：2024-04-08 19:32:22" itemprop="dateModified" datetime="2024-04-08T19:32:22+08:00">2024-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -279,8 +279,8 @@
 <li>容器遍历</li>
 <li>容器排序</li>
 <li>容器空值</li>
-<li>容器原理</li>
 <li>容器安全</li>
+<li>容器原理</li>
 <li>容器扩容</li>
 </ul>
 <h2 id="Concurrency"><a href="#Concurrency" class="headerlink" title="Concurrency"></a>Concurrency</h2><ul>
@@ -305,7 +305,7 @@
 <li>JVM核心功能</li>
 <li>JVM运行数据分区</li>
 <li>JVM内存分配策略</li>
-<li>JVM垃圾数据回收</li>
+<li>JVM垃圾数据回收（分代、标记、回收算法、回收时机、回收过程、回收器分类、回收器搭配）</li>
 <li>JVM类（类加载机制、双亲委派机制）</li>
 <li>JVM对象（对象生命周期、对象初始化过程、对象内存结构）</li>
 <li>JVM问题排查（CPU占用高、内存OOM和泄露、线程死锁）</li>
@@ -333,7 +333,7 @@
 <li>扫码登录流程</li>
 </ul>
 <h3 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h3><ul>
-<li>SpringCloud组件</li>
+<li>SpringCloud组件（降级、熔断、限流）</li>
 </ul>
 <h2 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a>Mysql</h2><ul>
 <li>mysql索引（索引分类、索引原则、索引失效、索引优化、索引结构、B+索引、Hash索引）</li>
@@ -349,21 +349,16 @@
 <li>redis淘汰策略（不淘汰、淘汰最先过期的、random、lru、lfu）</li>
 <li>redis更新策略（旁路缓存、穿透写入、异步回写）</li>
 <li>redis使用场景（分布式锁、限流器、延时队列）</li>
+<li>redis事务（持久化）</li>
 <li>redis问题（缓存穿透、缓存击穿、缓存雪崩、缓存一致性、数据丢失）</li>
 <li>redis性能（性能优化、为什么很快，单线程、多线程、大key，热key）</li>
-<li>redis架构（主从复制、集群、主从、哨兵、分布式）</li>
+<li>redis架构（主从复制、主从、哨兵、集群、hash槽）</li>
 <li>redis分布式锁（分布式锁、红锁）</li>
 </ul>
 <h2 id="MQ"><a href="#MQ" class="headerlink" title="MQ"></a>MQ</h2><ul>
-<li>消息延时</li>
-<li>消息过期</li>
-<li>消费分组</li>
-<li>消费策略</li>
-<li>消息丢失</li>
-<li>消息重复</li>
-<li>消息乱序</li>
-<li>消息积压</li>
-<li>消息溢出</li>
+<li>消息使用（消息延时、消息过期、消费分组、消费策略、死信队列）</li>
+<li>消息可靠性（可靠性、Ack、Retry、Qos、持久化）</li>
+<li>消息问题（消息丢失、消息重复、消息乱序、消息积压、消息溢出）</li>
 </ul>
 <h2 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h2><ul>
 <li>TCP和UDP的区别</li>
@@ -386,7 +381,7 @@
 <h2 id="Distributed"><a href="#Distributed" class="headerlink" title="Distributed"></a>Distributed</h2><ul>
 <li>分布式id（雪花id + 时钟回拨）</li>
 <li>分布式锁（redis分布式锁 + redis红锁）</li>
-<li>分布式事务</li>
+<li>分布式事务（2PC、3PC、TCC、SAGA、本地消息表、MQ事务消息、最大努力通知）</li>
 </ul>
 <h1 id="java面试总结（语言篇）"><a href="#java面试总结（语言篇）" class="headerlink" title="java面试总结（语言篇）"></a>java面试总结（语言篇）</h1><h2 id="Lang-1"><a href="#Lang-1" class="headerlink" title="Lang"></a>Lang</h2><h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><h4 id="String为什么是不可变的"><a href="#String为什么是不可变的" class="headerlink" title="String为什么是不可变的"></a>String为什么是不可变的</h4><ul>
 <li>字符数组私有且被final修饰，并且没有提供修改的方法，保证不会被外部修改</li>
