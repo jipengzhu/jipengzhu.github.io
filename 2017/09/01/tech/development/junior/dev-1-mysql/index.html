@@ -28,7 +28,7 @@
 <meta property="og:description" content="mysql">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-31T17:01:00.000Z">
-<meta property="article:modified_time" content="2024-04-15T11:07:27.861Z">
+<meta property="article:modified_time" content="2024-04-18T09:21:22.643Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-15 19:07:27" itemprop="dateModified" datetime="2024-04-15T19:07:27+08:00">2024-04-15</time>
+                <time title="修改时间：2024-04-18 17:21:22" itemprop="dateModified" datetime="2024-04-18T17:21:22+08:00">2024-04-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -309,6 +309,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/RitaAndWakaka/article/details/118059592">mysql引擎详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35642036/article/details/82820178">mysql引擎之MyISAM和InnoDB的区别入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/helloxiaozhe/article/details/88601028">mysql引擎之MyISAM和InnoDB的区别详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36944952/article/details/125721541">mysql引擎之MyISAM和InnoDB和Memory对比</a></li>
 </ul>
 </blockquote>
 <ul>
@@ -329,11 +330,8 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44863976/article/details/102789392">mysql虚拟表详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36551991/article/details/111145516">mysql虚拟表之临时表入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_16268979/article/details/112646329">mysql虚拟表之临时表进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31730175/article/details/104574681">mysql虚拟表之临时表进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31362767/article/details/123603051">mysql虚拟表之临时表详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lampzsy/article/details/19911881">mysql虚拟表之内存表入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/helunqu2017/article/details/113447497">mysql虚拟表之内存表进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wang0907/article/details/126769011">mysql虚拟表之内存表详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_15952103/article/details/109193385">mysql虚拟表之视图入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45737068/article/details/106154731">mysql虚拟表之视图进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_62617719/article/details/124313392">mysql虚拟表之视图详解</a></li>
@@ -953,14 +951,16 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/quader/article/details/122761023">mysql常规查询之orderBy自定义排序</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/kuaileshifu/article/details/49558599">mysql常规查询之orderBy之文件排序</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/vipshop_fin_dev/article/details/115537133">mysql常规查询之orderBy之优化建议</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/eagle89/article/details/81315981">mysql常规查询之orderBy原理</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hbhe0316/article/details/122701128">mysql常规查询之orderBy之sort_buffer_size</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/stone_tmp/article/details/118249406">mysql常规查询之orderBy原理入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/eagle89/article/details/81315981">mysql常规查询之orderBy原理详解</a></li>
 <li><a target="_blank" rel="noopener" href="http://idber.github.io/2019/04/28-MySQL%E7%9A%84%E4%B8%89%E7%A7%8D%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95.html">mysql常规查询之orderBy算法</a></li>
 </ul>
 </blockquote>
 <ul>
-<li>快速排序：sort_buffer用的排序算法</li>
-<li>归并排序：临时文件用的排序算法（sort_buffer满了会写入临时文件）</li>
-<li>堆排序：分页时会使用优先级队列（堆结构）进行排序（堆排序）</li>
+<li>快速排序：内部排序（sort_buffer够用的时候）</li>
+<li>归并排序：外部排序（sort_buffer不够用的时候）</li>
+<li>堆排序：内部排序（包含分页操作的时候）</li>
 </ul>
 <h4 id="limit"><a href="#limit" class="headerlink" title="limit"></a>limit</h4><blockquote>
 <ul>
@@ -2046,13 +2046,15 @@
 </ul>
 <h2 id="Optimize-1"><a href="#Optimize-1" class="headerlink" title="Optimize"></a>Optimize</h2><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/RuiKe1400360107/article/details/107655921">mysql优化之避免全表扫描</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/An1090239782/article/details/100927224">mysql查询优化入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liuerchong/article/details/123746558">mysql查询优化进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37723088/article/details/129160111">mysql查询优化详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41942838/article/details/111244411">mysql性能优化入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mifffy_java/article/details/106404202">mysql性能优化进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zxp2624161989/article/details/106019863">mysql性能优化详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/RuiKe1400360107/article/details/107655921">mysql优化之避免全表扫描</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cn_hhaip/article/details/120472198">mysql优化之大数据查询</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/locahuang/article/details/112485334">mysql优化之冷热分离</a></li>
 </ul>
 </blockquote>
 <p>查询优化</p>
@@ -2086,6 +2088,16 @@
 <li>分页时可以使用子查询进行索引覆盖</li>
 <li>子查询和关联查询时注意要用小表驱动大表</li>
 <li>查询时避免使用长事务</li>
+</ul>
+</li>
+<li>大数据<ul>
+<li>预处理<ul>
+<li>预统计 + 物化</li>
+<li>预查询 + 缓存</li>
+</ul>
+</li>
+<li>分库分表</li>
+<li>使用数据仓库和大数据组件</li>
 </ul>
 </li>
 </ul>
@@ -2255,7 +2267,8 @@
 </blockquote>
 <h3 id="数据分片（Sharding）"><a href="#数据分片（Sharding）" class="headerlink" title="数据分片（Sharding）"></a>数据分片（Sharding）</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/agonie201218/article/details/110823552">数据库分表分库入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Decade_Faiz/article/details/130299037">数据库分表分库入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/agonie201218/article/details/110823552">数据库分表分库进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/g6U8W7p06dCO99fQ3/article/details/128179735">数据库分表分库详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41668084/article/details/113356941">数据库分表分库后的常见问题</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46033586/article/details/129129484">数据库分表分库之分区策略</a></li>
