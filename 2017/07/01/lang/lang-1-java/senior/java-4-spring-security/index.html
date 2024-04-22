@@ -28,7 +28,7 @@
 <meta property="og:description" content="spring-security">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T19:04:00.000Z">
-<meta property="article:modified_time" content="2024-04-22T09:27:27.153Z">
+<meta property="article:modified_time" content="2024-04-22T11:17:26.385Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-22 17:27:27" itemprop="dateModified" datetime="2024-04-22T17:27:27+08:00">2024-04-22</time>
+                <time title="修改时间：2024-04-22 19:17:26" itemprop="dateModified" datetime="2024-04-22T19:17:26+08:00">2024-04-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,7 +255,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/gonghaiyu/article/details/109151198">java使用无限制的加密算法</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_29689487/article/details/81634057">对称加密和非对称加密的区别</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/boweiqiang/article/details/105737017">加密（Encryption）和签名（Signature）的区别</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44848480/article/details/129037634">认证（Authentication）和授权（Authorization）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44848480/article/details/129037634">认证（Authentication）和鉴权（Authorization）详解</a></li>
 </ul>
 </blockquote>
 <ul>
@@ -270,7 +270,7 @@
 <li>Sign&#x2F;Signature：签名</li>
 <li>Verify&#x2F;Verification：校验</li>
 <li>Authenticate&#x2F;Authentication：认证</li>
-<li>Authorize&#x2F;Authorization：授权</li>
+<li>Authorize&#x2F;Authorization：鉴权</li>
 </ul>
 <h3 id="Secure"><a href="#Secure" class="headerlink" title="Secure"></a>Secure</h3><h4 id="安全有哪些方向"><a href="#安全有哪些方向" class="headerlink" title="安全有哪些方向"></a>安全有哪些方向</h4><p>数据安全、服务安全（API和WEB）、机器安全、网络安全、信息安全</p>
 <h4 id="安全有哪些技术"><a href="#安全有哪些技术" class="headerlink" title="安全有哪些技术"></a>安全有哪些技术</h4><h5 id="古代有哪些安全相关的技术"><a href="#古代有哪些安全相关的技术" class="headerlink" title="古代有哪些安全相关的技术"></a>古代有哪些安全相关的技术</h5><ul>
@@ -312,7 +312,7 @@
 <blockquote>
 <p>ps： <code>公钥</code> 和 <code>私钥</code> 都具备加密和解密的功能，但是不能自己加密又自己解密，如果其中一把钥匙既能加密又能自己解密，那就相当于 <code>秘钥</code> 了</p>
 </blockquote>
-<h3 id="Auth"><a href="#Auth" class="headerlink" title="Auth"></a>Auth</h3><p><code>认证</code> 的作用：验证用户的身份<br><code>授权</code> 的作用：检验用户的权限</p>
+<h3 id="Auth"><a href="#Auth" class="headerlink" title="Auth"></a>Auth</h3><p><code>认证</code> 的作用：验证用户的身份<br><code>鉴权</code> 的作用：检验用户的权限</p>
 <h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37771475/article/details/86153799">SpringSecurity入门</a></li>
@@ -425,13 +425,24 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39766005/article/details/120976857">常见的认证方案入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zwkkkk1/article/details/82179310">常见的认证方案进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012324798/article/details/104533817">常见的认证方案详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/maoliran/article/details/51841420">认证之WWW-Authenticate的作用</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/maoliran/article/details/51841420">认证之WWW-Authenticate和Authorization的作用</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaokanfuchen86/article/details/123033611">认证之Authorization的Basic和Bearer区别</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/351718444?utm_id=0">认证之两步验证入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://sspai.com/post/43346">认证之两步验证详解</a></li>
 </ul>
 </blockquote>
-<p>认证的常见方式</p>
+<p>常见的认证方案</p>
+<ul>
+<li>HTTP基本认证（HTTP Basic Authentication）</li>
+<li>HTTP摘要认证（HTTP Digest Authentication）</li>
+<li>HTTP相互认证（HTTP Mutual Authentication）</li>
+<li>客户端SSL认证（Client SSL Authentication）</li>
+<li>表单认证（Form-Based Authentication）</li>
+</ul>
+<blockquote>
+<p>ps：表单认证需要与Cookie和Token配合使用</p>
+</blockquote>
+<p>常见的认证方式</p>
 <ul>
 <li>账号密码</li>
 <li>邮箱链接</li>
@@ -442,7 +453,7 @@
 <li>脸纹</li>
 <li>签名</li>
 </ul>
-<p>认证成功后返回的是 <code>令牌（token）</code> ， token关联或者包含了用户的 <code>身份</code> 和 <code>权限</code> 信息</p>
+<p>认证成功后返回的是 <code>token（令牌）</code> ， token关联或者包含了用户的 <code>身份</code> 和 <code>权限</code> 信息</p>
 <h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2><h3 id="Private"><a href="#Private" class="headerlink" title="Private"></a>Private</h3><p>注册：Register、Sign Up<br>登录：Login、Sign In<br>登出：Logout、Sign Out</p>
 <h4 id="Register"><a href="#Register" class="headerlink" title="Register"></a>Register</h4><blockquote>
 <ul>
@@ -454,9 +465,9 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_24550639/article/details/111089296">OpenID详解</a></li>
 </ul>
 </blockquote>
-<p>账号的常见方式</p>
+<p>账号的常见形式</p>
 <ul>
-<li>自动分配</li>
+<li>自动选号</li>
 <li>手动选号</li>
 <li>邮箱号</li>
 <li>手机号</li>
@@ -511,8 +522,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42764468/article/details/107731844">JWT注销和续签问题详解</a></li>
 </ul>
 </blockquote>
-<h4 id="Logout"><a href="#Logout" class="headerlink" title="Logout"></a>Logout</h4><h3 id="Public"><a href="#Public" class="headerlink" title="Public"></a>Public</h3><p>开放接口使用的不是 <code>登录认证</code> ，而是 <code>签名认证</code></p>
-<h4 id="OpenAPI"><a href="#OpenAPI" class="headerlink" title="OpenAPI"></a>OpenAPI</h4><blockquote>
+<h4 id="Logout"><a href="#Logout" class="headerlink" title="Logout"></a>Logout</h4><h3 id="Public"><a href="#Public" class="headerlink" title="Public"></a>Public</h3><h4 id="OpenAPI"><a href="#OpenAPI" class="headerlink" title="OpenAPI"></a>OpenAPI</h4><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44155115/article/details/105086219">免费的开放接口大全入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41856814/article/details/89290195">免费的开放接口大全详解</a></li>
@@ -521,49 +531,45 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaoyi52/article/details/121198620">开放接口（OpenAPI）详解</a></li>
 </ul>
 </blockquote>
-<h5 id="Signature"><a href="#Signature" class="headerlink" title="Signature"></a>Signature</h5><blockquote>
+<h5 id="Account"><a href="#Account" class="headerlink" title="Account"></a>Account</h5><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hjzgg/p/11062043.html">接口签名入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hujunzheng/p/9725168.html">接口签名进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq877728715/article/details/113555907">接口签名详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_63437643/article/details/124061112">接口签名精进</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/inthat/article/details/103140515">接口签名之appkey和appsecret详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dsq_MaDing/article/details/128807455">接口签名之AK（AccessKey）&#x2F;SK（SecretKey）入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/makenothing/article/details/81158481">接口签名之AK（AccessKey）&#x2F;SK（SecretKey）进阶</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lijialexiao/article/details/121288347">接口签名之AK（AccessKey）&#x2F;SK（SecretKey）详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011627980/article/details/52778326">接口签名之MD5</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012105931/article/details/51088312">接口签名之SHA1</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43040108/article/details/120760046">接口签名之HmacSHA1</a></li>
-<li><a target="_blank" rel="noopener" href="https://cnodejs.org/topic/5955f21e984e31dd458c15f2">接口签名之客户端如何保证appsecret的安全讨论1</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/24575506">接口签名之客户端如何保证appsecret的安全讨论2</a></li>
-<li><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000004603922">接口签名之客户端如何保证appsecret的安全讨论3</a></li>
-<li><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/community/minihome/doc/0004a84fcb0bb0e89eddbaa5156401">接口签名之如何保证微信的AppSecret的安全</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lishirong/article/details/52851014">接口签名之如何保证云存储服务的SecretKey的安全</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/inthat/article/details/103140515">开放接口账号之appkey和appsecret详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dsq_MaDing/article/details/128807455">开放接口账号之AK（AccessKey）&#x2F;SK（SecretKey）入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/makenothing/article/details/81158481">开放接口账号之AK（AccessKey）&#x2F;SK（SecretKey）进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lijialexiao/article/details/121288347">开放接口账号之AK（AccessKey）&#x2F;SK（SecretKey）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://cnodejs.org/topic/5955f21e984e31dd458c15f2">开放接口账号之客户端如何保证appsecret的安全讨论1</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/24575506">开放接口账号之客户端如何保证appsecret的安全讨论2</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000004603922">开放接口账号之客户端如何保证appsecret的安全讨论3</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/community/minihome/doc/0004a84fcb0bb0e89eddbaa5156401">开放接口账号之如何保证微信的AppSecret的安全</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lishirong/article/details/52851014">开放接口账号之如何保证云存储服务的SecretKey的安全</a></li>
 </ul>
 </blockquote>
+<h5 id="Signature"><a href="#Signature" class="headerlink" title="Signature"></a>Signature</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hjzgg/p/11062043.html">开放接口签名入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hujunzheng/p/9725168.html">开放接口签名进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq877728715/article/details/113555907">开放接口签名详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_63437643/article/details/124061112">开放接口签名精进</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011627980/article/details/52778326">开放接口签名之MD5</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012105931/article/details/51088312">开放接口签名之SHA1</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43040108/article/details/120760046">开放接口签名之HmacSHA1</a></li>
+</ul>
+</blockquote>
+<p>开放接口认证时用的不是Token（令牌）机制，而是Signature（签名）机制</p>
 <h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><h3 id="SSO"><a href="#SSO" class="headerlink" title="SSO"></a>SSO</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46110252/article/details/137470096">SSO入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013905744/article/details/111225420">SSO详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/A_art_xiang/article/details/107028456">SSO流程图</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/AS_JOPO/article/details/120739180">SSO之基于共享Cookie实现详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Anumbrella/article/details/80821486">SSO之基于CAS认证中心实现详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xue_xiaofei/article/details/110061862">SSO之CAS和OAuth2对比</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lipei1220/article/details/107616418">SSO之CAS和OAuth2的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012324798/article/details/105612729">SSO之基于OIDC实现详解</a></li>
 </ul>
 </blockquote>
 <p>SSO的实现方案</p>
 <ul>
 <li>基于共享Cookie：多个应用需要共享父级域名</li>
 <li>基于CAS认证中心：多个应用不需要共享父级域名</li>
-</ul>
-<blockquote>
-<p>ps：OAuth2是用来授权的，不是用来认证的，因为OAuth2中只包含资源信息不包含用户信息</p>
-</blockquote>
-<p>OAuth2和CAS对比</p>
-<ul>
-<li>OAuth2和CAS的流程基本一致</li>
-<li>OAuth2未授权时返回的是授权页面，CAS未登录时返回的是登录页面</li>
-<li>OAuth2回跳时返回的是code用来获取accessToken，CAS回跳时返回的是ticket用来获取用户信息</li>
 </ul>
 <h3 id="IAM"><a href="#IAM" class="headerlink" title="IAM"></a>IAM</h3><blockquote>
 <ul>
@@ -572,10 +578,15 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jiagoushipro/article/details/126458241">IAM详解</a></li>
 </ul>
 </blockquote>
-<h1 id="Authorization（授权）"><a href="#Authorization（授权）" class="headerlink" title="Authorization（授权）"></a>Authorization（授权）</h1><blockquote>
+<p>IAM：身份和访问管理</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/brother_Cheng_Py/article/details/121970486">常见的授权模型入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43314519/article/details/118365309">常见的授权模型详解</a></li>
+<li>单点登录 (SSO)</li>
+<li>多因素身份验证 (MFA)</li>
+</ul>
+<h1 id="Authorization（鉴权）"><a href="#Authorization（鉴权）" class="headerlink" title="Authorization（鉴权）"></a>Authorization（鉴权）</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/brother_Cheng_Py/article/details/121970486">常见的鉴权模型入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43314519/article/details/118365309">常见的鉴权模型详解</a></li>
 </ul>
 </blockquote>
 <p>常见的权限模型</p>
@@ -592,12 +603,24 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/TheWindOfSon/article/details/107703234">OAuth2入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Huang_Ds/article/details/125533523">OAuth2详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a595077052/article/details/118996218">OAuth2流程图</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/bobozai86/article/details/124974819">OAuth2之资源服务器验证token</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39973810/article/details/84673548">OAuth2之Bearer Token和MAC Token的区别</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44388689/article/details/121602585">OAuth2之accessToken和refreshToken的区别</a></li>
 <li><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/oplatform/Mobile_App/WeChat_Login/Development_Guide.html">OAuth2之微信小程序</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dongdongdongJL/article/details/127792110">OAuth2和CAS对比</a></li>
 </ul>
 </blockquote>
 <p>OAuth2是一个行业标准的授权协议，包含一系列流程和标准</p>
+<p>OAuth2和CAS对比</p>
+<ul>
+<li>OAuth2和CAS的流程基本一致</li>
+<li>OAuth2未授权时返回的是授权页面，CAS未登录时返回的是登录页面</li>
+<li>OAuth2回跳时返回的是code用来获取accessToken，CAS回跳时返回的是ticket用来获取用户信息</li>
+</ul>
+<blockquote>
+<p>ps：OAuth2是用来授权的，不是用来认证的，因为OAuth2中只包含资源信息不包含用户信息</p>
+</blockquote>
 <h1 id="Data（数据安全）"><a href="#Data（数据安全）" class="headerlink" title="Data（数据安全）"></a>Data（数据安全）</h1><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_63108102/article/details/128414214">数据脱敏和数据加密入门</a></li>
@@ -974,7 +997,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Security"><span class="nav-number">1.</span> <span class="nav-text">Security</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">1.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Secure"><span class="nav-number">1.1.1.</span> <span class="nav-text">Secure</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E5%90%91"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">安全有哪些方向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%9C%89%E5%93%AA%E4%BA%9B%E6%8A%80%E6%9C%AF"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">安全有哪些技术</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%A4%E4%BB%A3%E6%9C%89%E5%93%AA%E4%BA%9B%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3%E7%9A%84%E6%8A%80%E6%9C%AF"><span class="nav-number">1.1.1.2.1.</span> <span class="nav-text">古代有哪些安全相关的技术</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%91%E4%BB%A3%E6%9C%89%E5%93%AA%E4%BA%9B%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3%E7%9A%84%E6%8A%80%E6%9C%AF"><span class="nav-number">1.1.1.2.2.</span> <span class="nav-text">近代有哪些安全相关的技术</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Secret"><span class="nav-number">1.1.2.</span> <span class="nav-text">Secret</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Auth"><span class="nav-number">1.1.3.</span> <span class="nav-text">Auth</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">1.2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SecureRandom"><span class="nav-number">1.2.1.</span> <span class="nav-text">SecureRandom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MessageDigest"><span class="nav-number">1.2.2.</span> <span class="nav-text">MessageDigest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cipher"><span class="nav-number">1.2.3.</span> <span class="nav-text">Cipher</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KeyGenerator"><span class="nav-number">1.2.4.</span> <span class="nav-text">KeyGenerator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KeyStore"><span class="nav-number">1.2.5.</span> <span class="nav-text">KeyStore</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Algorithm%EF%BC%88%E7%AE%97%E6%B3%95%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">Algorithm（算法）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Codec%EF%BC%88%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">Codec（编码算法）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Url"><span class="nav-number">2.1.1.</span> <span class="nav-text">Url</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Base64"><span class="nav-number">2.1.2.</span> <span class="nav-text">Base64</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Digest%EF%BC%88%E6%91%98%E8%A6%81%E7%AE%97%E6%B3%95%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">Digest（摘要算法）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CRC32"><span class="nav-number">2.2.1.</span> <span class="nav-text">CRC32</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MD5"><span class="nav-number">2.2.2.</span> <span class="nav-text">MD5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SHA1"><span class="nav-number">2.2.3.</span> <span class="nav-text">SHA1</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Crypto%EF%BC%88%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">Crypto（加密算法）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">2.3.1.</span> <span class="nav-text">对称加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">2.3.2.</span> <span class="nav-text">非对称加密</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Authentication%EF%BC%88%E8%AE%A4%E8%AF%81%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">Authentication（认证）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Application"><span class="nav-number">3.1.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Private"><span class="nav-number">3.1.1.</span> <span class="nav-text">Private</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Register"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">Register</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Login"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">Login</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Cookie"><span class="nav-number">3.1.1.2.1.</span> <span class="nav-text">Cookie</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Session"><span class="nav-number">3.1.1.2.2.</span> <span class="nav-text">Session</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Token"><span class="nav-number">3.1.1.2.3.</span> <span class="nav-text">Token</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Logout"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">Logout</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Public"><span class="nav-number">3.1.2.</span> <span class="nav-text">Public</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#OpenAPI"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">OpenAPI</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Signature"><span class="nav-number">3.1.2.1.1.</span> <span class="nav-text">Signature</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service"><span class="nav-number">3.2.</span> <span class="nav-text">Service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSO"><span class="nav-number">3.2.1.</span> <span class="nav-text">SSO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IAM"><span class="nav-number">3.2.2.</span> <span class="nav-text">IAM</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Authorization%EF%BC%88%E6%8E%88%E6%9D%83%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">Authorization（授权）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Application-1"><span class="nav-number">4.1.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux"><span class="nav-number">4.1.1.</span> <span class="nav-text">Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Database"><span class="nav-number">4.1.2.</span> <span class="nav-text">Database</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service-1"><span class="nav-number">4.2.</span> <span class="nav-text">Service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OAuth2"><span class="nav-number">4.2.1.</span> <span class="nav-text">OAuth2</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data%EF%BC%88%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">Data（数据安全）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Password"><span class="nav-number">5.1.</span> <span class="nav-text">Password</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Service%EF%BC%88%E6%9C%8D%E5%8A%A1%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">Service（服务安全）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#API%EF%BC%88%E6%8E%A5%E5%8F%A3%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">6.1.</span> <span class="nav-text">API（接口安全）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Authentication"><span class="nav-number">6.1.1.</span> <span class="nav-text">Authentication</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Signature-1"><span class="nav-number">6.1.2.</span> <span class="nav-text">Signature</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Crypto"><span class="nav-number">6.1.3.</span> <span class="nav-text">Crypto</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Captcha"><span class="nav-number">6.1.4.</span> <span class="nav-text">Captcha</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Crawler"><span class="nav-number">6.1.5.</span> <span class="nav-text">Crawler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web%EF%BC%88Web%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">6.2.</span> <span class="nav-text">Web（Web安全）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Https"><span class="nav-number">6.2.1.</span> <span class="nav-text">Https</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Tools"><span class="nav-number">6.2.1.1.</span> <span class="nav-text">Tools</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Certificate"><span class="nav-number">6.2.2.</span> <span class="nav-text">Certificate</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Tools-1"><span class="nav-number">6.2.2.1.</span> <span class="nav-text">Tools</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#KeyTool"><span class="nav-number">6.2.2.1.1.</span> <span class="nav-text">KeyTool</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Openssl"><span class="nav-number">6.2.2.1.2.</span> <span class="nav-text">Openssl</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ssh-keygen"><span class="nav-number">6.2.2.1.3.</span> <span class="nav-text">ssh-keygen</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Android"><span class="nav-number">6.2.2.2.</span> <span class="nav-text">Android</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hijack"><span class="nav-number">6.2.3.</span> <span class="nav-text">Hijack</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pay%EF%BC%88%E6%94%AF%E4%BB%98%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">6.3.</span> <span class="nav-text">Pay（支付安全）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Machine%EF%BC%88%E6%9C%BA%E5%99%A8%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">7.</span> <span class="nav-text">Machine（机器安全）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Network%EF%BC%88%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">8.</span> <span class="nav-text">Network（网络安全）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Information%EF%BC%88%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">9.</span> <span class="nav-text">Information（信息安全）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8"><span class="nav-number">9.1.</span> <span class="nav-text">信息安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%89%E5%85%A8"><span class="nav-number">9.2.</span> <span class="nav-text">代码安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%86%E9%92%A5%E5%AE%89%E5%85%A8"><span class="nav-number">9.3.</span> <span class="nav-text">密钥安全</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Security"><span class="nav-number">1.</span> <span class="nav-text">Security</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">1.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Secure"><span class="nav-number">1.1.1.</span> <span class="nav-text">Secure</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E5%90%91"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">安全有哪些方向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%9C%89%E5%93%AA%E4%BA%9B%E6%8A%80%E6%9C%AF"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">安全有哪些技术</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%A4%E4%BB%A3%E6%9C%89%E5%93%AA%E4%BA%9B%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3%E7%9A%84%E6%8A%80%E6%9C%AF"><span class="nav-number">1.1.1.2.1.</span> <span class="nav-text">古代有哪些安全相关的技术</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%91%E4%BB%A3%E6%9C%89%E5%93%AA%E4%BA%9B%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3%E7%9A%84%E6%8A%80%E6%9C%AF"><span class="nav-number">1.1.1.2.2.</span> <span class="nav-text">近代有哪些安全相关的技术</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Secret"><span class="nav-number">1.1.2.</span> <span class="nav-text">Secret</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Auth"><span class="nav-number">1.1.3.</span> <span class="nav-text">Auth</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">1.2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SecureRandom"><span class="nav-number">1.2.1.</span> <span class="nav-text">SecureRandom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MessageDigest"><span class="nav-number">1.2.2.</span> <span class="nav-text">MessageDigest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cipher"><span class="nav-number">1.2.3.</span> <span class="nav-text">Cipher</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KeyGenerator"><span class="nav-number">1.2.4.</span> <span class="nav-text">KeyGenerator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KeyStore"><span class="nav-number">1.2.5.</span> <span class="nav-text">KeyStore</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Algorithm%EF%BC%88%E7%AE%97%E6%B3%95%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">Algorithm（算法）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Codec%EF%BC%88%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">Codec（编码算法）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Url"><span class="nav-number">2.1.1.</span> <span class="nav-text">Url</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Base64"><span class="nav-number">2.1.2.</span> <span class="nav-text">Base64</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Digest%EF%BC%88%E6%91%98%E8%A6%81%E7%AE%97%E6%B3%95%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">Digest（摘要算法）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CRC32"><span class="nav-number">2.2.1.</span> <span class="nav-text">CRC32</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MD5"><span class="nav-number">2.2.2.</span> <span class="nav-text">MD5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SHA1"><span class="nav-number">2.2.3.</span> <span class="nav-text">SHA1</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Crypto%EF%BC%88%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">Crypto（加密算法）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">2.3.1.</span> <span class="nav-text">对称加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">2.3.2.</span> <span class="nav-text">非对称加密</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Authentication%EF%BC%88%E8%AE%A4%E8%AF%81%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">Authentication（认证）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Application"><span class="nav-number">3.1.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Private"><span class="nav-number">3.1.1.</span> <span class="nav-text">Private</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Register"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">Register</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Login"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">Login</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Cookie"><span class="nav-number">3.1.1.2.1.</span> <span class="nav-text">Cookie</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Session"><span class="nav-number">3.1.1.2.2.</span> <span class="nav-text">Session</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Token"><span class="nav-number">3.1.1.2.3.</span> <span class="nav-text">Token</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Logout"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">Logout</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Public"><span class="nav-number">3.1.2.</span> <span class="nav-text">Public</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#OpenAPI"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">OpenAPI</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Account"><span class="nav-number">3.1.2.1.1.</span> <span class="nav-text">Account</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Signature"><span class="nav-number">3.1.2.1.2.</span> <span class="nav-text">Signature</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service"><span class="nav-number">3.2.</span> <span class="nav-text">Service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSO"><span class="nav-number">3.2.1.</span> <span class="nav-text">SSO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IAM"><span class="nav-number">3.2.2.</span> <span class="nav-text">IAM</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Authorization%EF%BC%88%E9%89%B4%E6%9D%83%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">Authorization（鉴权）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Application-1"><span class="nav-number">4.1.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux"><span class="nav-number">4.1.1.</span> <span class="nav-text">Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Database"><span class="nav-number">4.1.2.</span> <span class="nav-text">Database</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service-1"><span class="nav-number">4.2.</span> <span class="nav-text">Service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OAuth2"><span class="nav-number">4.2.1.</span> <span class="nav-text">OAuth2</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data%EF%BC%88%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">Data（数据安全）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Password"><span class="nav-number">5.1.</span> <span class="nav-text">Password</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Service%EF%BC%88%E6%9C%8D%E5%8A%A1%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">Service（服务安全）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#API%EF%BC%88%E6%8E%A5%E5%8F%A3%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">6.1.</span> <span class="nav-text">API（接口安全）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Authentication"><span class="nav-number">6.1.1.</span> <span class="nav-text">Authentication</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Signature-1"><span class="nav-number">6.1.2.</span> <span class="nav-text">Signature</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Crypto"><span class="nav-number">6.1.3.</span> <span class="nav-text">Crypto</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Captcha"><span class="nav-number">6.1.4.</span> <span class="nav-text">Captcha</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Crawler"><span class="nav-number">6.1.5.</span> <span class="nav-text">Crawler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web%EF%BC%88Web%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">6.2.</span> <span class="nav-text">Web（Web安全）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Https"><span class="nav-number">6.2.1.</span> <span class="nav-text">Https</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Tools"><span class="nav-number">6.2.1.1.</span> <span class="nav-text">Tools</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Certificate"><span class="nav-number">6.2.2.</span> <span class="nav-text">Certificate</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Tools-1"><span class="nav-number">6.2.2.1.</span> <span class="nav-text">Tools</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#KeyTool"><span class="nav-number">6.2.2.1.1.</span> <span class="nav-text">KeyTool</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Openssl"><span class="nav-number">6.2.2.1.2.</span> <span class="nav-text">Openssl</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ssh-keygen"><span class="nav-number">6.2.2.1.3.</span> <span class="nav-text">ssh-keygen</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Android"><span class="nav-number">6.2.2.2.</span> <span class="nav-text">Android</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hijack"><span class="nav-number">6.2.3.</span> <span class="nav-text">Hijack</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pay%EF%BC%88%E6%94%AF%E4%BB%98%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">6.3.</span> <span class="nav-text">Pay（支付安全）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Machine%EF%BC%88%E6%9C%BA%E5%99%A8%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">7.</span> <span class="nav-text">Machine（机器安全）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Network%EF%BC%88%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">8.</span> <span class="nav-text">Network（网络安全）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Information%EF%BC%88%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">9.</span> <span class="nav-text">Information（信息安全）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8"><span class="nav-number">9.1.</span> <span class="nav-text">信息安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%89%E5%85%A8"><span class="nav-number">9.2.</span> <span class="nav-text">代码安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%86%E9%92%A5%E5%AE%89%E5%85%A8"><span class="nav-number">9.3.</span> <span class="nav-text">密钥安全</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
