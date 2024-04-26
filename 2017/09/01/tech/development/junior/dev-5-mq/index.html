@@ -28,7 +28,7 @@
 <meta property="og:description" content="mq">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-31T17:05:00.000Z">
-<meta property="article:modified_time" content="2024-04-25T12:17:35.184Z">
+<meta property="article:modified_time" content="2024-04-26T12:07:27.395Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ dev">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-25 20:17:35" itemprop="dateModified" datetime="2024-04-25T20:17:35+08:00">2024-04-25</time>
+                <time title="修改时间：2024-04-26 20:07:27" itemprop="dateModified" datetime="2024-04-26T20:07:27+08:00">2024-04-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -312,7 +312,9 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_47567401/article/details/113810919">常用的物联网协议</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.emqx.com/zh/mqtt-guide">MQTT教程</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.emqx.com/zh/blog/what-is-the-mqtt-protocol">关于MQTT你需要了解这些</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.emqx.com/zh/blog/introduction-to-mqtt-qos">MQTT之消息质量（Qos）详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.emqx.com/zh/blog/introduction-to-mqtt-qos">MQTT之消息质量（Qos）</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.emqx.com/zh/blog/mqtt-client-auto-reconnect-best-practices">MQTT之断线重连</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/paladinzh/article/details/88053530">MQTT之重连问题</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/K3169/article/details/127974283">MQTT之身份认证</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.emqx.com/zh/blog/a-comprehensive-comparison-of-open-source-mqtt-brokers-in-2023">MQTT之Broker选型入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/p1279030826/article/details/107916531">MQTT之Broker选型详解</a></li>
@@ -384,6 +386,8 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Hmj050117/article/details/121587672">RabbitMQ之Channel详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/debug_fan/article/details/105088145">RabbitMQ之Exchange详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45492007/article/details/106103962">RabbitMQ之Queue详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/NewBeeMu/article/details/121878183">RabbitMQ之工作模式入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45145809/article/details/109328224">RabbitMQ之工作模式详解</a></li>
 </ul>
 </blockquote>
 <h5 id="Exchange"><a href="#Exchange" class="headerlink" title="Exchange"></a>Exchange</h5><blockquote>
@@ -394,7 +398,6 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LOVELONG8808/article/details/93017243">RabbitMQ之Exchange的默认交换机入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangming520liwei/article/details/102585700">RabbitMQ之Exchange的默认交换机详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/iamshuigege/article/details/81675354">RabbitMQ之Exchange的路由规则详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45145809/article/details/109328224">RabbitMQ之Exchange的工作模式详解</a></li>
 </ul>
 </blockquote>
 <p>交换机类型</p>
@@ -424,6 +427,8 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xianren95/article/details/121924194">RocketMQ入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42103983/article/details/119269232">RocketMQ进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zyx1260168395/article/details/110641851">RocketMQ详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_65819602/article/details/133364773">RocketMQ之生产消息</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/An1090239782/article/details/126974915">RocketMQ之消费消息</a></li>
 </ul>
 </blockquote>
 <h4 id="Concept-2"><a href="#Concept-2" class="headerlink" title="Concept"></a>Concept</h4><blockquote>
@@ -589,77 +594,136 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38750084/article/details/83037938">Kafka文件清理详解</a></li>
 </ul>
 </blockquote>
+<h2 id="消息分区"><a href="#消息分区" class="headerlink" title="消息分区"></a>消息分区</h2><ul>
+<li>随机策略（random）</li>
+<li>轮询策略（round-robin）</li>
+<li>分键策略（key-sharding）<ul>
+<li>哈希分区（hash）</li>
+<li>粘性分区（sticky）</li>
+</ul>
+</li>
+</ul>
+<h3 id="RabbitMQ-3"><a href="#RabbitMQ-3" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41712271/article/details/118297896">RabbitMQ消息分区入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mameng1988/article/details/83902183">RabbitMQ消息分区详解</a></li>
+</ul>
+</blockquote>
+<h3 id="RocketMQ-3"><a href="#RocketMQ-3" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_26919721/article/details/121116584">RocketMQ消息分区入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/manba_yqq/article/details/131312816">RocketMQ消息分区详解</a></li>
+</ul>
+</blockquote>
+<h3 id="Kafka-3"><a href="#Kafka-3" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012203062/article/details/134403144">Kafka消息分区入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/albenxie/article/details/134233400">Kafka消息分区详解</a></li>
+</ul>
+</blockquote>
 <h2 id="消费分组"><a href="#消费分组" class="headerlink" title="消费分组"></a>消费分组</h2><ul>
-<li>不同组：共享消息</li>
 <li>同一组：独占消息</li>
+<li>不同组：共享消息</li>
 </ul>
 <blockquote>
 <p>ps：消费分组又叫多路消费</p>
 </blockquote>
-<h3 id="RabbitMQ-3"><a href="#RabbitMQ-3" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><p>RabbitMQ原生 <code>不支持消费分组</code> ， 但可以通过扇出交换机广播到多个队列（每个队列是一个分组，绑定了多个消费者）来实现</p>
+<h3 id="RabbitMQ-4"><a href="#RabbitMQ-4" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><p>RabbitMQ原生 <code>不支持消费分组</code> ， 但可以通过扇出交换机广播到多个队列（每个队列是一个分组，绑定了多个消费者）来实现</p>
 <blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_24845157/article/details/122235025">RabbitMQ消费分组详解</a></li>
 </ul>
 </blockquote>
-<h3 id="RocketMQ-3"><a href="#RocketMQ-3" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><p>RocketMQ原生 <code>支持消费分组</code></p>
+<h3 id="RocketMQ-4"><a href="#RocketMQ-4" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><p>RocketMQ原生 <code>支持消费分组</code></p>
 <blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36559868/article/details/106305164">RocketMQ消费分组详解</a></li>
 </ul>
 </blockquote>
-<h3 id="Kafka-3"><a href="#Kafka-3" class="headerlink" title="Kafka"></a>Kafka</h3><p>Kafka原生 <code>支持消费分组</code></p>
+<h3 id="Kafka-4"><a href="#Kafka-4" class="headerlink" title="Kafka"></a>Kafka</h3><p>Kafka原生 <code>支持消费分组</code></p>
 <blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/gdkyxy2013/article/details/86644919">Kafka消费分组详解</a></li>
 </ul>
 </blockquote>
-<h2 id="消费策略"><a href="#消费策略" class="headerlink" title="消费策略"></a>消费策略</h2><ul>
-<li>消费方式<ul>
-<li>单条消费（一次取一条）</li>
-<li>批量消费（一次取多条）</li>
+<h2 id="消费策略"><a href="#消费策略" class="headerlink" title="消费策略"></a>消费策略</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/gertent/article/details/80063356">MQ消费策略之集群模式和广播模式</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>按照消费模式分<ul>
+<li>集群模式：同一个消费组里的消费者独占消费消息</li>
+<li>广播模式：同一个消费组里的消费者共享消费消息</li>
+<li>分区模式：同一个消费组里的消费者分区消费消息</li>
 </ul>
 </li>
-<li>消费模式<ul>
-<li>顺序消费（单个消费者）</li>
-<li>并发消费（多个消费者）</li>
+<li>按照消费顺序分<ul>
+<li>串行消费：单个消费者</li>
+<li>并行消费：多个消费者</li>
 </ul>
 </li>
-<li>消费反馈<ul>
+<li>按照消费数量分<ul>
+<li>单条消费：一次取一条</li>
+<li>批量消费：一次取多条</li>
+</ul>
+</li>
+</ul>
+<h3 id="RabbitMQ-5"><a href="#RabbitMQ-5" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/NewBeeMu/article/details/121878183">RabbitMQ消费策略之工作模式</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>简单队列：</li>
+<li>工作队列：相当于集群模式</li>
+<li>发布订阅：相当于广播模式</li>
+<li>直接匹配：相当于分区模式</li>
+<li>通配匹配：相当于分区模式</li>
+</ul>
+<h3 id="RocketMQ-5"><a href="#RocketMQ-5" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_30038111/article/details/88946712">RocketMQ消费策略之串行消费和并发消费</a></li>
+</ul>
+</blockquote>
+<h3 id="Kafka-5"><a href="#Kafka-5" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/luo15242208310/article/details/122285689">Kafka消费策略之单条消费和批量消费</a></li>
+</ul>
+</blockquote>
+<h2 id="消费反馈"><a href="#消费反馈" class="headerlink" title="消费反馈"></a>消费反馈</h2><ul>
 <li>ack：确认（消费成功，可以删除）</li>
 <li>retry：重试（消费失败，需要重试）</li>
 <li>discard：丢弃（消费失败，可以丢弃）</li>
 </ul>
-</li>
-</ul>
-<h3 id="RabbitMQ-4"><a href="#RabbitMQ-4" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
+<h3 id="RabbitMQ-6"><a href="#RabbitMQ-6" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_62939743/article/details/129352905">RabbitMQ消费策略详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_62939743/article/details/129352905">RabbitMQ消费反馈详解</a></li>
 </ul>
 </blockquote>
-<h3 id="RocketMQ-4"><a href="#RocketMQ-4" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
+<h3 id="RocketMQ-6"><a href="#RocketMQ-6" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_30038111/article/details/88946712">RocketMQ消费策略详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_21040559/article/details/122775470">RocketMQ消费反馈详解</a></li>
 </ul>
 </blockquote>
-<h3 id="Kafka-4"><a href="#Kafka-4" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
+<h3 id="Kafka-6"><a href="#Kafka-6" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/luo15242208310/article/details/122285689">Kafka消费策略详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36551991/article/details/134835158">Kafka消费反馈详解</a></li>
 </ul>
 </blockquote>
-<h2 id="死信队列"><a href="#死信队列" class="headerlink" title="死信队列"></a>死信队列</h2><h3 id="RabbitMQ-5"><a href="#RabbitMQ-5" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><p>RabbitMQ原生 <code>支持死信队列</code></p>
+<h2 id="死信队列"><a href="#死信队列" class="headerlink" title="死信队列"></a>死信队列</h2><h3 id="RabbitMQ-7"><a href="#RabbitMQ-7" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><p>RabbitMQ原生 <code>支持死信队列</code></p>
 <blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Weixiaohuai/article/details/94760975">RabbitMQ死信队列详解</a></li>
 </ul>
 </blockquote>
-<h3 id="RocketMQ-5"><a href="#RocketMQ-5" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><p>RocketMQ原生 <code>支持死信队列</code></p>
+<h3 id="RocketMQ-7"><a href="#RocketMQ-7" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><p>RocketMQ原生 <code>支持死信队列</code></p>
 <blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41625866/article/details/125851764">RocketMQ死信队列详解</a></li>
 </ul>
 </blockquote>
-<h3 id="Kafka-5"><a href="#Kafka-5" class="headerlink" title="Kafka"></a>Kafka</h3><p>Kafka原生 <code>不支持死信队列</code></p>
+<h3 id="Kafka-7"><a href="#Kafka-7" class="headerlink" title="Kafka"></a>Kafka</h3><p>Kafka原生 <code>不支持死信队列</code></p>
 <blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Sampson_Hugo/article/details/103304678">Kafka死信队列详解</a></li>
@@ -671,50 +735,76 @@
 </ul>
 </blockquote>
 <p>生产端：只有推模式<br>消费端：支持拉模式和推模式</p>
-<h3 id="RabbitMQ-6"><a href="#RabbitMQ-6" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
+<h3 id="RabbitMQ-8"><a href="#RabbitMQ-8" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ITWANGBOIT/article/details/105428281">RabbitMQ推拉模式入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/bojinyan/article/details/129399616">RabbitMQ推拉模式详解</a></li>
 </ul>
 </blockquote>
-<h3 id="RocketMQ-6"><a href="#RocketMQ-6" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
+<h3 id="RocketMQ-8"><a href="#RocketMQ-8" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wanderlustLee/article/details/89294355">RocketMQ推拉模式入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chongshui129727/article/details/101006216">RocketMQ推拉模式详解</a></li>
 </ul>
 </blockquote>
-<h3 id="Kafka-6"><a href="#Kafka-6" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
+<h3 id="Kafka-8"><a href="#Kafka-8" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38294275/article/details/108373946">Kafka推拉模式入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sunny05296/article/details/106794887">Kafka推拉模式详解</a></li>
 </ul>
 </blockquote>
-<h2 id="控制参数"><a href="#控制参数" class="headerlink" title="控制参数"></a>控制参数</h2><h3 id="RabbitMQ-7"><a href="#RabbitMQ-7" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
+<h2 id="控制参数"><a href="#控制参数" class="headerlink" title="控制参数"></a>控制参数</h2><h3 id="RabbitMQ-9"><a href="#RabbitMQ-9" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yaomingyang/article/details/102636666">RabbitMQ消息参数详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fsgsggd/article/details/81349553">RabbitMQ队列参数详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yaomingyang/article/details/102636666">RabbitMQ消息控制参数详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fsgsggd/article/details/81349553">RabbitMQ队列控制参数详解</a></li>
 </ul>
 </blockquote>
-<h3 id="RocketMQ-7"><a href="#RocketMQ-7" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
+<h3 id="RocketMQ-9"><a href="#RocketMQ-9" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liuchang19950703/article/details/110231213">RocketMQ消息参数详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36804701/article/details/81481343">RocketMQ消费模式详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/pjsdsg/article/details/104276572">RocketMQ生产者控制参数详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liuchang19950703/article/details/110231213">RocketMQ消费者控制参数详解</a></li>
 </ul>
 </blockquote>
-<h3 id="Kafka-7"><a href="#Kafka-7" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
+<h3 id="Kafka-9"><a href="#Kafka-9" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/heiren_a/article/details/122232180">Kafka配置参数入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wyht1222/article/details/101452616">Kafka配置参数详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_28068985/article/details/120110762">Kafka控制参数入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/heiren_a/article/details/122232180">Kafka控制参数详解</a></li>
 </ul>
 </blockquote>
-<h1 id="Reliability"><a href="#Reliability" class="headerlink" title="Reliability"></a>Reliability</h1><h2 id="Reliability（可靠性）"><a href="#Reliability（可靠性）" class="headerlink" title="Reliability（可靠性）"></a>Reliability（可靠性）</h2><ul>
+<h1 id="Reliability"><a href="#Reliability" class="headerlink" title="Reliability"></a>Reliability</h1><h2 id="Reliability（可靠性）"><a href="#Reliability（可靠性）" class="headerlink" title="Reliability（可靠性）"></a>Reliability（可靠性）</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_27028561/article/details/121249856">MQ可靠性详解</a></li>
+</ul>
+</blockquote>
+<p>可靠性的关键点</p>
+<ul>
+<li>传输<ul>
+<li>确认机制</li>
+<li>超时机制</li>
+<li>重试机制</li>
+</ul>
+</li>
+<li>存储（持久化）<ul>
+<li>写盘策略</li>
+<li>刷盘策略</li>
+<li>同步策略（主从同步策略）</li>
+</ul>
+</li>
+</ul>
+<p>可靠性的保证</p>
+<ul>
 <li>生产端：使用确认机制<ul>
-<li>同步发送：同步返回结果（sync）</li>
-<li>异步发送：异步返回结果（async）</li>
-<li>单向发送：不关心结果（oneway）</li>
+<li>同步发送：同步发送并ACK（sync）</li>
+<li>异步发送：异步发送并ACK（async）</li>
+<li>单向发送：异步发送且不ACK（oneway）</li>
 </ul>
 </li>
 <li>队列端：开启持久化机制（刷盘策略 + 主从同步策略）<ul>
+<li>写盘策略：<ul>
+<li>同步写盘：写到磁盘后才返回ACK</li>
+<li>异步写盘：写到页缓存后就返回ACK</li>
+</ul>
+</li>
 <li>刷盘策略：<ul>
 <li>每次刷盘</li>
 <li>每秒刷盘</li>
@@ -736,7 +826,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="RabbitMQ-8"><a href="#RabbitMQ-8" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
+<h3 id="RabbitMQ-10"><a href="#RabbitMQ-10" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dingjianmin/article/details/121031996">RabbitMQ可靠性入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qqq3117004957/article/details/104849766">RabbitMQ可靠性详解</a></li>
@@ -748,9 +838,9 @@
 <li>消费端：使用手动确认机制(basicAck)</li>
 </ul>
 <blockquote>
-<p>ps：生产端建议使用确认（confirm）机制，不建议使用事务（transaction）机制<br>ps：确认机制是异步操作，性能好<br>ps：事务机制是异步操作，性能差</p>
+<p>ps：生产端建议使用确认（confirm）机制，不建议使用事务（transaction）机制<br>ps：确认机制是异步操作，性能好<br>ps：事务机制是同步操作，性能差</p>
 </blockquote>
-<h3 id="RocketMQ-8"><a href="#RocketMQ-8" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
+<h3 id="RocketMQ-10"><a href="#RocketMQ-10" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_24313635/article/details/106534138">RocketMQ可靠性入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/eluanshi12/article/details/114699421">RocketMQ可靠性详解</a></li>
@@ -758,13 +848,13 @@
 </blockquote>
 <ul>
 <li>生产端：使用确认机制（使用异步发送）</li>
-<li>队列端：同步刷盘策略 + 同步主从同步策略</li>
+<li>队列端：开启持久化机制（同步刷盘策略 + 同步主从同步策略）</li>
 <li>消费端：使用手动确认机制(ConsumeStatus)</li>
 </ul>
 <blockquote>
 <p>ps：生产端建议使用异步发送，而不是同步发送和单向发送<br>ps：异步发送是异步操作，性能好<br>ps：同步发送是同步操作，性能差<br>ps：单向发送无确认机制，会丢失消息</p>
 </blockquote>
-<h3 id="Kafka-8"><a href="#Kafka-8" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
+<h3 id="Kafka-10"><a href="#Kafka-10" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_26222859/article/details/123810437">Kafka可靠性入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/BigBug_500/article/details/119700448">Kafka可靠性详解</a></li>
@@ -772,39 +862,39 @@
 </blockquote>
 <ul>
 <li>生产端：使用确认机制（生产者的acks配置为1）</li>
-<li>队列端：同步刷盘策略 + 同步主从同步策略</li>
+<li>队列端：开启持久化机制（同步刷盘策略 + 同步主从同步策略）</li>
 <li>消费端：使用手动确认机制(手动提交offset)</li>
 </ul>
 <blockquote>
 <p>ps：acks含义 0：不关心结果 1：只需主节点写完成 -1：所有从节点都同步完成</p>
 </blockquote>
-<h2 id="Ack（确认机制）"><a href="#Ack（确认机制）" class="headerlink" title="Ack（确认机制）"></a>Ack（确认机制）</h2><h3 id="RabbitMQ-9"><a href="#RabbitMQ-9" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
+<h2 id="Ack（确认机制）"><a href="#Ack（确认机制）" class="headerlink" title="Ack（确认机制）"></a>Ack（确认机制）</h2><h3 id="RabbitMQ-11"><a href="#RabbitMQ-11" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Weixiaohuai/article/details/94961012">RabbitMQ确认机制详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40950803/article/details/106473259">RabbitMQ确认机制和事务对比</a></li>
 </ul>
 </blockquote>
-<h3 id="RocketMQ-9"><a href="#RocketMQ-9" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
+<h3 id="RocketMQ-11"><a href="#RocketMQ-11" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hi_bigguy/article/details/119568730">RocketMQ确认机制详解</a></li>
 </ul>
 </blockquote>
-<h3 id="Kafka-9"><a href="#Kafka-9" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
+<h3 id="Kafka-11"><a href="#Kafka-11" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chengliehuo9899/article/details/100987920">Kafka确认机制详解</a></li>
 </ul>
 </blockquote>
-<h2 id="Retry（重试机制）"><a href="#Retry（重试机制）" class="headerlink" title="Retry（重试机制）"></a>Retry（重试机制）</h2><h3 id="RabbitMQ-10"><a href="#RabbitMQ-10" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
+<h2 id="Retry（重试机制）"><a href="#Retry（重试机制）" class="headerlink" title="Retry（重试机制）"></a>Retry（重试机制）</h2><h3 id="RabbitMQ-12"><a href="#RabbitMQ-12" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cwr452829537/article/details/124967634">RabbitMQ重试机制详解</a></li>
 </ul>
 </blockquote>
-<h3 id="RocketMQ-10"><a href="#RocketMQ-10" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
+<h3 id="RocketMQ-12"><a href="#RocketMQ-12" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_45406092/article/details/120531495">RocketMQ重试机制详解</a></li>
 </ul>
 </blockquote>
-<h3 id="Kafka-10"><a href="#Kafka-10" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
+<h3 id="Kafka-12"><a href="#Kafka-12" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010953880/article/details/117215937">Kafka重试机制详解</a></li>
 </ul>
@@ -812,6 +902,7 @@
 <h2 id="Quality（传输质量）"><a href="#Quality（传输质量）" class="headerlink" title="Quality（传输质量）"></a>Quality（传输质量）</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_50668851/article/details/112555171">MQTT传输质量详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zerooffdate/article/details/78950907">MQTT传输质量之精确一次时如何实现的</a></li>
 </ul>
 </blockquote>
 <p>MQ传输质量</p>
@@ -878,39 +969,39 @@
 <blockquote>
 <p>ps：ACK -&gt; acknowledge，REC -&gt; received，REL -&gt; release，COMP -&gt; complete</p>
 </blockquote>
-<h3 id="RabbitMQ-11"><a href="#RabbitMQ-11" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
+<h3 id="RabbitMQ-13"><a href="#RabbitMQ-13" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mytt_10566/article/details/93492501">RabbitMQ传输质量详解</a></li>
 </ul>
 </blockquote>
-<h3 id="RocketMQ-11"><a href="#RocketMQ-11" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
+<h3 id="RocketMQ-13"><a href="#RocketMQ-13" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41489540/article/details/121053629">RocketMQ传输质量详解</a></li>
 </ul>
 </blockquote>
-<h3 id="Kafka-11"><a href="#Kafka-11" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
+<h3 id="Kafka-13"><a href="#Kafka-13" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_45406092/article/details/119573973">Kafka传输质量详解</a></li>
 </ul>
 </blockquote>
-<h2 id="Durability（持久化）"><a href="#Durability（持久化）" class="headerlink" title="Durability（持久化）"></a>Durability（持久化）</h2><h3 id="RabbitMQ-12"><a href="#RabbitMQ-12" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
+<h2 id="Durability（持久化）"><a href="#Durability（持久化）" class="headerlink" title="Durability（持久化）"></a>Durability（持久化）</h2><h3 id="RabbitMQ-14"><a href="#RabbitMQ-14" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangqsse/article/details/107353676">RabbitMQ持久化详解</a></li>
 </ul>
 </blockquote>
-<h3 id="RocketMQ-12"><a href="#RocketMQ-12" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
+<h3 id="RocketMQ-14"><a href="#RocketMQ-14" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014532775/article/details/107017349">RocketMQ持久化详解</a></li>
 </ul>
 </blockquote>
-<h3 id="Kafka-12"><a href="#Kafka-12" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
+<h3 id="Kafka-14"><a href="#Kafka-14" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41323968/article/details/123371172">Kafka持久化详解</a></li>
 </ul>
 </blockquote>
 <h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46614240/article/details/106626475">MQ常见问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46614240/article/details/106626475">MQ常见问题详解</a></li>
 </ul>
 </blockquote>
 <h2 id="消息丢失"><a href="#消息丢失" class="headerlink" title="消息丢失"></a>消息丢失</h2><blockquote>
@@ -975,17 +1066,17 @@
 </ul>
 </li>
 </ul>
-<h3 id="RabbitMQ-13"><a href="#RabbitMQ-13" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
+<h3 id="RabbitMQ-15"><a href="#RabbitMQ-15" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/bookssea/article/details/123119980">RabbitMQ消息丢失详解</a></li>
 </ul>
 </blockquote>
-<h3 id="RocketMQ-13"><a href="#RocketMQ-13" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
+<h3 id="RocketMQ-15"><a href="#RocketMQ-15" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45788094/article/details/108636781">RocketMQ消息丢失详解</a></li>
 </ul>
 </blockquote>
-<h3 id="Kafka-13"><a href="#Kafka-13" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
+<h3 id="Kafka-15"><a href="#Kafka-15" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010899985/article/details/109150280">Kafka消息丢失详解</a></li>
 </ul>
@@ -1019,19 +1110,19 @@
 <blockquote>
 <p>ps：反正最后都需要在消费端解决一下，所以只需要在消费端解决就行了</p>
 </blockquote>
-<h3 id="RabbitMQ-14"><a href="#RabbitMQ-14" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
+<h3 id="RabbitMQ-16"><a href="#RabbitMQ-16" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mytt_10566/article/details/93492501">RabbitMQ消息重复详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yuanlong122716/article/details/104596647">RabbitMQ幂等实现详解</a></li>
 </ul>
 </blockquote>
-<h3 id="RocketMQ-14"><a href="#RocketMQ-14" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
+<h3 id="RocketMQ-16"><a href="#RocketMQ-16" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LO_YUN/article/details/104135197">RocketMQ消息重复详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jiang18238032891/article/details/107344857">RocketMQ幂等实现详解</a></li>
 </ul>
 </blockquote>
-<h3 id="Kafka-14"><a href="#Kafka-14" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
+<h3 id="Kafka-16"><a href="#Kafka-16" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/riemann_/article/details/124600236">Kafka消息重复详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Aying_seeyou/article/details/107869578">Kafka幂等实现详解</a></li>
@@ -1069,21 +1160,21 @@
 <blockquote>
 <p>ps：总结为3种原因，1. 先发送但后到达 2. 先到达但后消费 3. 先消费但后完成</p>
 </blockquote>
-<h3 id="RabbitMQ-15"><a href="#RabbitMQ-15" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
+<h3 id="RabbitMQ-17"><a href="#RabbitMQ-17" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42039228/article/details/123526391">RabbitMQ消息顺序详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46084075/article/details/118616035">RabbitMQ消息之生产顺序之producer和exchanger</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45264992/article/details/119767010">RabbitMQ消息之消费顺序之consumer和queue</a></li>
 </ul>
 </blockquote>
-<h3 id="RocketMQ-15"><a href="#RocketMQ-15" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
+<h3 id="RocketMQ-17"><a href="#RocketMQ-17" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45325628/article/details/123217384">RocketMQ消息顺序详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/My_SweetXue/article/details/107381558">RocketMQ消息之生产顺序之producer和selector</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a417930422/article/details/51198531">RocketMQ消息之消费顺序之consumer和queue</a></li>
 </ul>
 </blockquote>
-<h3 id="Kafka-15"><a href="#Kafka-15" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
+<h3 id="Kafka-17"><a href="#Kafka-17" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42494845/article/details/111408725">Kafka消息顺序详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Z_linht/article/details/111660908">Kafka消息之生产顺序之producer和partitioner</a></li>
@@ -1098,17 +1189,17 @@
 <blockquote>
 <p>ps：当消费者数量大于分区数量时，多余的消费者也没活干，这时增加消费者也没用，这时候就需要新建一个分区更多的Topic，并启动一个 <code>数据迁移消费者</code> 将旧Topic迁移到新Topic中，然后增加消费者消费新的Topic</p>
 </blockquote>
-<h3 id="RabbitMQ-16"><a href="#RabbitMQ-16" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
+<h3 id="RabbitMQ-18"><a href="#RabbitMQ-18" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/feiying0canglang/article/details/120558918">RabbitMQ消息积压详解</a></li>
 </ul>
 </blockquote>
-<h3 id="RocketMQ-16"><a href="#RocketMQ-16" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
+<h3 id="RocketMQ-18"><a href="#RocketMQ-18" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013078871/article/details/123066366">RocketMQ消息积压详解</a></li>
 </ul>
 </blockquote>
-<h3 id="Kafka-16"><a href="#Kafka-16" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
+<h3 id="Kafka-18"><a href="#Kafka-18" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/philip502/article/details/118997899">Kafka消息积压详解</a></li>
 </ul>
@@ -1119,18 +1210,18 @@
 </ul>
 </blockquote>
 <p>问题描述：消息溢出<br>解决办法：需要抑制生产速度（阻塞生产者）</p>
-<h3 id="RabbitMQ-17"><a href="#RabbitMQ-17" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
+<h3 id="RabbitMQ-19"><a href="#RabbitMQ-19" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_15163365/article/details/104423302">RabbitMQ速度控制详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Taysuesue/article/details/113939002">RabbitMQ速度控制之basicQos</a></li>
 </ul>
 </blockquote>
-<h3 id="RocketMQ-17"><a href="#RocketMQ-17" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
+<h3 id="RocketMQ-19"><a href="#RocketMQ-19" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011075391/article/details/119504587">RocketMQ速度控制详解</a></li>
 </ul>
 </blockquote>
-<h3 id="Kafka-17"><a href="#Kafka-17" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
+<h3 id="Kafka-19"><a href="#Kafka-19" class="headerlink" title="Kafka"></a>Kafka</h3><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shuxiaogd/article/details/79390938">Kafka速度控制详解</a></li>
 </ul>
@@ -1253,7 +1344,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Concept"><span class="nav-number">1.1.</span> <span class="nav-text">Concept</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Protocol"><span class="nav-number">1.2.</span> <span class="nav-text">Protocol</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TMQP"><span class="nav-number">1.2.1.</span> <span class="nav-text">TMQP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AMQP"><span class="nav-number">1.2.2.</span> <span class="nav-text">AMQP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MQTT"><span class="nav-number">1.2.3.</span> <span class="nav-text">MQTT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Middleware"><span class="nav-number">1.3.</span> <span class="nav-text">Middleware</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ"><span class="nav-number">1.3.1.</span> <span class="nav-text">RabbitMQ</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Basic-1"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Concept-1"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">Concept</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Exchange"><span class="nav-number">1.3.1.2.1.</span> <span class="nav-text">Exchange</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Consumer"><span class="nav-number">1.3.1.2.2.</span> <span class="nav-text">Consumer</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Manage"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">Manage</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ"><span class="nav-number">1.3.2.</span> <span class="nav-text">RocketMQ</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Basic-2"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Concept-2"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">Concept</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Topic"><span class="nav-number">1.3.2.2.1.</span> <span class="nav-text">Topic</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Consumer-1"><span class="nav-number">1.3.2.2.2.</span> <span class="nav-text">Consumer</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Manage-1"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">Manage</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka"><span class="nav-number">1.3.3.</span> <span class="nav-text">Kafka</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Basic-3"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Concept-3"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">Concept</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Topic-1"><span class="nav-number">1.3.3.2.1.</span> <span class="nav-text">Topic</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Consumer-2"><span class="nav-number">1.3.3.2.2.</span> <span class="nav-text">Consumer</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Config"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">Config</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tools"><span class="nav-number">1.3.3.4.</span> <span class="nav-text">Tools</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Manage-2"><span class="nav-number">1.3.3.5.</span> <span class="nav-text">Manage</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZeroMQ"><span class="nav-number">1.3.4.</span> <span class="nav-text">ZeroMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ActiveMQ"><span class="nav-number">1.3.5.</span> <span class="nav-text">ActiveMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Disque"><span class="nav-number">1.3.6.</span> <span class="nav-text">Disque</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Usage"><span class="nav-number">2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E5%BB%B6%E6%97%B6"><span class="nav-number">2.1.</span> <span class="nav-text">消息延时</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-1"><span class="nav-number">2.1.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-1"><span class="nav-number">2.1.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E8%BF%87%E6%9C%9F"><span class="nav-number">2.2.</span> <span class="nav-text">消息过期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-2"><span class="nav-number">2.2.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-2"><span class="nav-number">2.2.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-2"><span class="nav-number">2.2.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E5%88%86%E7%BB%84"><span class="nav-number">2.3.</span> <span class="nav-text">消费分组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-3"><span class="nav-number">2.3.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-3"><span class="nav-number">2.3.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-3"><span class="nav-number">2.3.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E7%AD%96%E7%95%A5"><span class="nav-number">2.4.</span> <span class="nav-text">消费策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-4"><span class="nav-number">2.4.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-4"><span class="nav-number">2.4.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-4"><span class="nav-number">2.4.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97"><span class="nav-number">2.5.</span> <span class="nav-text">死信队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-5"><span class="nav-number">2.5.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-5"><span class="nav-number">2.5.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-5"><span class="nav-number">2.5.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.6.</span> <span class="nav-text">传输模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-6"><span class="nav-number">2.6.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-6"><span class="nav-number">2.6.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-6"><span class="nav-number">2.6.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%8F%82%E6%95%B0"><span class="nav-number">2.7.</span> <span class="nav-text">控制参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-7"><span class="nav-number">2.7.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-7"><span class="nav-number">2.7.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-7"><span class="nav-number">2.7.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reliability"><span class="nav-number">3.</span> <span class="nav-text">Reliability</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reliability%EF%BC%88%E5%8F%AF%E9%9D%A0%E6%80%A7%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">Reliability（可靠性）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-8"><span class="nav-number">3.1.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-8"><span class="nav-number">3.1.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-8"><span class="nav-number">3.1.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ack%EF%BC%88%E7%A1%AE%E8%AE%A4%E6%9C%BA%E5%88%B6%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">Ack（确认机制）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-9"><span class="nav-number">3.2.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-9"><span class="nav-number">3.2.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-9"><span class="nav-number">3.2.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Retry%EF%BC%88%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">Retry（重试机制）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-10"><span class="nav-number">3.3.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-10"><span class="nav-number">3.3.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-10"><span class="nav-number">3.3.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quality%EF%BC%88%E4%BC%A0%E8%BE%93%E8%B4%A8%E9%87%8F%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">Quality（传输质量）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-11"><span class="nav-number">3.4.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-11"><span class="nav-number">3.4.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-11"><span class="nav-number">3.4.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Durability%EF%BC%88%E6%8C%81%E4%B9%85%E5%8C%96%EF%BC%89"><span class="nav-number">3.5.</span> <span class="nav-text">Durability（持久化）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-12"><span class="nav-number">3.5.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-12"><span class="nav-number">3.5.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-12"><span class="nav-number">3.5.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem"><span class="nav-number">4.</span> <span class="nav-text">Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E4%B8%A2%E5%A4%B1"><span class="nav-number">4.1.</span> <span class="nav-text">消息丢失</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-13"><span class="nav-number">4.1.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-13"><span class="nav-number">4.1.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-13"><span class="nav-number">4.1.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E9%87%8D%E5%A4%8D"><span class="nav-number">4.2.</span> <span class="nav-text">消息重复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-14"><span class="nav-number">4.2.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-14"><span class="nav-number">4.2.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-14"><span class="nav-number">4.2.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E4%B9%B1%E5%BA%8F"><span class="nav-number">4.3.</span> <span class="nav-text">消息乱序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-15"><span class="nav-number">4.3.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-15"><span class="nav-number">4.3.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-15"><span class="nav-number">4.3.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E7%A7%AF%E5%8E%8B"><span class="nav-number">4.4.</span> <span class="nav-text">消息积压</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-16"><span class="nav-number">4.4.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-16"><span class="nav-number">4.4.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-16"><span class="nav-number">4.4.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E6%BA%A2%E5%87%BA"><span class="nav-number">4.5.</span> <span class="nav-text">消息溢出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-17"><span class="nav-number">4.5.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-17"><span class="nav-number">4.5.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-17"><span class="nav-number">4.5.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Performance"><span class="nav-number">5.</span> <span class="nav-text">Performance</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kafka%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E5%BF%AB"><span class="nav-number">5.1.</span> <span class="nav-text">Kafka为什么这么快</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Architecture"><span class="nav-number">6.</span> <span class="nav-text">Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Replication"><span class="nav-number">6.1.</span> <span class="nav-text">Replication</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster"><span class="nav-number">6.2.</span> <span class="nav-text">Cluster</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Distributed"><span class="nav-number">6.3.</span> <span class="nav-text">Distributed</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Application"><span class="nav-number">7.</span> <span class="nav-text">Application</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theory"><span class="nav-number">8.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Management"><span class="nav-number">9.1.</span> <span class="nav-text">Management</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual"><span class="nav-number">9.1.1.</span> <span class="nav-text">Visual</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tools-1"><span class="nav-number">9.1.2.</span> <span class="nav-text">Tools</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Operation"><span class="nav-number">9.2.</span> <span class="nav-text">Operation</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Concept"><span class="nav-number">1.1.</span> <span class="nav-text">Concept</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Protocol"><span class="nav-number">1.2.</span> <span class="nav-text">Protocol</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TMQP"><span class="nav-number">1.2.1.</span> <span class="nav-text">TMQP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AMQP"><span class="nav-number">1.2.2.</span> <span class="nav-text">AMQP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MQTT"><span class="nav-number">1.2.3.</span> <span class="nav-text">MQTT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Middleware"><span class="nav-number">1.3.</span> <span class="nav-text">Middleware</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ"><span class="nav-number">1.3.1.</span> <span class="nav-text">RabbitMQ</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Basic-1"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Concept-1"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">Concept</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Exchange"><span class="nav-number">1.3.1.2.1.</span> <span class="nav-text">Exchange</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Consumer"><span class="nav-number">1.3.1.2.2.</span> <span class="nav-text">Consumer</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Manage"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">Manage</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ"><span class="nav-number">1.3.2.</span> <span class="nav-text">RocketMQ</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Basic-2"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Concept-2"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">Concept</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Topic"><span class="nav-number">1.3.2.2.1.</span> <span class="nav-text">Topic</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Consumer-1"><span class="nav-number">1.3.2.2.2.</span> <span class="nav-text">Consumer</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Manage-1"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">Manage</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka"><span class="nav-number">1.3.3.</span> <span class="nav-text">Kafka</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Basic-3"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Concept-3"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">Concept</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Topic-1"><span class="nav-number">1.3.3.2.1.</span> <span class="nav-text">Topic</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Consumer-2"><span class="nav-number">1.3.3.2.2.</span> <span class="nav-text">Consumer</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Config"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">Config</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tools"><span class="nav-number">1.3.3.4.</span> <span class="nav-text">Tools</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Manage-2"><span class="nav-number">1.3.3.5.</span> <span class="nav-text">Manage</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZeroMQ"><span class="nav-number">1.3.4.</span> <span class="nav-text">ZeroMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ActiveMQ"><span class="nav-number">1.3.5.</span> <span class="nav-text">ActiveMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Disque"><span class="nav-number">1.3.6.</span> <span class="nav-text">Disque</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Usage"><span class="nav-number">2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E5%BB%B6%E6%97%B6"><span class="nav-number">2.1.</span> <span class="nav-text">消息延时</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-1"><span class="nav-number">2.1.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-1"><span class="nav-number">2.1.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E8%BF%87%E6%9C%9F"><span class="nav-number">2.2.</span> <span class="nav-text">消息过期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-2"><span class="nav-number">2.2.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-2"><span class="nav-number">2.2.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-2"><span class="nav-number">2.2.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E5%88%86%E5%8C%BA"><span class="nav-number">2.3.</span> <span class="nav-text">消息分区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-3"><span class="nav-number">2.3.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-3"><span class="nav-number">2.3.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-3"><span class="nav-number">2.3.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E5%88%86%E7%BB%84"><span class="nav-number">2.4.</span> <span class="nav-text">消费分组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-4"><span class="nav-number">2.4.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-4"><span class="nav-number">2.4.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-4"><span class="nav-number">2.4.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E7%AD%96%E7%95%A5"><span class="nav-number">2.5.</span> <span class="nav-text">消费策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-5"><span class="nav-number">2.5.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-5"><span class="nav-number">2.5.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-5"><span class="nav-number">2.5.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E5%8F%8D%E9%A6%88"><span class="nav-number">2.6.</span> <span class="nav-text">消费反馈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-6"><span class="nav-number">2.6.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-6"><span class="nav-number">2.6.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-6"><span class="nav-number">2.6.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97"><span class="nav-number">2.7.</span> <span class="nav-text">死信队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-7"><span class="nav-number">2.7.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-7"><span class="nav-number">2.7.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-7"><span class="nav-number">2.7.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.8.</span> <span class="nav-text">传输模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-8"><span class="nav-number">2.8.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-8"><span class="nav-number">2.8.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-8"><span class="nav-number">2.8.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%8F%82%E6%95%B0"><span class="nav-number">2.9.</span> <span class="nav-text">控制参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-9"><span class="nav-number">2.9.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-9"><span class="nav-number">2.9.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-9"><span class="nav-number">2.9.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reliability"><span class="nav-number">3.</span> <span class="nav-text">Reliability</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reliability%EF%BC%88%E5%8F%AF%E9%9D%A0%E6%80%A7%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">Reliability（可靠性）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-10"><span class="nav-number">3.1.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-10"><span class="nav-number">3.1.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-10"><span class="nav-number">3.1.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ack%EF%BC%88%E7%A1%AE%E8%AE%A4%E6%9C%BA%E5%88%B6%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">Ack（确认机制）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-11"><span class="nav-number">3.2.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-11"><span class="nav-number">3.2.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-11"><span class="nav-number">3.2.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Retry%EF%BC%88%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">Retry（重试机制）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-12"><span class="nav-number">3.3.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-12"><span class="nav-number">3.3.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-12"><span class="nav-number">3.3.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quality%EF%BC%88%E4%BC%A0%E8%BE%93%E8%B4%A8%E9%87%8F%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">Quality（传输质量）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-13"><span class="nav-number">3.4.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-13"><span class="nav-number">3.4.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-13"><span class="nav-number">3.4.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Durability%EF%BC%88%E6%8C%81%E4%B9%85%E5%8C%96%EF%BC%89"><span class="nav-number">3.5.</span> <span class="nav-text">Durability（持久化）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-14"><span class="nav-number">3.5.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-14"><span class="nav-number">3.5.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-14"><span class="nav-number">3.5.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem"><span class="nav-number">4.</span> <span class="nav-text">Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E4%B8%A2%E5%A4%B1"><span class="nav-number">4.1.</span> <span class="nav-text">消息丢失</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-15"><span class="nav-number">4.1.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-15"><span class="nav-number">4.1.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-15"><span class="nav-number">4.1.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E9%87%8D%E5%A4%8D"><span class="nav-number">4.2.</span> <span class="nav-text">消息重复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-16"><span class="nav-number">4.2.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-16"><span class="nav-number">4.2.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-16"><span class="nav-number">4.2.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E4%B9%B1%E5%BA%8F"><span class="nav-number">4.3.</span> <span class="nav-text">消息乱序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-17"><span class="nav-number">4.3.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-17"><span class="nav-number">4.3.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-17"><span class="nav-number">4.3.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E7%A7%AF%E5%8E%8B"><span class="nav-number">4.4.</span> <span class="nav-text">消息积压</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-18"><span class="nav-number">4.4.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-18"><span class="nav-number">4.4.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-18"><span class="nav-number">4.4.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E6%BA%A2%E5%87%BA"><span class="nav-number">4.5.</span> <span class="nav-text">消息溢出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-19"><span class="nav-number">4.5.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-19"><span class="nav-number">4.5.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-19"><span class="nav-number">4.5.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Performance"><span class="nav-number">5.</span> <span class="nav-text">Performance</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kafka%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E5%BF%AB"><span class="nav-number">5.1.</span> <span class="nav-text">Kafka为什么这么快</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Architecture"><span class="nav-number">6.</span> <span class="nav-text">Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Replication"><span class="nav-number">6.1.</span> <span class="nav-text">Replication</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster"><span class="nav-number">6.2.</span> <span class="nav-text">Cluster</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Distributed"><span class="nav-number">6.3.</span> <span class="nav-text">Distributed</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Application"><span class="nav-number">7.</span> <span class="nav-text">Application</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theory"><span class="nav-number">8.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Management"><span class="nav-number">9.1.</span> <span class="nav-text">Management</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual"><span class="nav-number">9.1.1.</span> <span class="nav-text">Visual</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tools-1"><span class="nav-number">9.1.2.</span> <span class="nav-text">Tools</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Operation"><span class="nav-number">9.2.</span> <span class="nav-text">Operation</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
