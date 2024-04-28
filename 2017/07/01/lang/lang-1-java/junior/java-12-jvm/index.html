@@ -28,7 +28,7 @@
 <meta property="og:description" content="java虚拟机篇">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-30T17:12:00.000Z">
-<meta property="article:modified_time" content="2024-04-27T12:27:36.823Z">
+<meta property="article:modified_time" content="2024-04-28T11:37:25.309Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ java">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-27 20:27:36" itemprop="dateModified" datetime="2024-04-27T20:27:36+08:00">2024-04-27</time>
+                <time title="修改时间：2024-04-28 19:37:25" itemprop="dateModified" datetime="2024-04-28T19:37:25+08:00">2024-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -376,6 +376,7 @@
 </ul>
 <h3 id="Principle"><a href="#Principle" class="headerlink" title="Principle"></a>Principle</h3><blockquote>
 <ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangshuai6707/article/details/132989941">JMM之as-if-serial和happens-before详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ThinkWon/article/details/102074107">JMM之as-if-serial和happens-before的区别</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/JingLisen/article/details/114645372">JMM之as-if-serial入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/HNUST_LIZEMING/article/details/88371178">JMM之as-if-serial详解</a></li>
@@ -489,6 +490,7 @@
 </ul>
 <h1 id="Garbage"><a href="#Garbage" class="headerlink" title="Garbage"></a>Garbage</h1><h2 id="Basic-2"><a href="#Basic-2" class="headerlink" title="Basic"></a>Basic</h2><blockquote>
 <ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/c15158032319/article/details/117450062">JVM垃圾回收入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/itcast_cn/article/details/124747346">JVM垃圾回收详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tolmanlau/article/details/107398449">JVM垃圾回收之控制参数</a></li>
 </ul>
@@ -635,8 +637,9 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_49131718/article/details/136419733">JVM垃圾回收器之G1和CMS的区别</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39685066/article/details/107294318">JVM垃圾回收器之CMS垃圾回收器的优点和缺点</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/chengqiuming/article/details/119270228">JVM垃圾回收器之G1垃圾回收器的优点和缺点</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/h16407/article/details/121612236">JVM垃圾回收之STW（停顿时间）和ThroughPut（吞吐量）</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/h16407/article/details/121612236">JVM垃圾回收之Latency（停顿时间）和ThroughPut（吞吐量）</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yj_58585858/article/details/118567138">JVM垃圾回收之Parallel（并行）和Concurrent（并发）</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/FU250/article/details/105386291">JVM垃圾回收之CMS并发清理阶段为什么是安全的</a></li>
 </ul>
 </blockquote>
 <ul>
@@ -654,13 +657,8 @@
 </li>
 </ul>
 <blockquote>
-<p>ps： <code>吞吐量</code> 是指用户线程时间除以总时间（用户线程时间和GC线程时间之和）的比值，因为总时间固定，则GC线程时间越少，用户线程时间越多，吞吐量越高<br>ps： <code>停顿时间</code> 是指用户线程被暂停（STW）的时间<br>ps：Parallel Scavenge是通过 <code>增大内存空间</code> 和 <code>减少垃圾回收次数</code> 的方式来 <code>提高吞吐量</code> 的<br>ps：Concurrent Mark Sweep是通过 <code>并发标记</code> 的方式来 <code>减少停顿时间</code> 的<br>ps：追求 <code>最短停顿时间</code> 的适合 <code>用户交互型</code> 的应用，追求 <code>最大吞吐量</code> 的适合 <code>后台计算型</code> 的应用</p>
+<p>ps： <code>吞吐量</code> 是指用户线程时间除以总时间（用户线程时间和GC线程时间之和）的比值，因为总时间固定，则GC线程时间越少，用户线程时间越多，吞吐量越高<br>ps： <code>停顿时间</code> 是指用户线程被暂停（STW）的时间<br>ps： <code>Parallel Scavenge</code> 是通过 <code>增大内存空间</code> 从而 <code>减少垃圾回收次数</code> 的方式来 <code>提高吞吐量</code> 的<br>ps： <code>Concurrent Mark Sweep</code> 是通过 <code>并发标记</code> 的方式来 <code>减少停顿时间</code> 的<br>ps： <code>前台交互型</code> 应用追求的是 <code>最短停顿时间</code> ，比如 <code>Web服务</code> 应用<br>ps： <code>后台计算型</code> 应用追求的是 <code>最大吞吐量</code> ，比如 <code>大数据计算</code> 应用</p>
 </blockquote>
-<p>支持并发标记的垃圾回收器</p>
-<ul>
-<li>CMS（Concurrent Mark Sweep）</li>
-<li>G1（Garbage First）</li>
-</ul>
 <h4 id="新生代垃圾回收器对比"><a href="#新生代垃圾回收器对比" class="headerlink" title="新生代垃圾回收器对比"></a>新生代垃圾回收器对比</h4><ul>
 <li>Serial：单线程标记，单线程回收，全程STW</li>
 <li>PN（ParNew）：多线程标记，多线程回收，全程STW，Serial的<code>多线程版本</code></li>
@@ -710,6 +708,15 @@
 </li>
 </ul>
 </li>
+</ul>
+<h4 id="支持并发标记的垃圾回收器"><a href="#支持并发标记的垃圾回收器" class="headerlink" title="支持并发标记的垃圾回收器"></a>支持并发标记的垃圾回收器</h4><ul>
+<li>CMS（Concurrent Mark Sweep）</li>
+<li>G1（Garbage First）</li>
+</ul>
+<h4 id="比较经典的垃圾回收器"><a href="#比较经典的垃圾回收器" class="headerlink" title="比较经典的垃圾回收器"></a>比较经典的垃圾回收器</h4><ul>
+<li>PS（Parallel Scavenge）：吞吐量优先垃圾回收器</li>
+<li>CMS（Concurrent Mark Sweep）：低延迟垃圾回收器</li>
+<li>G1（Garbage First）：分区垃圾回收器</li>
 </ul>
 <h3 id="垃圾回收器搭配"><a href="#垃圾回收器搭配" class="headerlink" title="垃圾回收器搭配"></a>垃圾回收器搭配</h3><blockquote>
 <ul>
@@ -768,6 +775,8 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/promsing/article/details/126200633">JVM类加载机制详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/briblue/article/details/54973413">JVM类加载机制原理</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zxh1991811/article/details/107981268">JVM类加载之自定义类加载器</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_30761967/article/details/107582414">JVM类加载之父类加载器加载的类不能使用子类加载器加载的类</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangtong95/article/details/77835759">JVM类加载之如何让父类加载器加载的类使用子类加载器加载的类</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liubenlong007/article/details/88574544">JVM类加载之能不能加载自己自定义的java.lang. String类</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cqc__c/article/details/81583877">JVM类加载之findClass与loadClass的区别</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/succing/article/details/123308677">JVM类加载之Class.forName和ClassLoader.loadClass的区别</a></li>
@@ -813,6 +822,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Ecilipse/article/details/122256795">JVM双亲委派机制详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Handsome_Le_le/article/details/109272646">JVM双亲委派机制的作用入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/BThinker/article/details/105293706">JVM双亲委派机制的作用详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Java_Pluto/article/details/116714927">JVM双亲委派机制的打破历史</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Mr_YanMingXin/article/details/119633526">JVM双亲委派机制打破入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dl962454/article/details/109981969">JVM双亲委派机制打破进阶</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39724194/article/details/124156898">JVM双亲委派机制打破详解</a></li>
@@ -905,12 +915,27 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wdays83892469/article/details/127151239">JVM问题排查思路</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/penggerhe/article/details/135217416">JVM之OOM排查详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_26664043/article/details/136271539">JVM之OOM场景详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaoxing598/article/details/128887598">JVM之OOM类型详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_26664043/article/details/136271539">JVM之OOM场景入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaoxing598/article/details/128887598">JVM之OOM场景进阶</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangkaixuan456/article/details/111904430">JVM之OOM场景详解</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/a718515028/article/details/86703186">JVM之OOM自动dump</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/golden_zhj/article/details/86574481">JVM之内存溢出和内存泄漏的区别</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014163312/article/details/124248558">JVM之cpu占用高排查</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/im_xiao/article/details/106731943">JVM之死锁排查</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41822345/article/details/105523832">JDK自带工具入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45455361/article/details/120931153">JDK自带工具详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45455361/article/details/120938015">JDK自带工具之jcmd</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq359605040/article/details/119954127">JDK自带工具之jhsdb</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weiwjacsdn/article/details/105023335">JDK自带工具入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhaofuqiangmycomm/article/details/114919403">JDK自带工具详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shixiaoling123/article/details/106630623">JDK自带工具之jconsole和jvisualvm详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangsir001/article/details/118069165">JDK自带工具之jconsole和jvisualvm的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Jin_Kwok/article/details/80326088">MAT入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lyd135364/article/details/121449969">MAT详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42262444/article/details/133163454">jprofile入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37165235/article/details/133932156">jprofile详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39387856/article/details/108513440">Arthas入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_14996421/article/details/115982546">Arthas详解</a></li>
 </ul>
 </blockquote>
 <p>jvm常见问题</p>
@@ -924,6 +949,28 @@
 </blockquote>
 <p>jvm问题排查工具</p>
 <p>jmap：排查内存问题（OOM）<br>jstack：排查线程问题（CPU负载高和死锁）</p>
+<ul>
+<li>命令行工具<ul>
+<li>jps：java进程查看工具</li>
+<li>jmap：java内存诊断工具</li>
+<li>jstack：java线程诊断工具</li>
+<li>jstat：JVM运行状态查看工具</li>
+<li>jinfo：JVM参数查看和调整工具</li>
+<li>jcmd：JVM综合诊断工具</li>
+<li>jhsdb：JVM综合诊断工具</li>
+<li>jhat：java内存分析工具（网页版）</li>
+</ul>
+</li>
+<li>可视化工具<ul>
+<li>jconsole：java自带工具（老版）</li>
+<li>jvisualvm：java自带工具（新版）</li>
+<li>jprofile：商业工具（可以在idea中使用）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>ps：jhat不常用（因为分析工作比较耗性能，一般不在应用服务器上用jhat分析，而是在其他机器上用jvisualvm分析）</p>
+</blockquote>
 <p>jvm问题排查过程</p>
 <ul>
 <li>OOM问题排查<ul>
@@ -951,40 +998,10 @@
 </blockquote>
 <h1 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h1><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41822345/article/details/105523832">JDK自带调优工具入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45455361/article/details/120931153">JDK自带调优工具详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45455361/article/details/120938015">JDK自带调优工具之jcmd</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq359605040/article/details/119954127">JDK自带调优工具之jhsdb</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weiwjacsdn/article/details/105023335">JDK自带监控工具入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhaofuqiangmycomm/article/details/114919403">JDK自带监控工具详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/shixiaoling123/article/details/106630623">JDK自带监控工具之jconsole和jvisualvm详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangsir001/article/details/118069165">JDK自带监控工具之jconsole和jvisualvm的区别</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42262444/article/details/133163454">jprofile入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37165235/article/details/133932156">jprofile详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39387856/article/details/108513440">Arthas入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_14996421/article/details/115982546">Arthas详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/javalingyu/article/details/124587666">JVM性能调优入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40381772/article/details/135595590">JVM性能调优详解</a></li>
 </ul>
 </blockquote>
-<p>自带调优工具</p>
-<ul>
-<li>jps：java进程查看工具</li>
-<li>jmap：java内存诊断工具</li>
-<li>jstack：java线程诊断工具</li>
-<li>jstat：JVM运行状态查看工具</li>
-<li>jinfo：JVM参数查看和调整工具</li>
-<li>jcmd：JVM综合调优工具</li>
-<li>jhsdb：JVM综合调优工具</li>
-<li>jhat：java内存分析工具（网页版）</li>
-</ul>
-<blockquote>
-<p>ps：jhat不常用（因为分析工作比较耗性能，一般不在应用服务器上用jhat分析，而是在其他机器上用jvisualvm分析）</p>
-</blockquote>
-<p>自带监控工具</p>
-<ul>
-<li>jconsole：java自带的监控工具（老版）</li>
-<li>jvisualvm：java自带的监控工具（新版）</li>
-<li>jprofile：商业监控工具（可以在idea中使用）</li>
-</ul>
 <h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://linux.cn/article-4481-1.html">Linux系统性能工具</a></li>
@@ -1119,7 +1136,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM"><span class="nav-number">1.</span> <span class="nav-text">JVM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">1.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced"><span class="nav-number">1.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Region"><span class="nav-number">1.2.1.</span> <span class="nav-text">Region</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Allocate"><span class="nav-number">1.2.2.</span> <span class="nav-text">Allocate</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JMM"><span class="nav-number">2.</span> <span class="nav-text">JMM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-1"><span class="nav-number">2.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced-1"><span class="nav-number">2.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature"><span class="nav-number">2.2.1.</span> <span class="nav-text">Feature</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Principle"><span class="nav-number">2.2.2.</span> <span class="nav-text">Principle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Operation"><span class="nav-number">2.2.3.</span> <span class="nav-text">Operation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Garbage"><span class="nav-number">3.</span> <span class="nav-text">Garbage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-2"><span class="nav-number">3.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%88%86%E4%BB%A3%E6%8A%80%E6%9C%AF"><span class="nav-number">3.1.1.</span> <span class="nav-text">垃圾分代技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E6%A0%87%E8%AE%B0%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.2.</span> <span class="nav-text">垃圾标记算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%AD%98%E6%B4%BB%E5%88%A4%E6%96%AD%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">对象存活判断方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%AD%98%E6%B4%BB%E6%A0%87%E8%AE%B0%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">对象存活标记算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%A0%87%E8%AE%B0%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.1.2.3.</span> <span class="nav-text">并发标记步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%A0%87%E8%AE%B0%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.2.4.</span> <span class="nav-text">并发标记问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%BC%8F%E6%A0%87%E8%A7%A3%E5%86%B3"><span class="nav-number">3.1.2.5.</span> <span class="nav-text">并发漏标解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.3.</span> <span class="nav-text">垃圾回收算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%97%B6%E6%9C%BA"><span class="nav-number">3.1.4.</span> <span class="nav-text">垃圾回收时机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E8%BF%87%E7%A8%8B"><span class="nav-number">3.1.5.</span> <span class="nav-text">垃圾回收过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%88%86%E7%B1%BB"><span class="nav-number">3.1.6.</span> <span class="nav-text">垃圾回收器分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E7%94%9F%E4%BB%A3%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%AF%B9%E6%AF%94"><span class="nav-number">3.1.6.1.</span> <span class="nav-text">新生代垃圾回收器对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%80%81%E7%94%9F%E4%BB%A3%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%AF%B9%E6%AF%94"><span class="nav-number">3.1.6.2.</span> <span class="nav-text">老生代垃圾回收器对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">3.1.6.3.</span> <span class="nav-text">主要垃圾回收器的特点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E6%90%AD%E9%85%8D"><span class="nav-number">3.1.7.</span> <span class="nav-text">垃圾回收器搭配</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced-2"><span class="nav-number">3.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Serial"><span class="nav-number">3.2.1.</span> <span class="nav-text">Serial</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ParNew"><span class="nav-number">3.2.2.</span> <span class="nav-text">ParNew</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Scavenge"><span class="nav-number">3.2.3.</span> <span class="nav-text">Parallel Scavenge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Serial-Old"><span class="nav-number">3.2.4.</span> <span class="nav-text">Serial Old</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMS"><span class="nav-number">3.2.5.</span> <span class="nav-text">CMS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Old"><span class="nav-number">3.2.6.</span> <span class="nav-text">Parallel Old</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G1"><span class="nav-number">3.2.7.</span> <span class="nav-text">G1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZGC"><span class="nav-number">3.2.8.</span> <span class="nav-text">ZGC</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Class"><span class="nav-number">4.</span> <span class="nav-text">Class</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6"><span class="nav-number">4.1.</span> <span class="nav-text">类加载机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%88%86%E7%B1%BB"><span class="nav-number">4.1.1.</span> <span class="nav-text">类加载器分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="nav-number">4.1.2.</span> <span class="nav-text">类加载过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6"><span class="nav-number">4.2.</span> <span class="nav-text">双亲委派机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">4.2.1.</span> <span class="nav-text">双亲委派机制的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E6%97%B6%E5%80%99%E8%A6%81%E6%89%93%E7%A0%B4%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6"><span class="nav-number">4.2.2.</span> <span class="nav-text">为什么有时候要打破双亲委派机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%89%93%E7%A0%B4%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6"><span class="nav-number">4.2.3.</span> <span class="nav-text">如何打破双亲委派机制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Object"><span class="nav-number">5.</span> <span class="nav-text">Object</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">5.1.</span> <span class="nav-text">对象生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%88%9D%E5%A7%8B%E5%8C%96%E8%BF%87%E7%A8%8B"><span class="nav-number">5.2.</span> <span class="nav-text">对象初始化过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="nav-number">5.3.</span> <span class="nav-text">对象内存结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lifecycle"><span class="nav-number">6.</span> <span class="nav-text">Lifecycle</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile"><span class="nav-number">6.1.</span> <span class="nav-text">Compile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Runtime"><span class="nav-number">6.2.</span> <span class="nav-text">Runtime</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem"><span class="nav-number">7.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Performance"><span class="nav-number">8.</span> <span class="nav-text">Performance</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">9.1.</span> <span class="nav-text">Linux</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM"><span class="nav-number">1.</span> <span class="nav-text">JVM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">1.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced"><span class="nav-number">1.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Region"><span class="nav-number">1.2.1.</span> <span class="nav-text">Region</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Allocate"><span class="nav-number">1.2.2.</span> <span class="nav-text">Allocate</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JMM"><span class="nav-number">2.</span> <span class="nav-text">JMM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-1"><span class="nav-number">2.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced-1"><span class="nav-number">2.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature"><span class="nav-number">2.2.1.</span> <span class="nav-text">Feature</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Principle"><span class="nav-number">2.2.2.</span> <span class="nav-text">Principle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Operation"><span class="nav-number">2.2.3.</span> <span class="nav-text">Operation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Garbage"><span class="nav-number">3.</span> <span class="nav-text">Garbage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-2"><span class="nav-number">3.1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%88%86%E4%BB%A3%E6%8A%80%E6%9C%AF"><span class="nav-number">3.1.1.</span> <span class="nav-text">垃圾分代技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E6%A0%87%E8%AE%B0%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.2.</span> <span class="nav-text">垃圾标记算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%AD%98%E6%B4%BB%E5%88%A4%E6%96%AD%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">对象存活判断方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%AD%98%E6%B4%BB%E6%A0%87%E8%AE%B0%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">对象存活标记算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%A0%87%E8%AE%B0%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.1.2.3.</span> <span class="nav-text">并发标记步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%A0%87%E8%AE%B0%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.2.4.</span> <span class="nav-text">并发标记问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%BC%8F%E6%A0%87%E8%A7%A3%E5%86%B3"><span class="nav-number">3.1.2.5.</span> <span class="nav-text">并发漏标解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.3.</span> <span class="nav-text">垃圾回收算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%97%B6%E6%9C%BA"><span class="nav-number">3.1.4.</span> <span class="nav-text">垃圾回收时机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E8%BF%87%E7%A8%8B"><span class="nav-number">3.1.5.</span> <span class="nav-text">垃圾回收过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%88%86%E7%B1%BB"><span class="nav-number">3.1.6.</span> <span class="nav-text">垃圾回收器分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E7%94%9F%E4%BB%A3%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%AF%B9%E6%AF%94"><span class="nav-number">3.1.6.1.</span> <span class="nav-text">新生代垃圾回收器对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%80%81%E7%94%9F%E4%BB%A3%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%AF%B9%E6%AF%94"><span class="nav-number">3.1.6.2.</span> <span class="nav-text">老生代垃圾回收器对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">3.1.6.3.</span> <span class="nav-text">主要垃圾回收器的特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E5%B9%B6%E5%8F%91%E6%A0%87%E8%AE%B0%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8"><span class="nav-number">3.1.6.4.</span> <span class="nav-text">支持并发标记的垃圾回收器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E7%BB%8F%E5%85%B8%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8"><span class="nav-number">3.1.6.5.</span> <span class="nav-text">比较经典的垃圾回收器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E6%90%AD%E9%85%8D"><span class="nav-number">3.1.7.</span> <span class="nav-text">垃圾回收器搭配</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced-2"><span class="nav-number">3.2.</span> <span class="nav-text">Advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Serial"><span class="nav-number">3.2.1.</span> <span class="nav-text">Serial</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ParNew"><span class="nav-number">3.2.2.</span> <span class="nav-text">ParNew</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Scavenge"><span class="nav-number">3.2.3.</span> <span class="nav-text">Parallel Scavenge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Serial-Old"><span class="nav-number">3.2.4.</span> <span class="nav-text">Serial Old</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMS"><span class="nav-number">3.2.5.</span> <span class="nav-text">CMS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Old"><span class="nav-number">3.2.6.</span> <span class="nav-text">Parallel Old</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G1"><span class="nav-number">3.2.7.</span> <span class="nav-text">G1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZGC"><span class="nav-number">3.2.8.</span> <span class="nav-text">ZGC</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Class"><span class="nav-number">4.</span> <span class="nav-text">Class</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6"><span class="nav-number">4.1.</span> <span class="nav-text">类加载机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%88%86%E7%B1%BB"><span class="nav-number">4.1.1.</span> <span class="nav-text">类加载器分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="nav-number">4.1.2.</span> <span class="nav-text">类加载过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6"><span class="nav-number">4.2.</span> <span class="nav-text">双亲委派机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">4.2.1.</span> <span class="nav-text">双亲委派机制的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E6%97%B6%E5%80%99%E8%A6%81%E6%89%93%E7%A0%B4%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6"><span class="nav-number">4.2.2.</span> <span class="nav-text">为什么有时候要打破双亲委派机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%89%93%E7%A0%B4%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6"><span class="nav-number">4.2.3.</span> <span class="nav-text">如何打破双亲委派机制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Object"><span class="nav-number">5.</span> <span class="nav-text">Object</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">5.1.</span> <span class="nav-text">对象生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%88%9D%E5%A7%8B%E5%8C%96%E8%BF%87%E7%A8%8B"><span class="nav-number">5.2.</span> <span class="nav-text">对象初始化过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="nav-number">5.3.</span> <span class="nav-text">对象内存结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lifecycle"><span class="nav-number">6.</span> <span class="nav-text">Lifecycle</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile"><span class="nav-number">6.1.</span> <span class="nav-text">Compile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Runtime"><span class="nav-number">6.2.</span> <span class="nav-text">Runtime</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem"><span class="nav-number">7.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Performance"><span class="nav-number">8.</span> <span class="nav-text">Performance</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">9.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">9.1.</span> <span class="nav-text">Linux</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

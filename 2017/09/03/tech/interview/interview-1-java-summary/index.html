@@ -28,7 +28,7 @@
 <meta property="og:description" content="java面试总结">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-09-02T17:03:00.000Z">
-<meta property="article:modified_time" content="2024-04-27T12:27:36.954Z">
+<meta property="article:modified_time" content="2024-04-28T11:37:25.568Z">
 <meta property="article:author" content="朱继鹏">
 <meta property="article:tag" content="+ interview">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-27 20:27:36" itemprop="dateModified" datetime="2024-04-27T20:27:36+08:00">2024-04-27</time>
+                <time title="修改时间：2024-04-28 19:37:25" itemprop="dateModified" datetime="2024-04-28T19:37:25+08:00">2024-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1442,13 +1442,8 @@
 </li>
 </ul>
 <blockquote>
-<p>ps： <code>吞吐量</code> 是指用户线程时间除以总时间（用户线程时间和GC线程时间之和）的比值，因为总时间固定，则GC线程时间越少，用户线程时间越多，吞吐量越高<br>ps： <code>停顿时间</code> 是指用户线程被暂停（STW）的时间<br>ps：Parallel Scavenge是通过 <code>增大内存空间</code> 和 <code>减少垃圾回收次数</code> 的方式来 <code>提高吞吐量</code> 的<br>ps：Concurrent Mark Sweep是通过 <code>并发标记</code> 的方式来 <code>减少停顿时间</code> 的<br>ps：追求 <code>最短停顿时间</code> 的适合 <code>用户交互型</code> 的应用，追求 <code>最大吞吐量</code> 的适合 <code>后台计算型</code> 的应用</p>
+<p>ps： <code>吞吐量</code> 是指用户线程时间除以总时间（用户线程时间和GC线程时间之和）的比值，因为总时间固定，则GC线程时间越少，用户线程时间越多，吞吐量越高<br>ps： <code>停顿时间</code> 是指用户线程被暂停（STW）的时间<br>ps： <code>Parallel Scavenge</code> 是通过 <code>增大内存空间</code> 从而 <code>减少垃圾回收次数</code> 的方式来 <code>提高吞吐量</code> 的<br>ps： <code>Concurrent Mark Sweep</code> 是通过 <code>并发标记</code> 的方式来 <code>减少停顿时间</code> 的<br>ps： <code>前台交互型</code> 应用追求的是 <code>最短停顿时间</code> ，比如 <code>Web服务</code> 应用<br>ps： <code>后台计算型</code> 应用追求的是 <code>最大吞吐量</code> ，比如 <code>大数据计算</code> 应用</p>
 </blockquote>
-<p>支持并发标记的垃圾回收器</p>
-<ul>
-<li>CMS（Concurrent Mark Sweep）</li>
-<li>G1（Garbage First）</li>
-</ul>
 <h5 id="新生代垃圾回收器对比"><a href="#新生代垃圾回收器对比" class="headerlink" title="新生代垃圾回收器对比"></a>新生代垃圾回收器对比</h5><ul>
 <li>Serial：单线程标记，单线程回收，全程STW</li>
 <li>PN（ParNew）：多线程标记，多线程回收，全程STW，Serial的<code>多线程版本</code></li>
@@ -1569,8 +1564,33 @@
 <li>cpu占用高</li>
 <li>死锁</li>
 </ul>
+<blockquote>
+<p>ps：内存溢出（Out Of Memory）和内存泄漏（Memory Leak）不是一个概念</p>
+</blockquote>
 <p>jvm问题排查工具</p>
 <p>jmap：排查内存问题（OOM）<br>jstack：排查线程问题（CPU负载高和死锁）</p>
+<ul>
+<li>命令行工具<ul>
+<li>jps：java进程查看工具</li>
+<li>jmap：java内存诊断工具</li>
+<li>jstack：java线程诊断工具</li>
+<li>jstat：JVM运行状态查看工具</li>
+<li>jinfo：JVM参数查看和调整工具</li>
+<li>jcmd：JVM综合诊断工具</li>
+<li>jhsdb：JVM综合诊断工具</li>
+<li>jhat：java内存分析工具（网页版）</li>
+</ul>
+</li>
+<li>可视化工具<ul>
+<li>jconsole：java自带工具（老版）</li>
+<li>jvisualvm：java自带工具（新版）</li>
+<li>jprofile：商业工具（可以在idea中使用）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>ps：jhat不常用（因为分析工作比较耗性能，一般不在应用服务器上用jhat分析，而是在其他机器上用jvisualvm分析）</p>
+</blockquote>
 <p>jvm问题排查过程</p>
 <ul>
 <li>OOM问题排查<ul>
